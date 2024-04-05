@@ -842,7 +842,6 @@ $(function () {
             serverSide: true,
             info: true,
             bDestroy: true,
-            dom: 'Blfrtip',
             dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
@@ -864,9 +863,10 @@ $(function () {
             serverSide: true,
             ajax: {
                 url: studentList,
-                data: function (d) {
-                    Object.assign(d, formData);
-                }
+                // data: function (d) {
+                //     Object.assign(d, formData);
+                // }
+                data:formData
             },
             pageLength: 10,
             lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],

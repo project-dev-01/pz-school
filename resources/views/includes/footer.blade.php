@@ -77,21 +77,27 @@
     var childData = {!! json_encode(Session::get('all_child', [])) !!};
 
     function showStudentName() {
-        var studentId = "{{ Session::get('student_id') }}";
-        var studentName = document.getElementById('studentName');
-        
-        for (var i = 0; i < childData.length; i++) {
-            if (childData[i].id == studentId) {
-                studentName.textContent = childData[i].name;
-                studentName.style.display = 'block';
-                break;
+        // Check screen width
+        if (window.innerWidth > 768) { // Adjust the breakpoint as needed
+            var studentId = "{{ Session::get('student_id') }}";
+            var studentName = document.getElementById('studentName');
+
+            for (var i = 0; i < childData.length; i++) {
+                if (childData[i].id == studentId) {
+                    studentName.textContent = childData[i].name;
+                    studentName.style.display = 'block';
+                    break;
+                }
             }
         }
     }
 
     function hideStudentName() {
-        var studentName = document.getElementById('studentName');
-        studentName.style.display = 'none';
+        // Check screen width
+        if (window.innerWidth > 768) { // Adjust the breakpoint as needed
+            var studentName = document.getElementById('studentName');
+            studentName.style.display = 'none';
+        }
     }
 </script>
 @endif
@@ -449,32 +455,121 @@
         });
     });
 </script>
+<!-- logoutModal.blade.php -->
+
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logoutModalLabel">Logout Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Your session is about to expire in <span id="countdownTimer"></span> seconds due to inactivity. Do you want to stay logged in?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Stay Logged In</button>
+                <!-- <button type="button" class="btn btn-primary" id="logoutButton">Logout</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function() {
-        var IDLE_TIMEOUT = 1500; //seconds
+        var IDLE_TIMEOUT = 1500; // seconds
         var _idleSecondsTimer = null;
         var _idleSecondsCounter = 0;
+        var countdownInterval = null;
+        var countdownTime = IDLE_TIMEOUT;
+
         document.onclick = function() {
             _idleSecondsCounter = 0;
+            resetCountdown();
         };
 
-        document.onmousemove = function() {
-            _idleSecondsCounter = 0;
-        };
+        // document.onmousemove = function() {
+        //     _idleSecondsCounter = 0;
+        //     resetCountdown();
+        // };
 
-        document.onkeypress = function() {
-            _idleSecondsCounter = 0;
-        };
+        // document.onkeypress = function() {
+        //     _idleSecondsCounter = 0;
+        //     resetCountdown();
+        // };
 
-        _idleSecondsTimer = window.setInterval(CheckIdleTime, 1000);
+        _idleSecondsTimer = window.setInterval(checkIdleTime, 1000);
+        startCountdown();
 
-        function CheckIdleTime() {
+        function checkIdleTime() {
             _idleSecondsCounter++;
             if (_idleSecondsCounter >= IDLE_TIMEOUT) {
                 window.clearInterval(_idleSecondsTimer);
+                $('#logoutModal').modal('show');
+            }
+        }
+
+        function startCountdown() {
+            countdownInterval = setInterval(updateCountdown, 1000);
+        }
+
+        function resetCountdown() {
+            countdownTime = IDLE_TIMEOUT;
+        }
+
+        function updateCountdown() {
+            if (countdownTime > 0) {
+                $('#countdownTimer').text(countdownTime);
+                if (countdownTime === 15) {
+                    $('#logoutModal').modal('show');
+                }
+                countdownTime--;
+            } else {
+                // $('#logoutModal').modal('hide');
                 logoutFunc();
             }
         }
+
+
+        $('#logoutButton').click(function() {
+            logoutFunc();
+        });
+
+        // function logoutFunc() {
+        //     // Perform logout action here
+        //     // This function should handle logout logic
+        //     // For example, redirect the user to the logout route
+        //     window.location.href = '/logout';
+        // }
+
+        // $(document).ready(function() {
+        //     var IDLE_TIMEOUT = 60; //seconds
+        //     var _idleSecondsTimer = null;
+        //     var _idleSecondsCounter = 0;
+        //     document.onclick = function() {
+        //         _idleSecondsCounter = 0;
+        //     };
+
+        //     document.onmousemove = function() {
+        //         _idleSecondsCounter = 0;
+        //     };
+
+        //     document.onkeypress = function() {
+        //         _idleSecondsCounter = 0;
+        //     };
+
+        //     _idleSecondsTimer = window.setInterval(CheckIdleTime, 1000);
+
+        //     function CheckIdleTime() {
+        //         _idleSecondsCounter++;
+        //         if (_idleSecondsCounter >= IDLE_TIMEOUT) {
+        //             window.clearInterval(_idleSecondsTimer);
+        //             logoutFunc();
+        //         }
+        //     }
+        // });
     });
 
     function logoutFunc() {
@@ -510,34 +605,4 @@
         $('ul#side-menu li a.active').parent().attr('id', 'scrollToView');
         document.getElementById("scrollToView").scrollIntoView();
     });
-</script>
-<script>
-    // update child session
-    var updateChildSessionID = "{{ route('navbar.update.child_id') }}";
- 
-    var childData = {!! json_encode(Session::get('all_child', [])) !!};
- 
-    function showStudentName() {
-        // Check screen width
-        if (window.innerWidth > 768) { // Adjust the breakpoint as needed
-            var studentId = "{{ Session::get('student_id') }}";
-            var studentName = document.getElementById('studentName');
- 
-            for (var i = 0; i < childData.length; i++) {
-                if (childData[i].id == studentId) {
-                    studentName.textContent = childData[i].name;
-                    studentName.style.display = 'block';
-                    break;
-                }
-            }
-        }
-    }
- 
-    function hideStudentName() {
-        // Check screen width
-        if (window.innerWidth > 768) { // Adjust the breakpoint as needed
-            var studentName = document.getElementById('studentName');
-            studentName.style.display = 'none';
-        }
-    }
 </script>

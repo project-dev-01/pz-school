@@ -72,13 +72,6 @@
         margin-bottom: 3px;
     }
 
-    .student-name {
-        position: absolute;
-        top: 70%;
-        /* Adjust this value to position the tooltip higher or lower */
-        left: 60%;
-        /* Ensure the tooltip appears above other elements */
-    }
 
     .iconsuser {
         margin-right: 10px;
