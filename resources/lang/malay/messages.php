@@ -2168,5 +2168,11 @@ return [
     "enter_attendance_no" =>"Masukkan nombor Kehadiran",
     "siblings" => "Adik beradik",
     "relationship" => "Perhubungan",
+    "your_leave_application_was_approved" => "Your leave application was approved",
+    "you_applied_leave" => "You applied leave",
+    "student_information_updated" => "Student Information updated",
+    "parent_information_updated" => "Parent Information Updated",
+    "applied_withdrawal_application_for" => "applied withdrawal application for",
+    "application_has_been" => "Application has been",
 
 ];

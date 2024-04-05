@@ -2221,4 +2221,10 @@ return [
     "enter_attendance_no" =>"出席番号を入力してください",
     "siblings" => "兄弟",
     "relationship" => "関係",
+    "your_leave_application_was_approved" => "あなたの休暇申請が承認されました。",
+    "you_applied_leave" => "あなとの休暇申請が完了しました。",
+    "student_information_updated" => "学生情報が更新されました。",
+    "parent_information_updated" => "保護者情報が更新されました",
+    "applied_withdrawal_application_for" => "の退学届の申請しました",
+    "application_has_been_admin" => "の退学届が承認されました。",
 ];
