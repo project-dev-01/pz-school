@@ -57,7 +57,7 @@ $(document).ready(function () {
             timeGridWeek: week,
             workWeek: work_week,
             timeGridDay: day,
-            listMonth: list
+            listMonth: calendar_lable_list
         },
         // timeformat to show
         eventTimeFormat: {

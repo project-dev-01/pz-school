@@ -448,6 +448,12 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+            <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <h4 class="navv">{{ __('messages.Calendar') }}
+                                    <h4>
+                            </li>
+                        </ul>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">

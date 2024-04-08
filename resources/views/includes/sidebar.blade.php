@@ -2185,19 +2185,19 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span> {{ __('messages.application') }} </span>
+                        <span> {{ __('messages.parent_admission') }} </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse {{  (request()->is('parent/application/edit*')) ? 'show' : '' }}" id="sidebarParentApplication">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('parent.application.index')}}" class="nav-link {{ (request()->is('parent/application') || request()->is('parent/application/edit*')) ? 'active' : '' }}">
-                                    <span> {{ __('messages.lists') }} </span>
+                                    <span> {{ __('messages.admission_list') }} </span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('parent.application.create')}}" class="nav-link {{ (request()->is('parent/application/create')) ? 'active' : '' }}">
-                                    <span> {{ __('messages.add') }} </span>
+                                    <span> {{ __('messages.admission_add') }} </span>
                                 </a>
                             </li>
                         </ul>
@@ -2215,7 +2215,7 @@
                             <path d="M24 34C24 28.4772 28.4772 24 34 24" stroke="#C4C7D2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
                             <path d="M34 44C39.5228 44 44 39.5228 44 34" stroke="#C4C7D2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        <span> {{ __('messages.termination') }}</span>
+                        <span> {{ __('messages.withdrawal') }}</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarParentTermination">
@@ -2223,12 +2223,12 @@
                             <li>
                                 <a href="{{ route('parent.termination.index')}}" class="nav-link {{ (request()->is('parent/termination/index*')) ? 'active' : '' }}">
                                     <!-- <i data-feather="x-circle"></i> -->
-                                    <span>{{ __('messages.lists') }}</span>
+                                    <span>{{ __('messages.withdrawal_list') }}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('parent.termination.create')}}" class="nav-link {{ (request()->is('parent/termination/create')) ? 'active' : '' }}">
-                                    <span> {{ __('messages.add') }} </span>
+                                    <span> {{ __('messages.withdrawal_application') }} </span>
                                 </a>
                             </li>
                         </ul>

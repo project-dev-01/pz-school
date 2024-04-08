@@ -2255,4 +2255,13 @@ return [
     "parent_information_updated" => "Parent Information Updated",
     "applied_withdrawal_application_for" => "applied withdrawal application for",
     "application_has_been" => "Application has been",
+
+    "parent_admission" => "Admission",
+    "admission_list" => "Admission List",
+    "admission_add" => "New Admission",
+    "withdrawal" => "Withdrawal",
+    "withdrawal_list" => "Withdrawal List",
+    "withdrawal_application" => "Withdrawal Application",
+    "calendar_lable_list" => "List",
+
 ];

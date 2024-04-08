@@ -2227,4 +2227,11 @@ return [
     "parent_information_updated" => "保護者情報が更新されました",
     "applied_withdrawal_application_for" => "の退学届の申請しました",
     "application_has_been_admin" => "の退学届が承認されました。",
+    "parent_admission" => "入学願書",
+    "admission_list" => "リスト",
+    "admission_add" => "追加",
+    "withdrawal" => "退学届",
+    "withdrawal_list" => "リスト",
+    "withdrawal_application" => "追加",
+    "calendar_lable_list" => "リスト",
 ];

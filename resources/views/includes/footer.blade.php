@@ -157,6 +157,7 @@
     var work_week = "{{ __('messages.work_week') }}";
     var day = "{{ __('messages.day') }}";
     var list = "{{ __('messages.list') }}";
+    var calendar_lable_list = "{{ __('messages.calendar_lable_list') }}";
     var locale = "{{ Session::get('locale') }}";
     var calLang = "{{ __('messages.calendar_lang') }}";
     var downloadcsv = "{{ __('messages.download_csv') }}";
