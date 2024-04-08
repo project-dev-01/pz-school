@@ -4401,16 +4401,6 @@ class AdminController extends Controller
             $nric_extension = $nric_file->getClientOriginalExtension();
         }
 
-        $image_principal_base64 = "";
-        $image_principal_extension = "";
-        $image_principal_file = $request->file('japanese_association_membership_image_principal');
-        if ($image_principal_file) {
-            $image_principal_path = $image_principal_file->path();
-            $image_principal_data = file_get_contents($image_principal_path);
-            $image_principal_base64 = base64_encode($image_principal_data);
-            $image_principal_extension = $image_principal_file->getClientOriginalExtension();
-        }
-
         $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'year' => $request->year,
@@ -4480,8 +4470,6 @@ class AdminController extends Controller
             'passport_file_extension' => $passport_extension,
             'nric_photo' => $nric_base64,
             'nric_file_extension' => $nric_extension,
-            'image_principal_photo' => $image_principal_base64,
-            'image_principal_file_extension' => $image_principal_extension,
             "dual_nationality" => $dual_nationality,
             "school_enrollment_status" => $request->school_enrollment_status,
             "school_enrollment_status_tendency" => $request->school_enrollment_status_tendency,
@@ -4938,15 +4926,6 @@ class AdminController extends Controller
             $nric_extension = $nric_file->getClientOriginalExtension();
         }
 
-        $image_principal_base64 = "";
-        $image_principal_extension = "";
-        $image_principal_file = $request->file('japanese_association_membership_image_principal');
-        if ($image_principal_file) {
-            $image_principal_path = $image_principal_file->path();
-            $image_principal_data = file_get_contents($image_principal_path);
-            $image_principal_base64 = base64_encode($image_principal_data);
-            $image_principal_extension = $image_principal_file->getClientOriginalExtension();
-        }
         $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'login_userid' => session()->get('user_id'),
@@ -5022,11 +5001,8 @@ class AdminController extends Controller
             'passport_old_photo' => $request->passport_old_photo,
             'dual_nationality' => $dual_nationality,
             'nric_old_photo' => $request->nric_old_photo,
-            'image_principal_old_photo' => $request->japanese_association_membership_image_principal_old,
             'nric_photo' => $nric_base64,
             'nric_file_extension' => $nric_extension,
-            'image_principal_photo' => $image_principal_base64,
-            'image_principal_file_extension' => $image_principal_extension,
             'school_country' => $request->school_country,
             'school_city' => $request->school_city,
             'school_state' => $request->school_state,
@@ -5083,6 +5059,7 @@ class AdminController extends Controller
             'guardian_first_name' => $request->guardian_first_name,
             'guardian_last_name' => $request->guardian_last_name,
         ];
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.student_update'), $data);
         return $response;
     }
@@ -5244,6 +5221,17 @@ class AdminController extends Controller
             $passport_base64 = base64_encode($passport_data);
             $passport_extension = $passport_file->getClientOriginalExtension();
         }*/
+
+        
+        $image_principal_base64 = "";
+        $image_principal_extension = "";
+        $image_principal_file = $request->file('japanese_association_membership_image_principal');
+        if ($image_principal_file) {
+            $image_principal_path = $image_principal_file->path();
+            $image_principal_data = file_get_contents($image_principal_path);
+            $image_principal_base64 = base64_encode($image_principal_data);
+            $image_principal_extension = $image_principal_file->getClientOriginalExtension();
+        }
         $japanese_association_membership_image_supplimental_base64 = "";
         $japanese_association_membership_image_supplimental_extension = "";
         $file = $request->file('japanese_association_membership_image_supplimental');
@@ -5364,6 +5352,9 @@ class AdminController extends Controller
             // 'guardian_remarks' => $request->guardian_remarks,
             'japanese_association_membership_image_supplimental' => $japanese_association_membership_image_supplimental_base64,
             'japanese_association_membership_image_supplimental_file_extension' => $japanese_association_membership_image_supplimental_extension,
+            'image_principal_photo' => $image_principal_base64,
+            'image_principal_file_extension' => $image_principal_extension,
+    
 
             'school_roleid' => isset($request->school_roleid) ? $request->school_roleid : '',
             'japan_postalcode' => $request->japan_postalcode,
@@ -5381,7 +5372,12 @@ class AdminController extends Controller
     }
     public function getParentList(Request $request)
     {
-        $response = Helper::GetMethod(config('constants.api.parent_list'));
+        $parent_data = [
+            'status' => $request->status
+        ];
+        // dd($parent_data);
+        
+        $response = Helper::GETMethodWithData(config('constants.api.parent_list'), $parent_data);
         // dd($response);
         $data = isset($response['data']) ? $response['data'] : [];
         return DataTables::of($data)
@@ -5515,7 +5511,7 @@ class AdminController extends Controller
         $grade = Helper::GetMethod(config('constants.api.class_list'));
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
-        //dd($response);
+        // dd($response);
         return view(
             'admin.parent.edit',
             [
@@ -5614,6 +5610,16 @@ class AdminController extends Controller
 //             $passport_base64 = base64_encode($passport_data);
 //             $passport_extension = $passport_file->getClientOriginalExtension();
 //         }
+
+        $image_principal_base64 = "";
+        $image_principal_extension = "";
+        $image_principal_file = $request->file('japanese_association_membership_image_principal');
+        if ($image_principal_file) {
+            $image_principal_path = $image_principal_file->path();
+            $image_principal_data = file_get_contents($image_principal_path);
+            $image_principal_base64 = base64_encode($image_principal_data);
+            $image_principal_extension = $image_principal_file->getClientOriginalExtension();
+        }
         $japanese_association_membership_image_supplimental_base64 = "";
         $japanese_association_membership_image_supplimental_extension = "";
         $file = $request->file('japanese_association_membership_image_supplimental');
@@ -5743,6 +5749,9 @@ class AdminController extends Controller
             'japanese_association_membership_image_supplimental' => $japanese_association_membership_image_supplimental_base64,
             'japanese_association_membership_image_supplimental_file_extension' => $japanese_association_membership_image_supplimental_extension,
             "japanese_association_membership_image_supplimental_old" => $request->japanese_association_membership_image_supplimental_old,
+            'image_principal_old_photo' => $request->japanese_association_membership_image_principal_old,
+            'image_principal_photo' => $image_principal_base64,
+            'image_principal_file_extension' => $image_principal_extension,
             'school_roleid' => isset($request->school_roleid) ? $request->school_roleid : '',
             'japan_postalcode' => $request->japan_postalcode,
             'japan_contact_no' => $request->japan_contact_no,

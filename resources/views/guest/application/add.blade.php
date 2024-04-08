@@ -1268,11 +1268,25 @@
 <script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
 <script src="{{ asset('country/js/countrySelect.js') }}"></script>
 <script>
-    $(".country").countrySelect({
-        defaultCountry: "jp",
-        preferredCountries: ['my', 'jp'],
-        responsiveDropdown: true
-    });
+    // $(".country").countrySelect({
+    //     defaultCountry: "jp",
+    //     preferredCountries: ['my', 'jp'],
+    //     responsiveDropdown: true
+    // });
+    
+    
+    function countrySelect(inputSelector,country) {
+        $(inputSelector).countrySelect({
+            defaultCountry: country,
+            preferredCountries: ['my', 'jp'],
+            responsiveDropdown: true
+        });
+    }
+    countrySelect('#father_nationality',"jp")
+    // countrySelect('#country',"my")
+    countrySelect('#nationality',"jp")
+    countrySelect('#dual_nationality',"jp")
+    countrySelect('#mother_nationality',"jp")
     var input = document.querySelector("#mother_phone_number");
     intlTelInput(input, {
         allowExtensions: true,

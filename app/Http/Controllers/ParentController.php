@@ -160,54 +160,54 @@ class ParentController extends Controller
         );
     }
 
-    public function studentProfile()
-    {
+    // public function studentProfile()
+    // {
 
-        $student_id = session()->get('student_id');
-        $data = [
-            'id' => isset($student_id) ? $student_id : 0,
-        ];
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));
-        $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
-        $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));
-        $session = Helper::GetMethod(config('constants.api.session'));
-        $semester = Helper::GetMethod(config('constants.api.semester'));
-        $student = Helper::PostMethod(config('constants.api.student_details'), $data);
-        $parent = Helper::GetMethod(config('constants.api.parent_list'));
-        $religion = Helper::GetMethod(config('constants.api.religion'));
-        $races = Helper::GetMethod(config('constants.api.races'));
-        $relation = Helper::GetMethod(config('constants.api.relation_list'));
-        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
-        $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
+    //     $student_id = session()->get('student_id');
+    //     $data = [
+    //         'id' => isset($student_id) ? $student_id : 0,
+    //     ];
+    //     $getclass = Helper::GetMethod(config('constants.api.class_list'));
+    //     $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
+    //     $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));
+    //     $session = Helper::GetMethod(config('constants.api.session'));
+    //     $semester = Helper::GetMethod(config('constants.api.semester'));
+    //     $student = Helper::PostMethod(config('constants.api.student_details'), $data);
+    //     $parent = Helper::GetMethod(config('constants.api.parent_list'));
+    //     $religion = Helper::GetMethod(config('constants.api.religion'));
+    //     $races = Helper::GetMethod(config('constants.api.races'));
+    //     $relation = Helper::GetMethod(config('constants.api.relation_list'));
+    //     $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+    //     $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
 
-        $prev = isset($student['data']['student']['previous_details']) ? json_decode($student['data']['student']['previous_details']) : "";
-        // $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
-        $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
-        $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
-        // dd($student);
-        return view(
-            'parent.student.profile',
-            [
-                'class' => isset($getclass['data']) ? $getclass['data'] : [],
-                'parent' => isset($parent['data']) ? $parent['data'] : [],
-                'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
-                'hostel' => isset($gethostel['data']) ? $gethostel['data'] : [],
-                'session' => isset($session['data']) ? $session['data'] : [],
-                'semester' => isset($semester['data']) ? $semester['data'] : [],
-                'student' => isset($student['data']['student']) ? $student['data']['student'] : [],
-                'section' => isset($student['data']['section']) ? $student['data']['section'] : [],
-                'vehicle' => isset($student['data']['vehicle']) ? $student['data']['vehicle'] : [],
-                'room' => isset($student['data']['room']) ? $student['data']['room'] : [],
-                'religion' => isset($religion['data']) ? $religion['data'] : [],
-                'races' => isset($races['data']) ? $races['data'] : [],
-                'relation' => isset($relation['data']) ? $relation['data'] : [],
-                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
-                'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
-                'role' => isset($student['data']['user']) ? $student['data']['user'] : []
+    //     $prev = isset($student['data']['student']['previous_details']) ? json_decode($student['data']['student']['previous_details']) : "";
+    //     // $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
+    //     $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
+    //     $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
+    //     // dd($student);
+    //     return view(
+    //         'parent.student.profile',
+    //         [
+    //             'class' => isset($getclass['data']) ? $getclass['data'] : [],
+    //             'parent' => isset($parent['data']) ? $parent['data'] : [],
+    //             'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
+    //             'hostel' => isset($gethostel['data']) ? $gethostel['data'] : [],
+    //             'session' => isset($session['data']) ? $session['data'] : [],
+    //             'semester' => isset($semester['data']) ? $semester['data'] : [],
+    //             'student' => isset($student['data']['student']) ? $student['data']['student'] : [],
+    //             'section' => isset($student['data']['section']) ? $student['data']['section'] : [],
+    //             'vehicle' => isset($student['data']['vehicle']) ? $student['data']['vehicle'] : [],
+    //             'room' => isset($student['data']['room']) ? $student['data']['room'] : [],
+    //             'religion' => isset($religion['data']) ? $religion['data'] : [],
+    //             'races' => isset($races['data']) ? $races['data'] : [],
+    //             'relation' => isset($relation['data']) ? $relation['data'] : [],
+    //             'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+    //             'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
+    //             'role' => isset($student['data']['user']) ? $student['data']['user'] : []
 
-            ]
-        );
-    }
+    //         ]
+    //     );
+    // }
     // change password
     public function changeNewPassword(Request $request)
     {
@@ -1162,6 +1162,16 @@ class ParentController extends Controller
             $father_passport_base64 = base64_encode($father_passport_data);
             $father_passport_extension = $father_passport_file->getClientOriginalExtension();
         }
+        
+        $image_principal_base64 = "";
+        $image_principal_extension = "";
+        $image_principal_file = $request->file('japanese_association_membership_image_principal');
+        if ($image_principal_file) {
+            $image_principal_path = $image_principal_file->path();
+            $image_principal_data = file_get_contents($image_principal_path);
+            $image_principal_base64 = base64_encode($image_principal_data);
+            $image_principal_extension = $image_principal_file->getClientOriginalExtension();
+        }
         $japanese_association_membership_image_supplimental_base64 = "";
         $japanese_association_membership_image_supplimental_extension = "";
         $file = $request->file('japanese_association_membership_image_supplimental');
@@ -1231,6 +1241,9 @@ class ParentController extends Controller
             'guardian_company_name_local' => $request->guardian_company_name_local,
             'guardian_company_phone_number' => $request->guardian_company_phone_number,
             'guardian_employment_status' => $request->guardian_employment_status,
+            'image_principal_photo' => $image_principal_base64,
+            'image_principal_file_extension' => $image_principal_extension,
+            'image_principal_old_photo' => $request->japanese_association_membership_image_principal_old,
             'japanese_association_membership_image_supplimental' => $japanese_association_membership_image_supplimental_base64,
             'japanese_association_membership_image_supplimental_file_extension' => $japanese_association_membership_image_supplimental_extension,
             "japanese_association_membership_image_supplimental_old" => $request->japanese_association_membership_image_supplimental_old,
@@ -1586,15 +1599,6 @@ class ParentController extends Controller
             $nric_extension = $nric_file->getClientOriginalExtension();
         }
 
-        $image_principal_base64 = "";
-        $image_principal_extension = "";
-        $image_principal_file = $request->file('japanese_association_membership_image_principal');
-        if ($image_principal_file) {
-            $image_principal_path = $image_principal_file->path();
-            $image_principal_data = file_get_contents($image_principal_path);
-            $image_principal_base64 = base64_encode($image_principal_data);
-            $image_principal_extension = $image_principal_file->getClientOriginalExtension();
-        }
         // Set dual nationality based on checkbox
         $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
@@ -1632,11 +1636,8 @@ class ParentController extends Controller
             'passport_file_extension' => $passport_extension,
             'dual_nationality' => $dual_nationality,
             'nric_old_photo' => $request->nric_old_photo,
-            'image_principal_old_photo' => $request->japanese_association_membership_image_principal_old,
             'nric_photo' => $nric_base64,
             'nric_file_extension' => $nric_extension,
-            'image_principal_photo' => $image_principal_base64,
-            'image_principal_file_extension' => $image_principal_extension,
             'school_last_attended' => $request->txt_prev_schname,
             'school_country' => $request->school_country,
             'school_city' => $request->school_city,

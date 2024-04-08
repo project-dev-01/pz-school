@@ -2246,6 +2246,7 @@ return [
     "faq_japanese" => "Japanese",
     "faq_english" => "English",
     "enter_attendance_no" =>"Enter Attendance number",
+    "employement_type" => "Employment type",
     "siblings" => "Sibling",
     "relationship" => "Relationship",
 

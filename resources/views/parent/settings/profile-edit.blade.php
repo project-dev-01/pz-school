@@ -833,6 +833,22 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label for="japanese_association_membership_image_principal">{{ __('messages.japanese_association_membership_image_principal') }}<span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" id="japanese_association_membership_image_principal" class="custom-file-input" value="" name="japanese_association_membership_image_principal" accept="image/png, image/gif, image/jpeg">
+                                            <label class="custom-file-label" for="japanese_association_membership_image_principal">{{ __('messages.choose_file') }}</label>
+                                        </div>
+                                    </div>
+                                    <label for="japanese_association_membership_image_principal" class="error"></label>
+                                    @if(isset($guardian['japanese_association_membership_image_principal']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$guardian['japanese_association_membership_image_principal'])
+                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$guardian['japanese_association_membership_image_principal'] }}" target="_blank"> {{ __('messages.japanese_association_membership_image_principal') }} </a>
+                                    @endif
+                                    <span id="japanese_association_membership_image_principal_name"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label for="japanese_association_membership_image_supplimental">{{ __('messages.japanese_association_membership_image_supplimental') }}</label>
                                     <div class="input-group">
                                         <div class="custom-file">
@@ -896,29 +912,34 @@
 <script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
 <script src="{{ asset('country/js/countrySelect.js') }}"></script>
 <script>
-    $(".country").countrySelect({
-        defaultCountry: "jp",
-        preferredCountries: ['my', 'jp'],
-        responsiveDropdown: true
-    });
+    function countrySelect(inputSelector,country) {
+        $(inputSelector).countrySelect({
+            defaultCountry: country,
+            preferredCountries: ['my', 'jp'],
+            responsiveDropdown: true
+        });
+    }
     function initializeIntlTelInput(inputSelector) {
-    var input = document.querySelector(inputSelector);
-    intlTelInput(input, {
-        allowExtensions: true,
-        autoFormat: false,
-        autoHideDialCode: false,
-        autoPlaceholder: false,
-        defaultCountry: "auto",
-        ipinfoToken: "yolo",
-        nationalMode: false,
-        numberType: "MOBILE",
-        initialCountry: "jp",
-        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-        preferredCountries: ['my', 'jp'],
-        preventInvalidNumbers: true,
-        // utilsScript: "js/utils.js"
-    });
-}
+        var input = document.querySelector(inputSelector);
+        intlTelInput(input, {
+            allowExtensions: true,
+            autoFormat: false,
+            autoHideDialCode: false,
+            autoPlaceholder: false,
+            defaultCountry: "auto",
+            ipinfoToken: "yolo",
+            nationalMode: false,
+            numberType: "MOBILE",
+            initialCountry: "jp",
+            //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+            preferredCountries: ['my', 'jp'],
+            preventInvalidNumbers: true,
+            // utilsScript: "js/utils.js"
+        });
+    }
+countrySelect('#father_nationality',"jp")
+countrySelect('#mother_nationality',"my")
+
 initializeIntlTelInput("#mother_phone_number");
 initializeIntlTelInput("#father_phone_number");
 initializeIntlTelInput("#phone_number");

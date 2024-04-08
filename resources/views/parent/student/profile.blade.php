@@ -816,23 +816,6 @@
                                             <input type="text" id="japanese_association_membership_number_student" class="form-control alloptions" placeholder="999999-99-9999" value="{{ isset($student['japanese_association_membership_number_student']) ? $student['japanese_association_membership_number_student'] : ''}}" name="japanese_association_membership_number_student" data-parsley-trigger="change">
                                         </div>
                                     </div>
-                                    <input type="hidden" name="japanese_association_membership_image_principal_old" id="japanese_association_membership_image_principal_old" value="{{ isset($student['japanese_association_membership_image_principal']) ? $student['japanese_association_membership_image_principal'] : ''}}" />
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="japanese_association_membership_image_principal">{{ __('messages.japanese_association_membership_image_principal') }}<span class="text-danger">*</span></label>
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" id="japanese_association_membership_image_principal" class="custom-file-input" value="" name="japanese_association_membership_image_principal" accept="image/png, image/gif, image/jpeg">
-                                                    <label class="custom-file-label" for="japanese_association_membership_image_principal">{{ __('messages.choose_file') }}</label>
-                                                </div>
-                                            </div>
-                                            <label for="japanese_association_membership_image_principal" class="error"></label>
-                                            @if(isset($student['japanese_association_membership_image_principal']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['japanese_association_membership_image_principal'])
-                                            <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['japanese_association_membership_image_principal'] }}" target="_blank"> {{ __('messages.japanese_association_membership_image_principal') }} </a>
-                                            @endif
-                                            <span id="japanese_association_membership_image_principal_name"></span>
-                                        </div>
-                                    </div>
                                     @if($form_field['nric'] == 0)
                                     <div class="col-md-4">
                                         <div class="form-group">

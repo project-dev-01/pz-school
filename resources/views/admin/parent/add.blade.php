@@ -807,6 +807,20 @@
 					</ul><br>
 					<div class="card-body">
 						<div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="japanese_association_membership_image_principal">{{ __('messages.japanese_association_membership_image_principal') }}<span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" id="japanese_association_membership_image_principal" class="custom-file-input" value="" name="japanese_association_membership_image_principal" accept="image/png, image/gif, image/jpeg">
+                                            <label class="custom-file-label" for="japanese_association_membership_image_principal">{{ __('messages.choose_file') }}</label>
+                                        </div>
+                                    </div>
+
+                                    <span id="japanese_association_membership_image_principal_name"></span>
+                                    <label for="japanese_association_membership_image_principal" class="error"></label>
+                                </div>
+                            </div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="japanese_association_membership_image_supplimental">{{ __('messages.japanese_association_membership_image_supplimental') }}</label>

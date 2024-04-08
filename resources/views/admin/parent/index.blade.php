@@ -42,6 +42,47 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
+                        <h4 class="nav-link">{{ __('messages.select_ground') }}
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <form id="parentFilter" autocomplete="off">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="status">{{ __('messages.status') }}</label>
+                                    <select id="parent_status" class="form-control" name="status">
+                                        <option value="">{{ __('messages.select_status') }}</option>
+                                        <option value="0">{{ __('messages.active') }}</option>
+                                        <option value="1">{{ __('messages.de_active') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="form-group text-right m-b-0">
+                            <!-- <button class="btn btn-primary-bl waves-effect waves-light" id="indexSubmit" type="submit">
+                                Filter
+                            </button> -->
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                {{ __('messages.filter') }}
+                            </button>
+                            <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                Cancel
+                            </button>-->
+                        </div>
+                    </form>
+
+                </div> <!-- end card-body -->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
                     <h4 class="navv">{{ __('messages.parent_guardian_list') }}<h4>
                     </li>
                 </ul><br>
@@ -117,7 +158,7 @@
     var footer_txt="{{ session()->get('footer_text') }}";
     // Get PDF Header & Footer Text End
 </script>
-<script src="{{ asset('js/custom/parent.js') }}"></script>
+<script src="{{ asset('js/custom/admin_parent_list.js') }}"></script>
 @if(!empty(Session::get('school_roleid')))
 <script>
 var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";

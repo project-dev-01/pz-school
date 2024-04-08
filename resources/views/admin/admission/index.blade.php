@@ -708,7 +708,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="school_enrollment_status">{{ __('messages.enrollment_status') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="school_enrollment_status" name="school_enrollment_status" placeholder="{{ __('messages.enter_enrollment_status') }}" aria-describedby="inputGroupPrepend">
+                                    <!-- <input type="text" class="form-control" id="school_enrollment_status" name="school_enrollment_status" placeholder="{{ __('messages.enter_enrollment_status') }}" aria-describedby="inputGroupPrepend"> -->
+                                    <select id="school_enrollment_status"  name="school_enrollment_status" class="form-control ">
+                                        <option value="">{{ __('messages.select_enrollment_status') }}</option>
+                                        <option value="Regular class" >{{ __('messages.regular_class') }}</option>
+                                        <option value="Special need class">{{ __('messages.special_need_class') }}</option>
+                                        <option value="Regular guidance class">{{ __('messages.regular_guidance_class') }}</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -960,20 +966,6 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="japanese_association_membership_image_principal">{{ __('messages.japanese_association_membership_image_principal') }}<span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" id="japanese_association_membership_image_principal" class="custom-file-input" value="" name="japanese_association_membership_image_principal" accept="image/png, image/gif, image/jpeg">
-                                            <label class="custom-file-label" for="japanese_association_membership_image_principal">{{ __('messages.choose_file') }}</label>
-                                        </div>
-                                    </div>
-
-                                    <span id="japanese_association_membership_image_principal_name"></span>
-                                    <label for="japanese_association_membership_image_principal" class="error"></label>
-                                </div>
-                            </div>
                            
                             @if($form_field['nric'] == 0)
                             <div class="col-md-4">

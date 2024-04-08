@@ -303,7 +303,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
 					</ol>-->
 				</div>
-				<h4 class="page-title">{{ __('messages.parent_guardian_profile') }}</h4>
+				<h4 class="page-title">{{ __('messages.parent_information') }}</h4>
 			</div>
 		</div>
 	</div>
@@ -322,7 +322,7 @@
 					</div> <!-- end col -->
 					<div class="col-lg-7">
 						<div class="pl-xl-3 mt-3 mt-xl-0">
-							<h1 class="mb-3">{{ isset($parent['first_name']) ? $parent['first_name'] : ''}}{{ isset($parent['last_name']) ? $parent['last_name'] : ''}}</h5>
+							<h1 class="mb-3">{{ isset($parent['last_name']) ? $parent['last_name'] : ''}}{{ isset($parent['first_name']) ? $parent['first_name'] : ''}}</h5>
 								<div class="row mb-3">
 									<div class="col-md-12">
 										<div>
@@ -903,6 +903,27 @@
 								</ul><br>
 								<div class="card-body">
 									<div class="row">
+										
+										<input type="hidden" name="japanese_association_membership_image_principal_old" id="japanese_association_membership_image_principal_old" value="{{ isset($parent['japanese_association_membership_image_principal']) ? $parent['japanese_association_membership_image_principal'] : ''}}" />
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="japanese_association_membership_image_principal">{{ __('messages.japanese_association_membership_image_principal') }}</label>
+												<div class="input-group">
+													<div class="custom-file">
+														<input type="file" id="japanese_association_membership_image_principal" class="custom-file-input" value="" name="japanese_association_membership_image_principal" accept="image/png, image/gif, image/jpeg">
+														<label class="custom-file-label" for="japanese_association_membership_image_principal">{{ __('messages.choose_file') }}</label>
+													</div>
+												</div>
+												<label for="japanese_association_membership_image_principal" class="error"></label>
+												@if(isset($parent['japanese_association_membership_image_principal']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['japanese_association_membership_image_principal'])
+												<a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['japanese_association_membership_image_principal'] }}" target="_blank"> {{ __('messages.japanese_association_membership_image_principal') }} </a>
+												@endif
+												<span id="japanese_association_membership_image_principal_name"></span>
+												
+											</div>
+										</div>
+										<input type="hidden" name="japanese_association_membership_image_supplimental_old" id="japanese_association_membership_image_supplimental_old" value="{{ isset($parent['japanese_association_membership_image_supplimental']) ? $parent['japanese_association_membership_image_supplimental'] : ''}}" />
+										
 										<div class="col-md-4">
 											<div class="form-group">
 												<label for="japanese_association_membership_image_supplimental">{{ __('messages.japanese_association_membership_image_supplimental') }}</label>
@@ -1106,7 +1127,7 @@
 												@endif
 											</div>
 											<div class="col-sm-8">
-												<h4 class="title">{{$child['first_name']}} {{$child['last_name']}}</h4>
+												<h4 class="title">{{$child['last_name']}} {{$child['first_name']}}</h4>
 												<div class="info">
 													<span> {{ __('messages.class') }}: {{$child['class_name']}} ({{$child['section_name']}})</span>
 												</div>

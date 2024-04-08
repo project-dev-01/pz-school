@@ -842,7 +842,13 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="school_enrollment_status">{{ __('messages.enrollment_status') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="school_enrollment_status"  value="{{ isset($student['school_enrollment_status']) ? $student['school_enrollment_status'] : ''}}" name="school_enrollment_status" placeholder="{{ __('messages.enter_enrollment_status') }}" aria-describedby="inputGroupPrepend">
+                                                <!-- <input type="text" class="form-control" id="school_enrollment_status"  value="{{ isset($student['school_enrollment_status']) ? $student['school_enrollment_status'] : ''}}" name="school_enrollment_status" placeholder="{{ __('messages.enter_enrollment_status') }}" aria-describedby="inputGroupPrepend"> -->
+                                                <select id="school_enrollment_status"  name="school_enrollment_status" class="form-control ">
+                                                    <option value="">{{ __('messages.select_enrollment_status') }}</option>
+                                                    <option value="Regular class" {{ isset($student['school_enrollment_status']) ? $student['school_enrollment_status'] == "Regular class" ? 'selected' : '' : '' }}>{{ __('messages.regular_class') }}</option>
+                                                    <option value="Special need class" {{ isset($student['school_enrollment_status']) ? $student['school_enrollment_status'] == "Special need class" ? 'selected' : '' : '' }}>{{ __('messages.special_need_class') }}</option>
+                                                    <option value="Regular guidance class" {{ isset($student['school_enrollment_status']) ? $student['school_enrollment_status'] == "Regular guidance class" ? 'selected' : '' : '' }}>{{ __('messages.regular_guidance_class') }}</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -998,24 +1004,6 @@
                                                 <div class="form-group">
                                                     <label for="japanese_association_membership_number_student">{{ __('messages.japanese_association_membership_number_student') }}<span class="text-danger">*</span></label>
                                                     <input type="text" id="japanese_association_membership_number_student" class="form-control alloptions" placeholder="999999-99-9999"  value="{{ isset($student['japanese_association_membership_number_student']) ? $student['japanese_association_membership_number_student'] : ''}}"  name="japanese_association_membership_number_student" data-parsley-trigger="change">
-                                                </div>
-                                            </div>
-                                            <input type="hidden" name="japanese_association_membership_image_principal_old" id="japanese_association_membership_image_principal_old" value="{{ isset($student['japanese_association_membership_image_principal']) ? $student['japanese_association_membership_image_principal'] : ''}}" />
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="japanese_association_membership_image_principal">{{ __('messages.japanese_association_membership_image_principal') }}</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" id="japanese_association_membership_image_principal" class="custom-file-input" value="" name="japanese_association_membership_image_principal" accept="image/png, image/gif, image/jpeg">
-                                                            <label class="custom-file-label" for="japanese_association_membership_image_principal">{{ __('messages.choose_file') }}</label>
-                                                        </div>
-                                                    </div>
-                                                    <label for="japanese_association_membership_image_principal" class="error"></label>
-                                                    @if(isset($student['japanese_association_membership_image_principal']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['japanese_association_membership_image_principal'])
-                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['japanese_association_membership_image_principal'] }}" target="_blank"> {{ __('messages.japanese_association_membership_image_principal') }} </a>
-                                                    @endif
-                                                    <span id="japanese_association_membership_image_principal_name"></span>
-                                                 
                                                 </div>
                                             </div>
                                             @if($form_field['nric'] == 0)

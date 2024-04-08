@@ -110,7 +110,7 @@ class GuestController extends Controller
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
         $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
-        // dd($form_field);
+        // dd($application);
         return view(
             'guest.application.add',
             [
@@ -251,6 +251,7 @@ class GuestController extends Controller
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
         $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
+        
         // $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
         // dd($application);
         return view(
@@ -526,7 +527,6 @@ class GuestController extends Controller
             ];
         // }
         // return $data;
-        // dd($data);
         $response = Helper::PostMethod(config('constants.api.application_update'), $data);
 
         return $response;

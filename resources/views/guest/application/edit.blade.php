@@ -1342,7 +1342,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="country">{{ __('messages.country') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" maxlength="50" id="country" {{$readonly_phase_2}} class="form-control student_country" placeholder="{{ __('messages.country') }}" value="{{ isset($application['country']) ? $application['country'] : ''}}" name="country" data-parsley-trigger="change">
+                                                    <input type="text" maxlength="50" id="country" {{$readonly_phase_2}} class="form-control " placeholder="{{ __('messages.country') }}" value="{{ isset($application['country']) ? $application['country'] : ''}}" name="country" data-parsley-trigger="change">
                                                 </div>
                                             </div>
                                         </div>
@@ -1836,16 +1836,24 @@
 </script>
 
 <script>
-    $(".student_country").countrySelect({
-        defaultCountry: "my",
-        preferredCountries: ['my', 'jp'],
-        responsiveDropdown: true
-    });
-    $(".country").countrySelect({
-        defaultCountry: "jp",
-        preferredCountries: ['my', 'jp'],
-        responsiveDropdown: true
-    });
+    // $(".country").countrySelect({
+    //     defaultCountry: "my",
+    //     preferredCountries: ['my', 'jp'],
+    //     responsiveDropdown: true
+    // });
+    
+    function countrySelect(inputSelector,country) {
+        $(inputSelector).countrySelect({
+            defaultCountry: country,
+            preferredCountries: ['my', 'jp'],
+            responsiveDropdown: true
+        });
+    }
+    countrySelect('#father_nationality',"jp")
+    countrySelect('#mother_nationality',"jp")
+    countrySelect('#country',"my")
+    countrySelect('#nationality',"jp")
+    countrySelect('#dual_nationality',"jp")
     var input = document.querySelector("#mother_phone_number");
     intlTelInput(input, {
         allowExtensions: true,

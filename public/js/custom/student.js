@@ -133,18 +133,6 @@ $(function () {
             $('#nric_photo_name').text(file.name);
         }
     });
-    $('#japanese_association_membership_image_principal').change(function() {
-        // var i = $(this).prev('label').clone();
-        var file = $('#japanese_association_membership_image_principal')[0].files[0];
-        if(file.size > 2097152) {
-            $('#japanese_association_membership_image_principal_name').text("File greater than 2Mb");
-            $("#japanese_association_membership_image_principal_name").addClass("error");
-            $('#japanese_association_membership_image_principal').val('');
-        } else {
-            $("#japanese_association_membership_image_principal_name").removeClass("error");
-            $('#japanese_association_membership_image_principal_name').text(file.name);
-        }
-    });
     $("#visa_type_others_show").hide();
 
     // Listen for changes in the visa_type dropdown
@@ -1189,7 +1177,7 @@ $(function () {
             visa_photo: "required",
             visa_type: "required",
             japanese_association_membership_number_student: "required",
-            japanese_association_membership_image_principal:"required",
+            // japanese_association_membership_image_principal:"required",
             txt_prev_schname: "required",
             school_country: "required",
             school_state: "required",
