@@ -91,7 +91,7 @@
                                                         <div class="col-md-3">
                                                             <div class="form-group">
                                                                 <label for="student_name">{{ __('messages.student_name') }}</label>
-                                                                <input type="text" name="student_name" class="form-control" id="student_name"/>
+                                                                <input type="text" name="student_name" class="form-control" id="student_name">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-3">
@@ -136,7 +136,7 @@
                                                         </div>
                                                         <div class="col-md-3">
                                                             <div class="form-group">
-                                                                <label for="student_status">{{ __('messages.status') }}</label>
+                                                                <label for="status">{{ __('messages.status') }}</label>
                                                                 <select id="student_status" class="form-control" name="status">
                                                                     <option value="">{{ __('messages.select_status') }}</option>
                                                                     <option value="0">{{ __('messages.active') }}</option>
@@ -366,21 +366,23 @@
                                                                                             </li>
                                                                                         </ul>
                                                                                     </li>  -->
-                                                                    </ul>
+                                                                        </ul>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            </li>
-                                                                    </ul>
+                                                                </li>
+                                                                </ul>
                                                                 </div>
                                                                 <div class="col-md-3">
-                                                                </div>
-                                                            </div>
-                                                            <br>
+                                                                <br>
                                                             <div class="form-group text-left m-b-0">
                                                                 <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
                                                                     {{ __('messages.save') }}
                                                                 </button>
                                                             </div>
+                                                                </div>
+                                                               
+                                                            </div>
+                                                           
                                                         </form>
                                                     </div>
                                                 </div>
