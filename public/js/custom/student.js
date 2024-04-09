@@ -1,5 +1,6 @@
 $(function () {
 
+    // $('#dual_nationality_container').hide();
     var formData = {
         student_name: null,
         department_id: null,
@@ -1168,7 +1169,7 @@ $(function () {
             drp_state: "required",
             drp_country: "required",
             drp_post_code: "required",
-            txt_religion: "required",
+            // txt_religion: "required",
             nationality: "required",
             passport: "required",
             passport_expiry_date: "required",

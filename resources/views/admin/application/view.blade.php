@@ -85,7 +85,7 @@
                                             <td class="country"></td>
                                         </tr>
                                         <tr>
-                                            <td>{{ __('messages.state') }}</td>
+                                            <td>{{ __('messages.state_province') }}</td>
                                             <td class="state"></td>
                                         </tr>
                                         <tr>
@@ -133,7 +133,7 @@
                                             <td class="school_country"></td>
                                         </tr>
                                         <tr>
-                                            <td>{{ __('messages.state') }}</td>
+                                            <td>{{ __('messages.state_province') }}</td>
                                             <td class="school_state"></td>
                                         </tr>
                                         <tr>

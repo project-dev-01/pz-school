@@ -654,7 +654,7 @@
                                         @if($form_field['religion'] == 0)
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="txt_religion">{{ __('messages.religion') }}<span class="text-danger">*</span></label>
+                                                <label for="txt_religion">{{ __('messages.religion') }}<span class="text-danger"></span></label>
                                                 <select class="form-control" name="txt_religion" id="religion">
                                                     <option value="">{{ __('messages.select_religion') }}</option>
                                                     @forelse($religion as $r)
@@ -821,8 +821,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="school_state">{{ __('messages.state') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="school_state"  value="{{ isset($student['school_state']) ? $student['school_state'] : ''}}" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                                <label for="school_state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="school_state"  value="{{ isset($student['school_state']) ? $student['school_state'] : ''}}" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
                                     </div>
@@ -830,7 +830,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="school_city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="school_city" value="{{ isset($student['school_city']) ? $student['school_city'] : ''}}" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="school_city" value="{{ isset($student['school_city']) ? $student['school_city'] : ''}}" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.city') }}" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -2327,30 +2327,6 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
-<script src="{{ asset('libs/mohithg-switchery/switchery.min.js') }}"></script>
-<script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
-<script src="{{ asset('libs/selectize/js/standalone/selectize.min.js') }}"></script>
-<!-- plugin js -->
-<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
-
-<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('toastr/toastr.min.js') }}"></script>
-<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
-<script>
-    toastr.options.preventDuplicates = true;
-</script>
-<script src="{{ asset('js/validation/validation.js') }}"></script>
-
-<script src="{{ asset('libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
-<script src="{{ asset('libs/autonumeric/autoNumeric-min.js') }}"></script>
-
-<!-- Init js-->
-<script src="{{ asset('js/pages/form-masks.init.js') }}"></script>
-<script src="{{ asset('libs/jquery-mask-plugin/jquery.mask.min.js') }}"></script>
-
-<script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
-<script src="{{ asset('country/js/countrySelect.js') }}"></script>
-
 <script>
     var parentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
@@ -2365,46 +2341,32 @@
     var studentList = null;
     var malaysiaPostalCode = "{{ route('admin.malaysia_postalCode') }}";
 </script>
+<!-- Plugins js-->
+<script src="{{ asset('libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js')}}"></script>
 
-<!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->
-<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
-<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
-<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
-<script src="{{ asset('js/custom/student.js') }}"></script>
+<!-- Init js-->
+<script src="{{ asset('js/pages/form-wizard.init.js')}}"></script>
+<script src="{{ asset('js/validation/validation.js') }}"></script>
+
+
+<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
+
+<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
+<script src="{{ asset('js/validation/validation.js') }}"></script>
+<!-- Init js-->
+<script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
+<script src="{{ asset('country/js/countrySelect.js') }}"></script>
+<script src="{{ asset('js/custom/admin_application.js') }}"></script>
 <script>
-    $('.dropify-im').dropify({
-        messages: {
-            default: drag_and_drop_to_check,
-            replace: drag_and_drop_to_replace,
-            remove: remove,
-            error: oops_went_wrong
-        }
-    });
-    $(function() {
-        // nric validation start
-        // var $form_2 = $('#editadmission');
-        // $form_2.validate({
-        //     debug: true
-        // });
-
-        // $('#txt_nric').rules("add", {
-        //     required: true
-        // });
-
-        $('#txt_nric').mask("000000-00-0000", {
-            reverse: true
-        });
-        // nric validation end
-        setTimeout(function() {
-            // Clear the values of email and password fields
-            $("#confirm_password").val("");
-            $("#password").val("");
-        }, 2000);
-    });
+    toastr.options.preventDuplicates = true;
 </script>
 <script>
     $(".country").countrySelect({
         responsiveDropdown: true,
+        preferredCountries: ['my', 'jp'],
         defaultCountry: "jp",
     });
     var input = document.querySelector("#txt_mobile_no");

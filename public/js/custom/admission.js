@@ -1,4 +1,6 @@
 $(function () {
+    
+    $('#dual_nationality_container').hide();
     // nric validation start
     // var $form_1 = $('#addadmission');
     // $form_1.validate({
@@ -333,7 +335,7 @@ $(function () {
             drp_state: "required",
             drp_country: "required",
             drp_post_code: "required",
-            txt_religion: "required",
+            // txt_religion: "required",
             nationality: "required",
             passport: "required",
             passport_expiry_date: "required",

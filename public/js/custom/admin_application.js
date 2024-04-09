@@ -304,7 +304,7 @@ $(function () {
             // mobile_no: "required",
             date_of_birth: "required",
             gender: "required",
-            religion: "required",
+            // religion: "required",
             nationality: "required",
             school_enrollment_status: "required",
             school_enrollment_status_tendency: "required",

@@ -866,8 +866,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="school_state">{{ __('messages.state') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="school_state" value="{{ isset($student['school_state']) ? $student['school_state'] : ''}}" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                            <label for="school_state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="school_state" value="{{ isset($student['school_state']) ? $student['school_state'] : ''}}" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                 </div>
@@ -875,7 +875,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="school_city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="school_city" value="{{ isset($student['school_city']) ? $student['school_city'] : ''}}" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control" id="school_city" value="{{ isset($student['school_city']) ? $student['school_city'] : ''}}" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.city') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">

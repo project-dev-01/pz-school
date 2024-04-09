@@ -530,7 +530,7 @@
                             @if($form_field['religion'] == 0)
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="txt_religion">{{ __('messages.religion') }}<span class="text-danger">*</span></label>
+                                    <label for="txt_religion">{{ __('messages.religion') }}</label>
                                     <select class="form-control" name="txt_religion" id="religion">
                                         <option value="">{{ __('messages.select_religion') }}</option>
                                         @forelse($religion as $r)
@@ -558,7 +558,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4"  id="dual_nationality_container" style="display: none;">
+                                            <div class="col-md-4"  id="dual_nationality_container">
                                                 <div class="form-group">
                                                     <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
                                                     <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" data-parsley-trigger="change">
@@ -686,8 +686,8 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="school_state">{{ __('messages.state') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="school_state" value="{{ isset($application['school_state']) ? $application['school_state'] : ''}}" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                    <label for="school_state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="school_state" value="{{ isset($application['school_state']) ? $application['school_state'] : ''}}" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend">
                                 </div>
                             </div>
 
@@ -696,7 +696,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="school_city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="school_city" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                    <input type="text" class="form-control" id="school_city" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.city') }}" aria-describedby="inputGroupPrepend">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -1942,6 +1942,25 @@
 <script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
 <script src="{{ asset('country/js/countrySelect.js') }}"></script>
 <script>
+    
+    function countrySelect(inputSelector,country) {
+        $(inputSelector).countrySelect({
+            defaultCountry: country,
+            preferredCountries: ['my', 'jp'],
+            responsiveDropdown: true
+        });
+    }
+    countrySelect('#father_nationality',"jp")
+    countrySelect('#mother_nationality',"jp")
+    countrySelect('#drp_country',"my")
+    countrySelect('#nationality',"jp")
+    countrySelect('#dual_nationality',"jp")
+
+    // $(".country").countrySelect({
+    //     defaultCountry: "jp",
+    //     preferredCountries: ['my', 'jp'],
+    //     responsiveDropdown: true
+    // });
     var input = document.querySelector("#txt_mobile_no");
     intlTelInput(input, {
         allowExtensions: true,
@@ -2005,11 +2024,6 @@
         //preferredCountries: ['cn', 'jp'],
         preventInvalidNumbers: true,
         // utilsScript: "js/utils.js"
-    });
-    $(".country").countrySelect({
-        defaultCountry: "jp",
-        preferredCountries: ['my', 'jp'],
-        responsiveDropdown: true
     });
 </script>
 <script>

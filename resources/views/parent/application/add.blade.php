@@ -479,7 +479,7 @@
                                             @if($form_field['religion'] == 0)
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="religion">{{ __('messages.religion') }}<span class="text-danger">*</span></label>
+                                                    <label for="religion">{{ __('messages.religion') }}<span class="text-danger"></span></label>
                                                     <select class="form-control" name="religion" id="religion">
                                                         <option value="">{{ __('messages.select_religion') }}</option>
                                                         @forelse($religion as $r)
@@ -561,8 +561,8 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="school_state">{{ __('messages.state') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control prev_school_form" id="school_state" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                                        <label for="school_state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control prev_school_form" id="school_state" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                             </div>
@@ -570,7 +570,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="school_city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control prev_school_form" id="school_city" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control prev_school_form" id="school_city" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.city') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
