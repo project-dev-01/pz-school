@@ -53,6 +53,9 @@ class Helper
     public static function postMethod($url, $data)
     {
         try {
+            $data["token"] = session('token');
+            $data["branch_id"] = session('branch_id');
+
             $response = Http::withToken(session('token'))->post($url, $data);
 
             return self::handleResponse($response);
