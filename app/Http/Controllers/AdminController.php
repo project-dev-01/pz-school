@@ -5495,9 +5495,13 @@ class AdminController extends Controller
         $data = [
             'id' => $id,
         ];
+        $parentId = [
+            'parent_id'=> $id,
+           ];
         $data1 = [
             'email' => session()->get('email'),
         ];
+        
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
         $education = Helper::GetMethod(config('constants.api.education_list'));
@@ -5511,12 +5515,13 @@ class AdminController extends Controller
         $grade = Helper::GetMethod(config('constants.api.class_list'));
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $get_std_names_dashboard = Helper::GETMethodWithData(config('constants.api.get_students_parentdashboard'), $parentId);
         // dd($response);
         return view(
             'admin.parent.edit',
             [
                 'religion' => isset($religion['data']) ? $religion['data'] : [],
-                'races' => isset($races['data']) ? $races['data'] : [],
+                'relation' => isset($relation['data']) ? $relation['data'] : [],                'races' => isset($races['data']) ? $races['data'] : [],
                 'education' => isset($education['data']) ? $education['data'] : [],
                 'parent' => isset($response['data']['parent']) ? $response['data']['parent'] : [],
                 'childs' => isset($response['data']['childs']) ? $response['data']['childs'] : [],
@@ -5527,6 +5532,7 @@ class AdminController extends Controller
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'grade' => isset($grade['data']) ? $grade['data'] : [],
                 'contact' => isset($contactDetails['data']) ? $contactDetails['data'] : [],
+                'get_std_names_dashboard' => isset($get_std_names_dashboard['data']) ? $get_std_names_dashboard['data'] : [],
 
                 'guardian' => isset($application['data']) ? $application['data'] : [],
                 'email' => session()->get('email'),
@@ -5552,45 +5558,45 @@ class AdminController extends Controller
             $extension = $file->getClientOriginalExtension();
         }
 */
-//         $mother_visa_base64 = "";
-//         $mother_visa_extension = "";
-//         $mother_visa_file = $request->file('visa_mother_photo');
-//         if ($mother_visa_file) {
-//             $mother_visa_path = $mother_visa_file->path();
-//             $mother_visa_data = file_get_contents($mother_visa_path);
-//             $mother_visa_base64 = base64_encode($mother_visa_data);
-//             $mother_visa_extension = $mother_visa_file->getClientOriginalExtension();
-//         }
+        $mother_visa_base64 = "";
+        $mother_visa_extension = "";
+        $mother_visa_file = $request->file('visa_mother_photo');
+        if ($mother_visa_file) {
+            $mother_visa_path = $mother_visa_file->path();
+            $mother_visa_data = file_get_contents($mother_visa_path);
+            $mother_visa_base64 = base64_encode($mother_visa_data);
+            $mother_visa_extension = $mother_visa_file->getClientOriginalExtension();
+        }
 
-//         $mother_passport_base64 = "";
-//         $mother_passport_extension = "";
-//         $mother_passport_file = $request->file('passport_mother_photo');
-//         if ($mother_passport_file) {
-//             $mother_passport_path = $mother_passport_file->path();
-//             $mother_passport_data = file_get_contents($mother_passport_path);
-//             $mother_passport_base64 = base64_encode($mother_passport_data);
-//             $mother_passport_extension = $mother_passport_file->getClientOriginalExtension();
-//         }
+        $mother_passport_base64 = "";
+        $mother_passport_extension = "";
+        $mother_passport_file = $request->file('passport_mother_photo');
+        if ($mother_passport_file) {
+            $mother_passport_path = $mother_passport_file->path();
+            $mother_passport_data = file_get_contents($mother_passport_path);
+            $mother_passport_base64 = base64_encode($mother_passport_data);
+            $mother_passport_extension = $mother_passport_file->getClientOriginalExtension();
+        }
 
-//         $father_visa_base64 = "";
-//         $father_visa_extension = "";
-//         $father_visa_file = $request->file('visa_father_photo');
-//         if ($father_visa_file) {
-//             $father_visa_path = $father_visa_file->path();
-//             $father_visa_data = file_get_contents($father_visa_path);
-//             $father_visa_base64 = base64_encode($father_visa_data);
-//             $father_visa_extension = $father_visa_file->getClientOriginalExtension();
-//         }
+        $father_visa_base64 = "";
+        $father_visa_extension = "";
+        $father_visa_file = $request->file('visa_father_photo');
+        if ($father_visa_file) {
+            $father_visa_path = $father_visa_file->path();
+            $father_visa_data = file_get_contents($father_visa_path);
+            $father_visa_base64 = base64_encode($father_visa_data);
+            $father_visa_extension = $father_visa_file->getClientOriginalExtension();
+        }
 
-//         $father_passport_base64 = "";
-//         $father_passport_extension = "";
-//         $father_passport_file = $request->file('passport_father_photo');
-//         if ($father_passport_file) {
-//             $father_passport_path = $father_passport_file->path();
-//             $father_passport_data = file_get_contents($father_passport_path);
-//             $father_passport_base64 = base64_encode($father_passport_data);
-//             $father_passport_extension = $father_passport_file->getClientOriginalExtension();
-//         }
+        $father_passport_base64 = "";
+        $father_passport_extension = "";
+        $father_passport_file = $request->file('passport_father_photo');
+        if ($father_passport_file) {
+            $father_passport_path = $father_passport_file->path();
+            $father_passport_data = file_get_contents($father_passport_path);
+            $father_passport_base64 = base64_encode($father_passport_data);
+            $father_passport_extension = $father_passport_file->getClientOriginalExtension();
+        }
 //         $visa_base64 = "";
 //         $visa_extension = "";
 //         $visa_file = $request->file('visa_photo');
@@ -5629,26 +5635,29 @@ class AdminController extends Controller
             $japanese_association_membership_image_supplimental_base64 = base64_encode($data);
             $japanese_association_membership_image_supplimental_extension = $file->getClientOriginalExtension();
         }
+        $fullNames = $request->input('full_name', []);
+        $siblingdob = $request->input('siblingdob', []);
+        $relationship = $request->input('relationship', []);
         $data = [
 
-
-            // "mother_last_name_furigana" => $request->mother_last_name_furigana,
-            // "mother_middle_name_furigana" => $request->mother_middle_name_furigana,
-            // "mother_first_name_furigana" => $request->mother_first_name_furigana,
-            // "mother_last_name_english" => $request->mother_last_name_english,
-            // "mother_middle_name_english" => $request->mother_middle_name_english,
-            // "mother_first_name_english" => $request->mother_first_name_english,
-            // "mother_nationality" => $request->mother_nationality,
-            // 'mother_first_name' => $request->mother_first_name,
-            // 'mother_last_name' => $request->mother_last_name,
-            // "mother_middle_name" => $request->mother_middle_name,
-            // 'mother_phone_number' => $request->mother_phone_number,
-            // 'mother_occupation' => $request->mother_occupation,
-            // 'mother_email' => $request->mother_email,
-            // 'visa_mother_photo' => $mother_visa_base64,
-            // 'mother_visa_file_extension' => $mother_visa_extension,
-            // 'passport_mother_photo' => $mother_passport_base64,
-            // 'mother_passport_file_extension' => $mother_passport_extension,
+            "mother_id"=>  $request->mother_id,
+            "mother_last_name_furigana" => $request->mother_last_name_furigana,
+            "mother_middle_name_furigana" => $request->mother_middle_name_furigana,
+            "mother_first_name_furigana" => $request->mother_first_name_furigana,
+            "mother_last_name_english" => $request->mother_last_name_english,
+            "mother_middle_name_english" => $request->mother_middle_name_english,
+            "mother_first_name_english" => $request->mother_first_name_english,
+            "mother_nationality" => $request->mother_nationality,
+            'mother_first_name' => $request->mother_first_name,
+            'mother_last_name' => $request->mother_last_name,
+            "mother_middle_name" => $request->mother_middle_name,
+            'mother_phone_number' => $request->mother_mobile_no,
+            'mother_occupation' => $request->mother_occupation,
+            'mother_email' => $request->mother_email,
+            'visa_mother_photo' => $mother_visa_base64,
+            'mother_visa_file_extension' => $mother_visa_extension,
+            'passport_mother_photo' => $mother_passport_base64,
+            'mother_passport_file_extension' => $mother_passport_extension,
             /*'mother_nric' => $request->mother_nric,
             'mother_visa_number' => $request->mother_visa_number,
             'mother_visa_expiry_date' => $request->mother_visa_expiry_date,
@@ -5657,28 +5666,28 @@ class AdminController extends Controller
             'mother_passport_number' => $request->mother_passport_number, 
             'mother_passport_expiry_date' => $request->mother_passport_expiry_date,
             'passport_mother_photo' => $mother_passport_base64,           
-            'mother_passport_file_extension' => $mother_passport_extension,           
-            'passport_mother_photo_old' => $request->passport_mother_photo_old,
-            'visa_mother_photo_old' => $request->visa_mother_photo_old,*/
+            'mother_passport_file_extension' => $mother_passport_extension, */          
+            'passport_mother_photo_old' => $request->passport_mother_old_photo,
+            'visa_mother_photo_old' => $request->visa_mother_old_photo,
 
-
-            // "father_last_name_furigana" => $request->father_last_name_furigana,
-            // "father_middle_name_furigana" => $request->father_middle_name_furigana,
-            // "father_first_name_furigana" => $request->father_first_name_furigana,
-            // "father_last_name_english" => $request->father_last_name_english,
-            // "father_middle_name_english" => $request->father_middle_name_english,
-            // "father_first_name_english" => $request->father_first_name_english,
-            // "father_nationality" => $request->father_nationality,
-            // 'father_first_name' => $request->father_first_name,
-            // 'father_last_name' => $request->father_last_name,
-            // "father_middle_name" => $request->father_middle_name,
-            // 'father_phone_number' => $request->father_phone_number,
-            // 'father_occupation' => $request->father_occupation,
-            // 'father_email' => $request->father_email,
-            // 'passport_father_photo' => $father_passport_base64,
-            // 'father_passport_file_extension' => $father_passport_extension,
-            // 'visa_father_photo' => $father_visa_base64,
-            // 'father_visa_file_extension' => $father_visa_extension,
+            "father_id"=>  $request->father_id,
+            "father_last_name_furigana" => $request->father_last_name_furigana,
+            "father_middle_name_furigana" => $request->father_middle_name_furigana,
+            "father_first_name_furigana" => $request->father_first_name_furigana,
+            "father_last_name_english" => $request->father_last_name_english,
+            "father_middle_name_english" => $request->father_middle_name_english,
+            "father_first_name_english" => $request->father_first_name_english,
+            "father_nationality" => $request->father_nationality,
+            'father_first_name' => $request->father_first_name,
+            'father_last_name' => $request->father_last_name,
+            "father_middle_name" => $request->father_middle_name,
+            'father_phone_number' => $request->father_mobile_no,
+            'father_occupation' => $request->father_occupation,
+            'father_email' => $request->father_email,
+            'passport_father_photo' => $father_passport_base64,
+            'father_passport_file_extension' => $father_passport_extension,
+            'visa_father_photo' => $father_visa_base64,
+            'father_visa_file_extension' => $father_visa_extension,
             /*'father_nric' => $request->father_nric,
             'father_visa_number' => $request->father_visa_number,
             'father_visa_expiry_date' => $request->father_visa_expiry_date,
@@ -5687,9 +5696,9 @@ class AdminController extends Controller
             'father_passport_number' => $request->father_passport_number,
             'passport_father_photo' => $father_passport_base64,            
             'father_passport_expiry_date' => $request->father_passport_expiry_date,
-            'father_passport_file_extension' => $father_passport_extension,            
-            'passport_father_photo_old' => $request->passport_father_photo_old,
-            'visa_father_photo_old' => $request->visa_father_photo_old,*/
+            'father_passport_file_extension' => $father_passport_extension,  */          
+            'passport_father_photo_old' => $request->passport_father_old_photo,
+            'visa_father_photo_old' => $request->visa_father_old_photo,
 
 
             'id' => $request->id,
@@ -5740,7 +5749,7 @@ class AdminController extends Controller
             'visa_old_photo' => $request->visa_old_photo,
             'passport_old_photo' => $request->passport_old_photo,*/
 
-            // 'guardian_relation' => $request->guardian_relation,
+           
             'guardian_company_name_japan' => $request->guardian_company_name_japan,
             'guardian_company_name_local' => $request->guardian_company_name_local,
             'guardian_company_phone_number' => $request->guardian_company_phone_number,
@@ -5758,6 +5767,11 @@ class AdminController extends Controller
             'japan_emergency_sms' => $request->japan_emergency_sms,
             'japan_address' => $request->japan_address,
             'stay_category' => $request->stay_category,
+            'student_id' => $request->student_id,
+            'full_name' => $fullNames,
+            'sblingdob' => $siblingdob,
+            'relationship' => $relationship,
+            'guardian_relation' => $request->guardian_relation,
 
             'role_id' => session()->get('role_id')
         ];
@@ -11446,5 +11460,12 @@ class AdminController extends Controller
             })
             ->rawColumns(['actions'])
             ->make(true);
+    }
+    public function parentDetailsAccStudentId(Request $request){
+        $data = [
+            "student_id" => $request->student_id
+        ];
+        $response = Helper::PostMethod(config('constants.api.getParentDetailsAccStudentId'), $data);
+        return  $response;
     }
 }

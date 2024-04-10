@@ -1215,7 +1215,7 @@
 <script>
     var employeeListShow = "{{ route('admin.listemployee') }}";
     var employeeList = null;
-    var yyyy_mm_dd = "{{ __('messages.yyyy_mm_dd') }}";
+    
     var emp_department_list = @json($emp_department);
     var emp_designation_list = @json($emp_designation);
     var employee_type_list = @json($employee_type_list);

@@ -1,11 +1,11 @@
 <?php
-$url = "http://localhost/paxsuzen-api-dev/public/api";
+$url = "http://localhost/paxsuze-api/public/api";
 // $url = "https://api.suzen.school/api";test
 return [
     'branch_id'=>'4',
     'school_name'=>'クアラルンプール日本人学校',
     'school_image'=>'logo_jskl.jpeg',
-    'image_url' => "http://localhost/paxsuzen-api-dev/public",
+    'image_url' => "http://localhost/paxsuze-api/public",
     'api' => [
         // login url
         'login' => $url.'/login',
@@ -425,7 +425,7 @@ return [
         'parent_student_update' => $url.'/parent/student/update',
         'parent_update_view' => $url.'/parent/update/view',
         'parent_student_update_info_list' => $url.'/parent/student/update_info/list',
-        
+        'getParentDetailsAccStudentId'  => $url.'/parent/getParentDetailsAccStudentId',        
         'student_update_info_list' => $url.'/student/update_info/list',
         'student_update_info_view' => $url.'/student/update_info/view',
         'parent_name' => $url.'/parent/name',

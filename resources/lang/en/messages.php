@@ -2247,7 +2247,7 @@ return [
     "faq_english" => "English",
     "enter_attendance_no" =>"Enter Attendance number",
     "employement_type" => "Employment type",
-    "siblings" => "Sibling",
+    "siblings" => "Siblings",
     "relationship" => "Relationship",
 
     "your_leave_application_was_approved" => "Your leave application was approved",

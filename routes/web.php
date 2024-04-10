@@ -430,6 +430,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('parent/update_info/update', [AdminController::class, 'updateParentInfo'])->name('admin.parent.update_info_update');
         Route::post('student/update_info/update', [AdminController::class, 'updateStudentInfo'])->name('admin.student.update_info_update');
         Route::post('parent/delete', [AdminController::class, 'deleteParent'])->name('admin.parent.delete');
+        Route::post('parent/parentDetailsAccStudentId', [AdminController::class, 'parentDetailsAccStudentId'])->name('admin.parent.parentDetailsAccStudentId');
 
         // Homework routes
         Route::get('homework/index', [AdminController::class, 'homework'])->name('admin.homework');

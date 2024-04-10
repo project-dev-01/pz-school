@@ -397,21 +397,63 @@
 			<div class="card">
 				<div class="card-body">
 					<div class="row">
-						<div class="col-lg-8">
-							<span class="header-title mb-3" id="span-parent" data-toggle="collapse" href="#basic_details" role="button" aria-expanded="false" aria-controls="basic_details"><i class="fas fa-user-edit"></i>{{ __('messages.basic_details') }}</span>
+						<div class="col-lg-12">
+							<span  class="header-title mb-3" id="span-parent" role="button" aria-expanded="false" aria-controls="basic_details" onclick="openBasicDetails()"><i class="fas fa-user-edit"></i>{{ __('messages.basic_details') }}</span>
 						</div>
-						<div class="col-lg-4">
+					</div>
+				    <div class="row basic-details-row" style="display: none;">
+					    <div class="col-lg-12">
+							<div class="row">
+								@forelse($childs as $child)
+								<div class="col-md-3 mb-4">
+									<div class="card text-xs-center" >
+										<div class="card-body" onclick="toggleBasicDetails('{{ $child['id'] }}')">
+									
+											<div class="row">
+												<div class="col-sm-4 text-center">
+													@if($child['photo'])
+													<img src="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}/{{$child['photo']}}" alt="" class="avatar-xl">
+													@else
+													<img src="{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}" alt="" class="avatar-xl">
+													@endif
+												</div>
+												<div class="col-sm-8">
+													<h4 class="title">{{$child['first_name']}} {{$child['last_name']}}</h4>
+													<div class="info">
+														<span> {{ __('messages.class') }}: {{$child['class_name']}} ({{$child['section_name']}})</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								@empty
+								<div class="alert alert-subl mt-md text-center text-danger">No Childs Available !</div>
+								@endforelse
+							</div>
+						</div>
+						<!-- <div class="col-lg-4">
+                            <div class="form-group">
+                                <select id="student_id" name="student_id" class="form-control" onchange="toggleBasicDetails()">
+                                    <option value="">{{ __('messages.select_student') }}</option>
+                                    @forelse($get_std_names_dashboard as $r)
+                                    <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                    @empty
+                                    @endforelse
+                                </select>
+								<div id="alertMessage" style="display: none; color: red;">Please select a student.</div>
+                            </div> -->
 							<!-- <div class="text-lg-right mt-3 mt-lg-0">
 								<button type="button" class="btn btn-white btn-rounded waves-effect waves-light mr-1" data-toggle="modal" data-target="#authenticationModal"><i class="fas fa-lock mr-1"></i> Authentication</button>
 							</div> -->
-						</div><!-- end col-->
+						<!--</div>--><!-- end col-->
 					</div> <!-- end row -->
 					<br>
 					<div class="collapse" id="basic_details">
 						<form id="editParent" method="post" action="{{ route('admin.parent.update') }}" enctype="multipart/form-data" autocomplete="off">
 							@csrf
 							<input type="hidden" name="id" value="{{ isset($parent['id']) ? $parent['id'] : ''}}">
-
+							<input type="hidden" name="student_id" id="student_id">
 							<div class="card">
 								<br>
 								<ul class="nav nav-tabs">
@@ -769,6 +811,24 @@
 
 									<div class="row">
 										<div class="col-md-4">
+										<div class="form-group">
+												<label for="guardian_relation">{{ __('messages.relation') }}<span class="text-danger">*</span></label>
+												<select id="guardian_relation" name="guardian_relation" class="form-control copy_guardian_info">
+													<option value="">{{ __('messages.select_relation') }}</option>
+													@forelse($relation as $r)
+													<option value="{{$r['id']}}">{{$r['name']}}</option>
+													@empty
+													@endforelse
+												</select>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="guardian_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
+												<input type="text" class="form-control copy_guardian_info" id="guardian_email" readonly value="{{ isset($parent['email']) ? $parent['email'] : ''}}" name="guardian_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
+											</div>
+                                		</div>
+										<div class="col-md-4">
 											<div class="form-group">
 												<label for="guardian_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
 												<input type="text" class="form-control number_validation" id="guardian_phone_number" value="{{ isset($parent['mobile_no']) ? $parent['mobile_no'] : ''}}" name="guardian_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
@@ -829,6 +889,23 @@
 												</select>
 											</div>
 										</div>
+										<input type="hidden" name="passport_father_old_photo" id="passport_father_old_photo" value="{{ isset($father['passport_photo']) ? $father['passport_photo'] : ''}}" />
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="passport_father_photo">{{ __('messages.passport_image_father_only_if_malaysian') }}<span class="text-danger">*</span></label>
+												<div class="input-group">
+													<div class="custom-file">
+														<input type="file" id="passport_father_photo" class="custom-file-input" name="passport_father_photo" accept="image/png, image/gif, image/jpeg" value="{{ isset($father['passport_photo']) ? $father['passport_photo'] : ''}}">
+														<label class="custom-file-label" for="passport_father_photo">{{ __('messages.choose_file') }}</label>
+													</div>
+												</div>
+												<label for="passport_father_photo" class="error"></label>
+												@if(isset($father['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$father['passport_photo'])
+												<a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$father['passport_photo'] }}" target="_blank"> {{ __('messages.passport_image_father_only_if_malaysian') }} </a>
+												@endif
+												<span id="passport_father_photo_name"></span>
+											</div>
+										</div>
 <!-- 
 										<div class="col-md-4">
 											<div class="form-group">
@@ -837,6 +914,299 @@
 												<label for="guardian_remarks" class="error"></label>
 											</div>
 										</div> -->
+										</div>
+									<div class="row">
+                                <input type="hidden" name="passport_mother_old_photo" id="passport_mother_old_photo" value="{{ isset($mother['passport_photo']) ? $mother['passport_photo'] : ''}}" />
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="passport_mother_photo">{{ __('messages.passport_image_mother_only_if_malaysian') }}<span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" id="passport_mother_photo" class="custom-file-input" name="passport_mother_photo" accept="image/png, image/gif, image/jpeg">
+                                                <label class="custom-file-label" for="passport_mother_photo">{{ __('messages.choose_file') }}</label>
+                                            </div>
+                                        </div>
+                                        <label for="passport_mother_photo" class="error"></label>
+                                        @if(isset($mother['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$mother['passport_photo'])
+                                        <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$mother['passport_photo'] }}" target="_blank"> {{ __('messages.passport_image_mother_only_if_malaysian') }} </a>
+                                        @endif
+                                        <span id="passport_mother_photo_name"></span>
+                                    </div>
+                                </div>
+
+
+                                <input type="hidden" name="visa_father_old_photo" id="visa_father_old_photo" value="{{ isset($father['visa_photo']) ? $father['visa_photo'] : ''}}" />
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="visa_father_photo">{{ __('messages.visa_image_father_only_for_non_malaysian') }}</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" id="visa_father_photo" class="custom-file-input" name="visa_father_photo" accept="image/png, image/gif, image/jpeg">
+                                                <label class="custom-file-label" for="visa_father_photo">{{ __('messages.choose_file') }}</label>
+                                            </div>
+                                        </div>
+                                        @if(isset($father['visa_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$father['visa_photo'])
+                                        <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$father['visa_photo'] }}" target="_blank"> {{ __('messages.visa_image_father_only_for_non_malaysian') }} </a>
+                                        @endif
+                                        <span id="visa_father_photo_name"></span>
+                                    </div>
+                                </div>
+
+										<input type="hidden" name="visa_mother_old_photo" id="visa_mother_old_photo" value="{{ isset($mother['visa_photo']) ? $mother['visa_photo'] : ''}}" />
+
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="visa_mother_photo">{{ __('messages.visa_image_mother_only_for_non_malaysian') }}</label>
+												<div class="input-group">
+													<div class="custom-file">
+														<input type="file" id="visa_mother_photo" class="custom-file-input" name="visa_mother_photo" accept="image/png, image/gif, image/jpeg">
+														<label class="custom-file-label" for="visa_mother_photo">{{ __('messages.choose_file') }}</label>
+													</div>
+												</div>
+												@if(isset($mother['visa_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$mother['visa_photo'])
+												<a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$mother['visa_photo'] }}" target="_blank"> {{ __('messages.visa_image_mother_only_for_non_malaysian') }} </a>
+												@endif
+												<span id="visa_mother_photo_name"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+					<div class="card">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <h4 class="navv">{{ __('messages.father_details') }}
+                                <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-1">
+                            </div>
+                            <div class="col-md-4" id="father_photo" style="display:none;">
+
+                            </div>
+                        </div>
+                        <div id="father_form">
+                        <input type="hidden" name="father_id" id="father_id">
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control father_form" maxlength="50" id="father_last_name" name="father_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_middle_name">{{ __('messages.middle_name') }}</label>
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name" name="father_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control father_form" maxlength="50" id="father_first_name" name="father_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_furigana" name="father_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_furigana" name="father_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_first_name_furigana" name="father_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_english" name="father_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_english" name="father_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_first_name_english" name="father_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="father_nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info father_form country" id="father_nationality" name="father_nationality" placeholder="{{ __('messages.enter_nationality') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <span class="far fa-envelope-open"></span>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control copy_parent_info father_form " placeholder="{{ __('messages.enter_your_email') }}" id="father_email"  name="father_email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
+                                        <input type="number" class="form-control copy_parent_info father_form " aria-describedby="inputGroupPrepend" placeholder="(XXX)-(XXX)-(XXXX)" id="father_mobile_no" name="father_mobile_no" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txt_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                        <input type="text" maxlength="50" id="father_occupation" name="father_occupation" class="form-control copy_parent_info father_form" placeholder="Manager" data-parsley-trigger="change">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <h4 class="navv">{{ __('messages.mother_details') }}
+                                <h4>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-1">
+                            </div>
+                            <div class="col-md-4" id="mother_photo" style="display:none;">
+
+                            </div>
+                        </div>
+                        <div id="mother_form">
+                        <input type="hidden" name="mother_id" id="mother_id">
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" maxlength="50" id="mother_last_name" name="mother_last_name"placeholder="{{ __('messages.akari') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_middle_name">{{ __('messages.middle_name') }}</label>
+                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name" name="mother_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="heard">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" maxlength="50" id="mother_first_name" name="mother_first_name" placeholder="{{ __('messages.sato') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name_furigana" name="mother_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
+                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name_furigana" name="mother_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name_furigana" name="mother_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name_english" name="mother_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
+                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name_english" name="mother_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name_english" name="mother_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+							</div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mother_nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control copy_parent_info mother_form country" id="mother_nationality" name="mother_nationality" placeholder="{{ __('messages.enter_nationality') }}" aria-describedby="inputGroupPrepend" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <span class="far fa-envelope-open"></span>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="{{ __('messages.enter_the_email') }}" id="mother_email" name="mother_email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
+                                        <input type="number" class="form-control" aria-describedby="inputGroupPrepend" placeholder="(XXX)-(XXX)-(XXXX)" id="mother_mobile_no" name="mother_mobile_no">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                              
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="txt_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                        <input type="text" maxlength="50" id="mother_occupation"  name="mother_occupation" class="form-control" placeholder="Developer" placeholder="{{ __('messages.enter_occupation') }}" data-parsley-trigger="change" >
+                                    </div>
+                                </div>
+                               
+                            </div>
 									</div>
 								</div>
 							</div>
@@ -891,6 +1261,52 @@
 										</div>
 
 									</div>
+									<div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="department">{{ __('messages.siblings') }}</label>
+                                            </div>
+                                        </div>
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <td>{{ __('messages.full_name') }}</td>
+                                                    <td>{{ __('messages.date_of_birth') }}</td>
+                                                    <td>{{ __('messages.relationship') }}</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dynamic_field_one">
+                                              
+                                                <tr id="row_department">
+                                                    <td>
+                                                    <input type="text" class="form-control" name="full_name[]" id="full_name">
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group input-group-merge">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">
+                                                                    <span class="fas fa-calendar"></span>
+                                                                </div>
+                                                            </div>
+                                                            <input type="text"  class="form-control dobDatepicker" name="dob[]" id="dob" placeholder="{{ __('messages.yyyy_mm_dd') }}">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text"  class="form-control" name="relationship[]" id="relationship">
+                                                        
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" name="add_sibling" id="add_sibling" class="btn btn-primary">{{ __('messages.add') }} +</button>
+                                                       
+                                                    </td>
+                                                </tr>
+                                               
+                                                <!-- last feild value -->
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+									
 								</div>
 							</div>
 							<div class="card">
@@ -1050,8 +1466,8 @@
 																			</div>
 																		</div>
 																	</div>
-																</div> <!-- end card-body -->
-							<!--</div> <!-- end card-->
+																</div> end card-body -->
+							<!--</div>  end card-->
 							<div class="card">
 								<ul class="nav nav-tabs">
 									<li class="nav-item">
@@ -1250,6 +1666,10 @@
 	var vehicleByRoute = "{{ route('admin.vehicle_by_route') }}";
 	var roomByHostel = "{{ route('admin.room_by_hostel') }}";
 	var indexAdmission = "{{ route('admin.admission') }}";
+	var parentDetailsAccStudentId = "{{ route('admin.parent.parentDetailsAccStudentId') }}";
+	var studentDetailsAccStudentId = "{{ config('constants.api.student_details') }}";
+	var yyyy_mm_dd = "{{ __('messages.yyyy_mm_dd') }}";
+	var addButton = "{{ __('messages.add') }}";
 </script>
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->

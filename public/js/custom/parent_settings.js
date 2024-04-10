@@ -230,6 +230,55 @@ $(function () {
             return false;
         }
     });
+    $(".dobDatepicker").datepicker({
+        dateFormat: 'dd-mm-yy',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-100:+50", // last hundred years
+    });
+    // designation add start
+    var sibling_increment = 1;
+    $(document).on('click', '#add_sibling', function() {
+        console.log(sibling_increment);
+        sibling_increment++;
+        var siblingAppend = '<tr id="row_sibling' + sibling_increment + '">' +
+            '<td>'+
+            '<input type="text" class="form-control" id="full_name" name="full_name[]" placeholder="" aria-describedby="inputGroupPrepend">' +
+            '</td>' +
+            '<td>' +
+            '<div class="input-group input-group-merge">' +
+            '<div class="input-group-prepend">' +
+            '<div class="input-group-text">' +
+            '<span class="fas fa-calendar"></span>' +
+            '</div>' +
+            '</div>' +
+            '<input type="text" class="form-control dobDatepicker" name="siblingdob[]" placeholder="' + yyyy_mm_dd + '">' +
+            '</div>' +
+            '</td>' +
+            '<td>' +
+           '<input type="text" class="form-control" id="relationship" name="relationship[]" placeholder="" aria-describedby="inputGroupPrepend">'+
+            '</td>' +
+            '<td>' +
+            '<button type="button" name="remove_designation" id="' + sibling_increment + '" class="btn btn-danger btn_remove_designation">X</button>' +
+            '</td>' +
+            '</tr>';
+
+        var appendDesHtml = $('#dynamic_field_one').append(siblingAppend);
+        // Initialize datepicker for the new field
+        appendDesHtml.find('.dobDatepicker').datepicker({
+            dateFormat: 'dd-mm-yy',
+            changeMonth: true,
+            changeYear: true,
+            autoclose: true,
+            yearRange: "-100:+50", // last hundred years
+        });
+
+    });
+    $(document).on('click', '.btn_remove_designation', function () {
+        var button_id = $(this).attr("id");
+        $('#row_sibling' + button_id + '').remove();
+    });
     // update profile details
     $('#updateProfileInfo').on('submit', function (e) {
         e.preventDefault();

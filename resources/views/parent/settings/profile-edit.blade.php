@@ -819,8 +819,69 @@
                                     </select>
                                 </div>
                             </div>
-
                         </div>
+                            <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="department">{{ __('messages.siblings') }}</label>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="student_id" value="{{ isset($sibling['id']) ? $sibling['id'] : ''}}">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <td>{{ __('messages.full_name') }}</td>
+                                                    <td>{{ __('messages.date_of_birth') }}</td>
+                                                    <td>{{ __('messages.relationship') }}</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dynamic_field_one">
+                                            @php
+                                                $siblingTypeIds = isset($sibling['sibling_full_name']) ? $sibling['sibling_full_name'] :"";
+                                                $siblingTypeLists = explode(',', $siblingTypeIds);
+                                                $siblingdob = isset($sibling['sibling_dob']) ? $sibling['sibling_dob'] :"";
+                                                $siblingdobs = explode(',', $siblingdob);
+                                                $siblingrelation = isset($sibling['sibling_relationship']) ? $sibling['sibling_relationship'] :"";
+                                                $siblingrelations = explode(',', $siblingrelation);
+                                                @endphp
+                                                @foreach($siblingTypeLists as $etkey => $etstep)
+                                                @php
+                                                $addRemove = $etkey+1;
+                                                @endphp
+                                                <tr id="row_department">
+                                                    <td>
+                                                    <input type="text" class="form-control" value="{{ isset($siblingTypeLists[$etkey]) ? $siblingTypeLists[$etkey] : ''}}" name="full_name[]" id="full_name">
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group input-group-merge">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">
+                                                                    <span class="fas fa-calendar"></span>
+                                                                </div>
+                                                            </div>
+                                                            <input type="text"  class="form-control dobDatepicker" value="{{ isset($siblingdobs[$etkey]) ? $siblingdobs[$etkey] : ''}}" name="siblingdob[]" id="siblingdob" placeholder="{{ __('messages.yyyy_mm_dd') }}">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text"  class="form-control" value="{{ isset($siblingrelations[$etkey]) ? $siblingrelations[$etkey] : ''}}" name="relationship[]" id="relationship">
+                                                        
+                                                    </td>
+                                                    <td>
+                                                    @if($addRemove > 1)
+                                                    <button type="button" name="remove_emp_type" data-emptype="{{$addRemove}}" id="{{$addRemove}}" class="btn btn-danger btn_remove_emp_type">X</button>
+                                                    @else
+                                                    <button type="button" name="add_sibling" id="add_sibling" class="btn btn-primary">{{ __('messages.add') }} +</button>
+                                                    @endif
+                                                </td>
+                                                </tr>
+                                                @endforeach
+                                               
+                                                <!-- last feild value -->
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                        
                     </div>
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
@@ -952,6 +1013,7 @@ initializeIntlTelInput("#guardian_company_phone_number");
     //event routes
     var eventList = "{{ route('parent.event.list') }}";
     var eventDetails = "{{ route('parent.event.details') }}";
+    var yyyy_mm_dd = "{{ __('messages.yyyy_mm_dd') }}";
 </script>
 <!-- <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script> -->
 <script src="{{ asset('js/custom/parent_settings.js') }}"></script>

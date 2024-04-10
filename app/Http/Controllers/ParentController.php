@@ -1080,6 +1080,8 @@ class ParentController extends Controller
         $mother_id = isset($student['data']['student']['mother_id']) ? $student['data']['student']['mother_id'] : "";
         $father_id = isset($student['data']['student']['father_id']) ? $student['data']['student']['father_id'] : "";
         $guardian_relation = isset($student['data']['student']['relation']) ? $student['data']['student']['relation'] : "";
+        $sibling= isset($student['data']['student']) ? $student['data']['student'] : "";
+       
         $guardian_data = [
             'id' => session()->get('ref_user_id')
         ];
@@ -1118,6 +1120,7 @@ class ParentController extends Controller
                 'user' => isset($response['data']['user']) ? $response['data']['user'] : [],
                 'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
                 'guardian_relation' => isset($guardian_relation) ? $guardian_relation : "",
+                'sibling' =>isset($sibling) ? $sibling: "",
             ]
         );
     }
@@ -1181,6 +1184,9 @@ class ParentController extends Controller
             $japanese_association_membership_image_supplimental_base64 = base64_encode($data);
             $japanese_association_membership_image_supplimental_extension = $file->getClientOriginalExtension();
         }
+        $fullNames = $request->input('full_name', []);
+        $siblingdob = $request->input('siblingdob', []);
+        $relationship = $request->input('relationship', []);
         $data = [
 
             'mother_id' => $request->mother_id,
@@ -1253,6 +1259,10 @@ class ParentController extends Controller
             'japan_emergency_sms' => $request->japan_emergency_sms,
             'japan_address' => $request->japan_address,
             'stay_category' => $request->stay_category,
+            'student_id' => $request->student_id,
+            'full_name' => $fullNames,
+            'sblingdob' => $siblingdob,
+            'relationship' => $relationship,
             'role_id' => session()->get('role_id')
         ];
         // dd($data);
