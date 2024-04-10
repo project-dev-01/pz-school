@@ -143,4 +143,34 @@ $(function () {
             ]
         });
     }
+        // delete Parent 
+        $(document).on('click', '#deleteParentBtn', function () {
+            var id = $(this).data('id');
+            var url = parentDelete;
+            swal.fire({
+                title: deleteTitle + '?',
+                html: deleteHtml,
+                showCancelButton: true,
+                showCloseButton: true,
+                cancelButtonText: deletecancelButtonText,
+                confirmButtonText: deleteconfirmButtonText,
+                cancelButtonColor: '#d33',
+                confirmButtonColor: '#556ee6',
+                width: 400,
+                allowOutsideClick: false
+            }).then(function (result) {
+                if (result.value) {
+                    $.post(url, {
+                        id: id
+                    }, function (data) {
+                        if (data.code == 200) {
+                            $('#parent-table').DataTable().ajax.reload(null, false);
+                            toastr.success(data.message);
+                        } else {
+                            toastr.error(data.message);
+                        }
+                    }, 'json');
+                }
+            });
+        });
 });

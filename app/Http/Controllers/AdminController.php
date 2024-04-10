@@ -4785,40 +4785,6 @@ class AdminController extends Controller
 
             ->rawColumns(['actions'])
             ->make(true);
-        // if ($student['code'] == "200") {
-
-        //     $output = "";
-        //     $row = 1;
-        //     if ($student['data']) {
-        //         foreach ($student['data'] as $stu) {
-        //             $edit = route('admin.student.details', $stu['id']);
-        //             $output .= '<tr>
-        //                             <td>' . $row . '</td>
-        //                             <td>' . $stu['first_name'] . ' ' . $stu['last_name'] . '</td>
-        //                             <td>' . $stu['register_no'] . '</td>
-        //                             <td>' . $stu['roll_no'] . '</td>
-        //                             <td>' . $stu['gender'] . '</td>
-        //                             <td>' . $stu['email'] . '</td>
-        //                             <td>' . $stu['mobile_no'] . '</td>
-        //                             <td>
-        //                                 <div class="button-list">
-        //                                     <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
-        //                                     <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $stu['id'] . '" id="deleteStudentBtn"><i class="fe-trash-2"></i></a>
-        //                                 </div>
-        //                             </td>
-
-        //                         </tr>';
-        //             $row++;
-        //         }
-        //     } else {
-        //         $output .= '<tr>
-        //                         <td colspan="8"> No Data Available</td>
-        //                     </tr>';
-        //     }
-        //     $student['table'] = $output;
-        // }
-        // dd($output);  
-        // return $student;
     }
 
     // get Student  details
@@ -5073,42 +5039,42 @@ class AdminController extends Controller
         ];
 
         $student = Helper::PostMethod(config('constants.api.student_delete'), $data);
-
-        // dd($student);
-        if ($student['code'] == "200") {
-
-            $output = "";
-            $row = 1;
-            if ($student['data']) {
-                foreach ($student['data'] as $stu) {
-
-                    $edit = route('admin.student.details', $stu['id']);
-                    $output .= '<tr>
-                                    <td>' . $row . '</td>
-                                    <td>' . $stu['first_name'] . ' ' . $stu['last_name'] . '</td>
-                                    <td>' . $stu['register_no'] . '</td>
-                                    <td>' . $stu['roll_no'] . '</td>
-                                    <td>' . $stu['gender'] . '</td>
-                                    <td>' . $stu['email'] . '</td>
-                                    <td>' . $stu['mobile_no'] . '</td>
-                                    <td>
-                                        <div class="button-list">
-                                        <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $stu['id'] . '" id="deleteStudentBtn"><i class="fe-trash-2"></i></a>
-                                        </div>
-                                    </td>
-
-                                </tr>';
-                    $row++;
-                }
-            } else {
-                $output .= '<tr>
-                                <td colspan="7"> ' . $no_data_available_lang . '</td>
-                            </tr>';
-            }
-            $student['table'] = $output;
-        }
         return $student;
+        // dd($student);
+        // if ($student['code'] == "200") {
+
+        //     $output = "";
+        //     $row = 1;
+        //     if ($student['data']) {
+        //         foreach ($student['data'] as $stu) {
+
+        //             $edit = route('admin.student.details', $stu['id']);
+        //             $output .= '<tr>
+        //                             <td>' . $row . '</td>
+        //                             <td>' . $stu['first_name'] . ' ' . $stu['last_name'] . '</td>
+        //                             <td>' . $stu['register_no'] . '</td>
+        //                             <td>' . $stu['roll_no'] . '</td>
+        //                             <td>' . $stu['gender'] . '</td>
+        //                             <td>' . $stu['email'] . '</td>
+        //                             <td>' . $stu['mobile_no'] . '</td>
+        //                             <td>
+        //                                 <div class="button-list">
+        //                                 <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
+        //                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $stu['id'] . '" id="deleteStudentBtn"><i class="fe-trash-2"></i></a>
+        //                                 </div>
+        //                             </td>
+
+        //                         </tr>';
+        //             $row++;
+        //         }
+        //     } else {
+        //         $output .= '<tr>
+        //                         <td colspan="7"> ' . $no_data_available_lang . '</td>
+        //                     </tr>';
+        //     }
+        //     $student['table'] = $output;
+        // }
+        // return $student;
     }
 
     public function createParent()
@@ -5521,6 +5487,7 @@ class AdminController extends Controller
             'admin.parent.edit',
             [
                 'religion' => isset($religion['data']) ? $religion['data'] : [],
+                'races' => isset($races['data']) ? $races['data'] : [],
                 'relation' => isset($relation['data']) ? $relation['data'] : [],                'races' => isset($races['data']) ? $races['data'] : [],
                 'education' => isset($education['data']) ? $education['data'] : [],
                 'parent' => isset($response['data']['parent']) ? $response['data']['parent'] : [],
