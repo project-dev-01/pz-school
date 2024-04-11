@@ -265,6 +265,14 @@
 			width: 13.3em;
 		}
 	}
+	.show {
+    display: block !important; /* Ensure the element is displayed */
+    /* Additional styling for visibility */
+}
+.card-body.clicked {
+    background-color: lightblue;
+    cursor: pointer; /* Add cursor pointer to indicate clickability */
+}
 </style>
 @if(Session::get('locale')=="en")
 <style>
@@ -401,35 +409,33 @@
 							<span  class="header-title mb-3" id="span-parent" role="button" aria-expanded="false" aria-controls="basic_details" onclick="openBasicDetails()"><i class="fas fa-user-edit"></i>{{ __('messages.basic_details') }}</span>
 						</div>
 					</div>
+					<br>
 				    <div class="row basic-details-row" style="display: none;">
 					    <div class="col-lg-12">
-							<div class="row">
-								@forelse($childs as $child)
-								<div class="col-md-3 mb-4">
-									<div class="card text-xs-center" >
-										<div class="card-body" onclick="toggleBasicDetails('{{ $child['id'] }}')">
-									
-											<div class="row">
-												<div class="col-sm-4 text-center">
-													@if($child['photo'])
-													<img src="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}/{{$child['photo']}}" alt="" class="avatar-xl">
-													@else
-													<img src="{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}" alt="" class="avatar-xl">
-													@endif
-												</div>
-												<div class="col-sm-8">
-													<h4 class="title">{{$child['first_name']}} {{$child['last_name']}}</h4>
-													<div class="info">
-														<span> {{ __('messages.class') }}: {{$child['class_name']}} ({{$child['section_name']}})</span>
+						<div class="row">
+								@foreach($childs as $child)
+									<div class="col-md-12 col-lg-6 col-xl-4">
+										<div class="card text-center">
+											<div class="card-body" id="child_{{ $child['id'] }}" onclick="toggleBasicDetails('{{ $child['id'] }}')">
+												<div class="row">
+													<div class="col-sm-4">
+														@if($child['photo'])
+															<img src="{{ config('constants.image_url') . '/' . config('constants.branch_id') . '/users/images/' . $child['photo'] }}" alt="Child Photo" class="avatar-xl">
+														@else
+															<img src="{{ config('constants.image_url') . '/common-asset/images/users/default.jpg' }}" alt="Default Photo" class="avatar-xl">
+														@endif
+													</div>
+													<div class="col-sm-8">
+														<h4 class="title">{{ $child['first_name'] }} {{ $child['last_name'] }}</h4>
+														<div class="info">
+															<span>{{ __('messages.class') }}: {{ $child['class_name'] }} ({{ $child['section_name'] }})</span>
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-								@empty
-								<div class="alert alert-subl mt-md text-center text-danger">No Childs Available !</div>
-								@endforelse
+								@endforeach
 							</div>
 						</div>
 						<!-- <div class="col-lg-4">
@@ -562,252 +568,7 @@
 										</div>
 									</div>
 									@endif
-									<!--<div class="row">
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="birthday">{{ __('messages.date_of_birth') }}</label>
-												<div class="input-group input-group-merge">
-												<div class="input-group-prepend">
-												<div class="input-group-text">
-												<span class="fas fa-birthday-cake"></span>
-												</div>
-												</div>
-												<input type="text" class="form-control" name="date_of_birth" value="{{ isset($parent['date_of_birth']) ? $parent['date_of_birth'] : ''}}" id="date_of_birth" placeholder="{{ __('messages.yyyy_mm_dd') }}">
-												</div>
-												</div>
-												</div>
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="gender">{{ __('messages.gender') }}</label>
-												<select class="form-control" name="gender">
-												<option value="">{{ __('messages.select_gender') }}</option>
-												<option value="Male" {{ isset($parent['gender']) ? $parent['gender'] == "Male" ? "selected" : "" : ""}}>{{ __('messages.male') }}</option>
-												<option value="Female" {{ isset($parent['gender']) ? $parent['gender'] == "Female" ? "selected" : "" : ""}}>{{ __('messages.female') }}</option>
-												</select>
-												</div>
-												</div>
-												<div class="col-md-4">
-												<div class="form-group mb-3">
-												<label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
-												<input type="text" class="form-control number_validation" name="mobile_no" id="mobile_no" value="{{ isset($parent['mobile_no']) ? $parent['mobile_no'] : ''}}" placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change">
-												</div>
-												</div>
-												</div>
-												<div class="row">
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="education">{{ __('messages.education') }}</label>
-												<select class="form-control" name="education">
-												<option value="">{{ __('messages.select_education') }}</option>
-												@forelse($education as $e)
-												<option value="{{$e['id']}}" {{ isset($parent['education']) ? $parent['education'] == $e['id'] ? "selected" : "" : "" }}>{{$e['name']}}</option>
-												@empty
-												@endforelse
-												</select>
-												</div>
-												</div>
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-												<input type="text" class="form-control" value="{{ isset($parent['occupation']) ? $parent['occupation'] : ''}}" name="occupation" placeholder="{{ __('messages.enter_occupation') }}" data-parsley-trigger="change">
-												</div>
-												</div>
-												<div class="col-md-4">
-												<div class="form-group mb-3">
-												<label for="income">{{ __('messages.income') }}</label>
-												<div class="input-group input-group-merge">
-												<div class="input-group-prepend">
-												<div class="input-group-text">
-												<span class="fas fa-calculator"></span>
-												</div>
-												</div>
-												<input type="text" class="form-control" value="{{ isset($parent['income']) ? $parent['income'] : ''}}" name="income" placeholder="{{ __('messages.enter_income') }}" aria-describedby="inputGroupPrepend">
-												</div>
-												</div>
-												</div>
-												</div>
-												<div class="row">
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="address">{{ __('messages.address_1') }}</label>
-												<input class="form-control" name="address" id="address" value="{{ isset($parent['address']) ? $parent['address'] : ''}}" placeholder="{{ __('messages.enter_address_1') }}">
-												</div>
-												</div>
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="address_2">{{ __('messages.address_2') }}</label>
-												<input class="form-control" name="address_2" id="address_2" value="{{ isset($parent['address_2']) ? $parent['address_2'] : ''}}" placeholder="{{ __('messages.enter_address_2') }}">
-												</div>
-												</div>
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="city">{{ __('messages.city') }}</label>
-												<input type="text" class="form-control" value="{{ isset($parent['city']) ? $parent['city'] : ''}}" name="city" data-parsley-trigger="change" placeholder="{{ __('messages.enter_city') }}">
-												</div>
-												</div>
-												</div>
-												<div class="row">
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="post_code">{{ __('messages.zip_postal_code') }}</label>
-												<input type="text" class="form-control" value="{{ isset($parent['post_code']) ? $parent['post_code'] : ''}}" name="post_code" data-parsley-trigger="change" placeholder="{{ __('messages.state_province') }}">
-												</div>
-												</div>
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="state">{{ __('messages.state_province') }}</label>
-												<input type="text" class="form-control" value="{{ isset($parent['state']) ? $parent['state'] : ''}}" name="state" data-parsley-trigger="change" placeholder="{{ __('messages.state_province') }}">
-												</div>
-												</div>
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="country">{{ __('messages.country') }}</label>
-												<input type="text" class="form-control country" value="{{ isset($parent['country']) ? $parent['country'] : ''}}" name="country" id="country" placeholder="{{ __('messages.country') }}" data-parsley-trigger="change">
-												</div>
-												</div>
-												</div>
-												
-												<div class="row">
-												@if($form_field['race'] == 0)
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="race">{{ __('messages.race') }}</label>
-												<select class="form-control" name="race">
-												<option value="">{{ __('messages.select_race') }}</option>
-												@forelse($races as $r)
-												<option value="{{$r['id']}}" {{ isset($parent['race']) ? $parent['race'] == $r['id'] ? "selected" : "" : "" }}>{{$r['races_name']}}</option>
-												@empty
-												@endforelse
-												</select>
-												</div>
-												</div>
-												@endif
-												@if($form_field['religion'] == 0)
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="religion">{{ __('messages.religion') }}</label>
-												<select class="form-control" name="religion">
-												<option value="">{{ __('messages.select_religion') }}</option>
-												@forelse($religion as $r)
-												<option value="{{$r['id']}}" {{ isset($parent['religion']) ? $parent['religion'] == $r['id'] ? "selected" : "" : "" }}>{{$r['religions_name']}}</option>
-												@empty
-												@endforelse
-												</select>
-												</div>
-												</div>
-												@endif
-												@if($form_field['blood_group'] == 0)
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="blooddgrp">{{ __('messages.blood_group') }}</label>
-												<select class="form-control" name="blood_group">
-												<option value="">{{ __('messages.select_blood_group') }}</option>
-												<option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "O+" ? "selected" : "" : "" }}>O+</option>
-												<option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "A+" ? "selected" : "" : "" }}>A+</option>
-												<option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "B+" ? "selected" : "" : "" }}>B+</option>
-												<option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "AB+" ? "selected" : "" : "" }}>AB+</option>
-												<option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "O-" ? "selected" : "" : "" }}>O-</option>
-												<option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "A-" ? "selected" : "" : "" }}>A-</option>
-												<option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "B-" ? "selected" : "" : "" }}>B-</option>
-												<option {{ isset($parent['blood_group']) ? $parent['blood_group'] == "AB-" ? "selected" : "" : "" }}>AB-</option>
-												</select>
-												</div>
-												</div>
-												@endif
-												@if($form_field['nationality'] == 0)
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="nationality">{{ __('messages.nationality') }}</label>
-												<input type="text" maxlength="50" id="nationality" class="form-control country" placeholder="{{ __('messages.nationality') }}" name="nationality" value="{{ isset($parent['nationality']) ? $parent['nationality'] : ''}}" data-parsley-trigger="change">
-												</div>
-												</div>
-												
-												@endif
-												@if($form_field['nric'] == 0)
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="nric">{{ __('messages.nric_number') }}</label>
-												<input type="text" maxlength="16" class="form-control" value="{{ isset($parent['nric']) ? $parent['nric'] : ''}}" id="nric" name="nric" placeholder="{{ __('messages.enter_nric_number') }}" data-parsley-trigger="change">
-												</div>
-												</div>
-												@endif
-												</div>
-												<div class="row">
-												@if($form_field['passport'] == 0)
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="Passport">{{ __('messages.passport_number') }}</label>
-												<input type="text" maxlength="20" class="form-control" name="passport" placeholder="999999-99-9999" value="{{ isset($parent['passport']) ? $parent['passport'] : ''}}">
-												</div>
-												</div>
-												<div class="col-md-4">
-												<div class="form-group mb-3">
-												<label for="text">{{ __('messages.passport_expiry_date') }}<span class="text-danger"></span></label>
-												<div class="input-group input-group-merge">
-												<div class="input-group-prepend">
-												<div class="input-group-text">
-												<span class="far fa-calendar-alt"></span>
-												</div>
-												</div>
-												<input type="text" class="form-control" id="passport_expiry_date" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($parent['passport_expiry_date']) ? $parent['passport_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
-												</div>
-												</div>
-												</div>
-												
-												<input type="hidden" name="passport_old_photo" id="passport_old_photo" value="{{ isset($parent['passport_photo']) ? $parent['passport_photo'] : ''}}" />
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="passport_photo">{{ __('messages.passport_photo') }}</label>
-												<div class="input-group">
-												<div class="custom-file">
-												<input type="file" id="passport_photo" class="custom-file-input" name="passport_photo" accept="image/png, image/gif, image/jpeg" >
-												<label class="custom-file-label" for="passport_photo">{{ __('messages.choose_the_file') }}</label>
-												</div>
-												</div>
-												@if(isset($parent['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['passport_photo'])
-												<a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['passport_photo'] }}" target="_blank"> {{ __('messages.passport_photo') }} </a>
-												@endif
-												<span id="passport_photo_name"></span>
-												</div>
-												</div>
-												@endif
-												@if($form_field['visa'] == 0)
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="visa_number">{{ __('messages.visa_number') }}</label>
-												<input type="text" maxlength="16" id="visa_number" class="form-control alloptions" placeholder="999999-99-9999" name="visa_number" value="{{ isset($parent['visa_number']) ? $parent['visa_number'] : ''}}" data-parsley-trigger="change">
-												</div>
-												</div>
-												<div class="col-md-4">
-												<div class="form-group mb-3">
-												<label for="text">{{ __('messages.visa_expiry_date') }}<span class="text-danger"></span></label>
-												<div class="input-group input-group-merge">
-												<div class="input-group-prepend">
-												<div class="input-group-text">
-												<span class="far fa-calendar-alt"></span>
-												</div>
-												</div>
-												<input type="text" class="form-control" id="visa_expiry_date" name="visa_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend" value="{{ isset($parent['visa_expiry_date']) ? $parent['visa_expiry_date'] : ''}}">
-												</div>
-												</div>
-												</div>
-												<input type="hidden" name="visa_old_photo" id="visa_old_photo" value="{{ isset($parent['visa_photo']) ? $parent['visa_photo'] : ''}}" />
-												<div class="col-md-4">
-												<div class="form-group">
-												<label for="visa_photo">{{ __('messages.visa_photo') }}</label>
-												<div class="input-group">
-												<div class="custom-file">
-												<input type="file" id="visa_photo" class="custom-file-input" name="visa_photo" accept="image/png, image/gif, image/jpeg" >
-												<label class="custom-file-label" for="visa_photo"{{ __('messages.choose_the_file') }}</label>
-												</div>
-												</div>
-												@if(isset($parent['visa_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['visa_photo'])
-												<a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['visa_photo'] }}" target="_blank"> {{ __('messages.visa_photo') }} </a>
-												@endif
-												<span id="visa_photo_name"></span>
-												</div>
-												</div>
-											@endif    -->
+									
 
 									<div class="row">
 										<div class="col-md-4">
@@ -889,36 +650,27 @@
 												</select>
 											</div>
 										</div>
-										<input type="hidden" name="passport_father_old_photo" id="passport_father_old_photo" value="{{ isset($father['passport_photo']) ? $father['passport_photo'] : ''}}" />
-										<div class="col-md-4">
+										<input type="hidden" name="passport_father_old_photo" id="passport_father_old_photo" />
+										<div class="col-md-4" id="passportdetails" style="display: none;">
 											<div class="form-group">
 												<label for="passport_father_photo">{{ __('messages.passport_image_father_only_if_malaysian') }}<span class="text-danger">*</span></label>
 												<div class="input-group">
 													<div class="custom-file">
-														<input type="file" id="passport_father_photo" class="custom-file-input" name="passport_father_photo" accept="image/png, image/gif, image/jpeg" value="{{ isset($father['passport_photo']) ? $father['passport_photo'] : ''}}">
+														<input type="file" id="passport_father_photo" class="custom-file-input" name="passport_father_photo" accept="image/png, image/gif, image/jpeg" >
 														<label class="custom-file-label" for="passport_father_photo">{{ __('messages.choose_file') }}</label>
 													</div>
 												</div>
 												<label for="passport_father_photo" class="error"></label>
-												@if(isset($father['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$father['passport_photo'])
-												<a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$father['passport_photo'] }}" target="_blank"> {{ __('messages.passport_image_father_only_if_malaysian') }} </a>
-												@endif
+												<a id="passport_father_photo_link" href="#" target="_blank"> {{ __('messages.passport_image_mother_only_if_malaysian') }} </a>
 												<span id="passport_father_photo_name"></span>
 											</div>
 										</div>
-<!-- 
-										<div class="col-md-4">
-											<div class="form-group">
-												<label for="guardian_remarks">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
-												<input type="text" class="form-control" id="guardian_remarks" value="{{ isset($parent['remarks']) ?$parent['remarks'] : ''}}" name="guardian_remarks" placeholder="" aria-describedby="inputGroupPrepend">
-												<label for="guardian_remarks" class="error"></label>
-											</div>
-										</div> -->
-										</div>
-									<div class="row">
-                                <input type="hidden" name="passport_mother_old_photo" id="passport_mother_old_photo" value="{{ isset($mother['passport_photo']) ? $mother['passport_photo'] : ''}}" />
 
-                                <div class="col-md-4">
+									</div>
+							<div class="row" >
+							<input type="hidden" name="passport_mother_old_photo" id="passport_mother_old_photo"  />
+
+                                <div class="col-md-4" id="mother_father_photo" style="display: none;">
                                     <div class="form-group">
                                         <label for="passport_mother_photo">{{ __('messages.passport_image_mother_only_if_malaysian') }}<span class="text-danger">*</span></label>
                                         <div class="input-group">
@@ -928,17 +680,17 @@
                                             </div>
                                         </div>
                                         <label for="passport_mother_photo" class="error"></label>
-                                        @if(isset($mother['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$mother['passport_photo'])
-                                        <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$mother['passport_photo'] }}" target="_blank"> {{ __('messages.passport_image_mother_only_if_malaysian') }} </a>
-                                        @endif
+                                      
+                                        <a id="passport_mother_photo_link" href="#" target="_blank">  {{ __('messages.passport_image_mother_only_if_malaysian') }} </a>
+                                       
                                         <span id="passport_mother_photo_name"></span>
                                     </div>
                                 </div>
 
 
-                                <input type="hidden" name="visa_father_old_photo" id="visa_father_old_photo" value="{{ isset($father['visa_photo']) ? $father['visa_photo'] : ''}}" />
+                                <input type="hidden" name="visa_father_old_photo" id="visa_father_old_photo" />
 
-                                <div class="col-md-4">
+                                <div class="col-md-4" id="mother_father_photos" style="display: none;">
                                     <div class="form-group">
                                         <label for="visa_father_photo">{{ __('messages.visa_image_father_only_for_non_malaysian') }}</label>
                                         <div class="input-group">
@@ -947,16 +699,14 @@
                                                 <label class="custom-file-label" for="visa_father_photo">{{ __('messages.choose_file') }}</label>
                                             </div>
                                         </div>
-                                        @if(isset($father['visa_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$father['visa_photo'])
-                                        <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$father['visa_photo'] }}" target="_blank"> {{ __('messages.visa_image_father_only_for_non_malaysian') }} </a>
-                                        @endif
+                                        <a id="visa_father_photo_link" href="#" target="_blank"> {{ __('messages.visa_image_father_only_for_non_malaysian') }} </a>
                                         <span id="visa_father_photo_name"></span>
                                     </div>
                                 </div>
 
-										<input type="hidden" name="visa_mother_old_photo" id="visa_mother_old_photo" value="{{ isset($mother['visa_photo']) ? $mother['visa_photo'] : ''}}" />
+									<input type="hidden" name="visa_mother_old_photo" id="visa_mother_old_photo"  />
 
-										<div class="col-md-4">
+										<div class="col-md-4" id="mother_father_photoss" style="display: none;">
 											<div class="form-group">
 												<label for="visa_mother_photo">{{ __('messages.visa_image_mother_only_for_non_malaysian') }}</label>
 												<div class="input-group">
@@ -965,16 +715,16 @@
 														<label class="custom-file-label" for="visa_mother_photo">{{ __('messages.choose_file') }}</label>
 													</div>
 												</div>
-												@if(isset($mother['visa_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$mother['visa_photo'])
-												<a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$mother['visa_photo'] }}" target="_blank"> {{ __('messages.visa_image_mother_only_for_non_malaysian') }} </a>
-												@endif
+												
+												<a id="visa_mother_photo_link" href="#" target="_blank"> {{ __('messages.visa_image_mother_only_for_non_malaysian') }} </a>
+											
 												<span id="visa_mother_photo_name"></span>
 											</div>
 										</div>
-									</div>
-								</div>
 							</div>
-					<div class="card">
+						</div>
+					</div>
+					<div class="card" id="father_details" style="display: none;">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
                             <h4 class="navv">{{ __('messages.father_details') }}
@@ -1076,7 +826,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
-                                        <input type="number" class="form-control copy_parent_info father_form " aria-describedby="inputGroupPrepend" placeholder="(XXX)-(XXX)-(XXXX)" id="father_mobile_no" name="father_mobile_no" >
+                                        <input type="text" class="form-control number_validation copy_parent_info father_form " placeholder="(XXX)-(XXX)-(XXXX)" id="father_mobile_no" name="father_mobile_no" data-parsley-trigger="change" >
                                     </div>
                                 </div>
                             </div>
@@ -1091,7 +841,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" id="mother_details" style="display: none;">
                     
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
@@ -1180,20 +930,15 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                        <div class="input-group input-group-merge">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <span class="far fa-envelope-open"></span>
-                                                </div>
-                                            </div>
+                                        
                                             <input type="text" class="form-control" placeholder="{{ __('messages.enter_the_email') }}" id="mother_email" name="mother_email">
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
-                                        <input type="number" class="form-control" aria-describedby="inputGroupPrepend" placeholder="(XXX)-(XXX)-(XXXX)" id="mother_mobile_no" name="mother_mobile_no">
+                                        <input type="text" class="form-control number_validation"  placeholder="(XXX)-(XXX)-(XXXX)" id="mother_mobile_no" name="mother_mobile_no" data-parsley-trigger="change">
                                     </div>
                                 </div>
                             </div>
@@ -1261,7 +1006,7 @@
 										</div>
 
 									</div>
-									<div class="row">
+									<div class="row" id="sibling" style="display: none;">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="department">{{ __('messages.siblings') }}</label>
@@ -1659,6 +1404,38 @@
 		preventInvalidNumbers: true,
 		// utilsScript: "js/utils.js"
 	});
+	var input = document.querySelector("#father_mobile_no");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "jp",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        //preferredCountries: ['cn', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
+    var input = document.querySelector("#mother_mobile_no");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "jp",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        //preferredCountries: ['cn', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
 </script>
 <script>
 	var indexParent = "{{ route('admin.parent') }}";
@@ -1670,6 +1447,7 @@
 	var studentDetailsAccStudentId = "{{ config('constants.api.student_details') }}";
 	var yyyy_mm_dd = "{{ __('messages.yyyy_mm_dd') }}";
 	var addButton = "{{ __('messages.add') }}";
+	var userImageUrl = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
 </script>
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->

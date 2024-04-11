@@ -357,6 +357,8 @@ $(function () {
             mother_email:"required",
             mother_mobile_no:"required",
             mother_occupation:"required",
+            passport_father_photo:"required",
+            passport_mother_photo:"required",
             
             "confirm_password": {
                 required: function (element) {
@@ -512,8 +514,25 @@ $(function () {
     }
 });
 function toggleBasicDetails(student_id) {
+    var prevSelectedCard = document.querySelector('.card-body.clicked');
+    if (prevSelectedCard) {
+        prevSelectedCard.classList.remove('clicked');
+    }
+    var cardBody = document.querySelector(`#child_${student_id}`);
+   
+    if (cardBody) {
+        // Toggle the 'clicked' class to change the background color
+        cardBody.classList.toggle('clicked');
+    }
    //    var student_id = document.getElementById("student_id").value;
     var basicDetailsSection = document.getElementById("basic_details");
+    var fatherSection = document.getElementById("father_details");
+    var motherSection = document.getElementById("mother_details");
+    var siblingSection = document.getElementById("sibling");
+    var motherFatherSection = document.getElementById("mother_father_photo");
+    var motherFatherSections = document.getElementById("mother_father_photos");
+    var motherFatherSectionss = document.getElementById("mother_father_photoss");
+    var passportdetails = document.getElementById("passportdetails");
     console.log(student_id);
     if (student_id) {
         $.post(parentDetailsAccStudentId, { token: token, branch_id: branchID, student_id: student_id }, function (res) {
@@ -544,6 +563,23 @@ function toggleBasicDetails(student_id) {
                 $("#father_email").val(data.email);
                 $("#father_occupation").val(data.occupation);
                 $("#father_mobile_no").val(data.mobile_no);
+                $("#passport_father_old_photo").val(data.passport_photo);
+                var passportFatherPhoto = data.passport_photo;
+                if (passportFatherPhoto) {
+                    var passportFatherImageUrl = userImageUrl + passportFatherPhoto;
+                    $("#passport_father_photo_link").attr("href", passportFatherImageUrl).show();
+                } else {
+                    $("#passport_father_photo_link").hide();
+                }
+                $("#visa_father_old_photo").val(data.visa_photo);
+                // Set visa father photo link
+                var visaFatherPhoto = data.visa_photo;
+                if (visaFatherPhoto) {
+                    var visaFatherImageUrl = userImageUrl + visaFatherPhoto;
+                    $("#visa_father_photo_link").attr("href", visaFatherImageUrl).show();
+                } else {
+                    $("#visa_father_photo_link").hide();
+                }
 
                 $("#mother_id").val(motherdata.id)
                 $("#mother_first_name").val(motherdata.first_name);
@@ -563,6 +599,24 @@ function toggleBasicDetails(student_id) {
                 $("#mother_email").val(motherdata.email);
                 $("#mother_occupation").val(motherdata.occupation);
                 $("#mother_mobile_no").val(motherdata.mobile_no);
+                $("#passport_mother_old_photo").val(motherdata.passport_photo);
+                // Set passport mother photo link
+                var passportMotherPhoto = motherdata.passport_photo;
+                if (passportMotherPhoto) {
+                    var passportMotherImageUrl = userImageUrl + passportMotherPhoto;
+                    $("#passport_mother_photo_link").attr("href", passportMotherImageUrl).show();
+                } else {
+                    $("#passport_mother_photo_link").hide();
+                }
+                $("#visa_mother_old_photo").val(motherdata.visa_photo);
+                // Set visa mother photo link
+                var visaMotherPhoto = motherdata.visa_photo;
+                if (visaMotherPhoto) {
+                    var visaMotherImageUrl = userImageUrl + visaMotherPhoto;
+                    $("#visa_mother_photo_link").attr("href", visaMotherImageUrl).show();
+                } else {
+                    $("#visa_mother_photo_link").hide();
+                }
             }
         }, 'json');
          $.post(studentDetailsAccStudentId, { token: token, branch_id: branchID, id: student_id }, function (res) {
@@ -575,21 +629,27 @@ function toggleBasicDetails(student_id) {
                
             }
     }, 'json');
-    }
-    if (student_id) {
-        // If a student is selected, show the basic details section
-       
-        basicDetailsSection.classList.add("show");
-       
-    } else {
-        // If no student is selected, hide the basic details section
-        basicDetailsSection.classList.remove("show");
-        
+    basicDetailsSection.classList.add("show");
+    fatherSection.classList.add("show");
+    motherSection.classList.add("show");
+    siblingSection.classList.add("show");
+    motherFatherSection.classList.add("show");
+    motherFatherSections.classList.add("show");
+    motherFatherSectionss.classList.add("show");
+    passportdetails.classList.add("show");
     }
 }
 // Function to populate sibling data rows
 function populateSiblingData(siblingData) {
-    $("#dynamic_field_one").empty();
+   
+     // Check if any of the sibling data arrays are empty
+     if (!siblingData.sibling_full_name || !siblingData.sibling_dob || !siblingData.sibling_relationship) {
+        // Display a message or perform specific actions for empty data
+        console.log("Sibling data arrays are empty.");
+        // For example, show an alert or update UI accordingly
+        return; // Exit the function if data arrays are empty
+    }
+     $("#dynamic_field_one").empty();
     // Split the sibling data strings by commas to separate individual values
     var names = siblingData.sibling_full_name.split(',');
     var dobs = siblingData.sibling_dob.split(',');
@@ -916,13 +976,22 @@ return countryCodes[nationalityName];
 }
 function openBasicDetails() {
     var basicDetailsRow = document.querySelector('.basic-details-row');
+    var basicDetailsSection = document.getElementById("basic_details");
 
     if (basicDetailsRow) {
-        // Toggle the visibility of the basic details row
-        if (basicDetailsRow.style.display === 'none') {
-            basicDetailsRow.style.display = 'block'; // Show the row
-        } else {
-            basicDetailsRow.style.display = 'none'; // Hide the row
+        // Count the number of child cards
+        var childCount = basicDetailsRow.querySelectorAll('.card').length;
+        console.log(childCount);
+        // Toggle the visibility of the basic details row based on child count
+        if (childCount > 0) {
+            // Show the basic details row if it's currently hidden
+            if (basicDetailsRow.style.display === 'none') {
+                basicDetailsRow.style.display = 'block'; // Show the row
+            } 
+        }else {
+            // Hide the basic details row if it's currently visible
+            basicDetailsRow.style.display = 'block'; // Hide the row
+            basicDetailsSection.classList.add('show');
         }
     }
 }

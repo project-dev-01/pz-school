@@ -5460,6 +5460,7 @@ class AdminController extends Controller
     {
         $data = [
             'id' => $id,
+            'academic_session_id' => session()->get('academic_session_id'),
         ];
         $parentId = [
             'parent_id'=> $id,

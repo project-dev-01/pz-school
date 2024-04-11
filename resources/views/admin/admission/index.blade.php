@@ -1235,7 +1235,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
-                                        <input type="number" class="form-control copy_guardian_info" aria-describedby="inputGroupPrepend" id="guardian_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" readonly>
+                                        <input type="text" class="form-control number_validation copy_guardian_info" id="guardian_mobile_no" placeholder="(XXX)-(XXX)-(XXXX)" data-parsley-trigger="change" readonly>
                                         
                                     </div>
                                 </div>
@@ -1477,14 +1477,9 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                        <div class="input-group input-group-merge">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <span class="far fa-envelope-open"></span>
-                                                </div>
-                                            </div>
+                                        
                                             <input type="text" class="form-control copy_parent_info father_form " placeholder="{{ __('messages.enter_your_email') }}" id="father_email"  name="father_email">
-                                        </div>
+                                       
                                     </div>
                                 </div>
                                 <!-- <div class="col-md-4">
@@ -1512,7 +1507,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
-                                        <input type="number" class="form-control copy_parent_info father_form " aria-describedby="inputGroupPrepend" placeholder="(XXX)-(XXX)-(XXXX)" id="father_mobile_no" name="father_mobile_no" >
+                                        <input type="text" class="form-control number_validation copy_parent_info father_form "  placeholder="(XXX)-(XXX)-(XXXX)" id="father_mobile_no" name="father_mobile_no" data-parsley-trigger="change" >
                                     </div>
                                 </div>
                             </div>
@@ -1740,20 +1735,15 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                        <div class="input-group input-group-merge">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <span class="far fa-envelope-open"></span>
-                                                </div>
-                                            </div>
+                                     
                                             <input type="text" class="form-control" placeholder="{{ __('messages.enter_the_email') }}" id="mother_email" name="mother_email">
-                                        </div>
+                                       
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mobile_no">{{ __('messages.mobile_no') }}<span class="text-danger">*</span></label>
-                                        <input type="number" class="form-control" aria-describedby="inputGroupPrepend" placeholder="(XXX)-(XXX)-(XXXX)" id="mother_mobile_no" name="mother_mobile_no">
+                                        <input type="text" class="form-control number_validation copy_parent_info mother_form "  placeholder="(XXX)-(XXX)-(XXXX)" id="mother_mobile_no" name="mother_mobile_no" data-parsley-trigger="change">
                                     </div>
                                 </div>
                             </div>
