@@ -2345,6 +2345,30 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+<script src="{{ asset('libs/mohithg-switchery/switchery.min.js') }}"></script>
+<script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
+<script src="{{ asset('libs/selectize/js/standalone/selectize.min.js') }}"></script>
+<!-- plugin js -->
+<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
+
+<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
+<script>
+    toastr.options.preventDuplicates = true;
+</script>
+<script src="{{ asset('js/validation/validation.js') }}"></script>
+
+<script src="{{ asset('libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
+<script src="{{ asset('libs/autonumeric/autoNumeric-min.js') }}"></script>
+
+<!-- Init js-->
+<script src="{{ asset('js/pages/form-masks.init.js') }}"></script>
+<script src="{{ asset('libs/jquery-mask-plugin/jquery.mask.min.js') }}"></script>
+
+<script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
+<script src="{{ asset('country/js/countrySelect.js') }}"></script>
+
 <script>
     var parentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
@@ -2360,27 +2384,42 @@
     var malaysiaPostalCode = "{{ route('admin.malaysia_postalCode') }}";
     var yyyy_mm_dd = "{{ __('messages.yyyy_mm_dd') }}";
 </script>
-<!-- Plugins js-->
-<script src="{{ asset('libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js')}}"></script>
 
-<!-- Init js-->
-<script src="{{ asset('js/pages/form-wizard.init.js')}}"></script>
-<script src="{{ asset('js/validation/validation.js') }}"></script>
-
-
-<script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
-<script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
-
-<script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{ asset('toastr/toastr.min.js') }}"></script>
-<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
-<script src="{{ asset('js/validation/validation.js') }}"></script>
-<!-- Init js-->
-<script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
-<script src="{{ asset('country/js/countrySelect.js') }}"></script>
-<script src="{{ asset('js/custom/admin_application.js') }}"></script>
+<!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->
+<script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
+<script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
+<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
+<script src="{{ asset('js/custom/student.js') }}"></script>
 <script>
-    toastr.options.preventDuplicates = true;
+    $('.dropify-im').dropify({
+        messages: {
+            default: drag_and_drop_to_check,
+            replace: drag_and_drop_to_replace,
+            remove: remove,
+            error: oops_went_wrong
+        }
+    });
+    $(function() {
+        // nric validation start
+        // var $form_2 = $('#editadmission');
+        // $form_2.validate({
+        //     debug: true
+        // });
+
+        // $('#txt_nric').rules("add", {
+        //     required: true
+        // });
+
+        $('#txt_nric').mask("000000-00-0000", {
+            reverse: true
+        });
+        // nric validation end
+        setTimeout(function() {
+            // Clear the values of email and password fields
+            $("#confirm_password").val("");
+            $("#password").val("");
+        }, 2000);
+    });
 </script>
 <script>
     $(".country").countrySelect({

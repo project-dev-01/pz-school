@@ -497,13 +497,16 @@ $(function () {
                 }
             },
             {
-                data: 'name'
-            },
-            {
                 data: 'class_name'
             },
             {
                 data: 'section_name'
+            },
+            {
+                data: 'attendance_no'
+            },
+            {
+                data: 'name'
             },
             {
                 data: 'from_leave'
@@ -512,28 +515,28 @@ $(function () {
                 data: 'to_leave'
             },
             {
-                data: 'status'
-            },
-            {
-                data: 'home_teacher_status'
-            },
-            {
-                data: 'nursing_teacher_status'
-            },
-            {
                 data: 'leave_type_name'
             },
             {
                 data: 'reason'
             },
             {
-                data: 'document'
+                data: 'home_teacher_status'
             },
             {
                 data: 'teacher_remarks'
             },
             {
+                data: 'nursing_teacher_status'
+            },
+            {
                 data: 'nursing_teacher_remarks'
+            },
+            {
+                data: 'document'
+            },
+            {
+                data: 'status'
             },
             {
                 data: 'status'
@@ -552,21 +555,7 @@ $(function () {
                 }
             },
             {
-                targets: 6,
-                render: function (data, type, row, meta) {
-                    var status = getStatusBadge(data);
-                    return status;
-                }
-            },
-            {
-                targets: 7,
-                render: function (data, type, row, meta) {
-                    var status = getStatusBadge(data);
-                    return status;
-                }
-            },
-            {
-                targets: 8,
+                targets: 9,
                 render: function (data, type, row, meta) {
                     var status = getStatusBadge(data);
                     return status;
@@ -575,6 +564,13 @@ $(function () {
             {
                 targets: 11,
                 render: function (data, type, row, meta) {
+                    var status = getStatusBadge(data);
+                    return status;
+                }
+            },
+            {
+                targets: 13,
+                render: function (data, type, row, meta) {
                     var documentLink = getDocumentLink(row);
                     return documentLink;
                 }
@@ -582,12 +578,19 @@ $(function () {
             {
                 targets: 14,
                 render: function (data, type, row, meta) {
+                    var status = getStatusBadge(data);
+                    return status;
+                }
+            },
+            {
+                targets: 15,
+                render: function (data, type, row, meta) {
                     var remarksButtons = getRemarksButtons(row);
                     return remarksButtons;
                 }
             },
             {
-                targets: 15,
+                targets: 16,
                 render: function (data, type, row, meta) {
                     var viewDetailsButton = getViewDetailsButton(row);
                     return viewDetailsButton;

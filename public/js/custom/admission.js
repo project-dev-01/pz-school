@@ -1,6 +1,6 @@
 $(function () {
     
-    $('#dual_nationality_container').hide();
+    // $('#dual_nationality_container').hide();
     // nric validation start
     // var $form_1 = $('#addadmission');
     // $form_1.validate({

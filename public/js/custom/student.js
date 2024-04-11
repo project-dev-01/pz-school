@@ -255,10 +255,10 @@ $(function () {
                 $(".guardian_state").html(data.state);
                 $(".guardian_city").html(data.city);
                 $(".guardian_address").html(data.address);
-                $(".guardian_company_name_japan").val(data.company_name_japan);
-                $(".guardian_company_name_local").val(data.company_name_local);
-                $(".guardian_company_phone_number").val(data.company_phone_number);
-                $(".guardian_employment_status").val(data.employment_status);
+                $(".guardian_company_name_japan").html(data.company_name_japan);
+                $(".guardian_company_name_local").html(data.company_name_local);
+                $(".guardian_company_phone_number").html(data.company_phone_number);
+                $(".guardian_employment_status").html(data.employment_status);
             }
         }, 'json');
     }
@@ -364,7 +364,7 @@ $(function () {
                 $(".father_state").html(data.state);
                 $(".father_city").html(data.city);
                 $(".father_address").html(data.address);
-                $(".father_nationality").val(data.nationality);
+                $(".father_nationality").html(data.nationality);
             }
         }, 'json');
     }
@@ -470,7 +470,7 @@ $(function () {
                 $(".mother_state").html(data.state);
                 $(".mother_city").html(data.city);
                 $(".mother_address").html(data.address);
-                $(".mother_nationality").val(data.nationality);
+                $(".mother_nationality").html(data.nationality);
             }
         }, 'json');
     }

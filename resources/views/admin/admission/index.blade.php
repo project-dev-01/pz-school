@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Admission')
+@section('title',' ' . __('messages.admission') . '')
 @section('component_css')
 <link href="{{ asset('libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
@@ -558,7 +558,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4"  id="dual_nationality_container">
+                                            <div class="col-md-4"  id="dual_nationality_container" style="display:none">
                                                 <div class="form-group">
                                                     <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
                                                     <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" data-parsley-trigger="change">

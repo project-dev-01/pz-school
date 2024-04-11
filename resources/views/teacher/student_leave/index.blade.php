@@ -124,18 +124,20 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th> {{ __('messages.student_name') }}</th>
                                     <th> {{ __('messages.grade') }}</th>
                                     <th> {{ __('messages.class') }}</th>
+                                    <th> {{ __('messages.attendance_no') }}</th>
+                                    <th> {{ __('messages.student_name') }}</th>
                                     <th> {{ __('messages.from') }}</th>
                                     <th> {{ __('messages.to') }}</th>
-                                    <th> {{ __('messages.status') }}</th>
-                                    <th> {{ __('messages.homeroom_status') }}</th>
-                                    <th> {{ __('messages.nursing_status') }}</th>
+                                    <th> {{ __('messages.leave_type') }}</th>
                                     <th> {{ __('messages.reason') }}</th>
-                                    <th> {{ __('messages.document') }}</th>
-                                    <th> {{ __('messages.teacher_remarks') }}</th>
+                                    <th> {{ __('messages.homeroom_status') }}</th>
+                                    <th> {{ __('messages.homeroom_teacher_remarks') }}</th>
+                                    <th> {{ __('messages.nursing_status') }}</th>
                                     <th> {{ __('messages.nursing_teacher_remarks') }}</th>
+                                    <th> {{ __('messages.document') }}</th>
+                                    <th> {{ __('messages.status') }}</th>
                                     <th> {{ __('messages.status') }}</th>
                                     <th> {{ __('messages.action') }}</th>
                                 </tr>

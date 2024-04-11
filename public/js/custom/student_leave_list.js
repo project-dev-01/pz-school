@@ -123,17 +123,16 @@ $(function () {
             // // subject division
             studentLeaveList(formData);
         }
-       
+
     });
-    function getstudentLeaveList() 
-    {
+    function getstudentLeaveList() {
         var form = this;
         var class_id = $("#changeClassName").val();
         var section_id = $("#sectionID").val();
         var student_name = $("#student_name").val();
         var status = $("#leave_status").val();
         var date = $("#range-datepicker").val();
-        var formData = new FormData();       
+        var formData = new FormData();
         // formData.append('token', token);
         formData.append('branch_id', branchID);
         formData.append('class_id', class_id);
@@ -208,10 +207,10 @@ $(function () {
                 if (res.code == 200) {
                     // allStudentLeave();
                     toastr.success('Leave Updated sucessfully');
-                   
+
                     // $('#student-leave-table').DataTable().ajax.reload(null, false);
-                     //location.reload();
-                     getstudentLeaveList();
+                    //location.reload();
+                    getstudentLeaveList();
                 }
                 else {
                     toastr.error(res.message);
@@ -248,36 +247,35 @@ $(function () {
         //     console.log(pair[0]+ ', ' + pair[1]); 
         // }
         // return false;
-        if (status!='') {
+        if (status != '') {
             $('#alert_status').html('');
             $('#leave_status_name').css('border-color', '');
-        $.ajax({
-            url: teacher_leave_remarks_updated,
-            method: "post",
-            data: formData,
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            success: function (res) {
-                if (res.code == 200) {
-                    // allStudentLeave();
-                    toastr.success('Leave Updated sucessfully');
-                    $('#nursingPopup').modal('hide');
-                    //location.reload();
-                    getstudentLeaveList();
-                }
-                else {
-                    toastr.error(res.message);
+            $.ajax({
+                url: teacher_leave_remarks_updated,
+                method: "post",
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (res) {
+                    if (res.code == 200) {
+                        // allStudentLeave();
+                        toastr.success('Leave Updated sucessfully');
+                        $('#nursingPopup').modal('hide');
+                        //location.reload();
+                        getstudentLeaveList();
+                    }
+                    else {
+                        toastr.error(res.message);
 
+                    }
                 }
-            }
-        });
-    }
-    else
-    {
-        $('#leave_status_name').css('border-color', 'red');
-        $('#alert_status').html('Required');
-    }
+            });
+        }
+        else {
+            $('#leave_status_name').css('border-color', 'red');
+            $('#alert_status').html('Required');
+        }
 
     });
     // $(document).on('click', '#stdLeave', function () {
@@ -371,13 +369,16 @@ $(function () {
                     }
                 },
                 {
-                    data: 'name'
-                },
-                {
                     data: 'class_name'
                 },
                 {
                     data: 'section_name'
+                },
+                {
+                    data: 'attendance_no'
+                },
+                {
+                    data: 'name'
                 },
                 {
                     data: 'from_leave'
@@ -386,28 +387,28 @@ $(function () {
                     data: 'to_leave'
                 },
                 {
-                    data: 'status'
-                },
-                {
-                    data: 'home_teacher_status'
-                },
-                {
-                    data: 'nursing_teacher_status'
-                },
-                {
                     data: 'leave_type_name'
                 },
                 {
                     data: 'reason'
                 },
                 {
-                    data: 'document'
+                    data: 'home_teacher_status'
                 },
                 {
                     data: 'teacher_remarks'
                 },
                 {
+                    data: 'nursing_teacher_status'
+                },
+                {
                     data: 'nursing_teacher_remarks'
+                },
+                {
+                    data: 'document'
+                },
+                {
+                    data: 'status'
                 },
                 {
                     data: 'status'
@@ -416,90 +417,58 @@ $(function () {
                     data: 'id'
                 }
             ],
-            columnDefs: [
-                {
-
-                    "targets": 1,
-                    "className": "table-user",
-                    "render": function (data, type, row, meta) {
-                        var first_name = '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
-                            '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
-                        return first_name;
-                    }
-                },
-                {
-                    "targets": 6,
-                    "render": function (data, type, row, meta) {
-                        var status = "";
-                        if (data == "Approve") {
-                            var status = '<span class="badge badge-success">' + data + '</span>';
-                        } else if (data == "Reject") {
-                            var status = '<span class="badge badge-danger">' + data + '</span>';
-                        } else if (data == "Pending") {
-                            var status = '<span class="badge badge-info">' + data + '</span>';
-                        }
-                        return status;
-                    }
-                },
-                {
-                    "targets": 7,
-                    "render": function (data, type, row, meta) {
-                        var home = "";
-                        if (data == "Approve") {
-                            var home = '<span class="badge badge-success">' + data + '</span>';
-                        } else if (data == "Reject") {
-                            var home = '<span class="badge badge-danger">' + data + '</span>';
-                        } else if (data == "Pending") {
-                            var home = '<span class="badge badge-info">' + data + '</span>';
-                        }
-                        return home;
-                    }
-                },
-                {
-                    "targets": 8,
-                    "render": function (data, type, row, meta) {
-                        var nursing = "";
-                        if (data == "Approve") {
-                            var nursing = '<span class="badge badge-success">' + data + '</span>';
-                        } else if (data == "Reject") {
-                            var nursing = '<span class="badge badge-danger">' + data + '</span>';
-                        } else if (data == "Pending") {
-                            var nursing = '<span class="badge badge-info">' + data + '</span>';
-                        }
-                        return nursing;
-                    }
-                },
-                {
-                    "targets": 11,
-                    "render": function (data, type, row, meta) {
-                        var document = "";
-                        if (row.document) {
-                            var document = '<a href="' + studentDocUrl + '/' + row.document + '" download target="_blank" class="btn btn-info waves-effect waves-light"><i class="fas fa-cloud-download-alt"></i></a>';
-                        } else {
-                            document = '<a href="javascript:void(0)" class="btn btn-secondary waves-effect waves-light"><i class="fas fa-times-circle"></i></a>';
-                        }
-                        return document;
-                    }
-                },
-                {
-                    "targets": 14,
-                    "render": function (data, type, row, meta) {
-                        var addremarks = '<button type="button" data-id="' + row.id + '" data-status="Approve" class="approveRejectLeave btn btn-success btn-rounded waves-effect waves-light"><span class="btn-label"><i class="mdi mdi-check-all"></i></span>Approve</button>' +
-                            '&nbsp;<button type="button" data-id="' + row.id + '" data-status="Reject" class="approveRejectLeave btn btn-danger btn-rounded waves-effect waves-light"><span class="btn-label"><i class="mdi mdi-close-circle-outline"></i></span>Reject</button>';
-                        return addremarks;
-                    }
-                },
-                {
-                    "targets": 15,
-                    "render": function (data, type, row, meta) {
-                        // var submitbtn = '<button type="button" class="btn btn-primary-bl waves-effect waves-light levsub" data-id="' + row.id + '" id="stdLeave">' + update + '</button>';
-                        // return submitbtn;
-                        var submitbtn = '<div class="button-list"><a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' + row.id + '"  data-student_id="' + row.student_id + '" id="viewDetails">viewDetails</a></div>';
-                        return submitbtn;
-                    }
-                },
+            columnDefs: [{
+                targets: 1,
+                className: "table-user",
+                render: function (data, type, row, meta) {
+                    var first_name = '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
+                        '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+                    return first_name;
+                }
+            },
+            {
+                targets: 9,
+                render: function (data, type, row, meta) {
+                    var status = getStatusBadge(data);
+                    return status;
+                }
+            },
+            {
+                targets: 11,
+                render: function (data, type, row, meta) {
+                    var status = getStatusBadge(data);
+                    return status;
+                }
+            },
+            {
+                targets: 13,
+                render: function (data, type, row, meta) {
+                    var documentLink = getDocumentLink(row);
+                    return documentLink;
+                }
+            },
+            {
+                targets: 14,
+                render: function (data, type, row, meta) {
+                    var status = getStatusBadge(data);
+                    return status;
+                }
+            },
+            {
+                targets: 15,
+                render: function (data, type, row, meta) {
+                    var remarksButtons = getRemarksButtons(row);
+                    return remarksButtons;
+                }
+            },
+            {
+                targets: 16,
+                render: function (data, type, row, meta) {
+                    var viewDetailsButton = getViewDetailsButton(row);
+                    return viewDetailsButton;
+                }
+            },
             ]
-        }).on('draw', function () {
         });
     }
     //viewDetails
