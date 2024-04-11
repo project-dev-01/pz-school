@@ -1246,7 +1246,7 @@
                                             <div class="col-md-4" id="reason_1" style="display:{{$phase_1_reason}}">
                                                 <div class="form-group">
                                                     <label for="phase_1_reason">{{ __('messages.reason') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="phase_1_reason" {{$readonly_phase_2}} value="{{ isset($application['phase_1_reason']) ? $application['phase_1_reason'] : ''}}" name="phase_1_reason" aria-describedby="inputGroupPrepend">
+                                                    <textarea type="text" id="phase_1_reason" class="form-control" {{$readonly_phase_2}}  placeholder="{{ __('messages.enter_reason') }}" name="phase_1_reason" data-parsley-trigger="change">{{ isset($application['phase_1_reason']) ? $application['phase_1_reason'] : ''}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -1257,7 +1257,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="remarks">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
-                                                    <textarea type="text" id="remarks" class="form-control" placeholder="{{ __('messages.enter_remarks') }}" name="remarks" data-parsley-trigger="change">{{ isset($application['remarks']) ? $application['remarks'] : ''}}</textarea>
+                                                    <textarea type="text" id="remarks" class="form-control" {{$readonly_phase_2}}  placeholder="{{ __('messages.enter_remarks') }}" name="remarks" data-parsley-trigger="change">{{ isset($application['remarks']) ? $application['remarks'] : ''}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -1632,6 +1632,9 @@
                                                     <option value="PR" {{ isset($application['stay_category']) ? $application['stay_category'] == "PR" ? 'selected' : '' : '' }}>{{ __('messages.pr_stay') }}</option>
                                                 </select>
                                             </div>
+                                                    @if($disabled_phase_2=="disabled")
+                                                    <input type="hidden" name="stay_category" value="{{$application['stay_category']}}">
+                                                    @endif
                                         </div>
                                     </div>
                                     <ul class="nav nav-tabs">
@@ -1666,7 +1669,7 @@
                                             <div class="col-md-4" id="reason_2" style="display:{{$phase_2_reason}}">
                                                 <div class="form-group">
                                                     <label for="phase_2_reason">{{ __('messages.reason') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="phase_2_reason" value="{{ isset($application['phase_2_reason']) ? $application['phase_2_reason'] : ''}}" name="phase_2_reason" aria-describedby="inputGroupPrepend">
+                                                    <textarea type="text" id="phase_2_reason" {{$readonly_phase_2}} class="form-control"   placeholder="{{ __('messages.enter_reason') }}" name="phase_2_reason" data-parsley-trigger="change">{{ isset($application['phase_2_reason']) ? $application['phase_2_reason'] : ''}}</textarea>
                                                 </div>
                                             </div>
 

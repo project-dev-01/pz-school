@@ -519,7 +519,12 @@ $(function () {
             $("#enrollment_show").show();
             $("#status_after_approval_show").show();
         }else{
+            $("#enrollment").val("");
+            $("#trail_date").val("");
+            $("#official_date").val("");
             $("#enrollment_show").hide();
+            $("#trail_date_show").hide();
+            $("#official_date_show").hide();
             $("#status_after_approval_show").hide();
         }
     });

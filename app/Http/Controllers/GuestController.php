@@ -270,6 +270,14 @@ class GuestController extends Controller
     public function applicationUpdate(Request $request)
     {
         // dd(1);
+        
+        $status = $request->status;
+        if($request->status==""){
+            $status = $request->phase_1_status;
+        }else if($request->status=="Send Back"){
+            $status = "Applied";
+        }
+
         $phase_2_status = $request->phase_2_status;
         if($request->status=="Approved"){
             if($request->phase_2_status==null){
@@ -277,6 +285,11 @@ class GuestController extends Controller
                 $phase_2_status = "Process";
             }
         }
+
+        if($request->phase_2_status=="Send Back"){
+            $phase_2_status = "Process";
+        }
+
         $trail_date = "";
         if($request->enrollment=="Trail Enrollment"){
             $trail_date = $request->trail_date;
@@ -286,10 +299,6 @@ class GuestController extends Controller
         $official_date = "";
         if($request->enrollment=="Official Enrollment"){
             $official_date = $request->official_date;
-        }
-        $status = $request->status;
-        if($request->status==""){
-            $status = $request->phase_1_status;
         }
         $visa_base64 = "";
         $visa_extension = "";

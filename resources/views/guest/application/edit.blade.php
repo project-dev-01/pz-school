@@ -328,6 +328,10 @@
                         $disabled_phase_1 = "disabled";
                         $readonly_phase_1 = "readonly";
                         $hidden_phase_2 = "none";
+                        }else if($application['status']=="Applied"){
+                        $disabled_phase_1 = "disabled";
+                        $readonly_phase_1 = "readonly";
+                        $hidden_phase_2 = "none";
                         }
 
 
@@ -337,6 +341,9 @@
                         $disabled_phase_2 = "disabled";
                         $readonly_phase_2 = "readonly";
                         }else if($application['phase_2_status']=="Reject"){
+                        $disabled_phase_2 = "disabled";
+                        $readonly_phase_2 = "readonly";
+                        }else if($application['phase_2_status']=="Process"){
                         $disabled_phase_2 = "disabled";
                         $readonly_phase_2 = "readonly";
                         }
@@ -1166,11 +1173,11 @@
                                                 <div class="col-md-2 mt-4">
                                                     <div class="form-group">
                                                         <div class="radio radio-success form-check-inline">
-                                                            <input type="radio" class="re_admission" id="" {{$readonly_phase_1}} name="re_admission" value="yes" {{ isset($application['type']) ? $application['type'] == "Re-Admission" ? 'checked' : '' : '' }}>
+                                                            <input type="radio" class="re_admission" id="" {{$disabled_phase_1}} name="re_admission" value="yes" {{ isset($application['type']) ? $application['type'] == "Re-Admission" ? 'checked' : '' : '' }}>
                                                             <label for="yes"> {{ __('messages.yes') }} </label>
                                                         </div>
                                                         <div class="radio radio-success form-check-inline">
-                                                            <input type="radio" class="re_admission" id="" {{$readonly_phase_1}} name="re_admission" value="no" {{ isset($application['type']) ? $application['type'] == "Admission" ? 'checked' : '' : '' }}>
+                                                            <input type="radio" class="re_admission" id="" {{$disabled_phase_1}} name="re_admission" value="no" {{ isset($application['type']) ? $application['type'] == "Admission" ? 'checked' : '' : '' }}>
                                                             <label for="no"> {{ __('messages.no') }} </label>
                                                         </div>
                                                         <!-- <div class="radio radio-success form-check-inline">
@@ -1178,6 +1185,10 @@
                                                             <label for="guardian"> Guardian </label>
                                                         </div> -->
                                                     </div>
+                                                    
+                                                    @if($disabled_phase_1=="disabled")
+                                                        <input type="hidden" name="re_admission" value="{{ isset($application['type']) ? $application['type'] == 'Re-Admission' ? 'yes' : 'no' : 'no' }}">
+                                                    @endif
                                                 </div>
                                                 @php
 
@@ -1251,7 +1262,7 @@
                                             <div class="col-md-4" id="reason_1" style="display:{{$phase_1_reason}}">
                                                 <div class="form-group">
                                                     <label for="phase_1_reason">{{ __('messages.reason') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="phase_1_reason" readonly value="{{ isset($application['phase_1_reason']) ? $application['phase_1_reason'] : ''}}" name="phase_1_reason" aria-describedby="inputGroupPrepend">
+                                                    <textarea type="text" id="phase_1_reason" class="form-control" readonly  placeholder="{{ __('messages.enter_reason') }}" name="phase_1_reason" data-parsley-trigger="change">{{ isset($application['phase_1_reason']) ? $application['phase_1_reason'] : ''}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -1740,7 +1751,7 @@
                                             <div class="col-md-4" id="reason_2" style="display:{{$phase_2_reason}}">
                                                 <div class="form-group">
                                                     <label for="phase_2_reason">{{ __('messages.reason') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" {{$readonly_phase_2}} id="phase_2_reason" readonly value="{{ isset($application['phase_2_reason']) ? $application['phase_2_reason'] : ''}}" name="phase_2_reason" aria-describedby="inputGroupPrepend">
+                                                    <textarea type="text" id="phase_2_reason" {{$readonly_phase_2}} class="form-control"   placeholder="{{ __('messages.enter_reason') }}" name="phase_2_reason" data-parsley-trigger="change">{{ isset($application['phase_2_reason']) ? $application['phase_2_reason'] : ''}}</textarea>
                                                 </div>
                                             </div>
                                         </div>

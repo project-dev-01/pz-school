@@ -960,6 +960,7 @@
                                                 <div class="form-group">
                                                     <label for="visa_type">{{ __('messages.visa_type__for_non_malaysian') }}<span class="text-danger">*</span></label>
                                                     <select id="visa_type" name="visa_type" class="form-control">
+                                                        <option value="">{{ __('messages.select_visa_type') }}</option>
                                                     <option value="No Require (Malaysian)" {{ isset($student['visa_type']) ? $student['visa_type'] == "No Require (Malaysian)" ? 'selected' : '' : '' }}>{{ __('messages.no_require_malaysian') }}</option>
                                                         <option value="Depedent Pass" {{ isset($student['visa_type']) ? $student['visa_type'] == "Depedent Pass" ? 'selected' : '' : '' }}>{{ __('messages.depedent_pass') }}</option>
                                                         <option value="MM2H" {{ isset($student['visa_type']) ? $student['visa_type'] == "MM2H" ? 'selected' : '' : '' }}>{{ __('messages.mm2h') }}</option>

@@ -399,7 +399,7 @@
                                     <!-- <div class="row"> -->
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="date_of_birth">{{ __('messages.date_of_birth') }}<span class="text-danger">*</span</label>
+                                            <label for="date_of_birth">{{ __('messages.date_of_birth') }}<span class="text-danger">*</span< /label>
                                                     <div class="input-group input-group-merge">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text">
