@@ -160,54 +160,54 @@ class ParentController extends Controller
         );
     }
 
-    // public function studentProfile()
-    // {
+    public function studentProfile()
+    {
 
-    //     $student_id = session()->get('student_id');
-    //     $data = [
-    //         'id' => isset($student_id) ? $student_id : 0,
-    //     ];
-    //     $getclass = Helper::GetMethod(config('constants.api.class_list'));
-    //     $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
-    //     $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));
-    //     $session = Helper::GetMethod(config('constants.api.session'));
-    //     $semester = Helper::GetMethod(config('constants.api.semester'));
-    //     $student = Helper::PostMethod(config('constants.api.student_details'), $data);
-    //     $parent = Helper::GetMethod(config('constants.api.parent_list'));
-    //     $religion = Helper::GetMethod(config('constants.api.religion'));
-    //     $races = Helper::GetMethod(config('constants.api.races'));
-    //     $relation = Helper::GetMethod(config('constants.api.relation_list'));
-    //     $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
-    //     $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
+        $student_id = session()->get('student_id');
+        $data = [
+            'id' => isset($student_id) ? $student_id : 0,
+        ];
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
+        $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $student = Helper::PostMethod(config('constants.api.student_details'), $data);
+        $parent = Helper::GetMethod(config('constants.api.parent_list'));
+        $religion = Helper::GetMethod(config('constants.api.religion'));
+        $races = Helper::GetMethod(config('constants.api.races'));
+        $relation = Helper::GetMethod(config('constants.api.relation_list'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
 
-    //     $prev = isset($student['data']['student']['previous_details']) ? json_decode($student['data']['student']['previous_details']) : "";
-    //     // $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
-    //     $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
-    //     $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
-    //     // dd($student);
-    //     return view(
-    //         'parent.student.profile',
-    //         [
-    //             'class' => isset($getclass['data']) ? $getclass['data'] : [],
-    //             'parent' => isset($parent['data']) ? $parent['data'] : [],
-    //             'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
-    //             'hostel' => isset($gethostel['data']) ? $gethostel['data'] : [],
-    //             'session' => isset($session['data']) ? $session['data'] : [],
-    //             'semester' => isset($semester['data']) ? $semester['data'] : [],
-    //             'student' => isset($student['data']['student']) ? $student['data']['student'] : [],
-    //             'section' => isset($student['data']['section']) ? $student['data']['section'] : [],
-    //             'vehicle' => isset($student['data']['vehicle']) ? $student['data']['vehicle'] : [],
-    //             'room' => isset($student['data']['room']) ? $student['data']['room'] : [],
-    //             'religion' => isset($religion['data']) ? $religion['data'] : [],
-    //             'races' => isset($races['data']) ? $races['data'] : [],
-    //             'relation' => isset($relation['data']) ? $relation['data'] : [],
-    //             'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
-    //             'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
-    //             'role' => isset($student['data']['user']) ? $student['data']['user'] : []
+        $prev = isset($student['data']['student']['previous_details']) ? json_decode($student['data']['student']['previous_details']) : "";
+        // $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
+        $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
+        $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
+        // dd($student);
+        return view(
+            'parent.student.profile',
+            [
+                'class' => isset($getclass['data']) ? $getclass['data'] : [],
+                'parent' => isset($parent['data']) ? $parent['data'] : [],
+                'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
+                'hostel' => isset($gethostel['data']) ? $gethostel['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'student' => isset($student['data']['student']) ? $student['data']['student'] : [],
+                'section' => isset($student['data']['section']) ? $student['data']['section'] : [],
+                'vehicle' => isset($student['data']['vehicle']) ? $student['data']['vehicle'] : [],
+                'room' => isset($student['data']['room']) ? $student['data']['room'] : [],
+                'religion' => isset($religion['data']) ? $religion['data'] : [],
+                'races' => isset($races['data']) ? $races['data'] : [],
+                'relation' => isset($relation['data']) ? $relation['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
+                'role' => isset($student['data']['user']) ? $student['data']['user'] : []
 
-    //         ]
-    //     );
-    // }
+            ]
+        );
+    }
     // change password
     public function changeNewPassword(Request $request)
     {
