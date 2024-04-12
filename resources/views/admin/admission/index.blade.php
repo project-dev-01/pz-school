@@ -213,6 +213,10 @@
     .country-select {
         display: block;
     }
+    .country-select .country-list
+    {
+        width: 361px !important;
+    }
 
     .ui-datepicker {
         width: 21.4em;
