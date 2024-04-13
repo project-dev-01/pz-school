@@ -72,7 +72,7 @@
 
             @if(Session::get('role_id') == '5')
             <li class="dropdown d-inline-block">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="{{ Session::get('picture') ? config('constants.image_url').'/'.$branch_id.'/users/images/'.Session::get('picture') : config('constants.image_url').'/common-asset/images/users/st.webp' }}" alt="user-image" class="rounded-circle admin_picture" style="width:31px;margin-bottom:4px;margin-left: -13px;margin-right: -12px;" onmouseover="showStudentName()" onmouseout="hideStudentName()">
                     <span id="studentName" class="student-name"></span>
                 </a>
@@ -83,6 +83,9 @@
                         <span class="childname">{{ $child['name'] }}</span>
                     </a>
                     @empty
+                    <a class="dropdown-item" href="javascript:void(0)">
+                        <span>{{ __('messages.no_data_available') }}</span>
+                    </a>
                     @endforelse
                 </div>
             </li>
