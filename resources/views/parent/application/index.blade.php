@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' . __('messages.application_list') . '')
+@section('title',' ' . __('messages.admission_list') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
@@ -69,7 +69,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">{{ __('messages.application_list') }}</h4>
+                <h4 class="page-title">{{ __('messages.admission_list') }}</h4>
             </div>
         </div>
     </div>
@@ -139,7 +139,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                            {{ __('messages.application_list') }}
+                            {{ __('messages.admission_list') }}
                             <h4>
                     </li>
                 </ul><br>

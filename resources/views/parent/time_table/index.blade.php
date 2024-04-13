@@ -67,6 +67,7 @@
                             @if($timetable>0)
                             {{ __('messages.class') }} {{ $details['class']['class_name'] ?? "" }} ({{ __('messages.section') }}: {{ $details['section']['section_name'] ?? "" }})
                             @endif
+                            {{ __('messages.timetable') }}
                         </h4>
 
                     </li>

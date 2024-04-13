@@ -2182,5 +2182,8 @@ return [
     "withdrawal_list" => "Withdrawal List",
     "withdrawal_application" => "Withdrawal Application",
     "calendar_lable_list" => "List",
+    "add_admission" => "Add Admission",
+    "add_withdrawal" => "Add Withdrawal",
+    "withdrawal_details" => "Withdrawal Details",
 
 ];

@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' . __('messages.add_application') . '')
+@section('title',' ' . __('messages.add_admission') . '')
 @section('component_css')
 <link href="{{ asset('libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
@@ -295,7 +295,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">{{ __('messages.add_application') }}</h4>
+                <h4 class="page-title">{{ __('messages.add_admission') }}</h4>
             </div>
         </div>
     </div>

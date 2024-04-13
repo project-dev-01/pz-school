@@ -43,8 +43,8 @@
                 </ul><br>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card-box">
+                        <div class="col-xl-12">
+                            <div class="">
                                 <div class="table-responsive">
                                     <table class="table table-bordered mb-0">
                                         <thead>

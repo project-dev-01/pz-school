@@ -2236,4 +2236,7 @@ return [
     "withdrawal_list" => "リスト",
     "withdrawal_application" => "追加",
     "calendar_lable_list" => "リスト",
+    "add_admission" => "入学願書",
+    "add_withdrawal" => "終了を追加します",
+    "termination_details" => "終了の詳細",
 ];

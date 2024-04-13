@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' . __('messages.add_termination') . '')
+@section('title',' ' . __('messages.add_withdrawal') . '')
 @section('component_css')
 <link href="{{ asset('libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
@@ -302,7 +302,7 @@
                         <li class="breadcrumb-item active">Wizard</li>
                     </ol>-->
                 </div>
-                <h4 class="page-title">{{ __('messages.add_termination') }}</h4>
+                <h4 class="page-title">{{ __('messages.add_withdrawal') }}</h4>
             </div>
         </div>
     </div>
@@ -310,14 +310,14 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <div class="card-body">
+                <div class="">
 
                     <form id="terminationForm" method="post" action="{{ route('parent.termination.add') }}" enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
                                 <h4 class="navv">
-                                    {{ __('messages.termination_details') }}
+                                    {{ __('messages.withdrawal_details') }}
                                     <h4>
                             </li>
                         </ul><br>
