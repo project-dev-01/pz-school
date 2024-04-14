@@ -36,9 +36,13 @@ Route::get('/', function () {
 });
 
 Route::get('/clear-cache', function () {
+    Artisan::call('view:cache');
+    Artisan::call('view:clear');
     Artisan::call('cache:clear');
     Artisan::call('route:cache');
+    Artisan::call('route:clear');
     Artisan::call('config:cache');
+    Artisan::call('config:clear');
     return "clear artisan cache";
 });
 
