@@ -57,9 +57,9 @@
                         <h4 class="faq-question">{{ __('messages.where_can_i_download_the_user') }}</h4>
                         <p class="faq-answer mb-4">{{ __('messages.you_can_download_the_user_manual') }}
                             <span class="text-left" style="display: inline-block; color: red;margin-top:10px;">
-                                {{ __('messages.faq_japanese') }}: <a href="http://www.OOOOOOO.com/jp" style="color: red;">http://www.OOOOOOO.com/jp</a>
+                                {{ __('messages.faq_japanese') }}: <a href="{{ $jap }}" target="blank_" style="color: red;">http://www.OOOOOOO.com/jp</a>
                                 <br>
-                                {{ __('messages.faq_english') }}: <a href="http://www.OOOOOOO.com/en" style="color: red;">http://www.OOOOOOO.com/en</a>
+                                {{ __('messages.faq_english') }}: <a href="{{ $en }}" target="blank_" style="color: red;">http://www.OOOOOOO.com/en</a>
                             </span>
                         </p>
                     </div>

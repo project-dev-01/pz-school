@@ -948,6 +948,7 @@ return [
         'setschoolpermission' => $url.'/menus/setschoolpermission',
         'getschoolroleaccess' => $url.'/menus/getschoolroleaccess', 
         'deleteschoolpermission' => $url.'/menus/deleteschoolpermission', 
+        'getschoolroleaccessroute' => $url.'/menus/getschoolroleaccessroute',
         
         
         

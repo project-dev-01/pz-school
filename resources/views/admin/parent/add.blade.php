@@ -323,25 +323,25 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-									
+
 									<input type="text" class="form-control" name="guardian_last_name" id="guardian_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-									
+
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="last_name">{{ __('messages.middle_name') }}</label>
-									
-										<input type="text" class="form-control" name="guardian_middle_name" id="guardian_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-									
+
+									<input type="text" class="form-control" name="guardian_middle_name" id="guardian_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-									
-										<input type="text" class="form-control" name="guardian_first_name" id="guardian_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-									
+
+									<input type="text" class="form-control" name="guardian_first_name" id="guardian_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+
 								</div>
 							</div>
 
@@ -351,25 +351,25 @@
 							<div class="col-md-4">
 								<div class="form-group mb-3">
 									<label for="">{{ __('messages.last_name') }}({{ __('messages.furigana') }})<span class="text-danger">*</span></label>
-									
-										<input type="text" name="guardian_last_name_furigana" class="form-control alloptions" maxlength="50" id="guardian_last_name_furigana" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
-									
+
+									<input type="text" name="guardian_last_name_furigana" class="form-control alloptions" maxlength="50" id="guardian_last_name_furigana" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group mb-3">
 									<label for="">{{ __('messages.middle_name') }}({{ __('messages.furigana') }})</label>
-									
-										<input type="text" name="guardian_middle_name_furigana" class="form-control alloptions" maxlength="50" id="guardian_middle_name_furigana" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
-									
+
+									<input type="text" name="guardian_middle_name_furigana" class="form-control alloptions" maxlength="50" id="guardian_middle_name_furigana" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="">{{ __('messages.first_name') }}({{ __('messages.furigana') }})<span class="text-danger">*</span></label>
-									
-										<input type="text" name="guardian_first_name_furigana" class="form-control alloptions" maxlength="50" id="guardian_first_name_furigana" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
-									
+
+									<input type="text" name="guardian_first_name_furigana" class="form-control alloptions" maxlength="50" id="guardian_first_name_furigana" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
+
 								</div>
 							</div>
 
@@ -381,25 +381,25 @@
 							<div class="col-md-4">
 								<div class="form-group mb-3">
 									<label for="">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-									
-										<input type="text" name="guardian_last_name_english" class="form-control alloptions" maxlength="50" id="guardian_last_name_english" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
-									
+
+									<input type="text" name="guardian_last_name_english" class="form-control alloptions" maxlength="50" id="guardian_last_name_english" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group mb-3">
 									<label for="">{{ __('messages.middle_name_roma') }}</label>
-									
-										<input type="text" name="guardian_middle_name_english" class="form-control alloptions" maxlength="50" id="guardian_middle_name_english" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
-									
+
+									<input type="text" name="guardian_middle_name_english" class="form-control alloptions" maxlength="50" id="guardian_middle_name_english" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-									
-										<input type="text" name="guardian_first_name_english" class="form-control alloptions" maxlength="50" id="guardian_first_name_english" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
-									
+
+									<input type="text" name="guardian_first_name_english" class="form-control alloptions" maxlength="50" id="guardian_first_name_english" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
+
 								</div>
 							</div>
 						</div>
@@ -464,12 +464,12 @@
 							</div>
 
 
-						<div class="col-md-4">
-							<div class="form-group">
-								<label for="guardian_company_name_japan">{{ __('messages.work_company_name_japan') }}<span class="text-danger">*</span></label>
-								<input type="text" class="form-control" id="guardian_company_name_japan" value="{{ isset($parent['guardian_company_name_japan']) ? $parent['guardian_company_name_japan'] : ''}}" name="guardian_company_name_japan" placeholder="{{ __('messages.enter_work_company_name_japan') }}" aria-describedby="inputGroupPrepend">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="guardian_company_name_japan">{{ __('messages.work_company_name_japan') }}<span class="text-danger">*</span></label>
+									<input type="text" class="form-control" id="guardian_company_name_japan" value="{{ isset($parent['guardian_company_name_japan']) ? $parent['guardian_company_name_japan'] : ''}}" name="guardian_company_name_japan" placeholder="{{ __('messages.enter_work_company_name_japan') }}" aria-describedby="inputGroupPrepend">
+								</div>
 							</div>
-						</div>
 						</div>
 						<!--
 													<div class="row">
@@ -697,7 +697,23 @@
 										<option value="Local Hire" {{ isset($parent['guardian_employment_status']) ? $parent['guardian_employment_status'] == "Local Hire" ? 'selected' : '' : '' }}>{{ __('messages.local_hire') }}</option>
 										<option value="Public Servant" {{ isset($parent['guardian_employment_status']) ? $parent['guardian_employment_status'] == "Public Servant" ? 'selected' : '' : '' }}>{{ __('messages.public_servant') }}</option>
 										<option value="Self-Employed" {{ isset($parent['guardian_employment_status']) ? $parent['guardian_employment_status'] == "Self-Employed" ? 'selected' : '' : '' }}>{{ __('messages.self_employed') }}</option>
-                                        <option value="Others" {{ isset($parent['guardian_employment_status']) ? $parent['guardian_employment_status'] == "Others" ? 'selected' : '' : '' }}>{{ __('messages.others') }}</option>
+										<option value="Others" {{ isset($parent['guardian_employment_status']) ? $parent['guardian_employment_status'] == "Others" ? 'selected' : '' : '' }}>{{ __('messages.others') }}</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="school_roleid">{{ __('messages.select_role') }}<span class="text-danger">*</span></label>
+									<select class="form-control " id="school_roleid" name="school_roleid" data-placeholder="{{ __('messages.choose_role') }}">
+										<option value="">{{ __('messages.select_role') }}</option>
+										@forelse($school_roles as $r)
+										@if($r['portal_roleid']==2 && $r['roles']!=null)
+										<option value="{{$r['id']}}">{{ $r['fullname'] }} ( {{ $r['roles'] }} )</option>
+										@endif
+										@empty
+										@endforelse
 									</select>
 								</div>
 							</div>
@@ -807,20 +823,20 @@
 					</ul><br>
 					<div class="card-body">
 						<div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="japanese_association_membership_image_principal">{{ __('messages.japanese_association_membership_image_principal') }}<span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" id="japanese_association_membership_image_principal" class="custom-file-input" value="" name="japanese_association_membership_image_principal" accept="image/png, image/gif, image/jpeg">
-                                            <label class="custom-file-label" for="japanese_association_membership_image_principal">{{ __('messages.choose_file') }}</label>
-                                        </div>
-                                    </div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="japanese_association_membership_image_principal">{{ __('messages.japanese_association_membership_image_principal') }}<span class="text-danger">*</span></label>
+									<div class="input-group">
+										<div class="custom-file">
+											<input type="file" id="japanese_association_membership_image_principal" class="custom-file-input" value="" name="japanese_association_membership_image_principal" accept="image/png, image/gif, image/jpeg">
+											<label class="custom-file-label" for="japanese_association_membership_image_principal">{{ __('messages.choose_file') }}</label>
+										</div>
+									</div>
 
-                                    <span id="japanese_association_membership_image_principal_name"></span>
-                                    <label for="japanese_association_membership_image_principal" class="error"></label>
-                                </div>
-                            </div>
+									<span id="japanese_association_membership_image_principal_name"></span>
+									<label for="japanese_association_membership_image_principal" class="error"></label>
+								</div>
+							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="japanese_association_membership_image_supplimental">{{ __('messages.japanese_association_membership_image_supplimental') }}</label>
@@ -1083,7 +1099,6 @@
 		preventInvalidNumbers: true,
 		// utilsScript: "js/utils.js"
 	});
-
 </script>
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>

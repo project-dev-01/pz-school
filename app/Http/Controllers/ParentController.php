@@ -13,12 +13,29 @@ use Excel;
 use PDF;
 use App\Exports\ParentAttendanceExport;
 use Illuminate\Session\TokenMismatchException;
+use Illuminate\Support\Facades\Route;
 
 class ParentController extends Controller
 {
     //
     public function index(Request $request)
     {
+        $currentRouteName = Route::currentRouteName();
+        $pagedata = [
+            'currentRouteName' => $currentRouteName,
+            'role_id' => session()->get('role_id'),
+            'school_roleid' => session()->get('school_roleid'),
+            'branch_id' => config('constants.branch_id')
+        ];
+
+        $accessRoutes = Helper::PostMethod(config('constants.api.getschoolroleaccessroute'), $pagedata);
+        $accessPermission = isset($accessRoutes['data']['read']) ? $accessRoutes['data']['read'] : null;
+
+        // Check if accessPermission is null
+        if ($accessPermission === null) {
+            // Return an empty response or render an empty view
+            return view('empty_page'); // Replace 'empty_page' with the name of your empty view
+        }
         $myArray = session()->get('hidden_week_ends');
         $delimiter = ','; // Delimiter you want between array items
         $hiddenWeekends = implode($delimiter, $myArray);
@@ -276,10 +293,14 @@ class ParentController extends Controller
             'role_name' => session()->get('role_name')
 
         ];
+        $en = config('constants.image_url') . '/common-asset/parentfaq/Suzen User Manual (Parent Portal)_v1.0.0_EN.pdf';
+        $jap = config('constants.image_url') . '/common-asset/parentfaq/Suzen User Manual (Parent Portal)_v1.0.0_JP.pdf';
         return view(
             'parent.faq.index',
             [
                 'data' => isset($data) ? $data : [],
+                'en' => $en,
+                'jap' => $jap
             ]
         );
     }
@@ -1080,8 +1101,8 @@ class ParentController extends Controller
         $mother_id = isset($student['data']['student']['mother_id']) ? $student['data']['student']['mother_id'] : "";
         $father_id = isset($student['data']['student']['father_id']) ? $student['data']['student']['father_id'] : "";
         $guardian_relation = isset($student['data']['student']['relation']) ? $student['data']['student']['relation'] : "";
-        $sibling= isset($student['data']['student']) ? $student['data']['student'] : "";
-       
+        $sibling = isset($student['data']['student']) ? $student['data']['student'] : "";
+
         $guardian_data = [
             'id' => session()->get('ref_user_id')
         ];
@@ -1120,7 +1141,7 @@ class ParentController extends Controller
                 'user' => isset($response['data']['user']) ? $response['data']['user'] : [],
                 'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
                 'guardian_relation' => isset($guardian_relation) ? $guardian_relation : "",
-                'sibling' =>isset($sibling) ? $sibling: "",
+                'sibling' => isset($sibling) ? $sibling : "",
             ]
         );
     }
@@ -1165,7 +1186,7 @@ class ParentController extends Controller
             $father_passport_base64 = base64_encode($father_passport_data);
             $father_passport_extension = $father_passport_file->getClientOriginalExtension();
         }
-        
+
         $image_principal_base64 = "";
         $image_principal_extension = "";
         $image_principal_file = $request->file('japanese_association_membership_image_principal');
@@ -1920,8 +1941,8 @@ class ParentController extends Controller
     public function applicationUpdate(Request $request)
     {
         $phase_2_status = $request->phase_2_status;
-        if($request->status=="Approved"){
-            if($request->phase_2_status==null){
+        if ($request->status == "Approved") {
+            if ($request->phase_2_status == null) {
 
                 $phase_2_status = "Process";
             }
@@ -2172,7 +2193,7 @@ class ParentController extends Controller
             'passport_mother_old_photo' => $request->passport_mother_old_photo,
             'visa_father_old_photo' => $request->visa_father_old_photo,
             'visa_mother_old_photo' => $request->visa_mother_old_photo,
-            'stay_category'=> $request->stay_category,
+            'stay_category' => $request->stay_category,
         ];
         // }
         // return $data;
@@ -2464,5 +2485,17 @@ class ParentController extends Controller
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
             ]
         );
+    }
+    public function checkpermissions(Request $request)
+    {
+        $pagedata = [
+            //'menu_id' => "27",
+            'menu_id' => $request->menu_id,
+            'role_id' => session()->get('role_id'),
+            'school_roleid' => session()->get('school_roleid'),
+            'branch_id' => config('constants.branch_id')
+        ];
+        $page = Helper::PostMethod(config('constants.api.getschoolroleaccess'), $pagedata);
+        return $page;
     }
 }

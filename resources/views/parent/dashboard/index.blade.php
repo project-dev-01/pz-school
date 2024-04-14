@@ -448,12 +448,12 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-            <ul class="nav nav-tabs">
-                            <li class="nav-item">
-                                <h4 class="navv">{{ __('messages.Calendar') }}
-                                    <h4>
-                            </li>
-                        </ul>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <h4 class="navv">{{ __('messages.Calendar') }}
+                            <h4>
+                    </li>
+                </ul>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
@@ -908,6 +908,12 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+@if(!empty(Session::get('school_roleid')))
+<script>
+    var checkpermissions = "{{ route('parent.school_role.checkpermissions') }}";
+</script>
+<script src="{{ asset('js/custom/permissions.js') }}"></script>
+@endif
 <!-- plugin js -->
 <script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
 <script src="{{ asset('libs/apexcharts/apexcharts.min.js') }}"></script>

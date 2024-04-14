@@ -5088,7 +5088,6 @@ class AdminController extends Controller
         $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
         $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
         $application = Helper::PostMethod(config('constants.api.get_application_guardian_details'), $data);
-
         $grade = Helper::GetMethod(config('constants.api.class_list'));
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
@@ -5257,6 +5256,7 @@ class AdminController extends Controller
             'father_passport_number' => $request->father_passport_number,       
             'father_passport_expiry_date' => $request->father_passport_expiry_date,*/
 
+            'school_roleid' => $request->school_roleid,
             'first_name' => $request->guardian_first_name,
             'last_name' => $request->guardian_last_name,
             'middle_name' => $request->guardian_middle_name,
@@ -5740,6 +5740,7 @@ class AdminController extends Controller
             'sblingdob' => $siblingdob,
             'relationship' => $relationship,
             'guardian_relation' => $request->guardian_relation,
+            'school_roleid' => $request->school_roleid,
 
             'role_id' => session()->get('role_id')
         ];

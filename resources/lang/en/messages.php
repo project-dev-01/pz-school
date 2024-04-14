@@ -2242,7 +2242,7 @@ return [
     "who_should_i_contact_if_i_have_any" => "Who should I contact if I have any questions about the functions or operating methods of this system (Suzen)?",
     "please_send_your_inquire" => "Please send your inquire to jskl2@jskl.edu.my for further assistance",
     "where_can_i_download_the_user" => "Where can i download the user manual for this system (Suzen)?",
-    "you_can_download_the_user_manual" => "You can download the user manual guide for Admin Portal from below link",
+    "you_can_download_the_user_manual" => "You can download the user manual guide for Parent Portal from below link",
     "faq_japanese" => "Japanese",
     "faq_english" => "English",
     "enter_attendance_no" =>"Enter Attendance number",

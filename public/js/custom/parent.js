@@ -179,7 +179,7 @@ $(function () {
                 required: true,
                 email: true
             },
-
+            school_roleid: "required",
             guardian_last_name: "required",
             guardian_last_name_furigana: "required",
             guardian_last_name_english: "required",
@@ -311,6 +311,7 @@ $(function () {
                 required: true,
                 email: true
             },
+            school_roleid: "required",
             guardian_last_name_furigana: "required",
             guardian_last_name_english: "required",
             guardian_first_name_furigana: "required",

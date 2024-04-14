@@ -1601,6 +1601,8 @@ Route::group(['prefix' => 'parent'], function () {
         Route::get('/update_info/view/{id}', [ParentController::class, 'viewParentUpdateInfo'])->name('parent.update_info_view');
         // student medical record
         Route::get('/student-medical-record', [ParentController::class, 'studentMedicalRecord'])->name('student.medical.index');
+        Route::post('school_role/checkpermissions', [ParentController::class, 'checkpermissions'])->name('parent.school_role.checkpermissions');
+
     });
 });
 
