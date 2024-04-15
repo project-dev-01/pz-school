@@ -20,22 +20,22 @@ class ParentController extends Controller
     //
     public function index(Request $request)
     {
-        $currentRouteName = Route::currentRouteName();
-        $pagedata = [
-            'currentRouteName' => $currentRouteName,
-            'role_id' => session()->get('role_id'),
-            'school_roleid' => session()->get('school_roleid'),
-            'branch_id' => config('constants.branch_id')
-        ];
+        // $currentRouteName = Route::currentRouteName();
+        // $pagedata = [
+        //     'currentRouteName' => $currentRouteName,
+        //     'role_id' => session()->get('role_id'),
+        //     'school_roleid' => session()->get('school_roleid'),
+        //     'branch_id' => config('constants.branch_id')
+        // ];
 
-        $accessRoutes = Helper::PostMethod(config('constants.api.getschoolroleaccessroute'), $pagedata);
-        $accessPermission = isset($accessRoutes['data']['read']) ? $accessRoutes['data']['read'] : null;
+        // $accessRoutes = Helper::PostMethod(config('constants.api.getschoolroleaccessroute'), $pagedata);
+        // $accessPermission = isset($accessRoutes['data']['read']) ? $accessRoutes['data']['read'] : null;
 
-        // Check if accessPermission is null
-        if ($accessPermission === null) {
-            // Return an empty response or render an empty view
-            return view('empty_page'); // Replace 'empty_page' with the name of your empty view
-        }
+        // // Check if accessPermission is null
+        // if ($accessPermission === null) {
+        //     // Return an empty response or render an empty view
+        //     return view('empty_page'); // Replace 'empty_page' with the name of your empty view
+        // }
         $myArray = session()->get('hidden_week_ends');
         $delimiter = ','; // Delimiter you want between array items
         $hiddenWeekends = implode($delimiter, $myArray);

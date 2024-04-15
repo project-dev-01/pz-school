@@ -376,7 +376,7 @@
 
                     @if($menu['menu_dropdown']=='Yes')
                     <div class="collapse" id="{{ str_replace('#','',$menu['menu_url'])}}">
-                        <ul class="nav-second-level" style="padding-left: 30px;">
+                        <ul class="nav-second-level">
                             @foreach($permissionsubmenu['data'] as $menu1)
                             @if($menu1['menu_status']==1)
                             @if($menu1['menu_read']=='Access')
@@ -461,7 +461,7 @@
 
                     @if($menu['menu_dropdown']=='Yes')
                     <div class="collapse" id="{{ str_replace('#','',$menu['menu_url'])}}">
-                        <ul class="nav-second-level" style="padding-left: 30px;">
+                        <ul class="nav-second-level">
                             @foreach($submenu['data'] as $menu1)
                             @if($menu1['menu_status']==1)
                             @if($menu1['menu_permission']=='Access')

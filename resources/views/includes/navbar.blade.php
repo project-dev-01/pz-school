@@ -185,22 +185,24 @@
             <li class="dropdown d-lg-inline-block topbar-dropdown" style="margin-right: -6px;">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     @if(app()->getLocale() == 'en')
-                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/USA.webp' }}" alt="user-image" style="height: 24px;width: 27px;">
+                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/USA.webp' }}" alt="user-image" style="height: 24px;width: 27px;margin-bottom: 2px;">
                     @endif
                     @if(app()->getLocale() == 'japanese')
-                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/JPN.webp' }}" alt="user-image" style="height: 24px;width: 27px;">
+                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/JPN.webp' }}" alt="user-image" style="height: 24px;width: 27px;margin-bottom: 2px;">
                     @endif
                     @if(app()->getLocale() == 'malay')
-                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/MAL.webp' }}" alt="user-image" style="height: 24px;width: 27px;">
+                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/MAL.webp' }}" alt="user-image" style="height: 24px;width: 27px;margin-bottom: 2px;">
                     @endif
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a href="{{ route('changeLang', ['lang' => 'en']) }}" class="dropdown-item flagsp @if(app()->getLocale() == 'en') active @endif">
                         <img src="{{ config('constants.image_url').'/common-asset/images/flags/USA.webp' }}" alt="en" value="en" class="flag2"/><span class="flagfont2">English</span>
                     </a>
+                    <div class="dropdown-divider" style="margin: 0 0;"></div>
                     <a href="{{ route('changeLang', ['lang' => 'japanese']) }}" class="dropdown-item flagsp @if(app()->getLocale() == 'japanese') active @endif">
                         <img src="{{ config('constants.image_url').'/common-asset/images/flags/JPN.webp' }}" alt="japanese" value="japanese" class="flag2" /><span class="flagfont2">日本語</span>
                     </a>
+                    <div class="dropdown-divider" style="margin: 0 0;"></div>
                     <a href="{{ route('changeLang', ['lang' => 'malay']) }}" class="dropdown-item @if(app()->getLocale() == 'malay') active @endif">
                         <img src="{{ config('constants.image_url').'/common-asset/images/flags/MAL.webp' }}" alt="malay" value="malay" class="flag2"><span class="flagfont2">Malay</span>
                     </a>

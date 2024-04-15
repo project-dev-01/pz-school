@@ -91,9 +91,8 @@
     }
 </style>
 <!-- Start Content-->
-<div class="container-fluid">
-
-    <!-- start page title -->
+<div class="container-fluid">   
+     <!-- start page title -->
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
