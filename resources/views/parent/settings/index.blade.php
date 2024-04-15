@@ -197,5 +197,5 @@
     var updateSettingSession = "{{ route('settings.updateSettingSession') }}";
     var profilePath = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images' }}";
 </script>
-<script src="{{ asset('js/custom/parent_settings.js') }}"></script>
+<script src="{{ asset('js/custom/parent_settings_profile.js') }}"></script>
 @endsection

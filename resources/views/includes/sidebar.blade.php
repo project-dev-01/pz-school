@@ -340,6 +340,7 @@
                 'type' => "Childmenu"
                 ];
                 $permissionmainmenu = App\Helpers\Helper::PostMethod(config('constants.api.schoolmenuaccess_list'),$permissionmainmenudata);
+             ;
                 $permissionsubmenu = App\Helpers\Helper::PostMethod(config('constants.api.schoolmenuaccess_list'),$permissionsubmenudata);
                 $permissionchildmenu = App\Helpers\Helper::PostMethod(config('constants.api.schoolmenuaccess_list'),$permissionchildmenudata);
 

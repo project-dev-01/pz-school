@@ -624,6 +624,7 @@ function toggleBasicDetails(student_id) {
             console.log(res.data);
             if (res.code == 200) {
                 var studentData = res.data.student;
+                console.log(studentData.relation);
                 $("#guardian_relation").val(studentData.relation);
                 $("#student_id").val(studentData.id);
                 populateSiblingData(studentData);

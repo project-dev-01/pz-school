@@ -213,7 +213,10 @@
 	.country-select {
 		display: block;
 	}
-
+	.country-select .country-list
+    {
+        width: 361px !important;
+    }
 	.ui-datepicker {
 		width: 20.2em;
 	}
@@ -579,7 +582,7 @@
 											<div class="form-group">
 												<label for="guardian_relation">{{ __('messages.relation') }}<span class="text-danger">*</span></label>
 												<select id="guardian_relation" name="guardian_relation" class="form-control copy_guardian_info">
-													<option value="">{{ __('messages.select_relation') }}</option>
+													<option value="0">{{ __('messages.select_relation') }}</option>
 													@forelse($relation as $r)
 													<option value="{{$r['id']}}">{{$r['name']}}</option>
 													@empty
@@ -668,7 +671,11 @@
 												</select>
 											</div>
 										</div>
-										<input type="hidden" name="passport_father_old_photo" id="passport_father_old_photo" />
+										
+
+									</div>
+									<div class="row">
+									<input type="hidden" name="passport_father_old_photo" id="passport_father_old_photo" />
 										<div class="col-md-4" id="passportdetails" style="display: none;">
 											<div class="form-group">
 												<label for="passport_father_photo">{{ __('messages.passport_image_father_only_if_malaysian') }}<span class="text-danger">*</span></label>
@@ -683,9 +690,6 @@
 												<span id="passport_father_photo_name"></span>
 											</div>
 										</div>
-
-									</div>
-									<div class="row">
 										<input type="hidden" name="passport_mother_old_photo" id="passport_mother_old_photo" />
 
 										<div class="col-md-4" id="mother_father_photo" style="display: none;">
