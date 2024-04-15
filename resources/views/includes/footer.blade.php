@@ -74,7 +74,7 @@
     // update child session
     var updateChildSessionID = "{{ route('navbar.update.child_id') }}";
 
-    var childData = {!! json_encode(Session::get('all_child', [])) !!};
+    var childData = {!!json_encode(Session::get('all_child', [])) !!};
 
     function showStudentName() {
         // Check screen width
@@ -84,8 +84,8 @@
 
             for (var i = 0; i < childData.length; i++) {
                 if (childData[i].id == studentId) {
-                    studentName.textContent = childData[i].name;
-                    studentName.style.display = 'block';
+                    studentName.setAttribute('data-original-title', childData[i].name);
+                    $(studentName).tooltip('show'); // Show the tooltip
                     break;
                 }
             }
@@ -96,7 +96,8 @@
         // Check screen width
         if (window.innerWidth > 768) { // Adjust the breakpoint as needed
             var studentName = document.getElementById('studentName');
-            studentName.style.display = 'none';
+            studentName.removeAttribute('data-original-title'); // Remove the title attribute
+            $(studentName).tooltip('hide'); // Hide the tooltip
         }
     }
 </script>

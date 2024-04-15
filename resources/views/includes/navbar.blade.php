@@ -72,11 +72,11 @@
 
             @if(Session::get('role_id') == '5')
             <li class="dropdown d-inline-block">
-                <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="studentName" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="{{ Session::get('picture') ? config('constants.image_url').'/'.$branch_id.'/users/images/'.Session::get('picture') : config('constants.image_url').'/common-asset/images/users/st.webp' }}" alt="user-image" class="rounded-circle admin_picture" style="width:31px;margin-bottom:4px;margin-left: -13px;margin-right: -12px;" onmouseover="showStudentName()" onmouseout="hideStudentName()">
-                    <span id="studentName" class="student-name"></span>
+                    <!-- <span id="studentName" class="student-name"></span> -->
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="studentName">
                     @forelse (Session::get('all_child', []) as $child)
                     <a class="dropdown-item responsiveAllChild" href="javascript:void(0)" data-id="{{ $child['id'] }}">
                         <i class="fe-user iconsuser"></i>
