@@ -2216,7 +2216,7 @@ return [
     "who_should_i_contact_if_i_have_any" => "本システム（Suzen）における機能や操作方法などについて、質問したい場合、どちらに問い合わせすればいいでしょうか？",
     "please_send_your_inquire" => "本メールアドレス jskl2@jskl.edu.myにてお問い合わせください。",
     "where_can_i_download_the_user" => "本システム（Suzen）のユーザーマニュアルなどはありますか？",
-    "you_can_download_the_user_manual" => "管理者ポータルのユーザーマニュアルについて、下記のリンクにてご確認いただくようにお願いいたします。",
+    "you_can_download_the_user_manual" => "保護者ポータルのユーザーマニュアルについて、下記のリンクにてご確認いただくようにお願いいたします。",
     "faq_japanese" => "日本語",
     "faq_english" => "英語",
     "enter_attendance_no" =>"出席番号を入力してください",
