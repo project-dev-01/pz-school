@@ -266,6 +266,10 @@
             width: 13.3em;
         }
     }
+    .breadcrumb-item+.breadcrumb-item::before {
+    font-family: "Material Design Icons";
+    color: #3A4265;
+}
 </style>
 @if(Session::get('locale')=="en")
 <style>
@@ -294,15 +298,41 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <!-- <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                        <li class="breadcrumb-item active">Wizard</li>
-                    </ol>-->
+            <div class="page-title-box" style="display: inline-flex; align-items: center;">
+                <div class="page-title-icon">
+                    <svg fill="#3A4265" width="20" height="20" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 402.161 402.161" xml:space="preserve">
+                        <g>
+                            <g>
+                                <g>
+                                    <path d="M201.08,49.778c-38.794,0-70.355,31.561-70.355,70.355c0,18.828,7.425,40.193,19.862,57.151
+                c14.067,19.181,32,29.745,50.493,29.745c18.494,0,36.426-10.563,50.494-29.745c12.437-16.958,19.862-38.323,19.862-57.151
+                C271.436,81.339,239.874,49.778,201.08,49.778z M201.08,192.029c-13.396,0-27.391-8.607-38.397-23.616
+                c-10.46-14.262-16.958-32.762-16.958-48.28c0-30.523,24.832-55.355,55.355-55.355s55.355,24.832,55.355,55.355
+                C256.436,151.824,230.372,192.029,201.08,192.029z"></path>
+                                    <path d="M201.08,0C109.387,0,34.788,74.598,34.788,166.292c0,91.693,74.598,166.292,166.292,166.292
+                s166.292-74.598,166.292-166.292C367.372,74.598,292.773,0,201.08,0z M201.08,317.584c-30.099-0.001-58.171-8.839-81.763-24.052
+                c0.82-22.969,11.218-44.503,28.824-59.454c6.996-5.941,17.212-6.59,25.422-1.615c8.868,5.374,18.127,8.099,27.52,8.099
+                c9.391,0,18.647-2.724,27.511-8.095c8.201-4.97,18.39-4.345,25.353,1.555c17.619,14.93,28.076,36.526,28.895,59.512
+                C259.25,308.746,231.178,317.584,201.08,317.584z M296.981,283.218c-3.239-23.483-15.011-45.111-33.337-60.64
+                c-11.89-10.074-29.1-11.256-42.824-2.939c-12.974,7.861-26.506,7.86-39.483-0.004c-13.74-8.327-30.981-7.116-42.906,3.01
+                c-18.31,15.549-30.035,37.115-33.265,60.563c-33.789-27.77-55.378-69.868-55.378-116.915C49.788,82.869,117.658,15,201.08,15
+                c83.423,0,151.292,67.869,151.292,151.292C352.372,213.345,330.778,255.448,296.981,283.218z"></path>
+                                    <path d="M302.806,352.372H99.354c-4.142,0-7.5,3.358-7.5,7.5c0,4.142,3.358,7.5,7.5,7.5h203.452c4.142,0,7.5-3.358,7.5-7.5
+                C310.307,355.73,306.948,352.372,302.806,352.372z"></path>
+                                    <path d="M302.806,387.161H99.354c-4.142,0-7.5,3.358-7.5,7.5c0,4.142,3.358,7.5,7.5,7.5h203.452c4.142,0,7.5-3.358,7.5-7.5
+                C310.307,390.519,306.948,387.161,302.806,387.161z"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+
                 </div>
-                <h4 class="page-title">{{ __('messages.student_profile') }}</h4>
+                <!--<h4 class="page-title" style="margin-left: 10px;">{{ __('messages.student_profile') }}</h4>-->
+                <ol class="breadcrumb m-0" style="font-family: 'Open Sans'; font-style: normal; font-weight: 600; font-size: 20px; letter-spacing: 0.0133em; color: #3A4265;padding-top: 15px;
+    padding-left: 10px;">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.profile') }}</a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.student_profile') }}</a></li>
+                </ol>
             </div>
         </div>
     </div>
@@ -311,7 +341,7 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <div class="card-body">
+                <div class="">
                     <form id="updateStudentProfile" method="post" action="{{ route('parent.student.update') }}" enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         <input type="hidden" name="student_id" value="{{ isset($student['id']) ? $student['id'] : ''}}">
@@ -504,7 +534,7 @@
                                     </div>
                                     @endif
 
-                                  
+
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="drp_post_code">{{ __('messages.zip_postal_code') }}<span class="text-danger">*</span></label>
@@ -573,7 +603,7 @@
                                         </div>
                                     </div> -->
 
-                                   
+
                                     @if($form_field['nationality'] == 0)
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -582,19 +612,19 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <div class="custom-control custom-checkbox" style="margin-top: 2.25rem;">
-                                                        <input type="checkbox" name="has_dual_nationality_checkbox" id="has_dual_nationality_checkbox" class="custom-control-input" {{ isset($student['dual_nationality']) ? 'checked' : '' }}>
-                                                        <label class="custom-control-label" for="has_dual_nationality_checkbox">Nationality (For dual nationality)</label>
-                                                    </div>
-                                                </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox" style="margin-top: 2.25rem;">
+                                                <input type="checkbox" name="has_dual_nationality_checkbox" id="has_dual_nationality_checkbox" class="custom-control-input" {{ isset($student['dual_nationality']) ? 'checked' : '' }}>
+                                                <label class="custom-control-label" for="has_dual_nationality_checkbox">Nationality (For dual nationality)</label>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group" id="dual_nationality_container" style="{{ isset($student['dual_nationality']) ? '' : 'display: none;' }}">
-                                                    <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
-                                                    <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" value="{{ isset($student['dual_nationality']) ? $student['dual_nationality'] : ''}}" data-parsley-trigger="change">
-                                                </div>
-                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" id="dual_nationality_container" style="{{ isset($student['dual_nationality']) ? '' : 'display: none;' }}">
+                                            <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
+                                            <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" value="{{ isset($student['dual_nationality']) ? $student['dual_nationality'] : ''}}" data-parsley-trigger="change">
+                                        </div>
+                                    </div>
                                     @endif
                                 </div>
                                 <div class="row">
@@ -700,7 +730,7 @@
                             </ul><br>
                             <div class="card-body">
                                 <div class="row">
-                                   
+
                                     @if($form_field['passport'] == 0)
                                     <input type="hidden" name="passport_old_photo" id="passport_old_photo" value="{{ isset($student['passport_photo']) ? $student['passport_photo'] : ''}}" />
                                     <div class="col-md-4">
@@ -739,7 +769,7 @@
                                             <label for="passport_expiry_date" class="error"></label>
                                         </div>
                                     </div>
-                                    
+
                                     @endif
                                     @if($form_field['visa'] == 0)
                                     <!-- <div class="col-md-4">
@@ -770,7 +800,7 @@
                                         <div class="form-group">
                                             <label for="visa_type">{{ __('messages.visa_type__for_non_malaysian') }}<span class="text-danger">*</span></label>
                                             <select id="visa_type" name="visa_type" class="form-control">
-                                                        <option value="">{{ __('messages.select_visa_type') }}</option>
+                                                <option value="">{{ __('messages.select_visa_type') }}</option>
                                                 <option value="No Require (Malaysian)" {{ isset($student['visa_type']) ? $student['visa_type'] == "No Require (Malaysian)" ? 'selected' : '' : '' }}>{{ __('messages.no_require_malaysian') }}</option>
                                                 <option value="Depedent Pass" {{ isset($student['visa_type']) ? $student['visa_type'] == "Depedent Pass" ? 'selected' : '' : '' }}>{{ __('messages.depedent_pass') }}</option>
                                                 <option value="MM2H" {{ isset($student['visa_type']) ? $student['visa_type'] == "MM2H" ? 'selected' : '' : '' }}>{{ __('messages.mm2h') }}</option>
@@ -810,7 +840,7 @@
                                         </div>
                                     </div>
                                     @endif
-                                   
+
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="japanese_association_membership_number_student">{{ __('messages.japanese_association_membership_number_student') }}<span class="text-danger">*</span></label>

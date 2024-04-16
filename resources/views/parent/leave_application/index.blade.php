@@ -72,8 +72,8 @@
             width: 14.3em;
         }
     }
-    @media screen and (min-device-width: 768px) and (max-device-width: 1200px)
-     {
+
+    @media screen and (min-device-width: 768px) and (max-device-width: 1200px) {
         .dt-buttons {
             margin-left: 56px;
         }
@@ -89,15 +89,19 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <!-- <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                    </ol>
-                </div> -->
-                <h4 class="page-title">{{ __('messages.leave_application') }}</h4>
+            <div class="page-title-box" style="display: inline-flex; align-items: center;">
+                <div class="page-title-icon">
+                    <svg class="svg-icon" width="20" height="20" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M802.133333 567.466667c-123.733333 0-221.866667 98.133333-221.866666 221.866666s98.133333 221.866667 221.866666 221.866667 221.866667-98.133333 221.866667-221.866667-98.133333-221.866667-221.866667-221.866666z m0 388.266666c-89.6 0-162.133333-72.533333-162.133333-162.133333s72.533333-162.133333 162.133333-162.133333 162.133333 72.533333 162.133334 162.133333-72.533333 162.133333-162.133334 162.133333z" fill="#3A4265"></path>
+                        <path d="M832 780.8v-102.4c0-17.066667-12.8-29.866667-29.866667-29.866667-17.066667 0-29.866667 12.8-29.866666 29.866667v115.2c0 8.533333 4.266667 12.8 8.533333 21.333333l59.733333 59.733334c4.266667 4.266667 12.8 8.533333 21.333334 8.533333s12.8-4.266667 21.333333-8.533333c12.8-12.8 12.8-29.866667 0-42.666667l-51.2-51.2z" fill="#3A4265"></path>
+                        <path d="M524.8 789.333333c0-72.533333 25.6-136.533333 72.533333-183.466666v-166.4h170.666667v81.066666c12.8 0 21.333333-4.266667 34.133333-4.266666 17.066667 0 34.133333 0 51.2 4.266666V226.133333c0-72.533333-55.466667-128-128-128h-85.333333v-42.666666c0-25.6-17.066667-42.666667-42.666667-42.666667s-42.666667 17.066667-42.666666 42.666667v42.666666H298.666667v-42.666666c0-25.6-17.066667-42.666667-42.666667-42.666667s-42.666667 17.066667-42.666667 42.666667v42.666666H128c-72.533333 0-128 55.466667-128 128v597.333334c0 72.533333 55.466667 128 128 128h448c-29.866667-46.933333-51.2-102.4-51.2-162.133334zM85.333333 226.133333c0-25.6 17.066667-42.666667 42.666667-42.666666h85.333333v42.666666c0 25.6 17.066667 42.666667 42.666667 42.666667s42.666667-17.066667 42.666667-42.666667v-42.666666h256v42.666666c0 25.6 17.066667 42.666667 42.666666 42.666667s42.666667-17.066667 42.666667-42.666667v-42.666666h85.333333c25.6 0 42.666667 17.066667 42.666667 42.666666v128H85.333333v-128z m170.666667 640H128c-25.6 0-42.666667-17.066667-42.666667-42.666666v-132.266667h170.666667v174.933333z m0-260.266666H85.333333v-166.4h170.666667v166.4z m256 260.266666H341.333333v-174.933333h170.666667v174.933333z m0-260.266666H341.333333v-166.4h170.666667v166.4z" fill="#3A4265"></path>
+                    </svg>
+                </div>
+                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.leave_application') }}</h4>
             </div>
         </div>
     </div>
+
     <!--General Details -->
     <div class="row">
         <div class="col-xl-12">
@@ -186,7 +190,7 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
 
                         </div>
                         <!--3st row-->
@@ -202,7 +206,7 @@
                                             <span id="file_name"></span>
                                         </div>
                                     </div>
-                                   
+
 
                                 </div>
                             </div>
@@ -214,12 +218,12 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <button type="button" class="btn form-control" style="background-color: gray;color:white;white-space: nowrap;display: inline-block;overflow: hidden;text-overflow: ellipsis;" data-toggle="modal"  id="studentAllReasons">{{ __('messages.click_here_for') }}</button>
+                                    <button type="button" class="btn form-control" style="background-color: gray;color:white;white-space: nowrap;display: inline-block;overflow: hidden;text-overflow: ellipsis;" data-toggle="modal" id="studentAllReasons">{{ __('messages.click_here_for') }}</button>
                                     <!-- <input type="button" class="form-control" id="btnOpenDialog" value="Click Here For Reason Details" /> -->
                                 </div>
                             </div>
-                            
-                          
+
+
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">

@@ -8,7 +8,7 @@
             @if(Session::get('role_id') != '1')
             <li class="d-lg-inline-block schl">
                 <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="tooltip" title="{{ Session::get('school_name') }}" href="javascript:void(0)" role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="{{ config('constants.image_url').'/common-asset/images/'.config('constants.school_image') }}" class="mr-2 rounded-circle schllogo" alt="{{ Session::get('school_name') }}" style="margin-bottom: 2px;">
+                    <img src="{{ config('constants.image_url').'/common-asset/images/'.config('constants.school_image') }}" class="mr-2 rounded-circle schllogo" alt="{{ Session::get('school_name') }}" style="margin-bottom: 4px;">
                 </a>
             </li>
             @endif
@@ -47,7 +47,7 @@
 
 
             @if(Session::get('role_id') == '2' || Session::get('role_id') == '4')
-            <li class="dropdown notification-list topbar-dropdown">
+            <li class="dropdown notification-list topbar-dropdown" style="margin-top: 1px;">
                 <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <i class="mdi mdi-calendar-clock font-22"></i>
                     <span class="badge badge-danger rounded-circle noti-icon-badge remainder-badge-count">0</span>
@@ -185,13 +185,13 @@
             <li class="dropdown d-lg-inline-block topbar-dropdown" style="margin-right: -6px;">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     @if(app()->getLocale() == 'en')
-                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/USA.webp' }}" alt="user-image" style="height: 24px;width: 27px;margin-bottom: 2px;">
+                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/USA.webp' }}" alt="user-image" style="height: 25px;width: 27px;margin-bottom: 3px;">
                     @endif
                     @if(app()->getLocale() == 'japanese')
-                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/JPN.webp' }}" alt="user-image" style="height: 24px;width: 27px;margin-bottom: 2px;">
+                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/JPN.webp' }}" alt="user-image" style="height: 25px;width: 27px;margin-bottom: 3px;">
                     @endif
                     @if(app()->getLocale() == 'malay')
-                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/MAL.webp' }}" alt="user-image" style="height: 24px;width: 27px;margin-bottom: 2px;">
+                    <img src="{{ config('constants.image_url').'/common-asset/images/flags/MAL.webp' }}" alt="user-image" style="height: 25px;width: 27px;margin-bottom: 3px;">
                     @endif
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">

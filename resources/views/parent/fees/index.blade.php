@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' .  __('messages.fees') . '')
+@section('title',' ' . __('messages.fees') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
@@ -19,11 +19,29 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <h4 class="page-title">{{ __('messages.fees_details') }}</h4>
+            <div class="page-title-box" style="display: inline-flex; align-items: center;">
+                <div class="page-title-icon">
+                    <svg width="20" height="20" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_354_1194)">
+                            <rect x="12.8" y="10.4097" width="6.4" height="4.8" rx="1" fill="#3A4265" />
+                            <rect x="12.8" y="16.8096" width="11.2" height="3.2" rx="1" fill="#3A4265" />
+                            <rect x="12.8" y="21.6094" width="8" height="3.2" rx="1" fill="#3A4265" />
+                            <rect y="0.80957" width="11.2" height="24" rx="1" fill="#3A4265" />
+                            <rect x="12.8" y="0.80957" width="11.2" height="3.2" rx="1" fill="#3A4265" />
+                            <rect x="12.8" y="5.60938" width="11.2" height="3.2" rx="1" fill="#3A4265" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_354_1194">
+                                <rect width="24" height="24" fill="white" transform="translate(0 0.80957)" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.fees_details') }}</h4>
             </div>
         </div>
     </div>
+
     <!-- end page title -->
     <div class="row">
         <div class="col-12">
@@ -82,7 +100,8 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">{{ __('messages.student_fees_allocation') }}<h4>
+                        <h4 class="navv">{{ __('messages.student_fees_allocation') }}
+                            <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -141,7 +160,7 @@
     var feesInvoice = '{{ route("parent.fees.invoice", [":id",""]) }}';
     // localStorage variables
     var fees_storage = localStorage.getItem('parent_fees_details');
-    
+
     var year_id = "{{ Session::get('academic_session_id') }}";
 </script>
 

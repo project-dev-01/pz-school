@@ -33,15 +33,17 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <!--<ol class="breadcrumb m-0">
-                    </ol>-->
+            <div class="page-title-box" style="display: inline-flex; align-items: center;">
+                <div class="page-title-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="20" height="20" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
                 </div>
-                <h4 class="page-title">{{ __('messages.analytic_report') }}</h4>
+                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.analytic_report') }}</h4>
             </div>
         </div>
     </div>
+
 
     <div class="row">
         <div class="col-xl-12">

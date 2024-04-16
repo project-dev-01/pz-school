@@ -22,14 +22,18 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <!-- <div class="page-title-right">
-                    
-                </div> -->
-                <h4 class="page-title">{{ __('messages.exam_schedule') }}</h4>
+            <div class="page-title-box" style="display: inline-flex; align-items: center;">
+                <div class="page-title-icon" style="margin-top: 4px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 28 28" fill="#3A4265">
+                        <path fill-rule="evenodd" d="M20.001 2H4C2.897 2 2 2.897 2 4v16c0 1.103.897 2 2 2h16.001c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zm-1 16H5V8h14v10zm0-12H5V5h14v1zm-6 5h4v2h-4v-2z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.exam_schedule') }}</h4>
             </div>
         </div>
     </div>
+
+
     <!-- end page title -->
     <div class="row">
         <div class="col-xl-12">
@@ -37,7 +41,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <h4 class="nav-link">
-                        {{ __('messages.schedule_list') }} 
+                            {{ __('messages.schedule_list') }}
                             <h4>
                     </li>
                 </ul><br>

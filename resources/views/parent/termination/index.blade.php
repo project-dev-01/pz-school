@@ -63,6 +63,10 @@
             display: flex;
         }
     }
+    .breadcrumb-item+.breadcrumb-item::before {
+    font-family: "Material Design Icons";
+    color: #3A4265;
+}
 </style> 
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
@@ -70,19 +74,28 @@
 
     <!-- start page title -->
     <div class="row">
-        <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <!--<ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                        <li class="breadcrumb-item active">Wizard</li>
-                    </ol>-->
-                </div>
-                <h4 class="page-title">{{ __('messages.withdrawal_list') }}</h4>
+    <div class="col-12">
+        <div class="page-title-box" style="display: inline-flex; align-items: center;">
+            <div class="page-title-icon">
+                <svg width="20" height="20" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M40 16.3977V6C40 4.89543 39.1046 4 38 4H10C8.89543 4 8 4.89543 8 6V42C8 43.1046 8.89543 44 10 44H20" stroke="#3A4265" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M16 14H29" stroke="#3A4265" stroke-width="4" stroke-linecap="round"></path>
+                    <path d="M16 21H21" stroke="#3A4265" stroke-width="4" stroke-linecap="round"></path>
+                    <path d="M34 44C28.4772 44 24 39.5228 24 34C24 28.4772 28.4772 24 34 24C39.5228 24 44 28.4772 44 34C44 39.5228 39.5228 44 34 44Z" stroke="#3A4265" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M27 27L41 41" stroke="white" stroke-width="4" stroke-linecap="round"></path>
+                    <path d="M24 34C24 28.4772 28.4772 24 34 24" stroke="#3A4265" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M34 44C39.5228 44 44 39.5228 44 34" stroke="#3A4265" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
             </div>
+            <!--<h4 class="page-title" style="margin-left: 10px;">{{ __('messages.withdrawal_list') }}</h4>-->
+            <ol class="breadcrumb m-0 responsivebc">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.withdrawal') }}</a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.withdrawal_list') }}</a></li>
+                </ol>
         </div>
     </div>
+</div>
+
     <!-- end page title -->
 
 

@@ -128,14 +128,13 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">{{ __('messages.list') }}</li>
-                        <!-- <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li> -->
-                    </ol>
+            <div class="page-title-box" style="display: inline-flex; align-items: center;">
+                <div class="page-title-icon">
+                    <svg class="svg-icon" style="width: 20px; height: 20px; fill: #3A4265;" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M513.706667 106.666667L406.613333 213.333333h213.333334l-106.24-106.666666M170.666667 298.666667v554.666666h682.666666V298.666667H170.666667m341.333333-298.666667l213.333333 213.333333h128a85.333333 85.333333 0 0 1 85.333334 85.333334v554.666666a85.333333 85.333333 0 0 1-85.333334 85.333334H170.666667a85.333333 85.333333 0 0 1-85.333334-85.333334V298.666667a85.333333 85.333333 0 0 1 85.333334-85.333334h128l213.333333-213.333333M298.666667 768v-170.666667h213.333333v170.666667H298.666667m298.666666-42.666667v-298.666666h170.666667v298.666666h-170.666667m-341.333333-213.333333V384h213.333333v128H256z" />
+                    </svg>
                 </div>
-                <h4 class="page-title">{{ __('messages.buletin') }}</h4>
+                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.buletin') }}</h4>
             </div>
         </div>
     </div>
@@ -143,8 +142,8 @@
     <!-- Add the search input here -->
     <div class="card-box">
         <div class="row">
-            <div class="col-xl-3">
-                <label for="pdfSearchInput">{{ __('messages.search') }}</label>
+            <div class="col-lg-3">
+                <label for="employee_type">{{ __('messages.search') }}</label>
                 <input type="text" class="form-control" id="pdfSearchInput" placeholder="{{ __('messages.search_pdf_files') }}">
             </div>
         </div>
@@ -158,71 +157,71 @@
                             <h4>
                     </li>
                 </ul><br>
-                        <ul class="nav nav-pills navtab-bg nav-justified" id="myTabs" style="padding: 0px 20px 0px 20px;">
-                            <li class="nav-item">
-                                <a href="#home1" id="tab1" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                    {{ __('messages.buletin') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#profile1" id="tab2" data-toggle="tab" aria-expanded="true" class="nav-link active">
-                                    {{ __('messages.imp_buletin') }}
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane" id="home1">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="table-responsive">
-                                                <table class="table w-100 nowrap" id="parent-bulletin-table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>{{ __('messages.title') }}</th>
-                                                            <th>{{ __('messages.file') }}</th>
-                                                            <th>{{ __('messages.action') }}</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!-- Your Bulletin Board table content here -->
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div> <!-- end table-responsive-->
-                                    </div> <!-- end col-->
-                                </div>
-                            </div> <!-- end card-->
-
-
-                            <div class="tab-pane show active" id="profile1">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="table-responsive">
-                                                <table class="table w-100 nowrap" id="parent-bulletin-imp-table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>{{ __('messages.title') }}</th>
-                                                            <th>{{ __('messages.file') }}</th>
-                                                            <th>{{ __('messages.action') }}</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!-- Your Bulletin Board table content here -->
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div> <!-- end table-responsive-->
-                                    </div> <!-- end col-->
-                                </div>
-                            </div>
+                <ul class="nav nav-pills navtab-bg nav-justified" id="myTabs" style="padding: 0px 20px 0px 20px;">
+                    <li class="nav-item">
+                        <a href="#home1" id="tab1" data-toggle="tab" aria-expanded="false" class="nav-link">
+                            {{ __('messages.buletin') }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#profile1" id="tab2" data-toggle="tab" aria-expanded="true" class="nav-link active">
+                            {{ __('messages.imp_buletin') }}
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane" id="home1">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table w-100 nowrap" id="parent-bulletin-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>{{ __('messages.title') }}</th>
+                                                    <th>{{ __('messages.file') }}</th>
+                                                    <th>{{ __('messages.action') }}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Your Bulletin Board table content here -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div> <!-- end table-responsive-->
+                            </div> <!-- end col-->
                         </div>
-        </div> <!-- end card-box -->
-    </div> <!-- end col -->
-</div> <!-- end card-box -->
+                    </div> <!-- end card-->
+
+
+                    <div class="tab-pane show active" id="profile1">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table w-100 nowrap" id="parent-bulletin-imp-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>{{ __('messages.title') }}</th>
+                                                    <th>{{ __('messages.file') }}</th>
+                                                    <th>{{ __('messages.action') }}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Your Bulletin Board table content here -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div> <!-- end table-responsive-->
+                            </div> <!-- end col-->
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end card-box -->
+        </div> <!-- end col -->
+    </div> <!-- end card-box -->
 </div> <!-- end col -->
 </div>
 <div class="modal fade" id="fileModal" tabindex="-1" aria-labelledby="fileModalLabel" aria-hidden="true">
