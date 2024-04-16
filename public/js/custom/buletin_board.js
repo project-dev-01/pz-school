@@ -51,18 +51,23 @@ $(function () {
             title: "required",
             discription: "required",
             target_user: "required",
-            file: "required",
+            
         }
     });
     $('#buletinForm').on('submit', function (e) {
         e.preventDefault();
         var form = this;
         var fileName = $("#file").val();
-        var ext = fileName.split('.').pop().toLowerCase();
 
-        if ($.inArray(ext, ['pdf']) === -1) {
-            $(form).find('span.file_error').text('Please select a PDF file.');
-            
+        // Check if fileName is not empty
+        if (fileName.trim() !== '') {
+            var ext = fileName.split('.').pop().toLowerCase();
+        
+            // Validate file extension only if fileName is not empty and is a PDF file
+            if ($.inArray(ext, ['pdf']) === -1) {
+                $(form).find('span.file_error').text('Please select a PDF file.');
+                // You can optionally return false here to prevent form submission
+            }
         }
         if ($('#publish').is(":checked")) {
             var date = $("#date").val().trim(); // Trim to remove leading/trailing spaces
@@ -99,7 +104,7 @@ $(function () {
             var discription = $("#discription").val();
             var file = $('#file')[0].files[0];
             console.log(file);
-            var publish = $("#publish").val();
+           // var publish = $("#publish").val();
             var add_to_dash = $("#add_to_dash").val();
             var date = $("#date").val();
             var endDate = $("#end_date").val();
@@ -121,7 +126,7 @@ $(function () {
             formData.append('title', title);
             formData.append('discription', discription);
             formData.append('target_user', target_user);
-            formData.append('publish', publish);
+           // formData.append('publish', publish);
             formData.append('add_to_dash', add_to_dash);
             formData.append('class_id', class_id);
             formData.append('section_id', section_id);
@@ -246,7 +251,7 @@ $(function () {
             var discription = $("#descriptions").val();
             var file = $('#files')[0].files[0];
             //console.log(file);
-            var publish = $("#publishs").val();
+            //var publish = $("#publishs").val();
             var date = $("#publish_dates").val();
             var publish_end_dates = $("#publish_end_dates").val();
             var target_user = [];
@@ -264,7 +269,7 @@ $(function () {
             formData.append('title', title);
             formData.append('discription', discription);
             formData.append('target_user', target_user);
-            formData.append('publish', publish);
+           // formData.append('publish', publish);
             formData.append('date', date);
             formData.append('publish_end_dates',publish_end_dates);
             formData.append('oldfile', $('#oldfile').text());
@@ -418,11 +423,17 @@ $(function () {
                 {
                     data: 'file',
                     name: 'file',
-                    render: function (data, type, full, meta) {
-                        // Assuming 'file' contains the file path or link
-                        // You can customize the link or action based on your requirements
-                        return '<a href="' + image_url + data + '" target="_blank">' + data + '</a>';
-                    } 
+                    render: function(data, type, full, meta) {
+                        // Check if data is not null and not empty
+                        if (data && data.trim() !== '') {
+                            // Assuming 'image_url' contains the base URL for file links
+                            var fileLink = image_url + data;
+                            return '<a href="' + fileLink + '" target="_blank">' + data + '</a>';
+                        } else {
+                            // Return empty string if data is null or empty
+                            return '';
+                        }
+                    }
                 },
                 {
                     data: 'target_user',
@@ -783,11 +794,11 @@ $(function () {
             $('#empDepartments').val(department_idValues).trigger('change');
             
             // Check the checkbox based on the database value
-            if (data.data.publish === 1) {
-                $('#publishs').prop('checked', true);
-            } else {
-                $('#publishs').prop('checked', false);
-            }
+            // if (data.data.publish === 1) {
+            //     $('#publishs').prop('checked', true);
+            // } else {
+            //     $('#publishs').prop('checked', false);
+            // }
             $('.editBuletin').modal('show');
         }, 'json');
         //console.log(id);

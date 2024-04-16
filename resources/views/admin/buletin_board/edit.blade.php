@@ -93,12 +93,12 @@
                           </select>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <div class="custom-control custom-checkbox form-check">
                             <input type="checkbox" class="custom-control-input" name="publishs" id="publishs">
                             <label class="custom-control-label" for="publish">{{ __('messages.publish') }}</label>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="text">{{ __('messages.publish_date') }}<span class="text-danger">*</span></label>
                         <div class="input-group input-group-merge">

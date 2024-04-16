@@ -10214,6 +10214,9 @@ class AdminController extends Controller
         $data = [
             'user_id' => $user_id,
         ];
+        $academic_session_id = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
         $usernames = Helper::GETMethodWithData(config('constants.api.buletin_board_usernames'), $data);
         $getClasses = Helper::GetMethod(config('constants.api.class_list'));
         $emp_department = Helper::PostMethod(config('constants.api.emp_department'), []);
@@ -10291,10 +10294,15 @@ class AdminController extends Controller
         // Concatenate the admin ID with the target users
         $rollid_target_user = $adminId . ',' . $targetUserString;
         $file = $request->file('file');
-        $path = $file->path();
-        $data = file_get_contents($path);
-        $base64 = base64_encode($data);
-        $extension = $file->getClientOriginalExtension();
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        } else {
+            $base64 = null;
+            $extension = null;
+        }
         $data = [
             'title' => $request->title,
             'description' => $request->discription,
@@ -10306,7 +10314,7 @@ class AdminController extends Controller
             'student_id' =>  $request->student_id,
             'parent_id' =>  $request->parent_id,
             'department_id' => $request->empDepartment,
-            'publish' => $request->publish,
+           // 'publish' => $request->publish,
             'add_to_dash' => $request->add_to_dash,
             'publish_date' => $request->date,
             'publish_end_date' => $request->endDate,
@@ -10394,7 +10402,7 @@ class AdminController extends Controller
             'file_extension' => $extension,
             'oldfile' => $request->oldfile,
             'target_user' => $rollid_target_user,
-            'publish' => $request->publish,
+           // 'publish' => $request->publish,
             'publish_date' => $request->date,
             'publish_end_dates' => $request->publish_end_dates,
             'updated_by' => session()->get('ref_user_id')

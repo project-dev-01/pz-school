@@ -21,7 +21,7 @@
                         <span class="text-danger error-text discription_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="name">{{ __('messages.file') }}<span class="text-danger">*</span> {{ __('messages.pdf_file_only')}}</label>
+                        <label for="name">{{ __('messages.file') }} {{ __('messages.pdf_file_only')}}</label>
                         <input type="file" id="file" name="file" class="form-control" placeholder="{{ __('messages.enter_file') }}" accept=".pdf">
                         <span class="text-danger error-text file_error"></span>
                     </div>
@@ -89,14 +89,14 @@
                             <label class="custom-control-label" for="add_to_dash">{{ __('messages.add_to_dash') }}</label>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <div class="custom-control custom-checkbox form-check">
                             <input type="checkbox" class="custom-control-input" name="publish" id="publish" checked>
                             <label class="custom-control-label" for="publish">{{ __('messages.publish') }}</label>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group">
-                        <label for="date">{{ __('messages.publish_date') }}</label>
+                        <label for="date">{{ __('messages.publish_date') }}<span class="text-danger">*</span></label>
                         <div class="input-group input-group-merge">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
