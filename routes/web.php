@@ -198,11 +198,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::get('/failed_logout', [AuthController::class, 'failed_logout'])->name('admin.failed_logout');
 
-    Route::group(['middleware' => ['isAdmin', 'logroute']], function () {
+    Route::group(['middleware' => ['isAdmin', 'logroute','Checkmenuaccess']], function () {
         Route::post('/staff_attendance/excel', [AdminController::class, 'staffAttendanceExcel'])->name('admin.staff_attendance.excel');
         Route::post('/student_list/excel', [AdminController::class, 'StudentListExcel'])->name('admin.student_list.excel');
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-
+        Route::get('page/403', [AdminController::class, 'page403'])->name('admin.page.403');
         // application details
         Route::get('application', [AdminController::class, 'applicationIndex'])->name('admin.application.index');
         Route::get('application/list', [AdminController::class, 'applicationList'])->name('admin.application.list');
@@ -1068,7 +1068,7 @@ Route::group(['prefix' => 'staff'], function () {
 
     Route::group(['middleware' => ['isStaff', 'logroute']], function () {
         Route::get('/dashboard', [StaffController::class, 'index'])->name('staff.dashboard');
-
+        Route::get('page/403', [StaffController::class, 'page403'])->name('staff.page.403');
         // Forum routes
         Route::get('forum/index', [StaffController::class, 'forumIndex'])->name('staff.forum.index');
         Route::get('forum/page-single-topic', [StaffController::class, 'forumPageSingleTopic'])->name('staff.forum.page-single-topic');
@@ -1293,6 +1293,7 @@ Route::group(['prefix' => 'teacher'], function () {
     Route::post('/logout', [AuthController::class, 'logoutTeacher'])->name('teacher.logout');
     Route::group(['middleware' => ['isTeacher', 'logroute']], function () {
         Route::get('/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
+        Route::get('page/403', [TeacherController::class, 'page403'])->name('teacher.page.403');
         // Test Result Rotes
         Route::get('test_result', [TeacherController::class, 'testResult'])->name('teacher.test_result');
         Route::get('exam_results/paper_wise_result', [TeacherController::class, 'paperWiseResult'])->name('teacher.paper_wise_result');
@@ -1478,8 +1479,9 @@ Route::group(['prefix' => 'parent'], function () {
     Route::get('/login', [AuthController::class, 'parentLoginForm'])->name('parent.login');
     Route::any('/authenticate', [AuthController::class, 'authenticateParent'])->name('parent.authenticate');
     Route::post('/logout', [AuthController::class, 'logoutParent'])->name('parent.logout');
-    Route::group(['middleware' => ['isParent', 'logroute']], function () {
+    Route::group(['middleware' => ['isParent', 'logroute','Checkmenuaccess']], function () {
         Route::get('/dashboard', [ParentController::class, 'index'])->name('parent.dashboard');
+        Route::get('page/403', [ParentController::class, 'page403'])->name('teacher.page.403');
         // Termination routes
         Route::get('termination/index', [ParentController::class, 'termination'])->name('parent.termination.index');
         Route::get('termination/create', [ParentController::class, 'createTermination'])->name('parent.termination.create');
@@ -1504,7 +1506,7 @@ Route::group(['prefix' => 'parent'], function () {
         Route::post('update-profile-info', [ParentController::class, 'updateProfileInfo'])->name('parent.settings.updateProfileInfo');
         // faq        
         Route::get('faq/index', [ParentController::class, 'faqIndex'])->name('parent.faq.Index');
-
+        
         //schedule routes  
         Route::get('exam/schedule', [ParentController::class, 'examSchedule'])->name('parent.exam.schedule');
 
@@ -1614,6 +1616,7 @@ Route::group(['prefix' => 'student'], function () {
     Route::post('/logout', [AuthController::class, 'logoutStudent'])->name('student.logout');
     Route::group(['middleware' => ['isStudent', 'logroute']], function () {
         Route::get('/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
+        Route::get('page/403', [StudentController::class, 'page403'])->name('student.page.403');
         Route::post('add_daily_report_remarks', [StudentController::class, 'addDailyReportRemarks'])->name('student.classroom.add_daily_report_remarks');
         // Homework routes
         Route::get('homework/homeworklist', [StudentController::class, 'homeworklist'])->name('student.homework');

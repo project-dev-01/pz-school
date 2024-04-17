@@ -885,4 +885,8 @@ class StudentController extends Controller
             ->rawColumns(['publish', 'actions'])
             ->make(true);
     }
+    public function page403(Request $request)
+    {
+        return view('student.dashboard.403');
+    }
 }

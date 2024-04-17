@@ -2352,4 +2352,8 @@ class TeacherController extends Controller
         $response = Helper::PostMethod(config('constants.api.student_interview_update'), $data);
         return $response;
     }
+    public function page403(Request $request)
+    {
+        return view('teacher.dashboard.403');
+    }
 }

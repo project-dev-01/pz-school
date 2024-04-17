@@ -2498,4 +2498,8 @@ class ParentController extends Controller
         $page = Helper::PostMethod(config('constants.api.getschoolroleaccess'), $pagedata);
         return $page;
     }
+    public function page403(Request $request)
+    {
+        return view('admin.dashboard.403');
+    }
 }
