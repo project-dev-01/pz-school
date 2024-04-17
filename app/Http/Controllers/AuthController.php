@@ -1188,28 +1188,46 @@ class AuthController extends Controller
     {
         try {
 
-            session()->pull('role_id');
-            session()->pull('token');
-            session()->pull('picture');
-            session()->pull('name');
-            session()->pull('email');
-            session()->pull('role_name');
-            session()->pull('user_id');
-            session()->pull('branch_id');
-            session()->pull('session_id');
-            session()->pull('ref_user_id');
-            session()->pull('student_id');
-            session()->pull('school_name');
-            session()->pull('school_logo');
-            session()->pull('all_child');
-            session()->pull('academic_session_id');
+            // session()->pull('role_id');
+            // session()->pull('token');
+            // session()->pull('picture');
+            // session()->pull('name');
+            // session()->pull('email');
+            // session()->pull('role_name');
+            // session()->pull('user_id');
+            // session()->pull('branch_id');
+            // session()->pull('session_id');
+            // session()->pull('ref_user_id');
+            // session()->pull('student_id');
+            // session()->pull('school_name');
+            // session()->pull('school_logo');
+            // session()->pull('all_child');
+            // session()->pull('academic_session_id');
+
+            session()->forget([
+                'role_id',
+                'token',
+                'picture',
+                'name',
+                'email',
+                'role_name',
+                'user_id',
+                'branch_id',
+                'session_id',
+                'ref_user_id',
+                'student_id',
+                'school_name',
+                'school_logo',
+                'all_child',
+                'academic_session_id'
+            ]);
             // session()->pull('password_changed_at');
             $defalutLang = session()->get('locale');
-            $req->session()->flush();
+            // $req->session()->flush();
             // $req->session()->put('locale', $defalutLang);
             $hour = time() + 3600 * 24 * 30;
             Cookie::queue(Cookie::make('locale', $defalutLang, $hour));
-            // Helper::GetMethod(config('constants.api.logout'));
+            Helper::GetMethod(config('constants.api.logout'));
         } catch (\Exception $e) {
 
             // CSRF token mismatch occurred, handle the error
