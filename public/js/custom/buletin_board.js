@@ -162,10 +162,15 @@ $(function () {
     $(".add_class_name").on('change', function (e) {
         e.preventDefault();
         var Selector = '.buletinForm';
-        var class_id = $(this).val();
-        var sectionID = "";
-        if (class_id) {
-            sectionsAllocation(class_id, sectionID);
+        
+        var selectedClassIds = $(this).val();
+        
+        if (selectedClassIds && selectedClassIds.length > 0) {
+            // Loop through each selected class ID
+            $.each(selectedClassIds, function(index, class_id) {
+                var sectionID = ""; // Initialize section ID (you can customize this based on your needs)
+                sectionsAllocation(class_id, sectionID);
+            });
         }
     });
     function sectionsAllocation(class_id, sectionID)
@@ -590,15 +595,18 @@ $(function () {
             $('#department').show();
             $('#student').show();
             $('#parentss').show();
+            $('#selectionLegend').text('Parent Student Section');
         }else if (selectedOptions && selectedOptions.includes('4') && selectedOptions.includes('5')){
             $('#class').show();
             $('#department').show();
             $('#parentss').show();
+            $('#selectionLegend').text('Parent Section');
             $('#student').hide();
         }else if (selectedOptions && selectedOptions.includes('5') && selectedOptions.includes('6')){
             $('#class').show();
             $('#student').show();
             $('#parentss').show();
+            $('#selectionLegend').text('Parent Student Section');
             $('#department').hide();
         }else if (selectedOptions && selectedOptions.includes('4')) {
             // Hide the other dropdown and show class dropdown
@@ -606,12 +614,14 @@ $(function () {
             $('#class').hide();
             $('#student').hide();
             $('#parentss').hide();
+            
         }else if (selectedOptions && selectedOptions.includes('5')) {
             // Hide the other dropdown and show class dropdown
             $('#department').hide();
             $('#class').show();
             $('#student').hide();
              $('#parentss').show();
+             $('#selectionLegend').text('Parent Section');
              
         }else if (selectedOptions && selectedOptions.includes('6')) {
             // Hide the other dropdown and show class dropdown
@@ -619,6 +629,7 @@ $(function () {
             $('#class').show();
             $('#student').show();
             $('#parentss').hide();
+            $('#selectionLegend').text('Student Section');
         }else {
             // Show class dropdown and hide the other dropdown
             $('#class').hide();

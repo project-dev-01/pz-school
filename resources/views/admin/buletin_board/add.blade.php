@@ -37,51 +37,59 @@
                         </select>
                         <span class="text-danger error-text target_user_error"></span>
                     </div>
-                    <div id="class">
-                        <div class="form-group">
-                            <label for="changeClassName"> {{ __('messages.grade') }}</label>
-                            <select id="changeClassName" class="form-control add_class_name" name="class_id">
-                                <option value="">{{ __('messages.select_grade') }}</option>
-                                @forelse ($classDetails as $cla)
-                                    <option value="{{ $cla['id'] }}">{{ $cla['name'] }}</option>
-                                @empty
-                                @endforelse
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="filtersectionID"> {{ __('messages.class') }}</label>
-                            <select id="filtersectionID" class="form-control" name="section_id">
-                                <option value="">{{ __('messages.select_class') }}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div id="student" data-value="student" >
-                        <div class="form-group">
-                            <label for="student_id">{{ __('messages.student') }}</label>
-                            <select id="student_id" class="form-control" name="student_id">
-                                <option value="">{{ __('messages.select_student') }}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div id="parentss" data-value="parent">
-                        <div class="form-group">
-                            <label for="parent_id">{{ __('messages.parent') }}</label>
-                            <select id="parent_id" class="form-control" name="parent_id">
-                                <option value="">{{ __('messages.select_parent') }}</option>
-                            </select>
-                        </div>
-                    </div>
+                    <fieldset style="margin: 0 0 20px 0; border: 1px solid #ccc;" id="class">
+
+                        <legend id="selectionLegend" style="margin-left: 1em;width: 144px;font-weight: 600;font-size: 13px;"></legend>
+                            <div >
+                                <div class="form-group p-1">
+                                    <label for="changeClassName"> {{ __('messages.grade') }}</label>
+                                    <select id="changeClassName" class="form-control add_class_name select2-multiple" data-toggle="select2" multiple="multiple" name="class_id[]">
+                                        <option value="">{{ __('messages.select_grade') }}</option>
+                                        @forelse ($classDetails as $cla)
+                                            <option value="{{ $cla['id'] }}">{{ $cla['name'] }}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                                <div class="form-group p-1">
+                                    <label for="filtersectionID"> {{ __('messages.class') }}</label>
+                                    <select id="filtersectionID" class="form-control" name="section_id">
+                                        <option value="">{{ __('messages.select_class') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="student" data-value="student" >
+                                <div class="form-group p-1">
+                                    <label for="student_id">{{ __('messages.student') }}</label>
+                                    <select id="student_id" class="form-control" name="student_id">
+                                        <option value="">{{ __('messages.select_student') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="parentss" data-value="parent">
+                                <div class="form-group p-1">
+                                    <label for="parent_id">{{ __('messages.parent') }}</label>
+                                    <select id="parent_id" class="form-control" name="parent_id">
+                                        <option value="">{{ __('messages.select_parent') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
                     <div id='department'>
-                        <div class="form-group">
-                            <label for="department_id">{{ __('messages.department') }}</label>
-                            <select class="form-control select2-multiple" data-toggle="select2" id="empDepartment" name="department_id" multiple="multiple" data-placeholder="{{ __('messages.choose_department') }}">
-                                <option value="">{{ __('messages.choose_department') }}</option>
-                                 @forelse($emp_department as $r)
-                                    <option value="{{$r['id']}}">{{$r['name']}}</option>
-                                 @empty
-                                 @endforelse
-                          </select>
-                        </div>
+                        <fieldset style="margin: 0 0 20px 0; border: 1px solid #ccc;">
+
+                            <legend style="margin-left: 1em;width: 100px;font-weight: 600;font-size: 13px;">Teacher Section</legend>
+                            <div class="form-group p-1">
+                                <label for="department_id">{{ __('messages.department') }}</label>
+                                <select class="form-control select2-multiple" data-toggle="select2" id="empDepartment" name="department_id" multiple="multiple" data-placeholder="{{ __('messages.choose_department') }}">
+                                    <option value="">{{ __('messages.choose_department') }}</option>
+                                    @forelse($emp_department as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                    @empty
+                                    @endforelse
+                            </select>
+                            </div>
+                            </fieldset>
                     </div>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox form-check">
@@ -115,7 +123,7 @@
                                     <span class="far fa-calendar-alt"></span>
                                 </div>
                             </div>
-                            <input type="text" class="form-control datepicker" id="end_date" name="end_date" aria-describedby="inputGroupPrepend">
+                            <input type="text" class="form-control datepicker" id="end_date" name="end_date" value="{{ $academic_year + 1 }}-03-31" aria-describedby="inputGroupPrepend">
                         </div>
                         <span class="text-danger error-text end_date_error"></span>
                     </div>
