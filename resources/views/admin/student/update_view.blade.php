@@ -331,7 +331,7 @@
                     </div> <!-- end col -->
                     <div class="col-lg-7">
                         <div class="pl-xl-3 mt-3 mt-xl-0">
-                            <h1 class="mb-3">{{ isset($student['first_name']) ? $student['first_name'] : ''}} {{ isset($student['last_name']) ? $student['last_name'] : ''}}</h5>
+                            <h1 class="mb-3">{{ isset($student['last_name']) ? $student['last_name'] : ''}} {{ isset($student['first_name']) ? $student['first_name'] : ''}} </h5>
                                 <div class="row mb-3">
                                     <div class="col-md-12">
                                         <div>
@@ -396,8 +396,8 @@
                                                         <i class="fas fa-home"></i></span>
                                                 </div>
                                                 <div class="media-body pl-2">
-                                                    <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                        <a href="javascript: void(0);" class="text-reset">{{ isset($student['current_address']) ? $student['current_address'] : ''}}</a>
+                                                    <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold"> 
+                                                        <a href="javascript: void(0);" class="text-reset">{{ isset($student['address_unit_no']) ? $student['address_unit_no'] . ',' : ''}} {{ isset($student['address_condominium']) ? $student['address_condominium'] . ',' : ''}} {{ isset($student['address_street']) ? $student['address_street'] . ',' : ''}} {{ isset($student['address_district']) ? $student['address_district']  : ''}}</a>
                                                     </h5>
                                                 </div>
                                             </div>

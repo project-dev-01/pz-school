@@ -1157,7 +1157,7 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <!-- <div class="card">
                     <div class="tab-pane" id="personal">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
@@ -1240,6 +1240,7 @@
                             </div>
                         </div>
                     </div>
+                </div> -->
 
 
                     <!-- <hr> -->

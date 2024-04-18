@@ -10995,7 +10995,7 @@ class AdminController extends Controller
         $grade_list_by_department = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
 
         $prev = json_decode($student['data']['student']['previous_details']);
-        $school_name = $prev->school_name;
+        //$school_name = $prev->school_name;
         $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
         $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
         $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";

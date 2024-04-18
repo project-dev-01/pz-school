@@ -1140,7 +1140,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="personal">
+                                <!-- <div class="tab-pane" id="personal">
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item">
                                             <h4 class="navv">
@@ -1219,7 +1219,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
 
                         </div>
