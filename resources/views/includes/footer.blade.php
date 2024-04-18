@@ -361,8 +361,8 @@
                     }
                 },
                 error: function(err) {
-                    // console.log("logout error");
-                    // console.log(err)
+                    console.log("setInterval logout error");
+                    console.log(err)
                 }
             });
         }, 8000);

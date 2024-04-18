@@ -3,16 +3,18 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
+use Illuminate\Auth\AuthenticationException;
+use League\OAuth2\Server\Exception\OAuthServerException;
 use Throwable;
+use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
     /**
      * A list of the exception types that are not reported.
      *
-     * @var string[]
+     * @var array
      */
     protected $dontReport = [
         //
@@ -21,13 +23,49 @@ class Handler extends ExceptionHandler
     /**
      * A list of the inputs that are never flashed for validation exceptions.
      *
-     * @var string[]
+     * @var array
      */
     protected $dontFlash = [
-        'current_password',
         'password',
         'password_confirmation',
     ];
+
+    /**
+     * Report or log an exception.
+     *
+     * @param  \Throwable  $e
+     * @return void
+     *
+     * @throws \Exception
+     */
+    public function report(Throwable $e)
+    {
+        // Check if the exception should not be reported
+        if ($this->shouldntReport($e)) {
+            return;
+        }
+
+        // Log the exception without stack trace
+        Log::error($e->getMessage());
+
+        parent::report($e);
+    }
+
+    /**
+     * Convert an authentication exception into a JSON response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Auth\AuthenticationException  $exception
+     * @return \Illuminate\Http\Response
+     */
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        return response()->json([
+            'code' => 401,
+            'success' => false,
+            'message' => $exception->getMessage(),
+        ], 401);
+    }
 
     /**
      * Register the exception handling callbacks for the application.
@@ -36,31 +74,25 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        // $this->reportable(function (Throwable $e) {
-        //     //
-        // });
+        $this->renderable(function ($request, OAuthServerException $e) {
+            return response()->json([
+                'code' => $e->getCode(),
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], $e->getCode());
+        });
         $this->renderable(function (NotFoundHttpException $e, $request) {
             // if ($request->is('api/*')) {
-                $response = [
-                    'code' => 404,
-                    'success' => false,
-                    'message' => 'Object not found',
-                ];
-                if (!empty($errorMessages)) {
-                    $response['data'] = $errorMessages;
-                }
-                return response()->json($response, 404);
+            $response = [
+                'code' => 404,
+                'success' => false,
+                'message' => 'Object not found',
+            ];
+            if (!empty($errorMessages)) {
+                $response['data'] = $errorMessages;
+            }
+            return response()->json($response, 404);
             // }
         });
     }
-
-    // public function render($request, Throwable $exception)
-    // {
-    //     // dd($exception);
-    //     if($this->isHttpException($exception)) {
-    //         return response()->view('errors.404');
-    //     } else {
-    //         return response()->view('errors.500');
-    //     }
-    // }
 }
