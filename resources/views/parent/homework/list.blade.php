@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Homework')
+@section('title',' ' . __('messages.homework') . '')
 @section('component_css')
 <!-- date picker -->
 <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />

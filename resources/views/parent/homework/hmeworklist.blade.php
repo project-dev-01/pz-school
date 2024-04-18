@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Homework')
+@section('title',' ' . __('messages.homework') . '')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">

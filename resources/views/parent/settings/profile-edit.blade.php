@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Profile Edit')
+@section('title',' ' . __('messages.parent_profile') . '')
 @section('component_css')
 <!-- date picker -->
 <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />

@@ -307,10 +307,10 @@
                                                         </div> <!-- end col -->
                                                         <div class="col-lg-6">
                                                             <div class="d-sm-flex justify-content-between">
-                                                                <div>
+                                                            <div>
                                                                     <img src="{{ config('constants.image_url').'/common-asset/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
-                                                                </div>
-                                                                <div class="mt-3 mt-sm-0">
+                                                            </div>    
+                                                            <div class="mt-3 mt-sm-0">
                                                                     <ul class="list-inline font-13 text-sm-center">
                                                                         <li class="list-inline-item" id="comments{{ $old['id'] }}">
                                                                             <i class='mdi mdi-comment-text-multiple-outline font-16'></i>

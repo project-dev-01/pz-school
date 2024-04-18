@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Timetable')
+@section('title',' ' . __('messages.timetable') . '')
 @section('component_css')
 <link href="{{ asset('libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
@@ -58,7 +58,7 @@
                         <path d="M3.75725 6.14037H0.00994332C0.0065815 6.09679 0.000976562 6.05493 0.000976562 6.01307C0.000976562 5.34444 0.000976562 4.67581 0.000976562 4.00604C0.000976562 3.4521 0.266561 3.08052 0.754584 2.93486C0.817237 2.91613 0.882065 2.9061 0.947328 2.90504C1.56366 2.90504 2.17999 2.88096 2.79633 2.90791C3.37008 2.93314 3.75277 3.35347 3.76453 3.94354C3.77798 4.6546 3.76453 5.3668 3.76453 6.07843C3.76334 6.09921 3.76091 6.11989 3.75725 6.14037Z" fill="#3A4265" />
                     </svg>
                 </div>
-                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.view_timetable') }}</h4>
+                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.timetable') }}</h4>
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' . __('messages.add_withdrawal') . '')
+@section('title',' ' . __('messages.withdrawal_application') . '')
 @section('component_css')
 <link href="{{ asset('libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />

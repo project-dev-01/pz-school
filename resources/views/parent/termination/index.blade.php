@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' . __('messages.withdrawal') . '')
+@section('title',' ' . __('messages.withdrawal_list') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">

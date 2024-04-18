@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Chat')
+@section('title',' ' . __('messages.chat') . '')
 @section('component_css')
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">

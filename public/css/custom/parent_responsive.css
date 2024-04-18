@@ -46,7 +46,9 @@
     padding-top: 15px;
 }
 
-
+.breadcrumb-item a {
+    color: #3A4265;
+}
 
 @media only screen and (min-width: 280px) and (max-width: 1200px) {
     .content-page {

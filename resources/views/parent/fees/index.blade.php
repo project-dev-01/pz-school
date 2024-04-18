@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' . __('messages.fees') . '')
+@section('title',' ' . __('messages.fees_details') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">

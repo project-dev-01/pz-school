@@ -266,10 +266,11 @@
             width: 13.3em;
         }
     }
+
     .breadcrumb-item+.breadcrumb-item::before {
-    font-family: "Material Design Icons";
-    color: #3A4265;
-}
+        font-family: "Material Design Icons";
+        color: #3A4265;
+    }
 </style>
 @if(Session::get('locale')=="en")
 <style>
@@ -328,11 +329,15 @@
 
                 </div>
                 <!--<h4 class="page-title" style="margin-left: 10px;">{{ __('messages.student_profile') }}</h4>-->
-                <ol class="breadcrumb m-0" style="font-family: 'Open Sans'; font-style: normal; font-weight: 600; font-size: 20px; letter-spacing: 0.0133em; color: #3A4265;padding-top: 15px;
-    padding-left: 10px;">
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.profile') }}</a></li>
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.student_profile') }}</a></li>
+                <ol class="breadcrumb m-0 responsivebc">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">
+                            <h4>{{ __('messages.profile') }}</h4>
+                        </a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">
+                            <h4>{{ __('messages.student_profile') }}</h4>
+                        </a></li>
                 </ol>
+
             </div>
         </div>
     </div>
