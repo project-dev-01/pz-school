@@ -1232,7 +1232,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card">
+                            <!-- <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <h4 class="navv">{{ __('messages.guardian_details') }}
@@ -1332,7 +1332,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- <div class="col-md-4">
+                                           <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="gender">{{ __('messages.gender') }}</label>
                                                     <select class="form-control" id="guardian_gender" disabled>
@@ -1362,8 +1362,8 @@
                                                     <input type="text" class="form-control" id="guardian_passport" placeholder="{{ __('messages.enter_passport_number') }}" readonly>
                                                 </div>
                                             </div>
-                                        </div> -->
-                                        <div class="row">
+                                        </div> 
+                                        <div class="row">-->
                                             <!-- <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="heard">{{ __('messages.nric_number') }}</label>
@@ -1385,7 +1385,7 @@
                                                         <option>AB-</option>
                                                     </select>
                                                 </div>
-                                            </div> -->
+                                            </div> 
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="txt_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
@@ -1446,7 +1446,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        <!-- <div class="row"> -->
+                                       <div class="row"> -->
                                             <!-- <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="education">{{ __('messages.education') }}</label>
@@ -1500,10 +1500,10 @@
                                                     <input type="text" class="form-control" id="guardian_address_2" placeholder="{{ __('messages.enter_address_2') }}" readonly>
                                                 </div>
                                             </div>
-                                        </div> -->
+                                        </div> 
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">

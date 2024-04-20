@@ -1,7 +1,7 @@
 $(function () {
 
     var formData = {
-        status: "0"
+        status: ""
     };
     if (parentList !== undefined && parentList !== null) {
         getParentList(formData);
