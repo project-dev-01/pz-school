@@ -226,10 +226,20 @@ $(function () {
             
         }
     }
+
+    // skip_prev_school_details
+    $("#skip_prev_school_details").on("change", function () {
+        
+        if ($(this).is(":checked")) {
+            $(".prev_school_form").val("");
+            $("#prev_school_details").hide("slow");
+        } else {
+            $("#prev_school_details").show("slow");
+        }
+    });
     
     // skip_mother_details
     $("#skip_mother_details").on("change", function () {
-        
         if ($(this).is(":checked")) {
             
             $("#mother_form input").val("");

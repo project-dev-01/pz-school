@@ -675,45 +675,51 @@
                         </li>
                     </ul>
                     <div class="card-body">
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input skip" id="skip_prev_school_details" name="skip_prev_school_details" >
+                            <label class="custom-control-label" for="skip_prev_school_details">{{ __('messages.skip_prev_school_details') }}</label>
+                        </div>
+                    </div>
+                    <div id="prev_school_details" >
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="txt_prev_schname">{{ __('messages.school_name') }}<span class="text-danger">*</span></label>
-                                    <input type="text" maxlength="50" id="txt_prev_schname" placeholder="{{ __('messages.enter_school_name') }}" class="form-control alloptions" name="txt_prev_schname" data-parsley-trigger="change">
+                                    <input type="text" maxlength="50" id="txt_prev_schname" placeholder="{{ __('messages.enter_school_name') }}" class="form-control alloptions prev_school_form" name="txt_prev_schname" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="school_country">{{ __('messages.country') }}<span class="text-danger">*</span></label>
-                                    <input type="text" maxlength="50" id="school_country" value="{{ isset($application['school_country']) ? $application['school_country'] : ''}}" name="school_country" class="form-control country" placeholder="{{ __('messages.country') }}" data-parsley-trigger="change">
+                                    <input type="text" maxlength="50" id="school_country" value="{{ isset($application['school_country']) ? $application['school_country'] : ''}}" name="school_country" class="form-control country prev_school_form" placeholder="{{ __('messages.country') }}" data-parsley-trigger="change">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="school_state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="school_state" value="{{ isset($application['school_state']) ? $application['school_state'] : ''}}" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend">
+                                    <input type="text" class="form-control prev_school_form" id="school_state" value="{{ isset($application['school_state']) ? $application['school_state'] : ''}}" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend">
                                 </div>
                             </div>
-
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="school_city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="school_city" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.city') }}" aria-describedby="inputGroupPrepend">
+                                    <input type="text" class="form-control prev_school_form" id="school_city" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.city') }}" aria-describedby="inputGroupPrepend">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="school_postal_code">{{ __('messages.postal_code') }}<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="school_postal_code" name="school_postal_code" placeholder="{{ __('messages.enter') }} {{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend">
+                                    <input type="text" class="form-control prev_school_form" id="school_postal_code" name="school_postal_code" placeholder="{{ __('messages.enter') }} {{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="school_enrollment_status">{{ __('messages.enrollment_status') }}<span class="text-danger">*</span></label>
                                     <!-- <input type="text" class="form-control" id="school_enrollment_status" name="school_enrollment_status" placeholder="{{ __('messages.enter_enrollment_status') }}" aria-describedby="inputGroupPrepend"> -->
-                                    <select id="school_enrollment_status"  name="school_enrollment_status" class="form-control ">
+                                    <select id="school_enrollment_status"  name="school_enrollment_status" class="form-control prev_school_form">
                                         <option value="">{{ __('messages.select_enrollment_status') }}</option>
                                         <option value="Regular class" >{{ __('messages.regular_class') }}</option>
                                         <option value="Special need class">{{ __('messages.special_need_class') }}</option>
@@ -726,7 +732,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="school_enrollment_status_tendency">{{ __('messages.enrollment_status_tendency') }}<span class="text-danger">*</span></label>
-                                    <select id="school_enrollment_status_tendency" name="school_enrollment_status_tendency" class="form-control">
+                                    <select id="school_enrollment_status_tendency" name="school_enrollment_status_tendency" class="form-control prev_school_form">
                                         <option value="">{{ __('messages.select_enrollment_status') }}</option>
                                         <option value="Yes">{{ __('messages.yes') }}</option>
                                         <option value="No">{{ __('messages.no') }}</option>
@@ -740,8 +746,7 @@
                                 </div>
                             </div> -->
                         </div>
-
-
+                    </div>
                     </div> <!-- end card-body -->
                 </div> <!-- end card-->
 
@@ -1356,12 +1361,12 @@
                     </ul>
                     <div class="card-body">
                         <div class="row">
-                            <!-- <div class="form-group">
+                            <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input skip" id="skip_father_details"  name="skip_father_details" >
                                     <label class="custom-control-label" for="skip_father_details">{{ __('messages.skip_father_details') }}</label>
                                 </div>
-                            </div> -->
+                            </div>
                             <!-- <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="father_name">{{ __('messages.father_name') }}</label>
@@ -1591,12 +1596,12 @@
                     </ul>
                     <div class="card-body">
                         <div class="row">
-                            <!-- <div class="form-group">
+                            <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input skip" id="skip_mother_details"  name="skip_mother_details" >
                                     <label class="custom-control-label" for="skip_mother_details">{{ __('messages.skip_mother_details') }}</label>
                                 </div>
-                            </div> -->
+                            </div>
                             <!-- <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="mother_name">{{ __('messages.mother_name') }}</label>
@@ -1936,7 +1941,6 @@
 <script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
 <script src="{{ asset('country/js/countrySelect.js') }}"></script>
 <script>
-    
     function countrySelect(inputSelector,country) {
         $(inputSelector).countrySelect({
             defaultCountry: country,
