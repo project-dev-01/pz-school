@@ -25,6 +25,7 @@
 <link href="{{ asset('css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/calendarresponsive.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <style>
@@ -89,6 +90,7 @@
             display: flex;
         }
     }
+
 </style>
 <!-- Start Content-->
 <div class="container-fluid">
@@ -132,19 +134,28 @@
     </div>
     @endif
     <!-- end page title -->
+
     <div class="row">
         <div class="col-xl-12">
             <div class="row">
                 <div class="col">
                     <div class="card">
-                        <ul class="nav nav-tabs">
-                            <li class="nav-item">
-                                <h4 class="navv">{{ __('messages.to_do_list') }}
-                                    <h4>
+                        <ul class="nav nav-tabs" style="display: inline-block;">
+                            <li class="nav-item d-flex justify-content-between align-items-center">
+                                <!-- Button placed on the left side -->
+                                <h4 class="navv">
+                                    {{ __('messages.to_do_list') }}
+                                </h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton7" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 20px;"></i></b>
+                                </button>
                             </li>
                         </ul>
-                        <div class="card-body">
-                            <div class="row" id="toDoList" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
+
+                        <div class="card-body collapse" id="toDoList">
+                            <div class="row" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                                 <div class="col">
                                     <a class="text-dark" data-toggle="collapse" data-id="today" data-count="{{ isset($get_to_do_list_dashboard['today'])?count($get_to_do_list_dashboard['today']):0 }}" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">
                                         <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> {{ __('messages.today') }} <span class="text-muted font-14">( {{ isset($get_to_do_list_dashboard['today']) ? count($get_to_do_list_dashboard['today']) : "0"}} )</span></h5>
@@ -307,10 +318,10 @@
                                                         </div> <!-- end col -->
                                                         <div class="col-lg-6">
                                                             <div class="d-sm-flex justify-content-between">
-                                                            <div>
+                                                                <div>
                                                                     <img src="{{ config('constants.image_url').'/common-asset/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
-                                                            </div>    
-                                                            <div class="mt-3 mt-sm-0">
+                                                                </div>
+                                                                <div class="mt-3 mt-sm-0">
                                                                     <ul class="list-inline font-13 text-sm-center">
                                                                         <li class="list-inline-item" id="comments{{ $old['id'] }}">
                                                                             <i class='mdi mdi-comment-text-multiple-outline font-16'></i>
@@ -357,18 +368,14 @@
                                     </div>
                                     <!-- end old tasks -->
                                 </div> <!-- end col -->
-                            </div> <!-- end row -->
-
-
-                        </div> <!-- end card-body -->
+                            </div>
+                        </div>
                     </div> <!-- end card -->
                 </div> <!-- end col -->
             </div> <!-- end row -->
         </div> <!-- end col -->
+    </div>
 
-        <!-- task details -->
-        <!-- task panel end -->
-    </div> <!-- end card-box -->
     <div class="row">
         <div class="col-12">
             <!-- tasks panel -->
@@ -377,13 +384,20 @@
                     <div class="row">
                         <div class="col">
                             <div class="card">
-                                <ul class="nav nav-tabs">
-                                    <li class="nav-item">
+                                <ul class="nav nav-tabs" style="display: inline-block;">
+                                    <li class="nav-item d-flex justify-content-between align-items-center">
+                                        <!-- Button placed on the left side -->
                                         <h4 class="navv"> {{ __('messages.homework_list') }}
                                             <h4>
+                                                <!-- Up and Down Arrows -->
+                                                <button class="btn btn-link collapse-button" type="button" id="collapseButton6" aria-expanded="true" aria-controls="toDoList">
+                                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 20px;"></i></b>
+                                                </button>
                                     </li>
                                 </ul>
-                                <div class="card-body">
+
+                                <div class="card-body collapse" id="toDoList1">
                                     @forelse ($get_homework_list_dashboard as $key => $homework)
                                     <div class="row" data-plugin="dragula" data-containers='["homework-list-show"]'>
                                         <div class="col">
@@ -448,13 +462,20 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
                         <h4 class="navv">{{ __('messages.Calendar') }}
                             <h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link " type="button" id="collapseButton5"  aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 20px;"></i></b>
+                                </button>
                     </li>
                 </ul>
-                <div class="card-body">
+
+                <div class="card-body collapse">
                     <div class="row">
                         <div class="col-lg-12">
                             <div id="student_calendor"></div>
@@ -634,13 +655,20 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
                         <h4 class="navv">{{ __('messages.leave_status') }}
                             <h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link " type="button"  id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 20px;"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+
+                <div class="card-body collapse">
                     <div class="table-responsive">
                         <table class="table w-100 nowrap" id="studentleave-table">
                             <thead>
@@ -668,12 +696,20 @@
     <div class="row">
         <div class="col-xl-12 col-md-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
                         <h4 class="navv"> {{ __('messages.student_ranking_class') }} & {{ __('messages.subject') }}</h4>
+                        <!-- Up and Down Arrows -->
+                        <button class="btn btn-link " type="button"  id="collapseButton2" aria-expanded="true" aria-controls="toDoList">
+                            <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 20px;"></i></b>
+                        </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+
+
+                <div class="card-body collapse">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -746,13 +782,19 @@
     <div class="row">
         <div class="col-xl-12 col-md-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
                         <h4 class="navv">{{ __('messages.semester_wise_exam_marks') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton3"  aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 20px;"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+
+                <div class="card-body collapse">
                     <div class="table-responsive">
                         <table class="table table-bordered w-100 nowrap" id="">
                             <thead>
@@ -805,13 +847,19 @@
         <div class="col-xl-12 col-md-12">
             <!-- Portlet card -->
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
                         <h4 class="navv"> {{ __('messages.exam_marks_status') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton4"  aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 20px;"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+
+                <div class="card-body collapse">
                     <ul class="nav nav-tab nav-bordered float-right">
                         <li class="nav-item">
                             <a href="#mcex" data-toggle="tab" aria-expanded="true" class="nav-link active">
@@ -994,4 +1042,5 @@
 <!-- <script src="{{ asset('js/custom/student_calendor_new.js') }}"></script> -->
 <script src="{{ asset('js/custom/parent_calendor_new_cal.js') }}"></script>
 <script src="{{ asset('js/custom/greeting.js') }}"></script>
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endsection
