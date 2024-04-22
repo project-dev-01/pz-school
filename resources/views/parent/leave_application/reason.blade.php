@@ -14,7 +14,7 @@
                         <div class="card" style="overflow-y: auto; max-height: 500px; overflow-x: hidden;">
                             <div class="table-responsive">
                                 <table class="table w-100 nowrap" id="studentleave-table">
-                                    <h4 class="header-title">{{ __('messages.reason') }}</h4>
+                                    <!--<h4 class="header-title">{{ __('messages.reason') }}</h4>-->
                                     <div id="showAllReasons">
                                         <!-- Content to be displayed dynamically -->
                                     </div>

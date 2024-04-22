@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card-box" style="overflow-y: auto;height:500px;">
-                            <h4 class="header-title">{{ __('messages.reason') }}</h4>
+                            <!--<h4 class="header-title">{{ __('messages.reason') }}</h4>-->
 
                             <div id="showAllReasons">
                             </div>
