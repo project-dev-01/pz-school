@@ -409,6 +409,7 @@ return [
         'get_to_do_teacher' => $url.'/get_to_do_teacher',
 
         // Student Url
+        'teacher_student_list' => $url.'/teacher/student/list',
         'student_list' => $url.'/student/list',
         'student_details' => $url.'/student/student-details',
         'student_update' => $url.'/student/update',

@@ -68,7 +68,6 @@ $(function () {
             academic_session_id: academic_session_id
         }, function (res) {
             if (res.code == 200) {
-                console.log(res)
                 $.each(res.data, function (key, val) {
                     $("#studentLeaveList").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
                 });
@@ -114,7 +113,6 @@ $(function () {
         // };
         // setLocalStorageStudentLeaveTeacher(classObj);
         var formData = new FormData();
-        formData.append('token', token);
         formData.append('branch_id', branchID);
         formData.append('class_id', class_id);
         formData.append('section_id', section_id);
@@ -132,7 +130,6 @@ $(function () {
         var status = $("#leave_status").val();
         var date = $("#range-datepicker").val();
         var formData = new FormData();
-        formData.append('token', token);
         formData.append('branch_id', branchID);
         formData.append('class_id', class_id);
         formData.append('section_id', section_id);
@@ -185,8 +182,6 @@ $(function () {
     $(document).on('click', '.approveRejectLeave', function () {
         var student_leave_tbl_id = $(this).data('id');
         var status = $(this).data('status');
-        console.log(student_leave_tbl_id);
-        console.log(status);
         var formData = new FormData();
         formData.append('branch_id', branchID);
         formData.append('student_leave_tbl_id', student_leave_tbl_id);
@@ -660,14 +655,11 @@ $(function () {
             dataType: 'json',
             contentType: false,
             success: function (res) {
-                console.log("------****----");
-                console.log(res);
                 if (res.code == 200) {
                     // $('#all-leave-list').DataTable().ajax.reload(null, false);
                     // toastr.success(res.message);
                     // DetailsModal
                     var leave_details = res.data;
-                    console.log(leave_details);
                     $('#nursingPopup').modal('show');
                     // var leave_type_details = res.data.leave_type_details;
                     // var assign_leave_approval_details = res.data.assign_leave_approval_details;

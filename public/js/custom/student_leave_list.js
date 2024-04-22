@@ -133,7 +133,6 @@ $(function () {
         var status = $("#leave_status").val();
         var date = $("#range-datepicker").val();
         var formData = new FormData();
-        // formData.append('token', token);
         formData.append('branch_id', branchID);
         formData.append('class_id', class_id);
         formData.append('section_id', section_id);
@@ -312,28 +311,25 @@ $(function () {
 
         $('#student-leave-table').DataTable({
             processing: true,
-            bDestroy: true,
+            destroy: true,
             info: true,
-            // dom: 'lBfrtip',
             dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
-            "language": {
-
-                "emptyTable": no_data_available,
-                "infoFiltered": filter_from_total_entries,
-                "zeroRecords": no_matching_records_found,
-                "infoEmpty": showing_zero_entries,
-                "info": showing_entries,
-                "lengthMenu": show_entries,
-                "search": datatable_search,
-                "paginate": {
-                    "next": next,
-                    "previous": previous
+                language: {
+                    emptyTable: no_data_available,
+                    infoFiltered: filter_from_total_entries,
+                    zeroRecords: no_matching_records_found,
+                    infoEmpty: showing_zero_entries,
+                    info: showing_entries,
+                    lengthMenu: show_entries,
+                    search: datatable_search,
+                    paginate: {
+                        next: next,
+                        previous: previous
+                    }
                 },
-            },
-            buttons: [
-                {
+                buttons: [{
                     extend: 'csv',
                     text: downloadcsv,
                     extension: '.csv',
@@ -352,19 +348,17 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     }
-
                 }
-            ],
-            data: dataSetNew,
-            "pageLength": 10,
-            "aLengthMenu": [
-                [5, 10, 25, 50, -1],
-                [5, 10, 25, 50, "All"]
-            ],
-            columns: [
-                {
-                    "targets": 0,
-                    "render": function (data, type, row, meta) {
+                ],
+                data: dataSetNew,
+                pageLength: 10,
+                lengthMenu: [
+                    [5, 10, 25, 50, -1],
+                    [5, 10, 25, 50, "All"]
+                ],
+                columns: [{
+                    targets: 0,
+                    render: function (data, type, row, meta) {
                         return meta.row + 1;
                     }
                 },
@@ -470,6 +464,39 @@ $(function () {
             },
             ]
         });
+    }
+    // Helper functions
+    function getStatusBadge(data) {
+        var status = '';
+        if (data == "Approve") {
+            status = '<span class="badge badge-success">' + data + '</span>';
+        } else if (data == "Reject") {
+            status = '<span class="badge badge-danger">' + data + '</span>';
+        } else if (data == "Pending") {
+            status = '<span class="badge badge-info">' + data + '</span>';
+        }
+        return status;
+    }
+
+    function getDocumentLink(row) {
+        var document = '';
+        if (row.document) {
+            document = '<a href="' + studentDocUrl + '/' + row.document + '" download target="_blank" class="btn btn-info waves-effect waves-light"><i class="fas fa-cloud-download-alt"></i></a>';
+        } else {
+            document = '<a href="javascript:void(0)" class="btn btn-secondary waves-effect waves-light"><i class="fas fa-times-circle"></i></a>';
+        }
+        return document;
+    }
+
+    function getRemarksButtons(row) {
+        var remarksButtons = '<button type="button" data-id="' + row.id + '" data-status="Approve" class="approveRejectLeave btn btn-success btn-rounded waves-effect waves-light"><span class="btn-label"><i class="mdi mdi-check-all"></i></span>Approve</button>' +
+            '&nbsp;<button type="button" data-id="' + row.id + '" data-status="Reject" class="approveRejectLeave btn btn-danger btn-rounded waves-effect waves-light"><span class="btn-label"><i class="mdi mdi-close-circle-outline"></i></span>Reject</button>';
+        return remarksButtons;
+    }
+
+    function getViewDetailsButton(row) {
+        var viewDetailsButton = '<div class="button-list"><a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' + row.id + '"  data-student_id="' + row.student_id + '" id="viewDetails">viewDetails</a></div>';
+        return viewDetailsButton;
     }
     //viewDetails
     $(document).on('click', '#viewDetails', function () {
@@ -631,6 +658,7 @@ $(function () {
             }
         });
     });
+    
     // function setLocalStorageStudentLeaveTeacher(classObj) {
 
     //     var studentLeaveDetails = new Object();

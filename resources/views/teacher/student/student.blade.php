@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Student List')
+@section('title',' ' . __('messages.student_list') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
@@ -17,13 +17,12 @@
 @endsection
 @section('content')
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
-
 <!-- Start Content-->
 <div class="container-fluid">
 
     <!-- start page title -->
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
             <div class="page-title-box">
                 <div class="page-title-right">
                     <!--<ol class="breadcrumb m-0">
@@ -37,6 +36,7 @@
         </div>
     </div>
     <!-- end page title -->
+
 
     <div class="row">
         <div class="col-xl-12">
@@ -59,7 +59,7 @@
                             </div>                       
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="class_id">{{ __('messages.grade') }}</label>
+                                    <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
                                         @forelse ($classes as $class)
@@ -111,7 +111,7 @@
     <!-- end row -->
 
 
-    <div class="row" id="student" >
+    <div class="row" id="student">
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs" >
@@ -125,7 +125,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="table-responsive">
-                                <table class="table w-100 nowrap " id="student-table">
+                                <table class="table w-100 nowrap" id="student-table">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -162,7 +162,6 @@
 
 <script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('toastr/toastr.min.js') }}"></script>
-<script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
 </script>
@@ -185,5 +184,5 @@
     // localStorage variables
     var student_list_storage = localStorage.getItem('teacher_student_list_details');
 </script>
-<script src="{{ asset('js/custom/student.js') }}"></script>
+<script src="{{ asset('js/custom/teacher_student_list.js') }}"></script>
 @endsection

@@ -11,7 +11,7 @@ use Exception;
 class Helper
 {
     // get api call get method
-    public static function getMethod($url, $data = [])
+    public static function GetMethod($url, $data = [])
     {
         try {
             $data["token"] = session('token');
@@ -50,7 +50,7 @@ class Helper
     }
     // post api call
 
-    public static function postMethod($url, $data)
+    public static function PostMethod($url, $data)
     {
         try {
             $data["token"] = session('token');

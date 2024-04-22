@@ -385,6 +385,7 @@ class TeacherController extends Controller
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        // dd($getclass);
         return view(
             'teacher.student.student',
             [
@@ -1744,11 +1745,10 @@ class TeacherController extends Controller
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
             "student_name" => $request->student_name,
-            "session_id" => $request->session_id,
             "academic_session_id" => session()->get('academic_session_id')
 
         ];
-        $response = Helper::PostMethod(config('constants.api.student_list'), $data);
+        $response = Helper::PostMethod(config('constants.api.teacher_student_list'), $data);
         $data = isset($response['data']) ? $response['data'] : [];
         return DataTables::of($data)
 

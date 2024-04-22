@@ -74,13 +74,6 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->renderable(function ($request, OAuthServerException $e) {
-            return response()->json([
-                'code' => $e->getCode(),
-                'success' => false,
-                'message' => $e->getMessage(),
-            ], $e->getCode());
-        });
         $this->renderable(function (NotFoundHttpException $e, $request) {
             // if ($request->is('api/*')) {
             $response = [
