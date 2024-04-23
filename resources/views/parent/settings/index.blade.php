@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' . __('messages.profile') . '')
+@section('title',' ' . __('messages.settings') . '')
 @section('component_css')
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
@@ -58,7 +58,7 @@
                     </svg>
 
                 </div>
-                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.profile') }}</h4>
+                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.settings') }}</h4>
             </div>
         </div>
     </div>

@@ -319,7 +319,7 @@
 
     var parent_leaveapply_storage = localStorage.getItem('parent_leaveapply_details');
 </script>
-</script>
 <!-- to do list -->
 <script src="{{ asset('js/custom/parent_leave_app.js') }}"></script>
+
 @endsection
