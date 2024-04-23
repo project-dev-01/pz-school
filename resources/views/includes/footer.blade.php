@@ -605,6 +605,10 @@
     // active class scroll sticky
     $(document).ready(function() {
         $('ul#side-menu li a.active').parent().attr('id', 'scrollToView');
-        document.getElementById("scrollToView").scrollIntoView();
+		var elementstv = document.getElementById('scrollToView');
+		if (elementstv) {
+			elementstv.scrollIntoView();
+		}
+        
     });
 </script>
