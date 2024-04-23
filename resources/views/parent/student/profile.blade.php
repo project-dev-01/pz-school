@@ -817,7 +817,7 @@
                                     @php
 
                                     $visa_type_others = "none";
-                                    if($student['visa_type'] == "Others"){
+                                    if (isset($student['visa_type']) && $student['visa_type'] == "Others") {
 
                                     $visa_type_others = "";
                                     }
