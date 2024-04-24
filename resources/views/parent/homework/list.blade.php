@@ -7,6 +7,7 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <style>
@@ -95,14 +96,20 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
+            <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
                         <h4 class="nav-link">
                             {{ __('messages.homework_list') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton1"  aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+                
+                <div class="card-body collapse show">
                     <form id="studentHomeworkFilter" method="post" action="{{ route('parent.homework.filter') }}" enctype="multipart/form-data" autocomplete="off">
                         <div class="row ml-1">
                             <div class="col-md-3">
@@ -167,14 +174,20 @@
     <div class="row" id="homeworks">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
+            <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
                         <h4 class="nav-link" id="title">
                             {{ __('messages.homework_list') }} ({{ __('messages.all_subject') }})
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton2"  aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body" id="homework_list">
+                </ul>
+             
+                <div class="card-body collapse show" id="homework_list">
                     @if($homework)
                     @foreach($homework as $key=>$work)
                     <form class="submitHomeworkForm" id="form{{$key}}" method="post" enctype="multipart/form-data" autocomplete="off">
@@ -313,5 +326,5 @@
     var parent_homework_storage = localStorage.getItem('parent_homework_details');
 </script>
 <script src="{{ asset('js/custom/homework.js') }}"></script>
-
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endsection

@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
 <link rel="stylesheet" href="{{ asset('mobile-country/css/intlTelInput.css') }}">
 <link rel="stylesheet" href="{{ asset('country/css/countrySelect.css') }}">
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .switch {
         height: 24px;
@@ -329,15 +330,19 @@
 
             <form id="addApplication" method="post" action="{{ route('parent.application.add') }}" enctype="multipart/form-data" autocomplete="off">
                 @csrf
-                <div class="card">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <h4 class="navv">
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                    <h4 class="navv">
                                 {{ __('messages.student_details') }}
                                 <h4>
-                        </li>
-                    </ul>
-                    <div class="card-body">
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>   
+                    <div class="card-body collapse show">
                         <div class="tab-content">
                             <!-- start Dashboard -->
                             <div class="tab-pane show active" id="basic">
@@ -541,14 +546,20 @@
                     </div>
                 </div><br>
                 <div class="card">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <h4 class="navv">
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                    <h4 class="navv">
                                 {{ __('messages.prev_school_details') }}
                                 <h4>
-                        </li>
-                    </ul><br>
-                    <div class="card-body">
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton2" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>      
+                  
+                    <div class="card-body collapse show">
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input skip" id="skip_prev_school_details" name="skip_prev_school_details">
@@ -618,14 +629,20 @@
                 </div>
                 <br>
                 <div class="card">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <h4 class="navv">
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                    <h4 class="navv">
                                 {{ __('messages.mother_details') }}
                                 <h4>
-                        </li>
-                    </ul><br>
-                    <div class="card-body">
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton3" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>      
+                  
+                    <div class="card-body collapse show">
 
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
@@ -741,14 +758,21 @@
                 </div>
                 <br>
                 <div class="card">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <h4 class="navv">
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                    <h4 class="navv">
                                 {{ __('messages.father_details') }}
                                 <h4>
-                        </li>
-                    </ul><br>
-                    <div class="card-body">
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton4" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>      
+                  
+                  
+                    <div class="card-body collapse show">
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input skip" id="skip_father_details" name="skip_father_details">
@@ -863,14 +887,20 @@
                 </div>
                 <br>
                 <div class="card">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <h4 class="navv">
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                    <h4 class="navv">
                                 {{ __('messages.guardian_details') }}
                                 <h4>
-                        </li>
-                    </ul>
-                    <div class="card-body">
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton5" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>          
+                   
+                    <div class="card-body collapse show">
                         <!-- <div class="form-group">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input skip" id="skip_guardian_details" name="skip_guardian_details">
@@ -1053,14 +1083,20 @@
                     </div>
                 </div><br>
                 <div class="card">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <h4 class="navv">
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                    <h4 class="navv">
                                 {{ __('messages.academic_details') }}
                                 <h4>
-                        </li>
-                    </ul><br>
-                    <div class="card-body">
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton6" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>          
+                  
+                    <div class="card-body collapse show">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -1104,15 +1140,20 @@
                         </div><br>
                     </div>
                 </div><br>
-                <div class="card">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <h4 class="navv">
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                    <h4 class="navv">
                                 {{ __('messages.re-admission') }}
                                 <h4>
-                        </li>
-                    </ul>
-                    <div class="card-body">
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton7" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>        
+                
+                    <div class="card-body collapse show">
                         <div id="re_admission_details">
                             <div class="row">
                                 <div class="col-md-2 mt-4">
@@ -1409,4 +1450,5 @@
     });
 </script>
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endsection
