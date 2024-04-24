@@ -15,6 +15,7 @@
 @endsection
 @section('content')
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .selected-cell {
         background-color: #f2f2f2;
@@ -106,13 +107,19 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
+            <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
                         <h4 class="navv"> {{ __('messages.leave_application') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton1"  aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+                
+                <div class="card-body collapse show">
                     <form id="stdGeneralDetails" method="post" action="{{ route('parent.studentleave.add') }}">
                         @csrf
                         <!-- <input type="text" name="class_id" id="listModeClassID">
@@ -243,13 +250,19 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
+            <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
                         <h4 class="navv">{{ __('messages.leave_status') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton2"  aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+              
+                <div class="card-body collapse show">
                     <div class="table-responsive">
                         <table class="table w-100 nowrap" id="studentleave-table">
                             <thead>
@@ -322,5 +335,5 @@
 </script>
 <!-- to do list -->
 <script src="{{ asset('js/custom/parent_leave_app.js') }}"></script>
-
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endsection
