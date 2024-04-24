@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Student Leave Details')
+@section('title',' ' . __('messages.student_interview_record') . '')
 @section('component_css')
 <link href="{{ asset('libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}" rel="stylesheet" type="text/css">

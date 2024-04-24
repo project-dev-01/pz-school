@@ -109,7 +109,11 @@ $(function () {
             var class_id = $('#changeClassName').val(); // Get the date value
             var section_id = $('#sectionID').val(); // Get the date value
             var student_id = $('#student_id').val(); // Get the date value
-        
+        console.log(department_id);
+        console.log(class_id);
+        console.log(section_id);
+        console.log(student_id);
+
             formData.set('department_id', department_id); // Set the date in the FormData
             formData.set('class_id', class_id); // Set the date in the FormData
             formData.set('section_id', section_id); // Set the date in the FormData
@@ -126,7 +130,7 @@ $(function () {
                     // console.log(data)
                     if (data.code == 200) {
                         console.log(data.data);
-                        $('#studentInterviewForm').find('form')[0].reset();
+                      //  $('#studentInterviewForm').find('form')[0].reset();
                        
                         studentInterviewTable(data.data);
                     } else {

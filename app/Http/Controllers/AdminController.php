@@ -11198,8 +11198,8 @@ class AdminController extends Controller
     {
         $data = [
             'department_id' => $request->department_id,
-            'grade_id' => $request->changeClassName,
-            'section_id' => $request->sectionID,
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
             'student_id' => $request->student_id,
         ];
         $response = Helper::PostMethod(config('constants.api.student_interview_list'), $data);
