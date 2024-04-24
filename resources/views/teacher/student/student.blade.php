@@ -63,7 +63,7 @@
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
                                         @forelse ($classes as $class)
-                                            <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
+                                            <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -71,7 +71,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="section_id">{{ __('messages.class') }}</label>
+                                    <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
                                     <select id="section_id" class="form-control" name="section_id">
                                         <option value="">{{ __('messages.select_class') }}</option>
                                     </select>
@@ -111,7 +111,7 @@
     <!-- end row -->
 
 
-    <div class="row" id="student">
+    <div class="row" id="student" style="display:none;">
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs" >
@@ -178,7 +178,6 @@
     
     var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
-    
     var sectionByClass = "{{ route('teacher.section_by_class') }}";
     var studentList = "{{ route('teacher.student.list') }}";
     // localStorage variables

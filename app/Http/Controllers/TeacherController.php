@@ -378,10 +378,15 @@ class TeacherController extends Controller
     }
     public function studentIndex()
     {
+        // $data = [
+        //     'teacher_id' => session()->get('ref_user_id')
+        // ];
+        // $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         $data = [
-            'teacher_id' => session()->get('ref_user_id')
+            'teacher_id' => session()->get('ref_user_id'),
+            'academic_session_id' => session()->get('academic_session_id')
         ];
-        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $getclass = Helper::PostMethod(config('constants.api.class_teacher_classes'), $data);
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
@@ -1586,9 +1591,10 @@ class TeacherController extends Controller
     {
         $data = [
             'class_id' => $request->class_id,
-            'teacher_id' => session()->get('ref_user_id')
+            'teacher_id' => session()->get('ref_user_id'),
+            "academic_session_id" => session()->get('academic_session_id')
         ];
-        $section = Helper::PostMethod(config('constants.api.teacher_section'), $data);
+        $section = Helper::PostMethod(config('constants.api.class_teacher_sections'), $data);
         return $section;
     }
     public function subjectmarks(Request $request)
