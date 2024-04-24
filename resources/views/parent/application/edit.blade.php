@@ -1289,7 +1289,7 @@
                                             {{ __('messages.update') }}
                                         </button>
                                         @endif
-                                        <a href="{{ route('guest.application.index') }}" class="btn btn-primary-bl waves-effect waves-light">
+                                        <a href="{{ route('parent.application.index') }}" class="btn btn-primary-bl waves-effect waves-light">
                                             {{ __('messages.back') }}
                                         </a>
                                     </div>
@@ -1772,7 +1772,7 @@
                                         <button class="btn btn-primary-bl waves-effect waves-light" {{$disabled_phase_2}} id="submit" type="submit">
                                             {{ __('messages.update') }}
                                         </button>
-                                        <a href="{{ route('guest.application.index') }}" class="btn btn-primary-bl waves-effect waves-light">
+                                        <a href="{{ route('parent.application.index') }}" class="btn btn-primary-bl waves-effect waves-light">
                                             {{ __('messages.back') }}
                                         </a>
                                     </div>
