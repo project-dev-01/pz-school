@@ -1,13 +1,23 @@
 <?php
-$url = "http://localhost/paxsuze-api/public/api";
+$url = "http://localhost/paxsuzen-api-dev/public/api";
 // $url = "https://api.suzen.school/api";test
+$schoolurl = "http://localhost/school-management-system/public";
 return [
     'branch_id'=>'5',
     'school_name'=>'クアラルンプール日本人学校',
     'school_image'=>'logo_jskl.jpeg',
-    'image_url' => "http://localhost/paxsuze-api/public",
+    'image_url' => "http://localhost/paxsuzen-api-dev/public",
     'cron_secret_key'=> 'S6rSMVixPeupH51AO5mVFjkQJ88bnjOO',
     'api' => [
+        // school login url
+        'homepage'=> $schoolurl.'/home',
+        'superadmin_login' => $schoolurl.'/syscont/login',
+        'admin_login' => $schoolurl.'/admin/login',
+        'staff_login' => $schoolurl.'/staff/login',
+        'teacher_login' => $schoolurl.'/teacher/login',
+        'parent_login' => $schoolurl.'/parent/login',
+        'student_login' => $schoolurl.'/student/login',
+        'guest_login' => $schoolurl.'/guest/login',
         // login url
         'login' => $url.'/login',
         'login_guest' => $url.'/login_guest',

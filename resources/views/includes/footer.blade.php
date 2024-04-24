@@ -120,8 +120,40 @@
         }
     });
     // get states
+   
     var get_roll_id = "{{Session::get('role_id')}}";
-
+    if(get_roll_id==1)
+    {
+        var loginurl = "{{ config('constants.api.superadmin_login') }}";  
+    }
+    else if(get_roll_id==2)
+    {
+        var loginurl = "{{ config('constants.api.admin_login') }}";  
+    }
+    else if(get_roll_id==3)
+    {
+        var loginurl = "{{ config('constants.api.staff_login') }}";  
+    }
+    else if(get_roll_id==4)
+    {
+        var loginurl = "{{ config('constants.api.teacher_login') }}";  
+    }
+    else if(get_roll_id==5)
+    {
+        var loginurl = "{{ config('constants.api.parent_login') }}";  
+    }
+    else if(get_roll_id==6)
+    {
+        var loginurl = "{{ config('constants.api.student_login') }}";  
+    }
+    else if(get_roll_id==7)
+    {
+        var loginurl = "{{ config('constants.api.guest_login') }}";  
+    }
+    else
+    {
+        var loginurl = "{{ config('constants.api.homepage') }}";  
+    }
     var getStates = "{{ config('constants.api.states') }}";
     var getCity = "{{ config('constants.api.cities') }}";
     var branchByClass = "{{ config('constants.api.branch_by_class') }}";
@@ -363,6 +395,8 @@
                 error: function(err) {
                     console.log("setInterval logout error");
                     console.log(err)
+                    window.location.href =loginurl;
+                    
                 }
             });
         }, 8000);

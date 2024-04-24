@@ -9976,8 +9976,13 @@ class AdminController extends Controller
         $data = [
             'id' => $request->id,
         ];
+        if ($request->id !== null) {
         $response = Helper::PostMethod(config('constants.api.school_menurole_details'), $data);
-        return $response;
+        return $response;   
+            
+        } else {
+            return response()->json(['error' => 'School Menu Role ID is empty.'], 500);
+        } 
     }
 
     public function updateschool_role(Request $request)
@@ -10111,14 +10116,20 @@ class AdminController extends Controller
             'deletes' => $request->deletes,
             'export' => $request->export
         ];
-        // dd($data);
-        $response = Helper::PostMethod(config('constants.api.setschoolpermission'), $data);
-        // dd($response);
-        //return redirect('admin/school_role/menuaccess');
-        if ($response['code'] == 200) {
-            return redirect()->route('admin.school_role.menuaccess')->with('success', $response['message']);
-        } else {
-            return redirect()->route('admin.school_role.menuaccess')->with('errors', $response['message']);
+        if($request->read !== null)
+        {
+            // dd($data);
+            $response = Helper::PostMethod(config('constants.api.setschoolpermission'), $data);
+            // dd($response);        
+            //return redirect('admin/school_role/menuaccess');
+            if ($response['code'] == 200) {
+                return redirect()->route('admin.school_role.menuaccess')->with('success', $response['message']);
+            } else {
+                return redirect()->route('admin.school_role.menuaccess')->with('errors', $response['message']);
+            }
+        }
+        else {
+            return redirect()->route('admin.school_role.menuaccess')->with('errors', 'At least one menu must be selected to set permissions.');
         }
     }
     public function deleteschoolpermission(Request $request)

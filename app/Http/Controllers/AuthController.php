@@ -1310,11 +1310,16 @@ class AuthController extends Controller
                 'userID' => $session_id,
                 'role_id' => $role_id
             ];
-            // dd($data);       
-            $response = Helper::PostMethod(config('constants.api.lastlogout'), $data);
+            if ($session_id !== null) {
+                $response = Helper::PostMethod(config('constants.api.lastlogout'), $data);
+                return $response;
+            } else {
+                return response()->json(['error' => 'Token expired or invalid 403.'], 403);
+            } 
+            
 
 
-            return $response;
+            
         } catch (\Exception $e) {
 
             // CSRF token mismatch occurred, handle the error
@@ -1329,8 +1334,12 @@ class AuthController extends Controller
             $data = [
                 'session_id' => $session_id,
             ];
-            $response = Helper::PostMethod(config('constants.api.all_logout'), $data);
-            return $response;
+            if ($session_id !== null) {
+                $response = Helper::PostMethod(config('constants.api.all_logout'), $data);
+                return $response;
+            } else {
+                return response()->json(['error' => 'Token expired or invalid 403.'], 403);
+            }
         } catch (\Exception $e) {
 
             // CSRF token mismatch occurred, handle the error
