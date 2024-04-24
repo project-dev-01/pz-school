@@ -115,9 +115,9 @@
                                     </div>
                                 </div> <!-- end col -->
                             </div> <!-- end row -->
-                            <div class="text-right">
+                            <!-- <div class="text-right">
                                 <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i>{{ __('messages.update') }}</button>
-                            </div>
+                            </div> -->
                         </form>
                     </div>
                     <!-- end settings content-->
