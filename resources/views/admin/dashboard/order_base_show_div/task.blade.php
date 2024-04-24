@@ -164,7 +164,7 @@
                                             <div class="card-body pb-0" id="task-list-two">
                                                 <!-- task -->
                                                 <div class="row justify-content-sm-between task-item">
-                                                    <div class="col-lg-6 mb-2">
+                                                    <div class="col-lg-5 mb-2">
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" data-id="{{ $old['id'] }}" class="custom-control-input admintaskListDashboard" id="old{{ $old['id'] }}" {{ ($old['user_id']) ? "checked" : "" }}>
                                                             <label class="custom-control-label" for="old{{ $old['id'] }}">
@@ -172,7 +172,7 @@
                                                             </label>
                                                         </div> <!-- end checkbox -->
                                                     </div> <!-- end col -->
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-7">
                                                         <div class="d-sm-flex justify-content-between">
                                                             <div>
                                                                 <img src="{{ config('constants.image_url').'/common-asset/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />

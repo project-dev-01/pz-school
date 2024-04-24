@@ -345,12 +345,12 @@
                 $permissionchildmenu = App\Helpers\Helper::PostMethod(config('constants.api.schoolmenuaccess_list'),$permissionchildmenudata);
 
                 @endphp
-                @if($permissionmainmenu['data']=='' || $permissionmainmenu['data']==null)
+                @if (isset($permissionmainmenu['data']) && ($permissionmainmenu['data'] == '' || $permissionmainmenu['data'] == null)) 
 
                 <li>
                     <a href="#">*.{{ __('messages.alertmenus2') }} </a>
                 </li>
-                @else
+                @elseif (isset($permissionmainmenu['data']))
 
                 @foreach($permissionmainmenu['data'] as $menu)
                 @if($menu['menu_status']==1)
@@ -424,6 +424,7 @@
                             @endif
                             @endif
                             @endforeach
+                            
                         </ul>
                     </div>
                     @endif

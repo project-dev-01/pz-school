@@ -140,21 +140,21 @@
             <div class="row">
                 <div class="col">
                     <div class="card">
-                        <ul class="nav nav-tabs" style="display: inline-block;">
-                            <li class="nav-item d-flex justify-content-between align-items-center">
+                    <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
                                 <!-- Button placed on the left side -->
                                 <h4 class="navv">
                                     {{ __('messages.to_do_list') }}
                                 </h4>
                                 <!-- Up and Down Arrows -->
-                                <button class="btn btn-link collapse-button" type="button" id="collapseButton7" aria-expanded="true" aria-controls="toDoList">
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
                                     <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
-                         background: white; color: blue;width: 20px;"></i></b>
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
                                 </button>
                             </li>
                         </ul>
 
-                        <div class="card-body collapse" id="toDoList">
+                        <div class="card-body collapse show" id="toDoList">
                             <div class="row" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                                 <div class="col">
                                     <a class="text-dark" data-toggle="collapse" data-id="today" data-count="{{ isset($get_to_do_list_dashboard['today'])?count($get_to_do_list_dashboard['today']):0 }}" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">
@@ -390,14 +390,14 @@
                                         <h4 class="navv"> {{ __('messages.homework_list') }}
                                             <h4>
                                                 <!-- Up and Down Arrows -->
-                                                <button class="btn btn-link collapse-button" type="button" id="collapseButton6" aria-expanded="true" aria-controls="toDoList">
+                                                <button class="btn btn-link collapse-button" type="button" id="collapseButton2" aria-expanded="true" aria-controls="toDoList">
                                                     <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
-                         background: white; color: blue;width: 20px;"></i></b>
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
                                                 </button>
                                     </li>
                                 </ul>
 
-                                <div class="card-body collapse" id="toDoList1">
+                                <div class="card-body collapse show" id="toDoList1">
                                     @forelse ($get_homework_list_dashboard as $key => $homework)
                                     <div class="row" data-plugin="dragula" data-containers='["homework-list-show"]'>
                                         <div class="col">
@@ -468,14 +468,14 @@
                         <h4 class="navv">{{ __('messages.Calendar') }}
                             <h4>
                                 <!-- Up and Down Arrows -->
-                                <button class="btn btn-link " type="button" id="collapseButton5"  aria-expanded="true" aria-controls="toDoList">
+                                <button class="btn btn-link " type="button" id="collapseButton3"  aria-expanded="true" aria-controls="toDoList">
                                     <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
-                         background: white; color: blue;width: 20px;"></i></b>
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
                                 </button>
                     </li>
                 </ul>
 
-                <div class="card-body collapse">
+                <div class="card-body collapse show">
                     <div class="row">
                         <div class="col-lg-12">
                             <div id="student_calendor"></div>
@@ -661,14 +661,14 @@
                         <h4 class="navv">{{ __('messages.leave_status') }}
                             <h4>
                                 <!-- Up and Down Arrows -->
-                                <button class="btn btn-link " type="button"  id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                <button class="btn btn-link " type="button"  id="collapseButton4" aria-expanded="true" aria-controls="toDoList">
                                     <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
-                         background: white; color: blue;width: 20px;"></i></b>
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
                                 </button>
                     </li>
                 </ul>
 
-                <div class="card-body collapse">
+                <div class="card-body collapse show">
                     <div class="table-responsive">
                         <table class="table w-100 nowrap" id="studentleave-table">
                             <thead>
@@ -701,15 +701,15 @@
                         <!-- Button placed on the left side -->
                         <h4 class="navv"> {{ __('messages.student_ranking_class') }} & {{ __('messages.subject') }}</h4>
                         <!-- Up and Down Arrows -->
-                        <button class="btn btn-link " type="button"  id="collapseButton2" aria-expanded="true" aria-controls="toDoList">
+                        <button class="btn btn-link " type="button"  id="collapseButton5" aria-expanded="true" aria-controls="toDoList">
                             <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
-                         background: white; color: blue;width: 20px;"></i></b>
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
                         </button>
                     </li>
                 </ul>
 
 
-                <div class="card-body collapse">
+                <div class="card-body collapse show">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -787,14 +787,14 @@
                         <!-- Button placed on the left side -->
                         <h4 class="navv">{{ __('messages.semester_wise_exam_marks') }}
                             <h4>
-                                <button class="btn btn-link " type="button" id="collapseButton3"  aria-expanded="true" aria-controls="toDoList">
+                                <button class="btn btn-link " type="button" id="collapseButton6"  aria-expanded="true" aria-controls="toDoList">
                                     <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
-                         background: white; color: blue;width: 20px;"></i></b>
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
                                 </button>
                     </li>
                 </ul>
 
-                <div class="card-body collapse">
+                <div class="card-body collapse show">
                     <div class="table-responsive">
                         <table class="table table-bordered w-100 nowrap" id="">
                             <thead>
@@ -852,14 +852,14 @@
                         <!-- Button placed on the left side -->
                         <h4 class="navv"> {{ __('messages.exam_marks_status') }}
                             <h4>
-                                <button class="btn btn-link " type="button" id="collapseButton4"  aria-expanded="true" aria-controls="toDoList">
+                                <button class="btn btn-link " type="button" id="collapseButton7"  aria-expanded="true" aria-controls="toDoList">
                                     <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
-                         background: white; color: blue;width: 20px;"></i></b>
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
                                 </button>
                     </li>
                 </ul>
 
-                <div class="card-body collapse">
+                <div class="card-body collapse show">
                     <ul class="nav nav-tab nav-bordered float-right">
                         <li class="nav-item">
                             <a href="#mcex" data-toggle="tab" aria-expanded="true" class="nav-link active">

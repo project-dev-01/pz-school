@@ -509,7 +509,7 @@
                                     @if($form_field['religion'] == 0)
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="txt_religion">{{ __('messages.religion') }}<span class="text-danger">*</span></label>
+                                            <label for="txt_religion">{{ __('messages.religion') }}</label>
                                             <select class="form-control" name="txt_religion" id="religion">
                                                 <option value="">{{ __('messages.select_religion') }}</option>
                                                 @forelse($religion as $r)

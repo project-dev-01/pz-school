@@ -10217,9 +10217,9 @@ class AdminController extends Controller
         $academic_session_id = [
             'id' => session()->get('academic_session_id')
         ];
-        
+        //dd($academic_session_id);
         $academic_year = Helper::PostMethod(config('constants.api.academic_year_details'), $academic_session_id);
-       // dd($academic_year['data']['name']);
+        //dd($academic_year);
         $usernames = Helper::GETMethodWithData(config('constants.api.buletin_board_usernames'), $data);
         $getClasses = Helper::GetMethod(config('constants.api.class_list'));
         $emp_department = Helper::PostMethod(config('constants.api.emp_department'), []);
@@ -10229,7 +10229,8 @@ class AdminController extends Controller
                 'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [],
                 'emp_department' => isset($emp_department['data']) ? $emp_department['data'] : [],
                 'usernames' => isset($usernames['data']) ? $usernames['data'] : [],
-                'academic_year' => isset($academic_year['data']['name']) ? $academic_year['data']['name'] : [],
+                'academic_year' => isset($academic_year['data']['name']) ? $academic_year['data']['name'] : ''
+
             ]
         );
     }

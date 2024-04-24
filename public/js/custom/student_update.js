@@ -433,7 +433,7 @@ $(function () {
             drp_state: "required",
             drp_country: "required",
             drp_post_code: "required",
-            txt_religion: "required",
+            // txt_religion: "required",
             nationality: "required",
             txt_passport: "required",
             passport_expiry_date: "required",
