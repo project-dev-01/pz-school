@@ -903,7 +903,7 @@
                                                     </div>
                                                     <label for="passport_photo" class="error"></label>
                                                     @if(isset($student['passport_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['passport_photo'])
-                                                <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['passport_photo'] }}" target="_blank"> {{ __('messages.passport_photo') }} </a>
+                                                <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['passport_photo'] }}" target="_blank"> {{ $student['passport_photo'] }} </a>
                                                 @endif
                                                     <span id="passport_photo_name"></span>
                                                     
@@ -952,7 +952,7 @@
                                                     </div>
                                                     <label for="visa_photo" class="error"></label>
                                                     @if(isset($student['visa_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['visa_photo'])
-                                                <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['visa_photo'] }}" target="_blank"> {{ __('messages.visa_photo') }} </a>
+                                                <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['visa_photo'] }}" target="_blank"> {{ $student['visa_photo'] }} </a>
                                                 @endif
                                                     <span id="visa_photo_name"></span>
                                                  
