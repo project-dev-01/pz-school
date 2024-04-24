@@ -318,6 +318,7 @@
     // $("#to_ldate").val(at);
 
     var parent_leaveapply_storage = localStorage.getItem('parent_leaveapply_details');
+    var holidayEventList = "{{ config('constants.api.holidays_list_event') }}";
 </script>
 <!-- to do list -->
 <script src="{{ asset('js/custom/parent_leave_app.js') }}"></script>

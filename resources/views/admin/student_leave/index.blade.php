@@ -395,6 +395,7 @@
     var getReasonsByLeaveType = "{{ config('constants.api.get_reasons_by_leave_type') }}";
     var getStudentList = "{{ config('constants.api.get_student_details') }}";
     var leaveTypeWiseGetAllReason = "{{ config('constants.api.leave_type_wise_get_all_reason') }}";
+    var holidayEventList = "{{ config('constants.api.holidays_list_event') }}";
 </script>
 <script src="{{ asset('js/custom/student_leave_list_byadmin.js') }}"></script>
 <script src="{{ asset('js/custom/student_leave_direct_approve.js') }}"></script>
