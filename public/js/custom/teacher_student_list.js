@@ -1,67 +1,52 @@
 $(function () {
 
     // $('#dual_nationality_container').hide();
-    var formData = {
-        student_name: null,
-        class_id: null,
-        section_id: null,
-        status: "0",
-        academic_year: academic_session_id
-    };
-    if (studentList !== undefined && studentList !== null) {
-        getStudentList(formData);
-    }
+    // var formData = {
+    //     student_name: null,
+    //     class_id: null,
+    //     section_id: null,
+    //     status: "0",
+    //     academic_year: academic_session_id
+    // };
+    // if (studentList !== undefined && studentList !== null) {
+    //     getStudentList(formData);
+    // }
 
 
     // rules validation
-
+    // rules validation
+    $("#StudentFilter").validate({
+        rules: {
+            class_id: "required",
+            section_id: "required"
+        }
+    });
     // get student list
     $('#StudentFilter').on('submit', function (e) {
         e.preventDefault();
-        // var StudentFilter = $("#StudentFilter").valid();
-        // if (StudentFilter === true) {
-        // var academic_year = $('#academic_year').val();
-        var student_name = $('#student_name').val();
-        var department_id_filter = $('#department_id_filter').val();
-        var class_id = $('#class_id').val();
-        var section_id = $('#section_id').val();
-        var session_id = $('#session_id').val();
-        var status = $('#student_status').val();
-
-        var classObj = {
-            student_name: student_name,
-            department_id: department_id_filter,
-            classID: class_id,
-            sectionID: section_id,
-            sessionID: session_id,
-            userID: userID,
-            status: status,
-            // academic_year:academic_year
-        };
-        // setLocalStorageForStudentList(classObj);
-
-        var formData = {
-            status: status,
-            student_name: student_name,
-            department_id: department_id_filter,
-            class_id: class_id,
-            section_id: section_id,
-            session_id: session_id,
-            // academic_year:academic_year
-        };
-        getStudentList(formData);
-        // } else {
-        //     $("#student").hide("slow");
-        // }
+        var StudentFilter = $("#StudentFilter").valid();
+        if (StudentFilter === true) {
+            // if (StudentFilter === true) {
+            // var academic_year = $('#academic_year').val();
+            var student_name = $('#student_name').val();
+            var class_id = $('#class_id').val();
+            var section_id = $('#section_id').val();
+            var formData = {
+                student_name: student_name,
+                class_id: class_id,
+                section_id: section_id
+            };
+            getStudentList(formData);
+        }
 
     });
     function getStudentList(formData) {
+        // $("#overlay").fadeIn(300);
         $("#student").show("slow");
         // set download filter value
         $('#excelStudentName').val(formData.student_name);
         $('#excelClassID').val(formData.class_id);
         $('#excelSectionID').val(formData.section_id);
-        $('#excelStatus').val(formData.status);
         var table = $('#student-table').DataTable({
             processing: true,
             info: true,
