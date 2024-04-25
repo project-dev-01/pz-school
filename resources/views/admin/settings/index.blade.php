@@ -130,7 +130,14 @@
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label for="old">{{ __('messages.old_password') }} :</label>
+                                        <div class="input-group input-group-merge">                                        
                                         <input type="password" class="form-control" id="old" name="old" placeholder="{{ __('messages.old_password') }}">
+                                        <div class="input-group-append" data-password="false">
+                                            <div class="input-group-text">
+                                                <span class="password-eye"></span>
+                                            </div>
+                                        </div>
+                                        </div>
                                         <span class="text-danger error-text old_error"></span>
                                     </div>
                                 </div>
@@ -139,7 +146,14 @@
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label for="password">{{ __('messages.new_password') }} : <span style="color:blue;">({{ __('messages.password_contain_8_charcs') }}.):</span></label>
+                                        <div class="input-group input-group-merge">
                                         <input type="password" class="form-control" id="password" name="password" placeholder="{{ __('messages.new_password') }}">
+                                        <div class="input-group-append" data-password="false">
+                                            <div class="input-group-text">
+                                                <span class="password-eye"></span>
+                                            </div>
+                                        </div>
+                                        </div>
                                         <span class="text-danger error-text password_error"></span>
                                     </div>
                                 </div>
@@ -148,11 +162,18 @@
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label for="confirmed">{{ __('messages.confirm_new_password') }} :</label>
+                                    <div class="input-group input-group-merge">
                                         <input type="password" class="form-control" id="confirmed" name="confirmed" placeholder="{{ __('messages.confirm_new_password') }}">
+                                        <div class="input-group-append" data-password="false">
+                                            <div class="input-group-text">
+                                                <span class="password-eye"></span>
+                                            </div>
+                                        </div>
+                                    </div>
                                         <span class="text-danger error-text confirmed_error"></span>
                                     </div>
                                 </div>
-                            </div> <!-- end row -->
+                            </div> <!-- end row -->                                
                             <div class="text-right">
                                 <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i> {{ __('messages.save') }}</button>
                             </div>
