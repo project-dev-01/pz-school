@@ -861,7 +861,7 @@ $(function () {
                 { data: 'name', name: 'name' },
                 { data: 'name_common', name: 'name_common' },
                 { data: 'register_no', name: 'register_no' },
-                { data: 'roll_no', name: 'roll_no' },
+                { data: 'attendance_no', name: 'attendance_no' },
                 { data: 'gender', name: 'gender' },
                 { data: 'email', name: 'email' },
                 { data: 'actions', name: 'actions', orderable: false, searchable: false }

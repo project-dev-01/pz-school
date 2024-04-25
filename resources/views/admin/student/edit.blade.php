@@ -1132,7 +1132,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">{{ __('messages.attendance_no') }}</label>
-                                                <input type="" id="txt_roll_no" class="form-control" name="txt_roll_no" placeholder="{{ __('messages.enter_attendance_no') }}" value="{{ isset($student['roll_no']) ? $student['roll_no'] : ''}}" data-parsley-trigger="change">
+                                                <input type="" id="txt_roll_no" class="form-control" name="txt_roll_no" placeholder="{{ __('messages.enter_attendance_no') }}" value="{{ isset($student['attendance_no']) ? $student['attendance_no'] : ''}}" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
