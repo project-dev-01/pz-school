@@ -215,10 +215,11 @@
     .country-select {
         display: block;
     }
-    .country-select .country-list
-    {
+
+    .country-select .country-list {
         width: 361px !important;
     }
+
     .ui-datepicker {
         width: 20.2em;
     }
@@ -270,10 +271,11 @@
             width: 13.3em;
         }
     }
+
     .breadcrumb-item+.breadcrumb-item::before {
-    font-family: "Material Design Icons";
-    color: #3A4265;
-}
+        font-family: "Material Design Icons";
+        color: #3A4265;
+    }
 </style>
 @if(Session::get('locale')=="en")
 <style>
@@ -327,119 +329,122 @@
     <!-- end page title -->
     <div class="row">
         <div class="col-xl-12">
+            <div class="">
 
-            <form id="addApplication" method="post" action="{{ route('parent.application.add') }}" enctype="multipart/form-data" autocomplete="off">
-                @csrf
-                <ul class="nav nav-tabs" style="display: inline-block;">
-                    <li class="nav-item d-flex justify-content-between align-items-center">
-                    <h4 class="navv">
-                                {{ __('messages.student_details') }}
-                                <h4>
-                                <!-- Up and Down Arrows -->
-                                <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
-                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+
+                <form id="addApplication" method="post" action="{{ route('parent.application.add') }}" enctype="multipart/form-data" autocomplete="off">
+                    @csrf
+                    <div class="card">
+                        <ul class="nav nav-tabs" style="display: inline-block;">
+                            <li class="nav-item d-flex justify-content-between align-items-center">
+                                <h4 class="navv">
+                                    {{ __('messages.student_details') }}
+                                    <h4>
+                                        <!-- Up and Down Arrows -->
+                                        <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                            <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
                          background: white; color: blue;width: 25px;padding:-1px"></i></b>
-                                </button>
+                                        </button>
                             </li>
-                        </ul>   
-                    <div class="card-body collapse show">
-                        <div class="tab-content">
-                            <!-- start Dashboard -->
-                            <div class="tab-pane show active" id="basic">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="last_name" name="last_name" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                        </ul>
+                        <div class="card-body collapse show">
+                            <div class="tab-content">
+                                <!-- start Dashboard -->
+                                <div class="tab-pane show active" id="basic">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="last_name" name="last_name" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="middle_name">{{ __('messages.middle_name') }}</label>
+                                                <input type="text" class="form-control" id="middle_name" name="middle_name" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="first_name" name="first_name" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="middle_name">{{ __('messages.middle_name') }}</label>
-                                            <input type="text" class="form-control" id="middle_name" name="middle_name" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                    @if($form_field['name_furigana'] == 0)
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="last_name_furigana" name="last_name_furigana" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="first_name" name="first_name" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="middle_name_furigana">{{ __('messages.middle_name_furigana') }}<span class="text-danger"></span></label>
+                                                <input type="text" class="form-control" id="middle_name_furigana" name="middle_name_furigana" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                @if($form_field['name_furigana'] == 0)
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="last_name_furigana" name="last_name_furigana" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="middle_name_furigana">{{ __('messages.middle_name_furigana') }}<span class="text-danger"></span></label>
-                                            <input type="text" class="form-control" id="middle_name_furigana" name="middle_name_furigana" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="first_name_furigana" name="first_name_furigana" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-                                        </div>
-                                    </div>
-                                </div>
-                                @endif
-                                @if($form_field['name_english'] == 0)
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="last_name_english" name="last_name_english" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="middle_name_english">{{ __('messages.middle_name_roma') }}</label>
-                                            <input type="text" class="form-control" id="middle_name_english" name="middle_name_english" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="first_name_english" name="first_name_english" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-                                        </div>
-                                    </div>
-                                </div>
-                                @endif
-                                <div class="row">
-                                    @if($form_field['name_common'] == 0)
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="first_name_common">{{ __('messages.first_name_common') }}</label>
-                                            <input type="text" class="form-control" id="first_name_common" name="first_name_common" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="last_name_common">{{ __('messages.last_name_common') }}</label>
-                                            <input type="text" class="form-control" id="last_name_common" name="last_name_common" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="first_name_furigana" name="first_name_furigana" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
                                         </div>
                                     </div>
                                     @endif
-                                    <!-- <div class="row"> -->
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="date_of_birth">{{ __('messages.date_of_birth') }}<span class="text-danger">*</span< /label>
-                                                    <div class="input-group input-group-merge">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">
-                                                                <span class="fas fa-calendar-alt"></span>
-                                                            </div>
-                                                        </div>
-                                                        <input type="text" class="form-control" name="date_of_birth" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="date_of_birth">
-                                                    </div>
-                                                    <label for="date_of_birth" class="error"></label>
+                                    @if($form_field['name_english'] == 0)
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="last_name_english" name="last_name_english" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
                                         </div>
-                                        <!-- <div class="form-group">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="middle_name_english">{{ __('messages.middle_name_roma') }}</label>
+                                                <input type="text" class="form-control" id="middle_name_english" name="middle_name_english" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="first_name_english" name="first_name_english" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
+                                    <div class="row">
+                                        @if($form_field['name_common'] == 0)
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="first_name_common">{{ __('messages.first_name_common') }}</label>
+                                                <input type="text" class="form-control" id="first_name_common" name="first_name_common" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="last_name_common">{{ __('messages.last_name_common') }}</label>
+                                                <input type="text" class="form-control" id="last_name_common" name="last_name_common" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                        </div>
+                                        @endif
+                                        <!-- <div class="row"> -->
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="date_of_birth">{{ __('messages.date_of_birth') }}<span class="text-danger">*</span< /label>
+                                                        <div class="input-group input-group-merge">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">
+                                                                    <span class="fas fa-calendar-alt"></span>
+                                                                </div>
+                                                            </div>
+                                                            <input type="text" class="form-control" name="date_of_birth" placeholder="{{ __('messages.yyyy_mm_dd') }}" id="date_of_birth">
+                                                        </div>
+                                                        <label for="date_of_birth" class="error"></label>
+                                            </div>
+                                            <!-- <div class="form-group">
                                                     <label for="date_of_birth">{{ __('messages.date_of_birth') }}<span class="text-danger">*</span></label>
                                                     <div class="input-group input-group-merge">
                                                         <input type="text" class="form-control" id="date_of_birth" name="date_of_birth" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
@@ -450,57 +455,57 @@
                                                         </div>
                                                     </div>
                                                 </div> -->
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="gender">{{ __('messages.gender') }}<span class="text-danger">*</span></label>
-                                            <select id="gender" name="gender" class="form-control">
-                                                <option value="">{{ __('messages.select_gender') }}</option>
-                                                <option value="Male">{{ __('messages.male') }}</option>
-                                                <option value="Female">{{ __('messages.female') }}</option>
-                                            </select>
                                         </div>
                                     </div>
-                                    <!-- </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="gender">{{ __('messages.gender') }}<span class="text-danger">*</span></label>
+                                                <select id="gender" name="gender" class="form-control">
+                                                    <option value="">{{ __('messages.select_gender') }}</option>
+                                                    <option value="Male">{{ __('messages.male') }}</option>
+                                                    <option value="Female">{{ __('messages.female') }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- </div>
                                             <div class="row"> -->
-                                    <!-- <div class="col-md-4">
+                                        <!-- <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
                                                     <input type="text" class="form-control" id="email" name="email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div> -->
-                                    @if($form_field['race'] == 0)
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="race">{{ __('messages.race') }}</label>
-                                            <select class="form-control" name="race" id="race">
-                                                <option value="">{{ __('messages.select_race') }}</option>
-                                                @forelse($races as $r)
-                                                <option value="{{$r['id']}}">{{$r['races_name']}}</option>
-                                                @empty
-                                                @endforelse
-                                            </select>
+                                        @if($form_field['race'] == 0)
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="race">{{ __('messages.race') }}</label>
+                                                <select class="form-control" name="race" id="race">
+                                                    <option value="">{{ __('messages.select_race') }}</option>
+                                                    @forelse($races as $r)
+                                                    <option value="{{$r['id']}}">{{$r['races_name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @if($form_field['religion'] == 0)
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="religion">{{ __('messages.religion') }}</label>
+                                                <select class="form-control" name="religion" id="religion">
+                                                    <option value="">{{ __('messages.select_religion') }}</option>
+                                                    @forelse($religion as $r)
+                                                    <option value="{{$r['id']}}">{{$r['religions_name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                     @endif
-                                    @if($form_field['religion'] == 0)
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="religion">{{ __('messages.religion') }}</label>
-                                            <select class="form-control" name="religion" id="religion">
-                                                <option value="">{{ __('messages.select_religion') }}</option>
-                                                @forelse($religion as $r)
-                                                <option value="{{$r['id']}}">{{$r['religions_name']}}</option>
-                                                @empty
-                                                @endforelse
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endif
-                                <!-- <div class="col-md-4">
+                                    <!-- <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="blood_group">{{ __('messages.blood_group') }}</label>
                                                     <select id="blood_group" name="blood_group" class="form-control">
@@ -516,223 +521,223 @@
                                                     </select>
                                                 </div>
                                             </div> -->
-                                @if($form_field['nationality'] == 0)
+                                    @if($form_field['nationality'] == 0)
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
+                                                <input type="text" maxlength="50" id="nationality" class="form-control country" placeholder="{{ __('messages.enter_nationality') }}" name="nationality" data-parsley-trigger="change">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox" style="margin-top: 2.25rem;">
+
+                                                    <input type="checkbox" name="has_dual_nationality_checkbox" id="has_dual_nationality_checkbox" class="custom-control-input">
+                                                    <label class="custom-control-label" for="has_dual_nationality_checkbox">{{ __('messages.dual_nationality') }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4" id="dual_nationality_container" style="display: none;">
+                                            <div class="form-group">
+                                                <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
+                                                <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" data-parsley-trigger="change">
+                                            </div>
+                                        </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="card">
+                        <ul class="nav nav-tabs" style="display: inline-block;">
+                            <li class="nav-item d-flex justify-content-between align-items-center">
+                                <h4 class="navv">
+                                    {{ __('messages.prev_school_details') }}
+                                    <h4>
+                                        <!-- Up and Down Arrows -->
+                                        <button class="btn btn-link collapse-button" type="button" id="collapseButton2" aria-expanded="true" aria-controls="toDoList">
+                                            <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                        </button>
+                            </li>
+                        </ul>
+
+                        <div class="card-body collapse show">
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input skip" id="skip_prev_school_details" name="skip_prev_school_details">
+                                    <label class="custom-control-label" for="skip_prev_school_details">{{ __('messages.skip_prev_school_details') }}</label>
+                                </div>
+                            </div>
+                            <div id="prev_school_details">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
-                                            <input type="text" maxlength="50" id="nationality" class="form-control country" placeholder="{{ __('messages.enter_nationality') }}" name="nationality" data-parsley-trigger="change">
+                                            <label for="school_last_attended">{{ __('messages.school_name') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control prev_school_form" id="school_last_attended" name="school_last_attended" placeholder="{{ __('messages.enter_school_name') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <div class="custom-control custom-checkbox" style="margin-top: 2.25rem;">
-
-                                                <input type="checkbox" name="has_dual_nationality_checkbox" id="has_dual_nationality_checkbox" class="custom-control-input">
-                                                <label class="custom-control-label" for="has_dual_nationality_checkbox">{{ __('messages.dual_nationality') }}</label>
-                                            </div>
+                                            <label for="school_country">{{ __('messages.country') }}<span class="text-danger">*</span></label>
+                                            <input type="text" maxlength="50" id="school_country" name="school_country" class="form-control country prev_school_form" placeholder="{{ __('messages.country') }}" data-parsley-trigger="change">
                                         </div>
                                     </div>
-                                    <div class="col-md-4" id="dual_nationality_container" style="display: none;">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
-                                            <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" data-parsley-trigger="change">
+                                            <label for="school_state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control prev_school_form" id="school_state" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
-                                    @endif
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><br>
-                <div class="card">
-                <ul class="nav nav-tabs" style="display: inline-block;">
-                    <li class="nav-item d-flex justify-content-between align-items-center">
-                    <h4 class="navv">
-                                {{ __('messages.prev_school_details') }}
-                                <h4>
-                                <!-- Up and Down Arrows -->
-                                <button class="btn btn-link collapse-button" type="button" id="collapseButton2" aria-expanded="true" aria-controls="toDoList">
-                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
-                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
-                                </button>
-                            </li>
-                        </ul>      
-                  
-                    <div class="card-body collapse show">
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input skip" id="skip_prev_school_details" name="skip_prev_school_details">
-                                <label class="custom-control-label" for="skip_prev_school_details">{{ __('messages.skip_prev_school_details') }}</label>
-                            </div>
-                        </div>
-                        <div id="prev_school_details">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="school_last_attended">{{ __('messages.school_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control prev_school_form" id="school_last_attended" name="school_last_attended" placeholder="{{ __('messages.enter_school_name') }}" aria-describedby="inputGroupPrepend">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="school_city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control prev_school_form" id="school_city" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.city') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="school_postal_code">{{ __('messages.postal_code') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control prev_school_form" id="school_postal_code" name="school_postal_code" placeholder="{{ __('messages.enter') }} {{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="school_enrollment_status">{{ __('messages.enrollment_status') }}<span class="text-danger">*</span></label>
+                                            <select id="school_enrollment_status" name="school_enrollment_status" class="form-control prev_school_form">
+                                                <option value="">{{ __('messages.select_enrollment_status') }}</option>
+                                                <option value="Regular class">{{ __('messages.regular_class') }}</option>
+                                                <option value="Special need class">{{ __('messages.special_need_class') }}</option>
+                                                <option value="Regular guidance class">{{ __('messages.regular_guidance_class') }}</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="school_country">{{ __('messages.country') }}<span class="text-danger">*</span></label>
-                                        <input type="text" maxlength="50" id="school_country" name="school_country" class="form-control country prev_school_form" placeholder="{{ __('messages.country') }}" data-parsley-trigger="change">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="school_state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control prev_school_form" id="school_state" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="school_city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control prev_school_form" id="school_city" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.city') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="school_postal_code">{{ __('messages.postal_code') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control prev_school_form" id="school_postal_code" name="school_postal_code" placeholder="{{ __('messages.enter') }} {{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="school_enrollment_status">{{ __('messages.enrollment_status') }}<span class="text-danger">*</span></label>
-                                        <select id="school_enrollment_status" name="school_enrollment_status" class="form-control prev_school_form">
-                                            <option value="">{{ __('messages.select_enrollment_status') }}</option>
-                                            <option value="Regular class">{{ __('messages.regular_class') }}</option>
-                                            <option value="Special need class">{{ __('messages.special_need_class') }}</option>
-                                            <option value="Regular guidance class">{{ __('messages.regular_guidance_class') }}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="school_enrollment_status_tendency">{{ __('messages.enrollment_status_tendency') }}<span class="text-danger">*</span></label>
-                                        <select id="school_enrollment_status_tendency" name="school_enrollment_status_tendency" class="form-control prev_school_form">
-                                            <option value="">{{ __('messages.select_enrollment_status') }}</option>
-                                            <option value="Yes">{{ __('messages.yes') }}</option>
-                                            <option value="No">{{ __('messages.no') }}</option>
-                                        </select>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="school_enrollment_status_tendency">{{ __('messages.enrollment_status_tendency') }}<span class="text-danger">*</span></label>
+                                            <select id="school_enrollment_status_tendency" name="school_enrollment_status_tendency" class="form-control prev_school_form">
+                                                <option value="">{{ __('messages.select_enrollment_status') }}</option>
+                                                <option value="Yes">{{ __('messages.yes') }}</option>
+                                                <option value="No">{{ __('messages.no') }}</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <br>
-                <div class="card">
-                <ul class="nav nav-tabs" style="display: inline-block;">
-                    <li class="nav-item d-flex justify-content-between align-items-center">
-                    <h4 class="navv">
-                                {{ __('messages.mother_details') }}
-                                <h4>
-                                <!-- Up and Down Arrows -->
-                                <button class="btn btn-link collapse-button" type="button" id="collapseButton3" aria-expanded="true" aria-controls="toDoList">
-                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                    <br>
+                    <div class="card">
+                        <ul class="nav nav-tabs" style="display: inline-block;">
+                            <li class="nav-item d-flex justify-content-between align-items-center">
+                                <h4 class="navv">
+                                    {{ __('messages.mother_details') }}
+                                    <h4>
+                                        <!-- Up and Down Arrows -->
+                                        <button class="btn btn-link collapse-button" type="button" id="collapseButton3" aria-expanded="true" aria-controls="toDoList">
+                                            <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
                          background: white; color: blue;width: 25px;padding:-1px"></i></b>
-                                </button>
+                                        </button>
                             </li>
-                        </ul>      
-                  
-                    <div class="card-body collapse show">
+                        </ul>
 
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input skip" id="skip_mother_details" name="skip_mother_details">
-                                <label class="custom-control-label" for="skip_mother_details">{{ __('messages.skip_mother_details') }}</label>
-                            </div>
-                        </div>
-                        <div id="mother_details">
+                        <div class="card-body collapse show">
 
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="mother_last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name" value="{{ isset($guardian['mother_last_name']) ? $guardian['mother_last_name'] : ''}}" name="mother_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="mother_middle_name">{{ __('messages.middle_name') }}</label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name" value="{{ isset($guardian['mother_middle_name']) ? $guardian['mother_middle_name'] : ''}}" name="mother_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="mother_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name" value="{{ isset($guardian['mother_first_name']) ? $guardian['mother_first_name'] : ''}}" name="mother_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input skip" id="skip_mother_details" name="skip_mother_details">
+                                    <label class="custom-control-label" for="skip_mother_details">{{ __('messages.skip_mother_details') }}</label>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="mother_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name_furigana" value="{{ isset($guardian['mother_last_name_furigana']) ? $guardian['mother_last_name_furigana'] : ''}}" name="mother_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                            <div id="mother_details">
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="mother_last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name" value="{{ isset($guardian['mother_last_name']) ? $guardian['mother_last_name'] : ''}}" name="mother_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="mother_middle_name">{{ __('messages.middle_name') }}</label>
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name" value="{{ isset($guardian['mother_middle_name']) ? $guardian['mother_middle_name'] : ''}}" name="mother_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="mother_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name" value="{{ isset($guardian['mother_first_name']) ? $guardian['mother_first_name'] : ''}}" name="mother_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="mother_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name_furigana" value="{{ isset($guardian['mother_middle_name_furigana']) ? $guardian['mother_middle_name_furigana'] : ''}}" name="mother_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="mother_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name_furigana" value="{{ isset($guardian['mother_last_name_furigana']) ? $guardian['mother_last_name_furigana'] : ''}}" name="mother_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="mother_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name_furigana" value="{{ isset($guardian['mother_middle_name_furigana']) ? $guardian['mother_middle_name_furigana'] : ''}}" name="mother_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="mother_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name_furigana" value="{{ isset($guardian['mother_first_name_furigana']) ? $guardian['mother_first_name_furigana'] : ''}}" name="mother_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="mother_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name_furigana" value="{{ isset($guardian['mother_first_name_furigana']) ? $guardian['mother_first_name_furigana'] : ''}}" name="mother_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="mother_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name_english" value="{{ isset($guardian['mother_last_name_english']) ? $guardian['mother_last_name_english'] : ''}}" name="mother_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="mother_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name_english" value="{{ isset($guardian['mother_middle_name_english']) ? $guardian['mother_middle_name_english'] : ''}}" name="mother_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="mother_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name_english" value="{{ isset($guardian['mother_first_name_english']) ? $guardian['mother_first_name_english'] : ''}}" name="mother_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="mother_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name_english" value="{{ isset($guardian['mother_last_name_english']) ? $guardian['mother_last_name_english'] : ''}}" name="mother_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="mother_nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control copy_parent_info mother_form country" id="mother_nationality" name="mother_nationality" value="{{ isset($guardian['mother_nationality']) ? $guardian['mother_nationality'] : ''}}" placeholder="{{ __('messages.enter_nationality') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="mother_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name_english" value="{{ isset($guardian['mother_middle_name_english']) ? $guardian['mother_middle_name_english'] : ''}}" name="mother_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="mother_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control  mother_form" id="mother_email" value="{{ isset($guardian['mother_email']) ? $guardian['mother_email'] : ''}}" name="mother_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="mother_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name_english" value="{{ isset($guardian['mother_first_name_english']) ? $guardian['mother_first_name_english'] : ''}}" name="mother_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="mother_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control copy_parent_info mother_form number_validation" id="mother_phone_number" value="{{ isset($guardian['mother_phone_number']) ? $guardian['mother_phone_number'] : ''}}" name="mother_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                            <label for="mother_phone_number" class="error"></label>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="mother_nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info mother_form country" id="mother_nationality" name="mother_nationality" value="{{ isset($guardian['mother_nationality']) ? $guardian['mother_nationality'] : ''}}" placeholder="{{ __('messages.enter_nationality') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="mother_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control  mother_form" id="mother_email" value="{{ isset($guardian['mother_email']) ? $guardian['mother_email'] : ''}}" name="mother_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="mother_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info mother_form number_validation" id="mother_phone_number" value="{{ isset($guardian['mother_phone_number']) ? $guardian['mother_phone_number'] : ''}}" name="mother_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
-                                        <label for="mother_phone_number" class="error"></label>
-                                    </div>
-                                </div>
-                                <!-- <div class="col-md-4">
+                                    <!-- <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
                                                         <select  id="mother_occupation" name="mother_occupation" class="form-control copy_parent_info mother_form">
@@ -744,124 +749,124 @@
                                                         </select>
                                                     </div>
                                                 </div> -->
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="mother_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_occupation" name="mother_occupation" value="{{ isset($guardian['mother_occupation']) ? $guardian['mother_occupation'] : ''}}" placeholder="{{ __('messages.enter_occupation') }}" aria-describedby="inputGroupPrepend">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="mother_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_occupation" name="mother_occupation" value="{{ isset($guardian['mother_occupation']) ? $guardian['mother_occupation'] : ''}}" placeholder="{{ __('messages.enter_occupation') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <br>
-                <div class="card">
-                <ul class="nav nav-tabs" style="display: inline-block;">
-                    <li class="nav-item d-flex justify-content-between align-items-center">
-                    <h4 class="navv">
-                                {{ __('messages.father_details') }}
-                                <h4>
-                                <!-- Up and Down Arrows -->
-                                <button class="btn btn-link collapse-button" type="button" id="collapseButton4" aria-expanded="true" aria-controls="toDoList">
-                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                    <br>
+                    <div class="card">
+                        <ul class="nav nav-tabs" style="display: inline-block;">
+                            <li class="nav-item d-flex justify-content-between align-items-center">
+                                <h4 class="navv">
+                                    {{ __('messages.father_details') }}
+                                    <h4>
+                                        <!-- Up and Down Arrows -->
+                                        <button class="btn btn-link collapse-button" type="button" id="collapseButton4" aria-expanded="true" aria-controls="toDoList">
+                                            <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
                          background: white; color: blue;width: 25px;padding:-1px"></i></b>
-                                </button>
+                                        </button>
                             </li>
-                        </ul>      
-                  
-                  
-                    <div class="card-body collapse show">
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input skip" id="skip_father_details" name="skip_father_details">
-                                <label class="custom-control-label" for="skip_father_details">{{ __('messages.skip_father_details') }}</label>
-                            </div>
-                        </div>
+                        </ul>
 
-                        <div id="father_details">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="father_last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_last_name" value="{{ isset($guardian['father_last_name']) ? $guardian['father_last_name'] : ''}}" name="father_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="father_middle_name">{{ __('messages.middle_name') }}</label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name" value="{{ isset($guardian['father_middle_name']) ? $guardian['father_middle_name'] : ''}}" name="father_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="father_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_first_name" value="{{ isset($guardian['father_first_name']) ? $guardian['father_first_name'] : ''}}" name="father_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
+
+                        <div class="card-body collapse show">
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input skip" id="skip_father_details" name="skip_father_details">
+                                    <label class="custom-control-label" for="skip_father_details">{{ __('messages.skip_father_details') }}</label>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="father_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_furigana" value="{{ isset($guardian['father_last_name_furigana']) ? $guardian['father_last_name_furigana'] : ''}}" name="father_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+
+                            <div id="father_details">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="father_last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_last_name" value="{{ isset($guardian['father_last_name']) ? $guardian['father_last_name'] : ''}}" name="father_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="father_middle_name">{{ __('messages.middle_name') }}</label>
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name" value="{{ isset($guardian['father_middle_name']) ? $guardian['father_middle_name'] : ''}}" name="father_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="father_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_first_name" value="{{ isset($guardian['father_first_name']) ? $guardian['father_first_name'] : ''}}" name="father_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="father_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_furigana" value="{{ isset($guardian['father_middle_name_furigana']) ? $guardian['father_middle_name_furigana'] : ''}}" name="father_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="father_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_furigana" value="{{ isset($guardian['father_last_name_furigana']) ? $guardian['father_last_name_furigana'] : ''}}" name="father_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="father_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_furigana" value="{{ isset($guardian['father_middle_name_furigana']) ? $guardian['father_middle_name_furigana'] : ''}}" name="father_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="father_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_first_name_furigana" value="{{ isset($guardian['father_first_name_furigana']) ? $guardian['father_first_name_furigana'] : ''}}" name="father_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="father_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_first_name_furigana" value="{{ isset($guardian['father_first_name_furigana']) ? $guardian['father_first_name_furigana'] : ''}}" name="father_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="father_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_english" value="{{ isset($guardian['father_last_name_english']) ? $guardian['father_last_name_english'] : ''}}" name="father_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="father_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_english" value="{{ isset($guardian['father_middle_name_english']) ? $guardian['father_middle_name_english'] : ''}}" name="father_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="father_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_first_name_english" value="{{ isset($guardian['father_first_name_english']) ? $guardian['father_first_name_english'] : ''}}" name="father_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="father_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_english" value="{{ isset($guardian['father_last_name_english']) ? $guardian['father_last_name_english'] : ''}}" name="father_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="father_nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control copy_parent_info father_form country" id="father_nationality" name="father_nationality" value="{{ isset($guardian['father_nationality']) ? $guardian['father_nationality'] : ''}}" placeholder="{{ __('messages.enter_nationality') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="father_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_english" value="{{ isset($guardian['father_middle_name_english']) ? $guardian['father_middle_name_english'] : ''}}" name="father_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="father_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control  father_form" id="father_email" value="{{ isset($guardian['father_email']) ? $guardian['father_email'] : ''}}" name="father_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="father_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_first_name_english" value="{{ isset($guardian['father_first_name_english']) ? $guardian['father_first_name_english'] : ''}}" name="father_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="father_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control copy_parent_info father_form number_validation" id="father_phone_number" value="{{ isset($guardian['father_phone_number']) ? $guardian['father_phone_number'] : ''}}" name="father_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                            <label for="father_phone_number" class="error"></label>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="father_nationality">{{ __('messages.nationality') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info father_form country" id="father_nationality" name="father_nationality" value="{{ isset($guardian['father_nationality']) ? $guardian['father_nationality'] : ''}}" placeholder="{{ __('messages.enter_nationality') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="father_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control  father_form" id="father_email" value="{{ isset($guardian['father_email']) ? $guardian['father_email'] : ''}}" name="father_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="father_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info father_form number_validation" id="father_phone_number" value="{{ isset($guardian['father_phone_number']) ? $guardian['father_phone_number'] : ''}}" name="father_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
-                                        <label for="father_phone_number" class="error"></label>
-                                    </div>
-                                </div>
-                                <!-- <div class="col-md-4">
+                                    <!-- <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="father_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
                                                         <select  id="father_occupation" name="father_occupation" class="form-control">
@@ -873,335 +878,336 @@
                                                         </select>
                                                     </div>
                                                 </div> -->
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="father_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_occupation" name="father_occupation" value="{{ isset($guardian['father_occupation']) ? $guardian['father_occupation'] : ''}}" placeholder="{{ __('messages.enter_occupation') }}" aria-describedby="inputGroupPrepend">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="father_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_occupation" name="father_occupation" value="{{ isset($guardian['father_occupation']) ? $guardian['father_occupation'] : ''}}" placeholder="{{ __('messages.enter_occupation') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <br>
-                <div class="card">
-                <ul class="nav nav-tabs" style="display: inline-block;">
-                    <li class="nav-item d-flex justify-content-between align-items-center">
-                    <h4 class="navv">
-                                {{ __('messages.guardian_details') }}
-                                <h4>
-                                <!-- Up and Down Arrows -->
-                                <button class="btn btn-link collapse-button" type="button" id="collapseButton5" aria-expanded="true" aria-controls="toDoList">
-                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                    <br>
+                    <div class="card">
+                        <ul class="nav nav-tabs" style="display: inline-block;">
+                            <li class="nav-item d-flex justify-content-between align-items-center">
+                                <h4 class="navv">
+                                    {{ __('messages.guardian_details') }}
+                                    <h4>
+                                        <!-- Up and Down Arrows -->
+                                        <button class="btn btn-link collapse-button" type="button" id="collapseButton5" aria-expanded="true" aria-controls="toDoList">
+                                            <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
                          background: white; color: blue;width: 25px;padding:-1px"></i></b>
-                                </button>
+                                        </button>
                             </li>
-                        </ul>          
-                   
-                    <div class="card-body collapse show">
-                        <!-- <div class="form-group">
+                        </ul>
+
+                        <div class="card-body collapse show">
+                            <!-- <div class="form-group">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input skip" id="skip_guardian_details" name="skip_guardian_details">
                                                 <label class="custom-control-label" for="skip_guardian_details">{{ __('messages.skip_guardian_details') }}</label>
                                             </div>  style="display:{{ isset($guardian['guardian_email']) ? 'none' : ''}}"
                                         </div> -->
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <div class="radio radio-success form-check-inline">
-                                        <input type="radio" class="copy_parent" name="copy_parent" id="copy_father" value="father">
-                                        <label for="father"> {{ __('messages.copy_from_father_details') }} </label>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="radio radio-success form-check-inline">
+                                            <input type="radio" class="copy_parent" name="copy_parent" id="copy_father" value="father">
+                                            <label for="father"> {{ __('messages.copy_from_father_details') }} </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="radio radio-success form-check-inline">
+                                            <input type="radio" class="copy_parent" name="copy_parent" id="copy_mother" value="mother">
+                                            <label for="mother"> {{ __('messages.copy_from_mother_details') }} </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="radio radio-success form-check-inline">
+                                            <input type="radio" class="copy_parent" name="copy_parent" id="copy_others" value="others" checked>
+                                            <label for="others"> {{ __('messages.others') }} </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <div class="radio radio-success form-check-inline">
-                                        <input type="radio" class="copy_parent" name="copy_parent" id="copy_mother" value="mother">
-                                        <label for="mother"> {{ __('messages.copy_from_mother_details') }} </label>
+                            <br>
+
+                            @php
+                            $guardian_readonly = "";
+                            $guardian_disabled = "";
+                            if(isset($guardian['guardian_last_name'])){
+                            $guardian_disabled = "disabled";
+                            $guardian_readonly = "readonly";
+                            }
+                            @endphp
+                            <div id="guardian_details">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="guardian_last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="guardian_last_name" {{$guardian_readonly}} value="{{ isset($guardian['guardian_last_name']) ? $guardian['guardian_last_name'] : ''}}" name="guardian_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="guardian_middle_name">{{ __('messages.middle_name') }}</label>
+                                            <input type="text" class="form-control" id="guardian_middle_name" {{$guardian_readonly}} value="{{ isset($guardian['guardian_middle_name']) ? $guardian['guardian_middle_name'] : ''}}" name="guardian_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="guardian_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="guardian_first_name" {{$guardian_readonly}} value="{{ isset($guardian['guardian_first_name']) ? $guardian['guardian_first_name'] : ''}}" name="guardian_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <div class="radio radio-success form-check-inline">
-                                        <input type="radio" class="copy_parent" name="copy_parent" id="copy_others" value="others" checked>
-                                        <label for="others"> {{ __('messages.others') }} </label>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="guardian_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="guardian_last_name_furigana" {{$guardian_readonly}} value="{{ isset($guardian['guardian_last_name_furigana']) ? $guardian['guardian_last_name_furigana'] : ''}}" name="guardian_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="guardian_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
+                                            <input type="text" class="form-control" id="guardian_middle_name_furigana" {{$guardian_readonly}} value="{{ isset($guardian['guardian_middle_name_furigana']) ? $guardian['guardian_middle_name_furigana'] : ''}}" name="guardian_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="guardian_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="guardian_first_name_furigana" {{$guardian_readonly}} value="{{ isset($guardian['guardian_first_name_furigana']) ? $guardian['guardian_first_name_furigana'] : ''}}" name="guardian_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="guardian_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="guardian_last_name_english" {{$guardian_readonly}} value="{{ isset($guardian['guardian_last_name_english']) ? $guardian['guardian_last_name_english'] : ''}}" name="guardian_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="guardian_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
+                                            <input type="text" class="form-control" id="guardian_middle_name_english" {{$guardian_readonly}} value="{{ isset($guardian['guardian_middle_name_english']) ? $guardian['guardian_middle_name_english'] : ''}}" name="guardian_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="guardian_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="guardian_first_name_english" {{$guardian_readonly}} value="{{ isset($guardian['guardian_first_name_english']) ? $guardian['guardian_first_name_english'] : ''}}" name="guardian_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="guardian_relation">{{ __('messages.relation') }}<span class="text-danger">*</span></label>
+                                            <select id="guardian_relation" {{$guardian_disabled}} name="guardian_relation" class="form-control">
+                                                <option value="">{{ __('messages.select_relation') }}</option>
+                                                @forelse($relation as $r)
+                                                <option value="{{$r['id']}}" {{ isset($guardian['guardian_relation']) ? $guardian['guardian_relation'] == $r['id'] ? 'selected' : '' : '' }}>{{$r['name']}}</option>
+                                                @empty
+                                                @endforelse
+                                            </select>
+                                        </div>
+                                        @if($guardian_disabled=="disabled")
+                                        <input type="hidden" name="guardian_relation" value="{{$guardian['guardian_relation']}}">
+                                        @endif
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="guardian_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="guardian_email" readonly value="{{$email}}" name="guardian_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="guardian_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control  number_validation " {{$guardian_readonly}} id="guardian_phone_number" value="{{ isset($guardian['guardian_phone_number']) ? $guardian['guardian_phone_number'] : ''}}" name="guardian_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                            <label for="guardian_phone_number" class="error"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="guardian_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="guardian_occupation" {{$guardian_readonly}} value="{{ isset($guardian['guardian_occupation']) ? $guardian['guardian_occupation'] : ''}}" name="guardian_occupation" placeholder="{{ __('messages.enter_occupation') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="guardian_company_name_japan">{{ __('messages.work_company_name_japan') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="guardian_company_name_japan" {{$guardian_readonly}} value="{{ isset($guardian['guardian_company_name_japan']) ? $guardian['guardian_company_name_japan'] : ''}}" name="guardian_company_name_japan" placeholder="{{ __('messages.enter_work_company_name_japan') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="guardian_company_name_local">{{ __('messages.work_company_name_local') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="guardian_company_name_local" {{$guardian_readonly}} value="{{ isset($guardian['guardian_company_name_local']) ? $guardian['guardian_company_name_local'] : ''}}" name="guardian_company_name_local" placeholder="{{ __('messages.enter_work_company_name_local') }}" aria-describedby="inputGroupPrepend">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="guardian_company_phone_number">{{ __('messages.work_company_phone_number') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control  number_validation " {{$guardian_readonly}} id="guardian_company_phone_number" value="{{ isset($guardian['guardian_company_phone_number']) ? $guardian['guardian_company_phone_number'] : ''}}" name="guardian_company_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                            <label for="guardian_company_phone_number" class="error"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="guardian_employment_status">{{ __('messages.employment_status') }}<span class="text-danger">*</span></label>
+                                            <select id="guardian_employment_status" {{$guardian_disabled}} name="guardian_employment_status" class="form-control">
+                                                <option value="">{{ __('messages.select_employment_status') }}</option>
+                                                <option value="Expat" {{ isset($guardian['guardian_employment_status']) ? $guardian['guardian_employment_status'] == "Expat" ? 'selected' : '' : '' }}>{{ __('messages.expat') }}</option>
+                                                <option value="Local Hire" {{ isset($guardian['guardian_employment_status']) ? $guardian['guardian_employment_status'] == "Local Hire" ? 'selected' : '' : '' }}>{{ __('messages.local_hire') }}</option>
+                                                <option value="Public Servant" {{ isset($guardian['guardian_employment_status']) ? $guardian['guardian_employment_status'] == "Public Servant" ? 'selected' : '' : '' }}>{{ __('messages.public_servant') }}</option>
+                                                <option value="Self-Employed" {{ isset($guardian['guardian_employment_status']) ? $guardian['guardian_employment_status'] == "Self-Employed" ? 'selected' : '' : '' }}>{{ __('messages.self_employed') }}</option>
+                                                <option value="Others" {{ isset($guardian['guardian_employment_status']) ? $guardian['guardian_employment_status'] == "Others" ? 'selected' : '' : '' }}>{{ __('messages.others') }}</option>
+                                            </select>
+                                        </div>
+                                        @if($guardian_disabled=="disabled")
+                                        <input type="hidden" name="guardian_employment_status" value="{{$guardian['guardian_employment_status']}}">
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <br>
+                    </div><br>
+                    <div class="card">
+                        <ul class="nav nav-tabs" style="display: inline-block;">
+                            <li class="nav-item d-flex justify-content-between align-items-center">
+                                <h4 class="navv">
+                                    {{ __('messages.academic_details') }}
+                                    <h4>
+                                        <!-- Up and Down Arrows -->
+                                        <button class="btn btn-link collapse-button" type="button" id="collapseButton6" aria-expanded="true" aria-controls="toDoList">
+                                            <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                        </button>
+                            </li>
+                        </ul>
 
-                        @php
-                        $guardian_readonly = "";
-                        $guardian_disabled = "";
-                        if(isset($guardian['guardian_last_name'])){
-                        $guardian_disabled = "disabled";
-                        $guardian_readonly = "readonly";
-                        }
-                        @endphp
-                        <div id="guardian_details">
+                        <div class="card-body collapse show">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="guardian_last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_last_name" {{$guardian_readonly}} value="{{ isset($guardian['guardian_last_name']) ? $guardian['guardian_last_name'] : ''}}" name="guardian_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_middle_name">{{ __('messages.middle_name') }}</label>
-                                        <input type="text" class="form-control" id="guardian_middle_name" {{$guardian_readonly}} value="{{ isset($guardian['guardian_middle_name']) ? $guardian['guardian_middle_name'] : ''}}" name="guardian_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_first_name" {{$guardian_readonly}} value="{{ isset($guardian['guardian_first_name']) ? $guardian['guardian_first_name'] : ''}}" name="guardian_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_last_name_furigana" {{$guardian_readonly}} value="{{ isset($guardian['guardian_last_name_furigana']) ? $guardian['guardian_last_name_furigana'] : ''}}" name="guardian_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
-                                        <input type="text" class="form-control" id="guardian_middle_name_furigana" {{$guardian_readonly}} value="{{ isset($guardian['guardian_middle_name_furigana']) ? $guardian['guardian_middle_name_furigana'] : ''}}" name="guardian_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_first_name_furigana" {{$guardian_readonly}} value="{{ isset($guardian['guardian_first_name_furigana']) ? $guardian['guardian_first_name_furigana'] : ''}}" name="guardian_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_last_name_english" {{$guardian_readonly}} value="{{ isset($guardian['guardian_last_name_english']) ? $guardian['guardian_last_name_english'] : ''}}" name="guardian_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
-                                        <input type="text" class="form-control" id="guardian_middle_name_english" {{$guardian_readonly}} value="{{ isset($guardian['guardian_middle_name_english']) ? $guardian['guardian_middle_name_english'] : ''}}" name="guardian_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_first_name_english" {{$guardian_readonly}} value="{{ isset($guardian['guardian_first_name_english']) ? $guardian['guardian_first_name_english'] : ''}}" name="guardian_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_relation">{{ __('messages.relation') }}<span class="text-danger">*</span></label>
-                                        <select id="guardian_relation" {{$guardian_disabled}} name="guardian_relation" class="form-control">
-                                            <option value="">{{ __('messages.select_relation') }}</option>
-                                            @forelse($relation as $r)
-                                            <option value="{{$r['id']}}" {{ isset($guardian['guardian_relation']) ? $guardian['guardian_relation'] == $r['id'] ? 'selected' : '' : '' }}>{{$r['name']}}</option>
+                                        <label for="expected_academic_year">{{ __('messages.expected_academic_year') }}<span class="text-danger">*</span></label>
+                                        <select id="expected_academic_year" name="expected_academic_year" class="form-control">
+                                            <option value="">{{ __('messages.select_academic_year') }}</option>
+                                            @forelse($academic_year_list as $r)
+                                            <option value="{{$r['id']}}">{{$r['name']}}</option>
                                             @empty
                                             @endforelse
                                         </select>
                                     </div>
-                                    @if($guardian_disabled=="disabled")
-                                    <input type="hidden" name="guardian_relation" value="{{$guardian['guardian_relation']}}">
-                                    @endif
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="guardian_email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_email" readonly value="{{$email}}" name="guardian_email" placeholder="{{ __('messages.enter_the_email') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control  number_validation " {{$guardian_readonly}} id="guardian_phone_number" value="{{ isset($guardian['guardian_phone_number']) ? $guardian['guardian_phone_number'] : ''}}" name="guardian_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
-                                        <label for="guardian_phone_number" class="error"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_occupation" {{$guardian_readonly}} value="{{ isset($guardian['guardian_occupation']) ? $guardian['guardian_occupation'] : ''}}" name="guardian_occupation" placeholder="{{ __('messages.enter_occupation') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_company_name_japan">{{ __('messages.work_company_name_japan') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_company_name_japan" {{$guardian_readonly}} value="{{ isset($guardian['guardian_company_name_japan']) ? $guardian['guardian_company_name_japan'] : ''}}" name="guardian_company_name_japan" placeholder="{{ __('messages.enter_work_company_name_japan') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_company_name_local">{{ __('messages.work_company_name_local') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="guardian_company_name_local" {{$guardian_readonly}} value="{{ isset($guardian['guardian_company_name_local']) ? $guardian['guardian_company_name_local'] : ''}}" name="guardian_company_name_local" placeholder="{{ __('messages.enter_work_company_name_local') }}" aria-describedby="inputGroupPrepend">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_company_phone_number">{{ __('messages.work_company_phone_number') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control  number_validation " {{$guardian_readonly}} id="guardian_company_phone_number" value="{{ isset($guardian['guardian_company_phone_number']) ? $guardian['guardian_company_phone_number'] : ''}}" name="guardian_company_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
-                                        <label for="guardian_company_phone_number" class="error"></label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="guardian_employment_status">{{ __('messages.employment_status') }}<span class="text-danger">*</span></label>
-                                        <select id="guardian_employment_status" {{$guardian_disabled}} name="guardian_employment_status" class="form-control">
-                                            <option value="">{{ __('messages.select_employment_status') }}</option>
-                                            <option value="Expat" {{ isset($guardian['guardian_employment_status']) ? $guardian['guardian_employment_status'] == "Expat" ? 'selected' : '' : '' }}>{{ __('messages.expat') }}</option>
-                                            <option value="Local Hire" {{ isset($guardian['guardian_employment_status']) ? $guardian['guardian_employment_status'] == "Local Hire" ? 'selected' : '' : '' }}>{{ __('messages.local_hire') }}</option>
-                                            <option value="Public Servant" {{ isset($guardian['guardian_employment_status']) ? $guardian['guardian_employment_status'] == "Public Servant" ? 'selected' : '' : '' }}>{{ __('messages.public_servant') }}</option>
-                                            <option value="Self-Employed" {{ isset($guardian['guardian_employment_status']) ? $guardian['guardian_employment_status'] == "Self-Employed" ? 'selected' : '' : '' }}>{{ __('messages.self_employed') }}</option>
-                                            <option value="Others" {{ isset($guardian['guardian_employment_status']) ? $guardian['guardian_employment_status'] == "Others" ? 'selected' : '' : '' }}>{{ __('messages.others') }}</option>
+                                        <label for="expected_grade">{{ __('messages.expected_grade') }}<span class="text-danger">*</span></label>
+                                        <select id="expected_grade" name="expected_grade" class="form-control">
+                                            <option value="">{{ __('messages.select_grade') }}</option>
+                                            @forelse($grade as $g)
+                                            <option value="{{$g['id']}}">{{$g['name']}}</option>
+                                            @empty
+                                            @endforelse
                                         </select>
                                     </div>
-                                    @if($guardian_disabled=="disabled")
-                                    <input type="hidden" name="guardian_employment_status" value="{{$guardian['guardian_employment_status']}}">
-                                    @endif
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><br>
-                <div class="card">
-                <ul class="nav nav-tabs" style="display: inline-block;">
-                    <li class="nav-item d-flex justify-content-between align-items-center">
-                    <h4 class="navv">
-                                {{ __('messages.academic_details') }}
-                                <h4>
-                                <!-- Up and Down Arrows -->
-                                <button class="btn btn-link collapse-button" type="button" id="collapseButton6" aria-expanded="true" aria-controls="toDoList">
-                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
-                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
-                                </button>
-                            </li>
-                        </ul>          
-                  
-                    <div class="card-body collapse show">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="expected_academic_year">{{ __('messages.expected_academic_year') }}<span class="text-danger">*</span></label>
-                                    <select id="expected_academic_year" name="expected_academic_year" class="form-control">
-                                        <option value="">{{ __('messages.select_academic_year') }}</option>
-                                        @forelse($academic_year_list as $r)
-                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="expected_grade">{{ __('messages.expected_grade') }}<span class="text-danger">*</span></label>
-                                    <select id="expected_grade" name="expected_grade" class="form-control">
-                                        <option value="">{{ __('messages.select_grade') }}</option>
-                                        @forelse($grade as $g)
-                                        <option value="{{$g['id']}}">{{$g['name']}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="expected_enroll_date">{{ __('messages.expected_enroll_date') }}<span class="text-danger">*</span></label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="far fa-calendar-alt"></span>
-                                            </div>
-                                        </div>
-                                        <input type="text" class="form-control" id="expected_enroll_date" name="expected_enroll_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
-
-                                    </div>
-                                    <label for="expected_enroll_date" class="error"></label>
-                                </div>
-                            </div>
-                        </div><br>
-                    </div>
-                </div><br>
-                <ul class="nav nav-tabs" style="display: inline-block;">
-                    <li class="nav-item d-flex justify-content-between align-items-center">
-                    <h4 class="navv">
-                                {{ __('messages.re-admission') }}
-                                <h4>
-                                <!-- Up and Down Arrows -->
-                                <button class="btn btn-link collapse-button" type="button" id="collapseButton7" aria-expanded="true" aria-controls="toDoList">
-                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
-                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
-                                </button>
-                            </li>
-                        </ul>        
-                
-                    <div class="card-body collapse show">
-                        <div id="re_admission_details">
-                            <div class="row">
-                                <div class="col-md-2 mt-4">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <div class="radio radio-success form-check-inline">
-                                            <input type="radio" class="re_admission" id="" name="re_admission" value="yes">
-                                            <label for="yes"> {{ __('messages.yes') }} </label>
-                                        </div>
-                                        <div class="radio radio-success form-check-inline">
-                                            <input type="radio" class="re_admission" id="" name="re_admission" value="no" checked>
-                                            <label for="no"> {{ __('messages.no') }} </label>
-                                        </div>
-                                        <!-- <div class="radio radio-success form-check-inline">
-                                                            <input type="radio" class="verify_emails" id="" name="verify_emails" value="guardian">
-                                                            <label for="guardian"> Guardian </label>
-                                                        </div> -->
-                                    </div>
-                                </div>
-                                <div class="col-md-4" id="last_date" style="display:none">
-                                    <div class="form-group">
-                                        <label for="last_date_of_withdrawal">{{ __('messages.last_date_of_withdrawal') }}<span class="text-danger">*</span></label>
+                                        <label for="expected_enroll_date">{{ __('messages.expected_enroll_date') }}<span class="text-danger">*</span></label>
                                         <div class="input-group input-group-merge">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
                                                     <span class="far fa-calendar-alt"></span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" id="last_date_of_withdrawal" name="last_date_of_withdrawal" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control" id="expected_enroll_date" name="expected_enroll_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+
                                         </div>
-                                        <label for="last_date_of_withdrawal" class="error"></label>
+                                        <label for="expected_enroll_date" class="error"></label>
+                                    </div>
+                                </div>
+                            </div><br>
+                        </div>
+                    </div><br>
+                    <div class="card">
+                        <ul class="nav nav-tabs" style="display: inline-block;">
+                            <li class="nav-item d-flex justify-content-between align-items-center">
+                                <h4 class="navv">
+                                    {{ __('messages.re-admission') }}
+                                    <h4>
+                                        <!-- Up and Down Arrows -->
+                                        <button class="btn btn-link collapse-button" type="button" id="collapseButton7" aria-expanded="true" aria-controls="toDoList">
+                                            <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                        </button>
+                            </li>
+                        </ul>
+
+                        <div class="card-body collapse show">
+                            <div id="re_admission_details">
+                                <div class="row">
+                                    <div class="col-md-2 mt-4">
+                                        <div class="form-group">
+                                            <div class="radio radio-success form-check-inline">
+                                                <input type="radio" class="re_admission" id="" name="re_admission" value="yes">
+                                                <label for="yes"> {{ __('messages.yes') }} </label>
+                                            </div>
+                                            <div class="radio radio-success form-check-inline">
+                                                <input type="radio" class="re_admission" id="" name="re_admission" value="no" checked>
+                                                <label for="no"> {{ __('messages.no') }} </label>
+                                            </div>
+                                            <!-- <div class="radio radio-success form-check-inline">
+                                                            <input type="radio" class="verify_emails" id="" name="verify_emails" value="guardian">
+                                                            <label for="guardian"> Guardian </label>
+                                                        </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" id="last_date" style="display:none">
+                                        <div class="form-group">
+                                            <label for="last_date_of_withdrawal">{{ __('messages.last_date_of_withdrawal') }}<span class="text-danger">*</span></label>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <span class="far fa-calendar-alt"></span>
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control" id="last_date_of_withdrawal" name="last_date_of_withdrawal" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                            </div>
+                                            <label for="last_date_of_withdrawal" class="error"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="remarks">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
+                                        <textarea type="text" id="remarks" class="form-control" placeholder="{{ __('messages.enter_remarks') }}" name="remarks" data-parsley-trigger="change"></textarea>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="remarks">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
-                                    <textarea type="text" id="remarks" class="form-control" placeholder="{{ __('messages.enter_remarks') }}" name="remarks" data-parsley-trigger="change"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- <div class="card">
+                    <!-- <div class="card">
                     <div class="tab-pane" id="personal">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
@@ -1296,17 +1302,13 @@
                             {{ __('messages.back') }}
                         </a>
                     </div>
-                </div>
+                        </form>
+            </div>
 
         </div>
     </div>
 </div>
 
-</form>
-</div> <!-- end card-->
-</div> <!-- end col -->
-</div><!-- end row -->
-</div> <!-- container -->
 @endsection
 @section('scripts')
 <script src="{{ asset('libs/mohithg-switchery/switchery.min.js') }}"></script>

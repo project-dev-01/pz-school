@@ -330,8 +330,12 @@
                 </div>
                 <!--<h4 class="page-title" style="margin-left: 10px;">{{ __('messages.student_profile') }}</h4>-->
                 <ol class="breadcrumb m-0 responsivebc">
-                <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.profile') }}</a></li>
-                <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.student_profile') }}</a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">
+                            <h4>{{ __('messages.profile') }}</h4>
+                        </a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">
+                            <h4>{{ __('messages.student_profile') }}</h4>
+                        </a></li>
                 </ol>
 
             </div>
@@ -341,26 +345,27 @@
 
     <div class="row">
         <div class="col-xl-12">
-            <div class="card">
-            <ul class="nav nav-tabs" style="display: inline-block;">
-                    <li class="nav-item d-flex justify-content-between align-items-center">
-                        <!-- Button placed on the left side -->
-                        <h4 class="navv">{{ __('messages.student_profile') }}</h4>
-                                <button class="btn btn-link " type="button" id="collapseButton1"  aria-expanded="true" aria-controls="toDoList">
-                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
-                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
-                                </button>
-                    </li>
-                </ul>
-                                <div class="">
+            <div class="">
+
+                <div class="">
                     <form id="updateStudentProfile" method="post" action="{{ route('parent.student.update') }}" enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         <input type="hidden" name="student_id" value="{{ isset($student['id']) ? $student['id'] : ''}}">
 
 
                         <div class="card">
-                         
-                        <div class="card-body collapse show">
+                            <ul class="nav nav-tabs" style="display: inline-block;">
+                                <li class="nav-item d-flex justify-content-between align-items-center">
+                                    <!-- Button placed on the left side -->
+                                    <h4 class="navv">{{ __('messages.student_profile') }}</h4>
+                                    <button class="btn btn-link " type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                        <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                    </button>
+                                </li>
+                            </ul>
+
+                            <div class="card-body collapse show">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group mb-3">
@@ -729,12 +734,18 @@
                             </div>
                         </div>
                         <div class="card">
-                            <ul class="nav nav-tabs">
-                                <li class="nav-item">
+                            <ul class="nav nav-tabs" style="display: inline-block;">
+                                <li class="nav-item d-flex justify-content-between align-items-center">
+                                    <!-- Button placed on the left side -->
                                     <h4 class="navv">{{ __('messages.personal_details') }}
                                         <h4>
+                                            <button class="btn btn-link " type="button" id="collapseButton2" aria-expanded="true" aria-controls="toDoList">
+                                                <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                            </button>
                                 </li>
-                            </ul><br>
+                            </ul>
+
                             <div class="card-body collapse show">
                                 <div class="row">
 
@@ -883,11 +894,17 @@
                             </div>
                         </div>
                         <div class="card">
-                            <ul class="nav nav-tabs">
-                                <li class="nav-item">
+                            <ul class="nav nav-tabs" style="display: inline-block;">
+                                <li class="nav-item d-flex justify-content-between align-items-center">
+                                    <!-- Button placed on the left side -->
                                     <h4 class="navv">{{ __('messages.previous_school_details') }}</h4>
+                                    <button class="btn btn-link " type="button" id="collapseButton3" aria-expanded="true" aria-controls="toDoList">
+                                        <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                    </button>
                                 </li>
                             </ul>
+
                             <div class="card-body collapse show">
                                 <div class="row">
                                     <div class="col-md-4">
