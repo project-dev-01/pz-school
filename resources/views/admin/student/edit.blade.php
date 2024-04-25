@@ -1232,7 +1232,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="card">
+                            <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
                                         <h4 class="navv">{{ __('messages.guardian_details') }}
@@ -1240,12 +1240,12 @@
                                     </li>
                                 </ul>
                                 <div class="card-body">
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="guardian_name">{{ __('messages.guardian_name') }}</label>
                                                 <input type="text" class="form-control" maxlength="50" id="guardian_name" placeholder="{{ __('messages.amir_shan') }}" aria-describedby="inputGroupPrepend">
-                                                <input type="hidden" name="guardian_id" id="guardian_id" value="{{ isset($student['guardian_id']) ? $student['guardian_id'] : ''}}">
+                                               
                                                 <div id="guardian_list">
                                                 </div>
                                             </div>
@@ -1263,8 +1263,8 @@
                                             </div>
                                         </div>
 
-                                    </div>
-                                    <div id="guardian_form" style="display:none;">
+                                    </div> -->
+                                    <div id="guardian_form">
                                         <div class="row">
                                             <div class="col-md-3" id="guardian_photo" style="display:none;">
 
@@ -1272,7 +1272,7 @@
                                         </div>
                                         <div class="row">
                                            
-
+                                        <input type="hidden" name="guardian_id" id="guardian_id" value="{{ isset($student['guardian_id']) ? $student['guardian_id'] : ''}}">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="heard">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
@@ -1332,7 +1332,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                           <div class="col-md-4">
+                                           <!-- <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="gender">{{ __('messages.gender') }}</label>
                                                     <select class="form-control" id="guardian_gender" disabled>
@@ -1341,8 +1341,8 @@
                                                         <option value="Female">{{ __('messages.female') }}</option>
                                                     </select>
                                                 </div>
-                                            </div> -->
-                                            <!-- <div class="col-md-4">
+                                            </div> 
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="birthday">{{ __('messages.date_of_birth') }}</label>
                                                     <div class="input-group input-group-merge">
@@ -1362,8 +1362,8 @@
                                                     <input type="text" class="form-control" id="guardian_passport" placeholder="{{ __('messages.enter_passport_number') }}" readonly>
                                                 </div>
                                             </div>
-                                        </div> 
-                                        <div class="row">-->
+                                        </div> -->
+                                        <div class="row">
                                             <!-- <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="heard">{{ __('messages.nric_number') }}</label>
@@ -1385,7 +1385,7 @@
                                                         <option>AB-</option>
                                                     </select>
                                                 </div>
-                                            </div> 
+                                            </div>--> 
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="txt_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
@@ -1446,8 +1446,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                       <div class="row"> -->
-                                            <!-- <div class="col-md-4">
+                                        <!-- <div class="row"> 
+                                           <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="education">{{ __('messages.education') }}</label>
                                                     <input type="text" class="form-control" data-parsley-trigger="change" id="guardian_education" placeholder="{{ __('messages.enter_education_name') }}" readonly>
@@ -1500,10 +1500,10 @@
                                                     <input type="text" class="form-control" id="guardian_address_2" placeholder="{{ __('messages.enter_address_2') }}" readonly>
                                                 </div>
                                             </div>
-                                        </div> 
+                                        </div> -->
                                     </div>
                                 </div>
-                            </div>-->
+                            </div>
                             <div class="card">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">

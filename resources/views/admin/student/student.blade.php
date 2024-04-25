@@ -248,14 +248,14 @@
                                                                                 </label>
                                                                             </div>
                                                                         </li>
-                                                                        <li>
+                                                                        <!-- <li>
                                                                             <div class="checkbox checkbox-primary mb-2">
                                                                                 <input id="checkboxSchoolDetails" name="checkboxSchoolDetails" type="checkbox" {{ isset($get_student_download_settings['school_info']) ? $get_student_download_settings['school_info'] == "1" ? "checked" : "" : "" }}>
                                                                                 <label for="checkboxSchoolDetails">
                                                                                     {{ __('messages.school_information') }}
                                                                                 </label>
                                                                             </div>
-                                                                        </li>
+                                                                        </li> -->
                                                                         <!-- <li>
                                                                             <div class="checkbox checkbox-primary mb-2">
                                                                                 <input id="checkboxAcademic" name="checkboxAcademic" type="checkbox" {{ isset($get_student_download_settings['grade_class_info']) ? $get_student_download_settings['grade_class_info'] == "1" ? "checked" : "" : "" }} onchange="updateCheckboxes(this)">

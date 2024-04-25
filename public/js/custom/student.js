@@ -1202,6 +1202,33 @@ $(function () {
             mother_email: "required",
             mother_mobile_no: "required",
             mother_occupation: "required",
+            guardian_last_name: "required",
+            guardian_last_name_furigana: "required",
+            guardian_last_name_english: "required",
+            guardian_first_name_furigana: "required",
+            guardian_first_name_english: "required",
+
+            guardian_company_name_japan: "required",
+            guardian_company_name_local: "required",
+            // guardian_company_phone_number: "required",
+
+            guardian_company_phone_number: {
+                required: true,
+                minlength: 8
+            },
+            guardian_employment_status: "required",
+            guardian_first_name: "required",
+            guardian_relation: "required",
+            guardian_phone_number: {
+                required: true,
+                minlength: 8
+            },
+            guardian_occupation: "required",
+            guardian_email: {
+                required: true,
+                email: true
+            },
+            guardian_occupation: "required",
 
             "passport_photo": {
                 required: function (element) {
