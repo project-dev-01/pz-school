@@ -139,9 +139,9 @@ class StudentListExport  implements FromCollection, WithHeadings
             'Japan Contact No',
             'Japan Emergency SMS',
             'Japan Stay Category',
-            'School Address',
-            'School Mobile No',
-            'School Email',
+            // 'School Address',
+            // 'School Mobile No',
+            // 'School Email',
         ];
         // here we add dynamic papernames
         if (isset($this->getSingleColumn['all_marks']) && is_array($this->getSingleColumn['all_marks'])) {
@@ -228,9 +228,9 @@ class StudentListExport  implements FromCollection, WithHeadings
                 'Japan Contact No'=> $item['guardian_japan_contact_no'] ?? null,
                 'Japan Emergency SMS'=> $item['guardian_japan_emergency_sms'] ?? null,
                 'Japan Stay Category'=> $item['guardian_japan_staycategory'] ?? null,
-                'School Address'=> $item['school_address'] ?? null,
-                'School Mobile No'=> $item['school_mobile_no'] ?? null,
-                'School Email'=> $item['school_email'] ?? null
+                // 'School Address'=> $item['school_address'] ?? null,
+                // 'School Mobile No'=> $item['school_mobile_no'] ?? null,
+                // 'School Email'=> $item['school_email'] ?? null
             ];
             return $this->columns;
             // dd($this->columns);

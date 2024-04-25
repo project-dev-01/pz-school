@@ -128,16 +128,23 @@ $(function () {
                     render: function (data, type, full, meta) {
                         const starClass = full.parent_imp === '1' ? 'star-important' : 'star-not-important';
                         const itemId = full.id;
-                        const isPDF = data.toLowerCase().endsWith('.pdf');
-                        // Create a combined column with the "parent_imp" button and the file link
-                        return `
-                            <div>
+                        if (data && typeof data === 'string' && data.trim() !== '') {
+                            const isPDF = data.toLowerCase().endsWith('.pdf');
+
+                            // Create the HTML content for a file
+                            const fileContent = `
                                 <button class="star-button ${starClass}" data-item-id="${itemId}" data-important="${full.parent_imp}" onclick="toggleStar(${itemId}, ${full.parent_imp})"></button>
                                 ${isPDF ? '<i class="fa fa-file-pdf pdf-icon" aria-hidden="true"></i>' : ''}
                                 <span class="${isPDF ? 'pdf-file' : ''}">
                                     ${data}
                                 </span>
-                            </div>`;
+                            `;
+
+                            return `<div>${fileContent}</div>`;
+                        } else {
+                            // Return empty content if data is null or empty
+                            return '';
+                        }
                     }
                 },
                 {
@@ -269,16 +276,23 @@ $(function () {
                     render: function (data, type, full, meta) {
                         const starClass = full.parent_imp === '1' ? 'star-important' : 'star-not-important';
                         const itemId = full.id;
-                        const isPDF = data.toLowerCase().endsWith('.pdf');
-                        // Create a combined column with the "parent_imp" button and the file link
-                        return `
-                            <div>
+                        if (data && typeof data === 'string' && data.trim() !== '') {
+                            const isPDF = data.toLowerCase().endsWith('.pdf');
+
+                            // Create the HTML content for a file
+                            const fileContent = `
                                 <button class="star-button ${starClass}" data-item-id="${itemId}" data-important="${full.parent_imp}" onclick="toggleStar(${itemId}, ${full.parent_imp})"></button>
                                 ${isPDF ? '<i class="fa fa-file-pdf pdf-icon" aria-hidden="true"></i>' : ''}
                                 <span class="${isPDF ? 'pdf-file' : ''}">
                                     ${data}
                                 </span>
-                            </div>`;
+                            `;
+
+                            return `<div>${fileContent}</div>`;
+                        } else {
+                            // Return empty content if data is null or empty
+                            return '';
+                        }
                     }
                 },
                 {
