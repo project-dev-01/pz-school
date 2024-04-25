@@ -1022,7 +1022,7 @@
                                                     </div>
                                                     <label for="japanese_association_membership_image_principal" class="error"></label>
                                                     @if(isset($student['japanese_association_membership_image_principal']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['japanese_association_membership_image_principal'])
-                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['japanese_association_membership_image_principal'] }}" target="_blank"> {{ __('messages.japanese_association_membership_image_principal') }} </a>
+                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['japanese_association_membership_image_principal'] }}" target="_blank"> {{ $student['japanese_association_membership_image_principal'] }} </a>
                                                     @endif
                                                     <span id="japanese_association_membership_image_principal_name"></span>
                                                  
@@ -1047,7 +1047,7 @@
                                                         </div>
                                                     </div>
                                                     @if(isset($student['nric_photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['nric_photo'])
-                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['nric_photo'] }}" target="_blank"> {{ __('messages.nric_image_only_for_malaysian') }} </a>
+                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['nric_photo'] }}" target="_blank"> {{ $student['nric_photo'] }} </a>
                                                     @endif
                                                     <span id="nric_photo_name"></span>
                                                 </div>
