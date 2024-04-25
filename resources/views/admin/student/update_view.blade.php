@@ -485,7 +485,7 @@
                     <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
                         {{ __('messages.update') }}
                     </button>
-                    <a href="{{ route('admin.student.index') }}" class="btn btn-primary-bl waves-effect waves-light">
+                    <a href="{{ route('admin.student.update_info') }}" class="btn btn-primary-bl waves-effect waves-light">
                         {{ __('messages.back') }}
                     </a>
                     <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">

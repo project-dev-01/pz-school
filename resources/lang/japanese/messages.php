@@ -2239,6 +2239,5 @@ return [
     "add_withdrawal" => "退学届",
     "withdrawal_details"=> "退学届詳細",
     "termination_details" => "終了の詳細",
-    "furigana_name"=> " Furigana Name",
-    
+    "furigana_name"=> "振り仮名",
 ];

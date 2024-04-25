@@ -808,11 +808,11 @@ $(function () {
                     name: 'email'
                 },
                 {
-                    data: 'expected_academic_year',
+                    data: 'academic_year',
                     name: 'academic_year'
                 },
                 {
-                    data: 'expected_grade',
+                    data: 'academic_grade',
                     name: 'academic_grade'
                 },
                 {
@@ -920,7 +920,7 @@ $(function () {
         var id = $(this).data('id');
         $('.viewApplication').find('span.error-text').text('');
         $.post(applicationDetails, { id: id,token: token,branch_id: branchID }, function (data) {
-            console.log('cc', data)
+            console.log('ccc', data)
             var name = data.data.last_name + " " + data.data.first_name;
             var english_name = data.data.last_name_english+" "+ data.data.first_name_english; 
             var furigana_name = data.data.last_name_furigana+" "+ data.data.first_name_furigana ;
@@ -928,8 +928,8 @@ $(function () {
             $('.viewApplication').find('.english_name').text(furigana_name);
             $('.viewApplication').find('.furigana_name').text(furigana_name);
             $('.viewApplication').find('.gender').text(data.data.gender);
-            $('.viewApplication').find('.academic_year').text(data.data.expected_academic_year);
-            $('.viewApplication').find('.academic_grade').text(data.data.expected_grade);
+            $('.viewApplication').find('.academic_year').text(data.data.academic_year);
+            $('.viewApplication').find('.academic_grade').text(data.data.academic_grade);
             $('.viewApplication').find('.date_of_birth').text(data.data.date_of_birth);
             $('.viewApplication').find('.mobile_no').text(data.data.mobile_no);
             $('.viewApplication').find('.email').text(data.data.email);
@@ -940,8 +940,8 @@ $(function () {
             $('.viewApplication').find('.city').text(data.data.city);
             $('.viewApplication').find('.postal_code').text(data.data.postal_code);
 
-            $('.viewApplication').find('.school_year').text(data.data.expected_academic_year);
-            $('.viewApplication').find('.grade').text(data.data.expected_grade);
+            $('.viewApplication').find('.school_year').text(data.data.academic_year);
+            $('.viewApplication').find('.grade').text(data.data.academic_grade);
             $('.viewApplication').find('.school_last_attended').text(data.data.school_last_attended);
             $('.viewApplication').find('.school_address_1').text(data.data.school_address_1);
             $('.viewApplication').find('.school_address_2').text(data.data.school_address_2);
