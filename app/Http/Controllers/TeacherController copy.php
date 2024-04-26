@@ -691,12 +691,13 @@ class TeacherController extends Controller
         $data = [
             'branch_id'=> config('constants.branch_id'),
             'teacher_id' => session()->get('ref_user_id')
+            
         ];
         $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
-        // dd($sem);
+        //dd($response);
         return view('teacher.classroom.management', [
             'teacher_class' => isset($response['data']) ? $response['data'] : [],
             'semester' => isset($semester['data']) ? $semester['data'] : [],
@@ -1992,9 +1993,8 @@ class TeacherController extends Controller
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
-                $description = str_replace(array("\r", "\n"), '', htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8')); // Removing newline characters;
                 return '<div class="button-list">
-                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(\'' . $image_url . '\', \'' . $row['title'] . '\', \'' .$description. '\')"><i class="fe-eye"></i></a>
+                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(\'' . $image_url . '\', \'' . $row['title'] . '\', \'' . $row['discription'] . '\')"><i class="fe-eye"></i></a>
                 <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
                 <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
             </a>
