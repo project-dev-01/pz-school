@@ -88,9 +88,9 @@ $(function () {
     
     $("#terminationEditForm").validate({
         rules: {
-            // date_of_termination : "required", 
-            termination_status: "required", 
-            school_fees_payment_status : "required", 
+            date_of_termination : "required", 
+            // termination_status: "required", 
+            // school_fees_payment_status : "required", 
         }
     });
     $('#school_fees_payment_status').on('change', function () {
@@ -272,6 +272,10 @@ $(function () {
                 {
                     data: 'date_of_termination',
                     name: 'date_of_termination'
+                },
+                {
+                    data: 'school_fees_payment_status',
+                    name: 'school_fees_payment_status'
                 },
                 {
                     data: 'actions',

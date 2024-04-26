@@ -13,17 +13,17 @@
                             <tr>
                                 <th>#</th>
                                 <th>{{ __('messages.name') }}</th>
-                                <th>{{ __('messages.department_name') }}</th>
+                                <!-- <th>{{ __('messages.email') }}</th> -->
                                 <th>{{ __('messages.grade_name') }}</th>
                                 <th>{{ __('messages.class_Name') }}</th>
                                 <th>{{ __('messages.gender') }}</th>
-                                <th>{{ __('messages.email') }}</th>
                                 <th>{{ __('messages.admission_date') }}</th>
+                                <!-- <th>{{ __('messages.department_name') }}</th> -->
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
-                    </table>
+                    </table> 
                 </div>
             </div>
         </div>

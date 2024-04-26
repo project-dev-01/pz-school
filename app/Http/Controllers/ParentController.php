@@ -1549,8 +1549,9 @@ class ParentController extends Controller
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                $description = str_replace(array("\r", "\n"), '', htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8')); // Removing newline characters;
                 return '<div class="button-list">
-                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(\'' . $image_url . '\', \'' . $row['title'] . '\', \'' . $row['discription'] . '\')"><i class="fe-eye"></i></a>
+                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(\'' . $image_url . '\', \'' . $row['title'] . '\', \'' . $description . '\')"><i class="fe-eye"></i></a>
                 <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
                 <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
             </a>
@@ -1744,7 +1745,7 @@ class ParentController extends Controller
                     $result = "success";
                 } else if ($status == "Send Back") {
                     $result = "warning";
-                } else if ($status == "Process") {
+                } else if ($status == "Applied") {
                     $result = "info";
                 } else if ($status == "Reject") {
                     $result = "danger";
@@ -1944,7 +1945,7 @@ class ParentController extends Controller
         if ($request->status == "Approved") {
             if ($request->phase_2_status == null) {
 
-                $phase_2_status = "Process";
+                $phase_2_status = "Applied";
             }
         }
         $trail_date = "";

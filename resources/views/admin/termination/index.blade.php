@@ -108,6 +108,7 @@
                                             <th> {{ __('messages.grade') }}</th>
                                             <th> {{ __('messages.status') }}</th>
                                             <th> {{ __('messages.date_of_termination') }}</th>
+                                            <th> {{ __('messages.school_fees_payment_status') }}</th>
                                             <th> {{ __('messages.actions') }}</th>
                                         </tr>
                                     </thead>

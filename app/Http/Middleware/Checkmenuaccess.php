@@ -22,12 +22,20 @@ class Checkmenuaccess
         //local URL end
         //LIVE URL start
         //$url = $_SERVER['REQUEST_URI'];
+        //$url = substr($_SERVER['REQUEST_URI'], 1);
         //LIVE URL end
         $role_id = Session::get('role_id');
         $school_roleid = Session::get('school_roleid');
         $branch_id =config('constants.branch_id');
         $urlpath=explode('/',$url);
         $rolename=$urlpath[0];
+        $dashboardurl=$rolename.'/dashboard';
+        $data = [
+            'role_id' => $role_id,
+            'school_roleid' =>  $school_roleid,
+            'branch_id' => config('constants.branch_id')
+        ];
+        //dd($url);
         if(!empty($school_roleid) && $school_roleid!='1')
         {
             $pagedata = [
@@ -46,7 +54,16 @@ class Checkmenuaccess
             }
             elseif($permission['data']===null)
             {
+                if($url==$dashboardurl)
+                {
+                    $response = Helper::PostMethod(config('constants.api.get_login_menuroute'), $data); 
+
+                    return redirect($response['data']);
+                }
+                else
+                {
                 return redirect($rolename.'/page/403');
+                }
             }
             elseif($permission['data']!=null && $permission['data']['read']=='Access')
             {
@@ -54,7 +71,16 @@ class Checkmenuaccess
             }
             else
             {
+                if($url==$dashboardurl)
+                {
+                    $response = Helper::PostMethod(config('constants.api.get_login_menuroute'), $data); 
+
+                    return redirect($response['data']);
+                }
+                else
+                {
                 return redirect($rolename.'/page/403');
+                }
             }    
 
         }   

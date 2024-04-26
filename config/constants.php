@@ -3,7 +3,7 @@ $url = "http://localhost/paxsuzen-api-dev/public/api";
 // $url = "https://api.suzen.school/api";test
 $schoolurl = "http://localhost/school-management-system/public";
 return [
-    'branch_id'=>'5',
+    'branch_id'=>'6',
     'school_name'=>'クアラルンプール日本人学校',
     'school_image'=>'logo_jskl.jpeg',
     'image_url' => "http://localhost/paxsuzen-api-dev/public",
@@ -943,7 +943,8 @@ return [
         'setpermission' => $url.'/menus/setpermission',        
         'menu_details' => $url.'/menus/menu_details',
         'menu_update' => $url.'/menus/update',        
-        'menuaccess_permission' => $url.'/menus/getpermission',  
+        'menuaccess_permission' => $url.'/menus/getpermission', 
+        'get_login_menuroute' => $url.'/menus/get_login_menuroute', 
 
         // event type url
         'school_role_add' => $url.'/school_role/add',
