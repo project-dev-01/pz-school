@@ -9968,8 +9968,12 @@ class AdminController extends Controller
         $data = [
             'id' => $request->id,
         ];
+        if ($request->id !== null) {
         $response = Helper::PostMethod(config('constants.api.school_role_details'), $data);
         return $response;
+        } else {
+            return response()->json(['error' => 'School Menu Role ID is empty.'], 403);
+        } 
     }
     public function school_menurole_details(Request $request)
     {
@@ -9981,7 +9985,7 @@ class AdminController extends Controller
         return $response;   
             
         } else {
-            return response()->json(['error' => 'School Menu Role ID is empty.'], 500);
+            return response()->json(['error' => 'School Menu Role ID is empty.'], 403);
         } 
     }
 

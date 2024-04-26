@@ -246,8 +246,14 @@ class CommonController extends Controller
     // unread notifications
     public function unreadNotifications(Request $request)
     {
-        // return "fdfsf";
+        if(session()->get('branch_id')!==null)
+        {// return "fdfsf";
         $unread_notifications = Helper::GetMethod(config('constants.api.unread_notifications'));
+        }
+        else
+        {
+            $unread_notifications=[]; 
+        }
         // return $unread_notifications;
         $notificationlist = '';
         $count = 0;

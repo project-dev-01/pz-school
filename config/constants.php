@@ -943,7 +943,8 @@ return [
         'setpermission' => $url.'/menus/setpermission',        
         'menu_details' => $url.'/menus/menu_details',
         'menu_update' => $url.'/menus/update',        
-        'menuaccess_permission' => $url.'/menus/getpermission',  
+        'menuaccess_permission' => $url.'/menus/getpermission', 
+        'get_login_menuroute' => $url.'/menus/get_login_menuroute', 
 
         // event type url
         'school_role_add' => $url.'/school_role/add',
