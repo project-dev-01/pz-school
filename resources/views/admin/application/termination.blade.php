@@ -76,7 +76,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>{{ __('messages.school_fees_payment_status') }}<span class="text-danger">*</span></td>
+                                <td>{{ __('messages.school_fees_payment_status') }}<span class="text-danger"></span></td>
                                 <td>:</td>
                                 <td> <select id="school_fees_payment_status" name="school_fees_payment_status" class="form-control" >
                                         <option value="">{{ __('messages.select_payment_status') }}</option>
@@ -85,7 +85,7 @@
                                     </select></td>
                             </tr>
                             <tr>
-                                <td>{{ __('messages.termination_status') }}<span class="text-danger">*</span></td>
+                                <td>{{ __('messages.termination_status') }}<span class="text-danger"></span></td>
                                 <td>:</td>
                                 <input type="hidden"  name="termination_status_old">
                                 <td> <select id="termination_status" class="form-control" name="termination_status">
@@ -113,7 +113,7 @@
                                     </select></td>
                             </tr>
                             <tr id="date_of_termination_row" style="display:none">
-                                <td>{{ __('messages.date_of_termination') }}</td>
+                                <td>{{ __('messages.date_of_termination') }}<span class="text-danger">*</span></td>
                                 <td>:</td>
                                 <td>
                                 
