@@ -843,6 +843,47 @@
                         </div>
 
                         <div class="row">
+                            <div class="col-md-4" id="enrollment_show" style="">
+                                <div class="form-group mb-3">
+                                    <label for="enrollment">{{ __('messages.enrollment') }}</label>
+                                    <select id="enrollment" name="enrollment" class="form-control">
+                                        <option value="">{{ __('messages.select_enrollment') }}</option>
+                                        <option  value="Trail Enrollment">{{ __('messages.trail_enrollment') }}</option>
+                                        <option  value="Official Enrollment">{{ __('messages.official_enrollment') }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4" id="trail_date_show" style="display: none;">
+                                <div class="form-group mb-3">
+                                    <label for="text">{{ __('messages.trail_date') }}</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="far fa-calendar-alt"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" id="trail_date" value="" name="trail_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            <div class="col-md-4" id="official_date_show" style="display: none;">
+                                <div class="form-group mb-3">
+                                    <label for="text">{{ __('messages.official_date') }}</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="far fa-calendar-alt"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" id="official_date" value="" name="official_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
 
                             <!-- <div class="col-md-4">
                                 <div class="form-group">

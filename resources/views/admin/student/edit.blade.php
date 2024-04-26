@@ -1113,9 +1113,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                       
-                                       
+                                    <div class="row">                                       
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="section_id">{{ __('messages.class') }}</label>
@@ -1136,7 +1134,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="form-group mb-3">
+                                            <div class="form-group ">
                                                 <label for="">{{ __('messages.admission_date') }}</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
@@ -1150,6 +1148,60 @@
                                         </div>
                                     </div>
 
+                                    <div class="row">
+                                            <div class="col-md-4" id="enrollment_show" >
+                                                <div class="form-group">
+                                                    <label for="enrollment">{{ __('messages.enrollment') }}</label>
+                                                    <select id="enrollment" name="enrollment" class="form-control">
+                                                        <option value="">{{ __('messages.select_enrollment') }}</option>
+                                                        <option {{ isset($student['enrollment']) ? $student['enrollment'] == "Trail Enrollment" ? 'selected' : '' : '' }} value="Trail Enrollment">{{ __('messages.trail_enrollment') }}</option>
+                                                        <option {{ isset($student['enrollment']) ? $student['enrollment'] == "Official Enrollment" ? 'selected' : '' : '' }} value="Official Enrollment">{{ __('messages.official_enrollment') }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            @php
+
+                                            $trail_date = "none";
+                                            if($student['enrollment']=="Trail Enrollment"){
+
+                                            $trail_date = "";
+                                            }
+                                            @endphp
+                                            <div class="col-md-4" id="trail_date_show" style="display:{{$trail_date}}">
+                                                <div class="form-group">
+                                                    <label for="text">{{ __('messages.trail_date') }}</label>
+                                                    <div class="input-group input-group-merge">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <span class="far fa-calendar-alt"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="trail_date" value="{{ isset($student['trail_date']) ? $student['trail_date'] : date('Y-m-d')}}" name="trail_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            @php
+                                            $official_date = "none";
+                                            if($student['enrollment']=="Official Enrollment"){
+
+                                            $official_date = "";
+                                            }
+                                            @endphp
+                                            <div class="col-md-4" id="official_date_show" style="display:{{$official_date}}">
+                                                <div class="form-group">
+                                                    <label for="text">{{ __('messages.official_date') }}</label>
+                                                    <div class="input-group input-group-merge">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <span class="far fa-calendar-alt"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="official_date" value="{{ isset($student['official_date']) ? $student['official_date'] : date('Y-m-d')}}" name="official_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
                                     <div class="row">
                                       
                                         <div class="col-md-4" style="display:none;">
