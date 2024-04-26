@@ -4407,6 +4407,11 @@ class AdminController extends Controller
             // 'register_no' => $request->txt_regiter_no,
             'roll_no' => $request->txt_roll_no,
             'admission_date' => $request->admission_date,
+
+            'enrollment' => $request->enrollment,
+            'trail_date' => $request->trail_date,
+            'official_date' => $request->official_date,
+
             'category_id' => $request->categy,
             'first_name' => $request->fname,
             'last_name' => $request->lname,
