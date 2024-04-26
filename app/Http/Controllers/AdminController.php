@@ -10828,6 +10828,18 @@ class AdminController extends Controller
                 
                 <span class="badge badge-soft-' . $color . ' p-1">' . $row['termination_status'] . '</span>
             </div>';
+        })
+        ->addColumn('school_fees_payment_status', function ($row) {
+            $color = "";
+            if ($row['school_fees_payment_status'] == "Paid") {
+                $color = "success";
+            } else if ($row['school_fees_payment_status'] == "Unpaid") {
+                $color = "danger";
+            } 
+            return '<div class="button-list">
+            
+            <span class="badge badge-soft-' . $color . ' p-1">' . $row['school_fees_payment_status'] . '</span>
+        </div>';
             })
             // <a href="' . route('parent.termination.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
             ->addColumn('actions', function ($row) {
@@ -10836,7 +10848,7 @@ class AdminController extends Controller
                     <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteTerminationBtn"><i class="fe-trash-2"></i></a>
                         </div>';
             })
-            ->rawColumns(['actions', 'termination_status'])
+            ->rawColumns(['actions', 'termination_status','school_fees_payment_status'])
             ->make(true);
     }
     public function getTerminationDetails(Request $request)

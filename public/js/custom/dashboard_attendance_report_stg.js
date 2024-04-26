@@ -609,10 +609,10 @@ $(function () {
                     data: 'student_name',
                     name: 'student_name'
                 },
-                {
-                    data: 'dept_name',
-                    name: 'dept_name'
-                },
+                // {
+                //     data: 'dept_name',
+                //     name: 'dept_name'
+                // },
                 {
                     data: 'class_name',
                     name: 'class_name'
@@ -625,10 +625,10 @@ $(function () {
                     data: 'gender',
                     name: 'gender'
                 },
-                {
-                    data: 'email',
-                    name: 'email'
-                },
+                // {
+                //     data: 'email',
+                //     name: 'email'
+                // },
                 {
                     data: 'admission_date',
                     name: 'admission_date'

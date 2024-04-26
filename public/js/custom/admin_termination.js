@@ -274,6 +274,10 @@ $(function () {
                     name: 'date_of_termination'
                 },
                 {
+                    data: 'school_fees_payment_status',
+                    name: 'school_fees_payment_status'
+                },
+                {
                     data: 'actions',
                     name: 'actions',
                     orderable: false,
