@@ -550,7 +550,7 @@
                                                 <div class="form-group">
                                                     <div class="custom-control custom-checkbox" style="margin-top: 2.25rem;">
                                                         <input type="checkbox" {{$disabled_phase_1}} name="has_dual_nationality_checkbox" id="has_dual_nationality_checkbox" class="custom-control-input" {{ isset($application['dual_nationality']) ? 'checked' : '' }}>
-                                                        <label class="custom-control-label" for="has_dual_nationality_checkbox">Nationality (For dual nationality)</label>
+                                                        <label class="custom-control-label" for="has_dual_nationality_checkbox">{{ __('messages.dual_nationality') }}</label>
                                                     </div>
                                                 </div>
                                             </div>

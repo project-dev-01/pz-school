@@ -83,6 +83,9 @@
             display: flex;
         }
     }
+    .custom-file-input:lang(en)~.custom-file-label::after {
+    content: "{{ __('messages.butt_browse') }}";
+}
 </style>
 <!-- Start Content-->
 <div class="container-fluid">
@@ -143,7 +146,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="frm_ldate">{{ __('messages.leave_from') }}<span class="text-danger">*</span></label>
+                                    <label for="frm_ldate">{{ __('messages.lab_leave_start') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -156,7 +159,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="to_ldate">{{ __('messages.to_leave') }}<span class="text-danger">*</span></label>
+                                    <label for="to_ldate">{{ __('messages.lab_leave_end') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -253,7 +256,7 @@
             <ul class="nav nav-tabs" style="display: inline-block;">
                     <li class="nav-item d-flex justify-content-between align-items-center">
                         <!-- Button placed on the left side -->
-                        <h4 class="navv">{{ __('messages.leave_status') }}
+                        <h4 class="navv">{{ __('messages.head_leave_application_status') }}
                             <h4>
                                 <button class="btn btn-link " type="button" id="collapseButton2"  aria-expanded="true" aria-controls="toDoList">
                                     <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
@@ -269,15 +272,15 @@
                                 <tr>
                                     <th>#</th>
                                     <th>{{ __('messages.student_name') }}</th>
-                                    <th>{{ __('messages.leave_from') }}</th>
-                                    <th>{{ __('messages.to_from') }}</th>
-                                    <th>{{ __('messages.teacher_remarks') }}</th>
+                                    <th>{{ __('messages.tab_leave_start') }}</th>
+                                    <th>{{ __('messages.tab_leave_end') }}</th>
+                                    <th>{{ __('messages.tab_teacher_remarks') }}</th>
                                     <th>{{ __('messages.leave_type') }}</th>
                                     <th>{{ __('messages.reason') }}</th>
-                                    <th>{{ __('messages.document') }}</th>
+                                    <th>{{ __('messages.tab_attachment') }}</th>
                                     <th>{{ __('messages.status') }}</th>
                                     <th>{{ __('messages.apply_date') }}</th>
-                                    <th>{{ __('messages.action') }}</th>
+                                    <th>{{ __('messages.tab_action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

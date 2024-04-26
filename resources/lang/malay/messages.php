@@ -2186,5 +2186,17 @@ return [
     "add_withdrawal" => "Add Withdrawal",
     "withdrawal_details" => "Withdrawal Details",
     "furigana_name"=> " Furigana Name",
-    "sub" => "Sub"
+    "sub" => "Sub",
+      //Parent Portal New Keywords//
+     //start student_leaves//
+     "lab_leave_start" => "Leave Start",
+     "lab_leave_end" => "Leave End",
+     "tab_leave_end" => "Leave End",
+     "tab_leave_start" => "Leave Start",
+     "tab_teacher_remarks" => "Teacher Remarks",
+     "tab_attachment" => "Attachment",
+     "tab_action" => "Action",
+     "head_leave_application_status" => "Leave Application Status",
+     "butt_browse" => "Browse",
+      //End student_leaves//
 ];

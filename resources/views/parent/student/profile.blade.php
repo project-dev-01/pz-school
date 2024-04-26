@@ -330,12 +330,8 @@
                 </div>
                 <!--<h4 class="page-title" style="margin-left: 10px;">{{ __('messages.student_profile') }}</h4>-->
                 <ol class="breadcrumb m-0 responsivebc">
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">
-                            <h4>{{ __('messages.profile') }}</h4>
-                        </a></li>
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">
-                            <h4>{{ __('messages.student_profile') }}</h4>
-                        </a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.profile') }}</a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.student_profile') }}</a></li>
                 </ol>
 
             </div>
