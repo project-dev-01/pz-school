@@ -1481,7 +1481,7 @@ Route::group(['prefix' => 'parent'], function () {
     Route::post('/logout', [AuthController::class, 'logoutParent'])->name('parent.logout');
     Route::group(['middleware' => ['isParent', 'logroute','Checkmenuaccess']], function () {
         Route::get('/dashboard', [ParentController::class, 'index'])->name('parent.dashboard');
-        Route::get('page/403', [ParentController::class, 'page403'])->name('teacher.page.403');
+        Route::get('page/403', [ParentController::class, 'page403'])->name('parent.page.403');
         // Termination routes
         Route::get('termination/index', [ParentController::class, 'termination'])->name('parent.termination.index');
         Route::get('termination/create', [ParentController::class, 'createTermination'])->name('parent.termination.create');

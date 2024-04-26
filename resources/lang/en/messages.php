@@ -2267,5 +2267,6 @@ return [
     "add_admission" => "Add Admission",
     "add_withdrawal" => "Add Withdrawal",
     "withdrawal_details" => "Withdrawal Details",
-    "furigana_name"  => "Furigana Name"
+    "furigana_name"  => "Furigana Name",
+    "sub" => "Sub"
 ];

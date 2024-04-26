@@ -2186,5 +2186,5 @@ return [
     "add_withdrawal" => "Add Withdrawal",
     "withdrawal_details" => "Withdrawal Details",
     "furigana_name"=> " Furigana Name",
-
+    "sub" => "Sub"
 ];

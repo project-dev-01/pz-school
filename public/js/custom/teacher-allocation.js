@@ -72,6 +72,7 @@ $(function () {
     // rules validation
     $("#addAssignTeacherForm").validate({
         rules: {
+            department_id: "required",
             class_name: "required",
             section_name: "required",
             class_teacher: "required",
@@ -153,6 +154,7 @@ $(function () {
     // update 
     $("#editAssignTeacherForm").validate({
         rules: {
+            edit_department_id: "required",
             class_name: "required",
             section_name: "required",
             class_teacher: "required",

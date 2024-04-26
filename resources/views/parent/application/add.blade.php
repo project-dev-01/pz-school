@@ -1302,7 +1302,7 @@
                             {{ __('messages.back') }}
                         </a>
                     </div>
-                        </form>
+                </form>
             </div>
 
         </div>
