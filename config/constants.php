@@ -1,12 +1,24 @@
 <?php
 $url = "http://localhost/pz-school-api/public/api";
 // $url = "https://api.suzen.school/api";test
+$schoolurl = "http://localhost/school-management-system/public";
 return [
     'branch_id'=>'5',
     'school_name'=>'クアラルンプール日本人学校',
     'school_image'=>'logo_jskl.jpeg',
     'image_url' => "http://localhost/pz-school-api/public",
+    'cron_secret_key'=> 'S6rSMVixPeupH51AO5mVFjkQJ88bnjOO',
+    'domainname'=> $schoolurl,
     'api' => [
+        // school login url        
+        'homepage'=> $schoolurl.'/home',
+        'superadmin_login' => $schoolurl.'/syscont/login',
+        'admin_login' => $schoolurl.'/admin/login',
+        'staff_login' => $schoolurl.'/staff/login',
+        'teacher_login' => $schoolurl.'/teacher/login',
+        'parent_login' => $schoolurl.'/parent/login',
+        'student_login' => $schoolurl.'/student/login',
+        'guest_login' => $schoolurl.'/guest/login',
         // login url
         'login' => $url.'/login',
         'login_guest' => $url.'/login_guest',
@@ -931,7 +943,8 @@ return [
         'setpermission' => $url.'/menus/setpermission',        
         'menu_details' => $url.'/menus/menu_details',
         'menu_update' => $url.'/menus/update',        
-        'menuaccess_permission' => $url.'/menus/getpermission',  
+        'menuaccess_permission' => $url.'/menus/getpermission', 
+        'get_login_menuroute' => $url.'/menus/get_login_menuroute', 
 
         // event type url
         'school_role_add' => $url.'/school_role/add',

@@ -17,13 +17,10 @@ class Checkmenuaccess
      */
     public function handle(Request $request, Closure $next)
     {
-        //local URL start
-        $url = str_replace('/school-management-system/public/','',$_SERVER['REQUEST_URI']);
-        //local URL end
-        //LIVE URL start
-        //$url = $_SERVER['REQUEST_URI'];
-        //$url = substr($_SERVER['REQUEST_URI'], 1);
-        //LIVE URL end
+        $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $domain=config('constants.domainname');  
+        $url = str_replace($domain.'/','',$actual_link);
+        
         $role_id = Session::get('role_id');
         $school_roleid = Session::get('school_roleid');
         $branch_id =config('constants.branch_id');
