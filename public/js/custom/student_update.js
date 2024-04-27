@@ -15,7 +15,15 @@ $(function () {
         autoclose: true,
         yearRange: "-3:+6", // last hundred years
     });
-    
+
+    if ($('#skip_prev_school_details').is(":checked")) {
+            
+        $(".prev_school_form").val("");
+        $("#prev_school_details").hide("slow");
+    } else {
+        $("#prev_school_details").show("slow");
+    }
+
     // skip_prev_school_details
     $("#skip_prev_school_details").on("change", function () {
         

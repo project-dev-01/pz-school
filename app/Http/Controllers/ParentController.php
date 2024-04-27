@@ -1805,6 +1805,7 @@ class ParentController extends Controller
         if ($request->last_date_of_withdrawal) {
             $type = "Re-Admission";
         }
+      
         // Set dual nationality based on checkbox
         $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
@@ -1901,6 +1902,8 @@ class ParentController extends Controller
             "expected_enroll_date" => $request->expected_enroll_date,
             "remarks" => $request->remarks,
 
+            "status" => "Parent",
+            "parent_id" => session()->get('ref_user_id')
         ];
 
         $response = Helper::PostMethod(config('constants.api.application_add'), $data);

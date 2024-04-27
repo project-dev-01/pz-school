@@ -13,6 +13,7 @@ use App\Exports\ExamScheduleDownload;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 
 class CommonController extends Controller
 {
@@ -264,10 +265,26 @@ class CommonController extends Controller
                 $count = isset($unread_notifications['data']['unread']) ? count($unread_notifications['data']['unread']) : 0;
                 // $count = count($count);
                 // dd($count);
+
                 if (!empty($unread_notifications['data']['unread'])) {
+
                     $notificationlist .= '<div class="noti-scroll" data-simplebar>';
                     foreach ($unread_notifications['data']['unread'] as $notification) {
-                        // dd($notification['type']);
+                      
+                    
+                        Log::info("HTTP request failed to ". $notification['type']);
+            
+                        if ($notification['type'] == "App\Notifications\NewApplication") {
+                        //    return $notification['data'];
+                            $student_name = isset($notification['data']['student_name']) ? $notification['data']['student_name'] : 'mannn';
+                            $notificationlist .= '<a href="' . route('admin.application.index') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                            <p class="notify-details">' . __('messages.information_update') . '</p>
+                            <p class="text-muted mb-0 user-msg">
+                            <small>' . $student_name . ' ' . __('messages.new_application_arrived', ['student_name' => $student_name]) . ' ' . $student_name . '</small>
+                            </p>
+                            </a>';
+                        }
+                       
                         if ($notification['type'] == "App\Notifications\LeaveApprove") {
                             $redirectRoute = "javascript:void(0)";
                             if (session()->get('role_id') == 2 || session()->get('role_id') == '2') {
@@ -334,6 +351,7 @@ class CommonController extends Controller
                             </a>';
                         }
 
+                        
                         if ($notification['type'] == "App\Notifications\StudentInfoUpdate") {
                             $parent_name = isset($notification['data']['info_update']['parent_name']) ? $notification['data']['info_update']['parent_name'] : '-';
                             $student_name = isset($notification['data']['info_update']['student_name']) ? $notification['data']['info_update']['student_name'] : '-';

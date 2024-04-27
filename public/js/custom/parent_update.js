@@ -70,7 +70,7 @@ $(function () {
                 success: function (data) {
                     if (data.code == 200) {
                         toastr.success(data.message);
-                        window.location.href = indexParent;
+                        window.location.href = parentUpdateList;
                     } else {
                         toastr.error(data.message);
                     }

@@ -907,7 +907,7 @@
                             <div class="card-body collapse show">
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input skip" id="skip_prev_school_details" name="skip_prev_school_details">
+                                        <input type="checkbox" class="custom-control-input skip" {{ $student['school_name'] ? '' : 'checked' }} id="skip_prev_school_details" name="skip_prev_school_details">
                                         <label class="custom-control-label" for="skip_prev_school_details">{{ __('messages.skip_prev_school_details') }}</label>
                                     </div>
                                 </div>
