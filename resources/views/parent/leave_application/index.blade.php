@@ -271,7 +271,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>{{ __('messages.student_name') }}</th>
+                                    <th>{{ __('messages.tab_student_name') }}</th>
                                     <th>{{ __('messages.tab_leave_start') }}</th>
                                     <th>{{ __('messages.tab_leave_end') }}</th>
                                     <th>{{ __('messages.tab_teacher_remarks') }}</th>

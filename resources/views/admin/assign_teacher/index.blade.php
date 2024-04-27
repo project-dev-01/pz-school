@@ -68,7 +68,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>{{ __('messages.department_name') }}</th>
+                                    <th>{{ __('messages.assign_department_name') }}</th>
                                     <th>{{ __('messages.grade') }}</th>
                                     <th>{{ __('messages.classes') }}</th>
                                     <th>{{ __('messages.teacher') }}</th>

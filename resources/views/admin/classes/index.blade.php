@@ -70,8 +70,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>{{ __('messages.department_name') }}</th>
-                                    <th>{{ __('messages.grade_name') }}</th>
+                                    <th>{{ __('messages.grade_department_name') }}</th>
+                                    <th>{{ __('messages.grade_grade_name') }}</th>
                                     <th>{{ __('messages.grade_numeric') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>

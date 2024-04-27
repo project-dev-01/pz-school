@@ -1107,7 +1107,7 @@
                                     <div class="form-group">
                                         <label for="expected_academic_year">{{ __('messages.expected_academic_year') }}<span class="text-danger">*</span></label>
                                         <select id="expected_academic_year" name="expected_academic_year" class="form-control">
-                                            <option value="">{{ __('messages.select_academic_year') }}</option>
+                                            <option value="">{{ __('messages.admission_select_academic_year') }}</option>
                                             @forelse($academic_year_list as $r)
                                             <option value="{{$r['id']}}">{{$r['name']}}</option>
                                             @empty

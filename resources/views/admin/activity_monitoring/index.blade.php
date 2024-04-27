@@ -125,7 +125,7 @@
                                                         <th>{{ __('messages.role') }}</th>
                                                         <th>{{ __('messages.check_in_time') }}</th>
                                                         <th>{{ __('messages.check_out_time') }}</th>
-                                                        <th>{{ __('messages.spend') }}</th>
+                                                        <th>{{ __('messages.loginactivity_spend') }}</th>
                                                         <th>{{ __('messages.ip_address') }}</th>
                                                         <th>{{ __('messages.country') }}</th>
                                                         <th>{{ __('messages.device') }}</th>

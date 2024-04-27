@@ -87,7 +87,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>{{ __('messages.name') }}</th>
+                                    <th>{{ __('messages.section_name') }}</th>
                                     <th>{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
