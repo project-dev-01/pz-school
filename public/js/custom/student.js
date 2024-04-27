@@ -1,5 +1,19 @@
 $(function () {
 
+
+    $('#enrollment').on('change', function(){
+        
+        if($(this).val() == 'Trail Enrollment'){
+            $('#trail_date_show').show();
+            $('#official_date_show').hide();
+        } else if($(this).val() == 'Official Enrollment'){
+            $('#trail_date_show').hide();
+            $('#official_date_show').show();
+        } else {
+            $('#trail_date_show').hide();
+            $('#official_date_show').hide();
+        }
+    }); 
     // $('#dual_nationality_container').hide();
     var formData = {
         student_name: null,

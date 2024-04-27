@@ -689,6 +689,7 @@ class TeacherController extends Controller
     public function classroomManagement()
     {
         $data = [
+            'branch_id'=> config('constants.branch_id'),
             'teacher_id' => session()->get('ref_user_id')
         ];
         $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);

@@ -1745,7 +1745,7 @@ class ParentController extends Controller
                     $result = "success";
                 } else if ($status == "Send Back") {
                     $result = "warning";
-                } else if ($status == "Process") {
+                } else if ($status == "Applied") {
                     $result = "info";
                 } else if ($status == "Reject") {
                     $result = "danger";
@@ -1945,7 +1945,7 @@ class ParentController extends Controller
         if ($request->status == "Approved") {
             if ($request->phase_2_status == null) {
 
-                $phase_2_status = "Process";
+                $phase_2_status = "Applied";
             }
         }
         $trail_date = "";

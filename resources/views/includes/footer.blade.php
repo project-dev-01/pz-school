@@ -395,7 +395,7 @@
                 error: function(err) {
                     console.log("setInterval logout error");
                     console.log(err)
-                    window.location.href =loginurl;
+                    // window.location.href =loginurl;
                     
                 }
             });

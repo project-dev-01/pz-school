@@ -10,6 +10,22 @@ $(function () {
     // $('#txt_nric').rules("add", {
     //     required: true
     // });
+
+    $('#enrollment').on('change', function(){
+        alert('vvfd');
+        if($(this).val() == 'Trail Enrollment'){
+            $('#trail_date_show').show();
+            $('#official_date_show').hide();
+        } else if($(this).val() == 'Official Enrollment'){
+            $('#trail_date_show').hide();
+            $('#official_date_show').show();
+        } else {
+            $('#trail_date_show').hide();
+            $('#official_date_show').hide();
+        }
+    });
+
+
     $("#department_id").on('change', function (e) {
         e.preventDefault();
         var Selector = '#addadmission';
