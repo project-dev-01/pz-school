@@ -113,7 +113,6 @@ class StudentListExport  implements FromCollection, WithHeadings
             'Father Occupation',
             'Father Mobile No',
             'Father Nationality',
-            'Student Previous Enrollment Status',
             'Mother Name Last',
             'Mother Name First',
             'Mother Name Last Furigana',
