@@ -16,6 +16,18 @@ $(function () {
         yearRange: "-3:+6", // last hundred years
     });
     
+    // skip_prev_school_details
+    $("#skip_prev_school_details").on("change", function () {
+        
+        if ($(this).is(":checked")) {
+            
+            $(".prev_school_form").val("");
+            $("#prev_school_details").hide("slow");
+        } else {
+            $("#prev_school_details").show("slow");
+        }
+    });
+    
     $('#passport_photo').change(function() {
         // var i = $(this).prev('label').clone();
         var file = $('#passport_photo')[0].files[0];

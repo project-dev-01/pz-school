@@ -905,23 +905,30 @@
                             </ul>
 
                             <div class="card-body collapse show">
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input skip" id="skip_prev_school_details" name="skip_prev_school_details">
+                                        <label class="custom-control-label" for="skip_prev_school_details">{{ __('messages.skip_prev_school_details') }}</label>
+                                    </div>
+                                </div>
+                                <div id="prev_school_details">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="txt_prev_schname">{{ __('messages.school_name') }}<span class="text-danger">*</span></label>
-                                            <input type="text" id="txt_prev_schname" class="form-control" name="txt_prev_schname" placeholder="{{ __('messages.enter_school_name') }}" data-parsley-trigger="change" value="{{ isset($student['school_name']) ? $student['school_name'] : '' }}">
+                                            <input type="text" id="txt_prev_schname" class="form-control prev_school_form" name="txt_prev_schname" placeholder="{{ __('messages.enter_school_name') }}" data-parsley-trigger="change" value="{{ isset($student['school_name']) ? $student['school_name'] : '' }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="school_country">{{ __('messages.country') }}<span class="text-danger">*</span></label>
-                                            <input type="text" maxlength="50" id="school_country" value="{{ isset($student['school_country']) ? $student['school_country'] : ''}}" name="school_country" class="form-control country" placeholder="{{ __('messages.country') }}" data-parsley-trigger="change">
+                                            <input type="text" maxlength="50" id="school_country" value="{{ isset($student['school_country']) ? $student['school_country'] : ''}}" name="school_country" class="form-control country prev_school_form" placeholder="{{ __('messages.country') }}" data-parsley-trigger="change">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="school_state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="school_state" value="{{ isset($student['school_state']) ? $student['school_state'] : ''}}" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control prev_school_form" id="school_state" value="{{ isset($student['school_state']) ? $student['school_state'] : ''}}" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                 </div>
@@ -929,19 +936,19 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="school_city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="school_city" value="{{ isset($student['school_city']) ? $student['school_city'] : ''}}" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.city') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control prev_school_form" id="school_city" value="{{ isset($student['school_city']) ? $student['school_city'] : ''}}" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.city') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="school_postal_code">{{ __('messages.postal_code') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="school_postal_code" name="school_postal_code" value="{{ isset($student['school_postal_code']) ? $student['school_postal_code'] : ''}}" placeholder="{{ __('messages.enter') }} {{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control prev_school_form" id="school_postal_code" name="school_postal_code" value="{{ isset($student['school_postal_code']) ? $student['school_postal_code'] : ''}}" placeholder="{{ __('messages.enter') }} {{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="school_enrollment_status">{{ __('messages.enrollment_status') }}<span class="text-danger">*</span></label>
-                                            <select id="school_enrollment_status" name="school_enrollment_status" class="form-control">
+                                            <select id="school_enrollment_status" name="school_enrollment_status" class="form-control prev_school_form">
                                                 <option value="">{{ __('messages.select_enrollment_status') }}</option>
                                                 <option value="Regular class" {{ isset($student['school_enrollment_status']) ? $student['school_enrollment_status'] == "Regular class" ? 'selected' : '' : '' }}>{{ __('messages.regular_class') }}</option>
                                                 <option value="Special need class" {{ isset($student['school_enrollment_status']) ? $student['school_enrollment_status'] == "Special need class" ? 'selected' : '' : '' }}>{{ __('messages.special_need_class') }}</option>
@@ -954,7 +961,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="school_enrollment_status_tendency">{{ __('messages.enrollment_status_tendency') }}<span class="text-danger">*</span></label>
-                                            <select id="school_enrollment_status_tendency" name="school_enrollment_status_tendency" class="form-control">
+                                            <select id="school_enrollment_status_tendency" name="school_enrollment_status_tendency" class="form-control prev_school_form">
                                                 <option value="">{{ __('messages.select_enrollment_status') }}</option>
                                                 <option value="Yes" {{ isset($student['school_enrollment_status_tendency']) ? $student['school_enrollment_status_tendency'] == "Yes" ? 'selected' : '' : '' }}>{{ __('messages.yes') }}</option>
                                                 <option value="No" {{ isset($student['school_enrollment_status_tendency']) ? $student['school_enrollment_status_tendency'] == "Yes" ? 'selected' : '' : '' }}>{{ __('messages.no') }}</option>
@@ -974,6 +981,7 @@
                                                 </textarea>
                                             </div>
                                         </div> -->
+                                </div>
                                 </div>
                             </div>
                         </div>
