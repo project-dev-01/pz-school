@@ -5344,9 +5344,9 @@ class AdminController extends Controller
     public function getParentList(Request $request)
     {
         $parent_data = [
-            'status' => $request->status
+            'status' => $request->status,
+            'academic_session_id' => session()->get('academic_session_id'),
         ];
-        // dd($parent_data);
         
         $response = Helper::GETMethodWithData(config('constants.api.parent_list'), $parent_data);
         // dd($response);
@@ -5449,7 +5449,6 @@ class AdminController extends Controller
         $races = Helper::GetMethod(config('constants.api.races'));
         $education = Helper::GetMethod(config('constants.api.education_list'));
         $response = Helper::PostMethod(config('constants.api.student_update_info_view'), $data);
-        // dd($response);
         return view(
             'admin.student.update_view',
             [
