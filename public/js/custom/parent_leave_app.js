@@ -578,21 +578,34 @@ console.log(selectedReasonId);
         // Add CSS for sticky header and cell hover color
         const style = document.createElement('style');
         style.textContent = `
-        table>thead>tr>th {
-            background-color: #E9D528;
-            font-weight: bold;
-            font-family: Open Sans;
-            font-size: 13px;
-            color: black;
-        }
         
-        .table {
-            font-size: 12px;
-            font-family: Open Sans;
-            color: #3A4265;
+        
+        table {
+            font-family: Verdana;
+            font-size: 14px;
+            border-collapse: collapse;
+            width: 600px;
+            table-layout: fixed;
+        }
+        th {
+            position: sticky;
+            top: 0;
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            z-index: 2; /* Ensures the header stays above other content */
         }
         .hoverable-cell:hover {
-            background-color: #D1E9EF;;
+            background-color: yellow;
+        }
+        td {
+            padding: 10px;
+            text-align: left;
+            z-index: 1; /* Ensures cells stay below header */
+        }
+        tr:hover {
+            background-color: #fff !important;
         }
         `;
         document.head.appendChild(style);
