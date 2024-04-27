@@ -2199,4 +2199,8 @@ return [
      "head_leave_application_status" => "Leave Application Status",
      "butt_browse" => "Browse",
       //End student_leaves//
+      "termination_academic_year" => "Academic Year",
+      "lab_number_of_days_leave" => "Number Of Days Leave",
+      "lab_leave_type" => "Leave Type",
+      "tendency_select_enrollment_status" => "Select Enrollment Status",
 ];

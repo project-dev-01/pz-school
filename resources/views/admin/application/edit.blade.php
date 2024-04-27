@@ -642,7 +642,7 @@
                                                     <div class="form-group">
                                                         <label for="school_enrollment_status_tendency">{{ __('messages.enrollment_status_tendency') }}<span class="text-danger">*</span></label>
                                                         <select id="school_enrollment_status_tendency" {{$disabled_phase_1}} name="school_enrollment_status_tendency" class="form-control prev_school_form">
-                                                            <option value="">{{ __('messages.select_enrollment_status') }}</option>
+                                                            <option value="">{{ __('messages.tendency_select_enrollment_status') }}</option>
                                                             <option value="Yes" {{ isset($application['school_enrollment_status_tendency']) ? $application['school_enrollment_status_tendency'] == "Yes" ? 'selected' : '' : '' }}>{{ __('messages.yes') }}</option>
                                                             <option value="No" {{ isset($application['school_enrollment_status_tendency']) ? $application['school_enrollment_status_tendency'] == "No" ? 'selected' : '' : '' }}>{{ __('messages.no') }}</option>
                                                         </select>

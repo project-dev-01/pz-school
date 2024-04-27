@@ -2121,6 +2121,7 @@ return [
     "enrollment_status_tendency" => "Enrollment Status (if there is a tendency to not attend school)",
     "enter_enrollment_status" => "Enter Enrollment Status",
     "select_enrollment_status" => "Select Enrollment Status",
+    "tendency_select_enrollment_status" => "Select Enrollment Status",
     "enter_nationality" => "Enter Nationality",
     "work_company_name_japan" => "Work Company Name (Japan)",
     "work_company_name_local" => "Work Company Name (Local)",
@@ -2282,4 +2283,7 @@ return [
      "head_leave_application_status" => "Leave Application Status",
      "butt_browse" => "Browse",
        //End student_leaves//
+       "termination_academic_year" => "Academic Year",
+       "lab_number_of_days_leave" => "Number Of Days Leave",
+       "lab_leave_type" => "Leave Type",
 ];
