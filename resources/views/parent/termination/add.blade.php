@@ -405,7 +405,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="parent_phone_number_after_transfer number_validation">{{ __('messages.parent_guardian_phone_number_after_transfer') }}<span class="text-danger">*</span></label>
-                                        <input type="number" class="form-control" id="parent_phone_number_after_transfer" value=""  name="parent_phone_number_after_transfer" placeholder="{{ __('messages.enter_parent_guardian_phone_number_after_transfer') }} " aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" id="parent_phone_number_after_transfer" value=""  name="parent_phone_number_after_transfer" placeholder="{{ __('messages.enter_parent_guardian_phone_number_after_transfer') }} " aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             <div class="col-md-4">
