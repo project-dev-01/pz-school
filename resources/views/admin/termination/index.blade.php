@@ -104,7 +104,7 @@
                                             <th> {{ __('messages.name_english') }}</th>
                                             <th> {{ __('messages.gender') }}</th>
                                             <th> {{ __('messages.email') }}</th>
-                                            <th> {{ __('messages.academic_year') }}</th>
+                                            <th> {{ __('messages.termination_academic_year') }}</th>
                                             <th> {{ __('messages.grade') }}</th>
                                             <th> {{ __('messages.status') }}</th>
                                             <th> {{ __('messages.date_of_termination') }}</th>

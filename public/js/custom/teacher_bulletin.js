@@ -332,7 +332,7 @@ $(function () {
     });
 
 });
-function openFilePopup(fileUrl, fileName, fileDescription) {
+function openFilePopup(data) {
     const modal = document.getElementById("fileModal");
     const modalTitle = modal.querySelector(".modal-title");
     const modalBody = modal.querySelector(".modal-body");
@@ -342,19 +342,21 @@ function openFilePopup(fileUrl, fileName, fileDescription) {
     const filePreview = modal.querySelector("#filePreview");
     const previewLink = modal.querySelector("#previewLink");
 
-    modalTitle.innerText = modelheader;
-    fileTitle.innerText = fileName;
-    fileDescriptionElement.innerText = fileDescription;
+    modalTitle.innerText = "File Details";
+    fileTitle.innerText = data.title;
+    
+    // Set file description using innerHTML to handle HTML entities
+    fileDescriptionElement.innerHTML = data.description;
 
     // Set the download link
-    downloadLink.href = fileUrl;
-    downloadLink.innerText =download;
+    downloadLink.href = data.image_url;
+    downloadLink.innerText = "Download";
 
     // Set the preview link to open in a new window
-    previewLink.href = fileUrl;
+    previewLink.href = data.image_url;
 
     // Set the src of the iframe for preview
-    filePreview.src = fileUrl;
+    filePreview.src = data.image_url;
 
     // Open the modal
     $(modal).modal("show");

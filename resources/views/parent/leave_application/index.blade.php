@@ -175,14 +175,14 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="total_leave">{{ __('messages.number_of_days_leave') }}<span class="text-danger">*</span></label>
+                                    <label for="total_leave">{{ __('messages.lab_number_of_days_leave') }}<span class="text-danger">*</span></label>
                                     <input type="number" id="total_leave" name="total_leave" class="form-control" placeholder="{{ __('messages.enter_days_leave') }}" readonly>
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="changeLevType">{{ __('messages.leave_type') }}<span class="text-danger">*</span></label>
+                                    <label for="changeLevType">{{ __('messages.lab_leave_type') }}<span class="text-danger">*</span></label>
                                     <select id="changeLevType" class="form-control" name="changeLevType">
                                         <option value="">{{ __('messages.select_leave_type') }}</option>
                                         @forelse ($get_student_leave_types as $ress)
@@ -271,7 +271,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>{{ __('messages.student_name') }}</th>
+                                    <th>{{ __('messages.tab_student_name') }}</th>
                                     <th>{{ __('messages.tab_leave_start') }}</th>
                                     <th>{{ __('messages.tab_leave_end') }}</th>
                                     <th>{{ __('messages.tab_teacher_remarks') }}</th>

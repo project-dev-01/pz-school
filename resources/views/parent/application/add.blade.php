@@ -622,7 +622,7 @@
                                         <div class="form-group">
                                             <label for="school_enrollment_status_tendency">{{ __('messages.enrollment_status_tendency') }}<span class="text-danger">*</span></label>
                                             <select id="school_enrollment_status_tendency" name="school_enrollment_status_tendency" class="form-control prev_school_form">
-                                                <option value="">{{ __('messages.select_enrollment_status') }}</option>
+                                                <option value="">{{ __('messages.tendency_select_enrollment_status') }}</option>
                                                 <option value="Yes">{{ __('messages.yes') }}</option>
                                                 <option value="No">{{ __('messages.no') }}</option>
                                             </select>
@@ -1107,7 +1107,7 @@
                                     <div class="form-group">
                                         <label for="expected_academic_year">{{ __('messages.expected_academic_year') }}<span class="text-danger">*</span></label>
                                         <select id="expected_academic_year" name="expected_academic_year" class="form-control">
-                                            <option value="">{{ __('messages.select_academic_year') }}</option>
+                                            <option value="">{{ __('messages.admission_select_academic_year') }}</option>
                                             @forelse($academic_year_list as $r)
                                             <option value="{{$r['id']}}">{{$r['name']}}</option>
                                             @empty

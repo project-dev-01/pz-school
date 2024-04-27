@@ -1,0 +1,101 @@
+/* Additional styles for the table */
+.table-container {
+    overflow-x: auto;
+}
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* CSS for responsive table */
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
+    /* Force table to not be like tables anymore */
+    table#event-table,
+    table#event-table thead,
+    table#event-table tbody,
+    table#event-table th,
+    table#event-table td,
+    table#event-table tr {
+        display: block;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    table#event-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    table#event-table tr {
+        margin: 0 0 1rem 0;
+        border: 1px solid #ddd; /* Add border to all table rows */
+        position: relative; /* Position each row relatively */
+    }
+
+    table#event-table td {
+        /* Behave like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    table#event-table td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 50%; /* Center vertically */
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold; /* Make labels bold */
+        text-align: center; /* Center align labels */
+        transform: translateY(-50%); /* Center vertically */
+    }
+
+    /* Add colon after each label */
+    table#event-table td:before {
+        content: ":";
+    }
+
+    /* Styles for expand/collapse buttons */
+    .expand-button,
+    .collapse-button {
+        position: absolute; /* Position absolutely */
+        top: 0; /* Align to top */
+        right: 0; /* Align to right */
+        margin: 10px; /* Adjust margin as needed */
+        cursor: pointer;
+    }
+
+    .details {
+        display: none;
+    }
+}
+
+/*
+    Label the data
+    You could also use a data-* attribute and content for this. 
+    That way "bloats" the HTML, this way means you need to keep HTML and CSS in sync.
+*/
+table#event-table td:nth-of-type(1):before {
+    content: "No";
+}
+table#event-table td:nth-of-type(2):before {
+    content: "title";
+}
+table#event-table td:nth-of-type(3):before {
+    content: "type";
+}
+table#event-table td:nth-of-type(4):before {
+    content: "audience";
+}
+table#event-table td:nth-of-type(5):before {
+    content: "start_date";
+}
+table#event-table td:nth-of-type(6):before {
+    content: "end_date";
+}
+table#event-table td:nth-of-type(7):before {
+    content: "action";
+}

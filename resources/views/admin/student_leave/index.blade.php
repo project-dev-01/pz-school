@@ -127,6 +127,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th> {{ __('messages.department') }}</th>
                                     <th> {{ __('messages.grade') }}</th>
                                     <th> {{ __('messages.class') }}</th>
                                     <th> {{ __('messages.attendance_no') }}</th>

@@ -424,7 +424,14 @@ $(function () {
                 },
                 {
                     data: 'discription',
-                    name: 'discription'
+                    name: 'discription',
+                    render: function(data, type, row) {
+                        if (type === 'display' || type === 'filter') {
+                            // Preserve whitespace and display line breaks
+                            return '<div style="white-space: pre-line;">' + data + '</div>';
+                        }
+                        return data;
+                    }
                 },
                 {
                     data: 'file',
@@ -459,6 +466,27 @@ $(function () {
         }).on('draw', function () {
         });
     }
+// Custom render function for truncating text with ellipsis
+function ellipsisRender(length, isWordBreak) {
+    return function(data, type, row) {
+        if (type === 'display' || type === 'filter') {
+            if (!data || data.length <= length) {
+                return data;
+            }
+            // Truncate the text and add ellipsis
+            var truncatedText = data.substr(0, length);
+            if (isWordBreak) {
+                // Find last space within the truncated text
+                var lastSpaceIndex = truncatedText.lastIndexOf(' ');
+                if (lastSpaceIndex !== -1) {
+                    truncatedText = truncatedText.substr(0, lastSpaceIndex);
+                }
+            }
+            return truncatedText + '...';
+        }
+        return data;
+    };
+}
 
 
     // Publish Event 

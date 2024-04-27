@@ -57,6 +57,7 @@ class TeacherController extends Controller
         $staff_id = [
             'staff_id' => session()->get('ref_user_id')
         ];
+        $bulletinBorad_data = Helper::GetMethod(config('constants.api.bulletinBoard_Dashboard'));
         $shortcut_data = Helper::PostMethod(config('constants.api.shortcutLink_list'), $staff_id);
         $get_data_hide_unhide_dashboard = Helper::PostMethod(config('constants.api.get_data_hide_unhide_dashboard'), $staff_id);
         // dd($get_data_hide_unhide_dashboard);
@@ -80,6 +81,7 @@ class TeacherController extends Controller
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : "",
                 'hiddenWeekends' => isset($hiddenWeekends) ? $hiddenWeekends : "",
                 'shortcut_links' => isset($shortcut_data['data']) ? $shortcut_data['data'] : [],
+                'bulletinBorad_data' => isset($bulletinBorad_data['data']) ? $bulletinBorad_data['data'] : [],
             ]
         );
     }
@@ -1992,13 +1994,18 @@ class TeacherController extends Controller
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
-                $description = str_replace(array("\r", "\n"), '', htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8')); // Removing newline characters;
+                $description = htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8'); // Encoding with quotes
+                $encoded_data = json_encode([
+                    'image_url' => $image_url,
+                    'title' => $row['title'],
+                    'description' => $description,
+                ]);
                 return '<div class="button-list">
-                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(\'' . $image_url . '\', \'' . $row['title'] . '\', \'' .$description. '\')"><i class="fe-eye"></i></a>
-                <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
-                <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
-            </a>
-                        </div>';
+                    <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>
+                    <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
+                    <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
+                </a>
+                </div>';
             })
             ->rawColumns(['publish', 'actions'])
             ->make(true);
@@ -2029,12 +2036,18 @@ class TeacherController extends Controller
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                $description = htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8'); // Encoding with quotes
+                $encoded_data = json_encode([
+                    'image_url' => $image_url,
+                    'title' => $row['title'],
+                    'description' => $description,
+                ]);
                 return '<div class="button-list">
-                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(\'' . $image_url . '\', \'' . $row['title'] . '\', \'' . $row['discription'] . '\')"><i class="fe-eye"></i></a>
-                <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
-                <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
-            </a>
-                        </div>';
+                    <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>
+                    <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
+                    <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
+                </a>
+                </div>';
             })
             ->rawColumns(['publish', 'actions'])
             ->make(true);

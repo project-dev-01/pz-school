@@ -17,7 +17,7 @@
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
-                        <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.submit') }}</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-light">{{ __('messages.staff_submit') }}</button>
                     </div>
 
                 </form>

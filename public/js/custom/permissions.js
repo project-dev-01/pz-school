@@ -1,6 +1,7 @@
 var pathname = window.location.pathname;
 
-pathname=pathname.replace('/school-management-system/public/','');
+pathname=pathname.replace('school-management-system/public/','');
+pathname=pathname.substring(1);
 //alert(pathname);
 $.post(checkpermissions, { menu_id:pathname }, function (data) {
     

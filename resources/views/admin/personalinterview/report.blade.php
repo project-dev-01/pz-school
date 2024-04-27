@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' . __('messages.personal_interview') . '')
+@section('title',' ' . __('messages.personal_interview_report') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
@@ -13,7 +13,7 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
-
+<link href="{{ asset('css/custom/pagehead_breadcrumb.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
@@ -23,16 +23,18 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <!--<ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                        <li class="breadcrumb-item active">Wizard</li>
-					</ol>-->
-				</div>
-                <h4 class="page-title">{{ __('messages.personal_interview') }}</h4>
-			</div>
+		<div class="page-title-box" style="display: inline-flex; align-items: center;margin-bottom:5px;margin-top:5px">
+                <div class="page-title-icon">
+				<i data-feather="file-text" class="icon-dual" style="color:black"></i>
+                </div>
+                <!--<h4 class="page-title" style="margin-left: 10px;">{{ __('messages.student_profile') }}</h4>-->
+                <ol class="breadcrumb m-0 responsivebc">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.personal_interview') }}</a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.personal_interview_report') }}</a></li>
+                </ol>
+
+            </div> 
+           
 		</div>
 	</div>
     <!-- end page title -->

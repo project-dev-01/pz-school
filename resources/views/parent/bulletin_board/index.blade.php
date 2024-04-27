@@ -254,7 +254,7 @@
                                         <td id="fileDescription"></td>
                                     </tr>
                                     <tr>
-                                        <td>{{ __('messages.download') }}</td>
+                                        <td>{{ __('messages.file_download') }}</td>
                                         <td class="publish_date"><a id="downloadLink" href="#" download>{{ __('messages.download') }}</a></td>
                                     </tr>
                                     <tr>

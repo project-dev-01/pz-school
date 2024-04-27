@@ -386,31 +386,31 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="reason_for_transfer">{{ __('messages.reason_for_transfer') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="reason_for_transfer" value=""  name="reason_for_transfer" placeholder="{{ __('messages.enter_reason_for_transfer') }}" aria-describedby="inputGroupPrepend">
+                                        <label for="reason_for_transfer">{{ __('messages.termination_reason_for_transfer') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="reason_for_transfer" value=""  name="reason_for_transfer" placeholder="{{ __('messages.termination_enter_reason_for_transfer') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="transfer_destination_school_name">{{ __('messages.transfer_destination_school_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="transfer_destination_school_name" value=""  name="transfer_destination_school_name" placeholder="{{ __('messages.enter_transfer_destination_school_name') }}" aria-describedby="inputGroupPrepend">
+                                        <label for="transfer_destination_school_name">{{ __('messages.termination_transfer_destination_school_name') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="transfer_destination_school_name" value=""  name="transfer_destination_school_name" placeholder="{{ __('messages.termination_enter_transfer_destination_school_name') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="transfer_destination_tel">{{ __('messages.transfer_destination_tel') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control number_validation" id="transfer_destination_tel" value=""  name="transfer_destination_tel" placeholder="{{ __('messages.enter_transfer_destination_tel') }}" aria-describedby="inputGroupPrepend">
+                                        <label for="transfer_destination_tel">{{ __('messages.termination_transfer_destination_tel') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control number_validation" id="transfer_destination_tel" value=""  name="transfer_destination_tel" placeholder="{{ __('messages.termination_enter_transfer_destination_tel') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="parent_phone_number_after_transfer number_validation">{{ __('messages.parent_guardian_phone_number_after_transfer') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="parent_phone_number_after_transfer" value=""  name="parent_phone_number_after_transfer" placeholder="{{ __('messages.enter_parent_guardian_phone_number_after_transfer') }} " aria-describedby="inputGroupPrepend">
+                                        <label for="parent_phone_number_after_transfer number_validation">{{ __('messages.termination_parent_guardian_phone_number_after_transfer') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="parent_phone_number_after_transfer" value=""  name="parent_phone_number_after_transfer" placeholder="{{ __('messages.termination_enter_parent_guardian_phone_number_after_transfer') }} " aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="parent_email_address_after_transfer">{{ __('messages.parent_email_address_after_transfer') }}<span class="text-danger">*</span></label>
+                                    <label for="parent_email_address_after_transfer">{{ __('messages.termination_parent_email_address_after_transfer') }}<span class="text-danger">*</span></label>
                                     
                                         <input type="text" name="parent_email_address_after_transfer" class="form-control" id="parent_email_address_after_transfer" placeholder="xxxxx@gmail.com" aria-describedby="inputGroupPrepend">
                                     
@@ -425,8 +425,8 @@
                                 </div> -->
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="parent_address_after_transfer">{{ __('messages.parent_address_after_transfer') }}<span class="text-danger">*</span></label>
-                                        <textarea type="text" class="form-control" id="parent_address_after_transfer" value=""  name="parent_address_after_transfer" placeholder="{{ __('messages.enter_parent_address_after_transfer') }} " aria-describedby="inputGroupPrepend"></textarea>
+                                        <label for="parent_address_after_transfer">{{ __('messages.termination_parent_address_after_transfer') }}<span class="text-danger">*</span></label>
+                                        <textarea type="text" class="form-control" id="parent_address_after_transfer" value=""  name="parent_address_after_transfer" placeholder="{{ __('messages.termination_enter_parent_address_after_transfer') }} " aria-describedby="inputGroupPrepend"></textarea>
                                     </div>
                                 </div>
                             </div><br>

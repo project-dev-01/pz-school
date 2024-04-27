@@ -781,7 +781,7 @@
                                                         <span class="far fa-calendar-alt"></span>
                                                     </div>
                                                 </div>
-                                                <input type="text" class="form-control" id="passport_expiry_date" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="passport_expiry_date" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($student['passport_expiry_date']) ? $student['passport_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
                                             </div>
                                             <label for="passport_expiry_date" class="error"></label>
                                         </div>
@@ -851,7 +851,7 @@
                                                         <span class="far fa-calendar-alt"></span>
                                                     </div>
                                                 </div>
-                                                <input type="text" class="form-control" id="visa_expiry_date" name="visa_expiry_date" value="{{ isset($application['visa_expiry_date']) ? $application['visa_expiry_date'] : date('Y-m-d')}}" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="visa_expiry_date" name="visa_expiry_date" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : date('Y-m-d')}}" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
                                             </div>
                                             <label for="visa_expiry_date" class="error"></label>
                                         </div>
@@ -962,7 +962,7 @@
                                         <div class="form-group">
                                             <label for="school_enrollment_status_tendency">{{ __('messages.enrollment_status_tendency') }}<span class="text-danger">*</span></label>
                                             <select id="school_enrollment_status_tendency" name="school_enrollment_status_tendency" class="form-control prev_school_form">
-                                                <option value="">{{ __('messages.select_enrollment_status') }}</option>
+                                                <option value="">{{ __('messages.tendency_select_enrollment_status') }}</option>
                                                 <option value="Yes" {{ isset($student['school_enrollment_status_tendency']) ? $student['school_enrollment_status_tendency'] == "Yes" ? 'selected' : '' : '' }}>{{ __('messages.yes') }}</option>
                                                 <option value="No" {{ isset($student['school_enrollment_status_tendency']) ? $student['school_enrollment_status_tendency'] == "Yes" ? 'selected' : '' : '' }}>{{ __('messages.no') }}</option>
                                             </select>
@@ -1065,7 +1065,7 @@
                             <button class="btn btn-primary-bl waves-effect waves-light">
                                 {{ __('messages.update') }}
                             </button>
-                            <a href="{{ route('parent.student.profile') }}" class="btn btn-primary-bl waves-effect waves-light">
+                            <a href="{{ route('parent.update_info') }}" class="btn btn-primary-bl waves-effect waves-light">
                                 {{ __('messages.back') }}
                             </a>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">

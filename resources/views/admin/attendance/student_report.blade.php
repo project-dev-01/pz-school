@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' . __('messages.attendance_report') . '')
+@section('title',' ' . __('messages.student') . '')
 @section('component_css')
 <!-- date picker -->
 <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
@@ -8,7 +8,7 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
-
+<link href="{{ asset('css/custom/pagehead_breadcrumb.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <style>
@@ -39,16 +39,28 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <!--<ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                        <li class="breadcrumb-item active">Wizard</li>
-                    </ol>-->
+        <div class="page-title-box" style="display: inline-flex; align-items: center;margin-bottom:5px;margin-top:5px">
+                <div class="page-title-icon">
+                <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_59_2184)">
+                                <path d="M11.2567 4.31207V2.11065H10.0526V0.666656H13.9496V2.09817H12.7435V4.30748C16.6027 4.65141 19.7033 6.333 21.911 9.50321C23.5559 11.8661 24.2232 14.5165 23.9352 17.3795C23.6385 20.3463 22.2288 23.0944 19.9854 25.0794C17.742 27.0645 14.8285 28.1417 11.8221 28.0976C8.8156 28.0536 5.93546 26.8916 3.75212 24.8418C1.56878 22.792 0.241509 20.0039 0.0332032 17.0297C-0.197159 13.7531 0.794459 10.8382 2.98091 8.36115C5.16736 5.88405 7.95289 4.58643 11.2567 4.31207ZM19.5915 16.286C19.5663 12.0387 16.1705 8.68014 11.9908 8.69195C7.79534 8.70377 4.37831 12.0952 4.40611 16.225C4.43391 20.3548 7.76356 23.7324 11.9041 23.7363C13.9919 23.7363 15.8401 23.0209 17.3322 21.5428C18.8163 20.0771 19.5537 18.2853 19.5915 16.286Z" fill="black" />
+                                <path d="M11.9987 22.2641C8.63131 22.2641 5.8855 19.5475 5.87491 16.2007C5.86432 12.8644 8.64256 10.1005 12.0027 10.1274C15.4197 10.1543 18.1033 12.8369 18.1165 16.2C18.1304 19.5455 15.3694 22.2628 11.9987 22.2641ZM7.52914 16.4843L10.4087 19.3388L16.5066 14.0531L15.5322 12.9557L10.4689 17.3533L8.54922 15.4735L7.52914 16.4843Z" fill="black" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_59_2184">
+                                    <rect width="24" height="27.4286" fill="white" transform="translate(0 0.666656)" />
+                                </clipPath>
+                            </defs>
+                        </svg>
                 </div>
-                <h4 class="page-title"> {{ __('messages.attendance_report') }}</h4>
-            </div>
+                <!--<h4 class="page-title" style="margin-left: 10px;">{{ __('messages.student_profile') }}</h4>-->
+                <ol class="breadcrumb m-0 responsivebc">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.attendance_report') }}</a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.student') }}</a></li>
+                </ol>
+
+            </div>    
+      
         </div>
     </div>
     <!-- end page title -->

@@ -94,8 +94,9 @@ $(function () {
     // rules validation
     // data bind 
     $('#studentLeaveList').on('submit', function (e) {
-        e.preventDefault();
+        e.preventDefault();       
         var form = this;
+        var department_id = $("#department_id").val();
         var class_id = $("#changeClassName").val();
         var section_id = $("#sectionID").val();
         var student_name = $("#student_name").val();
@@ -114,6 +115,7 @@ $(function () {
         // setLocalStorageStudentLeaveTeacher(classObj);
         var formData = new FormData();
         formData.append('branch_id', branchID);
+        formData.append('department_id', department_id);
         formData.append('class_id', class_id);
         formData.append('section_id', section_id);
         formData.append('student_name', student_name);
@@ -124,6 +126,7 @@ $(function () {
     });
     function getstudentLeaveList() {
         var form = this;
+        var department_id = $("#department_id").val();
         var class_id = $("#changeClassName").val();
         var section_id = $("#sectionID").val();
         var student_name = $("#student_name").val();
@@ -131,6 +134,7 @@ $(function () {
         var date = $("#range-datepicker").val();
         var formData = new FormData();
         formData.append('branch_id', branchID);
+        formData.append('department_id', department_id);
         formData.append('class_id', class_id);
         formData.append('section_id', section_id);
         formData.append('student_name', student_name);
@@ -490,6 +494,9 @@ $(function () {
                 render: function (data, type, row, meta) {
                     return meta.row + 1;
                 }
+            },
+            {
+                data: 'department_name'
             },
             {
                 data: 'class_name'

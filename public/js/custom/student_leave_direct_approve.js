@@ -253,6 +253,9 @@ $(function () {
             text-align: left;
             z-index: 1; /* Ensures cells stay below header */
         }
+        tr:hover {
+            background-color: #fff !important;
+        }
         `;
         document.head.appendChild(style);
         return table;
