@@ -1,23 +1,12 @@
 <?php
-$url = "http://localhost/paxsuzen-api-dev/public/api";
+$url = "http://localhost/pz-school-api/public/api";
 // $url = "https://api.suzen.school/api";test
-$schoolurl = "http://localhost/school-management-system/public";
 return [
-    'branch_id'=>'6',
+    'branch_id'=>'5',
     'school_name'=>'クアラルンプール日本人学校',
     'school_image'=>'logo_jskl.jpeg',
-    'image_url' => "http://localhost/paxsuzen-api-dev/public",
-    'cron_secret_key'=> 'S6rSMVixPeupH51AO5mVFjkQJ88bnjOO',
+    'image_url' => "http://localhost/pz-school-api/public",
     'api' => [
-        // school login url
-        'homepage'=> $schoolurl.'/home',
-        'superadmin_login' => $schoolurl.'/syscont/login',
-        'admin_login' => $schoolurl.'/admin/login',
-        'staff_login' => $schoolurl.'/staff/login',
-        'teacher_login' => $schoolurl.'/teacher/login',
-        'parent_login' => $schoolurl.'/parent/login',
-        'student_login' => $schoolurl.'/student/login',
-        'guest_login' => $schoolurl.'/guest/login',
         // login url
         'login' => $url.'/login',
         'login_guest' => $url.'/login_guest',
@@ -420,7 +409,6 @@ return [
         'get_to_do_teacher' => $url.'/get_to_do_teacher',
 
         // Student Url
-        'teacher_student_list' => $url.'/teacher/student/list',
         'student_list' => $url.'/student/list',
         'student_details' => $url.'/student/student-details',
         'student_update' => $url.'/student/update',
@@ -906,7 +894,7 @@ return [
         'buletin_board_update' => $url.'/buletin_board/update',
         'get_student_details_buletin_board' => $url.'/get_student_details_buletin_board',
         'get_parent_details_buletin_board'  => $url.'/get_parent_details_buletin_board',
-        'bulletin_board_cronJob' => $url.'/bulletin_board/cronJob',
+
 
         'get_bulletin_parent' => $url.'/buletin_board/list/parent',
         'get_bulletin_imp_parent' => $url.'/buletin_board/imp_list/parent',
@@ -943,8 +931,7 @@ return [
         'setpermission' => $url.'/menus/setpermission',        
         'menu_details' => $url.'/menus/menu_details',
         'menu_update' => $url.'/menus/update',        
-        'menuaccess_permission' => $url.'/menus/getpermission', 
-        'get_login_menuroute' => $url.'/menus/get_login_menuroute', 
+        'menuaccess_permission' => $url.'/menus/getpermission',  
 
         // event type url
         'school_role_add' => $url.'/school_role/add',
