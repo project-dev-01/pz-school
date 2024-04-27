@@ -57,6 +57,7 @@ class TeacherController extends Controller
         $staff_id = [
             'staff_id' => session()->get('ref_user_id')
         ];
+        $bulletinBorad_data = Helper::GetMethod(config('constants.api.bulletinBoard_Dashboard'));
         $shortcut_data = Helper::PostMethod(config('constants.api.shortcutLink_list'), $staff_id);
         $get_data_hide_unhide_dashboard = Helper::PostMethod(config('constants.api.get_data_hide_unhide_dashboard'), $staff_id);
         // dd($get_data_hide_unhide_dashboard);
@@ -80,6 +81,7 @@ class TeacherController extends Controller
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : "",
                 'hiddenWeekends' => isset($hiddenWeekends) ? $hiddenWeekends : "",
                 'shortcut_links' => isset($shortcut_data['data']) ? $shortcut_data['data'] : [],
+                'bulletinBorad_data' => isset($bulletinBorad_data['data']) ? $bulletinBorad_data['data'] : [],
             ]
         );
     }

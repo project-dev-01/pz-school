@@ -14,6 +14,7 @@
                     <?php
                     if (!empty($bulletinBorad_data)) {
                         foreach ($bulletinBorad_data as $file) {
+                            if (!empty($file['file'])) {
                             $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $file['file'];
                     ?>
                             <div class="col-xl-4">
@@ -43,6 +44,7 @@
                                 </div>
                             </div> <!-- end col -->
                     <?php
+                            }
                         }
                     } else {
                         // If no files are available
