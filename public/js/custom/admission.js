@@ -11,8 +11,25 @@ $(function () {
     //     required: true
     // });
 
+    $("#trail_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
+
+    $("#official_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
+
+
     $('#enrollment').on('change', function(){
-        alert('vvfd');
+       
         if($(this).val() == 'Trail Enrollment'){
             $('#trail_date_show').show();
             $('#official_date_show').hide();

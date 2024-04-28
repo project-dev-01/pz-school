@@ -544,6 +544,7 @@
 </script>
 <script>
     var studentUpdateList = "{{ route('admin.student.update_info_list') }}";
+    var studentUpdateMenu = "{{ route('admin.student.update_info') }}";
     var indexStudent = "{{ route('admin.student.index') }}";
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var vehicleByRoute = "{{ route('admin.vehicle_by_route') }}";

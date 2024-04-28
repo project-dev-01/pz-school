@@ -1,5 +1,22 @@
 $(function () {
 
+    $("#trail_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
+
+    $("#official_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
+
+    
 
     $('#enrollment').on('change', function(){
         

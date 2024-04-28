@@ -272,15 +272,15 @@ class CommonController extends Controller
                     foreach ($unread_notifications['data']['unread'] as $notification) {
                       
                     
-                        Log::info("HTTP request failed to ". $notification['type']);
+                        // Log::info("HTTP request failed to ". $notification['type']);
             
                         if ($notification['type'] == "App\Notifications\NewApplication") {
                         //    return $notification['data'];
                             $student_name = isset($notification['data']['student_name']) ? $notification['data']['student_name'] : 'mannn';
                             $notificationlist .= '<a href="' . route('admin.application.index') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
-                            <p class="notify-details">' . __('messages.information_update') . '</p>
+                            <p class="notify-details">' . __('messages.new_application') . '</p>
                             <p class="text-muted mb-0 user-msg">
-                            <small>' . $student_name . ' ' . __('messages.new_application_arrived', ['student_name' => $student_name]) . ' ' . $student_name . '</small>
+                            <small>' . $student_name . ' ' . __('messages.new_application', ['student_name' => $student_name]) . ' ' . $student_name . '</small>
                             </p>
                             </a>';
                         }

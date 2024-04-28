@@ -2183,6 +2183,7 @@ return [
     "student_portal" => "Student Portal",
     "guest_portal" => "Guest Portal",
 
+    "new_application" => "New Application",
     "your_leave-application_for" => "Your leave application for",
     "was_approved" => "was approved",
     "leave_start_from" => "Leave Start from",
