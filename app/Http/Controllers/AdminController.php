@@ -5347,7 +5347,8 @@ class AdminController extends Controller
             'status' => $request->status,
             'academic_session_id' => session()->get('academic_session_id'),
         ];
-        
+        // return $parent_data;
+        // dd($parent_data);
         $response = Helper::GETMethodWithData(config('constants.api.parent_list'), $parent_data);
         // dd($response);
         $data = isset($response['data']) ? $response['data'] : [];

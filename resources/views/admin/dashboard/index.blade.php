@@ -167,7 +167,7 @@
     'task' => 'Task',
     'student_transfer_list' => 'StudentTransferredList',
     'shortcut' => 'ShortcutLinks',
-    'bulletin' => 'BulletinBoard',
+    //'bulletin' => 'BulletinBoard',
     'student_plan_leave' => 'StudentPlanToLeave',
     'studentnewjoining' => 'StudentNewJoining',
     ];
@@ -349,7 +349,7 @@
     var teacherSectionUrl = "{{ config('constants.api.section_by_class') }}";
     // var presentStudentTerminationListUrl = "{{ route('admin.student_termination.list') }}";
 
-    var studentPlanToLeaveListUrl = "{{ config('constants.api.student_plan_to_leave') }}";
+    // var studentPlanToLeaveListUrl = "{{ config('constants.api.student_plan_to_leave') }}";
     var studentTransferListUrl = "{{ config('constants.api.student_transfer_list') }}";
     var studentNewJoiningListUrl = "{{ config('constants.api.student_new_joining_list') }}";
 

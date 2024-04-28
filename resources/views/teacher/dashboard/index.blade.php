@@ -87,7 +87,7 @@
     'task' => 'Task',
     'student_transfer_list' => 'StudentTransferredList',
     'shortcut' => 'ShortcutLinks',
-    'bulletin' => 'BulletinBoard',
+    //'bulletin' => 'BulletinBoard',
     'student_plan_leave' => 'StudentPlanToLeave',
     'studentnewjoining' => 'StudentNewJoining',
     ];
@@ -205,6 +205,8 @@
     var all_exam_subject_scores = "{{ config('constants.api.all_exam_subject_scores') }}";
     var staffLeaveHistoryDashboardUrl = "{{ config('constants.api.staff_leave_history_dashboard') }}";
 
+    var studentTransferListUrl = "{{ config('constants.api.student_transfer_list') }}";
+    var studentNewJoiningListUrl = "{{ config('constants.api.student_new_joining_list') }}";
 
     var getTestScore = "{{ config('constants.api.get_test_score_dashboard') }}";
     // all exam subject scores
@@ -223,7 +225,7 @@
 </script>
 <!-- to calendor  -->
 <!-- <script src="{{ asset('js/custom/teacher_calendor.js') }}"></script> -->
-<!-- <script src="{{ asset('js/custom/teacher_calendor_new.js') }}"></script> -->
+<script src="{{ asset('js/custom/dashboard_attendance_report_stg.js') }}"></script>
 <script src="{{ asset('js/custom/teacher_calendor_new_cal.js') }}"></script>
 
 <!-- to do list -->

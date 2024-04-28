@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Helpers\Helper;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Exception;
 class TerminationCron extends Command
 {
     /**
@@ -36,11 +38,24 @@ class TerminationCron extends Command
      */
     public function handle()
     {
-        \Log::info("Cron is working fine!");
-        $data = [
+        try {
+            $data = [
             'branch_id' => config('constants.branch_id')
-        ];
-        $response = Http::post(config('constants.api.termination_student'), $data);
-        $schoolDetails = $response->json();
+            ];
+            $url = config('constants.api.termination_student');
+       		$response = Http::post($url, $data);
+		    Log::info("termination IS WORKING");
+           	return $response->json();
+           
+        } catch (Exception $e) {
+            Log::error("HTTP request failed to $url", [
+                'url' => $url,
+                'error' => $e->getMessage(),
+            ]);
+
+            return null;
+        }
+
+
     }
 }
