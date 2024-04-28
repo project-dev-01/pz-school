@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Student Leave Details')
+@section('title',' ' . __('messages.student_leaves') . '')
 @section('component_css')
 <link href="{{ asset('libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}" rel="stylesheet" type="text/css">
@@ -15,6 +15,7 @@
 
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
+<link href="{{ asset('css/custom/pagehead_breadcrumb.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
@@ -25,16 +26,15 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <!-- <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-                            <li class="breadcrumb-item active">Datatables</li>
-                        </ol>
-                    </div> -->
-                <h4 class="page-title">{{ __('messages.student_leave_details') }}</h4>
+            <div class="page-title-box" style="display: inline-flex; align-items: center;margin-bottom:10px;margin-top:10px">
+                <div class="page-title-icon">
+                    <svg class="svg-icon" style="width: 20; height: 20;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M860 860.5H512c-28.3 0-51.2-22.9-51.2-51.2v-71.7h450.4v71.7c0 28.3-22.9 51.2-51.2 51.2zM630.6 519.7c-40-20.3-67.4-61.6-67.4-109.5 0-67.8 55-122.8 122.8-122.8s122.8 55 122.8 122.8c0 47.9-27.5 89.2-67.4 109.5 97.5 24.7 169.8 112.8 169.8 218H460.8c0-105.2 72.3-193.3 169.8-218zM491.5 410.1c0 31.4 7.6 60.9 20.8 87.2-74.5 53.9-123.2 141.4-123.2 240.4 0 13.4 1.2 26.6 2.9 39.5-156.6-14.1-279.3-145.4-279.3-305.7 0-169.6 137.5-307.1 307.1-307.1 72 0 138.1 25 190.4 66.5-69.7 29.6-118.7 98.7-118.7 179.2zM430.1 318c0-17-13.7-30.7-30.7-30.7S368.7 301 368.7 318v138.8l-94.8 94.8c-12 12-12 31.4 0 43.4s31.4 12 43.4 0l101.3-101.3c5.6-5.6 8.5-12.8 8.8-20.1 1.7-3.8 2.6-8 2.6-12.4V318z" fill="black" />
+                    </svg>
+                </div>
+                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.student_leaves') }} </h4>
             </div>
+
         </div>
     </div>
     <!-- end page title -->
