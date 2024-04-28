@@ -213,7 +213,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="changeStdName">{{ __('messages.student_name') }}<span class="text-danger">*</span></label>
+                                    <label for="changeStdName">{{ __('messages.lab_student_name') }}<span class="text-danger">*</span></label>
                                     <select id="changeStdName" class="form-control" name="changeStdName">
                                         <option value="">{{ __('messages.select_student') }}</option>
                                     </select>
@@ -221,7 +221,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">{{ __('messages.leave_from') }}<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.lab_leave_start') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -234,7 +234,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="heard">{{ __('messages.to_leave') }}<span class="text-danger">*</span></label>
+                                    <label for="heard">{{ __('messages.lab_leave_end') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -250,7 +250,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="total_leave">{{ __('messages.number_of_days_leave') }}<span class="text-danger">*</span></label>
+                                    <label for="total_leave">{{ __('messages.lab_number_of_days_leave') }}<span class="text-danger">*</span></label>
                                     <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="{{ __('messages.enter_days_leave') }}">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
@@ -269,7 +269,7 @@
                             </div> -->
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="directchangeLevType">{{ __('messages.leave_type') }}<span class="text-danger">*</span></label>
+                                    <label for="directchangeLevType">{{ __('messages.lab_leave_type') }}<span class="text-danger">*</span></label>
                                     <select id="directchangeLevType" class="form-control" name="directchangeLevType">
                                         <option value="">{{ __('messages.select_leave_type') }}</option>
                                         @forelse ($get_student_leave_types as $ress)

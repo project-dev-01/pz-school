@@ -134,7 +134,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="changeStdName">{{ __('messages.student_name') }}<span class="text-danger">*</span></label>
+                                    <label for="changeStdName">{{ __('messages.lab_student_name') }}<span class="text-danger">*</span></label>
                                     <select id="changeStdName" class="form-control" name="changeStdName">
                                         <option value="">{{ __('messages.select_student') }}</option>
                                         @forelse ($get_std_names_dashboard as $std)

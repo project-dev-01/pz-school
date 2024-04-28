@@ -1570,7 +1570,7 @@ return [
     "bulk_promotion" => "Bulk Promotion",
     "promotion_import" => "Promotion Import",
     "job_title" => "Job Title",
-    "select_job_title" => "Select Job",
+    "select_job_title" => "Select Job Title",
     "start" => "Start",
     "end" => "End",
     "employee_type" => "Employee Type",
@@ -2224,4 +2224,5 @@ return [
       "loginactivity_spend" => "Spending Time",
       "studentleaves_student_name" => "Student Name",
       "student_student_name" => "Student Name",
+      "lab_student_name" => "Student Name",
 ];
