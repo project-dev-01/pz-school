@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' . __('messages.activty_monitoring') . '')
+@section('title',' ' . __('messages.login_activity') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/pagehead_breadcrumb.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <style>
@@ -26,14 +27,26 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <!-- <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">List</li>
-                    </ol>
-                </div> -->
-                <h4 class="page-title">{{ __('messages.activty_monitoring') }}</h4>
-            </div>
+        <div class="page-title-box" style="display: inline-flex; align-items: center;margin-bottom:5px;margin-top:5px">
+                <div class="page-title-icon">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve" style="width: 15px;">
+                            <g>
+                                <g>
+                                    <g>
+                                        <path fill="black" d="M20.1,10.7c-4.6,1.6-7.9,5-9.4,9.6C10,22.4,9.9,32.4,10,129l0.1,106.4l1.2,2.3c1.4,3,4.2,5.7,7.2,7.2l2.3,1.2h107.3h107.3l2.3-1.2c3-1.4,5.7-4.2,7.2-7.2l1.2-2.3V128.1V20.8l-1.2-2.3c-1.4-3-4.2-5.7-7.2-7.2l-2.3-1.2l-106.6-0.1C32.7,10,22,10,20.1,10.7z M216.7,76.4v36.9H198h-18.7l-10.7,16.2c-5.9,8.9-10.8,16.1-11,16.1c-0.1,0-12.7-18.7-27.9-41.5c-15.2-22.9-28.2-42-28.8-42.5c-1.6-1.2-3.5-1.1-5.1,0.4c-0.8,0.7-8.9,12.6-18,26.3l-16.6,25.1H50.3H39.5V76.4V39.5h88.6h88.6V76.4z M126.5,152.1c15.2,22.9,28.2,42,28.8,42.5c1.3,1.1,3.2,1.1,4.6,0.1c0.6-0.4,8.7-12.2,18.1-26.3l17-25.6h10.8h10.8v36.9v36.9h-88.6H39.5v-36.9v-36.9h18.7h18.7l10.7-16.2c5.9-8.9,10.8-16.1,11-16.1C98.7,110.6,111.2,129.3,126.5,152.1z" />
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                </div>
+                <!--<h4 class="page-title" style="margin-left: 10px;">{{ __('messages.student_profile') }}</h4>-->
+                <ol class="breadcrumb m-0 responsivebc">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.activty_monitoring') }}</a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.login_activity') }}</a></li>
+                </ol>
+
+            </div>  
+         
         </div>
     </div>
     <!-- end page title -->

@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Expense Import')
+@section('title',' ' . __('messages.import_expense') . '')
 @section('component_css')
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
@@ -11,13 +11,32 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                    </ol>
+        <div class="page-title-box" style="display: inline-flex; align-items: center;margin-bottom:5px;margin-top:5px">
+                <div class="page-title-icon">
+                <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_354_1194)">
+                                <rect x="12.8" y="10.4097" width="6.4" height="4.8" rx="1" fill="black" />
+                                <rect x="12.8" y="16.8096" width="11.2" height="3.2" rx="1" fill="black" />
+                                <rect x="12.8" y="21.6094" width="8" height="3.2" rx="1" fill="black" />
+                                <rect y="0.80957" width="11.2" height="24" rx="1" fill="black" />
+                                <rect x="12.8" y="0.80957" width="11.2" height="3.2" rx="1" fill="black" />
+                                <rect x="12.8" y="5.60938" width="11.2" height="3.2" rx="1" fill="black" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_354_1194">
+                                    <rect width="24" height="24" fill="white" transform="translate(0 0.80957)" />
+                                </clipPath>
+                            </defs>
+                        </svg>
                 </div>
-                <h4 class="page-title">{{ __('messages.expense_import') }}</h4>
-            </div>
+                <!--<h4 class="page-title" style="margin-left: 10px;">{{ __('messages.student_profile') }}</h4>-->
+                <ol class="breadcrumb m-0 responsivebc">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.fees') }}</a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.import_expense') }}</a></li>
+                </ol>
+
+            </div>  
+       
         </div>
     </div>
     <!-- end page title -->
