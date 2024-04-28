@@ -57,7 +57,8 @@ class TeacherController extends Controller
         $staff_id = [
             'staff_id' => session()->get('ref_user_id')
         ];
-        $bulletinBorad_data = Helper::GetMethod(config('constants.api.bulletinBoard_Dashboard'));
+        $bulletinBorad_data = Helper::PostMethod(config('constants.api.bulletinBoard_teacher_Dashboard'), $staff_id);
+       
         $shortcut_data = Helper::PostMethod(config('constants.api.shortcutLink_list'), $staff_id);
         $get_data_hide_unhide_dashboard = Helper::PostMethod(config('constants.api.get_data_hide_unhide_dashboard'), $staff_id);
         // dd($get_data_hide_unhide_dashboard);

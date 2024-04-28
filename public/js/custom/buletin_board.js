@@ -427,8 +427,13 @@ $(function () {
                     name: 'discription',
                     render: function(data, type, row) {
                         if (type === 'display' || type === 'filter') {
-                            // Preserve whitespace and display line breaks
-                            return '<div style="white-space: pre-line;">' + data + '</div>';
+                            if (data && data.length > 50) {
+                                // If data is longer than 50 characters, show initial text followed by "View More" button
+                                var initialText = data.substring(0, 50); // Get the first 50 characters of the description
+                                return initialText + '... <button class="btn btn-sm btn-info view-description" data-toggle="modal" data-target="#descriptionModal" data-description="' + data + '">View More</button>';
+                            } else {
+                                return data; // If data is null/undefined or shorter than 50 characters, display it directly
+                            }
                         }
                         return data;
                     }
@@ -451,10 +456,18 @@ $(function () {
                 {
                     data: 'target_user',
                     name: 'target_user'
-                },
-                {
+                },{
                     data: 'publish_date',
-                    name: 'publish_date'
+                    name: 'publish_date',
+                    render: function(data, type, row) {
+                        if (type === 'display' || type === 'filter') {
+                            // Split the datetime string into date and time parts
+                            var parts = data.split(' ');
+                            // Display only the date part (assuming it's the first part of the split string)
+                            return parts[0];
+                        }
+                        return data;
+                    }
                 },
                 {
                     data: 'actions',
@@ -466,6 +479,13 @@ $(function () {
         }).on('draw', function () {
         });
     }
+    $('#buletin-table').on('click', '.view-description', function() {
+        // Get the full description from the data-description attribute of the button
+        var fullDescription = $(this).data('description');
+
+        // Update modal body with full description
+        $('#descriptionModalBody').text(fullDescription);
+    });
 // Custom render function for truncating text with ellipsis
 function ellipsisRender(length, isWordBreak) {
     return function(data, type, row) {
