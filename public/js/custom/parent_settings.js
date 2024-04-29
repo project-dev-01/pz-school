@@ -40,7 +40,7 @@ $(function () {
        var guardianMiddleNameEnglish = $('#guardian_middle_name_english').val();
        var guardianFirstNameEnglish = $('#guardian_first_name_english').val();
        var guardianEmail = $('#guardian_email').val();
-       var guardianMobileNo = $('#guardian_mobile_no').val();
+       var guardianMobileNo = $('#guardian_phone_number').val();
        var guardianOccupation = $('#guardian_occupation').val();
        var guardianId = $('#guardian_id').val();
        if (dataParentId === 1 || dataParentId === 2) {
@@ -60,7 +60,7 @@ $(function () {
                 $('#father_middle_name_english').val(guardianMiddleNameEnglish);
                 $('#father_first_name_english').val(guardianFirstNameEnglish);
                 $('#father_email').val(guardianEmail);
-                $('#father_mobile_no').val(guardianMobileNo);
+                $('#father_phone_number').val(guardianMobileNo);
                 $('#father_occupation').val(guardianOccupation);
                 $('#mother_details input').val('');
                 $('#mother_details select').val('');
@@ -81,7 +81,7 @@ $(function () {
                 $('#mother_middle_name_english').val(guardianMiddleNameEnglish);
                 $('#mother_first_name_english').val(guardianFirstNameEnglish);
                 $('#mother_email').val(guardianEmail);
-                $('#mother_mobile_no').val(guardianMobileNo);
+                $('#mother_phone_number').val(guardianMobileNo);
                 $('#mother_occupation').val(guardianOccupation);
                 $('#father_details input').val('');
                 $('#father_details select').val('');
@@ -208,6 +208,19 @@ $(function () {
     });
     
 
+
+    $('#japanese_association_membership_image_principal').change(function () {
+        // var i = $(this).prev('label').clone();
+        var file = $('#japanese_association_membership_image_principal')[0].files[0];
+        if (file.size > 2097152) {
+            $('#japanese_association_membership_image_principal_name').text("File greater than 2Mb");
+            $("#japanese_association_membership_image_principal_name").addClass("error");
+            $('#japanese_association_membership_image_principal').val('');
+        } else {
+            $("#japanese_association_membership_image_principal_name").removeClass("error");
+            $('#japanese_association_membership_image_principal_name').text(file.name);
+        }
+    });
     $('#japanese_association_membership_image_supplimental').change(function () {
         // var i = $(this).prev('label').clone();
         var file = $('#japanese_association_membership_image_supplimental')[0].files[0];
@@ -578,6 +591,15 @@ $(function () {
                     }
                 }
             },
+            "japanese_association_membership_image_principal": {
+                required: function (element) {
+                    if ($("#japanese_association_membership_image_principal_old").val().length < 1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
             "japanese_association_membership_image_supplimental": {
                 required: function (element) {
                     if ($("#japanese_association_membership_image_supplimental_old").val().length < 1) {
@@ -624,7 +646,7 @@ $(function () {
                 success: function (data) {
                     if (data.code == 200) {
                         toastr.success(data.message);
-                        window.location.href = indexParent;
+                        window.location.href = updateInfoList;
                     } else {
                         toastr.error(data.message);
                     }

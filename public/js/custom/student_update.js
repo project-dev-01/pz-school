@@ -556,6 +556,7 @@ $(function () {
                 success: function (data) {
                     if (data.code == 200) {
                         toastr.success(data.message);
+                        window.location.href = updateInfoList;
                     } else {
                         toastr.error(data.message);
                     }

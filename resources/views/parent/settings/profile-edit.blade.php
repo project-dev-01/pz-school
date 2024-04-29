@@ -443,7 +443,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="guardian_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_guardian_info number_validation" id="guardian_phone_number" value="{{ isset($guardian['phone_number']) ? $guardian['phone_number'] : ''}}" name="guardian_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_guardian_info number_validation" id="guardian_phone_number" value="{{ isset($guardian['mobile_no']) ? $guardian['mobile_no'] : ''}}" name="guardian_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
                                         <label for="guardian_phone_number" class="error"></label>
                                     </div>
                                 </div>
@@ -940,18 +940,20 @@
                                         <div class="custom-file">
                                             <input type="file" id="japanese_association_membership_image_principal" class="custom-file-input" value="" name="japanese_association_membership_image_principal" accept="image/png, image/gif, image/jpeg">
                                             <label class="custom-file-label" for="japanese_association_membership_image_principal">{{ __('messages.choose_file') }}</label>
+                                            <input type="hidden" id="japanese_association_membership_image_principal_old" value="{{ isset($guardian['japanese_association_membership_image_principal']) ?$guardian['japanese_association_membership_image_principal'] : ''}}" name="japanese_association_membership_image_principal_old">
+                                        
                                         </div>
                                     </div>
-                                    <label for="japanese_association_membership_image_principal" class="error"></label>
                                     @if(isset($guardian['japanese_association_membership_image_principal']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$guardian['japanese_association_membership_image_principal'])
                                     <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$guardian['japanese_association_membership_image_principal'] }}" target="_blank"> {{ __('messages.japanese_association_membership_image_principal') }} </a>
                                     @endif
                                     <span id="japanese_association_membership_image_principal_name"></span>
+                                <label for="japanese_association_membership_image_principal" class="error"></label>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="japanese_association_membership_image_supplimental">{{ __('messages.japanese_association_membership_image_supplimental') }}</label>
+                                    <label for="japanese_association_membership_image_supplimental">{{ __('messages.japanese_association_membership_image_supplimental') }}<span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" id="japanese_association_membership_image_supplimental" class="custom-file-input" name="japanese_association_membership_image_supplimental" accept="image/png, image/gif, image/jpeg">
@@ -963,6 +965,7 @@
                                     <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$guardian['japanese_association_membership_image_supplimental'] }}" target="_blank"> {{ __('messages.japanese_association_membership_image_supplimental') }} </a>
                                     @endif
                                     <span id="japanese_association_membership_image_supplimental_name"></span>
+                                <label for="japanese_association_membership_image_supplimental" class="error"></label>
                                 </div>
                             </div>
                         </div>
@@ -1044,7 +1047,7 @@ countrySelect('#mother_nationality',"my")
 
 initializeIntlTelInput("#mother_phone_number");
 initializeIntlTelInput("#father_phone_number");
-initializeIntlTelInput("#phone_number");
+// initializeIntlTelInput("#phone_number");
 initializeIntlTelInput("#japan_emergency_sms");
 initializeIntlTelInput("#japan_contact_no");
 initializeIntlTelInput("#guardian_phone_number");
@@ -1055,6 +1058,7 @@ initializeIntlTelInput("#guardian_company_phone_number");
     var eventList = "{{ route('parent.event.list') }}";
     var eventDetails = "{{ route('parent.event.details') }}";
     var yyyy_mm_dd = "{{ __('messages.yyyy_mm_dd') }}";
+    var updateInfoList = "{{ route('parent.update_info') }}";
 </script>
 <!-- <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script> -->
 <script src="{{ asset('js/custom/parent_settings.js') }}"></script>

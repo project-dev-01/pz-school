@@ -437,10 +437,26 @@
                                 </thead>
                                 <tbody>
                                     @foreach($changes as $key=>$change)
+                                   
                                     <tr>
                                         <th>{{ __('messages.'.$key) }}</th>
-                                        <th>{{ $change['old_value'] }}</th>
-                                        <th>{{ $change['new_value'] }}</th>
+                                        @if($key== "passport_photo" || $key== "visa_photo" || $key== "nric_photo")
+                                            <!-- <th>{{ $change['old_value'] }}</th> -->
+                                            <th>
+                                                @if(isset($change['old_value']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$change['old_value'])
+                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$change['old_value'] }}" target="_blank"> {{ $change['old_value'] }} </a>
+                                                @endif
+                                            </th>   
+                                            <th>
+                                                @if(isset($change['new_value']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$change['new_value'])
+                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$change['new_value'] }}" target="_blank"> {{ $change['new_value'] }} </a>
+                                                @endif
+                                            </th>    
+                                            <!-- <th>{{ $change['new_value'] }}</th> -->
+                                        @else
+                                            <th>{{ $change['old_value'] }}</th>
+                                            <th>{{ $change['new_value'] }}</th>
+                                        @endif
                                         <th>
                                             <div class="button-list ml-2">
                                                 <div class="radio radio-success form-check-inline">

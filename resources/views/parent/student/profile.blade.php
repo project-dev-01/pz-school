@@ -597,9 +597,9 @@
                                             <input type="text" id="drp_country" placeholder="{{ __('messages.country') }}" class="form-control country" name="drp_country" data-parsley-trigger="change" value="{{ isset($student['country']) ? $student['country'] : ''}}">
                                         </div>
                                     </div>
-                                </div>
                                 <!-- </div> -->
-                                <div class="row">
+                                <!-- </div> -->
+                                <!-- <div class="row"> -->
 
                                     <!-- <div class="col-md-4">
                                         <div class="form-group">
@@ -964,7 +964,7 @@
                                             <select id="school_enrollment_status_tendency" name="school_enrollment_status_tendency" class="form-control prev_school_form">
                                                 <option value="">{{ __('messages.tendency_select_enrollment_status') }}</option>
                                                 <option value="Yes" {{ isset($student['school_enrollment_status_tendency']) ? $student['school_enrollment_status_tendency'] == "Yes" ? 'selected' : '' : '' }}>{{ __('messages.yes') }}</option>
-                                                <option value="No" {{ isset($student['school_enrollment_status_tendency']) ? $student['school_enrollment_status_tendency'] == "Yes" ? 'selected' : '' : '' }}>{{ __('messages.no') }}</option>
+                                                <option value="No" {{ isset($student['school_enrollment_status_tendency']) ? $student['school_enrollment_status_tendency'] == "No" ? 'selected' : '' : '' }}>{{ __('messages.no') }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -1124,6 +1124,7 @@
     var indexAdmission = "{{ route('admin.admission') }}";
     var studentUpdateList = "{{ route('admin.student.update_info_list') }}";
     var malaysiaPostalCode = "{{ route('parent.malaysia_postalCode') }}";
+    var updateInfoList = "{{ route('parent.update_info') }}";
 </script>
 <!-- button js added -->
 <script src="{{ asset('buttons-datatables/dataTables.buttons.min.js') }}"></script>

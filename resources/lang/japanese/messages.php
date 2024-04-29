@@ -2281,4 +2281,21 @@ return [
       "studentleaves_student_name" => "生徒名前",
       "student_student_name" => "生徒名前", 
       "lab_student_name" => "生徒名前",
+
+      "visa_type"  => "ビザ種類（マレーシア国籍以外）",
+      "school_country" => "国",
+      "school_state" => "州",
+      "school_city" => "市",
+      "school_postal_code" => "郵便番号",
+      "school_enrollment_status" => "在籍状況",
+      "school_enrollment_status_tendency" => "在籍状況（不登校傾向の有無）",
+      "nric_photo"  => "NRIC写真（マレーシア国籍のみ）",
+      "middle_name_english" => "ミドルネーム（ローマ字）",
+
+      "company_name_japan" => "勤務先　会社名（日本）",
+      "company_name_local" => "勤務先　会社名（現地）",
+      "company_phone_number" => "勤務先　電話番号",
+      "japan_postalcode"=>"日本の住所：郵便番号",  
+      "japan_contact_no"=>"日本の連絡先：電話番",
+      "japan_emergency_sms"=>"緊急連絡先", 
 ];

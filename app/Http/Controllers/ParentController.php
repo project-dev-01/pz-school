@@ -1287,6 +1287,7 @@ class ParentController extends Controller
             'role_id' => session()->get('role_id')
         ];
         // dd($data);
+        // return $data;
         $response = Helper::PostMethod(config('constants.api.parent_update'), $data);
         return $response;
     }
@@ -1647,19 +1648,19 @@ class ParentController extends Controller
         $data = [
             'passport' => $request->txt_passport,
             'nric' => $request->txt_nric,
-            'blood_group' => $request->blooddgrp,
+            // 'blood_group' => $request->blooddgrp,
             'religion' => $request->txt_religion,
-            'race' => $request->txt_race,
+            // 'race' => $request->txt_race,
             'country' => $request->drp_country,
             'post_code' => $request->drp_post_code,
-            'mobile_no' => $request->txt_mobile_no,
+            // 'mobile_no' => $request->txt_mobile_no,
             'city' => $request->drp_city,
             'state' => $request->drp_state,
-            'current_address' => $request->txtarea_paddress,
-            'permanent_address' => $request->txtarea_permanent_address,
+            // 'current_address' => $request->txtarea_paddress,
+            // 'permanent_address' => $request->txtarea_permanent_address,
             'student_id' => $request->student_id,
             'passport_expiry_date' => $request->passport_expiry_date,
-            'visa_number' => $request->visa_number,
+            // 'visa_number' => $request->visa_number,
             'visa_expiry_date' => $request->visa_expiry_date,
             'nationality' => $request->nationality,
             'first_name' => $request->fname,
@@ -1670,7 +1671,7 @@ class ParentController extends Controller
             'last_name_furigana' => $request->last_name_furigana,
             'first_name_common' => $request->first_name_common,
             'last_name_common' => $request->last_name_common,
-            "middle_name" => $request->middle_name,
+            "middle_name" => $request->mname,
             "middle_name_english" => $request->middle_name_english,
             "middle_name_furigana" => $request->middle_name_furigana,
             'visa_photo' => $visa_base64,
@@ -1679,9 +1680,11 @@ class ParentController extends Controller
             'passport_file_extension' => $passport_extension,
             'dual_nationality' => $dual_nationality,
             'nric_old_photo' => $request->nric_old_photo,
+            'passport_old_photo' => $request->passport_old_photo,
+            'visa_old_photo' => $request->visa_old_photo,
             'nric_photo' => $nric_base64,
             'nric_file_extension' => $nric_extension,
-            'school_last_attended' => $request->txt_prev_schname,
+            'school_name' => $request->txt_prev_schname,
             'school_country' => $request->school_country,
             'school_city' => $request->school_city,
             'school_state' => $request->school_state,
@@ -2231,6 +2234,7 @@ class ParentController extends Controller
 
         $data = [
             "status" => "Parent",
+            "student_id" => session()->get('student_id'),
             "parent_id" => session()->get('ref_user_id')
         ];
         $response = Helper::GETMethodWithData(config('constants.api.parent_student_update_info_list'), $data);
