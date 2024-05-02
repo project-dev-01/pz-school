@@ -4796,55 +4796,62 @@ class AdminController extends Controller
     public function getStudentDetails($id)
     {
         
-        $data = [
+        if($id!==null || $id!==0)
+        {
+            $data = [
             'id' => $id,
-        ];
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));
-        $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
-        $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));
-        $session = Helper::GetMethod(config('constants.api.session'));
-        $semester = Helper::GetMethod(config('constants.api.semester'));
-        $student = Helper::PostMethod(config('constants.api.student_details'), $data);
-        $parent = Helper::GetMethod(config('constants.api.parent_list'));
-        $religion = Helper::GetMethod(config('constants.api.religion'));
-        $races = Helper::GetMethod(config('constants.api.races'));
-        $relation = Helper::GetMethod(config('constants.api.relation_list'));
-        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
-        $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
-        $department = Helper::GetMethod(config('constants.api.department_list'));
-        $data = [
-            'department_id' => isset($student['data']['student']['department_id']) ? $student['data']['student']['department_id'] : 0,
-        ];
-        $grade_list_by_department = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
-        $prev = json_decode($student['data']['student']['previous_details']);
-        // $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
-        $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
-        $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
-        $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
-        return view(
-            'admin.student.edit',
-            [
-                'grade_list_by_department' => isset($grade_list_by_department['data']) ? $grade_list_by_department['data'] : [],
-                'department' => isset($department['data']) ? $department['data'] : [],
-                'class' => isset($getclass['data']) ? $getclass['data'] : [],
-                'parent' => isset($parent['data']) ? $parent['data'] : [],
-                'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
-                'hostel' => isset($gethostel['data']) ? $gethostel['data'] : [],
-                'session' => isset($session['data']) ? $session['data'] : [],
-                'semester' => isset($semester['data']) ? $semester['data'] : [],
-                'student' => isset($student['data']['student']) ? $student['data']['student'] : [],
-                'section' => isset($student['data']['section']) ? $student['data']['section'] : [],
-                'vehicle' => isset($student['data']['vehicle']) ? $student['data']['vehicle'] : [],
-                'room' => isset($student['data']['room']) ? $student['data']['room'] : [],
-                'religion' => isset($religion['data']) ? $religion['data'] : [],
-                'races' => isset($races['data']) ? $races['data'] : [],
-                'relation' => isset($relation['data']) ? $relation['data'] : [],
-                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
-                'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
-                'role' => isset($student['data']['user']) ? $student['data']['user'] : [],
-                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
-            ]
-        );
+            ];
+            $getclass = Helper::GetMethod(config('constants.api.class_list'));
+            $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
+            $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));
+            $session = Helper::GetMethod(config('constants.api.session'));
+            $semester = Helper::GetMethod(config('constants.api.semester'));
+            $student = Helper::PostMethod(config('constants.api.student_details'), $data);
+            $parent = Helper::GetMethod(config('constants.api.parent_list'));
+            $religion = Helper::GetMethod(config('constants.api.religion'));
+            $races = Helper::GetMethod(config('constants.api.races'));
+            $relation = Helper::GetMethod(config('constants.api.relation_list'));
+            $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+            $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
+            $department = Helper::GetMethod(config('constants.api.department_list'));
+            $data = [
+                'department_id' => isset($student['data']['student']['department_id']) ? $student['data']['student']['department_id'] : 0,
+            ];
+            $grade_list_by_department = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+            $prev = json_decode($student['data']['student']['previous_details']);
+            // $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
+            $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
+            $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
+            $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
+            return view(
+                'admin.student.edit',
+                [
+                    'grade_list_by_department' => isset($grade_list_by_department['data']) ? $grade_list_by_department['data'] : [],
+                    'department' => isset($department['data']) ? $department['data'] : [],
+                    'class' => isset($getclass['data']) ? $getclass['data'] : [],
+                    'parent' => isset($parent['data']) ? $parent['data'] : [],
+                    'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
+                    'hostel' => isset($gethostel['data']) ? $gethostel['data'] : [],
+                    'session' => isset($session['data']) ? $session['data'] : [],
+                    'semester' => isset($semester['data']) ? $semester['data'] : [],
+                    'student' => isset($student['data']['student']) ? $student['data']['student'] : [],
+                    'section' => isset($student['data']['section']) ? $student['data']['section'] : [],
+                    'vehicle' => isset($student['data']['vehicle']) ? $student['data']['vehicle'] : [],
+                    'room' => isset($student['data']['room']) ? $student['data']['room'] : [],
+                    'religion' => isset($religion['data']) ? $religion['data'] : [],
+                    'races' => isset($races['data']) ? $races['data'] : [],
+                    'relation' => isset($relation['data']) ? $relation['data'] : [],
+                    'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                    'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
+                    'role' => isset($student['data']['user']) ? $student['data']['user'] : [],
+                    'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
+                ]
+            );
+        }
+        else
+        {
+            return redirect()->route('admin.student')->with('errors', "Invalid Student");
+        }
     }
 
 
@@ -10018,6 +10025,7 @@ class AdminController extends Controller
 
     public function rollmenuaccess(Request $request)
     {
+        ini_set('max_execution_time', 300);
         $data = [
             'status' => "All"
         ];
@@ -10036,6 +10044,7 @@ class AdminController extends Controller
     }
     public function getmenus1(Request $request)
     {
+        ini_set('max_execution_time', 300);
         $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
         //$menus = Helper::GetMethod(config('constants.api.menus'));
         $data = [
@@ -10059,6 +10068,7 @@ class AdminController extends Controller
     }
     public function getmenus(Request $request)
     {
+        ini_set('max_execution_time', 300);
         $role_id = $request->role_id;
         $branch_id = config('constants.branch_id');
 
@@ -10112,7 +10122,7 @@ class AdminController extends Controller
     }
     public function setpermission(Request $request)
     {
-
+        ini_set('max_execution_time', 300);
         $data = [
             'role_id' => $request->role_id,
             'school_roleid' => $request->school_roleid,
@@ -10162,6 +10172,7 @@ class AdminController extends Controller
     }
     public function checkpermissions(Request $request)
     {
+        ini_set('max_execution_time', 300);
         $pagedata = [
             //'menu_id' => "27",
             'menu_id' => $request->menu_id,
