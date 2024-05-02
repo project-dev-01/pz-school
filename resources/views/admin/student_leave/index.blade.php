@@ -142,7 +142,6 @@
                                     <th> {{ __('messages.nursing_teacher_remarks') }}</th>
                                     <th> {{ __('messages.document') }}</th>
                                     <th> {{ __('messages.status') }}</th>
-                                    <th> {{ __('messages.status') }}</th>
                                     <th> {{ __('messages.action') }}</th>
 
                                     <!-- <th>#</th>
@@ -251,7 +250,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="total_leave">{{ __('messages.lab_number_of_days_leave') }}<span class="text-danger">*</span></label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="{{ __('messages.enter_days_leave') }}">
+                                    <input type="number" id="total_leave" name="total_leave" class="form-control" placeholder="{{ __('messages.enter_days_leave') }}" readonly>
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
