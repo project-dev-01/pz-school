@@ -337,7 +337,8 @@ $(function () {
                     bom: true,
                     exportOptions: {
                         columns: 'th:not(:last-child)'
-                    }
+                    },
+                    enabled: false, // Initially disable CSV button
                 },
                 {
                     extend: 'pdf',
@@ -347,9 +348,32 @@ $(function () {
                     bom: true,
                     exportOptions: {
                         columns: 'th:not(:last-child)'
-                    }
+                    },
+                    enabled: false, // Initially disable PDF button
                 }
                 ],
+                initComplete: function () {
+                    var table = this;
+                    $.ajax({
+                        url: dataSetNew,
+                        success: function(data) {
+                            console.log(data.data.length);
+                            if (data && data.data.length > 0) {
+                                console.log('ok');
+                                $('#student-leave-table_wrapper .buttons-csv').removeClass('disabled');
+                                $('#student-leave-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                            } else {
+                                console.log(data);
+                                $('#student-leave-table_wrapper .buttons-csv').addClass('disabled');
+                                $('#student-leave-table_wrapper .buttons-pdf').addClass('disabled');               
+                            }
+                        },
+                        error: function() {
+                            console.log('error');
+                            // Handle error if necessary
+                        }
+                    });
+                },
                 data: dataSetNew,
                 pageLength: 10,
                 lengthMenu: [

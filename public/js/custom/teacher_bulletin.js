@@ -100,6 +100,28 @@ $(function () {
 
                 }
             ],
+            initComplete: function () {
+                var table = this;
+                $.ajax({
+                    url: teacherList,
+                    success: function(data) {
+                        console.log(data.data.length);
+                        if (data && data.data.length > 0) {
+                            console.log('ok');
+                            $('#teacher-bulletin-table_wrapper .buttons-csv').removeClass('disabled');
+                            $('#teacher-bulletin-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                        } else {
+                            console.log(data);
+                            $('#teacher-bulletin-table_wrapper .buttons-csv').addClass('disabled');
+                            $('#teacher-bulletin-table_wrapper .buttons-pdf').addClass('disabled');               
+                        }
+                    },
+                    error: function() {
+                        console.log('error');
+                        // Handle error if necessary
+                    }
+                });
+            },
             ajax: teacherList,
             columns: [
                 //  {data:'id', name:'id'},

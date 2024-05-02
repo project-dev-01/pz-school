@@ -506,7 +506,8 @@ $(function () {
                     bom: true,
                     exportOptions: {
                         columns: 'th:not(:last-child)'
-                    }
+                    },
+                    enabled: false, // Initially disable PDF button
                 },
                 {
                     extend: 'pdf',
@@ -517,6 +518,7 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     },
+                    enabled: false, // Initially disable PDF button
                     title: function() {
                         return leave_status_txt;
                     },
@@ -548,6 +550,28 @@ $(function () {
                     }
                 }
             ],
+            initComplete: function () {
+                var table = this;
+                $.ajax({
+                    url: stutdentleaveList,
+                    success: function(data) {
+                        console.log(data.data.length);
+                        if (data && data.data.length > 0) {
+                            console.log('ok');
+                            $('#studentleave-table_wrapper .buttons-csv').removeClass('disabled');
+                            $('#studentleave-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                        } else {
+                            console.log(data);
+                            $('#studentleave-table_wrapper .buttons-csv').addClass('disabled');
+                            $('#studentleave-table_wrapper .buttons-pdf').addClass('disabled');               
+                        }
+                    },
+                    error: function() {
+                        console.log('error');
+                        // Handle error if necessary
+                    }
+                });
+            },
             ajax: stutdentleaveList,
             pageLength: 5,
             aLengthMenu: [

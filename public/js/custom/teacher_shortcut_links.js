@@ -150,6 +150,28 @@ $(function () {
 
             }
             ],
+            initComplete: function () {
+                var table = this;
+                $.ajax({
+                    url: shortcutList,
+                    success: function(data) {
+                        console.log(data.data.length);
+                        if (data && data.data.length > 0) {
+                            console.log('ok');
+                            $('#shortcut-teacher-table_wrapper .buttons-csv').removeClass('disabled');
+                            $('#shortcut-teacher-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                        } else {
+                            console.log(data);
+                            $('#shortcut-teacher-table_wrapper .buttons-csv').addClass('disabled');
+                            $('#shortcut-teacher-table_wrapper .buttons-pdf').addClass('disabled');               
+                        }
+                    },
+                    error: function() {
+                        console.log('error');
+                        // Handle error if necessary
+                    }
+                });
+            },
             ajax: shortcutList,
             "pageLength": 10,
             "aLengthMenu": [

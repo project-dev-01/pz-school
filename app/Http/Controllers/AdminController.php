@@ -1642,7 +1642,9 @@ class AdminController extends Controller
     public function getEmpList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.employee_list'));
+        dd($response);
         $data = isset($response['data']) ? $response['data'] : [];
+        
         return DataTables::of($data)
 
             ->addIndexColumn()

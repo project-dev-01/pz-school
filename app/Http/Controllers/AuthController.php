@@ -486,7 +486,8 @@ class AuthController extends Controller
                         $user_name = $this->sessionCommon($request, $userDetails, $roleID);
                     }
                     if ($roleID == 2) {
-                        $redirect_route = route('admin.dashboard');
+                        $redirect_route
+                         = route('admin.dashboard');
                         return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
                     } else {
                         return redirect()->route('admin.login')->with('error', 'Invalid Credential');
@@ -1262,12 +1263,16 @@ class AuthController extends Controller
         $req->session()->put('picture', $userDetails['data']['user']['picture']);
         $req->session()->put('token', $userDetails['data']['token']);
         $req->session()->put('name', $userDetails['data']['user']['name']);
+        $req->session()->put('first_name', $userDetails['data']['user']['firstname']);
+        $req->session()->put('last_name', $userDetails['data']['user']['lastname']);
         $req->session()->put('email', $userDetails['data']['user']['email']);
         $req->session()->put('role_name', $userDetails['data']['role_name']);
         $req->session()->put('session_id', $userDetails['data']['user']['session_id']);
         $req->session()->put('branch_id', $userDetails['data']['subsDetails']['id']);
         $req->session()->put('school_name', $userDetails['data']['subsDetails']['school_name']);
         $req->session()->put('school_logo', $userDetails['data']['subsDetails']['logo']);
+        $req->session()->put('name_sequence_flag', $userDetails['data']['subsDetails']['firstlastname']);
+       
         // password_changed_at
         // $req->session()->put('password_changed_at', $userDetails['data']['subsDetails']['password_changed_at']);
         // space remove school name
@@ -1298,7 +1303,18 @@ class AuthController extends Controller
             $req->session()->put('student_id', null);
             $req->session()->put('all_child', null);
         }
-        $user_name = $userDetails['data']['user']['name'];
+
+        if($userDetails['data']['user']['firstname'] != null){
+            if($userDetails['data']['subsDetails']['firstlastname'] == 1){
+                $user_name = $userDetails['data']['user']['firstname']. ' ' . $userDetails['data']['user']['lastname'];
+            }else{
+                $user_name = $userDetails['data']['user']['lastname']. ' ' . $userDetails['data']['user']['firstname'];
+            }           
+        }else{
+            $user_name = $userDetails['data']['user']['name'];
+        }
+        $req->session()->put('name_sequence', $user_name);
+        // $user_name = $userDetails['data']['user']['name'];
         return $user_name;
     }
     public function lastlogout(Request $request)

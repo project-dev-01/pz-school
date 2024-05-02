@@ -40,7 +40,8 @@ $(function () {
                     bom: true,
                     exportOptions: {
                         columns: 'th:not(:last-child)'
-                    }
+                    },
+                    enabled: false, // Initially disable button
                 },
                 {
                     extend: 'pdf',
@@ -51,7 +52,7 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     },
-
+                    enabled: false, // Initially disable button
 
                     customize: function (doc) {
                         doc.pageMargins = [50, 50, 50, 50];
@@ -98,7 +99,7 @@ $(function () {
 
                     }
                 }
-            ],
+            ],           
             "ajax": {
                 url: AllLeaveList,
                 cache: false,
@@ -119,6 +120,16 @@ $(function () {
                 // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 // },
                 "dataSrc": function (json) {
+                    console.log(json.data.length);
+                    if (json && json.data.length > 0) {
+                        console.log('ok');
+                        $('#all-leave-list_wrapper .buttons-csv').removeClass('disabled');
+                        $('#all-leave-list_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                    } else {
+                        console.log(json);
+                        $('#all-leave-list_wrapper .buttons-csv').addClass('disabled');
+                        $('#all-leave-list_wrapper .buttons-pdf').addClass('disabled');               
+                    }
                     return json.data;
                 },
                 error: function (error) {
