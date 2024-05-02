@@ -736,16 +736,23 @@ class CommonController extends Controller
     public function chatnotification(Request $request)
     {
         try {
-            $session_id = session()->get('ref_user_id');
-            $role_id = session()->get('role_id');
-            $data = [
-                'userID' => $session_id,
-                'role_id' => $role_id
-            ];
-            //dd($data);       
-            $response = Helper::PostMethod(config('constants.api.chatnotification'), $data);
+                if(session()->get('ref_user_id')!==null && session()->get('role_id')!==null)
+                {
+                $session_id = session()->get('ref_user_id');
+                $role_id = session()->get('role_id');
+                $data = [
+                    'userID' => $session_id,
+                    'role_id' => $role_id
+                ];
+                //dd($data);       
+                $response = Helper::PostMethod(config('constants.api.chatnotification'), $data);
 
-            return $response;
+                return $response;
+                }
+                else
+                {
+                    return response()->json(['error' => "Invalid Login ID"], 403);
+                }
         } catch (\Exception $e) {
             // dd('123');
             // CSRF token mismatch occurred, handle the error

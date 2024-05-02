@@ -182,7 +182,7 @@ class ParentController extends Controller
 
         $student_id = session()->get('student_id');
         $data = [
-            'id' => isset($student_id) ? $student_id : 0,
+            'id' => isset($student_id) ? $student_id : '',
         ];
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
@@ -205,6 +205,7 @@ class ParentController extends Controller
         return view(
             'parent.student.profile',
             [
+                'id' => isset($student_id) ? $student_id : 0,
                 'class' => isset($getclass['data']) ? $getclass['data'] : [],
                 'parent' => isset($parent['data']) ? $parent['data'] : [],
                 'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],

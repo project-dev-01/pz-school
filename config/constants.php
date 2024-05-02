@@ -1,9 +1,9 @@
 <?php
 $url = "http://localhost/paxsuzen-api-dev/public/api";
-// $url = "https://api.suzen.school/api";
-$schoolurl = "http://localhost/school-management-system/public";
+// $url = "https://api.suzen.school/api";test
+$schoolurl = "http://localhost/school-management-system/public"; // end line don't use "/"
 return [
-    'branch_id'=>'6',
+    'branch_id'=>'5',
     'school_name'=>'クアラルンプール日本人学校',
     'school_image'=>'logo_jskl.jpeg',
     'image_url' => "http://localhost/paxsuzen-api-dev/public",

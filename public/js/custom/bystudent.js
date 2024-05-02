@@ -36,7 +36,7 @@ $(function () {
                     branch_id: branchID,
                     department_id: department_id
                 }, function (res) {
-                    alert(res.code);
+                    //alert(res.code);
                     if (res.code == 200) {
                         
                         $.each(res.data, function (key, val) {

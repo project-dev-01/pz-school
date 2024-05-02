@@ -447,7 +447,7 @@ var email_lang = "{{ __('messages.email') }}";
                 error: function(err) {
                     console.log("setInterval logout error");
                     console.log(err)
-                    // window.location.href =loginurl;
+                    window.location.href =loginurl;
                     
                 }
             });
@@ -470,6 +470,7 @@ var email_lang = "{{ __('messages.email') }}";
                 error: function(err) {
                     // console.log("logout error");
                     // console.log(err)
+                    window.location.href =loginurl;
                 }
             });
         }, 10000);

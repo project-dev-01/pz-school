@@ -341,7 +341,17 @@
         </div>
     </div>
     <!-- end page title -->
-
+    @if($id==0)
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="">
+                <h4> No Student's Available here.</h4>
+                </div>
+        </div>
+    </div>   
+ 
+@endif
+@if($id!=0)
     <div class="row">
         <div class="col-xl-12">
             <div class="">
@@ -1078,6 +1088,7 @@
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div><!-- end row -->
+    @endif
 </div> <!-- container -->
 @endsection
 @section('scripts')
