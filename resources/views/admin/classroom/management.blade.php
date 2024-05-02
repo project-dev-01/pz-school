@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 <link href="{{ asset('css/custom/classroom.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -24,7 +25,7 @@
         <div class="col-12">
         <div class="page-title-box" style="display: inline-flex; align-items: center;margin-bottom:10px;margin-top:10px">
                 <div class="page-title-icon">
-                <i data-feather="file-text" class="icon-dual" style="color:black"></i>
+                <i data-feather="file-text" class="icon-dual" style="color:#3A4265"></i>
                 </div>
                 <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.classroom_management') }}</h4>
             </div>
@@ -34,13 +35,21 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">{{ __('messages.classroom') }}
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
+            <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                                <!-- Button placed on the left side -->
+                                <h4 class="navv">
+                                {{ __('messages.classroom') }}
+                                </h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>
+              
+                <div class="card-body collapse show">
                     <form id="classroomFilter" autocomplete="off">
                         <div class="row">
                             <div class="col-md-3">
@@ -291,7 +300,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="text-right">
-                                            <h3 class="my-1"><span data-plugin="counterup" id="presentCount" style="color:black"></span></h3>
+                                            <h3 class="my-1"><span data-plugin="counterup" id="presentCount" style="color:#3A4265"></span></h3>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -301,7 +310,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="text-right">
-                                            <h3 class="my-1"><span data-plugin="counterup" id="absentCount" style="color:black"></span></h3>
+                                            <h3 class="my-1"><span data-plugin="counterup" id="absentCount" style="color:#3A4265"></span></h3>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -311,7 +320,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="text-right">
-                                            <h3 class="my-1"><span data-plugin="counterup" id="lateCount" style="color:black"></span></h3>
+                                            <h3 class="my-1"><span data-plugin="counterup" id="lateCount" style="color:#3A4265"></span></h3>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -321,7 +330,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="text-right">
-                                            <h3 class="my-1"><span data-plugin="counterup" id="excuseCount" style="color:black"></span></h3>
+                                            <h3 class="my-1"><span data-plugin="counterup" id="excuseCount" style="color:#3A4265"></span></h3>
                                         </div>
                                     </div>
                                 </div>
@@ -346,7 +355,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="text-right">
-                                            <h3 class="my-1"><span data-plugin="counterup" id="perfectAttendance" style="color:black"></span></h3>
+                                            <h3 class="my-1"><span data-plugin="counterup" id="perfectAttendance" style="color:#3A4265"></span></h3>
 
                                         </div>
                                     </div>
@@ -372,7 +381,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="text-right">
-                                            <h3 class="my-1"><span data-plugin="counterup" id="avg_attendance" style="color:black"></span></h3>
+                                            <h3 class="my-1"><span data-plugin="counterup" id="avg_attendance" style="color:#3A4265"></span></h3>
 
                                         </div>
                                     </div>
@@ -398,7 +407,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="text-right">
-                                            <h3 class="my-1"><span data-plugin="counterup" id="belowAttendance" style="color:black"></span></h3>
+                                            <h3 class="my-1"><span data-plugin="counterup" id="belowAttendance" style="color:#3A4265"></span></h3>
 
                                         </div>
                                     </div>
@@ -418,12 +427,21 @@
             <div class="row classRoomHideSHow" style="display: none;">
                 <div class="col-xl-12">
                     <div class="card">
-                        <ul class="nav nav-tabs">
-                            <li class="nav-item">
-                                <h4 class="navv"> {{ __('messages.classroom_details') }}
-                                    <h4>
+                    <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                                <!-- Button placed on the left side -->
+                                <h4 class="navv">
+                                {{ __('messages.classroom_details') }}
+                                </h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton2" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                             </li>
-                        </ul><br>
+                        </ul>                   
+                        
+                        <div class="card-body collapse show">
                         <ul class="nav nav-pills navtab-bg nav-justified">
                             <li class="nav-item">
                                 <a href="#profile-b1" data-toggle="tab" aria-expanded="true" class="nav-link">
@@ -445,8 +463,7 @@
                                     {{ __('messages.daily_report') }}
                                 </a>
                             </li>
-                        </ul><br>
-                        <div class="card-body">
+                        </ul>
                             <div class="tab-content">
                                 <div class="tab-pane" id="profile-b1">
                                     <div class="row">
@@ -834,5 +851,6 @@
 var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
 </script>
 <script src="{{ asset('js/custom/permissions.js') }}"></script>
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endif
 @endsection

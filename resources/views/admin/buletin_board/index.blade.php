@@ -17,7 +17,7 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
-
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
@@ -39,7 +39,7 @@
         <div class="page-title-box" style="display: inline-flex; align-items: center;margin-bottom:10px;margin-top:10px">
                 <div class="page-title-icon">
                 <svg class="svg-icon" style="width: 1.1em; height: 1.1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M513.706667 106.666667L406.613333 213.333333h213.333334l-106.24-106.666666M170.666667 298.666667v554.666666h682.666666V298.666667H170.666667m341.333333-298.666667l213.333333 213.333333h128a85.333333 85.333333 0 0 1 85.333334 85.333334v554.666666a85.333333 85.333333 0 0 1-85.333334 85.333334H170.666667a85.333333 85.333333 0 0 1-85.333334-85.333334V298.666667a85.333333 85.333333 0 0 1 85.333334-85.333334h128l213.333333-213.333333M298.666667 768v-170.666667h213.333333v170.666667H298.666667m298.666666-42.666667v-298.666666h170.666667v298.666666h-170.666667m-341.333333-213.333333V384h213.333333v128H256z" fill="black" />
+                            <path d="M513.706667 106.666667L406.613333 213.333333h213.333334l-106.24-106.666666M170.666667 298.666667v554.666666h682.666666V298.666667H170.666667m341.333333-298.666667l213.333333 213.333333h128a85.333333 85.333333 0 0 1 85.333334 85.333334v554.666666a85.333333 85.333333 0 0 1-85.333334 85.333334H170.666667a85.333333 85.333333 0 0 1-85.333334-85.333334V298.666667a85.333333 85.333333 0 0 1 85.333334-85.333334h128l213.333333-213.333333M298.666667 768v-170.666667h213.333333v170.666667H298.666667m298.666666-42.666667v-298.666666h170.666667v298.666666h-170.666667m-341.333333-213.333333V384h213.333333v128H256z" fill="#3A4265" />
                         </svg>
                 </div>
                 <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.buletin') }}</h4>
@@ -52,13 +52,21 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">{{ __('messages.buletin') }}
-                            <h4>
-                    </li>
-                </ul>
-                <div class="card-body">
+            <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                                <!-- Button placed on the left side -->
+                                <h4 class="navv">
+                                {{ __('messages.buletin') }}
+                                </h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>
+            
+                <div class="card-body collapse show">
                     <div class="form-group pull-right">
                         <div class="col-xs-2 col-sm-2">
                         <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addBuletinModal">{{ __('messages.add') }}</button>
@@ -165,5 +173,6 @@
 var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
 </script>
 <script src="{{ asset('js/custom/permissions.js') }}"></script>
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endif
 @endsection

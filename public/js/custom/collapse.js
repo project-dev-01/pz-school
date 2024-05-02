@@ -48,6 +48,18 @@ $('#collapseButton7').click(function () {
     var collapseContent = $(this).closest('.card').find('.collapse');
     collapseContent.toggleClass('show'); // Toggle 'show' class instead of using toggle()
 });
+$('#collapseButton8').click(function () {
+    var icon = $(this).find('i');
+    icon.toggleClass('mdi-chevron-up mdi-chevron-down');
+    var collapseContent = $(this).closest('.card').find('.collapse');
+    collapseContent.toggleClass('show'); // Toggle 'show' class instead of using toggle()
+});
+$('#collapseButton9').click(function () {
+    var icon = $(this).find('i');
+    icon.toggleClass('mdi-chevron-up mdi-chevron-down');
+    var collapseContent = $(this).closest('.card').find('.collapse');
+    collapseContent.toggleClass('show'); // Toggle 'show' class instead of using toggle()
+});
 // JavaScript code to toggle icon on collapse button click
 $('#pastTasks').on('show.bs.collapse', function () {
     // Change the icon to "mdi-chevron-up" when the collapse section is shown

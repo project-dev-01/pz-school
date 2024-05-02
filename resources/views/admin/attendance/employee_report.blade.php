@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 <link href="{{ asset('css/custom/pagehead_breadcrumb.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <style>
@@ -28,8 +29,8 @@
                 <div class="page-title-icon">
                 <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_59_2184)">
-                                <path d="M11.2567 4.31207V2.11065H10.0526V0.666656H13.9496V2.09817H12.7435V4.30748C16.6027 4.65141 19.7033 6.333 21.911 9.50321C23.5559 11.8661 24.2232 14.5165 23.9352 17.3795C23.6385 20.3463 22.2288 23.0944 19.9854 25.0794C17.742 27.0645 14.8285 28.1417 11.8221 28.0976C8.8156 28.0536 5.93546 26.8916 3.75212 24.8418C1.56878 22.792 0.241509 20.0039 0.0332032 17.0297C-0.197159 13.7531 0.794459 10.8382 2.98091 8.36115C5.16736 5.88405 7.95289 4.58643 11.2567 4.31207ZM19.5915 16.286C19.5663 12.0387 16.1705 8.68014 11.9908 8.69195C7.79534 8.70377 4.37831 12.0952 4.40611 16.225C4.43391 20.3548 7.76356 23.7324 11.9041 23.7363C13.9919 23.7363 15.8401 23.0209 17.3322 21.5428C18.8163 20.0771 19.5537 18.2853 19.5915 16.286Z" fill="black" />
-                                <path d="M11.9987 22.2641C8.63131 22.2641 5.8855 19.5475 5.87491 16.2007C5.86432 12.8644 8.64256 10.1005 12.0027 10.1274C15.4197 10.1543 18.1033 12.8369 18.1165 16.2C18.1304 19.5455 15.3694 22.2628 11.9987 22.2641ZM7.52914 16.4843L10.4087 19.3388L16.5066 14.0531L15.5322 12.9557L10.4689 17.3533L8.54922 15.4735L7.52914 16.4843Z" fill="black" />
+                                <path d="M11.2567 4.31207V2.11065H10.0526V0.666656H13.9496V2.09817H12.7435V4.30748C16.6027 4.65141 19.7033 6.333 21.911 9.50321C23.5559 11.8661 24.2232 14.5165 23.9352 17.3795C23.6385 20.3463 22.2288 23.0944 19.9854 25.0794C17.742 27.0645 14.8285 28.1417 11.8221 28.0976C8.8156 28.0536 5.93546 26.8916 3.75212 24.8418C1.56878 22.792 0.241509 20.0039 0.0332032 17.0297C-0.197159 13.7531 0.794459 10.8382 2.98091 8.36115C5.16736 5.88405 7.95289 4.58643 11.2567 4.31207ZM19.5915 16.286C19.5663 12.0387 16.1705 8.68014 11.9908 8.69195C7.79534 8.70377 4.37831 12.0952 4.40611 16.225C4.43391 20.3548 7.76356 23.7324 11.9041 23.7363C13.9919 23.7363 15.8401 23.0209 17.3322 21.5428C18.8163 20.0771 19.5537 18.2853 19.5915 16.286Z" fill="#3A4265" />
+                                <path d="M11.9987 22.2641C8.63131 22.2641 5.8855 19.5475 5.87491 16.2007C5.86432 12.8644 8.64256 10.1005 12.0027 10.1274C15.4197 10.1543 18.1033 12.8369 18.1165 16.2C18.1304 19.5455 15.3694 22.2628 11.9987 22.2641ZM7.52914 16.4843L10.4087 19.3388L16.5066 14.0531L15.5322 12.9557L10.4689 17.3533L8.54922 15.4735L7.52914 16.4843Z" fill="#3A4265" />
                             </g>
                             <defs>
                                 <clipPath id="clip0_59_2184">
@@ -53,14 +54,21 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                        {{ __('messages.select_ground') }}
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
+            <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                                <!-- Button placed on the left side -->
+                                <h4 class="navv">
+                                {{ __('messages.select_ground') }}
+                                </h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>
+             
+                <div class="card-body collapse show">
                     <form id="employeeAttendanceReport" method="post" enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
                             <div class="col-md-3">
@@ -372,5 +380,6 @@
 var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
 </script>
 <script src="{{ asset('js/custom/permissions.js') }}"></script>
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endif
 @endsection
