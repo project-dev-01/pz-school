@@ -110,6 +110,8 @@
     <!-- Init js-->
     <script src="{{ asset('js/pages/peity.init.js') }}"></script>
     <script src="{{ asset('js/custom/loading.js') }}"></script>
+    <script>window.UserHelpPublicProjectID="Y7YyGqyq2"</script>
+        <script src="https://run.userhelp.co" async></script>
 
 </body>
 

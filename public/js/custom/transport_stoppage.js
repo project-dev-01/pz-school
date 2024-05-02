@@ -135,6 +135,28 @@ $(function () {
 
                 }
             ],
+            initComplete: function () {
+                var table = this;
+                $.ajax({
+                    url: transportStoppageList,
+                    success: function(data) {
+                        console.log(data.data.length);
+                        if (data && data.data.length > 0) {
+                            console.log('ok');
+                            $('#transport-stoppage-table_wrapper .buttons-csv').removeClass('disabled');
+                            $('#transport-stoppage-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                        } else {
+                            console.log(data);
+                            $('#transport-stoppage-table_wrapper .buttons-csv').addClass('disabled');
+                            $('#transport-stoppage-table_wrapper .buttons-pdf').addClass('disabled');               
+                        }
+                    },
+                    error: function() {
+                        console.log('error');
+                        // Handle error if necessary
+                    }
+                });
+            },
             ajax: transportStoppageList,
             "pageLength": 10,
             "aLengthMenu": [

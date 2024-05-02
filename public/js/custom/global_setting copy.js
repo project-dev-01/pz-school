@@ -72,7 +72,8 @@ $(function () {
                     bom: true,
                     exportOptions: {
                         columns: 'th:not(:last-child)'
-                    }
+                    },
+                    enabled: false, // Initially disable PDF button
                 },
                 {
                     extend: 'pdf',
@@ -83,7 +84,7 @@ $(function () {
                 exportOptions: {
                     columns: 'th:not(:last-child)'
                 },
-
+                enabled: false, // Initially disable PDF button
             
                 customize: function (doc) {
                 doc.pageMargins = [50,50,50,50];
@@ -132,6 +133,28 @@ $(function () {
 
             }
             ],
+            initComplete: function () {
+                var table = this;
+                $.ajax({
+                    url: globalSettingList,
+                    success: function(data) {
+                        console.log(data.data.length);
+                        if (data && data.data.length > 0) {
+                            console.log('ok');
+                            $('#global-setting-table_wrapper .buttons-csv').removeClass('disabled');
+                            $('#global-setting-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                        } else {
+                            console.log(data);
+                            $('#global-setting-table_wrapper .buttons-csv').addClass('disabled');
+                            $('#global-setting-table_wrapper .buttons-pdf').addClass('disabled');               
+                        }
+                    },
+                    error: function() {
+                        console.log('error');
+                        // Handle error if necessary
+                    }
+                });
+            },
             ajax: globalSettingList,
             "pageLength": 10,
             "aLengthMenu": [

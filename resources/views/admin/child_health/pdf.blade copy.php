@@ -8,6 +8,9 @@
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
     <link href="../assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
     <link href="health.css" rel="stylesheet" type="text/css" />
+    <script>window.UserHelpPublicProjectID="Y7YyGqyq2"</script>
+        <script src="https://run.userhelp.co" async></script>
+
 <style>
     @font-face {
             font-family: ipag;

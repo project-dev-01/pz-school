@@ -85,7 +85,8 @@ $(function () {
                     bom: true,
                     exportOptions: {
                         columns: 'th:not(:last-child)'
-                    }
+                    },
+                    enabled: false, // Initially disable PDF button
                 },
                 {
                     extend: 'pdf',
@@ -96,7 +97,7 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     },
-    
+                    enabled: false, // Initially disable PDF button
                 
                     customize: function (doc) {
                     doc.pageMargins = [50,50,50,50];
@@ -144,6 +145,28 @@ $(function () {
                 }
             }
             ],
+            initComplete: function () {
+                var table = this;
+                $.ajax({
+                    url: leaveTypeList,
+                    success: function(data) {
+                        console.log(data.data.length);
+                        if (data && data.data.length > 0) {
+                            console.log('ok');
+                            $('#leave-type-table_wrapper .buttons-csv').removeClass('disabled');
+                            $('#leave-type-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                        } else {
+                            console.log(data);
+                            $('#leave-type-table_wrapper .buttons-csv').addClass('disabled');
+                            $('#leave-type-table_wrapper .buttons-pdf').addClass('disabled');               
+                        }
+                    },
+                    error: function() {
+                        console.log('error');
+                        // Handle error if necessary
+                    }
+                });
+            },
             ajax: leaveTypeList,
             "pageLength": 10,
             "aLengthMenu": [

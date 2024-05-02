@@ -109,6 +109,28 @@ $(function () {
 
             }
         ],
+        initComplete: function () {
+            var table = this;
+            $.ajax({
+                url: userList,
+                success: function(data) {
+                    console.log(data.data.length);
+                    if (data && data.data.length > 0) {
+                        console.log('ok');
+                        $('#user-table_wrapper .buttons-csv').removeClass('disabled');
+                        $('#user-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                    } else {
+                        console.log(data);
+                        $('#user-table_wrapper .buttons-csv').addClass('disabled');
+                        $('#user-table_wrapper .buttons-pdf').addClass('disabled');               
+                    }
+                },
+                error: function() {
+                    console.log('error');
+                    // Handle error if necessary
+                }
+            });
+        },
         ajax: userList,
         "pageLength": 10,
         "aLengthMenu": [

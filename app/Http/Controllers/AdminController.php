@@ -1642,7 +1642,9 @@ class AdminController extends Controller
     public function getEmpList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.employee_list'));
+        dd($response);
         $data = isset($response['data']) ? $response['data'] : [];
+        
         return DataTables::of($data)
 
             ->addIndexColumn()
@@ -4357,6 +4359,29 @@ class AdminController extends Controller
     public function addAdmission(Request $request)
     {
         // dd($request);
+        $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
+    
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+    
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+    
+        // Set type based on the last date of withdrawal
+        // $type = "Admission";
+        // if ($request->last_date_of_withdrawal) {
+        //     $type = "Re-Admission";
+        // }
+
+        // $type = $request->filled('last_date_of_withdrawal') ? 'Re-Admission' : 'Admission';
+    
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
         $status = "0";
         if ($request->status) {
             $status = "1";
@@ -4401,7 +4426,7 @@ class AdminController extends Controller
             $nric_extension = $nric_file->getClientOriginalExtension();
         }
 
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'year' => $request->year,
             // 'register_no' => $request->txt_regiter_no,
@@ -4858,6 +4883,18 @@ class AdminController extends Controller
     // Update Student 
     public function updateStudent(Request $request)
     {
+        $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
+
         $status = "0";
         if ($request->status) {
             $status = "1";
@@ -4904,7 +4941,7 @@ class AdminController extends Controller
             $nric_extension = $nric_file->getClientOriginalExtension();
         }
 
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'login_userid' => session()->get('user_id'),
             'login_roleid' => session()->get('role_id'),
@@ -9227,6 +9264,30 @@ class AdminController extends Controller
 
     public function updateApplication(Request $request)
     {
+        $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
+    
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+    
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+    
+        // Set type based on the last date of withdrawal
+        // $type = "Admission";
+        // if ($request->last_date_of_withdrawal) {
+        //     $type = "Re-Admission";
+        // }
+
+        // $type = $request->filled('last_date_of_withdrawal') ? 'Re-Admission' : 'Admission';
+    
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
+
         $trail_date = "";
         if ($request->enrollment == "Trail Enrollment") {
             $trail_date = $request->trail_date;
@@ -9325,7 +9386,7 @@ class AdminController extends Controller
             $visa_mother_base64 = base64_encode($visa_mother_data);
             $visa_mother_extension = $visa_mother_file->getClientOriginalExtension();
         }
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'id' => $request->id,
             'first_name' => $request->first_name,

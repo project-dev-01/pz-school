@@ -54,7 +54,8 @@ $(function () {
                     bom: true,
                     exportOptions: {
                         columns: 'th:not(:last-child)'
-                    }
+                    },
+                    enabled: false, // Initially disable CSV button
                 },
                 {
                     extend: 'pdf',
@@ -65,7 +66,7 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     },
-
+                    enabled: false, // Initially disable PDF button
 
                     customize: function (doc) {
                         doc.pageMargins = [50, 50, 50, 50];
@@ -112,7 +113,7 @@ $(function () {
 
                     }
                 }
-            ],
+            ],           
             "ajax": {
                 url: homeworkTableList,
                 cache: false,
@@ -135,6 +136,15 @@ $(function () {
                 "dataSrc": function (json) {
                     console.log("json");
                     console.log(json);
+                    if (json && json.data.length > 0) {
+                        console.log('ok');
+                        $('#homework-table_wrapper .buttons-csv').removeClass('disabled');
+                        $('#homework-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                    } else {
+                        console.log(data);
+                        $('#homework-table_wrapper .buttons-csv').addClass('disabled');
+                        $('#homework-table_wrapper .buttons-pdf').addClass('disabled');               
+                    }
                     return json.data;
                 },
                 error: function (error) {

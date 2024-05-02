@@ -496,7 +496,7 @@
                                 <button class="btn btn-primary-bl waves-effect waves-light" id="submit" type="submit">
                                     {{ __('messages.add') }}
                                 </button>
-                                <a href="{{ route('admin.application.index') }}" class="btn btn-primary-bl waves-effect waves-light">
+                                <a href="{{ route('parent.termination.index') }}" class="btn btn-primary-bl waves-effect waves-light">
                                     {{ __('messages.back') }}
                                 </a>
                             </div>

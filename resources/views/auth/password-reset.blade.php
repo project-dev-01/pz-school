@@ -119,6 +119,8 @@
 
     <!-- App js -->
     <script src="{{ asset('js/app.min.js') }}"></script>
+    <script>window.UserHelpPublicProjectID="Y7YyGqyq2"</script>
+        <script src="https://run.userhelp.co" async></script>
 
 </body>
 

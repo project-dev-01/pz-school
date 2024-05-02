@@ -120,8 +120,8 @@
                     <div class="col-6">
                         <p class="greetingText">
                             {{ $greetings }}
-                        </p>
-                        <h3 class="greetingName">{{ Session::get('name') }}</h3>
+                        </p>                     
+                        <h3 class="greetingName">{{ Session::get('name_sequence') }}</h3>
                     </div>
                     <div class="col-6">
                         <div class="float-right">

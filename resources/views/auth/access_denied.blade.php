@@ -21,6 +21,7 @@
 	<link href="{{ asset('css/custom-minified/admin_login.min.css') }}" rel="stylesheet" type="text/css" />
 	<link href="{{ asset('css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
 	<link href="{{ asset('css/custom/errorpage.css') }}" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body class="loading auth-fluid-pages pb-0">
@@ -71,6 +72,9 @@
 
 	<!-- App js -->
 	<script src="{{ asset('js/app.min.js') }}"></script>
+	<script>window.UserHelpPublicProjectID="Y7YyGqyq2"</script>
+        <script src="https://run.userhelp.co" async></script>
+
 
 </body>
 

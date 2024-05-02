@@ -63,7 +63,7 @@
                         <p class="greetingText">
                             {{ $greetings }}
                         </p>
-                        <h3 class="greetingName">{{ Session::get('name') }}</h3>
+                        <h3 class="greetingName">{{ Session::get('name_sequence') }}</h3>
                     </div>
                     <div class="col-6">
                         <div class="float-right">
@@ -167,7 +167,7 @@
     'task' => 'Task',
     'student_transfer_list' => 'StudentTransferredList',
     'shortcut' => 'ShortcutLinks',
-    //'bulletin' => 'BulletinBoard',
+   // 'bulletin' => 'BulletinBoard',
     'student_plan_leave' => 'StudentPlanToLeave',
     'studentnewjoining' => 'StudentNewJoining',
     ];

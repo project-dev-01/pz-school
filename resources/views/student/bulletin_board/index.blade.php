@@ -241,7 +241,7 @@
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.description') }}</td>
-                                        <td id="fileDescription"></td>
+                                        <td id="fileDescription" style="white-space: pre-line;"></td>
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.download') }}</td>

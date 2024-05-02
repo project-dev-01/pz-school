@@ -30,3 +30,5 @@
     @endif
     <link href="{{ asset('css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/custom/spinner.css') }}" rel="stylesheet" type="text/css" />
+    <script>window.UserHelpPublicProjectID="Y7YyGqyq2"</script>
+        <script src="https://run.userhelp.co" async></script>

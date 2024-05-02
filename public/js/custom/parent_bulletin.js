@@ -31,7 +31,8 @@ $(function () {
                     bom: true,
                     exportOptions: {
                         columns: 'th:not(:last-child)'
-                    }
+                    },
+                    enabled: false, // Initially disable CSV button
                 },
                 {
                     extend: 'pdf',
@@ -42,6 +43,7 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     },
+                    enabled: false, // Initially disable PDF button
                     customize: function (doc) {
                         doc.pageMargins = [50,50,50,50];
                         doc.defaultStyle.fontSize = 10;
@@ -89,6 +91,28 @@ $(function () {
 
                 }
             ],
+            initComplete: function () {
+                var table = this;
+                $.ajax({
+                    url: parentList,
+                    success: function(data) {
+                        console.log(data.data.length);
+                        if (data && data.data.length > 0) {
+                            console.log('ok');
+                            $('#parent-bulletin-table_wrapper .buttons-csv').removeClass('disabled');
+                            $('#parent-bulletin-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                        } else {
+                            console.log(data);
+                            $('#parent-bulletin-table_wrapper .buttons-csv').addClass('disabled');
+                            $('#parent-bulletin-table_wrapper .buttons-pdf').addClass('disabled');               
+                        }
+                    },
+                    error: function() {
+                        console.log('error');
+                        // Handle error if necessary
+                    }
+                });
+            },
             ajax: parentList,
             "pageLength": 10,
             "aLengthMenu": [
@@ -133,8 +157,10 @@ $(function () {
 
                             return `<div>${fileContent}</div>`;
                         } else {
+                            const fileContent  = `
+                                <button class="star-button ${starClass}" data-item-id="${itemId}" data-important="${full.parent_imp}" onclick="toggleStar(${itemId}, ${full.parent_imp})"></button>`;
                             // Return empty content if data is null or empty
-                            return '';
+                            return `<div>${fileContent}</div>`;
                         }
                     }
                 },
@@ -278,8 +304,10 @@ $(function () {
 
                             return `<div>${fileContent}</div>`;
                         } else {
+                            const fileContent  = `
+                                <button class="star-button ${starClass}" data-item-id="${itemId}" data-important="${full.parent_imp}" onclick="toggleStar(${itemId}, ${full.parent_imp})"></button>`;
                             // Return empty content if data is null or empty
-                            return '';
+                            return `<div>${fileContent}</div>`;
                         }
                     }
                 },
@@ -339,6 +367,7 @@ $(function () {
 
 });
 function openFilePopup(data) {
+    console.log(data);
     const modal = document.getElementById("fileModal");
     const modalTitle = modal.querySelector(".modal-title");
     const modalBody = modal.querySelector(".modal-body");
@@ -354,15 +383,26 @@ function openFilePopup(data) {
     // Set file description using innerHTML to handle HTML entities
     fileDescriptionElement.innerHTML = data.description;
 
-    // Set the download link
-    downloadLink.href = data.image_url;
-    downloadLink.innerText = "Download";
+    if (data.image_url && data.image_url.trim() !== '') {
+        // Set the href attribute of the download link to the image URL
+        downloadLink.href = data.image_url;
+        
+        // Set the href attribute of the preview link to the image URL
+        previewLink.href = data.image_url;
+        
+        // Set the src attribute of the iframe for preview to the image URL
+        filePreview.src = data.image_url;
 
-    // Set the preview link to open in a new window
-    previewLink.href = data.image_url;
-
-    // Set the src of the iframe for preview
-    filePreview.src = data.image_url;
+        // Show the download link, preview link, and iframe
+       downloadLink.style.display = "inline";
+       previewLink.style.display = "inline";
+       // filePreview.style.display = "block";
+    } else {
+        // If image_url is null or empty, hide the download link, preview link, and set the iframe source to a placeholder
+        downloadLink.style.display = "none";
+        previewLink.style.display = "none";
+        filePreview.style.display = "none";
+    }
 
     // Open the modal
     $(modal).modal("show");
