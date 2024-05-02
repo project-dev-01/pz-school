@@ -838,7 +838,7 @@ class StudentController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
-                $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                $image_url = !empty($row['file']) ? config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] : '';
                 $description = htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8'); // Encoding with quotes
                 $encoded_data = json_encode([
                     'image_url' => $image_url,
@@ -880,7 +880,7 @@ class StudentController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
-                $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                $image_url = !empty($row['file']) ? config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] : '';
                 $description = htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8'); // Encoding with quotes
                 $encoded_data = json_encode([
                     'image_url' => $image_url,

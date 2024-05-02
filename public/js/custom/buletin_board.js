@@ -453,16 +453,16 @@ $(function () {
                     name: 'target_user'
                 },{
                     data: 'publish_date',
-                    name: 'publish_date'
-                    // render: function(data, type, row) {
-                    //     if (type === 'display' || type === 'filter' || data) {
-                    //         // Split the datetime string into date and time parts
-                    //         var parts = data.split(' ');
-                    //         // Display only the date part (assuming it's the first part of the split string)
-                    //         return parts[0];
-                    //     }
-                    //     return data;
-                    // }
+                    name: 'publish_date',
+                    render: function(data, type, row) {
+                        if (data && (type === 'display' || type === 'filter')) {
+                            // Split the datetime string into date and time parts
+                            var parts = data.split(' ');
+                            // Display only the date part (assuming it's the first part of the split string)
+                            return parts[0];
+                        }
+                        return data;
+                    }
                 },
                 {
                     data: 'actions',
@@ -697,6 +697,7 @@ $(function () {
             $("#parent_id").empty();
             $("#parent_id").append('<option value="">Select Parent</option>');
             console.log(target_user,class_id,section_id);
+            console.log("testing");
             $.post(getParentList, { token: token, branch_id: branchID, class_id: class_id, section_id: section_id }, function (res) {
                 console.log(res);
                 if (res.code == 200) {

@@ -251,10 +251,10 @@
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.description') }}</td>
-                                        <td id="fileDescription"></td>
+                                        <td id="fileDescription" style="white-space: pre-line;"></td>
                                     </tr>
                                     <tr>
-                                        <td>{{ __('messages.file_download') }}</td>
+                                        <td>{{ __('messages.download') }}</td>
                                         <td class="publish_date"><a id="downloadLink" href="#" download>{{ __('messages.download') }}</a></td>
                                     </tr>
                                     <tr>
