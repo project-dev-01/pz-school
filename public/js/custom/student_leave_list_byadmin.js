@@ -565,14 +565,12 @@ $(function () {
                 data: 'status'
             },
             {
-                data: 'status'
-            },
-            {
                 data: 'id'
             }
             ],
-            columnDefs: [{
-                targets: 1,
+            columnDefs: [
+                {
+                targets: 5,
                 className: "table-user",
                 render: function (data, type, row, meta) {
                     var first_name = '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
@@ -581,21 +579,21 @@ $(function () {
                 }
             },
             {
-                targets: 9,
+                targets: 10,
                 render: function (data, type, row, meta) {
                     var status = getStatusBadge(data);
                     return status;
                 }
             },
             {
-                targets: 11,
+                targets: 12,
                 render: function (data, type, row, meta) {
                     var status = getStatusBadge(data);
                     return status;
                 }
             },
             {
-                targets: 13,
+                targets: 14,
                 render: function (data, type, row, meta) {
                     var documentLink = getDocumentLink(row);
                     return documentLink;

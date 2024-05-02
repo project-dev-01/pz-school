@@ -11,6 +11,7 @@ $(function () {
                 $.each(res.data.data, function (key, val) {
                     var field = key+"_lang";
                     var status = "";
+                    var color = "";
                     if(val.status=="accept"){
                         status = "Accept"
                         color = "success";
@@ -70,7 +71,7 @@ $(function () {
                 success: function (data) {
                     if (data.code == 200) {
                         toastr.success(data.message);
-                        window.location.href = parentUpdateList;
+                        window.location.href = parentUpdateMenu;
                     } else {
                         toastr.error(data.message);
                     }

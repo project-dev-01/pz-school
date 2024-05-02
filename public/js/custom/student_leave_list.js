@@ -429,14 +429,11 @@ $(function () {
                     data: 'status'
                 },
                 {
-                    data: 'status'
-                },
-                {
                     data: 'id'
                 }
             ],
             columnDefs: [{
-                targets: 1,
+                targets: 4,
                 className: "table-user",
                 render: function (data, type, row, meta) {
                     var first_name = '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +

@@ -445,6 +445,7 @@ class AuthController extends Controller
             'password' => $request->password,
             'user_browser' => $request->user_browser,
             'user_os' => $request->user_os,
+            'role_id' => "2",
             'user_device' => $request->user_device
         ]);
         $userDetails = $response->json();
@@ -509,7 +510,8 @@ class AuthController extends Controller
             'branch_id' => $request->branch_id,
             'password' => $request->password,
             'user_browser' => $request->user_browser,
-            'user_os' => $request->user_os,
+            'user_os' => $request->user_os,            
+            'role_id' => "4",
             'user_device' => $request->user_device
         ]);
 
@@ -566,7 +568,8 @@ class AuthController extends Controller
             'branch_id' => $request->branch_id,
             'password' => $request->password,
             'user_browser' => $request->user_browser,
-            'user_os' => $request->user_os,
+            'user_os' => $request->user_os,            
+            'role_id' => "3",
             'user_device' => $request->user_device
         ]);
 
@@ -623,7 +626,8 @@ class AuthController extends Controller
             'branch_id' => $request->branch_id,
             'password' => $request->password,
             'user_browser' => $request->user_browser,
-            'user_os' => $request->user_os,
+            'user_os' => $request->user_os,            
+            'role_id' => "5",
             'user_device' => $request->user_device
         ]);
         $userDetails = $response->json();
@@ -680,6 +684,7 @@ class AuthController extends Controller
             'password' => $request->password,
             'user_browser' => $request->user_browser,
             'user_os' => $request->user_os,
+            'role_id' => "6",
             'user_device' => $request->user_device
         ]);
 
@@ -1228,7 +1233,10 @@ class AuthController extends Controller
             // $req->session()->put('locale', $defalutLang);
             $hour = time() + 3600 * 24 * 30;
             Cookie::queue(Cookie::make('locale', $defalutLang, $hour));
-            Helper::GetMethod(config('constants.api.logout'));
+            if(session()->get('branch_id')!==null)
+            {
+                Helper::GetMethod(config('constants.api.logout'));
+            }
         } catch (\Exception $e) {
 
             // CSRF token mismatch occurred, handle the error

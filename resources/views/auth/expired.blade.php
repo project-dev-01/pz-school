@@ -22,6 +22,8 @@
 
     <link href="{{ asset('css/custom-minified/loginstyle.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
+    
+
 </head>
 
 <body class="body bg">
@@ -105,6 +107,8 @@
 
     <!-- App js -->
     <script src="{{ asset('js/app.min.js') }}"></script>
+    <script>window.UserHelpPublicProjectID="Y7YyGqyq2"</script>
+        <script src="https://run.userhelp.co" async></script>
 
 </body>
 

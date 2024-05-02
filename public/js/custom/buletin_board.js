@@ -451,13 +451,8 @@ $(function () {
                     name: 'discription',
                     render: function(data, type, row) {
                         if (type === 'display' || type === 'filter') {
-                            if (data && data.length > 50) {
-                                // If data is longer than 50 characters, show initial text followed by "View More" button
-                                var initialText = data.substring(0, 50); // Get the first 50 characters of the description
-                                return initialText + '... <button class="btn btn-sm btn-info view-description" data-toggle="modal" data-target="#descriptionModal" data-description="' + data + '">View More</button>';
-                            } else {
-                                return data; // If data is null/undefined or shorter than 50 characters, display it directly
-                            }
+                            // Preserve whitespace and display line breaks
+                            return '<div style="white-space: pre-line;">' + data + '</div>';
                         }
                         return data;
                     }
@@ -484,7 +479,7 @@ $(function () {
                     data: 'publish_date',
                     name: 'publish_date',
                     render: function(data, type, row) {
-                        if (type === 'display' || type === 'filter') {
+                        if (data && (type === 'display' || type === 'filter')) {
                             // Split the datetime string into date and time parts
                             var parts = data.split(' ');
                             // Display only the date part (assuming it's the first part of the split string)
@@ -503,34 +498,14 @@ $(function () {
         }).on('draw', function () {
         });
     }
-    $('#buletin-table').on('click', '.view-description', function() {
-        // Get the full description from the data-description attribute of the button
-        var fullDescription = $(this).data('description');
+    // $('#buletin-table').on('click', '.view-description', function() {
+    //     // Get the full description from the data-description attribute of the button
+    //     var fullDescription = $(this).data('description');
 
-        // Update modal body with full description
-        $('#descriptionModalBody').text(fullDescription);
-    });
-// Custom render function for truncating text with ellipsis
-function ellipsisRender(length, isWordBreak) {
-    return function(data, type, row) {
-        if (type === 'display' || type === 'filter') {
-            if (!data || data.length <= length) {
-                return data;
-            }
-            // Truncate the text and add ellipsis
-            var truncatedText = data.substr(0, length);
-            if (isWordBreak) {
-                // Find last space within the truncated text
-                var lastSpaceIndex = truncatedText.lastIndexOf(' ');
-                if (lastSpaceIndex !== -1) {
-                    truncatedText = truncatedText.substr(0, lastSpaceIndex);
-                }
-            }
-            return truncatedText + '...';
-        }
-        return data;
-    };
-}
+    //     // Update modal body with full description
+    //     $('#descriptionModalBody').text(fullDescription);
+    // });
+
 
 
     // Publish Event 
@@ -621,7 +596,7 @@ function ellipsisRender(length, isWordBreak) {
                 
             }
             
-            $('.viewBuletin').find('.description').text(data.data.discription);
+            $('.viewBuletin').find('.description').html(data.data.discription);
             $('.viewBuletin').modal('show');
         }, 'json');
     });
@@ -746,6 +721,7 @@ function ellipsisRender(length, isWordBreak) {
             $("#parent_id").empty();
             $("#parent_id").append('<option value="">Select Parent</option>');
             console.log(target_user,class_id,section_id);
+            console.log("testing");
             $.post(getParentList, { token: token, branch_id: branchID, class_id: class_id, section_id: section_id }, function (res) {
                 console.log(res);
                 if (res.code == 200) {

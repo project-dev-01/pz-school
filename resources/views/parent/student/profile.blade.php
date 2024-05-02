@@ -341,7 +341,17 @@
         </div>
     </div>
     <!-- end page title -->
-
+    @if($id==0)
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="">
+                <h4> No Student's Available here.</h4>
+                </div>
+        </div>
+    </div>   
+ 
+@endif
+@if($id!=0)
     <div class="row">
         <div class="col-xl-12">
             <div class="">
@@ -597,9 +607,9 @@
                                             <input type="text" id="drp_country" placeholder="{{ __('messages.country') }}" class="form-control country" name="drp_country" data-parsley-trigger="change" value="{{ isset($student['country']) ? $student['country'] : ''}}">
                                         </div>
                                     </div>
-                                </div>
                                 <!-- </div> -->
-                                <div class="row">
+                                <!-- </div> -->
+                                <!-- <div class="row"> -->
 
                                     <!-- <div class="col-md-4">
                                         <div class="form-group">
@@ -635,6 +645,8 @@
                                             <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
                                             <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" value="{{ isset($student['dual_nationality']) ? $student['dual_nationality'] : ''}}" data-parsley-trigger="change">
                                         </div>
+                                        <span id ="error_message"></span>
+
                                     </div>
                                     @endif
                                 </div>
@@ -964,7 +976,7 @@
                                             <select id="school_enrollment_status_tendency" name="school_enrollment_status_tendency" class="form-control prev_school_form">
                                                 <option value="">{{ __('messages.tendency_select_enrollment_status') }}</option>
                                                 <option value="Yes" {{ isset($student['school_enrollment_status_tendency']) ? $student['school_enrollment_status_tendency'] == "Yes" ? 'selected' : '' : '' }}>{{ __('messages.yes') }}</option>
-                                                <option value="No" {{ isset($student['school_enrollment_status_tendency']) ? $student['school_enrollment_status_tendency'] == "Yes" ? 'selected' : '' : '' }}>{{ __('messages.no') }}</option>
+                                                <option value="No" {{ isset($student['school_enrollment_status_tendency']) ? $student['school_enrollment_status_tendency'] == "No" ? 'selected' : '' : '' }}>{{ __('messages.no') }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -1078,6 +1090,7 @@
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div><!-- end row -->
+    @endif
 </div> <!-- container -->
 @endsection
 @section('scripts')
@@ -1124,6 +1137,7 @@
     var indexAdmission = "{{ route('admin.admission') }}";
     var studentUpdateList = "{{ route('admin.student.update_info_list') }}";
     var malaysiaPostalCode = "{{ route('parent.malaysia_postalCode') }}";
+    var updateInfoList = "{{ route('parent.update_info') }}";
 </script>
 <!-- button js added -->
 <script src="{{ asset('buttons-datatables/dataTables.buttons.min.js') }}"></script>
@@ -1147,6 +1161,36 @@
             error: oops_went_wrong
         }
     });
+    $(document).ready(function(){
+    var nationality = $('#nationality').val();
+    var dual_nationality = $('#dual_nationality').val();
+    if(nationality == dual_nationality)
+    {
+        $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
+    }
+    else
+    {
+        $('#error_message').hide().text('');
+    }
+    $('#nationality').on('change', function(){
+        var nationality = $('#nationality').val();
+        var dual_nationality = $('#dual_nationality').val();
+        $('#error_message').hide().text('');
+        if(nationality == dual_nationality)
+    {
+        $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
+    }
+    });
+    $('#dual_nationality').on('change', function(){
+        var nationality = $('#nationality').val();
+        var dual_nationality = $('#dual_nationality').val();
+        $('#error_message').hide().text('');
+        if(nationality == dual_nationality)
+    {
+        $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
+    }
+    });
+});
     $(function() {
         // nric validation start
         // var $form_2 = $('#editadmission');

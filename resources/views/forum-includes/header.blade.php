@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">    
     <link href="{{ asset('css/custom/select2.min.css')}}" rel="stylesheet" type="text/css" />
     <script async charset="utf-8" src="//cdn.embedly.com/widgets/platform.js"></script>
+    <script>window.UserHelpPublicProjectID="Y7YyGqyq2"</script>
+        <script src="https://run.userhelp.co" async></script>
     <style>
         .error {
             color: red;

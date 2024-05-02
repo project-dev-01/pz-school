@@ -167,7 +167,7 @@
     'task' => 'Task',
     'student_transfer_list' => 'StudentTransferredList',
     'shortcut' => 'ShortcutLinks',
-    //'bulletin' => 'BulletinBoard',
+   // 'bulletin' => 'BulletinBoard',
     'student_plan_leave' => 'StudentPlanToLeave',
     'studentnewjoining' => 'StudentNewJoining',
     ];

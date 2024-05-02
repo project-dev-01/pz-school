@@ -182,7 +182,7 @@ class ParentController extends Controller
 
         $student_id = session()->get('student_id');
         $data = [
-            'id' => isset($student_id) ? $student_id : 0,
+            'id' => isset($student_id) ? $student_id : '',
         ];
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
@@ -205,6 +205,7 @@ class ParentController extends Controller
         return view(
             'parent.student.profile',
             [
+                'id' => isset($student_id) ? $student_id : 0,
                 'class' => isset($getclass['data']) ? $getclass['data'] : [],
                 'parent' => isset($parent['data']) ? $parent['data'] : [],
                 'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
@@ -1287,6 +1288,7 @@ class ParentController extends Controller
             'role_id' => session()->get('role_id')
         ];
         // dd($data);
+        // return $data;
         $response = Helper::PostMethod(config('constants.api.parent_update'), $data);
         return $response;
     }
@@ -1548,7 +1550,7 @@ class ParentController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
-                $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                $image_url = !empty($row['file']) ? config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] : '';
         $description = htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8'); // Encoding with quotes
         $encoded_data = json_encode([
             'image_url' => $image_url,
@@ -1591,7 +1593,7 @@ class ParentController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
-                $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                $image_url = !empty($row['file']) ? config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] : '';
                 $description = htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8'); // Encoding with quotes
                 $encoded_data = json_encode([
                     'image_url' => $image_url,
@@ -1612,6 +1614,22 @@ class ParentController extends Controller
     // Update Student 
     public function updateStudent(Request $request)
     {
+        $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
+    
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+    
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+    
+    
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
 
         $visa_base64 = "";
         $visa_extension = "";
@@ -1643,23 +1661,23 @@ class ParentController extends Controller
         }
 
         // Set dual nationality based on checkbox
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'passport' => $request->txt_passport,
             'nric' => $request->txt_nric,
-            'blood_group' => $request->blooddgrp,
+            // 'blood_group' => $request->blooddgrp,
             'religion' => $request->txt_religion,
-            'race' => $request->txt_race,
+            // 'race' => $request->txt_race,
             'country' => $request->drp_country,
             'post_code' => $request->drp_post_code,
-            'mobile_no' => $request->txt_mobile_no,
+            // 'mobile_no' => $request->txt_mobile_no,
             'city' => $request->drp_city,
             'state' => $request->drp_state,
-            'current_address' => $request->txtarea_paddress,
-            'permanent_address' => $request->txtarea_permanent_address,
+            // 'current_address' => $request->txtarea_paddress,
+            // 'permanent_address' => $request->txtarea_permanent_address,
             'student_id' => $request->student_id,
             'passport_expiry_date' => $request->passport_expiry_date,
-            'visa_number' => $request->visa_number,
+            // 'visa_number' => $request->visa_number,
             'visa_expiry_date' => $request->visa_expiry_date,
             'nationality' => $request->nationality,
             'first_name' => $request->fname,
@@ -1670,7 +1688,7 @@ class ParentController extends Controller
             'last_name_furigana' => $request->last_name_furigana,
             'first_name_common' => $request->first_name_common,
             'last_name_common' => $request->last_name_common,
-            "middle_name" => $request->middle_name,
+            "middle_name" => $request->mname,
             "middle_name_english" => $request->middle_name_english,
             "middle_name_furigana" => $request->middle_name_furigana,
             'visa_photo' => $visa_base64,
@@ -1679,9 +1697,11 @@ class ParentController extends Controller
             'passport_file_extension' => $passport_extension,
             'dual_nationality' => $dual_nationality,
             'nric_old_photo' => $request->nric_old_photo,
+            'passport_old_photo' => $request->passport_old_photo,
+            'visa_old_photo' => $request->visa_old_photo,
             'nric_photo' => $nric_base64,
             'nric_file_extension' => $nric_extension,
-            'school_last_attended' => $request->txt_prev_schname,
+            'school_name' => $request->txt_prev_schname,
             'school_country' => $request->school_country,
             'school_city' => $request->school_city,
             'school_state' => $request->school_state,
@@ -1813,12 +1833,35 @@ class ParentController extends Controller
     {
 
         $type = "Admission";
+        $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
+    
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+    
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+    
+        // Set type based on the last date of withdrawal
+        // $type = "Admission";
+        // if ($request->last_date_of_withdrawal) {
+        //     $type = "Re-Admission";
+        // }
+
+        $type = $request->filled('last_date_of_withdrawal') ? 'Re-Admission' : 'Admission';
+    
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
         if ($request->last_date_of_withdrawal) {
             $type = "Re-Admission";
         }
       
         // Set dual nationality based on checkbox
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -1955,6 +1998,22 @@ class ParentController extends Controller
     }
     public function applicationUpdate(Request $request)
     {
+        $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
+    
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+    
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
+
         $phase_2_status = $request->phase_2_status;
         if ($request->status == "Approved") {
             if ($request->phase_2_status == null) {
@@ -1971,7 +2030,7 @@ class ParentController extends Controller
             $official_date = $request->official_date;
         }
         // Set dual nationality based on checkbox
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $status = $request->status;
         if ($request->status == "") {
             $status = $request->phase_1_status;
@@ -2231,6 +2290,7 @@ class ParentController extends Controller
 
         $data = [
             "status" => "Parent",
+            "student_id" => session()->get('student_id'),
             "parent_id" => session()->get('ref_user_id')
         ];
         $response = Helper::GETMethodWithData(config('constants.api.parent_student_update_info_list'), $data);
