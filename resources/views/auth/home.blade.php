@@ -280,6 +280,9 @@
     </script>
     <!-- Summernote js -->
     <script src="{{ asset('libs/summernote/summernote-bs4.min.js') }}"></script>
+    <script>window.UserHelpPublicProjectID="Y7YyGqyq2"
+</script>
+<script src="https://run.userhelp.co" async></script>
 
 </body>
 

@@ -128,13 +128,36 @@ class GuestController extends Controller
     }
     public function applicationAdd(Request $request)
     {
+              $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
+    
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+    
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+    
+        // Set type based on the last date of withdrawal
+        // $type = "Admission";
+        // if ($request->last_date_of_withdrawal) {
+        //     $type = "Re-Admission";
+        // }
 
-        $type = "Admission";
-        if($request->re_admission == "yes"){
-            $type = "Re-Admission";
-        }
+        $type = $request->filled('last_date_of_withdrawal') ? 'Re-Admission' : 'Admission';
+    
         // Set dual nationality based on checkbox
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
+
+        // $type = "Admission";
+        // if($request->re_admission == "yes"){
+        //     $type = "Re-Admission";
+        // }
+        // // Set dual nationality based on checkbox
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -270,7 +293,29 @@ class GuestController extends Controller
     public function applicationUpdate(Request $request)
     {
         // dd(1);
-        
+        $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
+    
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+    
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+    
+        // Set type based on the last date of withdrawal
+        // $type = "Admission";
+        // if ($request->last_date_of_withdrawal) {
+        //     $type = "Re-Admission";
+        // }
+
+        // $type = $request->filled('last_date_of_withdrawal') ? 'Re-Admission' : 'Admission';
+    
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null ;
         $status = $request->status;
         if($request->status==""){
             $status = $request->phase_1_status;
@@ -295,7 +340,7 @@ class GuestController extends Controller
             $trail_date = $request->trail_date;
         }
         // Set dual nationality based on checkbox
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $official_date = "";
         if($request->enrollment=="Official Enrollment"){
             $official_date = $request->official_date;

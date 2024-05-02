@@ -568,7 +568,6 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox" style="margin-top: 2.25rem;">
-
                                         <input type="checkbox" name="has_dual_nationality_checkbox" id="has_dual_nationality_checkbox" class="custom-control-input">
                                         <label class="custom-control-label" for="has_dual_nationality_checkbox">{{ __('messages.dual_nationality') }}</label>
                                     </div>
@@ -579,6 +578,7 @@
                                     <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
                                     <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" data-parsley-trigger="change">
                                 </div>
+                             <span id ="error_message"></span>
                             </div>
                             @endif
                         </div>
@@ -2123,5 +2123,37 @@
             error: oops_went_wrong
         }
     });
+    $(document).ready(function(){
+    var nationality = $('#nationality').val();
+    var dual_nationality = $('#dual_nationality').val();
+    if(nationality == dual_nationality)
+    {
+        $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
+    }
+    else
+    {
+        $('#error_message').hide().text('');
+    }
+    $('#nationality').on('change', function(){
+        var nationality = $('#nationality').val();
+        var dual_nationality = $('#dual_nationality').val();
+        $('#error_message').hide().text('');
+        if(nationality == dual_nationality)
+    {
+        $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
+    }
+    });
+    $('#dual_nationality').on('change', function(){
+        var nationality = $('#nationality').val();
+        var dual_nationality = $('#dual_nationality').val();
+        $('#error_message').hide().text('');
+        if(nationality == dual_nationality)
+    {
+        $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
+    }
+    });
+});
 </script>
+
+
 @endsection

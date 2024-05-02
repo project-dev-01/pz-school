@@ -1614,6 +1614,22 @@ class ParentController extends Controller
     // Update Student 
     public function updateStudent(Request $request)
     {
+        $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
+    
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+    
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+    
+    
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
 
         $visa_base64 = "";
         $visa_extension = "";
@@ -1645,7 +1661,7 @@ class ParentController extends Controller
         }
 
         // Set dual nationality based on checkbox
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'passport' => $request->txt_passport,
             'nric' => $request->txt_nric,
@@ -1817,12 +1833,35 @@ class ParentController extends Controller
     {
 
         $type = "Admission";
+        $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
+    
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+    
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+    
+        // Set type based on the last date of withdrawal
+        // $type = "Admission";
+        // if ($request->last_date_of_withdrawal) {
+        //     $type = "Re-Admission";
+        // }
+
+        $type = $request->filled('last_date_of_withdrawal') ? 'Re-Admission' : 'Admission';
+    
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
         if ($request->last_date_of_withdrawal) {
             $type = "Re-Admission";
         }
       
         // Set dual nationality based on checkbox
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -1959,6 +1998,22 @@ class ParentController extends Controller
     }
     public function applicationUpdate(Request $request)
     {
+        $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
+    
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+    
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
+
         $phase_2_status = $request->phase_2_status;
         if ($request->status == "Approved") {
             if ($request->phase_2_status == null) {
@@ -1975,7 +2030,7 @@ class ParentController extends Controller
             $official_date = $request->official_date;
         }
         // Set dual nationality based on checkbox
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $status = $request->status;
         if ($request->status == "") {
             $status = $request->phase_1_status;

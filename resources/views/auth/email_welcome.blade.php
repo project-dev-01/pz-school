@@ -20,6 +20,9 @@
     <link href="{{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/custom/email.css') }}" rel="stylesheet" type="text/css" />
+    <script>window.UserHelpPublicProjectID="Y7YyGqyq2"</script>
+        <script src="https://run.userhelp.co" async></script>
+
 </head>
 
 <body>

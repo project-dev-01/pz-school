@@ -18,6 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script>window.UserHelpPublicProjectID="Y7YyGqyq2"</script>
+        <script src="https://run.userhelp.co" async></script>
 </head>
 <body>
     <div id="app">

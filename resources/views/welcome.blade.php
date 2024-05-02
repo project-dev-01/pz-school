@@ -19,6 +19,9 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+                <script>window.UserHelpPublicProjectID="Y7YyGqyq2"</script>
+        <script src="https://run.userhelp.co" async></script>
+
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
