@@ -27,6 +27,11 @@
                                 <td id="noOfDaysLeave"></td>
                             </tr>
                             <tr>
+                                <td>{{ __('messages.remarks') }}</td>
+                                <td>:</td>
+                                <td id="parentRemarks"></td>
+                            </tr>
+                            <tr>
                                 <td>{{ __('messages.apply_date') }}</td>
                                 <td>:</td>
                                 <td id="applyLeaveDate"></td>

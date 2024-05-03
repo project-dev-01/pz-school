@@ -722,10 +722,11 @@ $(function () {
                     $('#documentDetails').html(leave_details.document);
                     $('#showleaveType').html(leave_details.leave_type_name);
                     $('#absentReasonFromParent').html(leave_details.reason);
+                    $('#parentRemarks').html(leave_details.remarks);
                     $('#leave_status_name').val(leave_details.nursing_teacher_status);
                     $('#changeLevType').val(leave_details.nursing_leave_type);
                     $('#yourRemarks').val(leave_details.nursing_teacher_remarks);
-
+                    
                     var student_leave_type_id = leave_details.nursing_leave_type;
                     $("#changelevReasons1").empty();
                     $("#changelevReasons1").append('<option value="">' + select_reason + '</option>');

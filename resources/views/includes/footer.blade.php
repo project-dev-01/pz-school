@@ -445,9 +445,9 @@ var email_lang = "{{ __('messages.email') }}";
                     }
                 },
                 error: function(err) {
-                    console.log("setInterval logout error");
-                    console.log(err)
-                    window.location.href =loginurl;
+                    // console.log("setInterval logout error");
+                    // console.log(err)
+                    // window.location.href =loginurl;
                     
                 }
             });
