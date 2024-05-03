@@ -1,16 +1,4 @@
-<style>
-    .menu-arrow {
-        transition: transform .15s;
-        position: absolute;
-        right: 10px;
-        display: inline-block;
-        font-family: 'Material Design Icons';
-        text-rendering: auto;
-        line-height: 1.5rem;
-        font-size: 1.1rem;
-        transform: translate(0, 0);
-    }
-</style>
+<link href="{{ asset('css/custom/sidebar.css') }}" rel="stylesheet" type="text/css" />
 <!-- ========== Left Sidebar Start ========== -->
 <div class="left-side-menu" style="background-color:#2F2F8F">
     <div class="h-100" data-simplebar>
@@ -53,26 +41,26 @@
         </div>
 
         @php
-            $role_id = session('role_id');
-            $branch_id = session('branch_id');
-            $mainmenudata = [
-                'role_id' => $role_id,
-                'br_id' => $branch_id,
-                'type' => 'Mainmenu'
-            ];
-            $submenudata = [
-                'role_id' => $role_id,
-                'br_id' => $branch_id,
-                'type' => 'Submenu'
-            ];
-            $childmenudata = [
-                'role_id' => $role_id,
-                'br_id' => $branch_id,
-                'type' => 'Childmenu'
-            ];
-            $mainmenu = App\Helpers\Helper::PostMethod(config('constants.api.menuaccess_list'), $mainmenudata);
-            $submenu = App\Helpers\Helper::PostMethod(config('constants.api.menuaccess_list'), $submenudata);
-            $childmenu = App\Helpers\Helper::PostMethod(config('constants.api.menuaccess_list'), $childmenudata);
+        $role_id = session('role_id');
+        $branch_id = session('branch_id');
+        $mainmenudata = [
+        'role_id' => $role_id,
+        'br_id' => $branch_id,
+        'type' => 'Mainmenu'
+        ];
+        $submenudata = [
+        'role_id' => $role_id,
+        'br_id' => $branch_id,
+        'type' => 'Submenu'
+        ];
+        $childmenudata = [
+        'role_id' => $role_id,
+        'br_id' => $branch_id,
+        'type' => 'Childmenu'
+        ];
+        $mainmenu = App\Helpers\Helper::PostMethod(config('constants.api.menuaccess_list'), $mainmenudata);
+        $submenu = App\Helpers\Helper::PostMethod(config('constants.api.menuaccess_list'), $submenudata);
+        $childmenu = App\Helpers\Helper::PostMethod(config('constants.api.menuaccess_list'), $childmenudata);
         @endphp
         <!--- Sidemenu -->
         <div id="sidebar-menu">
@@ -340,12 +328,12 @@
                 'type' => "Childmenu"
                 ];
                 $permissionmainmenu = App\Helpers\Helper::PostMethod(config('constants.api.schoolmenuaccess_list'),$permissionmainmenudata);
-             ;
+                ;
                 $permissionsubmenu = App\Helpers\Helper::PostMethod(config('constants.api.schoolmenuaccess_list'),$permissionsubmenudata);
                 $permissionchildmenu = App\Helpers\Helper::PostMethod(config('constants.api.schoolmenuaccess_list'),$permissionchildmenudata);
 
                 @endphp
-                @if (isset($permissionmainmenu['data']) && ($permissionmainmenu['data'] == '' || $permissionmainmenu['data'] == null)) 
+                @if (isset($permissionmainmenu['data']) && ($permissionmainmenu['data'] == '' || $permissionmainmenu['data'] == null))
 
                 <li>
                     <a href="#">*.{{ __('messages.alertmenus2') }} </a>
@@ -424,7 +412,7 @@
                             @endif
                             @endif
                             @endforeach
-                            
+
                         </ul>
                     </div>
                     @endif
