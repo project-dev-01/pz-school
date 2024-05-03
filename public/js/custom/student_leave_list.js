@@ -120,6 +120,7 @@ $(function () {
             formData.append('student_name', student_name);
             formData.append('status', status);
             formData.append('date', date);
+            formData.append('academic_session_id', academic_session_id);
             // // subject division
             studentLeaveList(formData);
         }
@@ -139,6 +140,7 @@ $(function () {
         formData.append('student_name', student_name);
         formData.append('status', status);
         formData.append('date', date);
+        formData.append('academic_session_id', academic_session_id);
         // // subject division
         studentLeaveList(formData);
     }
