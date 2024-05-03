@@ -1337,7 +1337,13 @@ class AuthController extends Controller
             ];
             if ($session_id !== null) {
                 $response = Helper::PostMethod(config('constants.api.lastlogout'), $data);
+                if($response!==null)
+                {
                 return $response;
+                }
+                else {
+                    return response()->json(['error' => 'Token expired or invalid 403.'], 403);
+                } 
             } else {
                 return response()->json(['error' => 'Token expired or invalid 403.'], 403);
             } 
