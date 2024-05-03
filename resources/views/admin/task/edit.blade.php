@@ -10,9 +10,14 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
-
 @endsection
 @section('content')
+<style>
+     .custom-file-input:lang(en)~.custom-file-label::after 
+   {
+    content: "{{ __('messages.butt_browse') }}";
+   }
+</style>    
 <!-- Start Content-->
 <div class="container-fluid">
     <!-- start page title -->

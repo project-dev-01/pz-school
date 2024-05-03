@@ -11,19 +11,14 @@
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
-
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <!--<ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                        <li class="breadcrumb-item active">Wizard</li>
-                    </ol>-->
+            <div class="page-title-box" style="display: inline-flex; align-items: center;margin-bottom:10px;margin-top:10px">
+                <div class="page-title-icon">
+                <i class="fas fa-user-clock" style="width:14px; color:#3A4265"></i>
                 </div>
-                <h4 class="page-title">{{ __('messages.employee_attendance') }}</h4>
+                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.employee_attendance') }}</h4>
             </div>
         </div>
     </div>

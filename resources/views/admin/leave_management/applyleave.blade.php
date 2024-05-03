@@ -71,6 +71,10 @@
             width: 14.3em;
         }
     }
+    .custom-file-input:lang(en)~.custom-file-label::after 
+    {
+    content: "{{ __('messages.butt_browse') }}";
+    }
 </style>
 <!-- Start Content-->
 <div class="container-fluid">
