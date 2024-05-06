@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Chat')
+@section('title',' ' . __('messages.chat') . '')
 @section('component_css')
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
@@ -10,17 +10,17 @@
 <div class="container-fluid">
 	<!-- start page title -->
 	<div class="row">
-		<div class="col-12">
-			<div class="page-title-box">
-				<div class="page-title-right">
-					<ol class="breadcrumb m-0">
-						<li class="breadcrumb-item active">{{ __('messages.chat') }}</li>
-					</ol>
-				</div>
-				<h4 class="page-title">{{ __('messages.chat') }}</h4>
-			</div>
-		</div>
-	</div>
+        <div class="col-12">
+            <div class="page-title-box" style="display: inline-flex; align-items: center;">
+                <div class="page-title-icon" style="margin-top:5px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 28 28" fill="none" stroke="#3A4265" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </div>
+                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.chat') }}</h4>
+            </div>
+        </div>
+    </div>
 	<!-- end page title -->
 
 	<div class="row">

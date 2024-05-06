@@ -16,14 +16,18 @@
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 <link href="{{ asset('css/custom/classroom.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <h4 class="page-title">{{ __('messages.classroom_management') }}</h4>
+            <div class="page-title-box" style="display: inline-flex; align-items: center;margin-bottom:10px;margin-top:10px">
+                <div class="page-title-icon">
+                    <i data-feather="file-text" class="icon-dual" style="color: #3A4265;"></i>
+                </div>
+                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.classroom_management') }}</h4>
             </div>
         </div>
     </div>
@@ -31,13 +35,18 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
                         <h4 class="navv"> {{ __('messages.classroom') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+                <div class="card-body collapse show">
                     <form id="classroomFilter" autocomplete="off">
                         <div class="row">
                             <div class="col-md-3">
@@ -404,12 +413,17 @@
             <div class="row classRoomHideSHow" style="display: none;">
                 <div class="col-xl-12">
                     <div class="card">
-                        <ul class="nav nav-tabs">
-                            <li class="nav-item">
+                        <ul class="nav nav-tabs" style="display: inline-block;">
+                            <li class="nav-item d-flex justify-content-between align-items-center">
+                                <!-- Button placed on the left side -->
                                 <h4 class="navv">{{ __('messages.classroom_details') }}
                                     <h4>
+                                        <button class="btn btn-link " type="button" id="collapseButton2" aria-expanded="true" aria-controls="toDoList">
+                                            <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                        </button>
                             </li>
-                        </ul><br>
+                        </ul>
                         <ul class="nav nav-pills navtab-bg nav-justified">
                             <li class="nav-item">
                                 <a href="#profile-b1" data-toggle="tab" aria-expanded="true" class="nav-link">
@@ -432,7 +446,7 @@
                                 </a>
                             </li>
                         </ul><br>
-                        <div class="card-body">
+                        <div class="card-body collapse show">
                             <div class="tab-content">
                                 <div class="tab-pane" id="profile-b1">
                                     <div class="row">
@@ -541,13 +555,18 @@
                                         </div><!-- /.modal-dialog -->
                                     </div><!-- /.modal -->
                                     <div class="card">
-                                        <ul class="nav nav-tabs">
-                                            <li class="nav-item">
+                                        <ul class="nav nav-tabs" style="display: inline-block;">
+                                            <li class="nav-item d-flex justify-content-between align-items-center">
+                                                <!-- Button placed on the left side -->
                                                 <h4 class="navv">{{ __('messages.student_leave_request') }}
                                                     <h4>
+                                                        <button class="btn btn-link " type="button" id="collapseButton3" aria-expanded="true" aria-controls="toDoList">
+                                                            <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                                        </button>
                                             </li>
-                                        </ul><br>
-                                        <div class="card-body">
+                                        </ul>
+                                        <div class="card-body collapse show">
                                             <form id="updatestudentleave" method="post" action="{{ route('teacher.studentleave.update') }}" autocomplete="off">
                                                 <div class="col-md-12">
                                                     <div class="table-responsive">
@@ -810,6 +829,7 @@
 </script>
 <script src="{{ asset('js/custom/classroom.js') }}"></script>
 <script src="{{ asset('js/custom/short-test.js') }}"></script>
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 
 <!-- <script src="https://use.fontawesome.com/fe459689b4.js"></script> -->
 @endsection

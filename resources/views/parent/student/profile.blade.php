@@ -270,9 +270,14 @@
         }
     }
 
-    .breadcrumb-item+.breadcrumb-item::before {
+    .breadcrumb-item+.breadcrumb-item::before 
+    {
         font-family: "Material Design Icons";
         color: #3A4265;
+    }
+    .custom-file-input:lang(en)~.custom-file-label::after 
+    {
+    content: "{{ __('messages.butt_browse') }}";
     }
 </style>
 @if(Session::get('locale')=="en")

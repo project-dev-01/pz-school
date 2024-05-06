@@ -1,11 +1,12 @@
 @extends('layouts.admin-layout')
-@section('title','Analytic Report')
+@section('title',' ' . __('messages.analytic_report') . '')
 @section('component_css')
+<meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=no">
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
-<meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=no">
 <style>
     @media only screen and (min-device-width: 320px) and (max-device-width: 844px) {
         .homework {
@@ -25,12 +26,13 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <!-- <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                    </ol>
-                </div> -->
-                <h4 class="page-title">{{ __('messages.analytic_report') }}</h4>
+            <div class="page-title-box" style="display: inline-flex; align-items: center;">
+                <div class="page-title-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="20" height="20" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                </div>
+                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.analytic_report') }}</h4>
             </div>
         </div>
     </div>
@@ -38,14 +40,18 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                            {{ __('messages.select_ground') }}
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv"> {{ __('messages.select_ground') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton1"  aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                    </ul>
+                <div class="card-body collapse show">
                     <form id="analyticCrepFilter" autocomplete="off">
                         <div class="row">
                             <div class="col-md-3">
@@ -127,14 +133,18 @@
         <div class="col-xl-6 col-md-6" id="attendance_card" style="display:none">
             <!-- Portlet card -->
             <div class="card homework">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                            {{ __('messages.attendance_report') }}
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv"> {{ __('messages.attendance_report') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton2"  aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                    </ul>
+                <div class="card-body collapse show">
                     <div class="col-md-12">
                         <div id="cardCollpaseAttrep" class="collapse pt-4 show" dir="ltr">
                             <div id="anylitc-attend" class="apex-charts" data-colors="#F5AA26,#F1556C,#4FC6E1"></div>
@@ -297,4 +307,5 @@
     var teacher_analytic_storage = localStorage.getItem('teacher_analytic_details');
 </script>
 <script src="{{ asset('js/custom/analytics.js') }}"></script>
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endsection

@@ -139,9 +139,10 @@ class ParentController extends Controller
     // student leave list
     public function getstudentleave_list()
     {
-        $parentid = session()->get('ref_user_id');
         $parent_id = [
-            'parent_id' => $parentid,
+            'parent_id' => session()->get('ref_user_id'),
+            'student_id' => session()->get('student_id'),
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.studentleave_list'), $parent_id);
         // $response = Helper::GETMethodWithData(config('constants.api.studentleave_list'),$parent_id);
@@ -1551,13 +1552,13 @@ class ParentController extends Controller
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 $image_url = !empty($row['file']) ? config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] : '';
-        $description = htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8'); // Encoding with quotes
-        $encoded_data = json_encode([
-            'image_url' => $image_url,
-            'title' => $row['title'],
-            'description' => $description,
-        ]);
-        return '<div class="button-list">
+                $description = htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8'); // Encoding with quotes
+                $encoded_data = json_encode([
+                    'image_url' => $image_url,
+                    'title' => $row['title'],
+                    'description' => $description,
+                ]);
+                return '<div class="button-list">
             <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>
             <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
             <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
@@ -1618,16 +1619,16 @@ class ParentController extends Controller
             'nationality' => 'required|string|max:50',
             'dual_nationality' => 'nullable|string|max:50|different:nationality',
         ];
-    
+
         // Define custom error messages
         $messages = [
             'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
         ];
-    
+
         // Validate the request
         $validatedData = $request->validate($rules, $messages);
-    
-    
+
+
         // Set dual nationality based on checkbox
         $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
 
@@ -1837,15 +1838,15 @@ class ParentController extends Controller
             'nationality' => 'required|string|max:50',
             'dual_nationality' => 'nullable|string|max:50|different:nationality',
         ];
-    
+
         // Define custom error messages
         $messages = [
             'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
         ];
-    
+
         // Validate the request
         $validatedData = $request->validate($rules, $messages);
-    
+
         // Set type based on the last date of withdrawal
         // $type = "Admission";
         // if ($request->last_date_of_withdrawal) {
@@ -1853,13 +1854,13 @@ class ParentController extends Controller
         // }
 
         $type = $request->filled('last_date_of_withdrawal') ? 'Re-Admission' : 'Admission';
-    
+
         // Set dual nationality based on checkbox
         $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
         if ($request->last_date_of_withdrawal) {
             $type = "Re-Admission";
         }
-      
+
         // Set dual nationality based on checkbox
         // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
@@ -2002,12 +2003,12 @@ class ParentController extends Controller
             'nationality' => 'required|string|max:50',
             'dual_nationality' => 'nullable|string|max:50|different:nationality',
         ];
-    
+
         // Define custom error messages
         $messages = [
             'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
         ];
-    
+
         // Validate the request
         $validatedData = $request->validate($rules, $messages);
 
