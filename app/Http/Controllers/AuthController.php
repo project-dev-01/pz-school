@@ -1357,7 +1357,35 @@ class AuthController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
     public function allLogout(Request $request)
+    {
+        try {
+            // $token = session()->get('token');
+            $session_id = session()->get('session_id');
+            
+            if ($session_id !== null) {
+                $data = [
+                    'session_id' => $session_id,
+                ];
+
+                $response = Helper::PostMethod(config('constants.api.all_logout'), $data);
+                
+                // Process and return the response
+                return $response;
+            } else {
+                // Session ID is null, indicating token expiration or invalidity
+                return response()->json(['error' => 'Session ID is null. Token expired or invalid.'], 403);
+            }
+        } catch (\Illuminate\Session\TokenMismatchException $e) {
+            // CSRF token mismatch occurred, handle the error
+            return response()->json(['error' => 'CSRF token mismatch'], 403);
+        } catch (\Exception $e) {
+            // Other exceptions
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    /*public function allLogout(Request $request)
     {
         try {
             // $token = session()->get('token');
@@ -1384,7 +1412,7 @@ class AuthController extends Controller
         //     $this->logoutCommon($request);
         // }
         // return $response;
-    }
+    }*/
     //
     public function twoFACheckView(Request $request)
     {
