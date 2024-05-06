@@ -1642,7 +1642,7 @@ class AdminController extends Controller
     public function getEmpList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.employee_list'));
-        dd($response);
+        //dd($response);
         $data = isset($response['data']) ? $response['data'] : [];
         
         return DataTables::of($data)
@@ -5446,7 +5446,7 @@ class AdminController extends Controller
         $races = Helper::GetMethod(config('constants.api.races'));
         $education = Helper::GetMethod(config('constants.api.education_list'));
         $response = Helper::PostMethod(config('constants.api.parent_update_info_view'), $data);
-        // dd($response);
+        //dd($response);
         return view(
             'admin.parent.update_view',
             [
@@ -10184,6 +10184,7 @@ class AdminController extends Controller
     public function setpermission(Request $request)
     {
         ini_set('max_execution_time', 300);
+        ini_set('max_input_vars', 3000);
         $data = [
             'role_id' => $request->role_id,
             'school_roleid' => $request->school_roleid,
@@ -10202,11 +10203,16 @@ class AdminController extends Controller
             $response = Helper::PostMethod(config('constants.api.setschoolpermission'), $data);
             // dd($response);        
             //return redirect('admin/school_role/menuaccess');
+            if($response){
             if ($response['code'] == 200) {
                 return redirect()->route('admin.school_role.menuaccess')->with('success', $response['message']);
             } else {
                 return redirect()->route('admin.school_role.menuaccess')->with('errors', $response['message']);
             }
+        }
+        else {
+            return redirect()->route('admin.school_role.menuaccess')->with('errors', 'Set Menu Pemission Failed.');
+        }
         }
         else {
             return redirect()->route('admin.school_role.menuaccess')->with('errors', 'At least one menu must be selected to set permissions.');
@@ -11157,10 +11163,17 @@ class AdminController extends Controller
             //dd($data);
 
             $response = Helper::PostMethod(config('constants.api.addstupicture'), $data);
-            if ($response['code'] == 200) {
-                return redirect()->route('admin.student.picture')->with('success', $response['message']);
-            } else {
-                return redirect()->route('admin.student.picture')->with('errors', $response['message']);
+            //dd($response);
+            if(isset($response))
+            {
+                if ($response['code'] == 200) {
+                    return redirect()->route('admin.student.picture')->with('success', $response['message']);
+                } else {
+                    return redirect()->route('admin.student.picture')->with('errors', $response['message']);
+                }
+            }
+            else {
+                return redirect()->route('admin.student.picture')->with('errors', "Student Register No. Not exist");
             }
         }
     }
@@ -11191,11 +11204,16 @@ class AdminController extends Controller
                 $response = Helper::PostMethod(config('constants.api.addstupicture'), $data);
             }
         }
-
-        if ($response['code'] == 200) {
-            return redirect()->route('admin.student.picture')->with('success', $response['message']);
-        } else {
-            return redirect()->route('admin.student.picture')->with('errors', $response['message']);
+        if(isset($response))
+        {
+            if ($response['code'] == 200) {
+                return redirect()->route('admin.student.picture')->with('success', $response['message']);
+            } else {
+                return redirect()->route('admin.student.picture')->with('errors', $response['message']);
+            }
+        }
+        else {
+            return redirect()->route('admin.student.picture')->with('errors', "Student Register No. Not exist");
         }
     }
     public function examsutdentlist(Request $request)

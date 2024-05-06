@@ -1,9 +1,14 @@
 @extends('layouts.admin-layout')
 @section('title','Homework')
 @section('content')
+<style>
+    .custom-file-input:lang(en)~.custom-file-label::after 
+    {
+    content: "{{ __('messages.butt_browse') }}";
+    }
+</style>    
 <!-- Start Content-->
 <div class="container-fluid">
-
     <!-- start page title -->
     <div class="row">
         <div class="col-12">

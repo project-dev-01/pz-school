@@ -1,17 +1,20 @@
-
-<link href="{{ asset('css/custom/commonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <div class="row">
     <div class="col-xl-12">
         <div class="row">
             <div class="col">
                 <div class="card">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.to_do_list') }}
-                                <h4>
-                        </li>
+                    <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv">{{ __('messages.to_do_list') }}
+                            <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton2"  aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                    </li>
                     </ul>
-                    <div class="card-body">
+                    <div class="card-body collapse show">
                         <div class="row" id="toDoList" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                             <div class="col">
                                 <a class="text-dark" data-toggle="collapse" data-id="today" data-count="{{ isset($get_to_do_list_dashboard['today'])?count($get_to_do_list_dashboard['today']):0 }}" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">

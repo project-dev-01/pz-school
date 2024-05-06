@@ -20,8 +20,11 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <h4 class="page-title">{{ __('messages.classroom_management') }}t</h4>
+        <div class="page-title-box" style="display: inline-flex; align-items: center;margin-bottom:10px;margin-top:10px">
+                <div class="page-title-icon">
+                <i data-feather="file-text" class="icon-dual" style="color:#3A4265"></i>
+                </div>
+                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.classroom_management') }}</h4>
             </div>
         </div>
     </div>

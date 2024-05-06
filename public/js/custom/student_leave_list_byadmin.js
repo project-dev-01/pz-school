@@ -2,6 +2,7 @@ $(function () {
     var defaultList = new FormData();
     defaultList.append('token', token);
     defaultList.append('branch_id', branchID);
+    defaultList.append('academic_session_id', academic_session_id);
     studentLeaveList(defaultList);
     // $('#homeRoomPopup').modal('show');
     // $('#nursingPopup').modal('show');
@@ -121,6 +122,7 @@ $(function () {
         formData.append('student_name', student_name);
         formData.append('status', status);
         formData.append('date', date);
+        formData.append('academic_session_id', academic_session_id);
         // // subject division
         studentLeaveList(formData);
     });
@@ -140,6 +142,7 @@ $(function () {
         formData.append('student_name', student_name);
         formData.append('status', status);
         formData.append('date', date);
+        formData.append('academic_session_id', academic_session_id);
         // // subject division
         studentLeaveList(formData);
     }
@@ -719,10 +722,11 @@ $(function () {
                     $('#documentDetails').html(leave_details.document);
                     $('#showleaveType').html(leave_details.leave_type_name);
                     $('#absentReasonFromParent').html(leave_details.reason);
+                    $('#parentRemarks').html(leave_details.remarks);
                     $('#leave_status_name').val(leave_details.nursing_teacher_status);
                     $('#changeLevType').val(leave_details.nursing_leave_type);
                     $('#yourRemarks').val(leave_details.nursing_teacher_remarks);
-
+                    
                     var student_leave_type_id = leave_details.nursing_leave_type;
                     $("#changelevReasons1").empty();
                     $("#changelevReasons1").append('<option value="">' + select_reason + '</option>');
@@ -881,6 +885,15 @@ $(function () {
                         getstudentLeaveList();
                     } else {
                         toastr.error(response.message);
+                    }
+                },
+                error: function (xhr) {
+                    console.log("err");
+                    console.log(xhr);
+                    if (xhr.responseJSON && xhr.responseJSON.error) {
+                        toastr.error(xhr.responseJSON.error);
+                    } else {
+                        toastr.error('An error occurred. Please try again later.');
                     }
                 }
             });

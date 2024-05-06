@@ -1271,16 +1271,15 @@ class AuthController extends Controller
         $req->session()->put('picture', $userDetails['data']['user']['picture']);
         $req->session()->put('token', $userDetails['data']['token']);
         $req->session()->put('name', $userDetails['data']['user']['name']);
-        $req->session()->put('first_name', $userDetails['data']['user']['firstname']);
-        $req->session()->put('last_name', $userDetails['data']['user']['lastname']);
+        $req->session()->put('first_name', isset($userDetails['data']['user']['firstname'])?$userDetails['data']['user']['firstname']:"");
+        $req->session()->put('last_name', isset($userDetails['data']['user']['lastname'])?$userDetails['data']['user']['lastname']:"");
         $req->session()->put('email', $userDetails['data']['user']['email']);
         $req->session()->put('role_name', $userDetails['data']['role_name']);
         $req->session()->put('session_id', $userDetails['data']['user']['session_id']);
         $req->session()->put('branch_id', $userDetails['data']['subsDetails']['id']);
         $req->session()->put('school_name', $userDetails['data']['subsDetails']['school_name']);
         $req->session()->put('school_logo', $userDetails['data']['subsDetails']['logo']);
-        $req->session()->put('name_sequence_flag', $userDetails['data']['subsDetails']['firstlastname']);
-       
+        $req->session()->put('name_sequence_flag', isset($userDetails['data']['subsDetails']['firstlastname'])?$userDetails['data']['subsDetails']['firstlastname']:"");
         // password_changed_at
         // $req->session()->put('password_changed_at', $userDetails['data']['subsDetails']['password_changed_at']);
         // space remove school name
@@ -1312,17 +1311,19 @@ class AuthController extends Controller
             $req->session()->put('all_child', null);
         }
 
-        if($userDetails['data']['user']['firstname'] != null){
-            if($userDetails['data']['subsDetails']['firstlastname'] == 1){
-                $user_name = $userDetails['data']['user']['firstname']. ' ' . $userDetails['data']['user']['lastname'];
-            }else{
-                $user_name = $userDetails['data']['user']['lastname']. ' ' . $userDetails['data']['user']['firstname'];
-            }           
+        if(isset($userDetails['data']['user']['firstname'])){
+            if(isset($userDetails['data']['subsDetails']['firstlastname'])){
+                if($userDetails['data']['subsDetails']['firstlastname'] == 1){
+                    $first_last_reverse = $userDetails['data']['user']['firstname']. ' ' . $userDetails['data']['user']['lastname'];
+                }else{
+                    $first_last_reverse = $userDetails['data']['user']['lastname']. ' ' . $userDetails['data']['user']['firstname'];
+                }
+            }
         }else{
-            $user_name = $userDetails['data']['user']['name'];
+            $first_last_reverse = "";
         }
-        $req->session()->put('name_sequence', $user_name);
-        // $user_name = $userDetails['data']['user']['name'];
+        $req->session()->put('name_sequence', $first_last_reverse);
+        $user_name = $userDetails['data']['user']['name'];
         return $user_name;
     }
     public function lastlogout(Request $request)
@@ -1336,7 +1337,13 @@ class AuthController extends Controller
             ];
             if ($session_id !== null) {
                 $response = Helper::PostMethod(config('constants.api.lastlogout'), $data);
+                if($response!==null)
+                {
                 return $response;
+                }
+                else {
+                    return response()->json(['error' => 'Token expired or invalid 403.'], 403);
+                } 
             } else {
                 return response()->json(['error' => 'Token expired or invalid 403.'], 403);
             } 

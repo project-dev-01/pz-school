@@ -11,6 +11,12 @@
 <link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
+<style>
+    .custom-file-input:lang(en)~.custom-file-label::after 
+    {
+    content: "{{ __('messages.butt_browse') }}";
+    }
+</style>    
 <!-- Start Content-->
 <div class="container-fluid">
     <div class="row">

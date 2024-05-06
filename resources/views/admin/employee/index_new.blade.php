@@ -266,6 +266,10 @@
             width: 14.3em;
         }
     }
+    .custom-file-input:lang(en)~.custom-file-label::after 
+   {
+    content: "{{ __('messages.butt_browse') }}";
+   }
 </style>
 
 @if(Session::get('locale')=="en")
