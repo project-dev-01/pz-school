@@ -445,6 +445,7 @@ class AuthController extends Controller
             'password' => $request->password,
             'user_browser' => $request->user_browser,
             'user_os' => $request->user_os,
+            'role_id' => "2",
             'user_device' => $request->user_device
         ]);
         $userDetails = $response->json();
@@ -486,7 +487,8 @@ class AuthController extends Controller
                         $user_name = $this->sessionCommon($request, $userDetails, $roleID);
                     }
                     if ($roleID == 2) {
-                        $redirect_route = route('admin.dashboard');
+                        $redirect_route
+                         = route('admin.dashboard');
                         return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
                     } else {
                         return redirect()->route('admin.login')->with('error', 'Invalid Credential');
@@ -508,7 +510,8 @@ class AuthController extends Controller
             'branch_id' => $request->branch_id,
             'password' => $request->password,
             'user_browser' => $request->user_browser,
-            'user_os' => $request->user_os,
+            'user_os' => $request->user_os,            
+            'role_id' => "4",
             'user_device' => $request->user_device
         ]);
 
@@ -565,7 +568,8 @@ class AuthController extends Controller
             'branch_id' => $request->branch_id,
             'password' => $request->password,
             'user_browser' => $request->user_browser,
-            'user_os' => $request->user_os,
+            'user_os' => $request->user_os,            
+            'role_id' => "3",
             'user_device' => $request->user_device
         ]);
 
@@ -622,7 +626,8 @@ class AuthController extends Controller
             'branch_id' => $request->branch_id,
             'password' => $request->password,
             'user_browser' => $request->user_browser,
-            'user_os' => $request->user_os,
+            'user_os' => $request->user_os,            
+            'role_id' => "5",
             'user_device' => $request->user_device
         ]);
         $userDetails = $response->json();
@@ -679,6 +684,7 @@ class AuthController extends Controller
             'password' => $request->password,
             'user_browser' => $request->user_browser,
             'user_os' => $request->user_os,
+            'role_id' => "6",
             'user_device' => $request->user_device
         ]);
 
@@ -1188,28 +1194,49 @@ class AuthController extends Controller
     {
         try {
 
-            session()->pull('role_id');
-            session()->pull('token');
-            session()->pull('picture');
-            session()->pull('name');
-            session()->pull('email');
-            session()->pull('role_name');
-            session()->pull('user_id');
-            session()->pull('branch_id');
-            session()->pull('session_id');
-            session()->pull('ref_user_id');
-            session()->pull('student_id');
-            session()->pull('school_name');
-            session()->pull('school_logo');
-            session()->pull('all_child');
-            session()->pull('academic_session_id');
+            // session()->pull('role_id');
+            // session()->pull('token');
+            // session()->pull('picture');
+            // session()->pull('name');
+            // session()->pull('email');
+            // session()->pull('role_name');
+            // session()->pull('user_id');
+            // session()->pull('branch_id');
+            // session()->pull('session_id');
+            // session()->pull('ref_user_id');
+            // session()->pull('student_id');
+            // session()->pull('school_name');
+            // session()->pull('school_logo');
+            // session()->pull('all_child');
+            // session()->pull('academic_session_id');
+
+            session()->forget([
+                'role_id',
+                'token',
+                'picture',
+                'name',
+                'email',
+                'role_name',
+                'user_id',
+                'branch_id',
+                'session_id',
+                'ref_user_id',
+                'student_id',
+                'school_name',
+                'school_logo',
+                'all_child',
+                'academic_session_id'
+            ]);
             // session()->pull('password_changed_at');
             $defalutLang = session()->get('locale');
-            $req->session()->flush();
+            // $req->session()->flush();
             // $req->session()->put('locale', $defalutLang);
             $hour = time() + 3600 * 24 * 30;
             Cookie::queue(Cookie::make('locale', $defalutLang, $hour));
-            // Helper::GetMethod(config('constants.api.logout'));
+            if(session()->get('branch_id')!==null)
+            {
+                Helper::GetMethod(config('constants.api.logout'));
+            }
         } catch (\Exception $e) {
 
             // CSRF token mismatch occurred, handle the error
@@ -1244,12 +1271,15 @@ class AuthController extends Controller
         $req->session()->put('picture', $userDetails['data']['user']['picture']);
         $req->session()->put('token', $userDetails['data']['token']);
         $req->session()->put('name', $userDetails['data']['user']['name']);
+        $req->session()->put('first_name', isset($userDetails['data']['user']['firstname'])?$userDetails['data']['user']['firstname']:"");
+        $req->session()->put('last_name', isset($userDetails['data']['user']['lastname'])?$userDetails['data']['user']['lastname']:"");
         $req->session()->put('email', $userDetails['data']['user']['email']);
         $req->session()->put('role_name', $userDetails['data']['role_name']);
         $req->session()->put('session_id', $userDetails['data']['user']['session_id']);
         $req->session()->put('branch_id', $userDetails['data']['subsDetails']['id']);
         $req->session()->put('school_name', $userDetails['data']['subsDetails']['school_name']);
         $req->session()->put('school_logo', $userDetails['data']['subsDetails']['logo']);
+        $req->session()->put('name_sequence_flag', isset($userDetails['data']['subsDetails']['firstlastname'])?$userDetails['data']['subsDetails']['firstlastname']:"");
         // password_changed_at
         // $req->session()->put('password_changed_at', $userDetails['data']['subsDetails']['password_changed_at']);
         // space remove school name
@@ -1280,6 +1310,19 @@ class AuthController extends Controller
             $req->session()->put('student_id', null);
             $req->session()->put('all_child', null);
         }
+
+        if(isset($userDetails['data']['user']['firstname'])){
+            if(isset($userDetails['data']['subsDetails']['firstlastname'])){
+                if($userDetails['data']['subsDetails']['firstlastname'] == 1){
+                    $first_last_reverse = $userDetails['data']['user']['firstname']. ' ' . $userDetails['data']['user']['lastname'];
+                }else{
+                    $first_last_reverse = $userDetails['data']['user']['lastname']. ' ' . $userDetails['data']['user']['firstname'];
+                }
+            }
+        }else{
+            $first_last_reverse = "";
+        }
+        $req->session()->put('name_sequence', $first_last_reverse);
         $user_name = $userDetails['data']['user']['name'];
         return $user_name;
     }
@@ -1292,11 +1335,22 @@ class AuthController extends Controller
                 'userID' => $session_id,
                 'role_id' => $role_id
             ];
-            // dd($data);       
-            $response = Helper::PostMethod(config('constants.api.lastlogout'), $data);
+            if ($session_id !== null) {
+                $response = Helper::PostMethod(config('constants.api.lastlogout'), $data);
+                if($response!==null)
+                {
+                return $response;
+                }
+                else {
+                    return response()->json(['error' => 'Token expired or invalid 403.'], 403);
+                } 
+            } else {
+                return response()->json(['error' => 'Token expired or invalid 403.'], 403);
+            } 
+            
 
 
-            return $response;
+            
         } catch (\Exception $e) {
 
             // CSRF token mismatch occurred, handle the error
@@ -1311,8 +1365,12 @@ class AuthController extends Controller
             $data = [
                 'session_id' => $session_id,
             ];
-            $response = Helper::PostMethod(config('constants.api.all_logout'), $data);
-            return $response;
+            if ($session_id !== null) {
+                $response = Helper::PostMethod(config('constants.api.all_logout'), $data);
+                return $response;
+            } else {
+                return response()->json(['error' => 'Token expired or invalid 403.'], 403);
+            }
         } catch (\Exception $e) {
 
             // CSRF token mismatch occurred, handle the error

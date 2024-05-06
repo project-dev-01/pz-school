@@ -48,7 +48,7 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'paxsuzen-school'),
+            'database' => env('DB_DATABASE', 'pz-school'),
             'username' => env('DB_USERNAME', 'root'),
             'password' => env('DB_PASSWORD', ''),
             // 'database' => env('DB_DATABASE', 'paxsuzen_pz-school'),

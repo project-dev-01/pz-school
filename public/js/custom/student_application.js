@@ -64,7 +64,7 @@ $(function () {
     }
     $(document).on('change', '#confirm_admission', function () {
         if ($(this).prop('checked') == true) {
-            window.open(commonpath+"JSKL ADMISSION PROCEDURE 2024.pdf", '_blank');
+            window.open("https://jskl.edu.my/wp-content/uploads/2024/04/JSKL%E5%85%A5%E5%9C%92%E3%83%BB%E5%85%A5%E5%AD%A6%E6%89%8B%E7%B6%9A%E3%81%8D2024.pdf?_sm_nck=1", '_blank');
             // $(this).prop('disabled', true);
         }else{
              $('#submit').prop('disabled', true);
@@ -92,7 +92,7 @@ $(function () {
     $(document).on('change', '#agree_school_policy', function () {
         
         if ($(this).prop('checked') == true) {
-            window.open("https://jskl.edu.my/wp-contentcontent/uploads/2023/02/JSKL-Privacy-Policy.pdf", '_blank');
+            window.open("https://jskl.edu.my/wp-content/uploads/2023/02/JSKL-Privacy-Policy.pdf", '_blank');
             // $(this).prop('disabled', true);
         }else{
              $('#submit').prop('disabled', true);

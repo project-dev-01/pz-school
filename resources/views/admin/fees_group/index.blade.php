@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/pagehead_breadcrumb.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -21,14 +23,32 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <!-- <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">List</li>
-                    </ol>
-                </div> -->
-                <h4 class="page-title">{{ __('messages.fees_group') }}</h4>
-            </div>
+        <div class="page-title-box" style="display: inline-flex; align-items: center;margin-bottom:5px;margin-top:5px">
+                <div class="page-title-icon">
+                <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_354_1194)">
+                                <rect x="12.8" y="10.4097" width="6.4" height="4.8" rx="1" fill="#3A4265" />
+                                <rect x="12.8" y="16.8096" width="11.2" height="3.2" rx="1" fill="#3A4265" />
+                                <rect x="12.8" y="21.6094" width="8" height="3.2" rx="1" fill="#3A4265" />
+                                <rect y="0.80957" width="11.2" height="24" rx="1" fill="#3A4265" />
+                                <rect x="12.8" y="0.80957" width="11.2" height="3.2" rx="1" fill="#3A4265" />
+                                <rect x="12.8" y="5.60938" width="11.2" height="3.2" rx="1" fill="#3A4265" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_354_1194">
+                                    <rect width="24" height="24" fill="white" transform="translate(0 0.80957)" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                </div>
+                <!--<h4 class="page-title" style="margin-left: 10px;">{{ __('messages.student_profile') }}</h4>-->
+                <ol class="breadcrumb m-0 responsivebc">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.fees') }}</a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.fees_group') }} </a></li>
+                </ol>
+
+            </div>    
+         
         </div>
     </div>
     <!-- end page title -->
@@ -36,18 +56,27 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="nav-link">{{ __('messages.fees_group') }}<h4>
-                    </li>
-                </ul><br>
+            <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                                <!-- Button placed on the left side -->
+                                <h4 class="navv">
+                                {{ __('messages.fees_group') }}
+                                </h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>
+          
+                <div class="card-body collapse show">
                 <div class="form-group pull-right">
-                    <div class="col-xs-2 col-sm-2">
+                    <div class="">
                         <a href="{{ route('admin.fees_group.create')}}" class="btn add-btn btn-rounded waves-effect waves-light">{{ __('messages.add') }}</a>
                         <!-- <button type="button" class="btn add-btn btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#addFeesGroupModal">Add</button> -->
                     </div>
                 </div>
-                <div class="card-body">
                     <div class="table-responsive">
                         <table class="table dt-responsive nowrap w-100" id="fees-group-table">
                             <thead>
@@ -105,5 +134,6 @@
 var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
 </script>
 <script src="{{ asset('js/custom/permissions.js') }}"></script>
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endif
 @endsection

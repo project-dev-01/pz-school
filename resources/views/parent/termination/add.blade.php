@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title',' ' . __('messages.add_termination') . '')
+@section('title',' ' . __('messages.withdrawal_application') . '')
 @section('component_css')
 <link href="{{ asset('libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
@@ -266,6 +266,10 @@
             width: 13.3em;
         }
     }
+    .breadcrumb-item+.breadcrumb-item::before {
+    font-family: "Material Design Icons";
+    color: #3A4265;
+}
 </style>
 @if(Session::get('locale')=="en")
 <style>
@@ -293,35 +297,50 @@
 <div class="container-fluid">
     <!-- start page title -->
     <div class="row">
-        <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <!-- <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                        <li class="breadcrumb-item active">Wizard</li>
-                    </ol>-->
-                </div>
-                <h4 class="page-title">{{ __('messages.add_termination') }}</h4>
+    <div class="col-12">
+        <div class="page-title-box" style="display: inline-flex; align-items: center;">
+            <div class="page-title-icon">
+                <svg width="20" height="20" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M40 16.3977V6C40 4.89543 39.1046 4 38 4H10C8.89543 4 8 4.89543 8 6V42C8 43.1046 8.89543 44 10 44H20" stroke="#3A4265" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M16 14H29" stroke="#3A4265" stroke-width="4" stroke-linecap="round"></path>
+                    <path d="M16 21H21" stroke="#3A4265" stroke-width="4" stroke-linecap="round"></path>
+                    <path d="M34 44C28.4772 44 24 39.5228 24 34C24 28.4772 28.4772 24 34 24C39.5228 24 44 28.4772 44 34C44 39.5228 39.5228 44 34 44Z" stroke="#3A4265" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M27 27L41 41" stroke="white" stroke-width="4" stroke-linecap="round"></path>
+                    <path d="M24 34C24 28.4772 28.4772 24 34 24" stroke="#3A4265" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M34 44C39.5228 44 44 39.5228 44 34" stroke="#3A4265" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
             </div>
+            <!--<h4 class="page-title" style="margin-left: 10px;">{{ __('messages.add_withdrawal') }}</h4>-->
+            <ol class="breadcrumb m-0 responsivebc">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.withdrawal') }}</a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.withdrawal_application') }}</a></li>
+                </ol>
         </div>
     </div>
+</div>
+
     <!-- end page title -->
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <div class="card-body">
+            <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                    <h4 class="navv">
+                                    {{ __('messages.withdrawal_details') }}
+                                    <h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>  
+                <div class="">
 
                     <form id="terminationForm" method="post" action="{{ route('parent.termination.add') }}" enctype="multipart/form-data" autocomplete="off">
                         @csrf
-                        <ul class="nav nav-tabs">
-                            <li class="nav-item">
-                                <h4 class="navv">
-                                    {{ __('messages.termination_details') }}
-                                    <h4>
-                            </li>
-                        </ul><br>
-                        <div class="card-body">
+                       
+                        <div class="card-body collapse show">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -367,31 +386,31 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="reason_for_transfer">{{ __('messages.reason_for_transfer') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="reason_for_transfer" value=""  name="reason_for_transfer" placeholder="{{ __('messages.enter_reason_for_transfer') }}" aria-describedby="inputGroupPrepend">
+                                        <label for="reason_for_transfer">{{ __('messages.termination_reason_for_transfer') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="reason_for_transfer" value=""  name="reason_for_transfer" placeholder="{{ __('messages.termination_enter_reason_for_transfer') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="transfer_destination_school_name">{{ __('messages.transfer_destination_school_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="transfer_destination_school_name" value=""  name="transfer_destination_school_name" placeholder="{{ __('messages.enter_transfer_destination_school_name') }}" aria-describedby="inputGroupPrepend">
+                                        <label for="transfer_destination_school_name">{{ __('messages.termination_transfer_destination_school_name') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="transfer_destination_school_name" value=""  name="transfer_destination_school_name" placeholder="{{ __('messages.termination_enter_transfer_destination_school_name') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="transfer_destination_tel">{{ __('messages.transfer_destination_tel') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control number_validation" id="transfer_destination_tel" value=""  name="transfer_destination_tel" placeholder="{{ __('messages.enter_transfer_destination_tel') }}" aria-describedby="inputGroupPrepend">
+                                        <label for="transfer_destination_tel">{{ __('messages.termination_transfer_destination_tel') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control number_validation" id="transfer_destination_tel" value=""  name="transfer_destination_tel" placeholder="{{ __('messages.termination_enter_transfer_destination_tel') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="parent_phone_number_after_transfer number_validation">{{ __('messages.parent_guardian_phone_number_after_transfer') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="parent_phone_number_after_transfer" value=""  name="parent_phone_number_after_transfer" placeholder="{{ __('messages.enter_parent_guardian_phone_number_after_transfer') }} " aria-describedby="inputGroupPrepend">
+                                        <label for="parent_phone_number_after_transfer number_validation">{{ __('messages.termination_parent_guardian_phone_number_after_transfer') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="parent_phone_number_after_transfer" value=""  name="parent_phone_number_after_transfer" placeholder="{{ __('messages.termination_enter_parent_guardian_phone_number_after_transfer') }} " aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="parent_email_address_after_transfer">{{ __('messages.parent_email_address_after_transfer') }}<span class="text-danger">*</span></label>
+                                    <label for="parent_email_address_after_transfer">{{ __('messages.termination_parent_email_address_after_transfer') }}<span class="text-danger">*</span></label>
                                     
                                         <input type="text" name="parent_email_address_after_transfer" class="form-control" id="parent_email_address_after_transfer" placeholder="xxxxx@gmail.com" aria-describedby="inputGroupPrepend">
                                     
@@ -406,8 +425,8 @@
                                 </div> -->
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="parent_address_after_transfer">{{ __('messages.parent_address_after_transfer') }}<span class="text-danger">*</span></label>
-                                        <textarea type="text" class="form-control" id="parent_address_after_transfer" value=""  name="parent_address_after_transfer" placeholder="{{ __('messages.enter_parent_address_after_transfer') }} " aria-describedby="inputGroupPrepend"></textarea>
+                                        <label for="parent_address_after_transfer">{{ __('messages.termination_parent_address_after_transfer') }}<span class="text-danger">*</span></label>
+                                        <textarea type="text" class="form-control" id="parent_address_after_transfer" value=""  name="parent_address_after_transfer" placeholder="{{ __('messages.termination_enter_parent_address_after_transfer') }} " aria-describedby="inputGroupPrepend"></textarea>
                                     </div>
                                 </div>
                             </div><br>
@@ -477,7 +496,7 @@
                                 <button class="btn btn-primary-bl waves-effect waves-light" id="submit" type="submit">
                                     {{ __('messages.add') }}
                                 </button>
-                                <a href="{{ route('admin.application.index') }}" class="btn btn-primary-bl waves-effect waves-light">
+                                <a href="{{ route('parent.termination.index') }}" class="btn btn-primary-bl waves-effect waves-light">
                                     {{ __('messages.back') }}
                                 </a>
                             </div>
@@ -554,4 +573,5 @@
 </script>
 
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endsection

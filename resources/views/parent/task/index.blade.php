@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','To Do List')
+@section('title',' ' . __('messages.to_do_list') . '')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">

@@ -57,6 +57,8 @@ class TeacherController extends Controller
         $staff_id = [
             'staff_id' => session()->get('ref_user_id')
         ];
+        $bulletinBorad_data = Helper::PostMethod(config('constants.api.bulletinBoard_teacher_Dashboard'), $staff_id);
+       
         $shortcut_data = Helper::PostMethod(config('constants.api.shortcutLink_list'), $staff_id);
         $get_data_hide_unhide_dashboard = Helper::PostMethod(config('constants.api.get_data_hide_unhide_dashboard'), $staff_id);
         // dd($get_data_hide_unhide_dashboard);
@@ -80,6 +82,7 @@ class TeacherController extends Controller
                 'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : "",
                 'hiddenWeekends' => isset($hiddenWeekends) ? $hiddenWeekends : "",
                 'shortcut_links' => isset($shortcut_data['data']) ? $shortcut_data['data'] : [],
+                'bulletinBorad_data' => isset($bulletinBorad_data['data']) ? $bulletinBorad_data['data'] : [],
             ]
         );
     }
@@ -378,13 +381,19 @@ class TeacherController extends Controller
     }
     public function studentIndex()
     {
+        // $data = [
+        //     'teacher_id' => session()->get('ref_user_id')
+        // ];
+        // $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         $data = [
-            'teacher_id' => session()->get('ref_user_id')
+            'teacher_id' => session()->get('ref_user_id'),
+            'academic_session_id' => session()->get('academic_session_id')
         ];
-        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $getclass = Helper::PostMethod(config('constants.api.class_teacher_classes'), $data);
         $semester = Helper::GetMethod(config('constants.api.semester'));
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        // dd($getclass);
         return view(
             'teacher.student.student',
             [
@@ -683,6 +692,7 @@ class TeacherController extends Controller
     public function classroomManagement()
     {
         $data = [
+            'branch_id'=> config('constants.branch_id'),
             'teacher_id' => session()->get('ref_user_id')
         ];
         $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
@@ -1585,9 +1595,10 @@ class TeacherController extends Controller
     {
         $data = [
             'class_id' => $request->class_id,
-            'teacher_id' => session()->get('ref_user_id')
+            'teacher_id' => session()->get('ref_user_id'),
+            "academic_session_id" => session()->get('academic_session_id')
         ];
-        $section = Helper::PostMethod(config('constants.api.teacher_section'), $data);
+        $section = Helper::PostMethod(config('constants.api.class_teacher_sections'), $data);
         return $section;
     }
     public function subjectmarks(Request $request)
@@ -1744,11 +1755,10 @@ class TeacherController extends Controller
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
             "student_name" => $request->student_name,
-            "session_id" => $request->session_id,
             "academic_session_id" => session()->get('academic_session_id')
 
         ];
-        $response = Helper::PostMethod(config('constants.api.student_list'), $data);
+        $response = Helper::PostMethod(config('constants.api.teacher_student_list'), $data);
         $data = isset($response['data']) ? $response['data'] : [];
         return DataTables::of($data)
 
@@ -1768,44 +1778,51 @@ class TeacherController extends Controller
     public function getStudentDetails($id)
     {
 
-        $data = [
+        if($id!==null || $id!==0)
+        {
+            $data = [
             'id' => $id,
-        ];
+            ];
 
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));
-        $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
-        $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));
-        $session = Helper::GetMethod(config('constants.api.session'));
-        $semester = Helper::GetMethod(config('constants.api.semester'));
-        $student = Helper::PostMethod(config('constants.api.student_details'), $data);
-        $parent = Helper::GetMethod(config('constants.api.parent_list'));
-        $religion = Helper::GetMethod(config('constants.api.religion'));
-        $races = Helper::GetMethod(config('constants.api.races'));
-        $relation = Helper::GetMethod(config('constants.api.relation_list'));
+            $getclass = Helper::GetMethod(config('constants.api.class_list'));
+            $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
+            $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));
+            $session = Helper::GetMethod(config('constants.api.session'));
+            $semester = Helper::GetMethod(config('constants.api.semester'));
+            $student = Helper::PostMethod(config('constants.api.student_details'), $data);
+            $parent = Helper::GetMethod(config('constants.api.parent_list'));
+            $religion = Helper::GetMethod(config('constants.api.religion'));
+            $races = Helper::GetMethod(config('constants.api.races'));
+            $relation = Helper::GetMethod(config('constants.api.relation_list'));
 
-        $prev = json_decode($student['data']['student']['previous_details']);
-        $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
-        $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
-        $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
-        return view(
-            'teacher.student.view',
-            [
-                'class' => isset($getclass['data']) ? $getclass['data'] : [],
-                'parent' => isset($parent['data']) ? $parent['data'] : [],
-                'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
-                'hostel' => isset($gethostel['data']) ? $gethostel['data'] : [],
-                'session' => isset($session['data']) ? $session['data'] : [],
-                'semester' => isset($semester['data']) ? $semester['data'] : [],
-                'student' => isset($student['data']['student']) ? $student['data']['student'] : [],
-                'section' => isset($student['data']['section']) ? $student['data']['section'] : [],
-                'vehicle' => isset($student['data']['vehicle']) ? $student['data']['vehicle'] : [],
-                'room' => isset($student['data']['room']) ? $student['data']['room'] : [],
-                'religion' => isset($religion['data']) ? $religion['data'] : [],
-                'races' => isset($races['data']) ? $races['data'] : [],
-                'relation' => isset($relation['data']) ? $relation['data'] : [],
+            $prev = json_decode($student['data']['student']['previous_details']);
+            $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
+            $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
+            $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
+            return view(
+                'teacher.student.view',
+                [
+                    'class' => isset($getclass['data']) ? $getclass['data'] : [],
+                    'parent' => isset($parent['data']) ? $parent['data'] : [],
+                    'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
+                    'hostel' => isset($gethostel['data']) ? $gethostel['data'] : [],
+                    'session' => isset($session['data']) ? $session['data'] : [],
+                    'semester' => isset($semester['data']) ? $semester['data'] : [],
+                    'student' => isset($student['data']['student']) ? $student['data']['student'] : [],
+                    'section' => isset($student['data']['section']) ? $student['data']['section'] : [],
+                    'vehicle' => isset($student['data']['vehicle']) ? $student['data']['vehicle'] : [],
+                    'room' => isset($student['data']['room']) ? $student['data']['room'] : [],
+                    'religion' => isset($religion['data']) ? $religion['data'] : [],
+                    'races' => isset($races['data']) ? $races['data'] : [],
+                    'relation' => isset($relation['data']) ? $relation['data'] : [],
 
-            ]
-        );
+                ]
+            );
+        }
+        else
+        {
+            return redirect()->route('teacher.student')->with('errors', "Invalid Student");
+        }
     }
 
     // index Timetable
@@ -1984,13 +2001,19 @@ class TeacherController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
-                $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                $image_url = !empty($row['file']) ? config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] : '';
+                $description = htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8'); // Encoding with quotes
+                $encoded_data = json_encode([
+                    'image_url' => $image_url,
+                    'title' => $row['title'],
+                    'description' => $description,
+                ]);
                 return '<div class="button-list">
-                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(\'' . $image_url . '\', \'' . $row['title'] . '\', \'' . $row['discription'] . '\')"><i class="fe-eye"></i></a>
-                <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
-                <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
-            </a>
-                        </div>';
+                    <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>
+                    <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
+                    <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
+                </a>
+                </div>';
             })
             ->rawColumns(['publish', 'actions'])
             ->make(true);
@@ -2020,13 +2043,19 @@ class TeacherController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
-                $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                $image_url = !empty($row['file']) ? config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] : '';
+                $description = htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8'); // Encoding with quotes
+                $encoded_data = json_encode([
+                    'image_url' => $image_url,
+                    'title' => $row['title'],
+                    'description' => $description,
+                ]);
                 return '<div class="button-list">
-                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(\'' . $image_url . '\', \'' . $row['title'] . '\', \'' . $row['discription'] . '\')"><i class="fe-eye"></i></a>
-                <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
-                <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
-            </a>
-                        </div>';
+                    <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>
+                    <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
+                    <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
+                </a>
+                </div>';
             })
             ->rawColumns(['publish', 'actions'])
             ->make(true);
@@ -2351,5 +2380,9 @@ class TeacherController extends Controller
         ];
         $response = Helper::PostMethod(config('constants.api.student_interview_update'), $data);
         return $response;
+    }
+    public function page403(Request $request)
+    {
+        return view('teacher.dashboard.403');
     }
 }

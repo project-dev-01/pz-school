@@ -12,6 +12,8 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
+<link href="{{ asset('css/custom/pagehead_breadcrumb.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .accordion-head i {
         font-size: 23px;
@@ -25,13 +27,13 @@
     }
 
     a {
-        color: black;
+        color: #3A4265;
         text-decoration: none;
         background-color: transparent;
     }
 
     a:hover {
-        color: black;
+        color: #3A4265;
         text-decoration: none;
     }
     div.dt-buttons {
@@ -55,16 +57,20 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <!--<ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                        <li class="breadcrumb-item active">Wizard</li>
-                    </ol>-->
+        <div class="page-title-box" style="display: inline-flex; align-items: center;margin-bottom:5px;margin-top:5px">
+                <div class="page-title-icon">
+                <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 1.6668H3.93801V3.1181H5.0536V1.6668H5.28419H20.0992C20.9784 1.64405 21.8384 1.90614 22.5299 2.40755C23.2215 2.90896 23.7008 3.61801 23.8847 4.41156C23.9536 4.69416 23.9873 4.98309 23.9851 5.27273C23.9851 12.2033 23.9851 15.1361 23.9851 22.0712C24.0144 22.7616 23.8171 23.4441 23.419 24.0293C23.0209 24.6146 22.4406 25.0753 21.7539 25.3511C21.2377 25.5735 20.6724 25.6816 20.1029 25.6668H5.07593V24.2086H3.96034V25.6531H0.0111668L0 1.6668ZM3.96034 5.18696V6.96762H5.07593V5.18696H3.96034ZM5.07593 10.8V9.02962H3.96034V10.8H5.07593ZM3.98268 12.8586V14.6324H5.09826V12.8586H3.98268ZM5.09826 16.6944H3.98268V18.4785H5.09826V16.6944ZM5.09826 20.537H3.98268V22.3108H5.09826V20.537Z" fill="#3A4265" />
+                        </svg>
                 </div>
-                <h4 class="page-title">{{ __('messages.evaluation_report') }}</h4>
-            </div>
+                <!--<h4 class="page-title" style="margin-left: 10px;">{{ __('messages.student_profile') }}</h4>-->
+                <ol class="breadcrumb m-0 responsivebc">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.homework') }}</a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.evaluation_report') }}</a></li>
+                </ol>
+
+            </div> 
+         
         </div>
     </div>
     <!-- end page title -->
@@ -72,14 +78,21 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                            {{ __('messages.select_ground') }}
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
+            <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                                <!-- Button placed on the left side -->
+                                <h4 class="navv">
+                                {{ __('messages.select_ground') }}
+                                </h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>
+             
+                <div class="card-body collapse show">
                     <form id="evaluationFilterForm" autocomplete="off">
                         <div class="row">
                             <div class="col-md-3">
@@ -212,13 +225,21 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">{{ __('messages.homework_list') }}
-                            <h4>
-                    </li>
-                </ul><br>
-                <div class="card-body">
+            <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                                <!-- Button placed on the left side -->
+                                <h4 class="navv">
+                                {{ __('messages.homework_list') }}
+                                </h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton2" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>
+               
+                <div class="card-body collapse show">
                     <div class="table-responsive">
                         <table class="table dt-responsive nowrap w-100" id="homework-table">
                             <thead>
@@ -292,4 +313,5 @@
 </script>
 <script src="{{ asset('js/custom/homework.js') }}"></script>
 <script src="{{ asset('js/custom/evaluatuion_report.js') }}"></script>
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endsection

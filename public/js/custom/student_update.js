@@ -15,6 +15,26 @@ $(function () {
         autoclose: true,
         yearRange: "-3:+6", // last hundred years
     });
+
+    if ($('#skip_prev_school_details').is(":checked")) {
+            
+        $(".prev_school_form").val("");
+        $("#prev_school_details").hide("slow");
+    } else {
+        $("#prev_school_details").show("slow");
+    }
+
+    // skip_prev_school_details
+    $("#skip_prev_school_details").on("change", function () {
+        
+        if ($(this).is(":checked")) {
+            
+            $(".prev_school_form").val("");
+            $("#prev_school_details").hide("slow");
+        } else {
+            $("#prev_school_details").show("slow");
+        }
+    });
     
     $('#passport_photo').change(function() {
         // var i = $(this).prev('label').clone();
@@ -118,7 +138,8 @@ $(function () {
                 bom: true,
                 exportOptions: {
                     columns: 'th:not(:last-child)'
-                }
+                },
+                enabled: false // Initially disable CSV button
             },
             {
                 extend: 'pdf',
@@ -129,7 +150,7 @@ $(function () {
                 exportOptions: {
                     columns: 'th:not(:last-child)'
                 },
-
+                enabled: false, // Initially disable PDF button
             
                 customize: function (doc) {
                 doc.pageMargins = [50,50,50,50];
@@ -177,6 +198,28 @@ $(function () {
             }
         }
         ],
+        initComplete: function () {
+            var table = this;
+            $.ajax({
+                url: studentUpdateList,
+                success: function(data) {
+                    console.log(data.data.length);
+                    if (data && data.data.length > 0) {
+                        console.log('ok');
+                        $('#student-update-table_wrapper .buttons-csv').removeClass('disabled');
+                        $('#student-update-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                    } else {
+                        console.log(data);
+                        $('#student-update-table_wrapper .buttons-csv').addClass('disabled');
+                        $('#student-update-table_wrapper .buttons-pdf').addClass('disabled');               
+                    }
+                },
+                error: function() {
+                    console.log('error');
+                    // Handle error if necessary
+                }
+            });
+        },
         ajax: studentUpdateList,
         "pageLength": 10,
         "aLengthMenu": [
@@ -433,7 +476,7 @@ $(function () {
             drp_state: "required",
             drp_country: "required",
             drp_post_code: "required",
-            txt_religion: "required",
+            // txt_religion: "required",
             nationality: "required",
             txt_passport: "required",
             passport_expiry_date: "required",
@@ -513,6 +556,7 @@ $(function () {
                 success: function (data) {
                     if (data.code == 200) {
                         toastr.success(data.message);
+                        window.location.href = updateInfoList;
                     } else {
                         toastr.error(data.message);
                     }
@@ -537,7 +581,7 @@ $(function () {
                 success: function (data) {
                     if (data.code == 200) {
                         toastr.success(data.message);
-                        window.location.href = indexStudent;
+                        window.location.href = studentUpdateMenu;
                     } else {
                         toastr.error(data.message);
                     }

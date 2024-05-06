@@ -47,7 +47,7 @@
                         <label for="editsubjectType">{{ __('messages.type') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="editsubjectType" name="type">
                             <option value="0">{{ __('messages.main') }}</option>
-                            <option value="2">Sub</option>
+                            <option value="2">{{ __('messages.sub') }}</option>
                             <option value="3">{{ __('messages.alternative') }}</option>
                         </select>
                     </div>

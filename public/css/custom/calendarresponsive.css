@@ -107,7 +107,6 @@
     }
     .btn-group, .btn-group-vertical {
         position: relative;
-        display: inherit;
         vertical-align: middle;
     }
     
@@ -116,6 +115,16 @@
 @media screen and (min-width: 768px) and (max-width: 1024px) {
     .popupresponsive {
         margin: 0px -65px 0px -65px;
+    }
+
+}
+
+@media (max-width: 280px) 
+{
+    .btn-group, .btn-group-vertical {
+        position: relative;
+        vertical-align: middle;
+        display: initial;
     }
 
 }

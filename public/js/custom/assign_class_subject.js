@@ -435,7 +435,9 @@ $(function () {
                     bom: true,
                     exportOptions: {
                         columns: 'th:not(:last-child)'
-                    }
+                    },
+                    enabled: false, // Initially disable CSV button
+
                 },
                 {
                     extend: 'pdf',
@@ -446,7 +448,7 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     },
-
+                    enabled: false, // Initially disable PDF button
 
                     customize: function (doc) {
                         doc.pageMargins = [50, 50, 50, 50];
@@ -493,7 +495,7 @@ $(function () {
 
                     }
                 }
-            ],
+            ],           
             "ajax": {
                 url: classAssignSubList,
                 cache: false,
@@ -508,6 +510,16 @@ $(function () {
                 // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 // },
                 "dataSrc": function (json) {
+                    console.log(data.data.length);
+                    if (json && json.data.length > 0) {
+                        console.log('ok');
+                        $('#class-assign-subjects-table_wrapper .buttons-csv').removeClass('disabled');
+                        $('#class-assign-subjects-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                    } else {
+                        console.log(json);
+                        $('#class-assign-subjects-table_wrapper .buttons-csv').addClass('disabled');
+                        $('#class-assign-subjects-table_wrapper .buttons-pdf').addClass('disabled');               
+                    }
                     return json.data;
                 },
                 error: function (error) {

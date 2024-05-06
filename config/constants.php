@@ -1,12 +1,24 @@
 <?php
-$url = "http://localhost/paxsuze-api/public/api";
+$url = "http://localhost/paxsuzen-api-dev/public/api";
 // $url = "https://api.suzen.school/api";testdfgfdgf
+$schoolurl = "http://localhost/school-management-system/public"; // end line don't use "/"
 return [
-    'branch_id'=>'4',
+    'branch_id'=>'6',
     'school_name'=>'クアラルンプール日本人学校',
     'school_image'=>'logo_jskl.jpeg',
-    'image_url' => "http://localhost/paxsuze-api/public",
+    'image_url' => "http://localhost/paxsuzen-api-dev/public",
+    'cron_secret_key'=> 'S6rSMVixPeupH51AO5mVFjkQJ88bnjOO',
+    'domainname'=> $schoolurl,
     'api' => [
+        // school login url        
+        'homepage'=> $schoolurl.'/home',
+        'superadmin_login' => $schoolurl.'/syscont/login',
+        'admin_login' => $schoolurl.'/admin/login',
+        'staff_login' => $schoolurl.'/staff/login',
+        'teacher_login' => $schoolurl.'/teacher/login',
+        'parent_login' => $schoolurl.'/parent/login',
+        'student_login' => $schoolurl.'/student/login',
+        'guest_login' => $schoolurl.'/guest/login',
         // login url
         'login' => $url.'/login',
         'login_guest' => $url.'/login_guest',
@@ -409,6 +421,7 @@ return [
         'get_to_do_teacher' => $url.'/get_to_do_teacher',
 
         // Student Url
+        'teacher_student_list' => $url.'/teacher/student/list',
         'student_list' => $url.'/student/list',
         'student_details' => $url.'/student/student-details',
         'student_update' => $url.'/student/update',
@@ -425,7 +438,7 @@ return [
         'parent_student_update' => $url.'/parent/student/update',
         'parent_update_view' => $url.'/parent/update/view',
         'parent_student_update_info_list' => $url.'/parent/student/update_info/list',
-        
+        'getParentDetailsAccStudentId'  => $url.'/parent/getParentDetailsAccStudentId',        
         'student_update_info_list' => $url.'/student/update_info/list',
         'student_update_info_view' => $url.'/student/update_info/view',
         'parent_name' => $url.'/parent/name',
@@ -894,7 +907,7 @@ return [
         'buletin_board_update' => $url.'/buletin_board/update',
         'get_student_details_buletin_board' => $url.'/get_student_details_buletin_board',
         'get_parent_details_buletin_board'  => $url.'/get_parent_details_buletin_board',
-
+        'bulletin_board_cronJob' => $url.'/bulletin_board/cronJob',
 
         'get_bulletin_parent' => $url.'/buletin_board/list/parent',
         'get_bulletin_imp_parent' => $url.'/buletin_board/imp_list/parent',
@@ -931,7 +944,8 @@ return [
         'setpermission' => $url.'/menus/setpermission',        
         'menu_details' => $url.'/menus/menu_details',
         'menu_update' => $url.'/menus/update',        
-        'menuaccess_permission' => $url.'/menus/getpermission',  
+        'menuaccess_permission' => $url.'/menus/getpermission', 
+        'get_login_menuroute' => $url.'/menus/get_login_menuroute', 
 
         // event type url
         'school_role_add' => $url.'/school_role/add',
@@ -948,6 +962,7 @@ return [
         'setschoolpermission' => $url.'/menus/setschoolpermission',
         'getschoolroleaccess' => $url.'/menus/getschoolroleaccess', 
         'deleteschoolpermission' => $url.'/menus/deleteschoolpermission', 
+        'getschoolroleaccessroute' => $url.'/menus/getschoolroleaccessroute',
         
         
         
@@ -1040,6 +1055,7 @@ return [
         'shortcutLink_update' => $url.'/shortcutLink/update',
         'shortcutLink_delete' => $url.'/shortcutLink/delete',
         'bulletinBoard_Dashboard' =>  $url.'/bulletinBoard_Dashboard',
+        'bulletinBoard_teacher_Dashboard'=>  $url.'/bulletinBoard_teacher_Dashboard',
         'settings_attendance_report' => $url.'/settings_attendance_report',
         'get_settings_attendance_report' => $url.'/get_settings_attendance_report',
         'getlogmodifyusers' => $url.'/getlogmodifyusers',

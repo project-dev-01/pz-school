@@ -1,0 +1,11 @@
+
+    /*colapse responsive*/
+    @media screen and (min-width: 375px) and (max-width: 667px) {
+
+        .ml-2,
+        .mx-2 {
+            margin-left: 2px !important;
+            width: 100%;
+        }
+    }
+    

@@ -1,5 +1,37 @@
 $(function () {
 
+    $("#trail_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
+
+    $("#official_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
+
+    
+
+    $('#enrollment').on('change', function(){
+        
+        if($(this).val() == 'Trail Enrollment'){
+            $('#trail_date_show').show();
+            $('#official_date_show').hide();
+        } else if($(this).val() == 'Official Enrollment'){
+            $('#trail_date_show').hide();
+            $('#official_date_show').show();
+        } else {
+            $('#trail_date_show').hide();
+            $('#official_date_show').hide();
+        }
+    }); 
+    // $('#dual_nationality_container').hide();
     var formData = {
         student_name: null,
         department_id: null,
@@ -7,7 +39,7 @@ $(function () {
         section_id: null,
         session_id: null,
         status: "0",
-        academic_year:academic_session_id
+        academic_year: academic_session_id
     };
     if (studentList !== undefined && studentList !== null) {
         getStudentList(formData);
@@ -121,10 +153,10 @@ $(function () {
             $('#visa_photo_name').text(file.name);
         }
     });
-    $('#nric_photo').change(function() {
+    $('#nric_photo').change(function () {
         // var i = $(this).prev('label').clone();
         var file = $('#nric_photo')[0].files[0];
-        if(file.size > 2097152) {
+        if (file.size > 2097152) {
             $('#nric_photo_name').text("File greater than 2Mb");
             $("#nric_photo_name").addClass("error");
             $('#nric_photo').val('');
@@ -133,22 +165,10 @@ $(function () {
             $('#nric_photo_name').text(file.name);
         }
     });
-    $('#japanese_association_membership_image_principal').change(function() {
-        // var i = $(this).prev('label').clone();
-        var file = $('#japanese_association_membership_image_principal')[0].files[0];
-        if(file.size > 2097152) {
-            $('#japanese_association_membership_image_principal_name').text("File greater than 2Mb");
-            $("#japanese_association_membership_image_principal_name").addClass("error");
-            $('#japanese_association_membership_image_principal').val('');
-        } else {
-            $("#japanese_association_membership_image_principal_name").removeClass("error");
-            $('#japanese_association_membership_image_principal_name').text(file.name);
-        }
-    });
     $("#visa_type_others_show").hide();
 
     // Listen for changes in the visa_type dropdown
-    $("#visa_type").change(function() {
+    $("#visa_type").change(function () {
         // If the selected value is "Others", show the additional input field, otherwise hide it
         if ($(this).val() === "Others") {
             $("#visa_type_others_show").show();
@@ -193,7 +213,7 @@ $(function () {
         } else {
             var id = $(this).val();
             guardian(id);
-            
+
             copyparent();
         }
     });
@@ -266,10 +286,10 @@ $(function () {
                 $(".guardian_state").html(data.state);
                 $(".guardian_city").html(data.city);
                 $(".guardian_address").html(data.address);
-                $(".guardian_company_name_japan").val(data.company_name_japan);
-                $(".guardian_company_name_local").val(data.company_name_local);
-                $(".guardian_company_phone_number").val(data.company_phone_number);
-                $(".guardian_employment_status").val(data.employment_status);
+                $(".guardian_company_name_japan").html(data.company_name_japan);
+                $(".guardian_company_name_local").html(data.company_name_local);
+                $(".guardian_company_phone_number").html(data.company_phone_number);
+                $(".guardian_employment_status").html(data.employment_status);
             }
         }, 'json');
     }
@@ -375,7 +395,7 @@ $(function () {
                 $(".father_state").html(data.state);
                 $(".father_city").html(data.city);
                 $(".father_address").html(data.address);
-                $(".father_nationality").val(data.nationality);
+                $(".father_nationality").html(data.nationality);
             }
         }, 'json');
     }
@@ -413,7 +433,7 @@ $(function () {
 
     function mother(id) {
         $('#mother_id').val(id);
-       // $("#mother_form").show("slow");
+        // $("#mother_form").show("slow");
         $("#mother_photo").show();
         $("#mother_info").show();
         $.post(parentDetails, { token: token, branch_id: branchID, id: id }, function (res) {
@@ -481,7 +501,7 @@ $(function () {
                 $(".mother_state").html(data.state);
                 $(".mother_city").html(data.city);
                 $(".mother_address").html(data.address);
-                $(".mother_nationality").val(data.nationality);
+                $(".mother_nationality").html(data.nationality);
             }
         }, 'json');
     }
@@ -736,8 +756,8 @@ $(function () {
         "Zambia": "zm",
         "Zimbabwe": "zw"
     };
-    
-    
+
+
     // Function to retrieve country code based on nationality name
     function getCountryCodeByNationality(nationalityName) {
         return countryCodes[nationalityName];
@@ -839,15 +859,13 @@ $(function () {
         // $('#academicYear').val(formData.academic_year);
         var table = $('#student-table').DataTable({
             processing: true,
-            serverSide: true,
             info: true,
             bDestroy: true,
-            dom: 'Blfrtip',
             dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             "language": {
-                
+
                 "emptyTable": no_data_available,
                 "infoFiltered": filter_from_total_entries,
                 "zeroRecords": no_matching_records_found,
@@ -861,7 +879,6 @@ $(function () {
                 },
             },
             // exportOptions: { rows: ':visible' },
-            serverSide: true,
             ajax: {
                 url: studentList,
                 data: function (d) {
@@ -875,7 +892,7 @@ $(function () {
                 { data: 'name', name: 'name' },
                 { data: 'name_common', name: 'name_common' },
                 { data: 'register_no', name: 'register_no' },
-                { data: 'roll_no', name: 'roll_no' },
+                { data: 'attendance_no', name: 'attendance_no' },
                 { data: 'gender', name: 'gender' },
                 { data: 'email', name: 'email' },
                 { data: 'actions', name: 'actions', orderable: false, searchable: false }
@@ -988,13 +1005,13 @@ $(function () {
     });
     $("#guardian_relation").change(function () {
 
-            copyparent();
+        copyparent();
     });
 
-    function copyparent(){
-        
+    function copyparent() {
+
         var dataParentId = $('#guardian_relation').find(':selected').data('parent-id');
-        
+
         var guardianLastName = $('#guardian_last_name').val();
         var guardianMiddleName = $('#guardian_middle_name').val();
         var guardianFirstName = $('#guardian_first_name').val();
@@ -1008,12 +1025,12 @@ $(function () {
         var guardianMobileNo = $('#guardian_mobile_no').val();
         var guardianOccupation = $('#guardian_occupation').val();
         var guardianId = $('#guardian_id').val();
-       // Check if data-parent-id is 1 for father or 2 for mother
-       if (dataParentId === 1 || dataParentId === 2) {
-        
+        // Check if data-parent-id is 1 for father or 2 for mother
+        if (dataParentId === 1 || dataParentId === 2) {
+
             if (dataParentId === 1) {
-                
-                $("#father_form").show("slow"); 
+
+                $("#father_form").show("slow");
                 $('#skip_father_details').prop('checked', false);
                 $('#father_id').val(guardianId);
                 $('#father_last_name').val(guardianLastName);
@@ -1033,8 +1050,8 @@ $(function () {
                 $('#mother_form input').val('');
                 $('#mother_form select').val('');
             } else if (dataParentId === 2) {
-                
-                $("#mother_form").show("slow"); 
+
+                $("#mother_form").show("slow");
                 $('#skip_mother_details').prop('checked', false);
                 $('#mother_id').val(guardianId);
                 $('#mother_last_name').val(guardianLastName);
@@ -1058,24 +1075,24 @@ $(function () {
             var fatherEmail = $('#father_email').val();
             var motherEmail = $('#mother_email').val();
             // Enable all fields if data-parent-id is neither 1 nor 2
-            if(guardianEmail == fatherEmail){
+            if (guardianEmail == fatherEmail) {
                 $('#father_form input').val('');
                 $('#father_form select').val('');
                 $('#father_form input, #father_form select').prop('readonly', false);
-            }else if(guardianEmail == motherEmail){
+            } else if (guardianEmail == motherEmail) {
                 $('#mother_form input').val('');
                 $('#mother_form select').val('');
                 $('#mother_form input, #mother_form select').prop('readonly', false);
             }
-            
+
         }
     }
-    
+
     // skip_mother_details
     $("#skip_mother_details").on("change", function () {
-        
+
         if ($(this).is(":checked")) {
-            
+
             $("#mother_form input").val("");
             $("#mother_form select").val("");
             $("#mother_form").hide("slow");
@@ -1085,9 +1102,9 @@ $(function () {
     });
     // skip_father_details
     $("#skip_father_details").on("change", function () {
-        
+
         if ($(this).is(":checked")) {
-            
+
             $("#father_form input").val("");
             $("#father_form select").val("");
             $("#father_form").hide("slow");
@@ -1095,7 +1112,7 @@ $(function () {
             $("#father_form").show("slow");
         }
     });
-    $("#passport, #japanese_association_membership_number_student").on("input", function() {
+    $("#passport, #japanese_association_membership_number_student").on("input", function () {
         var regexp = /^[A-Za-z0-9]+$/;
         if (!regexp.test($(this).val())) {
             $(this).val($(this).val().replace(/[^\w]/gi, ''));
@@ -1137,8 +1154,8 @@ $(function () {
 
         });
     });
-    $('#has_dual_nationality_checkbox').change(function() {
-        if(this.checked) {
+    $('#has_dual_nationality_checkbox').change(function () {
+        if (this.checked) {
             $('#dual_nationality_container').show();
         } else {
             $('#dual_nationality_container').hide();
@@ -1152,71 +1169,98 @@ $(function () {
                 required: true,
                 email: true
             },
-           // txt_roll_no: "required",
+            // txt_roll_no: "required",
             admission_date: "required",
             classnames: "required",
             department_id: "required",
             class_id: "required",
-            section_id: "required",
+            // section_id: "required",
             // categy: "required",
             fname: "required",
             txt_mobile_no: "required",
-            school_enrollment_status_tendency:"required",
+            // school_enrollment_status_tendency: "required",
             // categy: "required",
             fname: "required",
             first_name_english: "required",
-            first_name_furigana: "required",
+            // first_name_furigana: "required",
             txt_mobile_no: "required",
             lname: "required",
             last_name_english: "required",
-            last_name_furigana: "required",
+            // last_name_furigana: "required",
             dob: "required",
-            gender: "required",
-            address_unit_no: "required",
-            address_condominium: "required",
-            address_street: "required",
-            address_district: "required",
-            drp_city: "required",
-            drp_state: "required",
-            drp_country: "required",
-            drp_post_code: "required",
-            txt_religion: "required",
+            // gender: "required",
+            // address_unit_no: "required",
+            // address_condominium: "required",
+            // address_street: "required",
+            // address_district: "required",
+            // drp_city: "required",
+            // drp_state: "required",
+            // drp_country: "required",
+            // drp_post_code: "required",
+            // txt_religion: "required",
             nationality: "required",
             passport: "required",
-            passport_expiry_date: "required",
-            passport_photo: "required",
-            visa_expiry_date: "required",
-            visa_photo: "required",
-            visa_type: "required",
+            // passport_expiry_date: "required",
+            // passport_photo: "required",
+            // visa_expiry_date: "required",
+            // visa_photo: "required",
+            // visa_type: "required",
             japanese_association_membership_number_student: "required",
-            japanese_association_membership_image_principal:"required",
-            txt_prev_schname: "required",
-            school_country: "required",
-            school_state: "required",
-            school_city: "required",
-            school_postal_code: "required",
-            school_enrollment_status: "required",
-            father_last_name:"required",
-            father_first_name:"required",
-            father_last_name_furigana:"required",
-            father_first_name_furigana:"required",
-            father_last_name_english:"required",
-            father_first_name_english:"required",
-            father_nationality:"required",
-            father_email:"required",
-            father_mobile_no:"required",
-            father_occupation:"required",
-            mother_last_name:"required",
-            mother_first_name:"required",
-            mother_last_name_furigana:"required",
-            mother_first_name_furigana:"required",
-            mother_last_name_english:"required",
-            mother_first_name_english:"required",
-            mother_nationality:"required",
-            mother_email:"required",
-            mother_mobile_no:"required",
-            mother_occupation:"required",
-            
+            // japanese_association_membership_image_principal:"required",
+            // txt_prev_schname: "required",
+            // school_country: "required",
+            // school_state: "required",
+            // school_city: "required",
+            // school_postal_code: "required",
+            // school_enrollment_status: "required",
+            father_last_name: "required",
+            father_first_name: "required",
+            // father_last_name_furigana: "required",
+            // father_first_name_furigana: "required",
+            father_last_name_english: "required",
+            father_first_name_english: "required",
+            father_nationality: "required",
+            father_email: "required",
+            father_mobile_no: "required",
+            // father_occupation: "required",
+            mother_last_name: "required",
+            mother_first_name: "required",
+            // mother_last_name_furigana: "required",
+            // mother_first_name_furigana: "required",
+            mother_last_name_english: "required",
+            mother_first_name_english: "required",
+            mother_nationality: "required",
+            mother_email: "required",
+            mother_mobile_no: "required",
+            // mother_occupation: "required",
+            guardian_last_name: "required",
+            guardian_last_name_furigana: "required",
+            guardian_last_name_english: "required",
+            guardian_first_name_furigana: "required",
+            guardian_first_name_english: "required",
+
+            guardian_company_name_japan: "required",
+            guardian_company_name_local: "required",
+            // guardian_company_phone_number: "required",
+
+            guardian_company_phone_number: {
+                required: true,
+                minlength: 8
+            },
+            guardian_employment_status: "required",
+            guardian_first_name: "required",
+            guardian_relation: "required",
+            guardian_phone_number: {
+                required: true,
+                minlength: 8
+            },
+            guardian_occupation: "required",
+            guardian_email: {
+                required: true,
+                email: true
+            },
+            guardian_occupation: "required",
+
             "passport_photo": {
                 required: function (element) {
                     if ($("#passport_old_photo").val() == null) {
@@ -1244,7 +1288,7 @@ $(function () {
                     }
                 }
             },
-          
+
             // txt_pwd: {
             //     minlength: 6
             // },
@@ -1263,7 +1307,7 @@ $(function () {
             }
         }
     });
- 
+
     $('#editadmission').on('submit', function (e) {
         e.preventDefault();
         var admissionCheck = $("#editadmission").valid();
@@ -1309,8 +1353,24 @@ $(function () {
                     id: id
                 }, function (data) {
                     if (data.code == 200) {
-                        $("#student").show("slow");
-                        $('#student-table').DataTable().ajax.reload(null, false);
+                        // $('#student-table').DataTable().ajax.reload(null, false);
+                        var student_name = $('#student_name').val();
+                        var department_id_filter = $('#department_id_filter').val();
+                        var class_id = $('#class_id').val();
+                        var section_id = $('#section_id').val();
+                        var session_id = $('#session_id').val();
+                        var status = $('#student_status').val();
+
+                        var formData = {
+                            status: status,
+                            student_name: student_name,
+                            department_id: department_id_filter,
+                            class_id: class_id,
+                            section_id: section_id,
+                            session_id: session_id,
+                            // academic_year:academic_year
+                        };
+                        getStudentList(formData);
                         toastr.success(data.message);
                     } else {
                         $("#student").hide("slow");

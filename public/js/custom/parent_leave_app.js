@@ -1,11 +1,31 @@
 $(function () {
+    var dates = [];
+    getHolidays();
+    function getHolidays() {
+        $.get(holidayEventList, { token: token, branch_id: branchID }, function (res) {
+            // console.log('test',res)
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    dates.push(val.start_date);
+                });
+            }
+        }, 'json');
+    }
+    function DisableDates(date) {
+
+        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+        var day = date.getDay();
+        return [(day > 0 && day < 6 && dates.indexOf(string) == -1), ""];
+    }
+    
     $("#frm_ldate").datepicker({
         dateFormat: 'dd-mm-yy',
         changeMonth: true,
         changeYear: true,
         autoclose: true,
         yearRange: "-100:+50", // last hundred years
-        minDate: 0
+        minDate: 0,
+        beforeShowDay: DisableDates,
     });
     $("#to_ldate").datepicker({
         dateFormat: 'dd-mm-yy',
@@ -13,7 +33,8 @@ $(function () {
         changeYear: true,
         autoclose: true,
         yearRange: "-100:+50", // last hundred years
-        minDate: 0
+        minDate: 0,
+        beforeShowDay: DisableDates,
     });
     $("#to_ldate").on('change', function () {
         let frm_ldate = $("#frm_ldate").val();
@@ -557,6 +578,8 @@ console.log(selectedReasonId);
         // Add CSS for sticky header and cell hover color
         const style = document.createElement('style');
         style.textContent = `
+        
+        
         table {
             font-family: Verdana;
             font-size: 14px;
@@ -580,6 +603,9 @@ console.log(selectedReasonId);
             padding: 10px;
             text-align: left;
             z-index: 1; /* Ensures cells stay below header */
+        }
+        tr:hover {
+            background-color: #fff !important;
         }
         `;
         document.head.appendChild(style);

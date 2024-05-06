@@ -5,7 +5,7 @@
 	<meta charset="utf-8" />
 	<title>403</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Paxsuzen School is a premier educational institution that offers quality education to students of all ages. Our curriculum is designed to prepare future leaders for success in the global marketplace.">
+	<meta name="description" content="To learn as much as I can, attain good grades and advance my education further. I believe that self-motivation and a strict routine has helped me achieve my goals so far, and I will use the same method in the future.">
 	<meta name="keywords" content="Paxsuzen School, education, future leaders, curriculum">
 	<meta content="Paxsuzen" name="author" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -21,6 +21,7 @@
 	<link href="{{ asset('css/custom-minified/admin_login.min.css') }}" rel="stylesheet" type="text/css" />
 	<link href="{{ asset('css/custom-minified/opensans-font.min.css') }}" rel="stylesheet" type="text/css" />
 	<link href="{{ asset('css/custom/errorpage.css') }}" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body class="loading auth-fluid-pages pb-0">
@@ -71,6 +72,9 @@
 
 	<!-- App js -->
 	<script src="{{ asset('js/app.min.js') }}"></script>
+	<script>window.UserHelpPublicProjectID="Y7YyGqyq2"</script>
+        <script src="https://run.userhelp.co" async></script>
+
 
 </body>
 

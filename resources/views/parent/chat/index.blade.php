@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Chat')
+@section('title',' ' . __('messages.chat') . '')
 @section('component_css')
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
@@ -9,7 +9,7 @@
 <!-- Start Content-->
 <div class="container-fluid">
     <!-- start page title -->
-    <div class="row">
+    <!--<div class="row">
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
@@ -20,7 +20,21 @@
                 <h4 class="page-title">{{ __('messages.chat') }}</h4>
             </div>
         </div>
+    </div>-->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box" style="display: inline-flex; align-items: center;">
+                <div class="page-title-icon" style="margin-top:5px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 28 28" fill="none" stroke="#3A4265" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </div>
+                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.chat') }}</h4>
+            </div>
+        </div>
     </div>
+
+
     <!-- end page title -->
 
     <div class="row">
@@ -65,7 +79,7 @@
                         </a>
                         @endforeach
                         @if(count($group_list)==0)
-                        <a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers" >							<i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
+                        <a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers"> <i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
                             <span class="mb-0 mt-1">{{ __('messages.no_group_available') }}</span>
                         </a>
                         @endif
@@ -96,10 +110,10 @@
                                 </a>
                                 @endforeach
                                 @if(count($teacher_list)==0)
-								<a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers" >							<i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
-									<span class="mb-0 mt-1">{{ __('messages.no_teacher_available') }}</span>
-								</a>
-								@endif
+                                <a href="javascript: void(0);" class="text-reset mb-2 d-block chatusers"> <i class="mdi mdi-checkbox-blank-circle-outline mr-1 text-success"></i>
+                                    <span class="mb-0 mt-1">{{ __('messages.no_teacher_available') }}</span>
+                                </a>
+                                @endif
 
                             </div> <!-- end slimscroll-->
                         </div> <!-- End col -->
@@ -136,11 +150,11 @@
                                 <a href="javascript: void(0);" class="text-reset"><span id="toname"></span></a> (<span id="usertype">Teacher</span>)
                             </h5>
                             <p class="mt-1 mb-0 text-muted font-12">
-								<span  id="onlinestatus">
-								<small class="mdi mdi-circle text-success"></small> {{ __('messages.online') }}  </span>
-								<a href="#"  data-toggle="modal" data-target="#grouplist" style="display:none;" id="groupcnt">0  {{ __('messages.members') }}</a>
-                        
-							</p>
+                                <span id="onlinestatus">
+                                    <small class="mdi mdi-circle text-success"></small> {{ __('messages.online') }} </span>
+                                <a href="#" data-toggle="modal" data-target="#grouplist" style="display:none;" id="groupcnt">0 {{ __('messages.members') }}</a>
+
+                            </p>
                         </div>
                         <div>
                             <form class="search-bar mb-3">
@@ -156,8 +170,8 @@
                     <div class="row">
                         <div class="col">
                             <ul class="conversation-list" data-simplebar style="height:250px; overflow-x: hidden;">
-                            <div class="chatreadmore text-center"><button type="button" class="btn btn-info btn-small" onclick="addlimit()"> {{ __('messages.read_more') }} </button></div>
-							<div id="showchat">
+                                <div class="chatreadmore text-center"><button type="button" class="btn btn-info btn-small" onclick="addlimit()"> {{ __('messages.read_more') }} </button></div>
+                                <div id="showchat">
                                 </div>
                             </ul>
                         </div>
@@ -179,7 +193,7 @@
                                     <div class="col mb-2 mb-sm-0">
                                         <input type="text" name="chat_content" id="chat_content" class="form-control border-0" placeholder="{{ __('messages.enter_your_text') }}" required="">
                                         <div class="invalid-feedback">
-                                        {{ __('messages.enter_your_text') }}
+                                            {{ __('messages.enter_your_text') }}
                                         </div>
                                         <span id="status"></span>
                                     </div>
@@ -209,22 +223,22 @@
 </div> <!-- container -->
 <!-- Grouplist Modal -->
 <div id="grouplist" class="modal fade" role="dialog">
-<div class="modal-dialog">
+    <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-        <div class="modal-header">
-        <h4 class="modal-title"  id="showgrouptitle"></h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-       
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="showgrouptitle"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <ul id="showgrouplist"></ul>
+            </div>
+
         </div>
-        <div class="modal-body">
-        <ul id="showgrouplist"></ul>
-        </div>
-     
+
     </div>
-
-  </div>
 </div>
 @endsection
 @section('scripts')
@@ -244,7 +258,7 @@
 
     function my_function(toid, toname, toimage, touser) {
         $("#emptyChat").hide();
-		$("#showIndivuChat").show();
+        $("#showIndivuChat").show();
         $('#groupcnt').hide();
         $('#toname').html(toname);
         $('#usertype').html(touser);
@@ -254,8 +268,8 @@
         $('#chat_toid').val(toid);
         $('#chat_toname').val(toname);
         $('#chat_touser').val(touser);
-		$('#Teacher'+toid).html('');
-        
+        $('#Teacher' + toid).html('');
+
         toimg = (toimage && imgurl + toimage) ? imgurl + toimage : defaultimg;
         $('#toimage').prop('src', toimg)
         scrollDownShow = 1;
@@ -467,8 +481,7 @@
                             chatCount++;
                             if (chat_touser == 'Group') {
                                 msgread = '';
-                            }
-                            else if (item.chat_status == 'Unread') {
+                            } else if (item.chat_status == 'Unread') {
                                 msgread = '<img src={{ asset("images/chat/unread.png") }} style="width:20px" title="' + item.chat_status + '" />';
                             } else {
                                 msgread = '<img src={{ asset("images/chat/read.png") }} style="width:20px" title="' + item.chat_status + '" />';
@@ -482,7 +495,8 @@
                             }
 
                             if (item.chat_document != null) {
-                                chatfile = '<br><a href="{{ url($url.'/'.config('constants.branch_id').'/chats/') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
+                                chatfile = '<br><a href="{{ url($url.' / '.config('
+                                constants.branch_id ').' / chats / ') }}' + item.chat_document + '" download class="btn btn-primary chat-send btn-block"><i class="fe-paperclip"></i></a>';
                             }
                             if (chat_fromid == item.chat_fromid && chat_fromuser == item.chat_fromuser) {
                                 chat_li += '<li class="clearfix odd">';
@@ -529,30 +543,26 @@
                                 chat_li += '</li>';
                             }
                         });
-                       
-                        if(parseInt(limit)<=parseInt(chatCount))
-                        {
-                            
-							$('.chatreadmore').show(); 
+
+                        if (parseInt(limit) <= parseInt(chatCount)) {
+
+                            $('.chatreadmore').show();
+                        } else {
+
+                            $('.chatreadmore').hide();
                         }
-                        else
-                        {
-                            
-							$('.chatreadmore').hide(); 
+                        if (chat_touser == 'Group') {
+                            var gplistarray = response.data.groupnamelist;
+                            $('#groupcnt').show();
+                            $('#groupcnt').html('(' + response.data.groupcount + ' Members )');
+                            $('#showgrouptitle').html(chat_toname);
+                            var gplist = '';
+                            $.each(gplistarray, function(i, item) {
+                                gplist += '<li>' + item.username + ' ( ' + item.usertype + ' )</li> ';
+                            });
                         }
-                        if(chat_touser=='Group')
-							{
-								var gplistarray=response.data.groupnamelist;
-								$('#groupcnt').show();
-								$('#groupcnt').html('('+response.data.groupcount+' Members )');
-								$('#showgrouptitle').html(chat_toname);
-								var gplist='';
-								$.each(gplistarray, function(i, item) {
-									gplist+='<li>'+item.username+' ( '+item.usertype+' )</li> ';
-								});
-							}
-						$('#showchat').html(chat_li);
-                        $('#showgrouplist').html(gplist);                            
+                        $('#showchat').html(chat_li);
+                        $('#showgrouplist').html(gplist);
                         if (scrollDownShow == 1) {
                             scroll();
                             // getChatNotifications();
@@ -576,13 +586,14 @@
             block: "end"
         });
     }
-    function addlimit()
-    {
-        
-        var newlimit = parseInt($("#limit").val())+parseInt('25');
+
+    function addlimit() {
+
+        var newlimit = parseInt($("#limit").val()) + parseInt('25');
         $("#limit").val(newlimit);
         getchatlist();
     }
+
     function tConvert(time) {
         // Check correct time format and split into components
         time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];

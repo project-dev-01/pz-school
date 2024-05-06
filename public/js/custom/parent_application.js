@@ -264,7 +264,7 @@ $(function () {
             // mobile_no: "required",
             date_of_birth: "required",
             gender: "required",
-            religion: "required",
+            // religion: "required",
             nationality: "required",
             school_enrollment_status: "required",
             school_enrollment_status_tendency: "required",
@@ -305,7 +305,7 @@ $(function () {
             expected_academic_year: "required",
             expected_grade: "required",
             expected_enroll_date: "required",
-            remarks: "required",
+            // remarks: "required",
 
             // email: {
             //     required: true,
@@ -404,7 +404,7 @@ $(function () {
             // mobile_no: "required",
             date_of_birth: "required",
             gender: "required",
-            religion: "required",
+            // religion: "required",
             nationality: "required",
             school_enrollment_status: "required",
             school_enrollment_status_tendency: "required",
@@ -445,7 +445,7 @@ $(function () {
             expected_academic_year: "required",
             expected_grade: "required",
             expected_enroll_date: "required",
-            remarks: "required",
+            // remarks: "required",
 
             // email: {
             //     required: true,
@@ -699,7 +699,8 @@ $(function () {
                     bom: true,
                     exportOptions: {
                         columns: 'th:not(:last-child)'
-                    }
+                    },
+                    enabled: false, // Initially disable CSV button
                 },
                 {
                     extend: 'pdf',
@@ -710,7 +711,7 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     },
-
+                    enabled: false, // Initially disable PDF button
                 
                     customize: function (doc) {
                     doc.pageMargins = [50,50,50,50];
@@ -758,6 +759,32 @@ $(function () {
                 }
             }
             ],
+            initComplete: function () {
+                var table = this;
+                $.ajax({
+                    url: applicationList,
+                    data: function (d) {                    
+                        d.academic_year = $('#academic_year').val(),
+                        d.academic_grade = $('#academic_grade').val()
+                    },
+                    success: function(data) {
+                        console.log(data.data.length);
+                        if (data && data.data.length > 0) {
+                            console.log('ok');
+                            $('#application-table_wrapper .buttons-csv').removeClass('disabled');
+                            $('#application-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                        } else {
+                            console.log(data);
+                            $('#application-table_wrapper .buttons-csv').addClass('disabled');
+                            $('#application-table_wrapper .buttons-pdf').addClass('disabled');               
+                        }
+                    },
+                    error: function() {
+                        console.log('error');
+                        // Handle error if necessary
+                    }
+                });
+            },
             serverSide: true,
             ajax: {
                 url: applicationList,
@@ -920,9 +947,13 @@ $(function () {
         var id = $(this).data('id');
         $('.viewApplication').find('span.error-text').text('');
         $.post(applicationDetails, { id: id,token: token,branch_id: branchID }, function (data) {
-            console.log('cc', data)
-            var name = data.data.first_name + " " + data.data.last_name;
+            console.log('ccc', data)
+            var name = data.data.last_name + " " + data.data.first_name;
+            var english_name = data.data.last_name_english+" "+ data.data.first_name_english; 
+            var furigana_name = data.data.last_name_furigana+" "+ data.data.first_name_furigana ;
             $('.viewApplication').find('.name').text(name);
+            $('.viewApplication').find('.english_name').text(furigana_name);
+            $('.viewApplication').find('.furigana_name').text(furigana_name);
             $('.viewApplication').find('.gender').text(data.data.gender);
             $('.viewApplication').find('.academic_year').text(data.data.academic_year);
             $('.viewApplication').find('.academic_grade').text(data.data.academic_grade);
@@ -936,8 +967,8 @@ $(function () {
             $('.viewApplication').find('.city').text(data.data.city);
             $('.viewApplication').find('.postal_code').text(data.data.postal_code);
 
-            $('.viewApplication').find('.school_year').text(data.data.school_year);
-            $('.viewApplication').find('.grade').text(data.data.grade);
+            $('.viewApplication').find('.school_year').text(data.data.academic_year);
+            $('.viewApplication').find('.grade').text(data.data.academic_grade);
             $('.viewApplication').find('.school_last_attended').text(data.data.school_last_attended);
             $('.viewApplication').find('.school_address_1').text(data.data.school_address_1);
             $('.viewApplication').find('.school_address_2').text(data.data.school_address_2);
@@ -946,24 +977,39 @@ $(function () {
             $('.viewApplication').find('.school_state').text(data.data.school_state);
             $('.viewApplication').find('.school_postal_code').text(data.data.school_postal_code);
             
-            var mother_name = data.data.mother_first_name + " " + data.data.mother_last_name;
+            var mother_name = data.data.mother_last_name + " " + data.data.mother_first_name;
+            var mother_english_name = data.data.mother_last_name_english	 + " " + data.data.mother_first_name_english;
+            var mother_furigana_name = data.data.mother_last_name_furigana	 + " " + data.data.mother_first_name_furigana;
             $('.viewApplication').find('.mother_name').text(mother_name);
+            $('.viewApplication').find('.mother_english_name').text(mother_english_name);
+            $('.viewApplication').find('.mother_furigana_name').text(mother_furigana_name);
             $('.viewApplication').find('.mother_email').text(data.data.mother_email);
             $('.viewApplication').find('.mother_occupation').text(data.data.mother_occupation);
             $('.viewApplication').find('.mother_phone_number').text(data.data.mother_phone_number);
             
             var father_name = data.data.father_first_name + " " + data.data.father_last_name;
+            var father_english_name = data.data.father_last_name_english	 + " " + data.data.father_first_name_english;
+            var father_furigana_name = data.data.father_last_name_furigana	 + " " + data.data.father_first_name_furigana;
             $('.viewApplication').find('.father_name').text(father_name);
+            $('.viewApplication').find('.father_english_name').text(father_english_name);
+            $('.viewApplication').find('.father_furigana_name').text(father_furigana_name);
             $('.viewApplication').find('.father_email').text(data.data.father_email);
             $('.viewApplication').find('.father_occupation').text(data.data.father_occupation);
             $('.viewApplication').find('.father_phone_number').text(data.data.father_phone_number);
             
             var guardian_name = data.data.guardian_first_name + " " + data.data.guardian_last_name;
+            var guardian_english_name = data.data.guardian_last_name_english	 + " " + data.data.guardian_first_name_english;
+            var guardian_furigana_name = data.data.guardian_last_name_furigana	 + " " + data.data.guardian_first_name_furigana;
             $('.viewApplication').find('.guardian_name').text(guardian_name);
+            $('.viewApplication').find('.guardian_english_name').text(guardian_english_name);
+            $('.viewApplication').find('.guardian_furigana_name').text(guardian_furigana_name);
             $('.viewApplication').find('.guardian_relation').text(data.data.guardian_relation);
             $('.viewApplication').find('.guardian_email').text(data.data.guardian_email);
             $('.viewApplication').find('.guardian_occupation').text(data.data.guardian_occupation);
             $('.viewApplication').find('.guardian_phone_number').text(data.data.guardian_phone_number);
+            $('.viewApplication').find('.guardian_company_name_japan').text(data.data.guardian_company_name_japan);
+            $('.viewApplication').find('.guardian_company_name_local').text(data.data.guardian_company_name_local);
+            $('.viewApplication').find('.guardian_company_phone_number').text(data.data.guardian_company_phone_number);
             $('.viewApplication').modal('show');
         }, 'json');
     });
@@ -1049,5 +1095,4 @@ $(function () {
             }
         }
     }
-
 });

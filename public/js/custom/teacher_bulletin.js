@@ -100,6 +100,28 @@ $(function () {
 
                 }
             ],
+            initComplete: function () {
+                var table = this;
+                $.ajax({
+                    url: teacherList,
+                    success: function(data) {
+                        console.log(data.data.length);
+                        if (data && data.data.length > 0) {
+                            console.log('ok');
+                            $('#teacher-bulletin-table_wrapper .buttons-csv').removeClass('disabled');
+                            $('#teacher-bulletin-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                        } else {
+                            console.log(data);
+                            $('#teacher-bulletin-table_wrapper .buttons-csv').addClass('disabled');
+                            $('#teacher-bulletin-table_wrapper .buttons-pdf').addClass('disabled');               
+                        }
+                    },
+                    error: function() {
+                        console.log('error');
+                        // Handle error if necessary
+                    }
+                });
+            },
             ajax: teacherList,
             columns: [
                 //  {data:'id', name:'id'},
@@ -125,16 +147,25 @@ $(function () {
                     render: function (data, type, full, meta) {
                         const starClass = full.parent_imp === '1' ? 'star-important' : 'star-not-important';
                         const itemId = full.id;
-                        const isPDF = data.toLowerCase().endsWith('.pdf');
-                        // Create a combined column with the "parent_imp" button and the file link
-                        return `
-                            <div>
+                        if (data && typeof data === 'string' && data.trim() !== '') {
+                            const isPDF = data.toLowerCase().endsWith('.pdf');
+
+                            // Create the HTML content for a file
+                            const fileContent = `
                                 <button class="star-button ${starClass}" data-item-id="${itemId}" data-important="${full.parent_imp}" onclick="toggleStar(${itemId}, ${full.parent_imp})"></button>
                                 ${isPDF ? '<i class="fa fa-file-pdf pdf-icon" aria-hidden="true"></i>' : ''}
                                 <span class="${isPDF ? 'pdf-file' : ''}">
                                     ${data}
                                 </span>
-                            </div>`;
+                            `;
+
+                            return `<div>${fileContent}</div>`;
+                        } else {
+                            const fileContent  = `
+                                <button class="star-button ${starClass}" data-item-id="${itemId}" data-important="${full.parent_imp}" onclick="toggleStar(${itemId}, ${full.parent_imp})"></button>`;
+                            // Return empty content if data is null or empty
+                            return `<div>${fileContent}</div>`;
+                        }
                     }
                 },
                 {data: 'actions',
@@ -264,16 +295,25 @@ $(function () {
                     render: function (data, type, full, meta) {
                         const starClass = full.parent_imp === '1' ? 'star-important' : 'star-not-important';
                         const itemId = full.id;
-                        const isPDF = data.toLowerCase().endsWith('.pdf');
-                        // Create a combined column with the "parent_imp" button and the file link
-                        return `
-                            <div>
+                        if (data && typeof data === 'string' && data.trim() !== '') {
+                            const isPDF = data.toLowerCase().endsWith('.pdf');
+
+                            // Create the HTML content for a file
+                            const fileContent = `
                                 <button class="star-button ${starClass}" data-item-id="${itemId}" data-important="${full.parent_imp}" onclick="toggleStar(${itemId}, ${full.parent_imp})"></button>
                                 ${isPDF ? '<i class="fa fa-file-pdf pdf-icon" aria-hidden="true"></i>' : ''}
                                 <span class="${isPDF ? 'pdf-file' : ''}">
                                     ${data}
                                 </span>
-                            </div>`;
+                            `;
+
+                            return `<div>${fileContent}</div>`;
+                        } else {
+                            const fileContent  = `
+                                <button class="star-button ${starClass}" data-item-id="${itemId}" data-important="${full.parent_imp}" onclick="toggleStar(${itemId}, ${full.parent_imp})"></button>`;
+                            // Return empty content if data is null or empty
+                            return `<div>${fileContent}</div>`;
+                        }
                     }
                 },
                 {
@@ -318,7 +358,7 @@ $(function () {
     });
 
 });
-function openFilePopup(fileUrl, fileName, fileDescription) {
+function openFilePopup(data) {
     const modal = document.getElementById("fileModal");
     const modalTitle = modal.querySelector(".modal-title");
     const modalBody = modal.querySelector(".modal-body");
@@ -328,19 +368,32 @@ function openFilePopup(fileUrl, fileName, fileDescription) {
     const filePreview = modal.querySelector("#filePreview");
     const previewLink = modal.querySelector("#previewLink");
 
-    modalTitle.innerText = modelheader;
-    fileTitle.innerText = fileName;
-    fileDescriptionElement.innerText = fileDescription;
+    modalTitle.innerText = "File Details";
+    fileTitle.innerText = data.title;
+    
+    // Set file description using innerHTML to handle HTML entities
+    fileDescriptionElement.innerHTML = data.description;
+    if (data.image_url && data.image_url.trim() !== '') {
+        // Set the href attribute of the download link to the image URL
+        downloadLink.href = data.image_url;
+        
+        // Set the href attribute of the preview link to the image URL
+        previewLink.href = data.image_url;
+        
+        // Set the src attribute of the iframe for preview to the image URL
+        filePreview.src = data.image_url;
 
+        // Show the download link, preview link, and iframe
+       downloadLink.style.display = "inline";
+       previewLink.style.display = "inline";
+       // filePreview.style.display = "block";
+    } else {
+        // If image_url is null or empty, hide the download link, preview link, and set the iframe source to a placeholder
+        downloadLink.style.display = "none";
+        previewLink.style.display = "none";
+        filePreview.style.display = "none";
+    }
     // Set the download link
-    downloadLink.href = fileUrl;
-    downloadLink.innerText =download;
-
-    // Set the preview link to open in a new window
-    previewLink.href = fileUrl;
-
-    // Set the src of the iframe for preview
-    filePreview.src = fileUrl;
 
     // Open the modal
     $(modal).modal("show");

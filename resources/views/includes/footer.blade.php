@@ -74,26 +74,31 @@
     // update child session
     var updateChildSessionID = "{{ route('navbar.update.child_id') }}";
 
-    var childData = {
-        !!json_encode(Session::get('all_child', [])) !!
-    };
+    var childData = {!!json_encode(Session::get('all_child', [])) !!};
 
     function showStudentName() {
-        var studentId = "{{ Session::get('student_id') }}";
-        var studentName = document.getElementById('studentName');
+        // Check screen width
+        if (window.innerWidth > 768) { // Adjust the breakpoint as needed
+            var studentId = "{{ Session::get('student_id') }}";
+            var studentName = document.getElementById('studentName');
 
-        for (var i = 0; i < childData.length; i++) {
-            if (childData[i].id == studentId) {
-                studentName.textContent = childData[i].name;
-                studentName.style.display = 'block';
-                break;
+            for (var i = 0; i < childData.length; i++) {
+                if (childData[i].id == studentId) {
+                    studentName.setAttribute('data-original-title', childData[i].name);
+                    $(studentName).tooltip('show'); // Show the tooltip
+                    break;
+                }
             }
         }
     }
 
     function hideStudentName() {
-        var studentName = document.getElementById('studentName');
-        studentName.style.display = 'none';
+        // Check screen width
+        if (window.innerWidth > 768) { // Adjust the breakpoint as needed
+            var studentName = document.getElementById('studentName');
+            studentName.removeAttribute('data-original-title'); // Remove the title attribute
+            $(studentName).tooltip('hide'); // Hide the tooltip
+        }
     }
 </script>
 @endif
@@ -115,8 +120,40 @@
         }
     });
     // get states
+   
     var get_roll_id = "{{Session::get('role_id')}}";
-
+    if(get_roll_id==1)
+    {
+        var loginurl = "{{ config('constants.api.superadmin_login') }}";  
+    }
+    else if(get_roll_id==2)
+    {
+        var loginurl = "{{ config('constants.api.admin_login') }}";  
+    }
+    else if(get_roll_id==3)
+    {
+        var loginurl = "{{ config('constants.api.staff_login') }}";  
+    }
+    else if(get_roll_id==4)
+    {
+        var loginurl = "{{ config('constants.api.teacher_login') }}";  
+    }
+    else if(get_roll_id==5)
+    {
+        var loginurl = "{{ config('constants.api.parent_login') }}";  
+    }
+    else if(get_roll_id==6)
+    {
+        var loginurl = "{{ config('constants.api.student_login') }}";  
+    }
+    else if(get_roll_id==7)
+    {
+        var loginurl = "{{ config('constants.api.guest_login') }}";  
+    }
+    else
+    {
+        var loginurl = "{{ config('constants.api.homepage') }}";  
+    }
     var getStates = "{{ config('constants.api.states') }}";
     var getCity = "{{ config('constants.api.cities') }}";
     var branchByClass = "{{ config('constants.api.branch_by_class') }}";
@@ -153,6 +190,7 @@
     var work_week = "{{ __('messages.work_week') }}";
     var day = "{{ __('messages.day') }}";
     var list = "{{ __('messages.list') }}";
+    var calendar_lable_list = "{{ __('messages.calendar_lable_list') }}";
     var locale = "{{ Session::get('locale') }}";
     var calLang = "{{ __('messages.calendar_lang') }}";
     var downloadcsv = "{{ __('messages.download_csv') }}";
@@ -284,6 +322,58 @@
     var balance_lang = "{{ __('messages.balance') }}";
     var warden_name_lang = "{{ __('messages.choose_the_warden_name') }}";
     var choose_lang = "{{ __('messages.choose') }}";
+    var last_name_lang = "{{ __('messages.last_name') }}";
+    var middle_name_lang = "{{ __('messages.middle_name') }}";
+    var first_name_lang = "{{ __('messages.first_name') }}";
+    var last_name_english_lang = "{{ __('messages.last_name_english') }}";
+    var middle_name_english_lang = "{{ __('messages.middle_name_english') }}";
+    var first_name_english_lang = "{{ __('messages.first_name_english') }}";
+    var last_name_furigana_lang = "{{ __('messages.last_name_furigana') }}";
+    var middle_name_furigana_lang = "{{ __('messages.middle_name_furigana') }}";
+    var first_name_furigana_lang = "{{ __('messages.first_name_furigana') }}";
+    var last_name_common_lang = "{{ __('messages.last_name_common') }}";
+    var first_name_common_lang = "{{ __('messages.first_name_common') }}";
+    var birthday_lang = "{{ __('messages.birthday') }}";
+    var gender_lang = "{{ __('messages.gender') }}";
+    var religion_lang = "{{ __('messages.religion') }}";
+    var post_code_lang = "{{ __('messages.post_code') }}";
+    var address_unit_no_lang = "{{ __('messages.address_unit_no') }}";
+    var address_condominium_lang = "{{ __('messages.address_condominium') }}";
+    var address_street_lang = "{{ __('messages.address_street') }}";
+    var address_district_lang = "{{ __('messages.address_district') }}";
+    var nationality_lang = "{{ __('messages.nationality') }}";
+    var dual_nationality_lang = "{{ __('messages.dual_nationality') }}";
+    var passport_lang = "{{ __('messages.passport') }}";
+    var passport_photo_lang = "{{ __('messages.passport_photo') }}";
+    var passport_expiry_date_lang = "{{ __('messages.passport_expiry_date') }}";
+    var visa_photo_lang = "{{ __('messages.visa_photo') }}";
+    var visa_type_lang = "{{ __('messages.visa_type') }}";
+    var visa_type_others_lang = "{{ __('messages.visa_type_others') }}";
+    var visa_expiry_date_lang = "{{ __('messages.visa_expiry_date') }}";
+    var japanese_association_membership_number_student_lang = "{{ __('messages.japanese_association_membership_number_student') }}";
+    var nric_lang = "{{ __('messages.nric') }}";
+    var nric_photo_lang = "{{ __('messages.nric_photo') }}";
+    var school_name_lang = "{{ __('messages.school_name') }}";
+    var school_country_lang = "{{ __('messages.school_country') }}";
+    var school_state_lang = "{{ __('messages.school_state') }}";
+    var school_city_lang = "{{ __('messages.school_city') }}";
+    var school_postal_code_lang = "{{ __('messages.school_postal_code') }}";
+    var school_enrollment_status_lang = "{{ __('messages.school_enrollment_status') }}";
+    var school_enrollment_status_tendency_lang = "{{ __('messages.school_enrollment_status_tendency') }}";
+    var company_name_japan_lang = "{{ __('messages.company_name_japan') }}";
+    var company_name_local_lang = "{{ __('messages.company_name_local') }}";
+    var company_phone_number_lang = "{{ __('messages.company_phone_number') }}";
+    var employment_status_lang = "{{ __('messages.employment_status') }}";
+    var japan_postalcode_lang = "{{ __('messages.japan_postalcode') }}";
+    var japan_contact_no_lang = "{{ __('messages.japan_contact_no') }}";
+    var japan_emergency_sms_lang = "{{ __('messages.japan_emergency_sms') }}";
+    var japan_address_lang = "{{ __('messages.japan_address') }}";
+    var stay_category_lang = "{{ __('messages.stay_category') }}";
+    var japanese_association_membership_image_principal_lang = "{{ __('messages.japanese_association_membership_image_principal') }}";
+    var japanese_association_membership_image_supplimental_lang = "{{ __('messages.japanese_association_membership_image_supplimental') }}";
+var email_lang = "{{ __('messages.email') }}";
+
+    
 
     // academic_session_id
     var academic_session_id = "{{ Session::get('academic_session_id') }}";
@@ -355,8 +445,10 @@
                     }
                 },
                 error: function(err) {
-                    // console.log("logout error");
+                    // console.log("setInterval logout error");
                     // console.log(err)
+                    // window.location.href =loginurl;
+                    
                 }
             });
         }, 8000);
@@ -378,6 +470,7 @@
                 error: function(err) {
                     // console.log("logout error");
                     // console.log(err)
+                    window.location.href =loginurl;
                 }
             });
         }, 10000);
@@ -599,6 +692,10 @@
     // active class scroll sticky
     $(document).ready(function() {
         $('ul#side-menu li a.active').parent().attr('id', 'scrollToView');
-        document.getElementById("scrollToView").scrollIntoView();
+		var elementstv = document.getElementById('scrollToView');
+		if (elementstv) {
+			elementstv.scrollIntoView();
+		}
+        
     });
 </script>

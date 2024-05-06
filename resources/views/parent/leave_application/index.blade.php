@@ -15,6 +15,7 @@
 @endsection
 @section('content')
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .selected-cell {
         background-color: #f2f2f2;
@@ -72,8 +73,8 @@
             width: 14.3em;
         }
     }
-    @media screen and (min-device-width: 768px) and (max-device-width: 1200px)
-     {
+
+    @media screen and (min-device-width: 768px) and (max-device-width: 1200px) {
         .dt-buttons {
             margin-left: 56px;
         }
@@ -82,6 +83,10 @@
             display: flex;
         }
     }
+    .custom-file-input:lang(en)~.custom-file-label::after 
+    {
+    content: "{{ __('messages.butt_browse') }}";
+    }
 </style>
 <!-- Start Content-->
 <div class="container-fluid">
@@ -89,26 +94,36 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <!-- <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                    </ol>
-                </div> -->
-                <h4 class="page-title">{{ __('messages.leave_application') }}</h4>
+            <div class="page-title-box" style="display: inline-flex; align-items: center;">
+                <div class="page-title-icon">
+                    <svg class="svg-icon" width="20" height="20" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M802.133333 567.466667c-123.733333 0-221.866667 98.133333-221.866666 221.866666s98.133333 221.866667 221.866666 221.866667 221.866667-98.133333 221.866667-221.866667-98.133333-221.866667-221.866667-221.866666z m0 388.266666c-89.6 0-162.133333-72.533333-162.133333-162.133333s72.533333-162.133333 162.133333-162.133333 162.133333 72.533333 162.133334 162.133333-72.533333 162.133333-162.133334 162.133333z" fill="#3A4265"></path>
+                        <path d="M832 780.8v-102.4c0-17.066667-12.8-29.866667-29.866667-29.866667-17.066667 0-29.866667 12.8-29.866666 29.866667v115.2c0 8.533333 4.266667 12.8 8.533333 21.333333l59.733333 59.733334c4.266667 4.266667 12.8 8.533333 21.333334 8.533333s12.8-4.266667 21.333333-8.533333c12.8-12.8 12.8-29.866667 0-42.666667l-51.2-51.2z" fill="#3A4265"></path>
+                        <path d="M524.8 789.333333c0-72.533333 25.6-136.533333 72.533333-183.466666v-166.4h170.666667v81.066666c12.8 0 21.333333-4.266667 34.133333-4.266666 17.066667 0 34.133333 0 51.2 4.266666V226.133333c0-72.533333-55.466667-128-128-128h-85.333333v-42.666666c0-25.6-17.066667-42.666667-42.666667-42.666667s-42.666667 17.066667-42.666666 42.666667v42.666666H298.666667v-42.666666c0-25.6-17.066667-42.666667-42.666667-42.666667s-42.666667 17.066667-42.666667 42.666667v42.666666H128c-72.533333 0-128 55.466667-128 128v597.333334c0 72.533333 55.466667 128 128 128h448c-29.866667-46.933333-51.2-102.4-51.2-162.133334zM85.333333 226.133333c0-25.6 17.066667-42.666667 42.666667-42.666666h85.333333v42.666666c0 25.6 17.066667 42.666667 42.666667 42.666667s42.666667-17.066667 42.666667-42.666667v-42.666666h256v42.666666c0 25.6 17.066667 42.666667 42.666666 42.666667s42.666667-17.066667 42.666667-42.666667v-42.666666h85.333333c25.6 0 42.666667 17.066667 42.666667 42.666666v128H85.333333v-128z m170.666667 640H128c-25.6 0-42.666667-17.066667-42.666667-42.666666v-132.266667h170.666667v174.933333z m0-260.266666H85.333333v-166.4h170.666667v166.4z m256 260.266666H341.333333v-174.933333h170.666667v174.933333z m0-260.266666H341.333333v-166.4h170.666667v166.4z" fill="#3A4265"></path>
+                    </svg>
+                </div>
+                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.leave_application') }}</h4>
             </div>
         </div>
     </div>
+
     <!--General Details -->
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
+            <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
                         <h4 class="navv"> {{ __('messages.leave_application') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton1"  aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+                
+                <div class="card-body collapse show">
                     <form id="stdGeneralDetails" method="post" action="{{ route('parent.studentleave.add') }}">
                         @csrf
                         <!-- <input type="text" name="class_id" id="listModeClassID">
@@ -120,7 +135,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="changeStdName">{{ __('messages.student_name') }}<span class="text-danger">*</span></label>
+                                    <label for="changeStdName">{{ __('messages.lab_student_name') }}<span class="text-danger">*</span></label>
                                     <select id="changeStdName" class="form-control" name="changeStdName">
                                         <option value="">{{ __('messages.select_student') }}</option>
                                         @forelse ($get_std_names_dashboard as $std)
@@ -132,7 +147,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="frm_ldate">{{ __('messages.leave_from') }}<span class="text-danger">*</span></label>
+                                    <label for="frm_ldate">{{ __('messages.lab_leave_start') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -145,7 +160,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="to_ldate">{{ __('messages.to_leave') }}<span class="text-danger">*</span></label>
+                                    <label for="to_ldate">{{ __('messages.lab_leave_end') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -161,14 +176,14 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="total_leave">{{ __('messages.number_of_days_leave') }}<span class="text-danger">*</span></label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="{{ __('messages.enter_days_leave') }}">
+                                    <label for="total_leave">{{ __('messages.lab_number_of_days_leave') }}<span class="text-danger">*</span></label>
+                                    <input type="number" id="total_leave" name="total_leave" class="form-control" placeholder="{{ __('messages.enter_days_leave') }}" readonly>
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="changeLevType">{{ __('messages.leave_type') }}<span class="text-danger">*</span></label>
+                                    <label for="changeLevType">{{ __('messages.lab_leave_type') }}<span class="text-danger">*</span></label>
                                     <select id="changeLevType" class="form-control" name="changeLevType">
                                         <option value="">{{ __('messages.select_leave_type') }}</option>
                                         @forelse ($get_student_leave_types as $ress)
@@ -186,7 +201,7 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
 
                         </div>
                         <!--3st row-->
@@ -202,7 +217,7 @@
                                             <span id="file_name"></span>
                                         </div>
                                     </div>
-                                   
+
 
                                 </div>
                             </div>
@@ -214,12 +229,12 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <button type="button" class="btn form-control" style="background-color: gray;color:white;white-space: nowrap;display: inline-block;overflow: hidden;text-overflow: ellipsis;" data-toggle="modal"  id="studentAllReasons">{{ __('messages.click_here_for') }}</button>
+                                    <button type="button" class="btn form-control" style="background-color: gray;color:white;white-space: nowrap;display: inline-block;overflow: hidden;text-overflow: ellipsis;" data-toggle="modal" id="studentAllReasons">{{ __('messages.click_here_for') }}</button>
                                     <!-- <input type="button" class="form-control" id="btnOpenDialog" value="Click Here For Reason Details" /> -->
                                 </div>
                             </div>
-                            
-                          
+
+
                         </div>
                         <div class="form-group text-right m-b-0">
                             <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
@@ -239,28 +254,34 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">{{ __('messages.leave_status') }}
+            <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv">{{ __('messages.head_leave_application_status') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton2"  aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+              
+                <div class="card-body collapse show">
                     <div class="table-responsive">
                         <table class="table w-100 nowrap" id="studentleave-table">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>{{ __('messages.student_name') }}</th>
-                                    <th>{{ __('messages.leave_from') }}</th>
-                                    <th>{{ __('messages.to_from') }}</th>
-                                    <th>{{ __('messages.teacher_remarks') }}</th>
+                                    <th>{{ __('messages.tab_student_name') }}</th>
+                                    <th>{{ __('messages.tab_leave_start') }}</th>
+                                    <th>{{ __('messages.tab_leave_end') }}</th>
+                                    <th>{{ __('messages.tab_teacher_remarks') }}</th>
                                     <th>{{ __('messages.leave_type') }}</th>
                                     <th>{{ __('messages.reason') }}</th>
-                                    <th>{{ __('messages.document') }}</th>
+                                    <th>{{ __('messages.tab_attachment') }}</th>
                                     <th>{{ __('messages.status') }}</th>
                                     <th>{{ __('messages.apply_date') }}</th>
-                                    <th>{{ __('messages.action') }}</th>
+                                    <th>{{ __('messages.tab_action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -314,8 +335,9 @@
     // $("#to_ldate").val(at);
 
     var parent_leaveapply_storage = localStorage.getItem('parent_leaveapply_details');
-</script>
+    var holidayEventList = "{{ config('constants.api.holidays_list_event') }}";
 </script>
 <!-- to do list -->
 <script src="{{ asset('js/custom/parent_leave_app.js') }}"></script>
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endsection

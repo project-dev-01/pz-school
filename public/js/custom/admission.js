@@ -1,4 +1,6 @@
 $(function () {
+    
+    // $('#dual_nationality_container').hide();
     // nric validation start
     // var $form_1 = $('#addadmission');
     // $form_1.validate({
@@ -8,6 +10,39 @@ $(function () {
     // $('#txt_nric').rules("add", {
     //     required: true
     // });
+
+    $("#trail_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
+
+    $("#official_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
+
+
+    $('#enrollment').on('change', function(){
+       
+        if($(this).val() == 'Trail Enrollment'){
+            $('#trail_date_show').show();
+            $('#official_date_show').hide();
+        } else if($(this).val() == 'Official Enrollment'){
+            $('#trail_date_show').hide();
+            $('#official_date_show').show();
+        } else {
+            $('#trail_date_show').hide();
+            $('#official_date_show').hide();
+        }
+    });
+
+
     $("#department_id").on('change', function (e) {
         e.preventDefault();
         var Selector = '#addadmission';
@@ -224,10 +259,20 @@ $(function () {
             
         }
     }
+
+    // skip_prev_school_details
+    $("#skip_prev_school_details").on("change", function () {
+        
+        if ($(this).is(":checked")) {
+            $(".prev_school_form").val("");
+            $("#prev_school_details").hide("slow");
+        } else {
+            $("#prev_school_details").show("slow");
+        }
+    });
     
     // skip_mother_details
     $("#skip_mother_details").on("change", function () {
-        
         if ($(this).is(":checked")) {
             
             $("#mother_form input").val("");
@@ -333,7 +378,7 @@ $(function () {
             drp_state: "required",
             drp_country: "required",
             drp_post_code: "required",
-            txt_religion: "required",
+            // txt_religion: "required",
             nationality: "required",
             passport: "required",
             passport_expiry_date: "required",

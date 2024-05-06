@@ -8,7 +8,8 @@ $(function () {
                 enableTime: true,
                 dateFormat: "Y-m-d H:i",
                 minDate: today,
-              container: '#addBuletinModal modal-body',
+                defaultDate : today,
+                container: '#addBuletinModal modal-body',
                 defaultHour : today.getHours(),
                 defaultMinute : today.getMinutes(),
                 minuteIncrement : 1,
@@ -51,18 +52,23 @@ $(function () {
             title: "required",
             discription: "required",
             target_user: "required",
-            file: "required",
+            
         }
     });
     $('#buletinForm').on('submit', function (e) {
         e.preventDefault();
         var form = this;
         var fileName = $("#file").val();
-        var ext = fileName.split('.').pop().toLowerCase();
 
-        if ($.inArray(ext, ['pdf']) === -1) {
-            $(form).find('span.file_error').text('Please select a PDF file.');
-            
+        // Check if fileName is not empty
+        if (fileName.trim() !== '') {
+            var ext = fileName.split('.').pop().toLowerCase();
+        
+            // Validate file extension only if fileName is not empty and is a PDF file
+            if ($.inArray(ext, ['pdf']) === -1) {
+                $(form).find('span.file_error').text('Please select a PDF file.');
+                // You can optionally return false here to prevent form submission
+            }
         }
         if ($('#publish').is(":checked")) {
             var date = $("#date").val().trim(); // Trim to remove leading/trailing spaces
@@ -99,7 +105,7 @@ $(function () {
             var discription = $("#discription").val();
             var file = $('#file')[0].files[0];
             console.log(file);
-            var publish = $("#publish").val();
+           // var publish = $("#publish").val();
             var add_to_dash = $("#add_to_dash").val();
             var date = $("#date").val();
             var endDate = $("#end_date").val();
@@ -121,7 +127,7 @@ $(function () {
             formData.append('title', title);
             formData.append('discription', discription);
             formData.append('target_user', target_user);
-            formData.append('publish', publish);
+           // formData.append('publish', publish);
             formData.append('add_to_dash', add_to_dash);
             formData.append('class_id', class_id);
             formData.append('section_id', section_id);
@@ -157,10 +163,15 @@ $(function () {
     $(".add_class_name").on('change', function (e) {
         e.preventDefault();
         var Selector = '.buletinForm';
-        var class_id = $(this).val();
-        var sectionID = "";
-        if (class_id) {
-            sectionsAllocation(class_id, sectionID);
+        
+        var selectedClassIds = $(this).val();
+        
+        if (selectedClassIds && selectedClassIds.length > 0) {
+            // Loop through each selected class ID
+            $.each(selectedClassIds, function(index, class_id) {
+                var sectionID = ""; // Initialize section ID (you can customize this based on your needs)
+                sectionsAllocation(class_id, sectionID);
+            });
         }
     });
     function sectionsAllocation(class_id, sectionID)
@@ -246,7 +257,7 @@ $(function () {
             var discription = $("#descriptions").val();
             var file = $('#files')[0].files[0];
             //console.log(file);
-            var publish = $("#publishs").val();
+            //var publish = $("#publishs").val();
             var date = $("#publish_dates").val();
             var publish_end_dates = $("#publish_end_dates").val();
             var target_user = [];
@@ -264,7 +275,7 @@ $(function () {
             formData.append('title', title);
             formData.append('discription', discription);
             formData.append('target_user', target_user);
-            formData.append('publish', publish);
+           // formData.append('publish', publish);
             formData.append('date', date);
             formData.append('publish_end_dates',publish_end_dates);
             formData.append('oldfile', $('#oldfile').text());
@@ -330,7 +341,8 @@ $(function () {
                     bom: true,
                     exportOptions: {
                         columns: 'th:not(:last-child)'
-                    }
+                    },
+                    enabled: false, // Initially disable CSV button
                 },
                 {
                     extend: 'pdf',
@@ -341,6 +353,7 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     },
+                    enabled: false, // Initially disable PDF button
                     customize: function (doc) {
                         doc.pageMargins = [50,50,50,50];
                         doc.defaultStyle.fontSize = 10;
@@ -388,6 +401,28 @@ $(function () {
 
                 }
             ],
+            initComplete: function () {
+                var table = this;
+                $.ajax({
+                    url: buletinBoardList,
+                    success: function(data) {
+                        console.log(data.data.length);
+                        if (data && data.data.length > 0) {
+                            console.log('ok');
+                            $('#buletin-table_wrapper .buttons-csv').removeClass('disabled');
+                            $('#buletin-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                        } else {
+                            console.log(data);
+                            $('#buletin-table_wrapper .buttons-csv').addClass('disabled');
+                            $('#buletin-table_wrapper .buttons-pdf').addClass('disabled');               
+                        }
+                    },
+                    error: function() {
+                        console.log('error');
+                        // Handle error if necessary
+                    }
+                });
+            },
             ajax: buletinBoardList,
             "pageLength": 10,
             "aLengthMenu": [
@@ -413,24 +448,45 @@ $(function () {
                 },
                 {
                     data: 'discription',
-                    name: 'discription'
+                    name: 'discription',
+                    render: function(data, type, row) {
+                        if (type === 'display' || type === 'filter') {
+                            // Preserve whitespace and display line breaks
+                            return '<div style="white-space: pre-line;">' + data + '</div>';
+                        }
+                        return data;
+                    }
                 },
                 {
                     data: 'file',
                     name: 'file',
-                    render: function (data, type, full, meta) {
-                        // Assuming 'file' contains the file path or link
-                        // You can customize the link or action based on your requirements
-                        return '<a href="' + image_url + data + '" target="_blank">' + data + '</a>';
-                    } 
+                    render: function(data, type, full, meta) {
+                        // Check if data is not null and not empty
+                        if (data && data.trim() !== '') {
+                            // Assuming 'image_url' contains the base URL for file links
+                            var fileLink = image_url + data;
+                            return '<a href="' + fileLink + '" target="_blank">' + data + '</a>';
+                        } else {
+                            // Return empty string if data is null or empty
+                            return '';
+                        }
+                    }
                 },
                 {
                     data: 'target_user',
                     name: 'target_user'
-                },
-                {
+                },{
                     data: 'publish_date',
-                    name: 'publish_date'
+                    name: 'publish_date',
+                    render: function(data, type, row) {
+                        if (data && (type === 'display' || type === 'filter')) {
+                            // Split the datetime string into date and time parts
+                            var parts = data.split(' ');
+                            // Display only the date part (assuming it's the first part of the split string)
+                            return parts[0];
+                        }
+                        return data;
+                    }
                 },
                 {
                     data: 'actions',
@@ -442,6 +498,14 @@ $(function () {
         }).on('draw', function () {
         });
     }
+    // $('#buletin-table').on('click', '.view-description', function() {
+    //     // Get the full description from the data-description attribute of the button
+    //     var fullDescription = $(this).data('description');
+
+    //     // Update modal body with full description
+    //     $('#descriptionModalBody').text(fullDescription);
+    // });
+
 
 
     // Publish Event 
@@ -532,7 +596,7 @@ $(function () {
                 
             }
             
-            $('.viewBuletin').find('.description').text(data.data.discription);
+            $('.viewBuletin').find('.description').html(data.data.discription);
             $('.viewBuletin').modal('show');
         }, 'json');
     });
@@ -579,15 +643,18 @@ $(function () {
             $('#department').show();
             $('#student').show();
             $('#parentss').show();
+            $('#selectionLegend').text('Parent Student Section');
         }else if (selectedOptions && selectedOptions.includes('4') && selectedOptions.includes('5')){
             $('#class').show();
             $('#department').show();
             $('#parentss').show();
+            $('#selectionLegend').text('Parent Section');
             $('#student').hide();
         }else if (selectedOptions && selectedOptions.includes('5') && selectedOptions.includes('6')){
             $('#class').show();
             $('#student').show();
             $('#parentss').show();
+            $('#selectionLegend').text('Parent Student Section');
             $('#department').hide();
         }else if (selectedOptions && selectedOptions.includes('4')) {
             // Hide the other dropdown and show class dropdown
@@ -595,12 +662,14 @@ $(function () {
             $('#class').hide();
             $('#student').hide();
             $('#parentss').hide();
+            
         }else if (selectedOptions && selectedOptions.includes('5')) {
             // Hide the other dropdown and show class dropdown
             $('#department').hide();
             $('#class').show();
             $('#student').hide();
              $('#parentss').show();
+             $('#selectionLegend').text('Parent Section');
              
         }else if (selectedOptions && selectedOptions.includes('6')) {
             // Hide the other dropdown and show class dropdown
@@ -608,6 +677,7 @@ $(function () {
             $('#class').show();
             $('#student').show();
             $('#parentss').hide();
+            $('#selectionLegend').text('Student Section');
         }else {
             // Show class dropdown and hide the other dropdown
             $('#class').hide();
@@ -651,6 +721,7 @@ $(function () {
             $("#parent_id").empty();
             $("#parent_id").append('<option value="">Select Parent</option>');
             console.log(target_user,class_id,section_id);
+            console.log("testing");
             $.post(getParentList, { token: token, branch_id: branchID, class_id: class_id, section_id: section_id }, function (res) {
                 console.log(res);
                 if (res.code == 200) {
@@ -783,11 +854,11 @@ $(function () {
             $('#empDepartments').val(department_idValues).trigger('change');
             
             // Check the checkbox based on the database value
-            if (data.data.publish === 1) {
-                $('#publishs').prop('checked', true);
-            } else {
-                $('#publishs').prop('checked', false);
-            }
+            // if (data.data.publish === 1) {
+            //     $('#publishs').prop('checked', true);
+            // } else {
+            //     $('#publishs').prop('checked', false);
+            // }
             $('.editBuletin').modal('show');
         }, 'json');
         //console.log(id);

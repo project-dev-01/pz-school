@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Exam Marks')
+@section('title',' ' . __('messages.exam_marks') . '')
 @section('component_css')
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
@@ -45,10 +45,11 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
+            <div class="page-title-box" style="display: inline-flex; align-items: center;">
+                <div class="page-title-icon">
+                <i class="fas fa-marker" style="color: #3A4265;"></i>
                 </div>
-                <h4 class="page-title">{{ __('messages.exam_marks') }}</h4>
+                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.exam_marks') }}</h4>
             </div>
         </div>
     </div>

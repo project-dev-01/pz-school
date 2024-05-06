@@ -75,7 +75,7 @@ class GuestController extends Controller
                     $result = "success";
                 } else if ($status == "Send Back") {
                     $result = "warning";
-                } else if ($status == "Process") {
+                } else if ($status == "Applied") {
                     $result = "info";
                 } else if ($status == "Reject") {
                     $result = "danger";
@@ -110,7 +110,7 @@ class GuestController extends Controller
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
         $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
-        // dd($form_field);
+        // dd($application);
         return view(
             'guest.application.add',
             [
@@ -128,13 +128,36 @@ class GuestController extends Controller
     }
     public function applicationAdd(Request $request)
     {
+              $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
+    
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+    
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+    
+        // Set type based on the last date of withdrawal
+        // $type = "Admission";
+        // if ($request->last_date_of_withdrawal) {
+        //     $type = "Re-Admission";
+        // }
 
-        $type = "Admission";
-        if($request->re_admission == "yes"){
-            $type = "Re-Admission";
-        }
+        $type = $request->filled('last_date_of_withdrawal') ? 'Re-Admission' : 'Admission';
+    
         // Set dual nationality based on checkbox
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
+
+        // $type = "Admission";
+        // if($request->re_admission == "yes"){
+        //     $type = "Re-Admission";
+        // }
+        // // Set dual nationality based on checkbox
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -251,6 +274,7 @@ class GuestController extends Controller
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
         $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
+        
         // $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
         // dd($application);
         return view(
@@ -269,26 +293,57 @@ class GuestController extends Controller
     public function applicationUpdate(Request $request)
     {
         // dd(1);
+        $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
+    
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+    
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+    
+        // Set type based on the last date of withdrawal
+        // $type = "Admission";
+        // if ($request->last_date_of_withdrawal) {
+        //     $type = "Re-Admission";
+        // }
+
+        // $type = $request->filled('last_date_of_withdrawal') ? 'Re-Admission' : 'Admission';
+    
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null ;
+        $status = $request->status;
+        if($request->status==""){
+            $status = $request->phase_1_status;
+        }else if($request->status=="Send Back"){
+            $status = "Applied";
+        }
+
         $phase_2_status = $request->phase_2_status;
         if($request->status=="Approved"){
             if($request->phase_2_status==null){
 
-                $phase_2_status = "Process";
+                $phase_2_status = "Applied";
             }
         }
+
+        if($request->phase_2_status=="Send Back"){
+            $phase_2_status = "Applied";
+        }
+
         $trail_date = "";
         if($request->enrollment=="Trail Enrollment"){
             $trail_date = $request->trail_date;
         }
         // Set dual nationality based on checkbox
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $official_date = "";
         if($request->enrollment=="Official Enrollment"){
             $official_date = $request->official_date;
-        }
-        $status = $request->status;
-        if($request->status==""){
-            $status = $request->phase_1_status;
         }
         $visa_base64 = "";
         $visa_extension = "";
@@ -526,7 +581,6 @@ class GuestController extends Controller
             ];
         // }
         // return $data;
-        // dd($data);
         $response = Helper::PostMethod(config('constants.api.application_update'), $data);
 
         return $response;

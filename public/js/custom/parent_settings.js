@@ -40,7 +40,7 @@ $(function () {
        var guardianMiddleNameEnglish = $('#guardian_middle_name_english').val();
        var guardianFirstNameEnglish = $('#guardian_first_name_english').val();
        var guardianEmail = $('#guardian_email').val();
-       var guardianMobileNo = $('#guardian_mobile_no').val();
+       var guardianMobileNo = $('#guardian_phone_number').val();
        var guardianOccupation = $('#guardian_occupation').val();
        var guardianId = $('#guardian_id').val();
        if (dataParentId === 1 || dataParentId === 2) {
@@ -60,7 +60,7 @@ $(function () {
                 $('#father_middle_name_english').val(guardianMiddleNameEnglish);
                 $('#father_first_name_english').val(guardianFirstNameEnglish);
                 $('#father_email').val(guardianEmail);
-                $('#father_mobile_no').val(guardianMobileNo);
+                $('#father_phone_number').val(guardianMobileNo);
                 $('#father_occupation').val(guardianOccupation);
                 $('#mother_details input').val('');
                 $('#mother_details select').val('');
@@ -81,7 +81,7 @@ $(function () {
                 $('#mother_middle_name_english').val(guardianMiddleNameEnglish);
                 $('#mother_first_name_english').val(guardianFirstNameEnglish);
                 $('#mother_email').val(guardianEmail);
-                $('#mother_mobile_no').val(guardianMobileNo);
+                $('#mother_phone_number').val(guardianMobileNo);
                 $('#mother_occupation').val(guardianOccupation);
                 $('#father_details input').val('');
                 $('#father_details select').val('');
@@ -208,6 +208,19 @@ $(function () {
     });
     
 
+
+    $('#japanese_association_membership_image_principal').change(function () {
+        // var i = $(this).prev('label').clone();
+        var file = $('#japanese_association_membership_image_principal')[0].files[0];
+        if (file.size > 2097152) {
+            $('#japanese_association_membership_image_principal_name').text("File greater than 2Mb");
+            $("#japanese_association_membership_image_principal_name").addClass("error");
+            $('#japanese_association_membership_image_principal').val('');
+        } else {
+            $("#japanese_association_membership_image_principal_name").removeClass("error");
+            $('#japanese_association_membership_image_principal_name').text(file.name);
+        }
+    });
     $('#japanese_association_membership_image_supplimental').change(function () {
         // var i = $(this).prev('label').clone();
         var file = $('#japanese_association_membership_image_supplimental')[0].files[0];
@@ -229,6 +242,55 @@ $(function () {
             event.preventDefault();
             return false;
         }
+    });
+    $(".dobDatepicker").datepicker({
+        dateFormat: 'dd-mm-yy',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-100:+50", // last hundred years
+    });
+    // designation add start
+    var sibling_increment = 1;
+    $(document).on('click', '#add_sibling', function() {
+        console.log(sibling_increment);
+        sibling_increment++;
+        var siblingAppend = '<tr id="row_sibling' + sibling_increment + '">' +
+            '<td>'+
+            '<input type="text" class="form-control" id="full_name" name="full_name[]" placeholder="" aria-describedby="inputGroupPrepend">' +
+            '</td>' +
+            '<td>' +
+            '<div class="input-group input-group-merge">' +
+            '<div class="input-group-prepend">' +
+            '<div class="input-group-text">' +
+            '<span class="fas fa-calendar"></span>' +
+            '</div>' +
+            '</div>' +
+            '<input type="text" class="form-control dobDatepicker" name="siblingdob[]" placeholder="' + yyyy_mm_dd + '">' +
+            '</div>' +
+            '</td>' +
+            '<td>' +
+           '<input type="text" class="form-control" id="relationship" name="relationship[]" placeholder="" aria-describedby="inputGroupPrepend">'+
+            '</td>' +
+            '<td>' +
+            '<button type="button" name="remove_designation" id="' + sibling_increment + '" class="btn btn-danger btn_remove_designation">X</button>' +
+            '</td>' +
+            '</tr>';
+
+        var appendDesHtml = $('#dynamic_field_one').append(siblingAppend);
+        // Initialize datepicker for the new field
+        appendDesHtml.find('.dobDatepicker').datepicker({
+            dateFormat: 'dd-mm-yy',
+            changeMonth: true,
+            changeYear: true,
+            autoclose: true,
+            yearRange: "-100:+50", // last hundred years
+        });
+
+    });
+    $(document).on('click', '.btn_remove_designation', function () {
+        var button_id = $(this).attr("id");
+        $('#row_sibling' + button_id + '').remove();
     });
     // update profile details
     $('#updateProfileInfo').on('submit', function (e) {
@@ -529,6 +591,15 @@ $(function () {
                     }
                 }
             },
+            "japanese_association_membership_image_principal": {
+                required: function (element) {
+                    if ($("#japanese_association_membership_image_principal_old").val().length < 1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
             "japanese_association_membership_image_supplimental": {
                 required: function (element) {
                     if ($("#japanese_association_membership_image_supplimental_old").val().length < 1) {
@@ -575,7 +646,7 @@ $(function () {
                 success: function (data) {
                     if (data.code == 200) {
                         toastr.success(data.message);
-                        window.location.href = indexParent;
+                        window.location.href = updateInfoList;
                     } else {
                         toastr.error(data.message);
                     }

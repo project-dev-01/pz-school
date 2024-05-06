@@ -46,7 +46,7 @@
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.description') }}</td>
-                                        <td class="description"></td>
+                                        <td class="description" style="white-space: pre-line;"></td>
                                     </tr>
                                 </table>
                             </div>

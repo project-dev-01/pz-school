@@ -25,9 +25,12 @@
 <link href="{{ asset('css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/calendarresponsive.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/commonresponsive.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <style>
+    
     .ui-datepicker {
         width: 21.4em;
     }
@@ -89,19 +92,20 @@
             display: flex;
         }
     }
+
 </style>
 <!-- Start Content-->
 <div class="container-fluid">
-
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <!-- <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                    </ol>
-                </div> -->
-                <h4 class="page-title">{{ __('messages.dashboard') }}</h4>
+            <div class="page-title-box" style="display: inline-flex; align-items: center;">
+                <div class="page-title-icon">
+                    <svg width="20" height="20" viewBox="0 0 28 28" fill="#3A4265" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.33333 13.3333H9.33333C9.68696 13.3333 10.0261 13.1929 10.2761 12.9428C10.5262 12.6928 10.6667 12.3536 10.6667 12V1.33333C10.6667 0.979711 10.5262 0.640573 10.2761 0.390524C10.0261 0.140476 9.68696 0 9.33333 0H1.33333C0.979711 0 0.640573 0.140476 0.390524 0.390524C0.140476 0.640573 0 0.979711 0 1.33333V12C0 12.3536 0.140476 12.6928 0.390524 12.9428C0.640573 13.1929 0.979711 13.3333 1.33333 13.3333ZM0 22.6667C0 23.0203 0.140476 23.3594 0.390524 23.6095C0.640573 23.8595 0.979711 24 1.33333 24H9.33333C9.68696 24 10.0261 23.8595 10.2761 23.6095C10.5262 23.3594 10.6667 23.0203 10.6667 22.6667V17.3333C10.6667 16.9797 10.5262 16.6406 10.2761 16.3905C10.0261 16.1405 9.68696 16 9.33333 16H1.33333C0.979711 16 0.640573 16.1405 0.390524 16.3905C0.140476 16.6406 0 16.9797 0 17.3333V22.6667ZM13.3333 22.6667C13.3333 23.0203 13.4738 23.3594 13.7239 23.6095C13.9739 23.8595 14.313 24 14.6667 24H22.6667C23.0203 24 23.3594 23.8595 23.6095 23.6095C23.8595 23.3594 24 23.0203 24 22.6667V13.3333C24 12.9797 23.8595 12.6406 23.6095 12.3905C23.3594 12.1405 23.0203 12 22.6667 12H14.6667C14.313 12 13.9739 12.1405 13.7239 12.3905C13.4738 12.6406 13.3333 12.9797 13.3333 13.3333V22.6667ZM14.6667 9.33333H22.6667C23.0203 9.33333 23.3594 9.19286 23.6095 8.94281C23.8595 8.69276 24 8.35362 24 8V1.33333C24 0.979711 23.8595 0.640573 23.6095 0.390524C23.3594 0.140476 23.0203 0 22.6667 0H14.6667C14.313 0 13.9739 0.140476 13.7239 0.390524C13.4738 0.640573 13.3333 0.979711 13.3333 1.33333V8C13.3333 8.35362 13.4738 8.69276 13.7239 8.94281C13.9739 9.19286 14.313 9.33333 14.6667 9.33333Z" />
+                    </svg>
+                </div>
+                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.dashboard') }}</h4>
             </div>
         </div>
     </div>
@@ -116,7 +120,7 @@
                     <div class="col-6">
                         <p class="greetingText">
                             {{ $greetings }}
-                        </p>
+                        </p>                     
                         <h3 class="greetingName">{{ Session::get('name') }}</h3>
                     </div>
                     <div class="col-6">
@@ -132,19 +136,28 @@
     </div>
     @endif
     <!-- end page title -->
+
     <div class="row">
         <div class="col-xl-12">
             <div class="row">
                 <div class="col">
                     <div class="card">
-                        <ul class="nav nav-tabs">
-                            <li class="nav-item">
-                                <h4 class="navv">{{ __('messages.to_do_list') }}
-                                    <h4>
+                    <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                                <!-- Button placed on the left side -->
+                                <h4 class="navv">
+                                    {{ __('messages.to_do_list') }}
+                                </h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                             </li>
                         </ul>
-                        <div class="card-body">
-                            <div class="row" id="toDoList" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
+
+                        <div class="card-body collapse show" id="toDoList">
+                            <div class="row" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                                 <div class="col">
                                     <a class="text-dark" data-toggle="collapse" data-id="today" data-count="{{ isset($get_to_do_list_dashboard['today'])?count($get_to_do_list_dashboard['today']):0 }}" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">
                                         <h5 class="mb-0"><i class='mdi mdi-chevron-down font-18'></i> {{ __('messages.today') }} <span class="text-muted font-14">( {{ isset($get_to_do_list_dashboard['today']) ? count($get_to_do_list_dashboard['today']) : "0"}} )</span></h5>
@@ -158,7 +171,7 @@
                                             <div class="card-body pb-0" id="task-list-one">
                                                 <!-- task -->
                                                 <div class="row justify-content-sm-between task-item">
-                                                    <div class="col-lg-6 mb-2">
+                                                    <div class="col-lg-5 mb-2">
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" data-id="{{ $today['id'] }}" class="custom-control-input admintaskListDashboard" id="today{{ $today['id'] }}" {{ ($today['user_id']) ? "checked" : "" }}>
                                                             <label class="custom-control-label" for="today{{ $today['id'] }}">
@@ -166,13 +179,13 @@
                                                             </label>
                                                         </div> <!-- end checkbox -->
                                                     </div> <!-- end col -->
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-7">
                                                         <div class="d-sm-flex justify-content-between">
-                                                            <div>
+                                                            <div class="todoresponsive">
                                                                 <img src="{{ config('constants.image_url').'/common-asset/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                             </div>
                                                             <div class="mt-3 mt-sm-0">
-                                                                <ul class="list-inline font-13 text-sm-center">
+                                                                <ul class="list-inline font-13 text-sm-center todo_list">
                                                                     <li class="list-inline-item" id="comments{{ $today['id'] }}">
                                                                         <i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>
                                                                         {{$today['total_comments']}}
@@ -227,7 +240,7 @@
                                                 <div class="card-body pb-0" id="task-list-two">
                                                     <!-- task -->
                                                     <div class="row justify-content-sm-between task-item">
-                                                        <div class="col-lg-6 mb-2">
+                                                        <div class="col-lg-5 mb-2">
                                                             <div class="custom-control custom-checkbox">
                                                                 <input type="checkbox" data-id="{{ $upcoming['id'] }}" class="custom-control-input admintaskListDashboard" id="upcoming{{ $upcoming['id'] }}" {{ ($upcoming['user_id']) ? "checked" : "" }}>
                                                                 <label class="custom-control-label" for="upcoming{{ $upcoming['id'] }}">
@@ -235,13 +248,13 @@
                                                                 </label>
                                                             </div> <!-- end checkbox -->
                                                         </div> <!-- end col -->
-                                                        <div class="col-lg-6">
+                                                        <div class="col-lg-7">
                                                             <div class="d-sm-flex justify-content-between">
-                                                                <div>
+                                                                <div class="todoresponsive">
                                                                     <img src="{{ config('constants.image_url').'/common-asset/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                                 </div>
                                                                 <div class="mt-3 mt-sm-0">
-                                                                    <ul class="list-inline font-13 text-sm-center">
+                                                                    <ul class="list-inline font-13 text-sm-center todo_list">
                                                                         <li class="list-inline-item" id="comments{{ $upcoming['id'] }}">
                                                                             <i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>
                                                                             {{$upcoming['total_comments']}}
@@ -297,7 +310,7 @@
                                                 <div class="card-body pb-0" id="task-list-two">
                                                     <!-- task -->
                                                     <div class="row justify-content-sm-between task-item">
-                                                        <div class="col-lg-6 mb-2">
+                                                        <div class="col-lg-5 mb-2">
                                                             <div class="custom-control custom-checkbox">
                                                                 <input type="checkbox" data-id="{{ $old['id'] }}" class="custom-control-input admintaskListDashboard" id="old{{ $old['id'] }}" {{ ($old['user_id']) ? "checked" : "" }}>
                                                                 <label class="custom-control-label" for="old{{ $old['id'] }}">
@@ -305,13 +318,13 @@
                                                                 </label>
                                                             </div> <!-- end checkbox -->
                                                         </div> <!-- end col -->
-                                                        <div class="col-lg-6">
+                                                        <div class="col-lg-7">
                                                             <div class="d-sm-flex justify-content-between">
-                                                                <div>
+                                                                <div class="todoresponsive">
                                                                     <img src="{{ config('constants.image_url').'/common-asset/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                                 </div>
                                                                 <div class="mt-3 mt-sm-0">
-                                                                    <ul class="list-inline font-13 text-sm-center">
+                                                                    <ul class="list-inline font-13 text-sm-center todo_list">
                                                                         <li class="list-inline-item" id="comments{{ $old['id'] }}">
                                                                             <i class='mdi mdi-comment-text-multiple-outline font-16'></i>
                                                                             {{$old['total_comments']}}
@@ -357,18 +370,14 @@
                                     </div>
                                     <!-- end old tasks -->
                                 </div> <!-- end col -->
-                            </div> <!-- end row -->
-
-
-                        </div> <!-- end card-body -->
+                            </div>
+                        </div>
                     </div> <!-- end card -->
                 </div> <!-- end col -->
             </div> <!-- end row -->
         </div> <!-- end col -->
+    </div>
 
-        <!-- task details -->
-        <!-- task panel end -->
-    </div> <!-- end card-box -->
     <div class="row">
         <div class="col-12">
             <!-- tasks panel -->
@@ -377,13 +386,20 @@
                     <div class="row">
                         <div class="col">
                             <div class="card">
-                                <ul class="nav nav-tabs">
-                                    <li class="nav-item">
+                                <ul class="nav nav-tabs" style="display: inline-block;">
+                                    <li class="nav-item d-flex justify-content-between align-items-center">
+                                        <!-- Button placed on the left side -->
                                         <h4 class="navv"> {{ __('messages.homework_list') }}
                                             <h4>
+                                                <!-- Up and Down Arrows -->
+                                                <button class="btn btn-link collapse-button" type="button" id="collapseButton2" aria-expanded="true" aria-controls="toDoList">
+                                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                                </button>
                                     </li>
                                 </ul>
-                                <div class="card-body">
+
+                                <div class="card-body collapse show" id="toDoList1">
                                     @forelse ($get_homework_list_dashboard as $key => $homework)
                                     <div class="row" data-plugin="dragula" data-containers='["homework-list-show"]'>
                                         <div class="col">
@@ -448,7 +464,20 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-body">
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv">{{ __('messages.Calendar') }}
+                            <h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link " type="button" id="collapseButton3"  aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                    </li>
+                </ul>
+
+                <div class="card-body collapse show">
                     <div class="row">
                         <div class="col-lg-12">
                             <div id="student_calendor"></div>
@@ -628,13 +657,20 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
                         <h4 class="navv">{{ __('messages.leave_status') }}
                             <h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link " type="button"  id="collapseButton4" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+
+                <div class="card-body collapse show">
                     <div class="table-responsive">
                         <table class="table w-100 nowrap" id="studentleave-table">
                             <thead>
@@ -662,12 +698,20 @@
     <div class="row">
         <div class="col-xl-12 col-md-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
                         <h4 class="navv"> {{ __('messages.student_ranking_class') }} & {{ __('messages.subject') }}</h4>
+                        <!-- Up and Down Arrows -->
+                        <button class="btn btn-link " type="button"  id="collapseButton5" aria-expanded="true" aria-controls="toDoList">
+                            <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                        </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+
+
+                <div class="card-body collapse show">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -740,13 +784,19 @@
     <div class="row">
         <div class="col-xl-12 col-md-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
                         <h4 class="navv">{{ __('messages.semester_wise_exam_marks') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton6"  aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+
+                <div class="card-body collapse show">
                     <div class="table-responsive">
                         <table class="table table-bordered w-100 nowrap" id="">
                             <thead>
@@ -799,13 +849,19 @@
         <div class="col-xl-12 col-md-12">
             <!-- Portlet card -->
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
                         <h4 class="navv"> {{ __('messages.exam_marks_status') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton7"  aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+
+                <div class="card-body collapse show">
                     <ul class="nav nav-tab nav-bordered float-right">
                         <li class="nav-item">
                             <a href="#mcex" data-toggle="tab" aria-expanded="true" class="nav-link active">
@@ -902,6 +958,12 @@
 </div> <!-- container -->
 @endsection
 @section('scripts')
+@if(!empty(Session::get('school_roleid')))
+<script>
+    var checkpermissions = "{{ route('parent.school_role.checkpermissions') }}";
+</script>
+<script src="{{ asset('js/custom/permissions.js') }}"></script>
+@endif
 <!-- plugin js -->
 <script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
 <script src="{{ asset('libs/apexcharts/apexcharts.min.js') }}"></script>
@@ -982,4 +1044,5 @@
 <!-- <script src="{{ asset('js/custom/student_calendor_new.js') }}"></script> -->
 <script src="{{ asset('js/custom/parent_calendor_new_cal.js') }}"></script>
 <script src="{{ asset('js/custom/greeting.js') }}"></script>
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endsection

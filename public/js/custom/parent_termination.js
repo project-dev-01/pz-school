@@ -43,7 +43,10 @@ $(function () {
             reason_for_transfer : "required", 
             transfer_destination_school_name : "required", 
             transfer_destination_tel : "required", 
-            parent_phone_number_after_transfer : "required", 
+            parent_phone_number_after_transfer: {
+                required: true,
+                number : true 
+            },         
             parent_address_after_transfer : "required", 
             parent_email_address_after_transfer: {
                 required: true,
@@ -84,7 +87,10 @@ $(function () {
             reason_for_transfer : "required", 
             transfer_destination_school_name : "required", 
             transfer_destination_tel : "required", 
-            parent_phone_number_after_transfer : "required", 
+            parent_phone_number_after_transfer: {
+                required: true,
+                number : true 
+            }, 
             parent_address_after_transfer : "required", 
             parent_email_address_after_transfer: {
                 required: true,

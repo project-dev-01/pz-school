@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
 <link rel="stylesheet" href="{{ asset('libs/dropify/css/dropify.min.css') }}">
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .datepicker {
         z-index: 99999 !important;
@@ -133,14 +134,13 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item active">{{ __('messages.list') }}</li>
-                        <!-- <li class="breadcrumb-item"><a href="{{ route('admin.add_classes')}}">Add Class</a></li> -->
-                    </ol>
+        <div class="page-title-box" style="display: inline-flex; align-items: center;">
+                <div class="page-title-icon">
+                    <svg class="svg-icon" style="width: 20px; height: 20px; fill: #3A4265;" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M513.706667 106.666667L406.613333 213.333333h213.333334l-106.24-106.666666M170.666667 298.666667v554.666666h682.666666V298.666667H170.666667m341.333333-298.666667l213.333333 213.333333h128a85.333333 85.333333 0 0 1 85.333334 85.333334v554.666666a85.333333 85.333333 0 0 1-85.333334 85.333334H170.666667a85.333333 85.333333 0 0 1-85.333334-85.333334V298.666667a85.333333 85.333333 0 0 1 85.333334-85.333334h128l213.333333-213.333333M298.666667 768v-170.666667h213.333333v170.666667H298.666667m298.666666-42.666667v-298.666666h170.666667v298.666666h-170.666667m-341.333333-213.333333V384h213.333333v128H256z" />
+                    </svg>
                 </div>
-                <h4 class="page-title">{{ __('messages.buletin') }}</h4>
+                <h4 class="page-title" style="margin-left: 10px;">{{ __('messages.buletin') }}</h4>
             </div>
         </div>
     </div>
@@ -148,7 +148,7 @@
     <!-- Add the search input here -->
     <div class="card-box">
         <div class="row">
-            <div class="col-xl-3">
+            <div class="col-md-3">
                 <label for="employee_type">{{ __('messages.search') }}</label>
                 <input type="text" class="form-control" id="pdfSearchInput" placeholder="{{ __('messages.search_pdf_files') }}">
             </div>
@@ -157,12 +157,18 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="nav-link">{{ __('messages.buletin') }}
+            <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv"> {{ __('messages.buletin') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
+                </ul>
+                <div class="card-body collapse show"> 
                         <ul class="nav nav-pills navtab-bg nav-justified" id="myTabs" style="padding: 0px 20px 0px 20px;">
                             <li class="nav-item">
                                 <a href="#home1" id="tab1" data-toggle="tab" aria-expanded="false" class="nav-link">
@@ -225,6 +231,7 @@
                                 </div>
                             </div>
                         </div>
+</div>
         </div> <!-- end card-box -->
     </div> <!-- end col -->
 </div> <!-- end card-box -->
@@ -248,11 +255,11 @@
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.description') }}</td>
-                                        <td id="fileDescription"></td>
+                                        <td id="fileDescription" style="white-space: pre-line;"></td>
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.download') }}</td>
-                                        <td class="publish_date"><a id="downloadLink" href="#" download>{{ __('messages.sownload') }}</a></td>
+                                        <td class="publish_date"><a id="downloadLink" href="#" download>{{ __('messages.download') }}</a></td>
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.preview') }}</td>
@@ -313,5 +320,5 @@
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
 <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('js/custom/teacher_bulletin.js') }}"></script>
-
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endsection

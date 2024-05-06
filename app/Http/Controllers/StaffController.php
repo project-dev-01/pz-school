@@ -1933,5 +1933,9 @@ class StaffController extends Controller
         $response = Helper::PostMethod(config('constants.api.shortcutLink_delete'), $data);
         return $response;
     }
+    public function page403(Request $request)
+    {
+        return view('staff.dashboard.403');
+    }
 
 }

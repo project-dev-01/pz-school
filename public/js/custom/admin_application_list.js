@@ -3,6 +3,33 @@ $(function () {
         academic_year: $('#academic_year').val(),
         academic_grade: $('#academic_grade').val(),
     }; 
+    $("#department_id").on('change', function (e) {
+        e.preventDefault();
+        var Selector = '#applicationFilter';
+        var department_id = $(this).val();
+        var classID = "";
+        classAllocation(department_id, Selector, classID);
+    });
+    function classAllocation(department_id, Selector, classID) {
+        $(Selector).find('select[name="academic_grade"]').empty();
+        $(Selector).find('select[name="academic_grade"]').append('<option value="">' + select_grade + '</option>');
+        if (department_id) {
+            $.post(getGradeByDepartmentUrl,
+                {
+                    branch_id: branchID,
+                    department_id: department_id
+                }, function (res) {
+                    if (res.code == 200) {
+                        $.each(res.data, function (key, val) {
+                            $(Selector).find('select[name="academic_grade"]').append('<option value="' + val.id + '">' + val.name + '</option>');
+                        });
+                        if (classID != '') {
+                            $(Selector).find('select[name="academic_grade"]').val(classID);
+                        }
+                    }
+                }, 'json');
+        }
+    }
 
     application(formData);
     function application(formData) {
@@ -36,7 +63,8 @@ $(function () {
                     bom: true,
                     exportOptions: {
                         columns: 'th:not(:last-child)'
-                    }
+                    },
+                    enabled: false, // Initially disable CSV button
                 },
                 {
                     extend: 'pdf',
@@ -47,6 +75,7 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     },
+                    enabled: false, // Initially disable PDF button
                     customize: function (doc) {
                         doc.pageMargins = [50, 50, 50, 50];
                         doc.defaultStyle.fontSize = 10;
@@ -65,6 +94,28 @@ $(function () {
                     }
                 }
             ],
+            initComplete: function () {
+                var table = this;
+                $.ajax({
+                    url: applicationList,
+                    success: function(data) {
+                        console.log(data.data.length);
+                        if (data && data.data.length > 0) {
+                            console.log('ok');
+                            $('#application-table_wrapper .buttons-csv').removeClass('disabled');
+                            $('#application-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                        } else {
+                            console.log(data);
+                            $('#application-table_wrapper .buttons-csv').addClass('disabled');
+                            $('#application-table_wrapper .buttons-pdf').addClass('disabled');               
+                        }
+                    },
+                    error: function() {
+                        console.log('error');
+                        // Handle error if necessary
+                    }
+                });
+            },
             ajax: {
                 url: applicationList,
                 data: function (d) {

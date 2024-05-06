@@ -1642,7 +1642,9 @@ class AdminController extends Controller
     public function getEmpList(Request $request)
     {
         $response = Helper::GetMethod(config('constants.api.employee_list'));
+        //dd($response);
         $data = isset($response['data']) ? $response['data'] : [];
+        
         return DataTables::of($data)
 
             ->addIndexColumn()
@@ -4357,6 +4359,29 @@ class AdminController extends Controller
     public function addAdmission(Request $request)
     {
         // dd($request);
+        $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
+    
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+    
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+    
+        // Set type based on the last date of withdrawal
+        // $type = "Admission";
+        // if ($request->last_date_of_withdrawal) {
+        //     $type = "Re-Admission";
+        // }
+
+        // $type = $request->filled('last_date_of_withdrawal') ? 'Re-Admission' : 'Admission';
+    
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
         $status = "0";
         if ($request->status) {
             $status = "1";
@@ -4401,22 +4426,17 @@ class AdminController extends Controller
             $nric_extension = $nric_file->getClientOriginalExtension();
         }
 
-        $image_principal_base64 = "";
-        $image_principal_extension = "";
-        $image_principal_file = $request->file('japanese_association_membership_image_principal');
-        if ($image_principal_file) {
-            $image_principal_path = $image_principal_file->path();
-            $image_principal_data = file_get_contents($image_principal_path);
-            $image_principal_base64 = base64_encode($image_principal_data);
-            $image_principal_extension = $image_principal_file->getClientOriginalExtension();
-        }
-
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'year' => $request->year,
             // 'register_no' => $request->txt_regiter_no,
             'roll_no' => $request->txt_roll_no,
             'admission_date' => $request->admission_date,
+
+            'enrollment' => $request->enrollment,
+            'trail_date' => $request->trail_date,
+            'official_date' => $request->official_date,
+
             'category_id' => $request->categy,
             'first_name' => $request->fname,
             'last_name' => $request->lname,
@@ -4480,8 +4500,6 @@ class AdminController extends Controller
             'passport_file_extension' => $passport_extension,
             'nric_photo' => $nric_base64,
             'nric_file_extension' => $nric_extension,
-            'image_principal_photo' => $image_principal_base64,
-            'image_principal_file_extension' => $image_principal_extension,
             "dual_nationality" => $dual_nationality,
             "school_enrollment_status" => $request->school_enrollment_status,
             "school_enrollment_status_tendency" => $request->school_enrollment_status_tendency,
@@ -4797,101 +4815,86 @@ class AdminController extends Controller
 
             ->rawColumns(['actions'])
             ->make(true);
-        // if ($student['code'] == "200") {
-
-        //     $output = "";
-        //     $row = 1;
-        //     if ($student['data']) {
-        //         foreach ($student['data'] as $stu) {
-        //             $edit = route('admin.student.details', $stu['id']);
-        //             $output .= '<tr>
-        //                             <td>' . $row . '</td>
-        //                             <td>' . $stu['first_name'] . ' ' . $stu['last_name'] . '</td>
-        //                             <td>' . $stu['register_no'] . '</td>
-        //                             <td>' . $stu['roll_no'] . '</td>
-        //                             <td>' . $stu['gender'] . '</td>
-        //                             <td>' . $stu['email'] . '</td>
-        //                             <td>' . $stu['mobile_no'] . '</td>
-        //                             <td>
-        //                                 <div class="button-list">
-        //                                     <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
-        //                                     <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $stu['id'] . '" id="deleteStudentBtn"><i class="fe-trash-2"></i></a>
-        //                                 </div>
-        //                             </td>
-
-        //                         </tr>';
-        //             $row++;
-        //         }
-        //     } else {
-        //         $output .= '<tr>
-        //                         <td colspan="8"> No Data Available</td>
-        //                     </tr>';
-        //     }
-        //     $student['table'] = $output;
-        // }
-        // dd($output);  
-        // return $student;
     }
 
     // get Student  details
     public function getStudentDetails($id)
     {
         
-        $data = [
+        if($id!==null || $id!==0)
+        {
+            $data = [
             'id' => $id,
-        ];
-        $getclass = Helper::GetMethod(config('constants.api.class_list'));
-        $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
-        $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));
-        $session = Helper::GetMethod(config('constants.api.session'));
-        $semester = Helper::GetMethod(config('constants.api.semester'));
-        $student = Helper::PostMethod(config('constants.api.student_details'), $data);
-        $parent = Helper::GetMethod(config('constants.api.parent_list'));
-        $religion = Helper::GetMethod(config('constants.api.religion'));
-        $races = Helper::GetMethod(config('constants.api.races'));
-        $relation = Helper::GetMethod(config('constants.api.relation_list'));
-        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
-        $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
-        $department = Helper::GetMethod(config('constants.api.department_list'));
-        $data = [
-            'department_id' => isset($student['data']['student']['department_id']) ? $student['data']['student']['department_id'] : 0,
-        ];
-        $grade_list_by_department = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
-        $prev = json_decode($student['data']['student']['previous_details']);
-        // $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
-        $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
-        $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
-        $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
-        return view(
-            'admin.student.edit',
-            [
-                'grade_list_by_department' => isset($grade_list_by_department['data']) ? $grade_list_by_department['data'] : [],
-                'department' => isset($department['data']) ? $department['data'] : [],
-                'class' => isset($getclass['data']) ? $getclass['data'] : [],
-                'parent' => isset($parent['data']) ? $parent['data'] : [],
-                'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
-                'hostel' => isset($gethostel['data']) ? $gethostel['data'] : [],
-                'session' => isset($session['data']) ? $session['data'] : [],
-                'semester' => isset($semester['data']) ? $semester['data'] : [],
-                'student' => isset($student['data']['student']) ? $student['data']['student'] : [],
-                'section' => isset($student['data']['section']) ? $student['data']['section'] : [],
-                'vehicle' => isset($student['data']['vehicle']) ? $student['data']['vehicle'] : [],
-                'room' => isset($student['data']['room']) ? $student['data']['room'] : [],
-                'religion' => isset($religion['data']) ? $religion['data'] : [],
-                'races' => isset($races['data']) ? $races['data'] : [],
-                'relation' => isset($relation['data']) ? $relation['data'] : [],
-                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
-                'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
-                'role' => isset($student['data']['user']) ? $student['data']['user'] : [],
-                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
-            ]
-        );
+            ];
+            $getclass = Helper::GetMethod(config('constants.api.class_list'));
+            $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
+            $gethostel = Helper::GetMethod(config('constants.api.hostel_list'));
+            $session = Helper::GetMethod(config('constants.api.session'));
+            $semester = Helper::GetMethod(config('constants.api.semester'));
+            $student = Helper::PostMethod(config('constants.api.student_details'), $data);
+            $parent = Helper::GetMethod(config('constants.api.parent_list'));
+            $religion = Helper::GetMethod(config('constants.api.religion'));
+            $races = Helper::GetMethod(config('constants.api.races'));
+            $relation = Helper::GetMethod(config('constants.api.relation_list'));
+            $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+            $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
+            $department = Helper::GetMethod(config('constants.api.department_list'));
+            $data = [
+                'department_id' => isset($student['data']['student']['department_id']) ? $student['data']['student']['department_id'] : 0,
+            ];
+            $grade_list_by_department = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+            $prev = json_decode($student['data']['student']['previous_details']);
+            // $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
+            $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
+            $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
+            $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
+            return view(
+                'admin.student.edit',
+                [
+                    'grade_list_by_department' => isset($grade_list_by_department['data']) ? $grade_list_by_department['data'] : [],
+                    'department' => isset($department['data']) ? $department['data'] : [],
+                    'class' => isset($getclass['data']) ? $getclass['data'] : [],
+                    'parent' => isset($parent['data']) ? $parent['data'] : [],
+                    'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
+                    'hostel' => isset($gethostel['data']) ? $gethostel['data'] : [],
+                    'session' => isset($session['data']) ? $session['data'] : [],
+                    'semester' => isset($semester['data']) ? $semester['data'] : [],
+                    'student' => isset($student['data']['student']) ? $student['data']['student'] : [],
+                    'section' => isset($student['data']['section']) ? $student['data']['section'] : [],
+                    'vehicle' => isset($student['data']['vehicle']) ? $student['data']['vehicle'] : [],
+                    'room' => isset($student['data']['room']) ? $student['data']['room'] : [],
+                    'religion' => isset($religion['data']) ? $religion['data'] : [],
+                    'races' => isset($races['data']) ? $races['data'] : [],
+                    'relation' => isset($relation['data']) ? $relation['data'] : [],
+                    'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                    'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
+                    'role' => isset($student['data']['user']) ? $student['data']['user'] : [],
+                    'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
+                ]
+            );
+        }
+        else
+        {
+            return redirect()->route('admin.student')->with('errors', "Invalid Student");
+        }
     }
 
 
     // Update Student 
     public function updateStudent(Request $request)
     {
+        $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
+
         $status = "0";
         if ($request->status) {
             $status = "1";
@@ -4938,16 +4941,7 @@ class AdminController extends Controller
             $nric_extension = $nric_file->getClientOriginalExtension();
         }
 
-        $image_principal_base64 = "";
-        $image_principal_extension = "";
-        $image_principal_file = $request->file('japanese_association_membership_image_principal');
-        if ($image_principal_file) {
-            $image_principal_path = $image_principal_file->path();
-            $image_principal_data = file_get_contents($image_principal_path);
-            $image_principal_base64 = base64_encode($image_principal_data);
-            $image_principal_extension = $image_principal_file->getClientOriginalExtension();
-        }
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'login_userid' => session()->get('user_id'),
             'login_roleid' => session()->get('role_id'),
@@ -5022,11 +5016,8 @@ class AdminController extends Controller
             'passport_old_photo' => $request->passport_old_photo,
             'dual_nationality' => $dual_nationality,
             'nric_old_photo' => $request->nric_old_photo,
-            'image_principal_old_photo' => $request->japanese_association_membership_image_principal_old,
             'nric_photo' => $nric_base64,
             'nric_file_extension' => $nric_extension,
-            'image_principal_photo' => $image_principal_base64,
-            'image_principal_file_extension' => $image_principal_extension,
             'school_country' => $request->school_country,
             'school_city' => $request->school_city,
             'school_state' => $request->school_state,
@@ -5083,6 +5074,7 @@ class AdminController extends Controller
             'guardian_first_name' => $request->guardian_first_name,
             'guardian_last_name' => $request->guardian_last_name,
         ];
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.student_update'), $data);
         return $response;
     }
@@ -5096,42 +5088,42 @@ class AdminController extends Controller
         ];
 
         $student = Helper::PostMethod(config('constants.api.student_delete'), $data);
-
-        // dd($student);
-        if ($student['code'] == "200") {
-
-            $output = "";
-            $row = 1;
-            if ($student['data']) {
-                foreach ($student['data'] as $stu) {
-
-                    $edit = route('admin.student.details', $stu['id']);
-                    $output .= '<tr>
-                                    <td>' . $row . '</td>
-                                    <td>' . $stu['first_name'] . ' ' . $stu['last_name'] . '</td>
-                                    <td>' . $stu['register_no'] . '</td>
-                                    <td>' . $stu['roll_no'] . '</td>
-                                    <td>' . $stu['gender'] . '</td>
-                                    <td>' . $stu['email'] . '</td>
-                                    <td>' . $stu['mobile_no'] . '</td>
-                                    <td>
-                                        <div class="button-list">
-                                        <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
-                                        <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $stu['id'] . '" id="deleteStudentBtn"><i class="fe-trash-2"></i></a>
-                                        </div>
-                                    </td>
-
-                                </tr>';
-                    $row++;
-                }
-            } else {
-                $output .= '<tr>
-                                <td colspan="7"> ' . $no_data_available_lang . '</td>
-                            </tr>';
-            }
-            $student['table'] = $output;
-        }
         return $student;
+        // dd($student);
+        // if ($student['code'] == "200") {
+
+        //     $output = "";
+        //     $row = 1;
+        //     if ($student['data']) {
+        //         foreach ($student['data'] as $stu) {
+
+        //             $edit = route('admin.student.details', $stu['id']);
+        //             $output .= '<tr>
+        //                             <td>' . $row . '</td>
+        //                             <td>' . $stu['first_name'] . ' ' . $stu['last_name'] . '</td>
+        //                             <td>' . $stu['register_no'] . '</td>
+        //                             <td>' . $stu['roll_no'] . '</td>
+        //                             <td>' . $stu['gender'] . '</td>
+        //                             <td>' . $stu['email'] . '</td>
+        //                             <td>' . $stu['mobile_no'] . '</td>
+        //                             <td>
+        //                                 <div class="button-list">
+        //                                 <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light"><i class="fe-edit"></i></a>
+        //                                 <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $stu['id'] . '" id="deleteStudentBtn"><i class="fe-trash-2"></i></a>
+        //                                 </div>
+        //                             </td>
+
+        //                         </tr>';
+        //             $row++;
+        //         }
+        //     } else {
+        //         $output .= '<tr>
+        //                         <td colspan="7"> ' . $no_data_available_lang . '</td>
+        //                     </tr>';
+        //     }
+        //     $student['table'] = $output;
+        // }
+        // return $student;
     }
 
     public function createParent()
@@ -5145,7 +5137,6 @@ class AdminController extends Controller
         $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
         $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
         $application = Helper::PostMethod(config('constants.api.get_application_guardian_details'), $data);
-
         $grade = Helper::GetMethod(config('constants.api.class_list'));
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
@@ -5244,6 +5235,17 @@ class AdminController extends Controller
             $passport_base64 = base64_encode($passport_data);
             $passport_extension = $passport_file->getClientOriginalExtension();
         }*/
+
+        
+        $image_principal_base64 = "";
+        $image_principal_extension = "";
+        $image_principal_file = $request->file('japanese_association_membership_image_principal');
+        if ($image_principal_file) {
+            $image_principal_path = $image_principal_file->path();
+            $image_principal_data = file_get_contents($image_principal_path);
+            $image_principal_base64 = base64_encode($image_principal_data);
+            $image_principal_extension = $image_principal_file->getClientOriginalExtension();
+        }
         $japanese_association_membership_image_supplimental_base64 = "";
         $japanese_association_membership_image_supplimental_extension = "";
         $file = $request->file('japanese_association_membership_image_supplimental');
@@ -5303,6 +5305,7 @@ class AdminController extends Controller
             'father_passport_number' => $request->father_passport_number,       
             'father_passport_expiry_date' => $request->father_passport_expiry_date,*/
 
+            'school_roleid' => $request->school_roleid,
             'first_name' => $request->guardian_first_name,
             'last_name' => $request->guardian_last_name,
             'middle_name' => $request->guardian_middle_name,
@@ -5364,6 +5367,9 @@ class AdminController extends Controller
             // 'guardian_remarks' => $request->guardian_remarks,
             'japanese_association_membership_image_supplimental' => $japanese_association_membership_image_supplimental_base64,
             'japanese_association_membership_image_supplimental_file_extension' => $japanese_association_membership_image_supplimental_extension,
+            'image_principal_photo' => $image_principal_base64,
+            'image_principal_file_extension' => $image_principal_extension,
+    
 
             'school_roleid' => isset($request->school_roleid) ? $request->school_roleid : '',
             'japan_postalcode' => $request->japan_postalcode,
@@ -5381,7 +5387,13 @@ class AdminController extends Controller
     }
     public function getParentList(Request $request)
     {
-        $response = Helper::GetMethod(config('constants.api.parent_list'));
+        $parent_data = [
+            'status' => $request->status,
+            'academic_session_id' => session()->get('academic_session_id'),
+        ];
+        // return $parent_data;
+        // dd($parent_data);
+        $response = Helper::GETMethodWithData(config('constants.api.parent_list'), $parent_data);
         // dd($response);
         $data = isset($response['data']) ? $response['data'] : [];
         return DataTables::of($data)
@@ -5434,7 +5446,7 @@ class AdminController extends Controller
         $races = Helper::GetMethod(config('constants.api.races'));
         $education = Helper::GetMethod(config('constants.api.education_list'));
         $response = Helper::PostMethod(config('constants.api.parent_update_info_view'), $data);
-        // dd($response);
+        //dd($response);
         return view(
             'admin.parent.update_view',
             [
@@ -5482,7 +5494,6 @@ class AdminController extends Controller
         $races = Helper::GetMethod(config('constants.api.races'));
         $education = Helper::GetMethod(config('constants.api.education_list'));
         $response = Helper::PostMethod(config('constants.api.student_update_info_view'), $data);
-        // dd($response);
         return view(
             'admin.student.update_view',
             [
@@ -5498,10 +5509,15 @@ class AdminController extends Controller
     {
         $data = [
             'id' => $id,
+            'academic_session_id' => session()->get('academic_session_id'),
         ];
+        $parentId = [
+            'parent_id'=> $id,
+           ];
         $data1 = [
             'email' => session()->get('email'),
         ];
+        
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
         $education = Helper::GetMethod(config('constants.api.education_list'));
@@ -5515,12 +5531,14 @@ class AdminController extends Controller
         $grade = Helper::GetMethod(config('constants.api.class_list'));
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
-        //dd($response);
+        $get_std_names_dashboard = Helper::GETMethodWithData(config('constants.api.get_students_parentdashboard'), $parentId);
+        // dd($response);
         return view(
             'admin.parent.edit',
             [
                 'religion' => isset($religion['data']) ? $religion['data'] : [],
                 'races' => isset($races['data']) ? $races['data'] : [],
+                'relation' => isset($relation['data']) ? $relation['data'] : [],                'races' => isset($races['data']) ? $races['data'] : [],
                 'education' => isset($education['data']) ? $education['data'] : [],
                 'parent' => isset($response['data']['parent']) ? $response['data']['parent'] : [],
                 'childs' => isset($response['data']['childs']) ? $response['data']['childs'] : [],
@@ -5531,6 +5549,7 @@ class AdminController extends Controller
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'grade' => isset($grade['data']) ? $grade['data'] : [],
                 'contact' => isset($contactDetails['data']) ? $contactDetails['data'] : [],
+                'get_std_names_dashboard' => isset($get_std_names_dashboard['data']) ? $get_std_names_dashboard['data'] : [],
 
                 'guardian' => isset($application['data']) ? $application['data'] : [],
                 'email' => session()->get('email'),
@@ -5556,45 +5575,45 @@ class AdminController extends Controller
             $extension = $file->getClientOriginalExtension();
         }
 */
-//         $mother_visa_base64 = "";
-//         $mother_visa_extension = "";
-//         $mother_visa_file = $request->file('visa_mother_photo');
-//         if ($mother_visa_file) {
-//             $mother_visa_path = $mother_visa_file->path();
-//             $mother_visa_data = file_get_contents($mother_visa_path);
-//             $mother_visa_base64 = base64_encode($mother_visa_data);
-//             $mother_visa_extension = $mother_visa_file->getClientOriginalExtension();
-//         }
+        $mother_visa_base64 = "";
+        $mother_visa_extension = "";
+        $mother_visa_file = $request->file('visa_mother_photo');
+        if ($mother_visa_file) {
+            $mother_visa_path = $mother_visa_file->path();
+            $mother_visa_data = file_get_contents($mother_visa_path);
+            $mother_visa_base64 = base64_encode($mother_visa_data);
+            $mother_visa_extension = $mother_visa_file->getClientOriginalExtension();
+        }
 
-//         $mother_passport_base64 = "";
-//         $mother_passport_extension = "";
-//         $mother_passport_file = $request->file('passport_mother_photo');
-//         if ($mother_passport_file) {
-//             $mother_passport_path = $mother_passport_file->path();
-//             $mother_passport_data = file_get_contents($mother_passport_path);
-//             $mother_passport_base64 = base64_encode($mother_passport_data);
-//             $mother_passport_extension = $mother_passport_file->getClientOriginalExtension();
-//         }
+        $mother_passport_base64 = "";
+        $mother_passport_extension = "";
+        $mother_passport_file = $request->file('passport_mother_photo');
+        if ($mother_passport_file) {
+            $mother_passport_path = $mother_passport_file->path();
+            $mother_passport_data = file_get_contents($mother_passport_path);
+            $mother_passport_base64 = base64_encode($mother_passport_data);
+            $mother_passport_extension = $mother_passport_file->getClientOriginalExtension();
+        }
 
-//         $father_visa_base64 = "";
-//         $father_visa_extension = "";
-//         $father_visa_file = $request->file('visa_father_photo');
-//         if ($father_visa_file) {
-//             $father_visa_path = $father_visa_file->path();
-//             $father_visa_data = file_get_contents($father_visa_path);
-//             $father_visa_base64 = base64_encode($father_visa_data);
-//             $father_visa_extension = $father_visa_file->getClientOriginalExtension();
-//         }
+        $father_visa_base64 = "";
+        $father_visa_extension = "";
+        $father_visa_file = $request->file('visa_father_photo');
+        if ($father_visa_file) {
+            $father_visa_path = $father_visa_file->path();
+            $father_visa_data = file_get_contents($father_visa_path);
+            $father_visa_base64 = base64_encode($father_visa_data);
+            $father_visa_extension = $father_visa_file->getClientOriginalExtension();
+        }
 
-//         $father_passport_base64 = "";
-//         $father_passport_extension = "";
-//         $father_passport_file = $request->file('passport_father_photo');
-//         if ($father_passport_file) {
-//             $father_passport_path = $father_passport_file->path();
-//             $father_passport_data = file_get_contents($father_passport_path);
-//             $father_passport_base64 = base64_encode($father_passport_data);
-//             $father_passport_extension = $father_passport_file->getClientOriginalExtension();
-//         }
+        $father_passport_base64 = "";
+        $father_passport_extension = "";
+        $father_passport_file = $request->file('passport_father_photo');
+        if ($father_passport_file) {
+            $father_passport_path = $father_passport_file->path();
+            $father_passport_data = file_get_contents($father_passport_path);
+            $father_passport_base64 = base64_encode($father_passport_data);
+            $father_passport_extension = $father_passport_file->getClientOriginalExtension();
+        }
 //         $visa_base64 = "";
 //         $visa_extension = "";
 //         $visa_file = $request->file('visa_photo');
@@ -5614,6 +5633,16 @@ class AdminController extends Controller
 //             $passport_base64 = base64_encode($passport_data);
 //             $passport_extension = $passport_file->getClientOriginalExtension();
 //         }
+
+        $image_principal_base64 = "";
+        $image_principal_extension = "";
+        $image_principal_file = $request->file('japanese_association_membership_image_principal');
+        if ($image_principal_file) {
+            $image_principal_path = $image_principal_file->path();
+            $image_principal_data = file_get_contents($image_principal_path);
+            $image_principal_base64 = base64_encode($image_principal_data);
+            $image_principal_extension = $image_principal_file->getClientOriginalExtension();
+        }
         $japanese_association_membership_image_supplimental_base64 = "";
         $japanese_association_membership_image_supplimental_extension = "";
         $file = $request->file('japanese_association_membership_image_supplimental');
@@ -5623,26 +5652,29 @@ class AdminController extends Controller
             $japanese_association_membership_image_supplimental_base64 = base64_encode($data);
             $japanese_association_membership_image_supplimental_extension = $file->getClientOriginalExtension();
         }
+        $fullNames = $request->input('full_name', []);
+        $siblingdob = $request->input('siblingdob', []);
+        $relationship = $request->input('relationship', []);
         $data = [
 
-
-            // "mother_last_name_furigana" => $request->mother_last_name_furigana,
-            // "mother_middle_name_furigana" => $request->mother_middle_name_furigana,
-            // "mother_first_name_furigana" => $request->mother_first_name_furigana,
-            // "mother_last_name_english" => $request->mother_last_name_english,
-            // "mother_middle_name_english" => $request->mother_middle_name_english,
-            // "mother_first_name_english" => $request->mother_first_name_english,
-            // "mother_nationality" => $request->mother_nationality,
-            // 'mother_first_name' => $request->mother_first_name,
-            // 'mother_last_name' => $request->mother_last_name,
-            // "mother_middle_name" => $request->mother_middle_name,
-            // 'mother_phone_number' => $request->mother_phone_number,
-            // 'mother_occupation' => $request->mother_occupation,
-            // 'mother_email' => $request->mother_email,
-            // 'visa_mother_photo' => $mother_visa_base64,
-            // 'mother_visa_file_extension' => $mother_visa_extension,
-            // 'passport_mother_photo' => $mother_passport_base64,
-            // 'mother_passport_file_extension' => $mother_passport_extension,
+            "mother_id"=>  $request->mother_id,
+            "mother_last_name_furigana" => $request->mother_last_name_furigana,
+            "mother_middle_name_furigana" => $request->mother_middle_name_furigana,
+            "mother_first_name_furigana" => $request->mother_first_name_furigana,
+            "mother_last_name_english" => $request->mother_last_name_english,
+            "mother_middle_name_english" => $request->mother_middle_name_english,
+            "mother_first_name_english" => $request->mother_first_name_english,
+            "mother_nationality" => $request->mother_nationality,
+            'mother_first_name' => $request->mother_first_name,
+            'mother_last_name' => $request->mother_last_name,
+            "mother_middle_name" => $request->mother_middle_name,
+            'mother_phone_number' => $request->mother_mobile_no,
+            'mother_occupation' => $request->mother_occupation,
+            'mother_email' => $request->mother_email,
+            'visa_mother_photo' => $mother_visa_base64,
+            'mother_visa_file_extension' => $mother_visa_extension,
+            'passport_mother_photo' => $mother_passport_base64,
+            'mother_passport_file_extension' => $mother_passport_extension,
             /*'mother_nric' => $request->mother_nric,
             'mother_visa_number' => $request->mother_visa_number,
             'mother_visa_expiry_date' => $request->mother_visa_expiry_date,
@@ -5651,28 +5683,28 @@ class AdminController extends Controller
             'mother_passport_number' => $request->mother_passport_number, 
             'mother_passport_expiry_date' => $request->mother_passport_expiry_date,
             'passport_mother_photo' => $mother_passport_base64,           
-            'mother_passport_file_extension' => $mother_passport_extension,           
-            'passport_mother_photo_old' => $request->passport_mother_photo_old,
-            'visa_mother_photo_old' => $request->visa_mother_photo_old,*/
+            'mother_passport_file_extension' => $mother_passport_extension, */          
+            'passport_mother_photo_old' => $request->passport_mother_old_photo,
+            'visa_mother_photo_old' => $request->visa_mother_old_photo,
 
-
-            // "father_last_name_furigana" => $request->father_last_name_furigana,
-            // "father_middle_name_furigana" => $request->father_middle_name_furigana,
-            // "father_first_name_furigana" => $request->father_first_name_furigana,
-            // "father_last_name_english" => $request->father_last_name_english,
-            // "father_middle_name_english" => $request->father_middle_name_english,
-            // "father_first_name_english" => $request->father_first_name_english,
-            // "father_nationality" => $request->father_nationality,
-            // 'father_first_name' => $request->father_first_name,
-            // 'father_last_name' => $request->father_last_name,
-            // "father_middle_name" => $request->father_middle_name,
-            // 'father_phone_number' => $request->father_phone_number,
-            // 'father_occupation' => $request->father_occupation,
-            // 'father_email' => $request->father_email,
-            // 'passport_father_photo' => $father_passport_base64,
-            // 'father_passport_file_extension' => $father_passport_extension,
-            // 'visa_father_photo' => $father_visa_base64,
-            // 'father_visa_file_extension' => $father_visa_extension,
+            "father_id"=>  $request->father_id,
+            "father_last_name_furigana" => $request->father_last_name_furigana,
+            "father_middle_name_furigana" => $request->father_middle_name_furigana,
+            "father_first_name_furigana" => $request->father_first_name_furigana,
+            "father_last_name_english" => $request->father_last_name_english,
+            "father_middle_name_english" => $request->father_middle_name_english,
+            "father_first_name_english" => $request->father_first_name_english,
+            "father_nationality" => $request->father_nationality,
+            'father_first_name' => $request->father_first_name,
+            'father_last_name' => $request->father_last_name,
+            "father_middle_name" => $request->father_middle_name,
+            'father_phone_number' => $request->father_mobile_no,
+            'father_occupation' => $request->father_occupation,
+            'father_email' => $request->father_email,
+            'passport_father_photo' => $father_passport_base64,
+            'father_passport_file_extension' => $father_passport_extension,
+            'visa_father_photo' => $father_visa_base64,
+            'father_visa_file_extension' => $father_visa_extension,
             /*'father_nric' => $request->father_nric,
             'father_visa_number' => $request->father_visa_number,
             'father_visa_expiry_date' => $request->father_visa_expiry_date,
@@ -5681,9 +5713,9 @@ class AdminController extends Controller
             'father_passport_number' => $request->father_passport_number,
             'passport_father_photo' => $father_passport_base64,            
             'father_passport_expiry_date' => $request->father_passport_expiry_date,
-            'father_passport_file_extension' => $father_passport_extension,            
-            'passport_father_photo_old' => $request->passport_father_photo_old,
-            'visa_father_photo_old' => $request->visa_father_photo_old,*/
+            'father_passport_file_extension' => $father_passport_extension,  */          
+            'passport_father_photo_old' => $request->passport_father_old_photo,
+            'visa_father_photo_old' => $request->visa_father_old_photo,
 
 
             'id' => $request->id,
@@ -5734,7 +5766,7 @@ class AdminController extends Controller
             'visa_old_photo' => $request->visa_old_photo,
             'passport_old_photo' => $request->passport_old_photo,*/
 
-            // 'guardian_relation' => $request->guardian_relation,
+           
             'guardian_company_name_japan' => $request->guardian_company_name_japan,
             'guardian_company_name_local' => $request->guardian_company_name_local,
             'guardian_company_phone_number' => $request->guardian_company_phone_number,
@@ -5743,12 +5775,21 @@ class AdminController extends Controller
             'japanese_association_membership_image_supplimental' => $japanese_association_membership_image_supplimental_base64,
             'japanese_association_membership_image_supplimental_file_extension' => $japanese_association_membership_image_supplimental_extension,
             "japanese_association_membership_image_supplimental_old" => $request->japanese_association_membership_image_supplimental_old,
+            'image_principal_old_photo' => $request->japanese_association_membership_image_principal_old,
+            'image_principal_photo' => $image_principal_base64,
+            'image_principal_file_extension' => $image_principal_extension,
             'school_roleid' => isset($request->school_roleid) ? $request->school_roleid : '',
             'japan_postalcode' => $request->japan_postalcode,
             'japan_contact_no' => $request->japan_contact_no,
             'japan_emergency_sms' => $request->japan_emergency_sms,
             'japan_address' => $request->japan_address,
             'stay_category' => $request->stay_category,
+            'student_id' => $request->student_id,
+            'full_name' => $fullNames,
+            'sblingdob' => $siblingdob,
+            'relationship' => $relationship,
+            'guardian_relation' => $request->guardian_relation,
+            'school_roleid' => $request->school_roleid,
 
             'role_id' => session()->get('role_id')
         ];
@@ -9099,7 +9140,7 @@ class AdminController extends Controller
                     $result = "success";
                 } else if ($status == "Send Back") {
                     $result = "warning";
-                } else if ($status == "Process") {
+                } else if ($status == "Applied") {
                     $result = "info";
                 } else if ($status == "Reject") {
                     $result = "danger";
@@ -9223,6 +9264,30 @@ class AdminController extends Controller
 
     public function updateApplication(Request $request)
     {
+        $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
+    
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+    
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+    
+        // Set type based on the last date of withdrawal
+        // $type = "Admission";
+        // if ($request->last_date_of_withdrawal) {
+        //     $type = "Re-Admission";
+        // }
+
+        // $type = $request->filled('last_date_of_withdrawal') ? 'Re-Admission' : 'Admission';
+    
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
+
         $trail_date = "";
         if ($request->enrollment == "Trail Enrollment") {
             $trail_date = $request->trail_date;
@@ -9321,7 +9386,7 @@ class AdminController extends Controller
             $visa_mother_base64 = base64_encode($visa_mother_data);
             $visa_mother_extension = $visa_mother_file->getClientOriginalExtension();
         }
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'id' => $request->id,
             'first_name' => $request->first_name,
@@ -9976,16 +10041,25 @@ class AdminController extends Controller
         $data = [
             'id' => $request->id,
         ];
+        if ($request->id !== null) {
         $response = Helper::PostMethod(config('constants.api.school_role_details'), $data);
         return $response;
+        } else {
+            return response()->json(['error' => 'School Menu Role ID is empty.'], 403);
+        } 
     }
     public function school_menurole_details(Request $request)
     {
         $data = [
             'id' => $request->id,
         ];
+        if ($request->id !== null) {
         $response = Helper::PostMethod(config('constants.api.school_menurole_details'), $data);
-        return $response;
+        return $response;   
+            
+        } else {
+            return response()->json(['error' => 'School Menu Role ID is empty.'], 403);
+        } 
     }
 
     public function updateschool_role(Request $request)
@@ -10012,6 +10086,7 @@ class AdminController extends Controller
 
     public function rollmenuaccess(Request $request)
     {
+        ini_set('max_execution_time', 300);
         $data = [
             'status' => "All"
         ];
@@ -10030,6 +10105,7 @@ class AdminController extends Controller
     }
     public function getmenus1(Request $request)
     {
+        ini_set('max_execution_time', 300);
         $getBranches = Helper::GetMethod(config('constants.api.branch_list'));
         //$menus = Helper::GetMethod(config('constants.api.menus'));
         $data = [
@@ -10053,6 +10129,7 @@ class AdminController extends Controller
     }
     public function getmenus(Request $request)
     {
+        ini_set('max_execution_time', 300);
         $role_id = $request->role_id;
         $branch_id = config('constants.branch_id');
 
@@ -10106,7 +10183,8 @@ class AdminController extends Controller
     }
     public function setpermission(Request $request)
     {
-
+        ini_set('max_execution_time', 300);
+        ini_set('max_input_vars', 3000);
         $data = [
             'role_id' => $request->role_id,
             'school_roleid' => $request->school_roleid,
@@ -10119,14 +10197,25 @@ class AdminController extends Controller
             'deletes' => $request->deletes,
             'export' => $request->export
         ];
-        // dd($data);
-        $response = Helper::PostMethod(config('constants.api.setschoolpermission'), $data);
-        // dd($response);
-        //return redirect('admin/school_role/menuaccess');
-        if ($response['code'] == 200) {
-            return redirect()->route('admin.school_role.menuaccess')->with('success', $response['message']);
-        } else {
-            return redirect()->route('admin.school_role.menuaccess')->with('errors', $response['message']);
+        if($request->read !== null)
+        {
+            // dd($data);
+            $response = Helper::PostMethod(config('constants.api.setschoolpermission'), $data);
+            // dd($response);        
+            //return redirect('admin/school_role/menuaccess');
+            if($response){
+            if ($response['code'] == 200) {
+                return redirect()->route('admin.school_role.menuaccess')->with('success', $response['message']);
+            } else {
+                return redirect()->route('admin.school_role.menuaccess')->with('errors', $response['message']);
+            }
+        }
+        else {
+            return redirect()->route('admin.school_role.menuaccess')->with('errors', 'Set Menu Pemission Failed.');
+        }
+        }
+        else {
+            return redirect()->route('admin.school_role.menuaccess')->with('errors', 'At least one menu must be selected to set permissions.');
         }
     }
     public function deleteschoolpermission(Request $request)
@@ -10150,6 +10239,7 @@ class AdminController extends Controller
     }
     public function checkpermissions(Request $request)
     {
+        ini_set('max_execution_time', 300);
         $pagedata = [
             //'menu_id' => "27",
             'menu_id' => $request->menu_id,
@@ -10222,6 +10312,12 @@ class AdminController extends Controller
         $data = [
             'user_id' => $user_id,
         ];
+        $academic_session_id = [
+            'id' => session()->get('academic_session_id')
+        ];
+        //dd($academic_session_id);
+        $academic_year = Helper::PostMethod(config('constants.api.academic_year_details'), $academic_session_id);
+        //dd($academic_year);
         $usernames = Helper::GETMethodWithData(config('constants.api.buletin_board_usernames'), $data);
         $getClasses = Helper::GetMethod(config('constants.api.class_list'));
         $emp_department = Helper::PostMethod(config('constants.api.emp_department'), []);
@@ -10230,7 +10326,9 @@ class AdminController extends Controller
             [
                 'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [],
                 'emp_department' => isset($emp_department['data']) ? $emp_department['data'] : [],
-                'usernames' => isset($usernames['data']) ? $usernames['data'] : []
+                'usernames' => isset($usernames['data']) ? $usernames['data'] : [],
+                'academic_year' => isset($academic_year['data']['name']) ? $academic_year['data']['name'] : ''
+
             ]
         );
     }
@@ -10280,8 +10378,6 @@ class AdminController extends Controller
     }
     public function addBuletinBoard(Request $request)
     {
-
-
         // Retrieve the selected values as an array
         $targetUsers = $request->input('target_user', []);
 
@@ -10299,10 +10395,15 @@ class AdminController extends Controller
         // Concatenate the admin ID with the target users
         $rollid_target_user = $adminId . ',' . $targetUserString;
         $file = $request->file('file');
-        $path = $file->path();
-        $data = file_get_contents($path);
-        $base64 = base64_encode($data);
-        $extension = $file->getClientOriginalExtension();
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        } else {
+            $base64 = null;
+            $extension = null;
+        }
         $data = [
             'title' => $request->title,
             'description' => $request->discription,
@@ -10314,7 +10415,7 @@ class AdminController extends Controller
             'student_id' =>  $request->student_id,
             'parent_id' =>  $request->parent_id,
             'department_id' => $request->empDepartment,
-            'publish' => $request->publish,
+           // 'publish' => $request->publish,
             'add_to_dash' => $request->add_to_dash,
             'publish_date' => $request->date,
             'publish_end_date' => $request->endDate,
@@ -10402,7 +10503,7 @@ class AdminController extends Controller
             'file_extension' => $extension,
             'oldfile' => $request->oldfile,
             'target_user' => $rollid_target_user,
-            'publish' => $request->publish,
+           // 'publish' => $request->publish,
             'publish_date' => $request->date,
             'publish_end_dates' => $request->publish_end_dates,
             'updated_by' => session()->get('ref_user_id')
@@ -10810,6 +10911,18 @@ class AdminController extends Controller
                 
                 <span class="badge badge-soft-' . $color . ' p-1">' . $row['termination_status'] . '</span>
             </div>';
+        })
+        ->addColumn('school_fees_payment_status', function ($row) {
+            $color = "";
+            if ($row['school_fees_payment_status'] == "Paid") {
+                $color = "success";
+            } else if ($row['school_fees_payment_status'] == "Unpaid") {
+                $color = "danger";
+            } 
+            return '<div class="button-list">
+            
+            <span class="badge badge-soft-' . $color . ' p-1">' . $row['school_fees_payment_status'] . '</span>
+        </div>';
             })
             // <a href="' . route('parent.termination.edit', $row['id']) . '" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fe-edit"></i></a>
             ->addColumn('actions', function ($row) {
@@ -10818,7 +10931,7 @@ class AdminController extends Controller
                     <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteTerminationBtn"><i class="fe-trash-2"></i></a>
                         </div>';
             })
-            ->rawColumns(['actions', 'termination_status'])
+            ->rawColumns(['actions', 'termination_status','school_fees_payment_status'])
             ->make(true);
     }
     public function getTerminationDetails(Request $request)
@@ -10993,7 +11106,7 @@ class AdminController extends Controller
         $grade_list_by_department = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
 
         $prev = json_decode($student['data']['student']['previous_details']);
-        $school_name = $prev->school_name;
+        //$school_name = $prev->school_name;
         $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
         $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
         $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
@@ -11050,10 +11163,17 @@ class AdminController extends Controller
             //dd($data);
 
             $response = Helper::PostMethod(config('constants.api.addstupicture'), $data);
-            if ($response['code'] == 200) {
-                return redirect()->route('admin.student.picture')->with('success', $response['message']);
-            } else {
-                return redirect()->route('admin.student.picture')->with('errors', $response['message']);
+            //dd($response);
+            if(isset($response))
+            {
+                if ($response['code'] == 200) {
+                    return redirect()->route('admin.student.picture')->with('success', $response['message']);
+                } else {
+                    return redirect()->route('admin.student.picture')->with('errors', $response['message']);
+                }
+            }
+            else {
+                return redirect()->route('admin.student.picture')->with('errors', "Student Register No. Not exist");
             }
         }
     }
@@ -11084,11 +11204,16 @@ class AdminController extends Controller
                 $response = Helper::PostMethod(config('constants.api.addstupicture'), $data);
             }
         }
-
-        if ($response['code'] == 200) {
-            return redirect()->route('admin.student.picture')->with('success', $response['message']);
-        } else {
-            return redirect()->route('admin.student.picture')->with('errors', $response['message']);
+        if(isset($response))
+        {
+            if ($response['code'] == 200) {
+                return redirect()->route('admin.student.picture')->with('success', $response['message']);
+            } else {
+                return redirect()->route('admin.student.picture')->with('errors', $response['message']);
+            }
+        }
+        else {
+            return redirect()->route('admin.student.picture')->with('errors', "Student Register No. Not exist");
         }
     }
     public function examsutdentlist(Request $request)
@@ -11195,8 +11320,8 @@ class AdminController extends Controller
     {
         $data = [
             'department_id' => $request->department_id,
-            'grade_id' => $request->changeClassName,
-            'section_id' => $request->sectionID,
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
             'student_id' => $request->student_id,
         ];
         $response = Helper::PostMethod(config('constants.api.student_interview_list'), $data);
@@ -11437,5 +11562,16 @@ class AdminController extends Controller
             })
             ->rawColumns(['actions'])
             ->make(true);
+    }
+    public function parentDetailsAccStudentId(Request $request){
+        $data = [
+            "student_id" => $request->student_id
+        ];
+        $response = Helper::PostMethod(config('constants.api.getParentDetailsAccStudentId'), $data);
+        return  $response;
+    }
+    public function page403(Request $request)
+    {
+        return view('admin.dashboard.403');
     }
 }

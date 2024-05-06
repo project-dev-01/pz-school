@@ -426,7 +426,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
-                                                <label for="">{{ __('messages.date_of_birth') }}</label>
+                                                <label for="">{{ __('messages.date_of_birth') }}<span class="text-danger">*</span></label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
@@ -439,7 +439,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="Passport">{{ __('messages.passport_number') }}</label>
+                                                <label for="Passport">{{ __('messages.passport_number') }}<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="txt_passport" placeholder="{{ __('messages.enter_passport_number') }}" value="{{ isset($student['passport']) ? $student['passport'] : ''}}">
                                             </div>
                                         </div>
@@ -548,13 +548,13 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">{{ __('messages.register_no') }}<span class="text-danger">*</span></label>
+                                                <label for="">{{ __('messages.register_no') }}</label>
                                                 <input type="" id="txt_regiter_no" class="form-control" name="txt_regiter_no" value="{{ isset($student['register_no']) ? $student['register_no'] : ''}}" data-parsley-trigger="change">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">{{ __('messages.roll') }}<span class="text-danger">*</span></label>
+                                                <label for="">{{ __('messages.roll') }}</label>
                                                 <input type="" id="txt_roll_no" class="form-control" name="txt_roll_no" value="{{ isset($student['roll_no']) ? $student['roll_no'] : ''}}" data-parsley-trigger="change">
                                             </div>
                                         </div>
@@ -562,7 +562,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group mb-3">
-                                                <label for="">{{ __('messages.admission_date') }}<span class="text-danger">*</span></label>
+                                                <label for="">{{ __('messages.admission_date') }}</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
@@ -587,7 +587,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="section_id">{{ __('messages.class') }}<span class="text-danger">*</span></label>
+                                                <label for="section_id">{{ __('messages.class') }}</label>
                                                 <select id="section_id" class="form-control" name="section_id">
                                                     <option value="">{{ __('messages.select_class') }}</option>
                                                     @forelse($section as $sec)
@@ -603,7 +603,7 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="">{{ __('messages.category') }}<span class="text-danger">*</span></label>
+                                                <label for="">{{ __('messages.category') }}</label>
                                                 <select id="categy" name="categy" class="form-control">
                                                     <option value="">{{ __('messages.select_category') }}</option>
                                                     <option value="1" {{isset($student['category_id']) ? $student['category_id'] == 1 ? "Selected" : "" : "" }}>One</option>
@@ -801,7 +801,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="txt_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                                    <label for="txt_occupation">{{ __('messages.occupation') }}</label>
                                                     <input type="text" maxlength="50" id="father_occupation" class="form-control " placeholder="{{ __('messages.enter_occupation') }}" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>
@@ -1648,5 +1648,5 @@
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
 <script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
 <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
-<script src="{{ asset('js/custom/student.js') }}"></script>
+<script src="{{ asset('js/custom/teacher_student.js') }}"></script>
 @endsection

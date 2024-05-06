@@ -40,7 +40,9 @@
                                     </a>
                                 </div><br>
                                 <h3 class="passrecov">{{ __('messages.renew_password') }}</h3>
-                                <p class="text-muted opoos">Dear user of teachxxxxx@suzen.com from SMK Kiaramas. <br>{{ __('messages.your_old_password_resetted') }}</p>
+                                <p class="text-muted opoos">
+                                    <!-- Dear user of teachxxxxx@suzen.com from SMK Kiaramas.  -->
+                                    <br>{{ __('messages.your_old_password_resetted') }}</p>
                             </div>
                             <form id="LoginAuth" action="{{ route('reset_password_validation') }}" method="post">
                                 @if ( Session::get('success'))
@@ -119,6 +121,8 @@
 
     <!-- App js -->
     <script src="{{ asset('js/app.min.js') }}"></script>
+    <script>window.UserHelpPublicProjectID="Y7YyGqyq2"</script>
+        <script src="https://run.userhelp.co" async></script>
 
 </body>
 

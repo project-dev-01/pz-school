@@ -49,7 +49,15 @@ $(function () {
                         $('#school-role-table').DataTable().ajax.reload(null, false);
                         $('.addschoolRole').modal('hide');
                         $('.addschoolRole').find('form')[0].reset();
-                        toastr.success(data.message);
+                        if(data.message=="Name Already Exist")
+                        {
+                            toastr.error(data.message);
+                        }
+                        else
+                        {
+                            toastr.success(data.message);
+                        }
+                       
                     } else {
                         toastr.error(data.message);
                     }
@@ -226,7 +234,14 @@ $(function () {
                             $('#school-role-table').DataTable().ajax.reload(null, false);
                             $('.editSchoolRole').modal('hide');
                             $('.editSchoolRole').find('form')[0].reset();
-                            toastr.success(data.message);
+                            if(data.message=="Name Already Exist")
+                            {
+                                toastr.error(data.message);
+                            }
+                            else
+                            {
+                                toastr.success(data.message);
+                            }
                         } 
                         else {
                             $('.editSchoolRole').modal('hide');

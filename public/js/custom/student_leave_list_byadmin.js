@@ -2,6 +2,7 @@ $(function () {
     var defaultList = new FormData();
     defaultList.append('token', token);
     defaultList.append('branch_id', branchID);
+    defaultList.append('academic_session_id', academic_session_id);
     studentLeaveList(defaultList);
     // $('#homeRoomPopup').modal('show');
     // $('#nursingPopup').modal('show');
@@ -68,7 +69,6 @@ $(function () {
             academic_session_id: academic_session_id
         }, function (res) {
             if (res.code == 200) {
-                console.log(res)
                 $.each(res.data, function (key, val) {
                     $("#studentLeaveList").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
                 });
@@ -95,8 +95,9 @@ $(function () {
     // rules validation
     // data bind 
     $('#studentLeaveList').on('submit', function (e) {
-        e.preventDefault();
+        e.preventDefault();       
         var form = this;
+        var department_id = $("#department_id").val();
         var class_id = $("#changeClassName").val();
         var section_id = $("#sectionID").val();
         var student_name = $("#student_name").val();
@@ -114,31 +115,34 @@ $(function () {
         // };
         // setLocalStorageStudentLeaveTeacher(classObj);
         var formData = new FormData();
-        formData.append('token', token);
         formData.append('branch_id', branchID);
+        formData.append('department_id', department_id);
         formData.append('class_id', class_id);
         formData.append('section_id', section_id);
         formData.append('student_name', student_name);
         formData.append('status', status);
         formData.append('date', date);
+        formData.append('academic_session_id', academic_session_id);
         // // subject division
         studentLeaveList(formData);
     });
     function getstudentLeaveList() {
         var form = this;
+        var department_id = $("#department_id").val();
         var class_id = $("#changeClassName").val();
         var section_id = $("#sectionID").val();
         var student_name = $("#student_name").val();
         var status = $("#leave_status").val();
         var date = $("#range-datepicker").val();
         var formData = new FormData();
-        formData.append('token', token);
         formData.append('branch_id', branchID);
+        formData.append('department_id', department_id);
         formData.append('class_id', class_id);
         formData.append('section_id', section_id);
         formData.append('student_name', student_name);
         formData.append('status', status);
         formData.append('date', date);
+        formData.append('academic_session_id', academic_session_id);
         // // subject division
         studentLeaveList(formData);
     }
@@ -185,8 +189,6 @@ $(function () {
     $(document).on('click', '.approveRejectLeave', function () {
         var student_leave_tbl_id = $(this).data('id');
         var status = $(this).data('status');
-        console.log(student_leave_tbl_id);
-        console.log(status);
         var formData = new FormData();
         formData.append('branch_id', branchID);
         formData.append('student_leave_tbl_id', student_leave_tbl_id);
@@ -471,7 +473,8 @@ $(function () {
                 bom: true,
                 exportOptions: {
                     columns: 'th:not(:last-child)'
-                }
+                },
+                enabled: false, // Initially disable CSV button
             },
             {
                 extend: 'pdf',
@@ -481,9 +484,32 @@ $(function () {
                 bom: true,
                 exportOptions: {
                     columns: 'th:not(:last-child)'
-                }
+                },
+                enabled: false, // Initially disable PDF button
             }
             ],
+            initComplete: function () {
+                var table = this;
+                $.ajax({
+                    url: dataSetNew,
+                    success: function(data) {
+                        console.log(data.data.length);
+                        if (data && data.data.length > 0) {
+                            console.log('ok');
+                            $('#student-leave-table_wrapper .buttons-csv').removeClass('disabled');
+                            $('#student-leave-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                        } else {
+                            console.log(data);
+                            $('#student-leave-table_wrapper .buttons-csv').addClass('disabled');
+                            $('#student-leave-table_wrapper .buttons-pdf').addClass('disabled');               
+                        }
+                    },
+                    error: function() {
+                        console.log('error');
+                        // Handle error if necessary
+                    }
+                });
+            },
             data: dataSetNew,
             pageLength: 10,
             lengthMenu: [
@@ -497,7 +523,7 @@ $(function () {
                 }
             },
             {
-                data: 'name'
+                data: 'department_name'
             },
             {
                 data: 'class_name'
@@ -506,19 +532,16 @@ $(function () {
                 data: 'section_name'
             },
             {
+                data: 'attendance_no'
+            },
+            {
+                data: 'name'
+            },
+            {
                 data: 'from_leave'
             },
             {
                 data: 'to_leave'
-            },
-            {
-                data: 'status'
-            },
-            {
-                data: 'home_teacher_status'
-            },
-            {
-                data: 'nursing_teacher_status'
             },
             {
                 data: 'leave_type_name'
@@ -527,13 +550,19 @@ $(function () {
                 data: 'reason'
             },
             {
-                data: 'document'
+                data: 'home_teacher_status'
             },
             {
                 data: 'teacher_remarks'
             },
             {
+                data: 'nursing_teacher_status'
+            },
+            {
                 data: 'nursing_teacher_remarks'
+            },
+            {
+                data: 'document'
             },
             {
                 data: 'status'
@@ -542,8 +571,9 @@ $(function () {
                 data: 'id'
             }
             ],
-            columnDefs: [{
-                targets: 1,
+            columnDefs: [
+                {
+                targets: 5,
                 className: "table-user",
                 render: function (data, type, row, meta) {
                     var first_name = '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
@@ -552,28 +582,21 @@ $(function () {
                 }
             },
             {
-                targets: 6,
+                targets: 10,
                 render: function (data, type, row, meta) {
                     var status = getStatusBadge(data);
                     return status;
                 }
             },
             {
-                targets: 7,
+                targets: 12,
                 render: function (data, type, row, meta) {
                     var status = getStatusBadge(data);
                     return status;
                 }
             },
             {
-                targets: 8,
-                render: function (data, type, row, meta) {
-                    var status = getStatusBadge(data);
-                    return status;
-                }
-            },
-            {
-                targets: 11,
+                targets: 14,
                 render: function (data, type, row, meta) {
                     var documentLink = getDocumentLink(row);
                     return documentLink;
@@ -582,12 +605,19 @@ $(function () {
             {
                 targets: 14,
                 render: function (data, type, row, meta) {
+                    var status = getStatusBadge(data);
+                    return status;
+                }
+            },
+            {
+                targets: 15,
+                render: function (data, type, row, meta) {
                     var remarksButtons = getRemarksButtons(row);
                     return remarksButtons;
                 }
             },
             {
-                targets: 15,
+                targets: 16,
                 render: function (data, type, row, meta) {
                     var viewDetailsButton = getViewDetailsButton(row);
                     return viewDetailsButton;
@@ -657,14 +687,11 @@ $(function () {
             dataType: 'json',
             contentType: false,
             success: function (res) {
-                console.log("------****----");
-                console.log(res);
                 if (res.code == 200) {
                     // $('#all-leave-list').DataTable().ajax.reload(null, false);
                     // toastr.success(res.message);
                     // DetailsModal
                     var leave_details = res.data;
-                    console.log(leave_details);
                     $('#nursingPopup').modal('show');
                     // var leave_type_details = res.data.leave_type_details;
                     // var assign_leave_approval_details = res.data.assign_leave_approval_details;
@@ -695,10 +722,11 @@ $(function () {
                     $('#documentDetails').html(leave_details.document);
                     $('#showleaveType').html(leave_details.leave_type_name);
                     $('#absentReasonFromParent').html(leave_details.reason);
+                    $('#parentRemarks').html(leave_details.remarks);
                     $('#leave_status_name').val(leave_details.nursing_teacher_status);
                     $('#changeLevType').val(leave_details.nursing_leave_type);
                     $('#yourRemarks').val(leave_details.nursing_teacher_remarks);
-
+                    
                     var student_leave_type_id = leave_details.nursing_leave_type;
                     $("#changelevReasons1").empty();
                     $("#changelevReasons1").append('<option value="">' + select_reason + '</option>');
@@ -857,6 +885,15 @@ $(function () {
                         getstudentLeaveList();
                     } else {
                         toastr.error(response.message);
+                    }
+                },
+                error: function (xhr) {
+                    console.log("err");
+                    console.log(xhr);
+                    if (xhr.responseJSON && xhr.responseJSON.error) {
+                        toastr.error(xhr.responseJSON.error);
+                    } else {
+                        toastr.error('An error occurred. Please try again later.');
                     }
                 }
             });

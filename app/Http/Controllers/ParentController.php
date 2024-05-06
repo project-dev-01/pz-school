@@ -13,12 +13,29 @@ use Excel;
 use PDF;
 use App\Exports\ParentAttendanceExport;
 use Illuminate\Session\TokenMismatchException;
+use Illuminate\Support\Facades\Route;
 
 class ParentController extends Controller
 {
     //
     public function index(Request $request)
     {
+        // $currentRouteName = Route::currentRouteName();
+        // $pagedata = [
+        //     'currentRouteName' => $currentRouteName,
+        //     'role_id' => session()->get('role_id'),
+        //     'school_roleid' => session()->get('school_roleid'),
+        //     'branch_id' => config('constants.branch_id')
+        // ];
+
+        // $accessRoutes = Helper::PostMethod(config('constants.api.getschoolroleaccessroute'), $pagedata);
+        // $accessPermission = isset($accessRoutes['data']['read']) ? $accessRoutes['data']['read'] : null;
+
+        // // Check if accessPermission is null
+        // if ($accessPermission === null) {
+        //     // Return an empty response or render an empty view
+        //     return view('empty_page'); // Replace 'empty_page' with the name of your empty view
+        // }
         $myArray = session()->get('hidden_week_ends');
         $delimiter = ','; // Delimiter you want between array items
         $hiddenWeekends = implode($delimiter, $myArray);
@@ -122,9 +139,10 @@ class ParentController extends Controller
     // student leave list
     public function getstudentleave_list()
     {
-        $parentid = session()->get('ref_user_id');
         $parent_id = [
-            'parent_id' => $parentid,
+            'parent_id' => session()->get('ref_user_id'),
+            'student_id' => session()->get('student_id'),
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.studentleave_list'), $parent_id);
         // $response = Helper::GETMethodWithData(config('constants.api.studentleave_list'),$parent_id);
@@ -165,7 +183,7 @@ class ParentController extends Controller
 
         $student_id = session()->get('student_id');
         $data = [
-            'id' => isset($student_id) ? $student_id : 0,
+            'id' => isset($student_id) ? $student_id : '',
         ];
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
@@ -188,6 +206,7 @@ class ParentController extends Controller
         return view(
             'parent.student.profile',
             [
+                'id' => isset($student_id) ? $student_id : 0,
                 'class' => isset($getclass['data']) ? $getclass['data'] : [],
                 'parent' => isset($parent['data']) ? $parent['data'] : [],
                 'transport' => isset($gettransport['data']) ? $gettransport['data'] : [],
@@ -218,7 +237,7 @@ class ParentController extends Controller
             'password' => [
                 'required',
                 'min:8',
-                'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'
+                'regex:/^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'
             ],
             'confirmed' => 'required|same:password|min:8'
         ]);
@@ -276,10 +295,14 @@ class ParentController extends Controller
             'role_name' => session()->get('role_name')
 
         ];
+        $en = config('constants.image_url') . '/common-asset/parentfaq/Suzen User Manual (Parent Portal)_v1.0.0_EN.pdf';
+        $jap = config('constants.image_url') . '/common-asset/parentfaq/Suzen User Manual (Parent Portal)_v1.0.0_JP.pdf';
         return view(
             'parent.faq.index',
             [
                 'data' => isset($data) ? $data : [],
+                'en' => $en,
+                'jap' => $jap
             ]
         );
     }
@@ -1080,6 +1103,8 @@ class ParentController extends Controller
         $mother_id = isset($student['data']['student']['mother_id']) ? $student['data']['student']['mother_id'] : "";
         $father_id = isset($student['data']['student']['father_id']) ? $student['data']['student']['father_id'] : "";
         $guardian_relation = isset($student['data']['student']['relation']) ? $student['data']['student']['relation'] : "";
+        $sibling = isset($student['data']['student']) ? $student['data']['student'] : "";
+
         $guardian_data = [
             'id' => session()->get('ref_user_id')
         ];
@@ -1118,6 +1143,7 @@ class ParentController extends Controller
                 'user' => isset($response['data']['user']) ? $response['data']['user'] : [],
                 'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
                 'guardian_relation' => isset($guardian_relation) ? $guardian_relation : "",
+                'sibling' => isset($sibling) ? $sibling : "",
             ]
         );
     }
@@ -1162,6 +1188,16 @@ class ParentController extends Controller
             $father_passport_base64 = base64_encode($father_passport_data);
             $father_passport_extension = $father_passport_file->getClientOriginalExtension();
         }
+
+        $image_principal_base64 = "";
+        $image_principal_extension = "";
+        $image_principal_file = $request->file('japanese_association_membership_image_principal');
+        if ($image_principal_file) {
+            $image_principal_path = $image_principal_file->path();
+            $image_principal_data = file_get_contents($image_principal_path);
+            $image_principal_base64 = base64_encode($image_principal_data);
+            $image_principal_extension = $image_principal_file->getClientOriginalExtension();
+        }
         $japanese_association_membership_image_supplimental_base64 = "";
         $japanese_association_membership_image_supplimental_extension = "";
         $file = $request->file('japanese_association_membership_image_supplimental');
@@ -1171,6 +1207,9 @@ class ParentController extends Controller
             $japanese_association_membership_image_supplimental_base64 = base64_encode($data);
             $japanese_association_membership_image_supplimental_extension = $file->getClientOriginalExtension();
         }
+        $fullNames = $request->input('full_name', []);
+        $siblingdob = $request->input('siblingdob', []);
+        $relationship = $request->input('relationship', []);
         $data = [
 
             'mother_id' => $request->mother_id,
@@ -1231,6 +1270,9 @@ class ParentController extends Controller
             'guardian_company_name_local' => $request->guardian_company_name_local,
             'guardian_company_phone_number' => $request->guardian_company_phone_number,
             'guardian_employment_status' => $request->guardian_employment_status,
+            'image_principal_photo' => $image_principal_base64,
+            'image_principal_file_extension' => $image_principal_extension,
+            'image_principal_old_photo' => $request->japanese_association_membership_image_principal_old,
             'japanese_association_membership_image_supplimental' => $japanese_association_membership_image_supplimental_base64,
             'japanese_association_membership_image_supplimental_file_extension' => $japanese_association_membership_image_supplimental_extension,
             "japanese_association_membership_image_supplimental_old" => $request->japanese_association_membership_image_supplimental_old,
@@ -1240,9 +1282,14 @@ class ParentController extends Controller
             'japan_emergency_sms' => $request->japan_emergency_sms,
             'japan_address' => $request->japan_address,
             'stay_category' => $request->stay_category,
+            'student_id' => $request->student_id,
+            'full_name' => $fullNames,
+            'sblingdob' => $siblingdob,
+            'relationship' => $relationship,
             'role_id' => session()->get('role_id')
         ];
         // dd($data);
+        // return $data;
         $response = Helper::PostMethod(config('constants.api.parent_update'), $data);
         return $response;
     }
@@ -1504,13 +1551,19 @@ class ParentController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
-                $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                $image_url = !empty($row['file']) ? config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] : '';
+                $description = htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8'); // Encoding with quotes
+                $encoded_data = json_encode([
+                    'image_url' => $image_url,
+                    'title' => $row['title'],
+                    'description' => $description,
+                ]);
                 return '<div class="button-list">
-                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(\'' . $image_url . '\', \'' . $row['title'] . '\', \'' . $row['discription'] . '\')"><i class="fe-eye"></i></a>
-                <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
-                <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
-            </a>
-                        </div>';
+            <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>
+            <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
+            <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
+        </a>
+        </div>';
             })
             ->rawColumns(['publish', 'actions'])
             ->make(true);
@@ -1541,13 +1594,19 @@ class ParentController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
-                $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                $image_url = !empty($row['file']) ? config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] : '';
+                $description = htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8'); // Encoding with quotes
+                $encoded_data = json_encode([
+                    'image_url' => $image_url,
+                    'title' => $row['title'],
+                    'description' => $description,
+                ]);
                 return '<div class="button-list">
-                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(\'' . $image_url . '\', \'' . $row['title'] . '\', \'' . $row['discription'] . '\')"><i class="fe-eye"></i></a>
-                <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
-                <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
-            </a>
-                        </div>';
+                    <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>
+                    <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
+                    <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
+                </a>
+                </div>';
             })
             ->rawColumns(['publish', 'actions'])
             ->make(true);
@@ -1556,6 +1615,22 @@ class ParentController extends Controller
     // Update Student 
     public function updateStudent(Request $request)
     {
+        $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
+
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+
+
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
 
         $visa_base64 = "";
         $visa_extension = "";
@@ -1586,33 +1661,24 @@ class ParentController extends Controller
             $nric_extension = $nric_file->getClientOriginalExtension();
         }
 
-        $image_principal_base64 = "";
-        $image_principal_extension = "";
-        $image_principal_file = $request->file('japanese_association_membership_image_principal');
-        if ($image_principal_file) {
-            $image_principal_path = $image_principal_file->path();
-            $image_principal_data = file_get_contents($image_principal_path);
-            $image_principal_base64 = base64_encode($image_principal_data);
-            $image_principal_extension = $image_principal_file->getClientOriginalExtension();
-        }
         // Set dual nationality based on checkbox
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'passport' => $request->txt_passport,
             'nric' => $request->txt_nric,
-            'blood_group' => $request->blooddgrp,
+            // 'blood_group' => $request->blooddgrp,
             'religion' => $request->txt_religion,
-            'race' => $request->txt_race,
+            // 'race' => $request->txt_race,
             'country' => $request->drp_country,
             'post_code' => $request->drp_post_code,
-            'mobile_no' => $request->txt_mobile_no,
+            // 'mobile_no' => $request->txt_mobile_no,
             'city' => $request->drp_city,
             'state' => $request->drp_state,
-            'current_address' => $request->txtarea_paddress,
-            'permanent_address' => $request->txtarea_permanent_address,
+            // 'current_address' => $request->txtarea_paddress,
+            // 'permanent_address' => $request->txtarea_permanent_address,
             'student_id' => $request->student_id,
             'passport_expiry_date' => $request->passport_expiry_date,
-            'visa_number' => $request->visa_number,
+            // 'visa_number' => $request->visa_number,
             'visa_expiry_date' => $request->visa_expiry_date,
             'nationality' => $request->nationality,
             'first_name' => $request->fname,
@@ -1623,7 +1689,7 @@ class ParentController extends Controller
             'last_name_furigana' => $request->last_name_furigana,
             'first_name_common' => $request->first_name_common,
             'last_name_common' => $request->last_name_common,
-            "middle_name" => $request->middle_name,
+            "middle_name" => $request->mname,
             "middle_name_english" => $request->middle_name_english,
             "middle_name_furigana" => $request->middle_name_furigana,
             'visa_photo' => $visa_base64,
@@ -1632,12 +1698,11 @@ class ParentController extends Controller
             'passport_file_extension' => $passport_extension,
             'dual_nationality' => $dual_nationality,
             'nric_old_photo' => $request->nric_old_photo,
-            'image_principal_old_photo' => $request->japanese_association_membership_image_principal_old,
+            'passport_old_photo' => $request->passport_old_photo,
+            'visa_old_photo' => $request->visa_old_photo,
             'nric_photo' => $nric_base64,
             'nric_file_extension' => $nric_extension,
-            'image_principal_photo' => $image_principal_base64,
-            'image_principal_file_extension' => $image_principal_extension,
-            'school_last_attended' => $request->txt_prev_schname,
+            'school_name' => $request->txt_prev_schname,
             'school_country' => $request->school_country,
             'school_city' => $request->school_city,
             'school_state' => $request->school_state,
@@ -1712,7 +1777,7 @@ class ParentController extends Controller
                     $result = "success";
                 } else if ($status == "Send Back") {
                     $result = "warning";
-                } else if ($status == "Process") {
+                } else if ($status == "Applied") {
                     $result = "info";
                 } else if ($status == "Reject") {
                     $result = "danger";
@@ -1769,11 +1834,35 @@ class ParentController extends Controller
     {
 
         $type = "Admission";
+        $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
+
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+
+        // Set type based on the last date of withdrawal
+        // $type = "Admission";
+        // if ($request->last_date_of_withdrawal) {
+        //     $type = "Re-Admission";
+        // }
+
+        $type = $request->filled('last_date_of_withdrawal') ? 'Re-Admission' : 'Admission';
+
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
         if ($request->last_date_of_withdrawal) {
             $type = "Re-Admission";
         }
+
         // Set dual nationality based on checkbox
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -1868,6 +1957,8 @@ class ParentController extends Controller
             "expected_enroll_date" => $request->expected_enroll_date,
             "remarks" => $request->remarks,
 
+            "status" => "Parent",
+            "parent_id" => session()->get('ref_user_id')
         ];
 
         $response = Helper::PostMethod(config('constants.api.application_add'), $data);
@@ -1908,11 +1999,27 @@ class ParentController extends Controller
     }
     public function applicationUpdate(Request $request)
     {
-        $phase_2_status = $request->phase_2_status;
-        if($request->status=="Approved"){
-            if($request->phase_2_status==null){
+        $rules = [
+            'nationality' => 'required|string|max:50',
+            'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        ];
 
-                $phase_2_status = "Process";
+        // Define custom error messages
+        $messages = [
+            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        ];
+
+        // Validate the request
+        $validatedData = $request->validate($rules, $messages);
+
+        // Set dual nationality based on checkbox
+        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
+
+        $phase_2_status = $request->phase_2_status;
+        if ($request->status == "Approved") {
+            if ($request->phase_2_status == null) {
+
+                $phase_2_status = "Applied";
             }
         }
         $trail_date = "";
@@ -1924,7 +2031,7 @@ class ParentController extends Controller
             $official_date = $request->official_date;
         }
         // Set dual nationality based on checkbox
-        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $status = $request->status;
         if ($request->status == "") {
             $status = $request->phase_1_status;
@@ -2161,7 +2268,7 @@ class ParentController extends Controller
             'passport_mother_old_photo' => $request->passport_mother_old_photo,
             'visa_father_old_photo' => $request->visa_father_old_photo,
             'visa_mother_old_photo' => $request->visa_mother_old_photo,
-            'stay_category'=> $request->stay_category,
+            'stay_category' => $request->stay_category,
         ];
         // }
         // return $data;
@@ -2184,6 +2291,7 @@ class ParentController extends Controller
 
         $data = [
             "status" => "Parent",
+            "student_id" => session()->get('student_id'),
             "parent_id" => session()->get('ref_user_id')
         ];
         $response = Helper::GETMethodWithData(config('constants.api.parent_student_update_info_list'), $data);
@@ -2453,5 +2561,21 @@ class ParentController extends Controller
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
             ]
         );
+    }
+    public function checkpermissions(Request $request)
+    {
+        $pagedata = [
+            //'menu_id' => "27",
+            'menu_id' => $request->menu_id,
+            'role_id' => session()->get('role_id'),
+            'school_roleid' => session()->get('school_roleid'),
+            'branch_id' => config('constants.branch_id')
+        ];
+        $page = Helper::PostMethod(config('constants.api.getschoolroleaccess'), $pagedata);
+        return $page;
+    }
+    public function page403(Request $request)
+    {
+        return view('admin.dashboard.403');
     }
 }

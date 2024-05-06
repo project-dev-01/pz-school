@@ -842,6 +842,28 @@ $(function () {
 
                 }
             ],
+            initComplete: function () {
+                var table = this;
+                $.ajax({
+                    url: dataSetNew,
+                    success: function(data) {
+                        console.log(data.data.length);
+                        if (data && data.data.length > 0) {
+                            console.log('ok');
+                            $('#staff-leave-list_wrapper .buttons-csv').removeClass('disabled');
+                            $('#staff-leave-list_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                        } else {
+                            console.log(data);
+                            $('#staff-leave-list_wrapper .buttons-csv').addClass('disabled');
+                            $('#staff-leave-list_wrapper .buttons-pdf').addClass('disabled');               
+                        }
+                    },
+                    error: function() {
+                        console.log('error');
+                        // Handle error if necessary
+                    }
+                });
+            },
             data: dataSetNew,
             "pageLength": 10,
             "aLengthMenu": [

@@ -25,3 +25,5 @@
     <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
     <link href="{{ asset('css/custom/style.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/custom/opensans-font.css') }}" rel="stylesheet" type="text/css" />
+    <script>window.UserHelpPublicProjectID="Y7YyGqyq2"</script>
+        <script src="https://run.userhelp.co" async></script>

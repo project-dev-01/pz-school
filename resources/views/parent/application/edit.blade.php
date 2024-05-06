@@ -214,7 +214,10 @@
     .country-select {
         display: block;
     }
-
+    .country-select .country-list
+    {
+        width: 361px !important;
+    }
     .ui-datepicker {
         width: 20.2em;
     }
@@ -329,6 +332,10 @@
                         $disabled_phase_1 = "disabled";
                         $readonly_phase_1 = "readonly";
                         $hidden_phase_2 = "none";
+                        }else if($application['status']=="Applied"){
+                        $disabled_phase_1 = "disabled";
+                        $readonly_phase_1 = "readonly";
+                        $hidden_phase_2 = "none";
                         }
 
 
@@ -338,6 +345,9 @@
                         $disabled_phase_2 = "disabled";
                         $readonly_phase_2 = "readonly";
                         }else if($application['phase_2_status']=="Reject"){
+                        $disabled_phase_2 = "disabled";
+                        $readonly_phase_2 = "readonly";
+                        }else if($application['phase_2_status']=="Applied"){
                         $disabled_phase_2 = "disabled";
                         $readonly_phase_2 = "readonly";
                         }
@@ -497,7 +507,7 @@
                                             @if($form_field['religion'] == 0)
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="religion">{{ __('messages.religion') }}<span class="text-danger">*</span></label>
+                                                    <label for="religion">{{ __('messages.religion') }}<span class="text-danger"></span></label>
                                                     <select {{$disabled_phase_1}} class="form-control" name="religion" id="religion">
                                                         <option value="">{{ __('messages.select_religion') }}</option>
                                                         @forelse($religion as $r)
@@ -543,7 +553,7 @@
                                                 <div class="form-group">
                                                     <div class="custom-control custom-checkbox" style="margin-top: 2.25rem;">
                                                         <input type="checkbox" {{$disabled_phase_1}} name="has_dual_nationality_checkbox" id="has_dual_nationality_checkbox" class="custom-control-input" {{ isset($application['dual_nationality']) ? 'checked' : '' }}>
-                                                        <label class="custom-control-label" for="has_dual_nationality_checkbox">Nationality (For dual nationality)</label>
+                                                        <label class="custom-control-label" for="has_dual_nationality_checkbox">{{ __('messages.dual_nationality') }}</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -552,6 +562,7 @@
                                                     <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
                                                     <input type="text" maxlength="50" id="dual_nationality" {{$readonly_phase_1}} class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" value="{{ isset($application['dual_nationality']) ? $application['dual_nationality'] : ''}}" data-parsley-trigger="change">
                                                 </div>
+                                                <span id ="error_message"></span>
                                             </div>
                                             @endif
                                             <!-- <div class="col-md-4">
@@ -604,8 +615,8 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="school_state">{{ __('messages.state') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control prev_school_form" id="school_state" {{$readonly_phase_1}} value="{{ isset($application['school_state']) ? $application['school_state'] : ''}}" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                                        <label for="school_state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control prev_school_form" id="school_state" {{$readonly_phase_1}} value="{{ isset($application['school_state']) ? $application['school_state'] : ''}}" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                             </div>
@@ -613,7 +624,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="school_city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control prev_school_form" id="school_city" {{$readonly_phase_1}} value="{{ isset($application['school_city']) ? $application['school_city'] : ''}}" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control prev_school_form" id="school_city" {{$readonly_phase_1}} value="{{ isset($application['school_city']) ? $application['school_city'] : ''}}" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.city') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -642,7 +653,7 @@
                                                     <div class="form-group">
                                                         <label for="school_enrollment_status_tendency">{{ __('messages.enrollment_status_tendency') }}<span class="text-danger">*</span></label>
                                                         <select {{$disabled_phase_1}} id="school_enrollment_status_tendency" name="school_enrollment_status_tendency" class="form-control prev_school_form">
-                                                            <option value="">{{ __('messages.select_enrollment_status') }}</option>
+                                                            <option value="">{{ __('messages.tendency_select_enrollment_status') }}</option>
                                                             <option value="Yes" {{ isset($application['school_enrollment_status_tendency']) ? $application['school_enrollment_status_tendency'] == "Yes" ? 'selected' : '' : '' }}>{{ __('messages.yes') }}</option>
                                                             <option value="No" {{ isset($application['school_enrollment_status_tendency']) ? $application['school_enrollment_status_tendency'] == "No" ? 'selected' : '' : '' }}>{{ __('messages.no') }}</option>
                                                         </select>
@@ -1167,11 +1178,11 @@
                                                 <div class="col-md-2 mt-4">
                                                     <div class="form-group">
                                                         <div class="radio radio-success form-check-inline">
-                                                            <input type="radio" class="re_admission" id="" {{$readonly_phase_1}} name="re_admission" value="yes" {{ isset($application['type']) ? $application['type'] == "Re-Admission" ? 'checked' : '' : '' }}>
+                                                            <input type="radio" class="re_admission" id="" {{$disabled_phase_1}} name="re_admission" value="yes" {{ isset($application['type']) ? $application['type'] == "Re-Admission" ? 'checked' : '' : '' }}>
                                                             <label for="yes"> {{ __('messages.yes') }} </label>
                                                         </div>
                                                         <div class="radio radio-success form-check-inline">
-                                                            <input type="radio" class="re_admission" id="" {{$readonly_phase_1}} name="re_admission" value="no" {{ isset($application['type']) ? $application['type'] == "Admission" ? 'checked' : '' : '' }}>
+                                                            <input type="radio" class="re_admission" id="" {{$disabled_phase_1}} name="re_admission" value="no" {{ isset($application['type']) ? $application['type'] == "Admission" ? 'checked' : '' : '' }}>
                                                             <label for="no"> {{ __('messages.no') }} </label>
                                                         </div>
                                                         <!-- <div class="radio radio-success form-check-inline">
@@ -1179,6 +1190,10 @@
                                                             <label for="guardian"> Guardian </label>
                                                         </div> -->
                                                     </div>
+                                                    
+                                                    @if($disabled_phase_1=="disabled")
+                                                        <input type="hidden" name="re_admission" value="{{ isset($application['type']) ? $application['type'] == 'Re-Admission' ? 'yes' : 'no' : 'no' }}">
+                                                    @endif
                                                 </div>
                                                 @php
 
@@ -1252,7 +1267,7 @@
                                             <div class="col-md-4" id="reason_1" style="display:{{$phase_1_reason}}">
                                                 <div class="form-group">
                                                     <label for="phase_1_reason">{{ __('messages.reason') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="phase_1_reason" readonly value="{{ isset($application['phase_1_reason']) ? $application['phase_1_reason'] : ''}}" name="phase_1_reason" aria-describedby="inputGroupPrepend">
+                                                    <textarea type="text" id="phase_1_reason" class="form-control" readonly  placeholder="{{ __('messages.enter_reason') }}" name="phase_1_reason" data-parsley-trigger="change">{{ isset($application['phase_1_reason']) ? $application['phase_1_reason'] : ''}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -1262,7 +1277,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="remarks">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
+                                                    <label for="remarks">{{ __('messages.remarks') }}<span class="text-danger"></span></label>
                                                     <textarea type="text" id="remarks" class="form-control" {{$readonly_phase_1}} placeholder="{{ __('messages.enter_remarks') }}" name="remarks" data-parsley-trigger="change">{{ isset($application['remarks']) ? $application['remarks'] : ''}}</textarea>
                                                 </div>
                                             </div>
@@ -1278,7 +1293,7 @@
                                             {{ __('messages.update') }}
                                         </button>
                                         @endif
-                                        <a href="{{ route('guest.application.index') }}" class="btn btn-primary-bl waves-effect waves-light">
+                                        <a href="{{ route('parent.application.index') }}" class="btn btn-primary-bl waves-effect waves-light">
                                             {{ __('messages.back') }}
                                         </a>
                                     </div>
@@ -1337,7 +1352,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" {{$readonly_phase_2}} class="form-control" id="state" value="{{ isset($application['state']) ? $application['state'] : ''}}" name="state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" {{$readonly_phase_2}} class="form-control" id="state" value="{{ isset($application['state']) ? $application['state'] : ''}}" name="state" placeholder="{{ __('messages.enter') }} {{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -1663,7 +1678,7 @@
                                                     <label for="phase_2_status">{{ __('messages.status') }}<span class="text-danger">*</span></label>
                                                     <select id="phase_2_status" {{$disabled_phase_2}} name="phase_2_status" class="form-control">
                                                         <option value="">{{ __('messages.select_status') }}</option>
-                                                        <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Process" ? 'selected' : '' : '' }} {{ isset($application['phase_2_status']) ? "" : 'selected'}} value="Process">{{ __('messages.process') }}</option>
+                                                        <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Applied" ? 'selected' : '' : '' }} {{ isset($application['phase_2_status']) ? "" : 'selected'}} value="Applied">{{ __('messages.applied') }}</option>
                                                         <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Approved" ? 'selected' : '' : '' }} disabled value="Approved">{{ __('messages.approved') }}</option>
                                                         <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Send Back" ? 'selected' : '' : '' }} disabled value="Send Back">{{ __('messages.send_back') }}</option>
                                                         <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Reject" ? 'selected' : '' : '' }} disabled value="Reject">{{ __('messages.reject') }}</option>
@@ -1742,7 +1757,7 @@
                                             <div class="col-md-4" id="reason_2" style="display:{{$phase_2_reason}}">
                                                 <div class="form-group">
                                                     <label for="phase_2_reason">{{ __('messages.reason') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" {{$readonly_phase_2}} id="phase_2_reason" readonly value="{{ isset($application['phase_2_reason']) ? $application['phase_2_reason'] : ''}}" name="phase_2_reason" aria-describedby="inputGroupPrepend">
+                                                    <textarea type="text" id="phase_2_reason" {{$readonly_phase_2}} class="form-control"   placeholder="{{ __('messages.enter_reason') }}" name="phase_2_reason" data-parsley-trigger="change">{{ isset($application['phase_2_reason']) ? $application['phase_2_reason'] : ''}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -1761,7 +1776,7 @@
                                         <button class="btn btn-primary-bl waves-effect waves-light" {{$disabled_phase_2}} id="submit" type="submit">
                                             {{ __('messages.update') }}
                                         </button>
-                                        <a href="{{ route('guest.application.index') }}" class="btn btn-primary-bl waves-effect waves-light">
+                                        <a href="{{ route('parent.application.index') }}" class="btn btn-primary-bl waves-effect waves-light">
                                             {{ __('messages.back') }}
                                         </a>
                                     </div>
@@ -1838,16 +1853,29 @@
 </script>
 
 <script>
-    $(".country").countrySelect({
-        defaultCountry: "jp",
-        preferredCountries: ['my', 'jp'],
-        responsiveDropdown: true
-    });
-    $(".student_country").countrySelect({
-        defaultCountry: "my",
-        preferredCountries: ['my', 'jp'],
-        responsiveDropdown: true
-    });
+    // $(".country").countrySelect({
+    //     defaultCountry: "jp",
+    //     preferredCountries: ['my', 'jp'],
+    //     responsiveDropdown: true
+    // });
+    // $(".student_country").countrySelect({
+    //     defaultCountry: "my",
+    //     preferredCountries: ['my', 'jp'],
+    //     responsiveDropdown: true
+    // });
+    
+    function countrySelect(inputSelector,country) {
+        $(inputSelector).countrySelect({
+            defaultCountry: country,
+            preferredCountries: ['my', 'jp'],
+            responsiveDropdown: true
+        });
+    }
+    countrySelect('#father_nationality',"jp")
+    countrySelect('#mother_nationality',"jp")
+    countrySelect('#country',"my")
+    countrySelect('#nationality',"jp")
+    countrySelect('#dual_nationality',"jp")
     var input = document.querySelector("#mother_phone_number");
     intlTelInput(input, {
         allowExtensions: true,
@@ -1943,6 +1971,36 @@
             limitReachedClass: "badge badge-danger badge-custom",
         })
 
+    });
+    $(document).ready(function(){
+        var nationality = $('#nationality').val();
+        var dual_nationality = $('#dual_nationality').val();
+        if(nationality == dual_nationality)
+        {
+            $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
+        }
+        else
+        {
+            $('#error_message').hide().text('');
+        }
+        $('#nationality').on('change', function(){
+            var nationality = $('#nationality').val();
+            var dual_nationality = $('#dual_nationality').val();
+            $('#error_message').hide().text('');
+            if(nationality == dual_nationality)
+        {
+            $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
+        }
+        });
+        $('#dual_nationality').on('change', function(){
+            var nationality = $('#nationality').val();
+            var dual_nationality = $('#dual_nationality').val();
+            $('#error_message').hide().text('');
+            if(nationality == dual_nationality)
+        {
+            $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
+        }
+        });
     });
 </script>
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->

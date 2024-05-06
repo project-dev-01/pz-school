@@ -9,7 +9,7 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
-
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 @section('css')
@@ -214,7 +214,10 @@
     .country-select {
         display: block;
     }
-
+    .country-select .country-list
+    {
+        width: 361px !important;
+    }
     .ui-datepicker {
         width: 20.2em;
     }
@@ -266,6 +269,16 @@
             width: 13.3em;
         }
     }
+
+    .breadcrumb-item+.breadcrumb-item::before 
+    {
+        font-family: "Material Design Icons";
+        color: #3A4265;
+    }
+    .custom-file-input:lang(en)~.custom-file-label::after 
+    {
+    content: "{{ __('messages.butt_browse') }}";
+    }
 </style>
 @if(Session::get('locale')=="en")
 <style>
@@ -294,36 +307,79 @@
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <!-- <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                        <li class="breadcrumb-item active">Wizard</li>
-                    </ol>-->
+            <div class="page-title-box" style="display: inline-flex; align-items: center;">
+                <div class="page-title-icon">
+                    <svg fill="#3A4265" width="20" height="20" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 402.161 402.161" xml:space="preserve">
+                        <g>
+                            <g>
+                                <g>
+                                    <path d="M201.08,49.778c-38.794,0-70.355,31.561-70.355,70.355c0,18.828,7.425,40.193,19.862,57.151
+                c14.067,19.181,32,29.745,50.493,29.745c18.494,0,36.426-10.563,50.494-29.745c12.437-16.958,19.862-38.323,19.862-57.151
+                C271.436,81.339,239.874,49.778,201.08,49.778z M201.08,192.029c-13.396,0-27.391-8.607-38.397-23.616
+                c-10.46-14.262-16.958-32.762-16.958-48.28c0-30.523,24.832-55.355,55.355-55.355s55.355,24.832,55.355,55.355
+                C256.436,151.824,230.372,192.029,201.08,192.029z"></path>
+                                    <path d="M201.08,0C109.387,0,34.788,74.598,34.788,166.292c0,91.693,74.598,166.292,166.292,166.292
+                s166.292-74.598,166.292-166.292C367.372,74.598,292.773,0,201.08,0z M201.08,317.584c-30.099-0.001-58.171-8.839-81.763-24.052
+                c0.82-22.969,11.218-44.503,28.824-59.454c6.996-5.941,17.212-6.59,25.422-1.615c8.868,5.374,18.127,8.099,27.52,8.099
+                c9.391,0,18.647-2.724,27.511-8.095c8.201-4.97,18.39-4.345,25.353,1.555c17.619,14.93,28.076,36.526,28.895,59.512
+                C259.25,308.746,231.178,317.584,201.08,317.584z M296.981,283.218c-3.239-23.483-15.011-45.111-33.337-60.64
+                c-11.89-10.074-29.1-11.256-42.824-2.939c-12.974,7.861-26.506,7.86-39.483-0.004c-13.74-8.327-30.981-7.116-42.906,3.01
+                c-18.31,15.549-30.035,37.115-33.265,60.563c-33.789-27.77-55.378-69.868-55.378-116.915C49.788,82.869,117.658,15,201.08,15
+                c83.423,0,151.292,67.869,151.292,151.292C352.372,213.345,330.778,255.448,296.981,283.218z"></path>
+                                    <path d="M302.806,352.372H99.354c-4.142,0-7.5,3.358-7.5,7.5c0,4.142,3.358,7.5,7.5,7.5h203.452c4.142,0,7.5-3.358,7.5-7.5
+                C310.307,355.73,306.948,352.372,302.806,352.372z"></path>
+                                    <path d="M302.806,387.161H99.354c-4.142,0-7.5,3.358-7.5,7.5c0,4.142,3.358,7.5,7.5,7.5h203.452c4.142,0,7.5-3.358,7.5-7.5
+                C310.307,390.519,306.948,387.161,302.806,387.161z"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+
                 </div>
-                <h4 class="page-title">{{ __('messages.student_profile') }}</h4>
+                <!--<h4 class="page-title" style="margin-left: 10px;">{{ __('messages.student_profile') }}</h4>-->
+                <ol class="breadcrumb m-0 responsivebc">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.profile') }}</a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.student_profile') }}</a></li>
+                </ol>
+
             </div>
         </div>
     </div>
     <!-- end page title -->
-
+    @if($id==0)
     <div class="row">
         <div class="col-xl-12">
-            <div class="card">
-                <div class="card-body">
+            <div class="">
+                <h4> No Student's Available here.</h4>
+                </div>
+        </div>
+    </div>   
+ 
+@endif
+@if($id!=0)
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="">
+
+                <div class="">
                     <form id="updateStudentProfile" method="post" action="{{ route('parent.student.update') }}" enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         <input type="hidden" name="student_id" value="{{ isset($student['id']) ? $student['id'] : ''}}">
 
 
                         <div class="card">
-                            <ul class="nav nav-tabs">
-                                <li class="nav-item">
+                            <ul class="nav nav-tabs" style="display: inline-block;">
+                                <li class="nav-item d-flex justify-content-between align-items-center">
+                                    <!-- Button placed on the left side -->
                                     <h4 class="navv">{{ __('messages.student_profile') }}</h4>
+                                    <button class="btn btn-link " type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                        <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                    </button>
                                 </li>
                             </ul>
-                            <div class="card-body">
+
+                            <div class="card-body collapse show">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group mb-3">
@@ -474,7 +530,7 @@
                                     @if($form_field['religion'] == 0)
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="txt_religion">{{ __('messages.religion') }}<span class="text-danger">*</span></label>
+                                            <label for="txt_religion">{{ __('messages.religion') }}</label>
                                             <select class="form-control" name="txt_religion" id="religion">
                                                 <option value="">{{ __('messages.select_religion') }}</option>
                                                 @forelse($religion as $r)
@@ -504,7 +560,7 @@
                                     </div>
                                     @endif
 
-                                  
+
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="drp_post_code">{{ __('messages.zip_postal_code') }}<span class="text-danger">*</span></label>
@@ -556,9 +612,9 @@
                                             <input type="text" id="drp_country" placeholder="{{ __('messages.country') }}" class="form-control country" name="drp_country" data-parsley-trigger="change" value="{{ isset($student['country']) ? $student['country'] : ''}}">
                                         </div>
                                     </div>
-                                </div>
                                 <!-- </div> -->
-                                <div class="row">
+                                <!-- </div> -->
+                                <!-- <div class="row"> -->
 
                                     <!-- <div class="col-md-4">
                                         <div class="form-group">
@@ -573,7 +629,7 @@
                                         </div>
                                     </div> -->
 
-                                   
+
                                     @if($form_field['nationality'] == 0)
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -582,19 +638,21 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <div class="custom-control custom-checkbox" style="margin-top: 2.25rem;">
-                                                        <input type="checkbox" name="has_dual_nationality_checkbox" id="has_dual_nationality_checkbox" class="custom-control-input" {{ isset($student['dual_nationality']) ? 'checked' : '' }}>
-                                                        <label class="custom-control-label" for="has_dual_nationality_checkbox">Nationality (For dual nationality)</label>
-                                                    </div>
-                                                </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox" style="margin-top: 2.25rem;">
+                                                <input type="checkbox" name="has_dual_nationality_checkbox" id="has_dual_nationality_checkbox" class="custom-control-input" {{ isset($student['dual_nationality']) ? 'checked' : '' }}>
+                                                <label class="custom-control-label" for="has_dual_nationality_checkbox">{{ __('messages.dual_nationality') }}</label>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group" id="dual_nationality_container" style="{{ isset($student['dual_nationality']) ? '' : 'display: none;' }}">
-                                                    <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
-                                                    <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" value="{{ isset($student['dual_nationality']) ? $student['dual_nationality'] : ''}}" data-parsley-trigger="change">
-                                                </div>
-                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" id="dual_nationality_container" style="{{ isset($student['dual_nationality']) ? '' : 'display: none;' }}">
+                                            <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
+                                            <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" value="{{ isset($student['dual_nationality']) ? $student['dual_nationality'] : ''}}" data-parsley-trigger="change">
+                                        </div>
+                                        <span id ="error_message"></span>
+
+                                    </div>
                                     @endif
                                 </div>
                                 <div class="row">
@@ -692,15 +750,21 @@
                             </div>
                         </div>
                         <div class="card">
-                            <ul class="nav nav-tabs">
-                                <li class="nav-item">
+                            <ul class="nav nav-tabs" style="display: inline-block;">
+                                <li class="nav-item d-flex justify-content-between align-items-center">
+                                    <!-- Button placed on the left side -->
                                     <h4 class="navv">{{ __('messages.personal_details') }}
                                         <h4>
+                                            <button class="btn btn-link " type="button" id="collapseButton2" aria-expanded="true" aria-controls="toDoList">
+                                                <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                            </button>
                                 </li>
-                            </ul><br>
-                            <div class="card-body">
+                            </ul>
+
+                            <div class="card-body collapse show">
                                 <div class="row">
-                                   
+
                                     @if($form_field['passport'] == 0)
                                     <input type="hidden" name="passport_old_photo" id="passport_old_photo" value="{{ isset($student['passport_photo']) ? $student['passport_photo'] : ''}}" />
                                     <div class="col-md-4">
@@ -734,12 +798,12 @@
                                                         <span class="far fa-calendar-alt"></span>
                                                     </div>
                                                 </div>
-                                                <input type="text" class="form-control" id="passport_expiry_date" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="passport_expiry_date" name="passport_expiry_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($student['passport_expiry_date']) ? $student['passport_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
                                             </div>
                                             <label for="passport_expiry_date" class="error"></label>
                                         </div>
                                     </div>
-                                    
+
                                     @endif
                                     @if($form_field['visa'] == 0)
                                     <!-- <div class="col-md-4">
@@ -770,6 +834,7 @@
                                         <div class="form-group">
                                             <label for="visa_type">{{ __('messages.visa_type__for_non_malaysian') }}<span class="text-danger">*</span></label>
                                             <select id="visa_type" name="visa_type" class="form-control">
+                                                <option value="">{{ __('messages.select_visa_type') }}</option>
                                                 <option value="No Require (Malaysian)" {{ isset($student['visa_type']) ? $student['visa_type'] == "No Require (Malaysian)" ? 'selected' : '' : '' }}>{{ __('messages.no_require_malaysian') }}</option>
                                                 <option value="Depedent Pass" {{ isset($student['visa_type']) ? $student['visa_type'] == "Depedent Pass" ? 'selected' : '' : '' }}>{{ __('messages.depedent_pass') }}</option>
                                                 <option value="MM2H" {{ isset($student['visa_type']) ? $student['visa_type'] == "MM2H" ? 'selected' : '' : '' }}>{{ __('messages.mm2h') }}</option>
@@ -781,7 +846,7 @@
                                     @php
 
                                     $visa_type_others = "none";
-                                    if($student['visa_type'] == "Others"){
+                                    if (isset($student['visa_type']) && $student['visa_type'] == "Others") {
 
                                     $visa_type_others = "";
                                     }
@@ -803,34 +868,17 @@
                                                         <span class="far fa-calendar-alt"></span>
                                                     </div>
                                                 </div>
-                                                <input type="text" class="form-control" id="visa_expiry_date" name="visa_expiry_date" value="{{ isset($application['visa_expiry_date']) ? $application['visa_expiry_date'] : date('Y-m-d')}}" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="visa_expiry_date" name="visa_expiry_date" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : date('Y-m-d')}}" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
                                             </div>
                                             <label for="visa_expiry_date" class="error"></label>
                                         </div>
                                     </div>
                                     @endif
-                                   
+
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="japanese_association_membership_number_student">{{ __('messages.japanese_association_membership_number_student') }}<span class="text-danger">*</span></label>
                                             <input type="text" id="japanese_association_membership_number_student" class="form-control alloptions" placeholder="999999-99-9999" value="{{ isset($student['japanese_association_membership_number_student']) ? $student['japanese_association_membership_number_student'] : ''}}" name="japanese_association_membership_number_student" data-parsley-trigger="change">
-                                        </div>
-                                    </div>
-                                    <input type="hidden" name="japanese_association_membership_image_principal_old" id="japanese_association_membership_image_principal_old" value="{{ isset($student['japanese_association_membership_image_principal']) ? $student['japanese_association_membership_image_principal'] : ''}}" />
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="japanese_association_membership_image_principal">{{ __('messages.japanese_association_membership_image_principal') }}<span class="text-danger">*</span></label>
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" id="japanese_association_membership_image_principal" class="custom-file-input" value="" name="japanese_association_membership_image_principal" accept="image/png, image/gif, image/jpeg">
-                                                    <label class="custom-file-label" for="japanese_association_membership_image_principal">{{ __('messages.choose_file') }}</label>
-                                                </div>
-                                            </div>
-                                            <label for="japanese_association_membership_image_principal" class="error"></label>
-                                            @if(isset($student['japanese_association_membership_image_principal']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['japanese_association_membership_image_principal'])
-                                            <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$student['japanese_association_membership_image_principal'] }}" target="_blank"> {{ __('messages.japanese_association_membership_image_principal') }} </a>
-                                            @endif
-                                            <span id="japanese_association_membership_image_principal_name"></span>
                                         </div>
                                     </div>
                                     @if($form_field['nric'] == 0)
@@ -862,29 +910,42 @@
                             </div>
                         </div>
                         <div class="card">
-                            <ul class="nav nav-tabs">
-                                <li class="nav-item">
+                            <ul class="nav nav-tabs" style="display: inline-block;">
+                                <li class="nav-item d-flex justify-content-between align-items-center">
+                                    <!-- Button placed on the left side -->
                                     <h4 class="navv">{{ __('messages.previous_school_details') }}</h4>
+                                    <button class="btn btn-link " type="button" id="collapseButton3" aria-expanded="true" aria-controls="toDoList">
+                                        <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                    </button>
                                 </li>
                             </ul>
-                            <div class="card-body">
+
+                            <div class="card-body collapse show">
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input skip" {{ $student['school_name'] ? '' : 'checked' }} id="skip_prev_school_details" name="skip_prev_school_details">
+                                        <label class="custom-control-label" for="skip_prev_school_details">{{ __('messages.skip_prev_school_details') }}</label>
+                                    </div>
+                                </div>
+                                <div id="prev_school_details">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="txt_prev_schname">{{ __('messages.school_name') }}<span class="text-danger">*</span></label>
-                                            <input type="text" id="txt_prev_schname" class="form-control" name="txt_prev_schname" placeholder="{{ __('messages.enter_school_name') }}" data-parsley-trigger="change" value="{{ isset($student['school_name']) ? $student['school_name'] : '' }}">
+                                            <input type="text" id="txt_prev_schname" class="form-control prev_school_form" name="txt_prev_schname" placeholder="{{ __('messages.enter_school_name') }}" data-parsley-trigger="change" value="{{ isset($student['school_name']) ? $student['school_name'] : '' }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="school_country">{{ __('messages.country') }}<span class="text-danger">*</span></label>
-                                            <input type="text" maxlength="50" id="school_country" value="{{ isset($student['school_country']) ? $student['school_country'] : ''}}" name="school_country" class="form-control country" placeholder="{{ __('messages.country') }}" data-parsley-trigger="change">
+                                            <input type="text" maxlength="50" id="school_country" value="{{ isset($student['school_country']) ? $student['school_country'] : ''}}" name="school_country" class="form-control country prev_school_form" placeholder="{{ __('messages.country') }}" data-parsley-trigger="change">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="school_state">{{ __('messages.state') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="school_state" value="{{ isset($student['school_state']) ? $student['school_state'] : ''}}" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                            <label for="school_state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control prev_school_form" id="school_state" value="{{ isset($student['school_state']) ? $student['school_state'] : ''}}" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                 </div>
@@ -892,19 +953,19 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="school_city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="school_city" value="{{ isset($student['school_city']) ? $student['school_city'] : ''}}" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control prev_school_form" id="school_city" value="{{ isset($student['school_city']) ? $student['school_city'] : ''}}" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.city') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="school_postal_code">{{ __('messages.postal_code') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="school_postal_code" name="school_postal_code" value="{{ isset($student['school_postal_code']) ? $student['school_postal_code'] : ''}}" placeholder="{{ __('messages.enter') }} {{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control prev_school_form" id="school_postal_code" name="school_postal_code" value="{{ isset($student['school_postal_code']) ? $student['school_postal_code'] : ''}}" placeholder="{{ __('messages.enter') }} {{ __('messages.postal_code') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="school_enrollment_status">{{ __('messages.enrollment_status') }}<span class="text-danger">*</span></label>
-                                            <select id="school_enrollment_status" name="school_enrollment_status" class="form-control">
+                                            <select id="school_enrollment_status" name="school_enrollment_status" class="form-control prev_school_form">
                                                 <option value="">{{ __('messages.select_enrollment_status') }}</option>
                                                 <option value="Regular class" {{ isset($student['school_enrollment_status']) ? $student['school_enrollment_status'] == "Regular class" ? 'selected' : '' : '' }}>{{ __('messages.regular_class') }}</option>
                                                 <option value="Special need class" {{ isset($student['school_enrollment_status']) ? $student['school_enrollment_status'] == "Special need class" ? 'selected' : '' : '' }}>{{ __('messages.special_need_class') }}</option>
@@ -917,10 +978,10 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="school_enrollment_status_tendency">{{ __('messages.enrollment_status_tendency') }}<span class="text-danger">*</span></label>
-                                            <select id="school_enrollment_status_tendency" name="school_enrollment_status_tendency" class="form-control">
-                                                <option value="">{{ __('messages.select_enrollment_status') }}</option>
+                                            <select id="school_enrollment_status_tendency" name="school_enrollment_status_tendency" class="form-control prev_school_form">
+                                                <option value="">{{ __('messages.tendency_select_enrollment_status') }}</option>
                                                 <option value="Yes" {{ isset($student['school_enrollment_status_tendency']) ? $student['school_enrollment_status_tendency'] == "Yes" ? 'selected' : '' : '' }}>{{ __('messages.yes') }}</option>
-                                                <option value="No" {{ isset($student['school_enrollment_status_tendency']) ? $student['school_enrollment_status_tendency'] == "Yes" ? 'selected' : '' : '' }}>{{ __('messages.no') }}</option>
+                                                <option value="No" {{ isset($student['school_enrollment_status_tendency']) ? $student['school_enrollment_status_tendency'] == "No" ? 'selected' : '' : '' }}>{{ __('messages.no') }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -937,6 +998,7 @@
                                                 </textarea>
                                             </div>
                                         </div> -->
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -1020,7 +1082,7 @@
                             <button class="btn btn-primary-bl waves-effect waves-light">
                                 {{ __('messages.update') }}
                             </button>
-                            <a href="{{ route('admin.student.index') }}" class="btn btn-primary-bl waves-effect waves-light">
+                            <a href="{{ route('parent.update_info') }}" class="btn btn-primary-bl waves-effect waves-light">
                                 {{ __('messages.back') }}
                             </a>
                             <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
@@ -1033,6 +1095,7 @@
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div><!-- end row -->
+    @endif
 </div> <!-- container -->
 @endsection
 @section('scripts')
@@ -1079,6 +1142,7 @@
     var indexAdmission = "{{ route('admin.admission') }}";
     var studentUpdateList = "{{ route('admin.student.update_info_list') }}";
     var malaysiaPostalCode = "{{ route('parent.malaysia_postalCode') }}";
+    var updateInfoList = "{{ route('parent.update_info') }}";
 </script>
 <!-- button js added -->
 <script src="{{ asset('buttons-datatables/dataTables.buttons.min.js') }}"></script>
@@ -1102,6 +1166,36 @@
             error: oops_went_wrong
         }
     });
+    $(document).ready(function(){
+    var nationality = $('#nationality').val();
+    var dual_nationality = $('#dual_nationality').val();
+    if(nationality == dual_nationality)
+    {
+        $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
+    }
+    else
+    {
+        $('#error_message').hide().text('');
+    }
+    $('#nationality').on('change', function(){
+        var nationality = $('#nationality').val();
+        var dual_nationality = $('#dual_nationality').val();
+        $('#error_message').hide().text('');
+        if(nationality == dual_nationality)
+    {
+        $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
+    }
+    });
+    $('#dual_nationality').on('change', function(){
+        var nationality = $('#nationality').val();
+        var dual_nationality = $('#dual_nationality').val();
+        $('#error_message').hide().text('');
+        if(nationality == dual_nationality)
+    {
+        $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
+    }
+    });
+});
     $(function() {
         // nric validation start
         // var $form_2 = $('#editadmission');
@@ -1119,4 +1213,5 @@
         // nric validation end
     });
 </script>
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endsection

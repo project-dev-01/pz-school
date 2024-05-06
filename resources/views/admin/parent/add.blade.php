@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Add Guardian')
+@section('title',' ' .  __('messages.add_parent_guardian') . '')
 @section('component_css')
 <link href="{{ asset('libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
@@ -9,7 +9,8 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
-
+<link href="{{ asset('css/custom/pagehead_breadcrumb.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('libs/dropzone/min/dropzone.min.css') }}">
@@ -265,6 +266,10 @@
 			width: 14.3em;
 		}
 	}
+	.custom-file-input:lang(en)~.custom-file-label::after 
+    {
+    content: "{{ __('messages.butt_browse') }}";
+    }
 </style>
 @if(Session::get('locale')=="en")
 <style>
@@ -296,9 +301,30 @@
 	<!-- start page title -->
 	<div class="row">
 		<div class="col-12">
-			<div class="page-title-box">
-				<h4 class="page-title">{{ __('messages.add_parent_guardian') }}</h4>
-			</div>
+		<div class="page-title-box" style="display: inline-flex; align-items: center;margin-bottom:5px;margin-top:5px">
+                <div class="page-title-icon">
+                <svg width="24" height="19" viewBox="0 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_183_477)">
+                                <path d="M0 18.9996C0.0521565 18.6286 0.0962869 18.2577 0.148443 17.9127C0.294192 16.9248 0.537261 15.9513 0.874621 15.0043C1.23927 13.9275 1.81449 12.9216 2.57172 12.0367C3.46053 10.9922 4.72431 10.2763 6.13441 10.0186C7.69185 9.69498 9.32112 9.85267 10.7723 10.4675C11.53 10.8075 12.2045 11.2872 12.7543 11.8772C13.2132 12.3634 13.6028 12.9019 13.9137 13.4797L13.9779 13.591C14.284 13.2526 14.6359 12.9521 15.0251 12.697C15.7892 12.2116 16.6865 11.9364 17.6128 11.9031C18.3739 11.8523 19.1385 11.9392 19.8636 12.1591C20.7852 12.4586 21.5877 13.008 22.1665 13.7357C22.7898 14.5279 23.2433 15.4232 23.5025 16.3732C23.7288 17.1476 23.8858 17.938 23.9719 18.7362C23.9719 18.8215 23.992 18.9068 24 18.9959L0 18.9996Z" fill="#3A4265" />
+                                <path d="M7.76333 8.64601C6.8733 8.64747 6.0028 8.40474 5.26205 7.94853C4.5213 7.49232 3.94361 6.84315 3.60209 6.08321C3.26057 5.32326 3.17059 4.48672 3.34355 3.67947C3.5165 2.87222 3.94461 2.13056 4.57368 1.5484C5.20275 0.966235 6.00448 0.569737 6.87739 0.409099C7.7503 0.248461 8.65513 0.330904 9.47733 0.645998C10.2995 0.961091 11.0022 1.49467 11.4962 2.17917C11.9903 2.86367 12.2536 3.66832 12.2528 4.49126C12.2517 5.59222 11.7785 6.64787 10.9369 7.42671C10.0953 8.20556 8.95405 8.64404 7.76333 8.64601Z" fill="#3A4265" />
+                                <path d="M18.018 4.35802C18.7079 4.35949 19.3818 4.55018 19.9544 4.90595C20.527 5.26172 20.9726 5.76657 21.2348 6.35661C21.497 6.94664 21.5639 7.59533 21.4272 8.22056C21.2905 8.8458 20.9562 9.41946 20.4667 9.86896C19.9772 10.3185 19.3544 10.6236 18.6773 10.7457C18.0001 10.8678 17.299 10.8014 16.6627 10.5549C16.0264 10.3084 15.4835 9.89293 15.1027 9.36102C14.7219 8.82911 14.5203 8.20469 14.5235 7.56681C14.5229 7.14341 14.6131 6.7241 14.7888 6.33311C14.9646 5.94212 15.2223 5.58719 15.5472 5.28883C15.8722 4.99048 16.2578 4.75461 16.6819 4.59485C17.106 4.43508 17.5601 4.35458 18.018 4.35802Z" fill="#3A4265" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_183_477">
+                                    <rect width="24" height="18.6667" fill="white" transform="translate(0 0.333008)" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+
+                </div>
+                <!--<h4 class="page-title" style="margin-left: 10px;">{{ __('messages.student_profile') }}</h4>-->
+                <ol class="breadcrumb m-0 responsivebc">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.parent_guardian_details') }}</a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('messages.add_parent_guardian') }}</a></li>
+                </ol>
+
+            </div>        
+			
 		</div>
 	</div>
 	<!-- end page title -->
@@ -310,38 +336,45 @@
 			<form id="addparent" method="post" action="{{ route('admin.parent.add') }}" enctype="multipart/form-data" autocomplete="off">
 				@csrf
 				<div class="card">
-					<ul class="nav nav-tabs">
-						<li class="nav-item">
-							<h4 class="navv">
+				<ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                                <!-- Button placed on the left side -->
+                                <h4 class="navv">
 								{{ __('messages.guardian_details') }}
-								<h4>
-						</li>
-					</ul>
-					<div class="card-body">
+                                </h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>
+				
+					<div class="card-body collapse show">
 
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-									
+
 									<input type="text" class="form-control" name="guardian_last_name" id="guardian_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-									
+
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="last_name">{{ __('messages.middle_name') }}</label>
-									
-										<input type="text" class="form-control" name="guardian_middle_name" id="guardian_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
-									
+
+									<input type="text" class="form-control" name="guardian_middle_name" id="guardian_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-									
-										<input type="text" class="form-control" name="guardian_first_name" id="guardian_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
-									
+
+									<input type="text" class="form-control" name="guardian_first_name" id="guardian_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+
 								</div>
 							</div>
 
@@ -351,25 +384,25 @@
 							<div class="col-md-4">
 								<div class="form-group mb-3">
 									<label for="">{{ __('messages.last_name') }}({{ __('messages.furigana') }})<span class="text-danger">*</span></label>
-									
-										<input type="text" name="guardian_last_name_furigana" class="form-control alloptions" maxlength="50" id="guardian_last_name_furigana" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
-									
+
+									<input type="text" name="guardian_last_name_furigana" class="form-control alloptions" maxlength="50" id="guardian_last_name_furigana" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group mb-3">
 									<label for="">{{ __('messages.middle_name') }}({{ __('messages.furigana') }})</label>
-									
-										<input type="text" name="guardian_middle_name_furigana" class="form-control alloptions" maxlength="50" id="guardian_middle_name_furigana" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
-									
+
+									<input type="text" name="guardian_middle_name_furigana" class="form-control alloptions" maxlength="50" id="guardian_middle_name_furigana" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="">{{ __('messages.first_name') }}({{ __('messages.furigana') }})<span class="text-danger">*</span></label>
-									
-										<input type="text" name="guardian_first_name_furigana" class="form-control alloptions" maxlength="50" id="guardian_first_name_furigana" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
-									
+
+									<input type="text" name="guardian_first_name_furigana" class="form-control alloptions" maxlength="50" id="guardian_first_name_furigana" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
+
 								</div>
 							</div>
 
@@ -381,25 +414,25 @@
 							<div class="col-md-4">
 								<div class="form-group mb-3">
 									<label for="">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-									
-										<input type="text" name="guardian_last_name_english" class="form-control alloptions" maxlength="50" id="guardian_last_name_english" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
-									
+
+									<input type="text" name="guardian_last_name_english" class="form-control alloptions" maxlength="50" id="guardian_last_name_english" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group mb-3">
 									<label for="">{{ __('messages.middle_name_roma') }}</label>
-									
-										<input type="text" name="guardian_middle_name_english" class="form-control alloptions" maxlength="50" id="guardian_middle_name_english" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
-									
+
+									<input type="text" name="guardian_middle_name_english" class="form-control alloptions" maxlength="50" id="guardian_middle_name_english" placeholder="{{ __('messages.wick') }}" aria-describedby="inputGroupPrepend">
+
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-									
-										<input type="text" name="guardian_first_name_english" class="form-control alloptions" maxlength="50" id="guardian_first_name_english" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
-									
+
+									<input type="text" name="guardian_first_name_english" class="form-control alloptions" maxlength="50" id="guardian_first_name_english" placeholder="{{ __('messages.john') }}" aria-describedby="inputGroupPrepend">
+
 								</div>
 							</div>
 						</div>
@@ -464,12 +497,12 @@
 							</div>
 
 
-						<div class="col-md-4">
-							<div class="form-group">
-								<label for="guardian_company_name_japan">{{ __('messages.work_company_name_japan') }}<span class="text-danger">*</span></label>
-								<input type="text" class="form-control" id="guardian_company_name_japan" value="{{ isset($parent['guardian_company_name_japan']) ? $parent['guardian_company_name_japan'] : ''}}" name="guardian_company_name_japan" placeholder="{{ __('messages.enter_work_company_name_japan') }}" aria-describedby="inputGroupPrepend">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="guardian_company_name_japan">{{ __('messages.work_company_name_japan') }}<span class="text-danger">*</span></label>
+									<input type="text" class="form-control" id="guardian_company_name_japan" value="{{ isset($parent['guardian_company_name_japan']) ? $parent['guardian_company_name_japan'] : ''}}" name="guardian_company_name_japan" placeholder="{{ __('messages.enter_work_company_name_japan') }}" aria-describedby="inputGroupPrepend">
+								</div>
 							</div>
-						</div>
 						</div>
 						<!--
 													<div class="row">
@@ -697,7 +730,23 @@
 										<option value="Local Hire" {{ isset($parent['guardian_employment_status']) ? $parent['guardian_employment_status'] == "Local Hire" ? 'selected' : '' : '' }}>{{ __('messages.local_hire') }}</option>
 										<option value="Public Servant" {{ isset($parent['guardian_employment_status']) ? $parent['guardian_employment_status'] == "Public Servant" ? 'selected' : '' : '' }}>{{ __('messages.public_servant') }}</option>
 										<option value="Self-Employed" {{ isset($parent['guardian_employment_status']) ? $parent['guardian_employment_status'] == "Self-Employed" ? 'selected' : '' : '' }}>{{ __('messages.self_employed') }}</option>
-                                        <option value="Others" {{ isset($parent['guardian_employment_status']) ? $parent['guardian_employment_status'] == "Others" ? 'selected' : '' : '' }}>{{ __('messages.others') }}</option>
+										<option value="Others" {{ isset($parent['guardian_employment_status']) ? $parent['guardian_employment_status'] == "Others" ? 'selected' : '' : '' }}>{{ __('messages.others') }}</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="school_roleid">{{ __('messages.select_role') }}<span class="text-danger">*</span></label>
+									<select class="form-control " id="school_roleid" name="school_roleid" data-placeholder="{{ __('messages.choose_role') }}">
+										<option value="">{{ __('messages.select_role') }}</option>
+										@forelse($school_roles as $r)
+										@if($r['portal_roleid']==2 && $r['roles']!=null)
+										<option value="{{$r['id']}}">{{ $r['fullname'] }} ( {{ $r['roles'] }} )</option>
+										@endif
+										@empty
+										@endforelse
 									</select>
 								</div>
 							</div>
@@ -706,14 +755,21 @@
 				</div>
 				<br>
 				<div class="card">
-					<ul class="nav nav-tabs">
-						<li class="nav-item">
-							<h4 class="navv">
+				<ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                                <!-- Button placed on the left side -->
+                                <h4 class="navv">
 								{{ __('messages.family_details') }}
-							</h4>
-						</li>
-					</ul><br>
-					<div class="card-body">
+                                </h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton2" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>
+			
+					<div class="card-body collapse show">
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
@@ -755,18 +811,79 @@
 								</div>
 							</div>
 						</div>
+						<!-- <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="siblings">{{ __('messages.siblings') }}<span class="text-danger">*</span></label>
+                                </div>
+                            </div>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <td>{{ __('messages.full_name') }}</td>
+                                        <td>{{ __('messages.date_of_birth') }}</td>
+                                        <td>{{ __('messages.relationship') }}</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="dynamic_field_one">
+                                    <tr>
+                                        <td>
+										<input type="text" class="form-control" id="full_name" value="" name="full_name" placeholder="" aria-describedby="inputGroupPrepend">
+                                        </td>
+                                        <td>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <span class="fas fa-calendar"></span>
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control designationDatepicker" name="department_start[]" placeholder="{{ __('messages.yyyy_mm_dd') }}">
+                                            </div>
+                                        </td>
+                                        <td>
+										<input type="text" class="form-control" id="relationship" value="" name="relationship" placeholder="" aria-describedby="inputGroupPrepend">
+                                        </td>
+                                        <td>
+                                            <button type="button" name="add_department" id="add_department" class="btn btn-primary">{{ __('messages.add') }} +</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> -->
+
 					</div>
 				</div>
 				<div class="card">
-					<ul class="nav nav-tabs">
-						<li class="nav-item">
-							<h4 class="navv">
+				<ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                                <!-- Button placed on the left side -->
+                                <h4 class="navv">
 								{{ __('messages.personal_details') }}
-							</h4>
-						</li>
-					</ul><br>
-					<div class="card-body">
+                                </h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton3" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>
+			
+					<div class="card-body collapse show">
 						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="japanese_association_membership_image_principal">{{ __('messages.japanese_association_membership_image_principal') }}<span class="text-danger">*</span></label>
+									<div class="input-group">
+										<div class="custom-file">
+											<input type="file" id="japanese_association_membership_image_principal" class="custom-file-input" value="" name="japanese_association_membership_image_principal" accept="image/png, image/gif, image/jpeg">
+											<label class="custom-file-label" for="japanese_association_membership_image_principal">{{ __('messages.choose_file') }}</label>
+										</div>
+									</div>
+
+									<span id="japanese_association_membership_image_principal_name"></span>
+									<label for="japanese_association_membership_image_principal" class="error"></label>
+								</div>
+							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="japanese_association_membership_image_supplimental">{{ __('messages.japanese_association_membership_image_supplimental') }}</label>
@@ -786,14 +903,21 @@
 					</div>
 				</div>
 				<div class="card">
-					<ul class="nav nav-tabs">
-						<li class="nav-item">
-							<h4 class="navv">
+				<ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                                <!-- Button placed on the left side -->
+                                <h4 class="navv">
 								{{ __('messages.login_details') }}
-								<h4>
-						</li>
-					</ul>
-					<div class="card-body">
+                                </h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton4" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>
+			
+					<div class="card-body collapse show">
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
@@ -850,13 +974,21 @@
 					</div>
 				</div>
 				<div class="card">
-					<ul class="nav nav-tabs">
-						<li class="nav-item">
-							<h4 class="navv">{{ __('messages.enable_two_factor_authentication') }}
-								<h4>
-						</li>
-					</ul>
-					<div class="card-body">
+				<ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                                <!-- Button placed on the left side -->
+                                <h4 class="navv">
+								{{ __('messages.enable_two_factor_authentication') }}
+                                </h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton5" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>
+				
+					<div class="card-body collapse show">
 						<div class="row">
 							<div class="col-md-6">
 								<h4 class="header-title">{{ __('messages.turn_on_turn_off') }}</h4>
@@ -957,6 +1089,7 @@
 <script src="{{ asset('libs/jquery-mask-plugin/jquery.mask.min.js') }}"></script>
 <script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
 <script src="{{ asset('country/js/countrySelect.js') }}"></script>
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 
 <script>
 	var indexParent = "{{ route('admin.parent') }}";
@@ -1029,7 +1162,6 @@
 		preventInvalidNumbers: true,
 		// utilsScript: "js/utils.js"
 	});
-
 </script>
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
@@ -1038,6 +1170,7 @@
 <script src="{{ asset('js/custom/parent.js') }}"></script>
 <script>
 	var parentList = "{{ route('admin.parent.list') }}";
+	var yyyy_mm_dd = "{{ __('messages.yyyy_mm_dd') }}";
 	$('.dropify-im').dropify({
 		messages: {
 			default: drag_and_drop_to_check,

@@ -214,7 +214,10 @@
     .country-select {
         display: block;
     }
-
+    .country-select .country-list
+    {
+        width: 361px !important;
+    }
     .ui-datepicker {
         width: 20.2em;
     }
@@ -479,7 +482,7 @@
                                             @if($form_field['religion'] == 0)
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="religion">{{ __('messages.religion') }}<span class="text-danger">*</span></label>
+                                                    <label for="religion">{{ __('messages.religion') }}<span class="text-danger"></span></label>
                                                     <select class="form-control" name="religion" id="religion">
                                                         <option value="">{{ __('messages.select_religion') }}</option>
                                                         @forelse($religion as $r)
@@ -527,6 +530,7 @@
                                                     <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
                                                     <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" data-parsley-trigger="change">
                                                 </div>
+                                                <span id ="error_message"></span>
                                             </div>
                                             @endif
                                         </div><br>
@@ -562,8 +566,8 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="school_state">{{ __('messages.state') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control prev_school_form" id="school_state" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                                        <label for="school_state">{{ __('messages.state_province') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control prev_school_form" id="school_state" name="school_state" placeholder="{{ __('messages.enter') }} {{ __('messages.state_province') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                             </div>
@@ -571,7 +575,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="school_city">{{ __('messages.city') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control prev_school_form" id="school_city" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.state') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control prev_school_form" id="school_city" name="school_city" placeholder="{{ __('messages.enter') }} {{ __('messages.city') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -597,7 +601,7 @@
                                                     <div class="form-group">
                                                         <label for="school_enrollment_status_tendency">{{ __('messages.enrollment_status_tendency') }}<span class="text-danger">*</span></label>
                                                         <select id="school_enrollment_status_tendency" name="school_enrollment_status_tendency" class="form-control prev_school_form">
-                                                            <option value="">{{ __('messages.select_enrollment_status') }}</option>
+                                                            <option value="">{{ __('messages.tendency_select_enrollment_status') }}</option>
                                                             <option value="Yes">{{ __('messages.yes') }}</option>
                                                             <option value="No">{{ __('messages.no') }}</option>
                                                         </select>
@@ -1133,14 +1137,14 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="remarks">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
+                                                    <label for="remarks">{{ __('messages.remarks') }}<span class="text-danger"></span></label>
                                                     <textarea type="text" id="remarks" class="form-control" placeholder="{{ __('messages.enter_remarks') }}" name="remarks" data-parsley-trigger="change"></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="personal">
+                                <!-- <div class="tab-pane" id="personal">
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item">
                                             <h4 class="navv">
@@ -1219,7 +1223,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
 
                         </div>
@@ -1268,11 +1272,25 @@
 <script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
 <script src="{{ asset('country/js/countrySelect.js') }}"></script>
 <script>
-    $(".country").countrySelect({
-        defaultCountry: "jp",
-        preferredCountries: ['my', 'jp'],
-        responsiveDropdown: true
-    });
+    // $(".country").countrySelect({
+    //     defaultCountry: "jp",
+    //     preferredCountries: ['my', 'jp'],
+    //     responsiveDropdown: true
+    // });
+    
+    
+    function countrySelect(inputSelector,country) {
+        $(inputSelector).countrySelect({
+            defaultCountry: country,
+            preferredCountries: ['my', 'jp'],
+            responsiveDropdown: true
+        });
+    }
+    countrySelect('#father_nationality',"jp")
+    // countrySelect('#country',"my")
+    countrySelect('#nationality',"jp")
+    countrySelect('#dual_nationality',"jp")
+    countrySelect('#mother_nationality',"jp")
     var input = document.querySelector("#mother_phone_number");
     intlTelInput(input, {
         allowExtensions: true,
@@ -1353,6 +1371,7 @@
         preventInvalidNumbers: true,
         // utilsScript: "js/utils.js"
     });
+   
 </script>
 
 
@@ -1365,4 +1384,36 @@
 <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
 <script src="{{ asset('js/custom/guest_application.js') }}"></script>
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->
+<script>
+     $(document).ready(function(){
+    var nationality = $('#nationality').val();
+    var dual_nationality = $('#dual_nationality').val();
+    if(nationality == dual_nationality)
+    {
+        $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
+    }
+    else
+    {
+        $('#error_message').hide().text('');
+    }
+    $('#nationality').on('change', function(){
+        var nationality = $('#nationality').val();
+        var dual_nationality = $('#dual_nationality').val();
+        $('#error_message').hide().text('');
+        if(nationality == dual_nationality)
+    {
+        $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
+    }
+    });
+    $('#dual_nationality').on('change', function(){
+        var nationality = $('#nationality').val();
+        var dual_nationality = $('#dual_nationality').val();
+        $('#error_message').hide().text('');
+        if(nationality == dual_nationality)
+    {
+        $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
+    }
+    });
+});
+</script>
 @endsection

@@ -151,11 +151,12 @@ $(function () {
     //     });
     // }
     $.ajax({
-        url: studentPlanToLeaveListUrl, // Replace with your API endpoint
+        url: studentTransferListUrl, // Replace with your API endpoint
         method: 'GET',
         dataType: 'json',
         data: {
-            branch_id: branchID
+            branch_id: branchID,
+            termination_status_flag: "Approved"
         },
         success: function (response) {
             // dataSetNew
@@ -307,29 +308,40 @@ $(function () {
                 [5, 10, 25, 50, "All"]
             ],
             columns: [
+                { data: 'id', name: 'id' },
+                // {
+                //     data: 'checkbox',
+                //     name: 'checkbox',
+                //     orderable: false,
+                //     searchable: false
+                // },
                 {
-                    data: 'id',
-                    name: 'id'
+                    data: 'control_number',
+                    name: 'control_number'
                 },
                 {
                     data: 'name',
                     name: 'name'
                 },
                 {
+                    data: 'name_english',
+                    name: 'name_english'
+                },
+                {
                     data: 'gender',
                     name: 'gender'
                 },
                 {
+                    data: 'parent_email_address_after_transfer',
+                    name: 'parent_email_address_after_transfer'
+                },
+                {
+                    data: 'academic_year',
+                    name: 'academic_year'
+                },
+                {
                     data: 'class_name',
                     name: 'class_name'
-                },
-                {
-                    data: 'section_name',
-                    name: 'section_name'
-                },
-                {
-                    data: 'schedule_date_of_termination',
-                    name: 'schedule_date_of_termination'
                 },
                 {
                     data: 'termination_status',
@@ -339,12 +351,53 @@ $(function () {
                     data: 'date_of_termination',
                     name: 'date_of_termination'
                 },
+                {
+                    data: 'school_fees_payment_status',
+                    name: 'school_fees_payment_status'
+                }
             ],
             columnDefs: [
                 {
                     "targets": 0,
                     "render": function (data, type, row, meta) {
                         return meta.row + 1;
+                    }
+                },
+                {
+                    "targets": 8,
+                    "render": function (data, type, row, meta) {
+                        // current_old_att_status
+                        var status = "";
+                        if (row.termination_status == "Approved") {
+                            status = "success";
+                        } else if (row.termination_status == "Rejected") {
+                            status = "danger";
+                        } else if (row.termination_status == "Pending") {
+                            status = "warning";
+                        } else if (row.termination_status == "Send Back") {
+                            status = "info";
+                        } else {
+                            status = "";
+                        }
+                        var att_status = '<div class="button-list"><span class="badge badge-soft-' + status + ' p-1">' + row.termination_status + '</span></div>';
+                        return att_status;
+
+                    }
+                },
+                {
+                    "targets": 10,
+                    "render": function (data, type, row, meta) {
+                        // current_old_att_status
+                        var sstatus = "";
+                        if (row.school_fees_payment_status == "Paid") {
+                            sstatus = "success";
+                        }
+                        if (row.school_fees_payment_status == "Unpaid") {
+                            sstatus = "danger";
+                        }
+                        var att_sstatus = '<div class="button-list"><span class="badge badge-soft-' + sstatus + ' p-1">' + row.school_fees_payment_status + '</span></div>';
+                        return att_sstatus;
+
                     }
                 }
             ]
@@ -454,29 +507,40 @@ $(function () {
                 [5, 10, 25, 50, "All"]
             ],
             columns: [
+                { data: 'id', name: 'id' },
+                // {
+                //     data: 'checkbox',
+                //     name: 'checkbox',
+                //     orderable: false,
+                //     searchable: false
+                // },
                 {
-                    data: 'id',
-                    name: 'id'
+                    data: 'control_number',
+                    name: 'control_number'
                 },
                 {
                     data: 'name',
                     name: 'name'
                 },
                 {
+                    data: 'name_english',
+                    name: 'name_english'
+                },
+                {
                     data: 'gender',
                     name: 'gender'
                 },
                 {
+                    data: 'parent_email_address_after_transfer',
+                    name: 'parent_email_address_after_transfer'
+                },
+                {
+                    data: 'academic_year',
+                    name: 'academic_year'
+                },
+                {
                     data: 'class_name',
                     name: 'class_name'
-                },
-                {
-                    data: 'section_name',
-                    name: 'section_name'
-                },
-                {
-                    data: 'schedule_date_of_termination',
-                    name: 'schedule_date_of_termination'
                 },
                 {
                     data: 'termination_status',
@@ -486,12 +550,53 @@ $(function () {
                     data: 'date_of_termination',
                     name: 'date_of_termination'
                 },
+                {
+                    data: 'school_fees_payment_status',
+                    name: 'school_fees_payment_status'
+                }
             ],
             columnDefs: [
                 {
                     "targets": 0,
                     "render": function (data, type, row, meta) {
                         return meta.row + 1;
+                    }
+                },
+                {
+                    "targets": 8,
+                    "render": function (data, type, row, meta) {
+                        // current_old_att_status
+                        var status = "";
+                        if (row.termination_status == "Approved") {
+                            status = "success";
+                        } else if (row.termination_status == "Rejected") {
+                            status = "danger";
+                        } else if (row.termination_status == "Pending") {
+                            status = "warning";
+                        } else if (row.termination_status == "Send Back") {
+                            status = "info";
+                        } else {
+                            status = "";
+                        }
+                        var att_status = '<div class="button-list"><span class="badge badge-soft-' + status + ' p-1">' + row.termination_status + '</span></div>';
+                        return att_status;
+
+                    }
+                },
+                {
+                    "targets": 10,
+                    "render": function (data, type, row, meta) {
+                        // current_old_att_status
+                        var sstatus = "";
+                        if (row.school_fees_payment_status == "Paid") {
+                            sstatus = "success";
+                        }
+                        if (row.school_fees_payment_status == "Unpaid") {
+                            sstatus = "danger";
+                        }
+                        var att_sstatus = '<div class="button-list"><span class="badge badge-soft-' + sstatus + ' p-1">' + row.school_fees_payment_status + '</span></div>';
+                        return att_sstatus;
+
                     }
                 }
             ]
@@ -609,10 +714,10 @@ $(function () {
                     data: 'student_name',
                     name: 'student_name'
                 },
-                {
-                    data: 'dept_name',
-                    name: 'dept_name'
-                },
+                // {
+                //     data: 'dept_name',
+                //     name: 'dept_name'
+                // },
                 {
                     data: 'class_name',
                     name: 'class_name'
@@ -625,10 +730,10 @@ $(function () {
                     data: 'gender',
                     name: 'gender'
                 },
-                {
-                    data: 'email',
-                    name: 'email'
-                },
+                // {
+                //     data: 'email',
+                //     name: 'email'
+                // },
                 {
                     data: 'admission_date',
                     name: 'admission_date'

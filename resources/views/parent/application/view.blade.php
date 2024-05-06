@@ -49,8 +49,12 @@
                                             <td class="name">	佐藤 直美</td>
                                         </tr>
                                         <tr>
-                                            <td>{{ __('messages.english_name') }}</td>
-                                            <td class="name">	Seyon Tamil</td>
+                                            <td>{{ __('messages.name_english') }}</td>
+                                            <td class="english_name">	Seyon Tamil</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ __('messages.furigana_name') }}</td>
+                                            <td class="furigana_name">	Seyon Tamil</td>
                                         </tr>
                                         <tr>
                                             <td>{{ __('messages.gender') }}</td>
@@ -68,7 +72,7 @@
                                             <td>{{ __('messages.date_of_birth') }}</td>
                                             <td class="date_of_birth">2010-10-01</td>
                                         </tr>
-                                        <tr>
+                                        <!-- <tr>
                                             <td>{{ __('messages.mobile_no') }}</td>
                                             <td class="mobile_no">9888727671</td>
                                         </tr>
@@ -99,7 +103,7 @@
                                         <tr>
                                             <td>{{ __('messages.postal_code') }}</td>
                                             <td class="postal_code">60011</td>
-                                        </tr>
+                                        </tr> -->
                                     </table>
                                 </div>
                             </div> <!-- end card-box -->
@@ -124,14 +128,14 @@
                                             <td>{{ __('messages.name') }}</td>
                                             <td class="school_last_attended"></td>
                                         </tr>
-                                        <tr>
+                                        <!-- <tr>
                                             <td>{{ __('messages.address_1') }}</td>
                                             <td class="school_address_1"></td>
                                         </tr>
                                         <tr>
                                             <td>{{ __('messages.address_2') }}</td>
                                             <td class="school_address_2"></td>
-                                        </tr>
+                                        </tr> -->
                                         <tr>
                                             <td>{{ __('messages.country') }}</td>
                                             <td class="school_country"></td>
@@ -165,6 +169,14 @@
                                             <td class="mother_name"></td>
                                         </tr>
                                         <tr>
+                                            <td>{{ __('messages.name_english') }}</td>
+                                            <td class="mother_english_name">	Seyon Tamil</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ __('messages.furigana_name') }}</td>
+                                            <td class="mother_furigana_name">	Seyon Tamil</td>
+                                        </tr>
+                                        <tr>
                                             <td>{{ __('messages.email') }}</td>
                                             <td class="mother_email"></td>
                                         </tr>
@@ -191,6 +203,14 @@
                                         <tr>
                                             <td>{{ __('messages.name') }}</td>
                                             <td class="father_name"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ __('messages.name_english') }}</td>
+                                            <td class="father_english_name">	Seyon Tamil</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ __('messages.furigana_name') }}</td>
+                                            <td class="father_furigana_name">	Seyon Tamil</td>
                                         </tr>
                                         <tr>
                                             <td>{{ __('messages.email') }}</td>
@@ -221,6 +241,14 @@
                                             <td class="guardian_name"></td>
                                         </tr>
                                         <tr>
+                                            <td>{{ __('messages.name_english') }}</td>
+                                            <td class="guardian_english_name">	Seyon Tamil</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ __('messages.furigana_name') }}</td>
+                                            <td class="guardian_furigana_name">	Seyon Tamil</td>
+                                        </tr>
+                                        <tr>
                                             <td>{{ __('messages.relation') }}</td>
                                             <td class="guardian_relation"></td>
                                         </tr>
@@ -231,6 +259,18 @@
                                         <tr>
                                             <td>{{ __('messages.phone_number') }}</td>
                                             <td class="guardian_phone_number"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ __('messages.work_company_name_japan') }}</td>
+                                            <td class="guardian_company_name_japan"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ __('messages.work_company_name_local') }}</td>
+                                            <td class="guardian_company_name_local"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ __('messages.work_company_phone_number') }}</td>
+                                            <td class="guardian_company_phone_number"></td>
                                         </tr>
                                         <tr>
                                             <td>{{ __('messages.occupation') }}</td>

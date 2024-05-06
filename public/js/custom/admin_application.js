@@ -304,7 +304,7 @@ $(function () {
             // mobile_no: "required",
             date_of_birth: "required",
             gender: "required",
-            religion: "required",
+            // religion: "required",
             nationality: "required",
             school_enrollment_status: "required",
             school_enrollment_status_tendency: "required",
@@ -345,7 +345,7 @@ $(function () {
             expected_academic_year: "required",
             expected_grade: "required",
             expected_enroll_date: "required",
-            remarks: "required",
+            // remarks: "required",
 
             // email: {
             //     required: true,
@@ -519,7 +519,12 @@ $(function () {
             $("#enrollment_show").show();
             $("#status_after_approval_show").show();
         }else{
+            $("#enrollment").val("");
+            $("#trail_date").val("");
+            $("#official_date").val("");
             $("#enrollment_show").hide();
+            $("#trail_date_show").hide();
+            $("#official_date_show").hide();
             $("#status_after_approval_show").hide();
         }
     });

@@ -138,7 +138,7 @@
     <!-- Init js-->
     <script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
     <script src="{{ asset('country/js/countrySelect.js') }}"></script>
-
+    
     <script>
         var application = "{{ route('schoolcrm.app.form') }}";
         var input = document.querySelector(".mobile_no");
@@ -163,7 +163,8 @@
             responsiveDropdown: true
         });
     </script>
-
+        <script>window.UserHelpPublicProjectID="Y7YyGqyq2"</script>
+        <script src="https://run.userhelp.co" async></script>
 </body>
 
 </html>

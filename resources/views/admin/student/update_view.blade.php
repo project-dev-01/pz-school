@@ -331,7 +331,7 @@
                     </div> <!-- end col -->
                     <div class="col-lg-7">
                         <div class="pl-xl-3 mt-3 mt-xl-0">
-                            <h1 class="mb-3">{{ isset($student['first_name']) ? $student['first_name'] : ''}} {{ isset($student['last_name']) ? $student['last_name'] : ''}}</h5>
+                            <h1 class="mb-3">{{ isset($student['last_name']) ? $student['last_name'] : ''}} {{ isset($student['first_name']) ? $student['first_name'] : ''}} </h5>
                                 <div class="row mb-3">
                                     <div class="col-md-12">
                                         <div>
@@ -396,8 +396,8 @@
                                                         <i class="fas fa-home"></i></span>
                                                 </div>
                                                 <div class="media-body pl-2">
-                                                    <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold">
-                                                        <a href="javascript: void(0);" class="text-reset">{{ isset($student['current_address']) ? $student['current_address'] : ''}}</a>
+                                                    <h5 class="mt-1 mb-0 font-family-primary font-weight-semibold"> 
+                                                        <a href="javascript: void(0);" class="text-reset">{{ isset($student['address_unit_no']) ? $student['address_unit_no'] . ',' : ''}} {{ isset($student['address_condominium']) ? $student['address_condominium'] . ',' : ''}} {{ isset($student['address_street']) ? $student['address_street'] . ',' : ''}} {{ isset($student['address_district']) ? $student['address_district']  : ''}}</a>
                                                     </h5>
                                                 </div>
                                             </div>
@@ -437,10 +437,26 @@
                                 </thead>
                                 <tbody>
                                     @foreach($changes as $key=>$change)
+                                   
                                     <tr>
                                         <th>{{ __('messages.'.$key) }}</th>
-                                        <th>{{ $change['old_value'] }}</th>
-                                        <th>{{ $change['new_value'] }}</th>
+                                        @if($key== "passport_photo" || $key== "visa_photo" || $key== "nric_photo")
+                                            <!-- <th>{{ $change['old_value'] }}</th> -->
+                                            <th>
+                                                @if(isset($change['old_value']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$change['old_value'])
+                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$change['old_value'] }}" target="_blank"> {{ $change['old_value'] }} </a>
+                                                @endif
+                                            </th>   
+                                            <th>
+                                                @if(isset($change['new_value']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$change['new_value'])
+                                                    <a href="{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$change['new_value'] }}" target="_blank"> {{ $change['new_value'] }} </a>
+                                                @endif
+                                            </th>    
+                                            <!-- <th>{{ $change['new_value'] }}</th> -->
+                                        @else
+                                            <th>{{ $change['old_value'] }}</th>
+                                            <th>{{ $change['new_value'] }}</th>
+                                        @endif
                                         <th>
                                             <div class="button-list ml-2">
                                                 <div class="radio radio-success form-check-inline">
@@ -485,7 +501,7 @@
                     <button class="btn btn-primary-bl waves-effect waves-light" type="Save">
                         {{ __('messages.update') }}
                     </button>
-                    <a href="{{ route('admin.student.index') }}" class="btn btn-primary-bl waves-effect waves-light">
+                    <a href="{{ route('admin.student.update_info') }}" class="btn btn-primary-bl waves-effect waves-light">
                         {{ __('messages.back') }}
                     </a>
                     <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
@@ -544,6 +560,7 @@
 </script>
 <script>
     var studentUpdateList = "{{ route('admin.student.update_info_list') }}";
+    var studentUpdateMenu = "{{ route('admin.student.update_info') }}";
     var indexStudent = "{{ route('admin.student.index') }}";
     var sectionByClass = "{{ route('admin.section_by_class') }}";
     var vehicleByRoute = "{{ route('admin.vehicle_by_route') }}";

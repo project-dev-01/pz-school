@@ -1,3 +1,13 @@
+<style>
+    .horizontal-scroll {
+    display: flex;
+    margin-right: -12px;
+    margin-left: -12px;
+    flex-wrap: unset;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent items from wrapping to new lines */
+}
+    </style>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -10,10 +20,11 @@
             </ul>
 
             <div class="card-body">
-                <div class="row">
+                <div class="row horizontal-scroll" >
                     <?php
                     if (!empty($bulletinBorad_data)) {
                         foreach ($bulletinBorad_data as $file) {
+                            if (!empty($file['file'])) {
                             $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $file['file'];
                     ?>
                             <div class="col-xl-4">
@@ -28,7 +39,8 @@
                                                 </div>
                                             </div>
                                             <div class="col pl-0">
-                                                <a href="{{ config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $file['file'] }}" class="text-muted font-weight-bold" style="color: #eb0e17!important;"><?php echo $file['file']; ?>
+                                            
+                                                <a href="{{ config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $file['file'] }}" class="text-muted font-weight-bold" style="color: #eb0e17!important;"><?php echo $file['title']; ?>
                                                     <p class="mb-0"> {{ __('messages.preview') }}</p>
                                                 </a>
                                             </div>
@@ -43,10 +55,11 @@
                                 </div>
                             </div> <!-- end col -->
                     <?php
+                            }
                         }
                     } else {
                         // If no files are available
-                        echo '<div class="col-12 text-center">No files available.</div>';
+                        echo '<div class="col-12 text-center">No files availabless.</div>';
                     }
                     ?>
                 </div>

@@ -3,13 +3,18 @@
         <div class="row">
             <div class="col">
                 <div class="card">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <h4 class="navv">{{ __('messages.to_do_list') }}
-                                <h4>
-                        </li>
+                    <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv">{{ __('messages.to_do_list') }}
+                            <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton2"  aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                    </li>
                     </ul>
-                    <div class="card-body">
+                    <div class="card-body collapse show">
                         <div class="row" id="toDoList" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three"]'>
                             <div class="col">
                                 <a class="text-dark" data-toggle="collapse" data-id="today" data-count="{{ isset($get_to_do_list_dashboard['today'])?count($get_to_do_list_dashboard['today']):0 }}" href="#todayTasks" aria-expanded="false" aria-controls="todayTasks">
@@ -25,7 +30,7 @@
                                         <div class="card-body pb-0" id="task-list-one">
                                             <!-- task -->
                                             <div class="row justify-content-sm-between task-item">
-                                                <div class="col-lg-6 mb-2">
+                                                <div class="col-lg-5 mb-2">
                                                     <div class="custom-control custom-checkbox">
                                                         <input type="checkbox" data-id="{{ $today['id'] }}" class="custom-control-input admintaskListDashboard" id="today{{ $today['id'] }}" {{ ($today['user_id']) ? "checked" : "" }}>
                                                         <label class="custom-control-label" for="today{{ $today['id'] }}">
@@ -33,13 +38,13 @@
                                                         </label>
                                                     </div> <!-- end checkbox -->
                                                 </div> <!-- end col -->
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-7">
                                                     <div class="d-sm-flex justify-content-between">
                                                         <div>
                                                             <img src="{{ config('constants.image_url').'/common-asset/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                         </div>
                                                         <div class="mt-3 mt-sm-0">
-                                                            <ul class="list-inline font-13 text-sm-center">
+                                                            <ul class="list-inline font-13 text-sm-center todo_list">
                                                                 <li class="list-inline-item" id="comments{{ $today['id'] }}">
                                                                     <i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>
                                                                     {{$today['total_comments']}}
@@ -94,7 +99,7 @@
                                             <div class="card-body pb-0" id="task-list-two">
                                                 <!-- task -->
                                                 <div class="row justify-content-sm-between task-item">
-                                                    <div class="col-lg-6 mb-2">
+                                                    <div class="col-lg-5 mb-2">
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" data-id="{{ $upcoming['id'] }}" class="custom-control-input admintaskListDashboard" id="upcoming{{ $upcoming['id'] }}" {{ ($upcoming['user_id']) ? "checked" : "" }}>
                                                             <label class="custom-control-label" for="upcoming{{ $upcoming['id'] }}">
@@ -102,14 +107,14 @@
                                                             </label>
                                                         </div> <!-- end checkbox -->
                                                     </div> <!-- end col -->
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-7">
                                                         <div class="d-sm-flex justify-content-between">
                                                             <div>
                                                                 <img src="{{ config('constants.image_url').'/common-asset/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                             </div>
 
                                                             <div class="mt-3 mt-sm-0">
-                                                                <ul class="list-inline font-13 text-sm-center">
+                                                                <ul class="list-inline font-13 text-sm-center todo_list">
                                                                     <li class="list-inline-item" id="comments{{ $upcoming['id'] }}">
                                                                         <i class='mdi mdi-comment-text-multiple-outline font-16 mr-1'></i>
                                                                         {{$upcoming['total_comments']}}
@@ -166,7 +171,7 @@
                                             <div class="card-body pb-0" id="task-list-two">
                                                 <!-- task -->
                                                 <div class="row justify-content-sm-between task-item">
-                                                    <div class="col-lg-6 mb-2">
+                                                    <div class="col-lg-5 mb-2">
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" data-id="{{ $old['id'] }}" class="custom-control-input admintaskListDashboard" id="old{{ $old['id'] }}" {{ ($old['user_id']) ? "checked" : "" }}>
                                                             <label class="custom-control-label" for="old{{ $old['id'] }}">
@@ -174,13 +179,13 @@
                                                             </label>
                                                         </div> <!-- end checkbox -->
                                                     </div> <!-- end col -->
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-7">
                                                         <div class="d-sm-flex justify-content-between">
                                                             <div>
                                                                 <img src="{{ config('constants.image_url').'/common-asset/images/users/12.jpg' }}" lt="image" class="avatar-xs rounded-circle" data-toggle="tooltip" data-placement="bottom" title="" />
                                                             </div>
                                                             <div class="mt-3 mt-sm-0">
-                                                                <ul class="list-inline font-13 text-sm-center">
+                                                                <ul class="list-inline font-13 text-sm-center todo_list">
                                                                     <li class="list-inline-item" id="comments{{ $old['id'] }}">
                                                                         <i class='mdi mdi-comment-text-multiple-outline font-16'></i>
                                                                         {{$old['total_comments']}}
