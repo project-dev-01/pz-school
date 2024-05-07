@@ -91,14 +91,18 @@
         <div class="col-xl-6 col-md-6" id="attendance_card" style="display:none">
             <!-- Portlet card -->
             <div class="card homework">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                            {{ __('messages.attendance_report') }}
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv">{{ __('messages.attendance_report') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton2" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+                <div class="card-body collapse show">
                     <div class="col-md-12">
                         <div id="cardCollpaseAttrep" class="collapse pt-4 show" dir="ltr">
                             <div id="anylitc-attend" class="apex-charts" data-colors="#F5AA26,#F1556C,#4FC6E1"></div>
@@ -109,14 +113,18 @@
         </div> <!-- end col-->
         <div class="col-xl-6 col-md-6" id="homework_card" style="display:none">
             <div class="card homework">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                            {{ __('messages.homeWork_report') }}
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv">   {{ __('messages.homeWork_report') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton3" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+                <div class="card-body collapse show">
                     <div class="col-md-12 homeworkstatus">
                         <div id="cardCollpase19" class="collapse pt-4 show" style="text-align:center" dir="ltr">
                             <div id="homework-status" class="apex-charts" data-colors="#1FAB44,#f1556c,#4FC6E1"></div>
@@ -129,15 +137,19 @@
     <div class="row" id="attitude_card" style="display:none">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                            {{ __('messages.attitude') }}
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv"> {{ __('messages.attitude') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton4" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
+                </ul>
 
-                <div class="card-body">
+                <div class="card-body collapse show">
                     <div class="col-xl-12">
                         <div class="" style="text-align:center">
                             <div id="attitude" class="attitude"></div>
@@ -152,14 +164,18 @@
     <div class="row" id="short_test_card" style="display:none">
         <div class="col-lg-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                            {{ __('messages.short_test') }}
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv"> {{ __('messages.short_test') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton5" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+                <div class="card-body collapse show">
                     <div class="row">
                         <div class="col-lg-12">
                             <div id="shortTest"></div>
@@ -173,14 +189,18 @@
     <div class="row" id="exam_result_card" style="display:none">
         <div class="col-md-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                            {{ __('messages.exam_result') }}
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv">  {{ __('messages.exam_result') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton6" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+                <div class="card-body collapse show">
                     <div class="col-md-12">
                         <div class="mt-4 chartjs-chart">
                             <canvas id="exam-result-analytic"></canvas>
@@ -192,17 +212,22 @@
     </div>
 
     <div class="card" id="subject_average_card" style="display:none">
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <h4 class="navv">{{ __('messages.subject_average') }}
-                    <h4>
-            </li>
-        </ul><br>
+        <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv">{{ __('messages.subject_average') }}
+                            <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton7" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                    </li>
+                </ul>
         <div class="row">
             <div class="col-md-12">
                 <!-- Portlet card -->
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body collapse show">
                         <div class="card-widgets">
                             <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
                             <a data-toggle="collapse" href="#cardCollpase4" role="button" aria-expanded="false" aria-controls="cardCollpase4"><i class="mdi mdi-minus"></i></a>

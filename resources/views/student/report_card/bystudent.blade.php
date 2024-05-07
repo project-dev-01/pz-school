@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','By Student')
+@section('title',' ' . __('messages.by_student') . '')
 @section('content')
 <!-- Start Content-->
 <div class="container-fluid">
@@ -19,14 +19,18 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                        {{ __('messages.select_ground') }}
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv"> {{ __('messages.select_ground') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+                <div class="card-body collapse show">
                     <form id="bystudentfilter" data-parsley-validate="">
                         <div class="row">
                             <div class="col-md-3">
@@ -80,14 +84,18 @@
     <div class="row" style="display: none;" id="bystudent_bodycontent">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="navv">
-                        {{ __('messages.student') }}
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv"> {{ __('messages.student') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton2" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+                <div class="card-body collapse show">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="col-sm-12">
@@ -135,4 +143,5 @@
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
 </script>
 <script src="{{ asset('js/custom/bystudent.js') }}"></script>
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endsection

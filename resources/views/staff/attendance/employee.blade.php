@@ -4,9 +4,9 @@
 <!-- date picker -->
 <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
-
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <!-- Start Content-->
@@ -27,14 +27,18 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="nav-link">
-                        {{ __('messages.select_ground') }}
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv">  {{ __('messages.select_ground') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+                <div class="card-body collapse show">
                     <form id="employeeAttendanceFilter" method="post" enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
                             <input type="hidden" id="employee" name="employee" value="{{$employee}}">
@@ -84,14 +88,18 @@
     <div class="row" id="employee_attendance" style="display:none;">
         <div class="col-xl-12 addEmployeeAttendanceForm">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="nav-link">
-                        {{ __('messages.employee_list') }}
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv"> {{ __('messages.employee_list') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton2" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+                <div class="card-body collapse show">
                     <form id="addEmployeeAttendanceForm" method="post" action="{{ route('staff.attendance.employee_add') }}" enctype="multipart/form-data" autocomplete="off">
                         @csrf
                         <div class="row">
@@ -169,5 +177,5 @@
     var staff_emp_attenance_storage = localStorage.getItem('staff_emp_attentance_details');
 </script>
 <script src="{{ asset('js/custom/teacher_attendance_list.js') }}"></script>
-
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endsection

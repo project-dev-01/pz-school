@@ -9,7 +9,7 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
-
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <style>
@@ -73,14 +73,18 @@
     <div class="row">
         <div class="col-xl-12 timetableForm">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="nav-link">
-                        {{ __('messages.select_ground') }}
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv"> {{ __('messages.select_ground') }}
                             <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+                <div class="card-body collapse show">
                     <form id="indexFilter" method="post" action="{{ route('staff.timetable.details') }}" enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
                             <div class="col-md-3">
@@ -147,19 +151,18 @@
     <div class="row" id="timetablerow" style="display:none;">
         <div class="col-xl-12">
             <div class="card">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <!-- <div class="edit-button">
-                            <a class="edit_modal btn btn-soft-secondary waves-effect" id="edit-modal" data-toggle="modal" data-target="#editTimetableModal">
-                                <i class="fas fa-pen-nib"></i>
-                            </a>
-                        </div> -->
-                        <h4 class="nav-link">
-                        {{ __('messages.schedule_list') }}
-                        </h4>
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv">  {{ __('messages.schedule_list') }}
+                            <h4>
+                                <button class="btn btn-link " type="button" id="collapseButton2" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                     </li>
-                </ul><br>
-                <div class="card-body">
+                </ul>
+                <div class="card-body collapse show">
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="table-responsive">
@@ -215,5 +218,5 @@
     var sectionByClass = "{{ route('staff.section_by_class') }}";
 </script>
 <script src="{{ asset('js/custom/timetable.js') }}"></script>
-
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endsection
