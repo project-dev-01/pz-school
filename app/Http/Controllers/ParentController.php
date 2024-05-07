@@ -197,11 +197,18 @@ class ParentController extends Controller
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
-
+        
+        $data = [
+            'department_id' => isset($student['data']['student']['department_id']) ? $student['data']['student']['department_id'] : 0,
+        ];
+        $grade_list_by_department = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+        
         $prev = isset($student['data']['student']['previous_details']) ? json_decode($student['data']['student']['previous_details']) : "";
         // $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
         $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
         $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+
         // dd($student);
         return view(
             'parent.student.profile',
@@ -222,8 +229,9 @@ class ParentController extends Controller
                 'relation' => isset($relation['data']) ? $relation['data'] : [],
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
-                'role' => isset($student['data']['user']) ? $student['data']['user'] : []
-
+                'role' => isset($student['data']['user']) ? $student['data']['user'] : [],
+                'department' => isset($department['data']) ? $department['data'] : [],
+                'grade_list_by_department' => isset($grade_list_by_department['data']) ? $grade_list_by_department['data'] : [],
             ]
         );
     }

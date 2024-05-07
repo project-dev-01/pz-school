@@ -1002,6 +1002,147 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="card">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <h4 class="navv">{{ __('messages.academic_details') }}</h4>
+                                    </li>
+                                </ul>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="btwyears">{{ __('messages.academic_year') }}<span class="text-danger">*</span></label>
+                                                <select disabled id="btwyears" class="form-control" name="year" >
+                                                    <option value="">{{ __('messages.select_academic_year') }}</option>
+                                                    @forelse($academic_year_list as $r)
+                                                    <option value="{{$r['id']}}" {{ isset($student['year']) ?  $student['year'] == $r['id'] ? 'Selected' : '' : "" }}>{{$r['name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- <input type="hidden" id="btwyears" class="form-control" name="year" value="{{ isset($student['year']) ? $student['year'] : ''}}" >                                        
+                                     <input type="hidden" disabled id="txt_regiter_no" class="form-control" name="txt_regiter_no" value="{{ isset($student['register_no']) ? $student['register_no'] : ''}}" >
+                                        -->
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
+                                                <select disabled id="department_id" name="department_id" class="form-control"  >
+                                                    <option value="">{{ __('messages.select_department') }}</option>
+                                                    @forelse($department as $r)
+                                                    <option value="{{$r['id']}}" {{ isset($student['department_id']) ?  $student['department_id'] == $r['id'] ? 'Selected' : '' : "" }}>{{$r['name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="class_id">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
+                                                <select disabled id="class_id" class="form-control" name="class_id"  >
+                                                    <option value="">{{ __('messages.select_grade') }}</option>
+                                                    @forelse($grade_list_by_department as $rd)
+                                                    <option value="{{$rd['id']}}" {{ isset($student['class_id']) ?  $student['class_id'] == $rd['id'] ? 'Selected' : '' : "" }}>{{$rd['name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">                                       
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="section_id">{{ __('messages.class') }}</label>
+                                                <select disabled id="section_id" class="form-control" name="section_id"   >
+                                                    <option value="">{{ __('messages.select_class') }}</option>
+                                                    @forelse($section as $sec)
+                                                    <option value="{{$sec['section_id']}}" {{ isset($student['section_id']) ?  $student['section_id'] == $sec['section_id'] ? 'Selected' : '' : "" }}>{{$sec['section_name']}}</option>
+                                                    @empty
+                                                    @endforelse
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="">{{ __('messages.attendance_no') }}</label>
+                                                <input type="" disabled id="txt_roll_no" class="form-control" name="txt_roll_no" placeholder="{{ __('messages.enter_attendance_no') }}" value="{{ isset($student['attendance_no']) ? $student['attendance_no'] : ''}}" data-parsley-trigger="change">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group ">
+                                                <label for="">{{ __('messages.register_no') }}</label>
+                                                <div class="input-group input-group-merge">                                                    
+                                                    <input disabled type="text" disabled class="form-control" value="{{ isset($student['register_no']) ? $student['register_no'] : ''}}"  placeholder="{{ __('messages.register_no') }}"  >
+                                                </div>
+                                            </div>
+                                        </div>                                       
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4" id="enrollment_show" >
+                                            <div class="form-group">
+                                                <label for="enrollment">{{ __('messages.enrollment') }}</label>
+                                                <select disabled id="enrollment" name="enrollment" class="form-control">
+                                                    <option value="">{{ __('messages.select_enrollment') }}</option>
+                                                    <option {{ isset($student['enrollment']) ? $student['enrollment'] == "Trail Enrollment" ? 'selected' : '' : '' }} value="Trail Enrollment">{{ __('messages.trail_enrollment') }}</option>
+                                                    <option {{ isset($student['enrollment']) ? $student['enrollment'] == "Official Enrollment" ? 'selected' : '' : '' }} value="Official Enrollment">{{ __('messages.official_enrollment') }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        @php
+
+                                        $trail_date = "none";
+                                        if($student['enrollment']=="Trail Enrollment"){
+                                        $trail_date = "block";
+                                        }
+                                        @endphp
+                                        <div class="col-md-4" id="trail_date_show" style="display:{{$trail_date}}">
+                                            <div class="form-group">
+                                                <label for="text">{{ __('messages.trail_date') }}</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="far fa-calendar-alt"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" disabled class="form-control" id="trail_date" value="{{ isset($student['trail_date']) ? $student['trail_date'] : date('Y-m-d')}}" name="trail_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        @php
+                                        $official_date = "none";
+                                        if($student['enrollment']=="Official Enrollment"){
+                                        $official_date = "block";
+                                        }
+                                        @endphp
+                                        <div class="col-md-4" id="official_date_show" style="display:{{$official_date}}">
+                                            <div class="form-group">
+                                                <label for="text">{{ __('messages.official_date') }}</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="far fa-calendar-alt"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" disabled class="form-control" id="official_date" value="{{ isset($student['official_date']) ? $student['official_date'] : date('Y-m-d')}}" name="official_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group ">
+                                                <label for="">{{ __('messages.date_of_termination') }}</label>
+                                                <div class="input-group input-group-merge">                                                    
+                                                    <input type="text" disabled class="form-control" value="{{ isset($student['date_of_termination']) ? $student['date_of_termination'] : ''}}"  placeholder="{{ __('messages.date_of_termination') }}"  >
+                                                </div>
+                                            </div>
+                                        </div>                                           
+                                    </div>                                    
+                                </div>
+                            </div>
                         <!-- <div class="card">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
