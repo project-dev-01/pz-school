@@ -1,68 +1,82 @@
-<style>
-    .horizontal-scroll {
-    display: flex;
-    margin-right: -12px;
-    margin-left: -12px;
-    flex-wrap: unset;
-    overflow-x: auto; /* Enable horizontal scrolling */
-    white-space: nowrap; /* Prevent items from wrapping to new lines */
-}
-    </style>
+
 <div class="row">
-    <div class="col-12">
+    <div class="col-lg-12">
         <div class="card">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <h4 class="navv">
-                        {{ __('messages.BulletinBoard') }}
-                        <h4>
-                </li>
-            </ul>
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                                <!-- Button placed on the left side -->
+                                <h4 class="navv">
+                                {{ __('messages.BulletinBoard') }}
+                                </h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton3" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                </ul>
+          
+                <div class="card-body collapse show">
+                    <div class="form-group pull-right">
+                        <div class="col-xs-2 col-sm-2">
+                        <a href="{{ route('teacher.buletin_board') }}" class="btn btn-primary width-xs waves-effect waves-light">{{ __('messages.go_to_bulletin') }}</a>
 
-            <div class="card-body">
-                <div class="row horizontal-scroll">
-                    <?php
-                    if (!empty($bulletinBorad_data)) {
-                        foreach ($bulletinBorad_data as $file) {
-                            if (!empty($file['file'])) {
-                            $image_url = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $file['file'];
-                    ?>
-                            <div class="col-xl-4">
-                                <div class="card mb-1 shadow-none border">
-                                    <div class="p-2">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <div class="avatar-sm">
-                                                    <span class="avatar-title bg-danger text-primary rounded">
-                                                        <i class="fe-file" style="color: #fff;"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="col pl-0">
-                                                <a href="{{ config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $file['file'] }}" class="text-muted font-weight-bold" style="color: #eb0e17!important;"><?php echo $file['title']; ?>
-                                                    <p class="mb-0"> {{ __('messages.preview') }}</p>
-                                                </a>
-                                            </div>
-                                            <div class="col-auto">
-                                                <!-- Button -->
-                                                <a href="{{ config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $file['file'] }}" class="btn btn-link btn-lg text-muted" style="color: black;" download>
-                                                    <i class="dripicons-download" style="color: black;"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> <!-- end col -->
-                    <?php
-                            }
-                        }
-                    } else {
-                        // If no files are available
-                        echo '<div class="col-12 text-center">No files available.</div>';
-                    }
-                    ?>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table dt-responsive nowrap w-100" id="buletin-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>{{ __('messages.title') }}</th>
+                                    <th>{{ __('messages.file') }}</th>
+                                    <th>{{ __('messages.publish_dates') }}</th>
+                                    <th>{{ __('messages.action') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="fileModal" tabindex="-1" aria-labelledby="fileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="fileModalLabel">{{ __('messages.file_details') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="card-box eventpopup" style="background-color: #8adfee14;">
+                            <div class="table-responsive">
+                                <table class="table w-100 nowrap">
+                                    <tr>
+                                        <td>{{ __('messages.title') }}</td>
+                                        <td id="fileTitle"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ __('messages.description') }}</td>
+                                        <td id="fileDescription" style="white-space: pre-line;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ __('messages.download') }}</td>
+                                        <td class="publish_date"><a id="downloadLink" href="#" download>{{ __('messages.download') }}</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ __('messages.preview') }}</td>
+                                        <td class="target_user"><a href="#" id="previewLink" target="_blank">{{ __('messages.preview') }}</a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div> <!-- end card-box -->
+                    </div> <!-- end col -->
+                </div>
+                <iframe id="filePreview" src="" style="display: none; width: 100%; height: 500px;"></iframe>
             </div>
         </div>
     </div>

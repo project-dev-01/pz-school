@@ -10376,6 +10376,32 @@ class AdminController extends Controller
             ->rawColumns(['target_user', 'actions'])
             ->make(true);
     }
+    public function getBuletinBoardDashBoard(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.bulletinBoard_Dashboard'));
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $downloadLink = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                $buttons = '<div class="button-list">';
+                
+                // Check if file exists
+                if (!empty($row['file'])) {
+                    // If file exists, add download button
+                    $buttons .= '<a href="' . $downloadLink . '" class="btn btn-danger waves-effect waves-light" download><i class="dripicons-download" style="color: white;"></i></a>';
+                    
+                    // If file exists, add preview button
+                   
+                }
+                $buttons .= ' <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" data-id="' . $row['id'] . '" id="viewBuletinBtn"><i class="fe-eye"></i></a>';
+                $buttons .= '</div>';
+                
+                return $buttons;
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
     public function addBuletinBoard(Request $request)
     {
         // Retrieve the selected values as an array

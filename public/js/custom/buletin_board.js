@@ -137,6 +137,8 @@ $(function () {
             formData.append('date', date);
             formData.append('endDate', endDate);
             formData.append('file', file);
+
+            $('#loaderOverlay').show();
             $.ajax({
                 url: $(form).attr('action'),
                 method: $(form).attr('method'),
@@ -148,13 +150,17 @@ $(function () {
                     $(form).find('span.error-text').text('');
                 },
                 success: function (data) {
+                    
                     console.log(data)
                     if (data.code == 200) {
-                        //$('#buletin-table').DataTable().ajax.reload(null, false);
+                       
                         $('.addBuletin').find('form')[0].reset();
+                        $('#loaderOverlay').hide();
                         window.location.href = bulletin;
+                       
                     } else {
                         toastr.error(data.message);
+                        $('#loaderOverlay').hide();
                     }
                 }
             });
@@ -468,7 +474,7 @@ $(function () {
                             return '<a href="' + fileLink + '" target="_blank">' + data + '</a>';
                         } else {
                             // Return empty string if data is null or empty
-                            return '';
+                            return '<span class="text-muted">no file uploaded</span>';
                         }
                     }
                 },

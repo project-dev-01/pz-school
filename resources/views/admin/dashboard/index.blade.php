@@ -167,7 +167,7 @@
     'task' => 'Task',
     'student_transfer_list' => 'StudentTransferredList',
     'shortcut' => 'ShortcutLinks',
-   // 'bulletin' => 'BulletinBoard',
+    'bulletin' => 'BulletinBoard',
     'student_plan_leave' => 'StudentPlanToLeave',
     'studentnewjoining' => 'StudentNewJoining',
     ];
@@ -288,6 +288,7 @@
     @include('admin.dashboard.task-show')
     @include('admin.dashboard.exam-schedule')
     @include('admin.dashboard.taskupdate')
+   
 
 </div> <!-- container -->
 @endsection
@@ -352,6 +353,10 @@
     // var studentPlanToLeaveListUrl = "{{ config('constants.api.student_plan_to_leave') }}";
     var studentTransferListUrl = "{{ config('constants.api.student_transfer_list') }}";
     var studentNewJoiningListUrl = "{{ config('constants.api.student_new_joining_list') }}";
+
+    var buletinBoardList = "{{ route('admin.buletin_board.dashboradlist') }}";
+    var buletinBoardDetails = "{{ route('admin.buletin_board.details') }}";
+    var image_url = "{{config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/'}}";
 
     var header_txt = "{{ __('messages.student_plan_to_leave') }}";
     var footer_txt = "{{ session()->get('footer_text') }}";

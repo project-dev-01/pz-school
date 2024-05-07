@@ -164,7 +164,7 @@ $(function () {
                             const fileContent  = `
                                 <button class="star-button ${starClass}" data-item-id="${itemId}" data-important="${full.parent_imp}" onclick="toggleStar(${itemId}, ${full.parent_imp})"></button>`;
                             // Return empty content if data is null or empty
-                            return `<div>${fileContent}</div>`;
+                            return `<div>${fileContent} <span class="text-muted">no file uploaded</span></div>`;
                         }
                     }
                 },
@@ -312,7 +312,7 @@ $(function () {
                             const fileContent  = `
                                 <button class="star-button ${starClass}" data-item-id="${itemId}" data-important="${full.parent_imp}" onclick="toggleStar(${itemId}, ${full.parent_imp})"></button>`;
                             // Return empty content if data is null or empty
-                            return `<div>${fileContent}</div>`;
+                            return `<div>${fileContent}  <span class="text-muted">no file uploaded</span></div>`;
                         }
                     }
                 },

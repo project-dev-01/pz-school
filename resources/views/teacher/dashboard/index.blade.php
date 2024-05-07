@@ -90,7 +90,7 @@
     'task' => 'Task',
     'student_transfer_list' => 'StudentTransferredList',
     'shortcut' => 'ShortcutLinks',
-    //'bulletin' => 'BulletinBoard',
+    'bulletin' => 'BulletinBoard',
     'student_plan_leave' => 'StudentPlanToLeave',
     'studentnewjoining' => 'StudentNewJoining',
     ];
@@ -186,6 +186,9 @@
     var pathDownloadFileUrl = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/images/todolist/' }}";
     var toDoCommentsUrl = "{{ config('constants.api.to_do_comments') }}";
     var getScheduleExamDetailsUrl = "{{ config('constants.api.get_schedule_exam_details_by_teacher') }}";
+
+    var buletinBoardList = "{{ route('teacher.buletin_board.dashboradlist') }}";
+    var image_url = "{{config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/'}}";
 
     var UserName = "{{ Session::get('name') }}";
     var hiddenWks = "{{ $hiddenWeekends }}";

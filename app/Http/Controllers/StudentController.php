@@ -845,12 +845,17 @@ class StudentController extends Controller
                     'title' => $row['title'],
                     'description' => $description,
                 ]);
+                 if (!empty($row['file'])) {
+                    $downloadButton = '<a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
+                        <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
+                    </a>';
+                } else {
+                    $downloadButton = ''; // If file doesn't exist, set empty string
+                }
                 return '<div class="button-list">
-                    <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>
-                    <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
-                    <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
-                </a>
-                </div>';
+                    <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>'
+                  .$downloadButton.
+                '</div>';
             })
             ->rawColumns(['publish', 'actions'])
             ->make(true);
@@ -887,12 +892,18 @@ class StudentController extends Controller
                     'title' => $row['title'],
                     'description' => $description,
                 ]);
+                if (!empty($row['file'])) {
+                    $downloadButton = '<a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
+                        <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
+                    </a>';
+                } else {
+                    $downloadButton = ''; // If file doesn't exist, set empty string
+                }
                 return '<div class="button-list">
-                    <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>
-                    <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
-                    <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
-                </a>
-                </div>';
+                    <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>'
+                    .$downloadButton.
+                   
+                '</div>';
             })
             ->rawColumns(['publish', 'actions'])
             ->make(true);
