@@ -65,11 +65,13 @@ return [
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
+            'permission' => 0775,
+            'rotate' => true,
+            'size' => '50M',
             'formatter_with' => [
                 'context' => true,
                 'extra' => true,
             ],
-    
         ],
 
         'slack' => [

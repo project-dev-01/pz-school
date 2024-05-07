@@ -488,7 +488,7 @@ class AuthController extends Controller
                     }
                     if ($roleID == 2) {
                         $redirect_route
-                         = route('admin.dashboard');
+                            = route('admin.dashboard');
                         return view('auth.loading', ['user_name' => $user_name, 'redirect_route' => $redirect_route]);
                     } else {
                         return redirect()->route('admin.login')->with('error', 'Invalid Credential');
@@ -510,7 +510,7 @@ class AuthController extends Controller
             'branch_id' => $request->branch_id,
             'password' => $request->password,
             'user_browser' => $request->user_browser,
-            'user_os' => $request->user_os,            
+            'user_os' => $request->user_os,
             'role_id' => "4",
             'user_device' => $request->user_device
         ]);
@@ -568,7 +568,7 @@ class AuthController extends Controller
             'branch_id' => $request->branch_id,
             'password' => $request->password,
             'user_browser' => $request->user_browser,
-            'user_os' => $request->user_os,            
+            'user_os' => $request->user_os,
             'role_id' => "3",
             'user_device' => $request->user_device
         ]);
@@ -626,7 +626,7 @@ class AuthController extends Controller
             'branch_id' => $request->branch_id,
             'password' => $request->password,
             'user_browser' => $request->user_browser,
-            'user_os' => $request->user_os,            
+            'user_os' => $request->user_os,
             'role_id' => "5",
             'user_device' => $request->user_device
         ]);
@@ -1233,8 +1233,7 @@ class AuthController extends Controller
             // $req->session()->put('locale', $defalutLang);
             $hour = time() + 3600 * 24 * 30;
             Cookie::queue(Cookie::make('locale', $defalutLang, $hour));
-            if(session()->get('branch_id')!==null)
-            {
+            if (session()->get('branch_id') !== null) {
                 Helper::GetMethod(config('constants.api.logout'));
             }
         } catch (\Exception $e) {
@@ -1271,15 +1270,15 @@ class AuthController extends Controller
         $req->session()->put('picture', $userDetails['data']['user']['picture']);
         $req->session()->put('token', $userDetails['data']['token']);
         $req->session()->put('name', $userDetails['data']['user']['name']);
-        $req->session()->put('first_name', isset($userDetails['data']['user']['firstname'])?$userDetails['data']['user']['firstname']:"");
-        $req->session()->put('last_name', isset($userDetails['data']['user']['lastname'])?$userDetails['data']['user']['lastname']:"");
+        $req->session()->put('first_name', isset($userDetails['data']['user']['firstname']) ? $userDetails['data']['user']['firstname'] : "");
+        $req->session()->put('last_name', isset($userDetails['data']['user']['lastname']) ? $userDetails['data']['user']['lastname'] : "");
         $req->session()->put('email', $userDetails['data']['user']['email']);
         $req->session()->put('role_name', $userDetails['data']['role_name']);
         $req->session()->put('session_id', $userDetails['data']['user']['session_id']);
         $req->session()->put('branch_id', $userDetails['data']['subsDetails']['id']);
         $req->session()->put('school_name', $userDetails['data']['subsDetails']['school_name']);
         $req->session()->put('school_logo', $userDetails['data']['subsDetails']['logo']);
-        $req->session()->put('name_sequence_flag', isset($userDetails['data']['subsDetails']['firstlastname'])?$userDetails['data']['subsDetails']['firstlastname']:"");
+        $req->session()->put('name_sequence_flag', isset($userDetails['data']['subsDetails']['firstlastname']) ? $userDetails['data']['subsDetails']['firstlastname'] : "");
         // password_changed_at
         // $req->session()->put('password_changed_at', $userDetails['data']['subsDetails']['password_changed_at']);
         // space remove school name
@@ -1311,16 +1310,16 @@ class AuthController extends Controller
             $req->session()->put('all_child', null);
         }
 
-        if(isset($userDetails['data']['user']['firstname'])){
-            if(isset($userDetails['data']['subsDetails']['firstlastname'])){
-                if($userDetails['data']['subsDetails']['firstlastname'] == 1){
-                    $first_last_reverse = $userDetails['data']['user']['firstname']. ' ' . $userDetails['data']['user']['lastname'];
-                }else{
-                    $first_last_reverse = $userDetails['data']['user']['lastname']. ' ' . $userDetails['data']['user']['firstname'];
+        $first_last_reverse = ""; // Initialize with a default value
+
+        if (isset($userDetails['data']['user']['firstname'])) {
+            if (isset($userDetails['data']['subsDetails']['firstlastname'])) {
+                if ($userDetails['data']['subsDetails']['firstlastname'] == 1) {
+                    $first_last_reverse = $userDetails['data']['user']['firstname'] . ' ' . $userDetails['data']['user']['lastname'];
+                } else {
+                    $first_last_reverse = $userDetails['data']['user']['lastname'] . ' ' . $userDetails['data']['user']['firstname'];
                 }
             }
-        }else{
-            $first_last_reverse = "";
         }
         $req->session()->put('name_sequence', $first_last_reverse);
         $user_name = $userDetails['data']['user']['name'];
@@ -1337,20 +1336,14 @@ class AuthController extends Controller
             ];
             if ($session_id !== null) {
                 $response = Helper::PostMethod(config('constants.api.lastlogout'), $data);
-                if($response!==null)
-                {
-                return $response;
-                }
-                else {
+                if ($response !== null) {
+                    return $response;
+                } else {
                     return response()->json(['error' => 'Token expired or invalid 403.'], 403);
-                } 
+                }
             } else {
                 return response()->json(['error' => 'Token expired or invalid 403.'], 403);
-            } 
-            
-
-
-            
+            }
         } catch (\Exception $e) {
 
             // CSRF token mismatch occurred, handle the error
@@ -1363,14 +1356,14 @@ class AuthController extends Controller
         try {
             // $token = session()->get('token');
             $session_id = session()->get('session_id');
-            
+
             if ($session_id !== null) {
                 $data = [
                     'session_id' => $session_id,
                 ];
 
                 $response = Helper::PostMethod(config('constants.api.all_logout'), $data);
-                
+
                 // Process and return the response
                 return $response;
             } else {
