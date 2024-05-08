@@ -1273,7 +1273,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="remarks">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
+                                                    <label for="remarks">{{ __('messages.remarks') }}<span class="text-danger"></span></label>
                                                     <textarea type="text" id="remarks" class="form-control" {{$readonly_phase_1}} placeholder="{{ __('messages.enter_remarks') }}" name="remarks" data-parsley-trigger="change">{{ isset($application['remarks']) ? $application['remarks'] : ''}}</textarea>
                                                 </div>
                                             </div>

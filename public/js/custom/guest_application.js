@@ -287,7 +287,7 @@ $(function () {
             expected_academic_year: "required",
             expected_grade: "required",
             expected_enroll_date: "required",
-            remarks: "required",
+            // remarks: "required",
 
             // email: {
             //     required: true,
@@ -472,7 +472,7 @@ $(function () {
             expected_academic_year: "required",
             expected_grade: "required",
             expected_enroll_date: "required",
-            remarks: "required",
+            // remarks: "required",
 
             // email: {
             //     required: true,
