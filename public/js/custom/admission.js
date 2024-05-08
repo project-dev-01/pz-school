@@ -339,10 +339,16 @@ $(function () {
     $('#has_dual_nationality_checkbox').change(function() {
         if(this.checked) {
             $('#dual_nationality_container').show();
-        } else {
-            $('#dual_nationality_container').hide();
+            // $('.error').css('display','block');
+                } else {
+            $('#dual_nationality_container').hide();   
+            // $('.error').css('display','none');
         }
     });
+    $.validator.addMethod("notEqualToNationality", function(value, element) {
+        return value !== $("#nationality").val();
+    }, "Dual nationality cannot be the same as nationality");
+    
     // rules validation
     $("#addadmission").validate({
         rules: {
@@ -414,8 +420,13 @@ $(function () {
             mother_email:"required",
             mother_mobile_no:"required",
             mother_occupation:"required",
-           
-
+            "dual_nationality": {
+                required: function (element) {
+                    return $("#has_dual_nationality_checkbox").is(":checked");
+                },
+                notEqualToNationality: true
+            },
+        
            // present_address: "required",
             txt_pwd: {
                 required: true,
@@ -428,6 +439,8 @@ $(function () {
             },
         }
     });
+  
+    
 
     $('#addadmission').on('submit', function (e) {
         e.preventDefault();

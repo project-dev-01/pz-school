@@ -231,6 +231,10 @@ $(function () {
     //         $("#guardian_details").show("slow");
     //     }
     // });
+    $.validator.addMethod("notEqualToNationality", function(value, element) {
+        return value !== $("#nationality").val();
+    }, "Dual nationality cannot be the same as nationality");
+    
     $("#addApplication").validate({
         rules: {
             first_name: "required",
@@ -336,7 +340,13 @@ $(function () {
                 required: true,
                 email: true
             },
-            last_date_of_withdrawal: "required"
+            last_date_of_withdrawal: "required",
+            "dual_nationality": {
+                required: function (element) {
+                    return $("#has_dual_nationality_checkbox").is(":checked");
+                },
+                notEqualToNationality: true
+            },
 
         }
     });
@@ -539,6 +549,12 @@ $(function () {
             passport_father_photo: "required",
             passport_mother_photo: "required",
             stay_category:"required",
+            "dual_nationality": {
+                required: function (element) {
+                    return $("#has_dual_nationality_checkbox").is(":checked");
+                },
+                notEqualToNationality: true
+            },
 
 
             "passport_photo": {

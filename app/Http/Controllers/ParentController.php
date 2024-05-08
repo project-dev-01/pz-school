@@ -1853,18 +1853,7 @@ class ParentController extends Controller
     {
 
         $type = "Admission";
-        $rules = [
-            'nationality' => 'required|string|max:50',
-            'dual_nationality' => 'nullable|string|max:50|different:nationality',
-        ];
 
-        // Define custom error messages
-        $messages = [
-            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
-        ];
-
-        // Validate the request
-        $validatedData = $request->validate($rules, $messages);
 
         // Set type based on the last date of withdrawal
         // $type = "Admission";
@@ -2018,18 +2007,6 @@ class ParentController extends Controller
     }
     public function applicationUpdate(Request $request)
     {
-        $rules = [
-            'nationality' => 'required|string|max:50',
-            'dual_nationality' => 'nullable|string|max:50|different:nationality',
-        ];
-
-        // Define custom error messages
-        $messages = [
-            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
-        ];
-
-        // Validate the request
-        $validatedData = $request->validate($rules, $messages);
 
         // Set dual nationality based on checkbox
         $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;

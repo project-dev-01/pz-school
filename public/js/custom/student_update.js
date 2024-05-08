@@ -445,6 +445,7 @@ $(function () {
 
         });
     });
+
     $('#has_dual_nationality_checkbox').change(function() {
         if(this.checked) {
             $('#dual_nationality_container').show();
@@ -452,6 +453,10 @@ $(function () {
             $('#dual_nationality_container').hide();
         }
     });
+    $.validator.addMethod("notEqualToNationality", function(value, element) {
+        return value !== $("#nationality").val();
+    }, "Dual nationality cannot be the same as nationality");
+
     $("#updateStudentProfile").validate({
         rules: {
            
@@ -491,6 +496,12 @@ $(function () {
             school_city: "required",
             school_postal_code: "required",
             school_enrollment_status: "required",
+            "dual_nationality": {
+                required: function (element) {
+                    return $("#has_dual_nationality_checkbox").is(":checked");
+                },
+                notEqualToNationality: true
+            },
           
 
             "passport_photo": {
