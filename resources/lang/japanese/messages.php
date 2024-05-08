@@ -1668,7 +1668,7 @@ return [
     "enter_parent_address_after_transfer" => "転送後に親アドレスを入力します",
     "edit_termination" => "終了を編集します",
     "delete_this_termination" => "この終了を削除します",
-    "date_of_termination" => "終了日",
+    "date_of_termination" => "退学日",
     "school_fees_payment_status" => "学費の支払いステータス（事務局入力）",
     "delete_google_address" => "Googleアドレス削除",
     "termination_status" => "退学ステータス（教員入力）",
@@ -2299,5 +2299,6 @@ return [
       "japan_contact_no"=>"日本の連絡先：電話番",
       "japan_emergency_sms"=>"緊急連絡先", 
 
-      "go_to_bulletin" => "掲示板へ行く",
+      "go_to_bulletin" => "掲示板へ行く", 
+      "phase_2_approved"=> "受理"
 ];

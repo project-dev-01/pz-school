@@ -582,6 +582,35 @@ $(function () {
                 }
             },
             {
+                targets: 6,
+                type: 'date-euro', // Custom sorting type for DD-MM-YYYY format
+                render: function(data, type, row, meta) {
+                    if (type === 'sort') {
+                        // Convert the date to a format that can be sorted correctly
+                        var parts = data.split('-');
+                        return parts[2] + '-' + parts[1] + '-' + parts[0]; // Convert to YYYY-MM-DD for sorting
+                    } else {
+                        // Format the date for display
+                        return data;
+                    }
+                }
+            },
+            {
+                targets: 7,
+                
+                type: 'date-euro', // Custom sorting type for DD-MM-YYYY format
+                render: function(data, type, row, meta) {
+                    if (type === 'sort') {
+                        // Convert the date to a format that can be sorted correctly
+                        var parts = data.split('-');
+                        return parts[2] + '-' + parts[1] + '-' + parts[0]; // Convert to YYYY-MM-DD for sorting
+                    } else {
+                        // Format the date for display
+                        return data;
+                    }
+                }
+            },
+            {
                 targets: 10,
                 render: function (data, type, row, meta) {
                     var status = getStatusBadge(data);

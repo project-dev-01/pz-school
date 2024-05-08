@@ -1658,7 +1658,7 @@
                                                     <select id="phase_2_status" name="phase_2_status" class="form-control">
                                                         <option value="">{{ __('messages.select_status') }}</option>
                                                         <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Applied" ? 'selected' : '' : '' }} value="Applied">{{ __('messages.applied') }}</option>
-                                                        <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Approved" ? 'selected' : '' : '' }} value="Approved">{{ __('messages.approved') }}</option>
+                                                        <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Approved" ? 'selected' : '' : '' }} value="Approved">{{ __('messages.phase_2_approved') }}</option>
                                                         <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Send Back" ? 'selected' : '' : '' }} value="Send Back">{{ __('messages.send_back') }}</option>
                                                         <option {{ isset($application['phase_2_status']) ? $application['phase_2_status'] == "Reject" ? 'selected' : '' : '' }} value="Reject">{{ __('messages.reject') }}</option>
                                                     </select>

@@ -1017,6 +1017,7 @@ class AuthController extends Controller
     public function resetPassword(Request $request)
     {
         $data = [
+            'branch_id' => config('constants.branch_id'),
             'email' => $request->email,
             'sent_link' => url('/')
         ];
@@ -1115,6 +1116,7 @@ class AuthController extends Controller
     public function resetPasswordValidation(Request $request)
     {
         $response = Http::post(config('constants.api.reset_password_validation'), [
+            'branch_id' => config('constants.branch_id'),
             'email' => $request->email,
             'password' => $request->password,
             'password_confirmation' => $request->password_confirmation,
@@ -1176,6 +1178,7 @@ class AuthController extends Controller
     public function resetExpirePassword(Request $request)
     {
         $response = Http::post(config('constants.api.reset_expire_reset_password'), [
+            'branch_id' => config('constants.branch_id'),
             'email' => $request->email,
             'password' => $request->password,
             'password_confirmation' => $request->password_confirmation,

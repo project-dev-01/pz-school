@@ -2327,4 +2327,5 @@ return [
   "japan_emergency_sms" => "Japan Emergency SMS",
 
   "go_to_bulletin" => "Go to Bulletin Board",
+  "phase_2_approved"=> "Approved"
 ];
