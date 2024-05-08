@@ -293,6 +293,10 @@ $(function () {
             $('#dual_nationality_container').hide();
         }
     });
+    $.validator.addMethod("notEqualToNationality", function(value, element) {
+        return value !== $("#nationality").val();
+    }, "Dual nationality cannot be the same as nationality");
+    
     $("#editApplication").validate({
         rules: {
             first_name: "required",
@@ -431,6 +435,13 @@ $(function () {
             phase_1_reason:"required",
             // enrollment:"required",
             stay_category:"required",
+            "dual_nationality": {
+                required: function (element) {
+                    return $("#has_dual_nationality_checkbox").is(":checked");
+                },
+                notEqualToNationality: true
+            },
+        
 
             "passport_photo": {
                 required: function (element) {

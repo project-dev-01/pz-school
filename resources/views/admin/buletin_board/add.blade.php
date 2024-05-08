@@ -1,7 +1,49 @@
 <!-- Center modal content -->
+<style>
+.loader {
+  border: 4px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 4px solid #3498db;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  position: absolute; /* Position the loader within the overlay */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Center the loader */
+  z-index: 99999; /* Ensure it's above all other elements */
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#loaderOverlay {
+  position: fixed; /* Position the overlay relative to the viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Transparent black background */
+  z-index: 9999; /* Ensure it's above all other elements */
+  display: none; /* Initially hidden */
+}
+
+    </style>
+     <div id="loaderOverlay">
+                <div class="loader"></div>
+            </div>
 <div class="modal fade addBuletin" id="addBuletinModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
+       
             <div class="modal-header">
                 <h4 class="modal-title" id="myaddBuletinModalLabel">{{ __('messages.buletin') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>

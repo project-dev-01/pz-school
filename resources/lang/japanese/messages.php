@@ -2298,4 +2298,6 @@ return [
       "japan_postalcode"=>"日本の住所：郵便番号",  
       "japan_contact_no"=>"日本の連絡先：電話番",
       "japan_emergency_sms"=>"緊急連絡先", 
+
+      "go_to_bulletin" => "掲示板へ行く",
 ];

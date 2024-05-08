@@ -2325,4 +2325,6 @@ return [
   "japan_postalcode" => "Japan Address Postal",
   "japan_contact_no" => "Japan Contact Phone Number",
   "japan_emergency_sms" => "Japan Emergency SMS",
+
+  "go_to_bulletin" => "Go to Bulletin Board",
 ];

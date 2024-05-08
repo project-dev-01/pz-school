@@ -197,11 +197,18 @@ class ParentController extends Controller
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $form_field = Helper::GetMethod(config('constants.api.form_field_list'));
-
+        
+        $data = [
+            'department_id' => isset($student['data']['student']['department_id']) ? $student['data']['student']['department_id'] : 0,
+        ];
+        $grade_list_by_department = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+        
         $prev = isset($student['data']['student']['previous_details']) ? json_decode($student['data']['student']['previous_details']) : "";
         // $student['data']['student']['school_name'] = isset($prev->school_name) ? $prev->school_name : "";
         $student['data']['student']['qualification'] = isset($prev->qualification) ? $prev->qualification : "";
         $student['data']['student']['remarks'] = isset($prev->remarks) ? $prev->remarks : "";
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+
         // dd($student);
         return view(
             'parent.student.profile',
@@ -222,8 +229,9 @@ class ParentController extends Controller
                 'relation' => isset($relation['data']) ? $relation['data'] : [],
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
-                'role' => isset($student['data']['user']) ? $student['data']['user'] : []
-
+                'role' => isset($student['data']['user']) ? $student['data']['user'] : [],
+                'department' => isset($department['data']) ? $department['data'] : [],
+                'grade_list_by_department' => isset($grade_list_by_department['data']) ? $grade_list_by_department['data'] : [],
             ]
         );
     }
@@ -1558,12 +1566,18 @@ class ParentController extends Controller
                     'title' => $row['title'],
                     'description' => $description,
                 ]);
+                if (!empty($row['file'])) {
+                    $downloadButton = '<a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
+                        <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
+                    </a>';
+                } else {
+                    $downloadButton = ''; // If file doesn't exist, set empty string
+                }
                 return '<div class="button-list">
-            <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>
-            <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
-            <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
-        </a>
-        </div>';
+            <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>'
+            .$downloadButton.
+            
+        '</div>';
             })
             ->rawColumns(['publish', 'actions'])
             ->make(true);
@@ -1601,12 +1615,17 @@ class ParentController extends Controller
                     'title' => $row['title'],
                     'description' => $description,
                 ]);
+                if (!empty($row['file'])) {
+                    $downloadButton = '<a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
+                        <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
+                    </a>';
+                } else {
+                    $downloadButton = ''; // If file doesn't exist, set empty string
+                }
                 return '<div class="button-list">
-                    <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>
-                    <a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
-                    <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
-                </a>
-                </div>';
+                    <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>'
+                   .$downloadButton.
+                '</div>';
             })
             ->rawColumns(['publish', 'actions'])
             ->make(true);
@@ -1834,18 +1853,7 @@ class ParentController extends Controller
     {
 
         $type = "Admission";
-        $rules = [
-            'nationality' => 'required|string|max:50',
-            'dual_nationality' => 'nullable|string|max:50|different:nationality',
-        ];
 
-        // Define custom error messages
-        $messages = [
-            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
-        ];
-
-        // Validate the request
-        $validatedData = $request->validate($rules, $messages);
 
         // Set type based on the last date of withdrawal
         // $type = "Admission";
@@ -1999,18 +2007,6 @@ class ParentController extends Controller
     }
     public function applicationUpdate(Request $request)
     {
-        $rules = [
-            'nationality' => 'required|string|max:50',
-            'dual_nationality' => 'nullable|string|max:50|different:nationality',
-        ];
-
-        // Define custom error messages
-        $messages = [
-            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
-        ];
-
-        // Validate the request
-        $validatedData = $request->validate($rules, $messages);
 
         // Set dual nationality based on checkbox
         $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;

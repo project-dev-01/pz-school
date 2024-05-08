@@ -979,7 +979,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('buletin_board/buletin_board-details', [AdminController::class, 'getBuletinBoardDetails'])->name('admin.buletin_board.details');
         Route::get('buletin_board/edit/{id}', [AdminController::class, 'editBuletinBoard'])->name('admin.buletin_board.edit');
         Route::post('buletin_board/update', [AdminController::class, 'updateBuletinBoard'])->name('admin.buletin_board.update');
-
+        Route::get('buletin_board/dasboardlist', [AdminController::class, 'getBuletinBoardDashBoard'])->name('admin.buletin_board.dashboradlist');
         // retired_person routes
         Route::get('retired_person/index', [AdminController::class, 'retired_person'])->name('admin.retired_person');
         Route::get('retired_person/list', [AdminController::class, 'retiredPersonList'])->name('admin.retired_person.list');
@@ -1343,6 +1343,7 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::get('buletin_board/list', [TeacherController::class, 'getBuletinBoardTeacherList'])->name('teacher.buletin_board.list');
         Route::get('buletin_board/imp_list', [TeacherController::class, 'getBuletinBoardImpTeacherList'])->name('teacher.buletin_board.imp_list');
         Route::post('buletin_board/star', [TeacherController::class, 'bulletinStarTeacher'])->name('teacher.buletin_board.star');
+        Route::get('buletin_board/dasboardlist', [TeacherController::class, 'getBuletinBoardDashBoard'])->name('teacher.buletin_board.dashboradlist');
         // Forum routes
         Route::get('forum/index', [TeacherController::class, 'forumIndex'])->name('teacher.forum.index');
         Route::get('forum/page-single-topic', [TeacherController::class, 'forumPageSingleTopic'])->name('teacher.forum.page-single-topic');

@@ -1137,6 +1137,14 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group ">
+                                                <label for="">{{ __('messages.register_no') }}</label>
+                                                <div class="input-group input-group-merge">                                                    
+                                                    <input type="text" disabled class="form-control" value="{{ isset($student['register_no']) ? $student['register_no'] : ''}}"  placeholder="{{ __('messages.register_no') }}"  >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-4">
+                                            <div class="form-group ">
                                                 <label for="">{{ __('messages.admission_date') }}</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
@@ -1147,7 +1155,7 @@
                                                     <input type="text" class="form-control" id="admission_date" value="{{ isset($student['admission_date']) ? $student['admission_date'] : ''}}" name="admission_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend" >
                                                 </div><label for="admission_date" class="error"></label>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
 
                                     <div class="row">
@@ -1165,8 +1173,7 @@
 
                                             $trail_date = "none";
                                             if($student['enrollment']=="Trail Enrollment"){
-
-                                            $trail_date = "";
+                                            $trail_date = "block";
                                             }
                                             @endphp
                                             <div class="col-md-4" id="trail_date_show" style="display:{{$trail_date}}">
@@ -1186,8 +1193,7 @@
                                             @php
                                             $official_date = "none";
                                             if($student['enrollment']=="Official Enrollment"){
-
-                                            $official_date = "";
+                                            $official_date = "block";
                                             }
                                             @endphp
                                             <div class="col-md-4" id="official_date_show" style="display:{{$official_date}}">
@@ -1203,6 +1209,16 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group ">
+                                                    <label for="">{{ __('messages.date_of_termination') }}</label>
+                                                    <div class="input-group input-group-merge">                                                    
+                                                        <input type="text" disabled class="form-control" value="{{ isset($student['date_of_termination']) ? $student['date_of_termination'] : ''}}"  placeholder="{{ __('messages.date_of_termination') }}"  >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
                                     </div>
                                     <div class="row">
                                       

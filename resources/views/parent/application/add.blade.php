@@ -541,8 +541,8 @@
                                             <div class="form-group">
                                                 <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
                                                 <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" data-parsley-trigger="change">
+                                                <label for="dual_nationality" class="error"></label>
                                             </div>
-                                            <span id ="error_message"></span>
                                         </div>
                                         @endif
                                     </div>
@@ -1442,36 +1442,7 @@
             error: oops_went_wrong
         }
     });
-    $(document).ready(function(){
-        var nationality = $('#nationality').val();
-        var dual_nationality = $('#dual_nationality').val();
-        if(nationality == dual_nationality)
-        {
-            $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
-        }
-        else
-        {
-            $('#error_message').hide().text('');
-        }
-        $('#nationality').on('change', function(){
-            var nationality = $('#nationality').val();
-            var dual_nationality = $('#dual_nationality').val();
-            $('#error_message').hide().text('');
-            if(nationality == dual_nationality)
-        {
-            $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
-        }
-        });
-        $('#dual_nationality').on('change', function(){
-            var nationality = $('#nationality').val();
-            var dual_nationality = $('#dual_nationality').val();
-            $('#error_message').hide().text('');
-            if(nationality == dual_nationality)
-        {
-            $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
-        }
-        });
-    });
+   
 
     $("#last_date_of_withdrawal").datepicker({
         dateFormat: 'yy-mm-dd',

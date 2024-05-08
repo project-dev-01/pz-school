@@ -188,7 +188,7 @@
                                 {{ __('messages.homework_list') }} ({{ __('messages.all_subject') }})
                                 </h4>
                                 <!-- Up and Down Arrows -->
-                                <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton2" aria-expanded="true" aria-controls="toDoList">
                                     <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
                          background: white; color: blue;width: 25px;padding:-1px"></i></b>
                                 </button>

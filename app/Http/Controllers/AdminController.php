@@ -4358,30 +4358,18 @@ class AdminController extends Controller
     // add admission
     public function addAdmission(Request $request)
     {
-        // dd($request);
-        $rules = [
-            'nationality' => 'required|string|max:50',
-            'dual_nationality' => 'nullable|string|max:50|different:nationality',
-        ];
-    
-        // Define custom error messages
-        $messages = [
-            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
-        ];
-    
-        // Validate the request
-        $validatedData = $request->validate($rules, $messages);
-    
+        // dd($request->has('has_dual_nationality_checkbox'));
+        // $type = $request->filled('last_date_of_withdrawal') ? 'Re-Admission' : 'Admission';
         // Set type based on the last date of withdrawal
-        // $type = "Admission";
-        // if ($request->last_date_of_withdrawal) {
-        //     $type = "Re-Admission";
-        // }
+        $type = "Admission";
+        if ($request->last_date_of_withdrawal) {
+            $type = "Re-Admission";
+        }
 
         // $type = $request->filled('last_date_of_withdrawal') ? 'Re-Admission' : 'Admission';
     
         // Set dual nationality based on checkbox
-        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
+        // $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
         $status = "0";
         if ($request->status) {
             $status = "1";
@@ -4426,7 +4414,7 @@ class AdminController extends Controller
             $nric_extension = $nric_file->getClientOriginalExtension();
         }
 
-        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'year' => $request->year,
             // 'register_no' => $request->txt_regiter_no,
@@ -9264,19 +9252,9 @@ class AdminController extends Controller
 
     public function updateApplication(Request $request)
     {
-        $rules = [
-            'nationality' => 'required|string|max:50',
-            'dual_nationality' => 'nullable|string|max:50|different:nationality',
-        ];
+      
     
-        // Define custom error messages
-        $messages = [
-            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
-        ];
-    
-        // Validate the request
-        $validatedData = $request->validate($rules, $messages);
-    
+        // Validate the request    
         // Set type based on the last date of withdrawal
         // $type = "Admission";
         // if ($request->last_date_of_withdrawal) {
@@ -9286,7 +9264,7 @@ class AdminController extends Controller
         // $type = $request->filled('last_date_of_withdrawal') ? 'Re-Admission' : 'Admission';
     
         // Set dual nationality based on checkbox
-        $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
+        // $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
 
         $trail_date = "";
         if ($request->enrollment == "Trail Enrollment") {
@@ -9386,7 +9364,7 @@ class AdminController extends Controller
             $visa_mother_base64 = base64_encode($visa_mother_data);
             $visa_mother_extension = $visa_mother_file->getClientOriginalExtension();
         }
-        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'id' => $request->id,
             'first_name' => $request->first_name,
@@ -10374,6 +10352,32 @@ class AdminController extends Controller
                         </div>';
             })
             ->rawColumns(['target_user', 'actions'])
+            ->make(true);
+    }
+    public function getBuletinBoardDashBoard(Request $request)
+    {
+        $response = Helper::GetMethod(config('constants.api.bulletinBoard_Dashboard'));
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $downloadLink = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                $buttons = '<div class="button-list">';
+                
+                // Check if file exists
+                if (!empty($row['file'])) {
+                    // If file exists, add download button
+                    $buttons .= '<a href="' . $downloadLink . '" class="btn btn-danger waves-effect waves-light" download><i class="dripicons-download" style="color: white;"></i></a>';
+                    
+                    // If file exists, add preview button
+                   
+                }
+                $buttons .= ' <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" data-id="' . $row['id'] . '" id="viewBuletinBtn"><i class="fe-eye"></i></a>';
+                $buttons .= '</div>';
+                
+                return $buttons;
+            })
+            ->rawColumns(['actions'])
             ->make(true);
     }
     public function addBuletinBoard(Request $request)

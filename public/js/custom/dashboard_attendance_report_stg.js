@@ -750,4 +750,268 @@ $(function () {
         }).on('draw', function () {
         });
     }
+    buletinTable();
+    function buletinTable() {
+        $('#buletin-table').DataTable({
+            processing: true,
+            info: true,
+            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            //dom: 'lBfrtip',
+            "language": {
+                
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+                "info": showing_entries,
+                "lengthMenu": show_entries,
+                "search": datatable_search,
+                "paginate": {
+                    "next": next,
+                    "previous": previous
+                },
+            },
+            buttons: [
+                {
+                    extend: 'csv',
+                    text: downloadcsv,
+                    extension: '.csv',
+                    charset: 'utf-8',
+                    bom: true,
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    },
+                    enabled: false, // Initially disable CSV button
+                },
+                {
+                    extend: 'pdf',
+                    text: downloadpdf,
+                    extension: '.pdf',
+                    charset: 'utf-8',
+                    bom: true,
+                    exportOptions: {
+                        columns: 'th:not(:last-child)'
+                    },
+                    enabled: false, // Initially disable PDF button
+                    customize: function (doc) {
+                        doc.pageMargins = [50,50,50,50];
+                        doc.defaultStyle.fontSize = 10;
+                        doc.styles.tableHeader.fontSize = 12;
+                        doc.styles.title.fontSize = 14;
+                        // Remove spaces around page title
+                        doc.content[0].text = doc.content[0].text.trim();
+                        /*// Create a Header
+                        doc['header']=(function(page, pages) {
+                            return {
+                                columns: [
+                                    
+                                    {
+                                        // This is the right column
+                                        bold: true,
+                                        fontSize: 20,
+                                        color: 'Blue',
+                                        fillColor: '#fff',
+                                        alignment: 'center',
+                                        text: header_txt
+                                    }
+                                ],
+                                margin:  [50, 15,0,0]
+                            }
+                        });*/
+                        // Create a footer
+                        
+                        doc['footer']=(function(page, pages) {
+                            return {
+                                columns: [
+                                    { alignment: 'left', text: [ footer_txt ],width:400} ,
+                                    {
+                                        // This is the right column
+                                        alignment: 'right',
+                                        text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }],
+                                        width:100
+    
+                                    }
+                                ],
+                                margin: [50, 0,0,0]
+                            }
+                        });
+                        
+                    }
+
+                }
+            ],
+            initComplete: function () {
+                var table = this;
+                $.ajax({
+                    url: buletinBoardList,
+                    success: function(data) {
+                        console.log(data.data.length);
+                        if (data && data.data.length > 0) {
+                            console.log('ok');
+                            $('#buletin-table_wrapper .buttons-csv').removeClass('disabled');
+                            $('#buletin-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                        } else {
+                            console.log(data);
+                            $('#buletin-table_wrapper .buttons-csv').addClass('disabled');
+                            $('#buletin-table_wrapper .buttons-pdf').addClass('disabled');               
+                        }
+                    },
+                    error: function() {
+                        console.log('error');
+                        // Handle error if necessary
+                    }
+                });
+            },
+            ajax: buletinBoardList,
+            "pageLength": 10,
+            "aLengthMenu": [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, "All"]
+            ],
+            columns: [
+               
+                {
+                    searchable: false,
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'title',
+                    name: 'title'
+                },
+                {
+                    data: 'file',
+                    name: 'file',
+                    render: function(data, type, full, meta) {
+                        // Check if data is not null and not empty
+                        if (data && data.trim() !== '') {
+                            // Assuming 'image_url' contains the base URL for file links
+                            var fileLink = image_url + data;
+                            return '<a href="' + fileLink + '" target="_blank">' + data + '</a>';
+                        } else {
+                            // Return empty string if data is null or empty
+                            return '<span class="text-muted">no file uploaded</span>';
+                        }
+                    }
+                },{
+                    data: 'publish_date',
+                    name: 'publish_date',
+                    render: function(data, type, row) {
+                        if (data && (type === 'display' || type === 'filter')) {
+                            // Split the datetime string into date and time parts
+                            var parts = data.split(' ');
+                            // Display only the date part (assuming it's the first part of the split string)
+                            return parts[0];
+                        }
+                        return data;
+                    }
+                },
+                {
+                    data: 'actions',
+                    name: 'actions'
+                },
+            ]
+        }).on('draw', function () {
+        });
+    }
+    $(document).on('click', '#viewBuletinBtn', function () {
+        var buletin_id = $(this).data('id');
+        $('.viewBuletin').find('span.error-text').text('');
+        $.post(buletinBoardDetails, { id: buletin_id }, function (data) {
+            console.log(data);
+            $('.viewBuletin').find('.title').text(data.data.title);
+            $('.viewBuletin').find('.file').text(data.data.file);
+            $('.viewBuletin').find('.publish_date').text(data.data.publish_date);
+            $('.viewBuletin').find('.publish_end_date').text(data.data.publish_end_date);
+           
+            var targetUserValues = data.data.target_user.split(',');
+            if (targetUserValues.includes('5')) {
+                var content = data.data.name + "<br>";
+
+                if (data.data.grade_name !== null) {
+                    content += "Grade: " + data.data.grade_name + "<br>";
+                }
+
+                if (data.data.section_name !== null) {
+                    content += "Class: " + data.data.section_name + "<br>";
+                }
+
+                if (data.data.parent_name !== null) {
+                    content += "Parent: " + data.data.parent_name;
+                }
+                $('.viewBuletin').find('.target_user').html(content);
+              
+            } else if (targetUserValues.includes('4')) {
+                var content = data.data.name + "<br>";
+
+                if (data.data.department_name !== null) {
+                    content += "Department: " + data.data.department_name + "<br>";
+                }
+                $('.viewBuletin').find('.target_user').html(content);
+            }else{
+                var content = data.data.name + "<br>";
+
+                if (data.data.grade_name !== null) {
+                    content += "Grade: " + data.data.grade_name + "<br>";
+                }
+
+                if (data.data.section_name !== null) {
+                    content += "Class: " + data.data.section_name + "<br>";
+                }
+
+                if (data.data.student_name !== null) {
+                    content += "Student: " + data.data.student_name;
+                }
+                $('.viewBuletin').find('.target_user').html(content);
+                
+            }
+            
+            $('.viewBuletin').find('.description').html(data.data.discription);
+            $('.viewBuletin').modal('show');
+        }, 'json');
+    });
+  
 });
+function openFilePopup(data) {
+    const modal = document.getElementById("fileModal");
+    const modalTitle = modal.querySelector(".modal-title");
+    const modalBody = modal.querySelector(".modal-body");
+    const fileTitle = modal.querySelector("#fileTitle");
+    const fileDescriptionElement = modal.querySelector("#fileDescription");
+  //  const created_by = modal.querySelector("#created_by");
+    const downloadLink = modal.querySelector("#downloadLink");
+    const filePreview = modal.querySelector("#filePreview");
+    const previewLink = modal.querySelector("#previewLink");
+
+    modalTitle.innerText = "File Details";
+    fileTitle.innerText = data.title;
+    //created_by.innerText = data.user_name;
+    // Set file description using innerHTML to handle HTML entities
+    fileDescriptionElement.innerHTML = data.description;
+    if (data.image_url && data.image_url.trim() !== '') {
+        // Set the href attribute of the download link to the image URL
+        downloadLink.href = data.image_url;
+        
+        // Set the href attribute of the preview link to the image URL
+        previewLink.href = data.image_url;
+        
+        // Set the src attribute of the iframe for preview to the image URL
+        filePreview.src = data.image_url;
+
+        // Show the download link, preview link, and iframe
+       downloadLink.style.display = "inline";
+       previewLink.style.display = "inline";
+       // filePreview.style.display = "block";
+    } else {
+        // If image_url is null or empty, hide the download link, preview link, and set the iframe source to a placeholder
+        downloadLink.style.display = "none";
+        previewLink.style.display = "none";
+        filePreview.style.display = "none";
+    }
+    // Set the download link
+
+    // Open the modal
+    $(modal).modal("show");
+}

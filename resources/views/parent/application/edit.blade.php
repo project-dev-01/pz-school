@@ -561,8 +561,8 @@
                                                 <div class="form-group" id="dual_nationality_container" style="{{ isset($application['dual_nationality']) ? '' : 'display: none;' }}">
                                                     <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
                                                     <input type="text" maxlength="50" id="dual_nationality" {{$readonly_phase_1}} class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" value="{{ isset($application['dual_nationality']) ? $application['dual_nationality'] : ''}}" data-parsley-trigger="change">
+                                                    <label for="dual_nationality" class="error"></label>
                                                 </div>
-                                                <span id ="error_message"></span>
                                             </div>
                                             @endif
                                             <!-- <div class="col-md-4">
@@ -1971,36 +1971,6 @@
             limitReachedClass: "badge badge-danger badge-custom",
         })
 
-    });
-    $(document).ready(function(){
-        var nationality = $('#nationality').val();
-        var dual_nationality = $('#dual_nationality').val();
-        if(nationality == dual_nationality)
-        {
-            $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
-        }
-        else
-        {
-            $('#error_message').hide().text('');
-        }
-        $('#nationality').on('change', function(){
-            var nationality = $('#nationality').val();
-            var dual_nationality = $('#dual_nationality').val();
-            $('#error_message').hide().text('');
-            if(nationality == dual_nationality)
-        {
-            $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
-        }
-        });
-        $('#dual_nationality').on('change', function(){
-            var nationality = $('#nationality').val();
-            var dual_nationality = $('#dual_nationality').val();
-            $('#error_message').hide().text('');
-            if(nationality == dual_nationality)
-        {
-            $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
-        }
-        });
     });
 </script>
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->
