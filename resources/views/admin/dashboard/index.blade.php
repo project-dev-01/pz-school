@@ -356,6 +356,7 @@
 
     var buletinBoardList = "{{ route('admin.buletin_board.dashboradlist') }}";
     var buletinBoardDetails = "{{ route('admin.buletin_board.details') }}";
+    var no_file_uploaded_txt ="{{__('messages.no_file_uploaded')}}";
     var image_url = "{{config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/'}}";
 
     var header_txt = "{{ __('messages.student_plan_to_leave') }}";

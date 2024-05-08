@@ -2327,5 +2327,6 @@ return [
   "japan_emergency_sms" => "Japan Emergency SMS",
 
   "go_to_bulletin" => "Go to Bulletin Board",
-  "phase_2_approved"=> "Approved"
+  "phase_2_approved"=> "Approved",
+  "no_file_uploaded" => "no file uploaded",
 ];

@@ -315,6 +315,7 @@
     var pdfPath = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/admin-documents/buletin_files' }}";
     var modelheader = "{{ __('messages.file_details') }}";
     var download = "{{ __('messages.download') }}";
+    var no_file_uploaded_txt ="{{__('messages.no_file_uploaded')}}";
 </script>
 <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>

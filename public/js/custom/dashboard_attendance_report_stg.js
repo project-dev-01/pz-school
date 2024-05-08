@@ -752,7 +752,7 @@ $(function () {
     }
     buletinTable();
     function buletinTable() {
-        $('#buletin-table').DataTable({
+        $('#buletin-table-dashboard').DataTable({
             processing: true,
             info: true,
             dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
@@ -782,8 +782,7 @@ $(function () {
                     bom: true,
                     exportOptions: {
                         columns: 'th:not(:last-child)'
-                    },
-                    enabled: false, // Initially disable CSV button
+                    }
                 },
                 {
                     extend: 'pdf',
@@ -793,8 +792,7 @@ $(function () {
                     bom: true,
                     exportOptions: {
                         columns: 'th:not(:last-child)'
-                    },
-                    enabled: false, // Initially disable PDF button
+                    }, // Initially disable PDF button
                     customize: function (doc) {
                         doc.pageMargins = [50,50,50,50];
                         doc.defaultStyle.fontSize = 10;
@@ -842,28 +840,6 @@ $(function () {
 
                 }
             ],
-            initComplete: function () {
-                var table = this;
-                $.ajax({
-                    url: buletinBoardList,
-                    success: function(data) {
-                        console.log(data.data.length);
-                        if (data && data.data.length > 0) {
-                            console.log('ok');
-                            $('#buletin-table_wrapper .buttons-csv').removeClass('disabled');
-                            $('#buletin-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
-                        } else {
-                            console.log(data);
-                            $('#buletin-table_wrapper .buttons-csv').addClass('disabled');
-                            $('#buletin-table_wrapper .buttons-pdf').addClass('disabled');               
-                        }
-                    },
-                    error: function() {
-                        console.log('error');
-                        // Handle error if necessary
-                    }
-                });
-            },
             ajax: buletinBoardList,
             "pageLength": 10,
             "aLengthMenu": [
@@ -875,15 +851,18 @@ $(function () {
                 {
                     searchable: false,
                     data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
+                    name: 'DT_RowIndex',
+                    className: 'text-center'
                 },
                 {
                     data: 'title',
-                    name: 'title'
+                    name: 'title',
+                    className: 'text-center'
                 },
                 {
                     data: 'file',
                     name: 'file',
+                    className: 'text-center',
                     render: function(data, type, full, meta) {
                         // Check if data is not null and not empty
                         if (data && data.trim() !== '') {
@@ -892,12 +871,13 @@ $(function () {
                             return '<a href="' + fileLink + '" target="_blank">' + data + '</a>';
                         } else {
                             // Return empty string if data is null or empty
-                            return '<span class="text-muted">no file uploaded</span>';
+                            return '<span class="text-muted">' + no_file_uploaded_txt + '</span>';
                         }
                     }
                 },{
                     data: 'publish_date',
                     name: 'publish_date',
+                    className: 'text-center',
                     render: function(data, type, row) {
                         if (data && (type === 'display' || type === 'filter')) {
                             // Split the datetime string into date and time parts
@@ -910,7 +890,8 @@ $(function () {
                 },
                 {
                     data: 'actions',
-                    name: 'actions'
+                    name: 'actions',
+                    className: 'text-center'
                 },
             ]
         }).on('draw', function () {

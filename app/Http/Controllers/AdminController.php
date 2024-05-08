@@ -10404,15 +10404,18 @@ class AdminController extends Controller
             $data = file_get_contents($path);
             $base64 = base64_encode($data);
             $extension = $file->getClientOriginalExtension();
+            $filename = $file->getClientOriginalName();
         } else {
             $base64 = null;
             $extension = null;
+            $filename=null;
         }
         $data = [
             'title' => $request->title,
             'description' => $request->discription,
             'file' => $base64,
             'file_extension' => $extension,
+            'fileName' => pathinfo($filename, PATHINFO_FILENAME),
             'target_user' => $rollid_target_user,
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
@@ -10495,9 +10498,11 @@ class AdminController extends Controller
             $data = file_get_contents($path);
             $base64 = base64_encode($data);
             $extension = $file->getClientOriginalExtension();
+            $filename = $file->getClientOriginalName(); 
         } else {
             $base64 = null;
             $extension = null;
+            $filename = null;
         }
         $data = [
             'id' => $request->id,
@@ -10505,6 +10510,7 @@ class AdminController extends Controller
             'description' => $request->discription,
             'file' => $base64,
             'file_extension' => $extension,
+            'fileName' => pathinfo($filename, PATHINFO_FILENAME),
             'oldfile' => $request->oldfile,
             'target_user' => $rollid_target_user,
            // 'publish' => $request->publish,

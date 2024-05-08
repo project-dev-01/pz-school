@@ -307,6 +307,7 @@
     var header_txt = "{{ __('messages.event') }}";
     var footer_txt = "{{ session()->get('footer_text') }}";
     var pdfPath = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/admin-documents/buletin_files' }}";
+    var no_file_uploaded_txt ="{{__('messages.no_file_uploaded')}}";
 </script>
 <script src="{{ asset('js/custom/parent_bulletin.js') }}"></script>
 <script src="{{ asset('js/custom/collapse.js') }}"></script>

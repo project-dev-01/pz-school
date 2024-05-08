@@ -45,6 +45,61 @@ $(function () {
         });
 
     });
+    // Function to handle file input change event
+    // document.getElementById('file').addEventListener('change', function(e) {
+    //     var files = e.target.files;
+    //     var fileList = document.getElementById('file-list');
+
+    //     // Clear existing file list
+    //     fileList.innerHTML = '';
+
+    //     var errorText = document.querySelector('.file_error');
+
+    //     if (files.length > 5) {
+    //         errorText.textContent = 'You can only select up to 5 files.';
+    //         this.value = ''; // Clear the file input to prevent selection of more files
+    //         return;
+    //     } else {
+    //         errorText.textContent = ''; // Clear error message if within limit
+    //     }
+
+    //     // Iterate over selected files
+    //     for (var i = 0; i < files.length; i++) {
+    //         var file = files[i];
+    //         var listItem = document.createElement('div');
+
+    //         // Display file name
+    //         listItem.textContent = file.name;
+
+    //         // Add remove button
+    //         var removeButton = document.createElement('button');
+    //         removeButton.textContent = 'X';
+    //         removeButton.setAttribute('type', 'button');
+    //         removeButton.classList.add('btn', 'btn-sm', 'btn-danger', 'ml-2');
+    //         removeButton.addEventListener('click', removeFile.bind(null, file));
+    //         listItem.appendChild(removeButton);
+
+    //         // Append file item to list
+    //         fileList.appendChild(listItem);
+    //     }
+    // });
+
+    // Function to handle remove file button click
+    function removeFile(file) {
+        var input = document.getElementById('file');
+        var files = Array.from(input.files);
+        var index = files.indexOf(file);
+        if (index !== -1) {
+            files.splice(index, 1);
+            var dataTransfer = new DataTransfer();
+            files.forEach(function(file) {
+                dataTransfer.items.add(file);
+            });
+            input.files = dataTransfer.files;
+            input.dispatchEvent(new Event('change'));
+        }
+    }
+
     buletinTable();
 
     $("#buletinForm").validate({
@@ -121,6 +176,7 @@ $(function () {
                 }
             });
             console.log(target_user);
+           
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -137,6 +193,10 @@ $(function () {
             formData.append('date', date);
             formData.append('endDate', endDate);
             formData.append('file', file);
+            // Append each file to FormData
+            // for (var i = 0; i < files.length; i++) {
+            //     formData.append('file[]', files[i]);
+            // }
 
             $('#loaderOverlay').show();
             $.ajax({
@@ -474,7 +534,7 @@ $(function () {
                             return '<a href="' + fileLink + '" target="_blank">' + data + '</a>';
                         } else {
                             // Return empty string if data is null or empty
-                            return '<span class="text-muted">no file uploaded</span>';
+                            return '<span class="text-muted">' + no_file_uploaded_txt +'</span>';
                         }
                     }
                 },
@@ -512,42 +572,6 @@ $(function () {
     //     $('#descriptionModalBody').text(fullDescription);
     // });
 
-
-
-    // Publish Event 
-    $(document).on('click', '#publishEventBtn', function () {
-        var event_id = $(this).data('id');
-        if ($(this).prop('checked') == true) {
-            var value = 1;
-            var text = "Publish";
-        } else {
-            var value = 0;
-            var text = "UnPublish";
-        }
-        swal.fire({
-            title: deleteTitle + '?',
-            html: deleteHtml,
-            showCancelButton: true,
-            showCloseButton: true,
-            cancelButtonText: deletecancelButtonText,
-            confirmButtonText: deleteconfirmButtonText,
-            cancelButtonColor: '#d33',
-            confirmButtonColor: '#556ee6',
-            width: 400,
-            allowOutsideClick: false
-        }).then(function (result) {
-            if (result.value) {
-                $.post(eventPublish, { id: event_id, status: value }, function (data) {
-                    if (data.code == 200) {
-                        $('#buletin-table').DataTable().ajax.reload(null, false);
-                        toastr.success(data.message);
-                    } else {
-                        toastr.error(data.message);
-                    }
-                }, 'json');
-            }
-        });
-    });
 
 
     $(document).on('click', '#viewBuletinBtn', function () {
@@ -870,42 +894,4 @@ $(function () {
         //console.log(id);
     });
    
-
-    // change branch id in add class,section and type in evvent 
-    $("#branch_id").on('change', function (e) {
-        e.preventDefault();
-        var Selector = '#eventForm';
-        var branch_id = $(this).val();
-        if (branch_id) {
-            branchEvent(branch_id, Selector);
-        }
-    });
-    // branch Event
-    function branchEvent(branch_id, Selector) {
-
-        $(Selector).find("#type").empty();
-        $(Selector).find("#type").append('<option value="">'+select_type+'</option>');
-        $(Selector).find("#class_name").empty();
-        $(Selector).find("#class_name").append('<option value="">'+select_class+'</option>');
-        $(Selector).find("#section_name").empty();
-        $(Selector).find("#section_name").append('<option value="">'+select_section+'</option>');
-        $.post(branchByEvent, { branch_id: branch_id, token: token }, function (res) {
-            if (res.code == 200) {
-                $.each(res.data.eventType, function (key, val) {
-                    $(Selector).find("#type").append('<option value="' + val.id + '">' + val.name + '</option>');
-                });
-                $.each(res.data.class, function (key, val) {
-                    $(Selector).find("#class_name").append('<option value="' + val.id + '">' + val.name + '</option>');
-                    $(Selector).find("#section_name").append('<optgroup label="Class ' + val.name + '">');
-                    $.each(res.data.section, function (key, sec) {
-                        if (sec.class_id == val.id) {
-                            $(Selector).find("#section_name").append('<option value="' + sec.section_id + '">' + sec.section_name + '</option>');
-                        }
-                    });
-                    $(Selector).find("#section_name").append('</optgroup>');
-                });
-            }
-        }, 'json');
-    }
-
 });

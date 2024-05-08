@@ -2227,4 +2227,5 @@ return [
       "lab_student_name" => "Student Name",
 
       "go_to_bulletin" => "Pergi ke Papan Buletin",
+      "no_file_uploaded"=> "tiada fail dimuat naik",
 ];

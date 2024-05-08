@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table dt-responsive nowrap w-100" id="buletin-table">
+                        <table class="table dt-responsive nowrap w-100" id="buletin-table-dashboard">
                             <thead>
                                 <tr>
                                     <th>#</th>

@@ -2300,5 +2300,6 @@ return [
       "japan_emergency_sms"=>"緊急連絡先", 
 
       "go_to_bulletin" => "掲示板へ行く", 
-      "phase_2_approved"=> "受理"
+      "phase_2_approved"=> "受理",
+      "no_file_uploaded"=> "ファイルがアップロードされていません",
 ];

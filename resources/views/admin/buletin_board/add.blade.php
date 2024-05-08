@@ -67,6 +67,9 @@
                         <input type="file" id="file" name="file" class="form-control" placeholder="{{ __('messages.enter_file') }}" accept=".pdf">
                         <span class="text-danger error-text file_error"></span>
                     </div>
+                    <!-- <div class="form-group">
+                         <div id="file-list"></div>
+                    </div> -->
                     <div class="form-group">
                         <label for="inputTopic">{{ __('messages.target_user') }}<span class="text-danger">*</span></label>
                         <select name="target_user[]" id="target_user" class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="{{ __('messages.choose') }}">>
