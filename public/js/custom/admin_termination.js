@@ -14,19 +14,19 @@ $(function () {
         });
 
     });
-    $('#termination_status').on('change', function () {
-        var status = $(this).val();
+    // $('#termination_status').on('change', function () {
+    //     var status = $(this).val();
         
-        $("#remarks_row").hide();
-        $("#date_of_termination_row").hide();
-        if(status=="Approved"){
+    //     $("#remarks_row").hide();
+    //     $("#date_of_termination_row").hide();
+    //     if(status=="Approved"){
 
-            $("#date_of_termination_row").show();
-        }else if(status=="Send Back" || status=="Rejected"){
+    //         $("#date_of_termination_row").show();
+    //     }else if(status=="Send Back" || status=="Rejected"){
 
-            $("#remarks_row").show();
-        }
-    });
+    //         $("#remarks_row").show();
+    //     }
+    // });
     
     $(document).on('click', '#editTerminationBtn', function () {
         
@@ -93,11 +93,11 @@ $(function () {
             // school_fees_payment_status : "required", 
         }
     });
-    $('#school_fees_payment_status').on('change', function () {
-        var isUnpaidSelected = $(this).val() === 'Unpaid';
-        $('#termination_status option[value="Approved"]').prop('disabled', isUnpaidSelected);
-        $('#termination_status').val('').trigger('change'); 
-    });
+    // $('#school_fees_payment_status').on('change', function () {
+    //     var isUnpaidSelected = $(this).val() === 'Unpaid';
+    //     $('#termination_status option[value="Approved"]').prop('disabled', isUnpaidSelected);
+    //     $('#termination_status').val('').trigger('change'); 
+    // });
     $('#terminationEditForm').on('submit', function(e){
         e.preventDefault();
 

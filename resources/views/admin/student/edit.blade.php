@@ -2590,38 +2590,4 @@
 
     
 </script>
-<!-- <script>
-        $(document).ready(function(){
-    var nationality = $('#nationality').val();
-    var dual_nationality = $('#dual_nationality').val();
-    if(nationality == dual_nationality)
-    {
-        $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
-    }
-    else
-    {
-        $('#error_message').hide().text('');
-    }
-    $('#nationality').on('change', function(){
-        var nationality = $('#nationality').val();
-        var dual_nationality = $('#dual_nationality').val();
-        $('#error_message').hide().text('');
-        if(nationality == dual_nationality)
-    {
-        $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
-    }
-    });
-    $('#dual_nationality').on('change', function(){
-        varnationality = $('#nationality').val();
-        var dual_nationality = $('#dual_nationality').val();
-        $('#error_message').hide().text('');
-        if(nationality == dual_nationality)
-    {
-        $('#error_message').text('Please select a different nationality.').css('color', 'red').show();
-    }
-    });
-});
-</script> -->
-
-
 @endsection

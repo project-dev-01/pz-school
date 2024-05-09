@@ -738,6 +738,10 @@ $(function () {
                     data: 'admission_date',
                     name: 'admission_date'
                 },
+                {
+                    data: 'status_after_approval',
+                    name: 'status_after_approval'
+                },
             ],
             columnDefs: [
                 {
