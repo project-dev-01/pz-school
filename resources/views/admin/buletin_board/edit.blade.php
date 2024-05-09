@@ -28,13 +28,17 @@
                   
                     <div class="form-group">
                         <label for="name">{{ __('messages.file') }}</label>
-                        <input type="file" id="files" name="files" class="form-control" placeholder="{{ __('messages.enter_file') }}">
+                        <input type="file" id="files" name="files[]" class="form-control" placeholder="{{ __('messages.enter_file') }}" accept=".pdf" multiple>
                         <span class="text-danger error-text name_error"></span>
+                    </div>
+                    <div class="form-group">
+                         <div id="file-lists"></div>
                     </div>
                     <div class="form-group">
                     <label for="name">{{ __('messages.old_file') }}</label>
                     <span id="oldfile" class="oldfile"></span>
                     </div>
+                 
                     <div class="form-group">
                         <label for="inputTopic">{{ __('messages.target_user') }}<span class="text-danger">*</span></label>
                         <select name="target_users[]" id="target_users" class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="{{ __('messages.choose') }}">>
@@ -47,50 +51,62 @@
                         </select>
                         <span class="text-danger error-text target_user_error"></span>
                     </div>
-                    <div id="edit_class">
-                        <div class="form-group">
-                            <label for="changeClassNames"> {{ __('messages.grade') }}<span class="text-danger">*</span></label>
-                            <select id="changeClassNames" class="form-control" name="class_ids">
-                                <option value="">{{ __('messages.select_grade') }}</option>
-                                @forelse ($classDetails as $cla)
-                                    <option value="{{ $cla['id'] }}">{{ $cla['name'] }}</option>
-                                @empty
-                                @endforelse
-                            </select>
+                    <fieldset style="margin: 0 0 20px 0; border: 1px solid #ccc;" id="edit_class">
+                        <legend id="selectionLegends" style="margin-left: 1em;width: 144px;font-weight: 600;font-size: 13px;"></legend>
+                        <div>
+                            <div class="form-group p-1">
+                                <label for="changeClassNames"> {{ __('messages.grade') }}<span class="text-danger">*</span></label>
+                                <select id="changeClassNames" class="form-control add_class_names select2-multiple" data-toggle="select2" multiple="multiple" name="class_ids">
+                                    <option value="">{{ __('messages.select_grade') }}</option>
+                                    @forelse ($classDetails as $cla)
+                                        <option value="{{ $cla['id'] }}">{{ $cla['name'] }}</option>
+                                    @empty
+                                    @endforelse
+                                </select>
+                            </div>
+                            <div class="form-group p-1">
+                                <label for="filtersectionIDs"> {{ __('messages.class') }}<span class="text-danger">*</span></label>
+                                <select id="filtersectionIDs" class="form-control" name="section_ids">
+                                    <option value="">{{ __('messages.select_class') }}</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="filtersectionIDs"> {{ __('messages.class') }}<span class="text-danger">*</span></label>
-                            <select id="filtersectionIDs" class="form-control" name="section_ids">
-                                <option value="">{{ __('messages.select_class') }}</option>
-                            </select>
+                        <div id="students" data-value="students" >
+                            <div class="form-group p-1">
+                                <label for="student_ids">{{ __('messages.student') }}</label>
+                                <select id="student_ids" class="form-control" name="student_ids">
+                                    <option value="">{{ __('messages.select_student') }}</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div id="students" data-value="students" >
-                        <div class="form-group">
-                            <label for="student_ids">{{ __('messages.student') }}</label>
-                            <select id="student_ids" class="form-control" name="student_ids">
-                                <option value="">{{ __('messages.select_student') }}</option>
-                            </select>
+                        <div id="parents" data-value="parents">
+                            <div class="form-group p-1">
+                                <label for="parent_ids">{{ __('messages.parent') }}</label>
+                                <select id="parent_ids" class="form-control" name="parent_ids">
+                                    <option value="">{{ __('messages.select_parent') }}</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div id="parents" data-value="parents">
-                        <div class="form-group">
-                            <label for="parent_ids">{{ __('messages.parent') }}</label>
-                            <select id="parent_ids" class="form-control" name="parent_ids">
-                                <option value="">{{ __('messages.select_parent') }}</option>
-                            </select>
-                        </div>
-                    </div>
+                    </fieldset>
                     <div id='departments'>
-                        <div class="form-group">
-                            <label for="department_ids">{{ __('messages.department') }}</label>
-                            <select class="form-control select2-multiple" data-toggle="select2" id="empDepartments" name="department_ids" multiple="multiple" data-placeholder="{{ __('messages.choose_department') }}">
-                                <option value="">{{ __('messages.choose_department') }}</option>
-                                 @forelse($emp_department as $r)
-                                    <option value="{{$r['id']}}">{{$r['name']}}</option>
-                                 @empty
-                                 @endforelse
-                          </select>
+                        <fieldset style="margin: 0 0 20px 0; border: 1px solid #ccc;">
+                            <legend style="margin-left: 1em;width: 100px;font-weight: 600;font-size: 13px;">Teacher Section</legend>
+                                <div class="form-group p-1">
+                                    <label for="department_ids">{{ __('messages.department') }}</label>
+                                    <select class="form-control select2-multiple" data-toggle="select2" id="empDepartments" name="department_ids" multiple="multiple" data-placeholder="{{ __('messages.choose_department') }}">
+                                        <option value="">{{ __('messages.choose_department') }}</option>
+                                        @forelse($emp_department as $r)
+                                            <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                       </fieldset>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox form-check">
+                            <input type="checkbox" class="custom-control-input" name="add_to_dashs" id="add_to_dashs">
+                            <label class="custom-control-label" for="add_to_dash">{{ __('messages.add_to_dash') }}</label>
                         </div>
                     </div>
                     <!-- <div class="form-group">

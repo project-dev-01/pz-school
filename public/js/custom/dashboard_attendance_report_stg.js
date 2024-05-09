@@ -870,12 +870,22 @@ $(function () {
                     render: function(data, type, full, meta) {
                         // Check if data is not null and not empty
                         if (data && data.trim() !== '') {
-                            // Assuming 'image_url' contains the base URL for file links
-                            var fileLink = image_url + data;
-                            return '<a href="' + fileLink + '" target="_blank">' + data + '</a>';
+                            // Split the data string into an array of file names
+                            var files = data.split(',');
+                            var fileLinks = '';
+                            // Iterate over each file in the array
+                            files.forEach(function(file) {
+                                // Trim the file name and construct the file link
+                                var trimmedFile = file.trim();
+                                var fileLink = image_url + trimmedFile;
+                                // Append the file link wrapped in a <div> to the fileLinks string
+                                fileLinks += '<div><a href="' + fileLink + '" target="_blank">' + trimmedFile + '</a></div>';
+                            });
+                            // Return the generated HTML
+                            return fileLinks;
                         } else {
                             // Return empty string if data is null or empty
-                            return '<span class="text-muted">' + no_file_uploaded_txt + '</span>';
+                            return '<span class="text-muted">' + no_file_uploaded_txt +'</span>';
                         }
                     }
                 },{
@@ -907,7 +917,12 @@ $(function () {
         $.post(buletinBoardDetails, { id: buletin_id }, function (data) {
             console.log(data);
             $('.viewBuletin').find('.title').text(data.data.title);
-            $('.viewBuletin').find('.file').text(data.data.file);
+            $('.viewBuletin').find('.file').html(data.data.file ? data.data.file.split(',').map(function(file) {
+                var trimmedFile = file.trim();
+                var fileLink = image_url + trimmedFile;
+                // Append the file link wrapped in a <div> to the fileLinks string
+                return '<div><a href="' + fileLink + '" target="_blank">' + trimmedFile + '</a></div>';
+            }).join('') : '<span class="text-muted">' + no_file_uploaded_txt +'</span>');
             $('.viewBuletin').find('.publish_date').text(data.data.publish_date);
             $('.viewBuletin').find('.publish_end_date').text(data.data.publish_end_date);
            
@@ -957,6 +972,18 @@ $(function () {
             $('.viewBuletin').modal('show');
         }, 'json');
     });
+      // Handle Download actio
+      $(document).on('click', '.download-all', function() {
+        var files = $(this).data('files').split(',');
+        files.forEach(function(file) {
+            // Construct the download link for each file and trigger download
+            var downloadLink = image_url + file;
+            var anchor = document.createElement('a');
+            anchor.href = downloadLink;
+            anchor.download = file;
+            anchor.click();
+        });
+    });
   
 });
 function openFilePopup(data) {
@@ -965,37 +992,50 @@ function openFilePopup(data) {
     const modalBody = modal.querySelector(".modal-body");
     const fileTitle = modal.querySelector("#fileTitle");
     const fileDescriptionElement = modal.querySelector("#fileDescription");
-  //  const created_by = modal.querySelector("#created_by");
     const downloadLink = modal.querySelector("#downloadLink");
-    const filePreview = modal.querySelector("#filePreview");
+    const filePreview = modal.querySelector("#fileLinksPreviewContainer");
     const previewLink = modal.querySelector("#previewLink");
 
     modalTitle.innerText = "File Details";
-    fileTitle.innerText = data.title;
-    //created_by.innerText = data.user_name;
+    const fileLinksContainer = modal.querySelector("#fileLinksContainer");
+
+    // Set file title
+    fileTitle.textContent = data.title;
+    
     // Set file description using innerHTML to handle HTML entities
     fileDescriptionElement.innerHTML = data.description;
-    if (data.image_url && data.image_url.trim() !== '') {
-        // Set the href attribute of the download link to the image URL
-        downloadLink.href = data.image_url;
-        
-        // Set the href attribute of the preview link to the image URL
-        previewLink.href = data.image_url;
-        
-        // Set the src attribute of the iframe for preview to the image URL
-        filePreview.src = data.image_url;
 
-        // Show the download link, preview link, and iframe
-       downloadLink.style.display = "inline";
-       previewLink.style.display = "inline";
-       // filePreview.style.display = "block";
-    } else {
-        // If image_url is null or empty, hide the download link, preview link, and set the iframe source to a placeholder
-        downloadLink.style.display = "none";
-        previewLink.style.display = "none";
-        filePreview.style.display = "none";
-    }
-    // Set the download link
+    // Clear existing file links
+    fileLinksContainer.innerHTML = '';
+    filePreview.innerHTML = '';
+    // Iterate over each file in the files array
+    data.files.forEach(function(file) {
+        // Create a new anchor element for the download link
+        var downloadLink = document.createElement('a');
+        downloadLink.href = image_url + file; // Assuming data.image_url is the base URL
+        downloadLink.textContent = file;
+        downloadLink.download = '';
+        //downloadLink.setAttribute('target', '_blank');
+
+        // Create a new list item to contain the download link
+        var listItem = document.createElement('li');
+        listItem.appendChild(downloadLink);
+
+        // Append the list item to the file links container
+        fileLinksContainer.appendChild(listItem);
+
+        var filePreviewLink = document.createElement('a');
+        filePreviewLink.href = image_url + file; // Assuming data.image_url is the base URL
+        filePreviewLink.textContent = file;
+        filePreviewLink.setAttribute('target', '_blank');
+
+        // Create a new list item to contain the download link
+        var listItems = document.createElement('li');
+        listItems.appendChild(filePreviewLink);
+
+        // Append the list item to the file links container
+        filePreview.appendChild(listItems);
+    });
 
     // Open the modal
     $(modal).modal("show");

@@ -168,6 +168,7 @@
 <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
 <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
+<script src="{{ asset('js/custom/buletin_board_list.js') }}"></script>
 <script src="{{ asset('js/custom/buletin_board.js') }}"></script>
 @if(!empty(Session::get('school_roleid')))
 <script>
