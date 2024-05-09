@@ -101,12 +101,17 @@ $(function () {
             '<input type="hidden" name="unhide_data[' + i + '][class_id]" id="classID' + i + '">' +
             '<input type="hidden" name="unhide_data[' + i + '][section_id]" id="sectionID' + i + '">' +
             '<input type="hidden" name="unhide_data[' + i + '][pattern]" id="patternName' + i + '">' +
-            '<button type="button" data-widget="' + i + '" id="WidgetLabelName' + i + '" class="form-control name_list addWidget" style="height: 50px;border-radius: 10px;border: 1px solid #18161652;background-color: transparent;">' + addWidgetH + '</button>' +
+            '<button type="button" data-widget="' + i + '" id="WidgetLabelName' + i + '" class="form-control name_list addWidget" style="height: 45px;border-radius: 10px;border: 1px solid #18161652;background-color: transparent;font-weight: bold;font-family: Open Sans;font-size: 13px;">' + addWidgetH + '</button>' +
             '</td>' +
+            // '<td class="col-md-3" style="padding:15px;">' +
+            // '<button type="button" class="fe-arrow-up move-up" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;margin-right:10px;"><i class="fe-arrow-up"></i></button>' +
+            // '<button type="button" class="fe-arrow-down move-down" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;margin-right:10px;"><i class="fe-arrow-down"></i></button>' +
+            // '<button type="button" class="fe-remove remove-widget" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;margin-right:10px;"><i class="fe-trash"></i></button>' +
+            // '</td>' +
             '<td class="col-md-3" style="padding:15px;">' +
-            '<button type="button" class="fe-arrow-up move-up" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;margin-right:10px;"><i class="fe-arrow-up"></i></button>' +
-            '<button type="button" class="fe-arrow-down move-down" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;margin-right:10px;"><i class="fe-arrow-down"></i></button>' +
-            '<button type="button" class="fe-remove remove-widget" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;margin-right:10px;"><i class="fe-trash"></i></button>' +
+            '<a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light move-up" style="margin-right:3px;"><i class="fe-arrow-up"></i></a>' +
+            '<a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light move-down" style="margin-right:3px;"><i class="fe-arrow-down"></i></a>' +
+            '<a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light remove-widget"><i class="fe-trash-2"></i></a>' +
             '</td>' +
             '</tr>';
 
@@ -126,14 +131,16 @@ $(function () {
         var widgetname = $(this).data('widgetname');
         var widgetvalue = $(this).data('widgetvalue');
         var visibility = 0; // default zero
-
+        var widgetvalues = messages[widgetvalue];
+ 
         var widgetDynamicID = $("#widgetDynamicID").val();
         $("#widgetName" + widgetDynamicID).val(widgetname);
         $("#widgetValue" + widgetDynamicID).val(widgetvalue);
         $("#visibility" + widgetDynamicID).val(visibility);
-
-        $("#WidgetLabelName" + widgetDynamicID).html(widgetname);
+ 
+        $("#WidgetLabelName" + widgetDynamicID).html(widgetvalues);
         $('#standard-modal').modal('hide');
+       
     });
 
     $('#addDynamicFilter').on('submit', function (e) {
@@ -210,5 +217,39 @@ $(function () {
             $('#standard-modal').modal('hide');
             $('#attendance-modal').modal('hide');
         }
+    });
+    
+    // delete form
+    $(document).on('click', '.remove-widget', function () {
+        var class_id = $(this).data('id');
+        // var url = classDeleteUrl;
+        swal.fire({
+            title: deleteTitle + '?',
+            html: deleteHtml,
+            showCancelButton: true,
+            showCloseButton: true,
+            cancelButtonText: deletecancelButtonText,
+            confirmButtonText: deleteconfirmButtonText,
+            cancelButtonColor: '#d33',
+            confirmButtonColor: '#556ee6',
+            width: 400,
+            allowOutsideClick: false
+        }).then(function (result) {
+            //  if (result.value) {
+            //     $.post(url, {
+            //         class_id: class_id,
+            //         token: token,
+            //         branch_id: branchID
+            //     }, function (data) {
+
+            //         if (data.code == 200) {
+            //             $('#class-table').DataTable().ajax.reload(null, false);
+            //             toastr.success(data.message);
+            //         } else {
+            //             toastr.error(data.message);
+            //         }
+            //     }, 'json');
+            // }
+        });
     });
 });

@@ -2,9 +2,13 @@
 {
     .todo_list
     {
-        padding-left: 40px;
+    padding-left: 40px;
     list-style: none;
     margin-top: -45px
+    }
+    .homeworkresponsive
+    {
+        margin-top: -12px;
     }
 }
 @media screen and (min-width: 412px) and (max-width: 915px) 

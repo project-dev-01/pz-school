@@ -21,7 +21,7 @@ class Checkmenuaccess
         $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $domain=config('constants.domainname');  
         $url = str_replace($domain.'/','',$actual_link);
-        //local URL end
+		//local URL end
         //LIVE URL start
         //$url = $_SERVER['REQUEST_URI'];
         //$url = substr($_SERVER['REQUEST_URI'], 1);

@@ -1912,6 +1912,8 @@ return [
     "StudentTransferredList" => "学生転送リスト",
     "ShortcutLinks" => "ショートカットリンク",
     "BulletinBoard" => "お知らせ",
+    "StudentPlanToLeave" => "退学予定生徒リスト",
+    "StudentNewJoining" => "編入生徒リスト",
     "add_hideunhide" => "ウィジェット追加",
     "dashboard_details" => "ダッシュボードの詳細",
     "add_attendance_report" => "出欠レポート",
@@ -2302,4 +2304,5 @@ return [
       "go_to_bulletin" => "掲示板へ行く", 
       "phase_2_approved"=> "受理",
       "no_file_uploaded"=> "ファイルがアップロードされていません",
+      "you_want_to_delete_this_widget" => "このウィッジを削除しますか",
 ];

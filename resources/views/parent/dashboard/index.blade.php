@@ -413,10 +413,10 @@
                                                     <div class="card-body pb-0" id="homework-list-show">
                                                         <!-- task -->
                                                         <div class="row">
-                                                            <div class="col-sm-7">
+                                                            <div class="col-sm-5">
                                                                 <a href="{{ route('parent.homework')}}">{{$homework['subject_name']}} </a>
                                                             </div> <!-- end col -->
-                                                            <div class="col-sm-5">
+                                                            <div class="col-sm-4">
                                                                 <div class="d-sm-flex">
                                                                     <!-- <div>
                                                                             <a class="navv dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="{{ route('parent.homework')}}" role="button" aria-haspopup="false" aria-expanded="false">
@@ -425,9 +425,25 @@
                                                                         </div> -->
                                                                     <div class="mt-3 mt-sm-0">
                                                                         <ul class="list-inline font-13 text-sm-right">
-                                                                            <li class="list-inline-item" style="margin-right: 45px; margin-left:25px;margin-bottom: 10px;">
+                                                                            <li class="list-inline-item">
                                                                                 <span class="badge badge-soft-danger" style="padding:8px 22px;">{{ __('messages.incomplete') }}</span>
                                                                             </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div> <!-- end .d-flex-->
+                                                            </div> <!-- end col -->
+                                                            <div class="col-sm-3 homeworkresponsive">
+                                                                <div class="d-sm-flex">
+                                                                    <!-- <div>
+                                                                            <a class="navv dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="modal" data-target="#latedetails" data-toggle="dropdown" href="{{ route('parent.homework')}}" role="button" aria-haspopup="false" aria-expanded="false">
+                                                                                <img src="{{ Session::get('picture') && asset('users/images/'.Session::get('picture')) ? asset('users/images/'.Session::get('picture')) : asset('images/users/default.jpg') }}" alt="user-image" class="rounded-circle admin_picture">
+                                                                            </a>
+                                                                        </div> -->
+                                                                    <div class="mt-3 mt-sm-0">
+                                                                        <ul class="list-inline font-13 text-sm-right">
+                                                                          <!--  <li class="list-inline-item" style="margin-right: 45px; margin-left:25px;margin-bottom: 10px;">
+                                                                                <span class="badge badge-soft-danger" style="padding:8px 22px;">{{ __('messages.incomplete') }}</span>
+                                                                            </li>-->
                                                                             <li class="list-inline-item pr-1">
                                                                                 <i class='mdi mdi-calendar-month-outline font-16'></i>
                                                                                 {{ __('messages.submission_date') }} : {{$homework['date_of_submission']}}

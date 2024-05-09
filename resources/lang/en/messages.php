@@ -1935,6 +1935,8 @@ return [
   "StudentTransferredList" => "Student Transferred List",
   "ShortcutLinks" => "Shortcut Links",
   "BulletinBoard" => "Bulletin Board",
+  "StudentPlanToLeave" => "Student Plan To Leave",
+  "StudentNewJoining" => "Student New Joining",
   "add_hideunhide" => "Add Hide/Unhide",
   "dashboard_details" => "Dashboard Details",
   "add_attendance_report" => "Add Attendance Report",
@@ -2329,4 +2331,5 @@ return [
   "go_to_bulletin" => "Go to Bulletin Board",
   "phase_2_approved"=> "Approved",
   "no_file_uploaded" => "no file uploaded",
+  "you_want_to_delete_this_widget" => "You want to Delete this Widget",
 ];

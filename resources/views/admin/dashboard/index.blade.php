@@ -25,6 +25,7 @@
 <link href="{{ asset('css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/calendarresponsive.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 <!-- <style>
     svg {
         height: 48px;
@@ -376,5 +377,6 @@
 var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
 </script>
 <script src="{{ asset('js/custom/permissions.js') }}"></script>
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endif
 @endsection

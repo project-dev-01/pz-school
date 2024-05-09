@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
 <!-- button link  -->
 <link rel="stylesheet" href="{{ asset('datatable/css/buttons.dataTables.min.css') }}">
-
 <!-- date picker -->
 <link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
@@ -15,10 +14,8 @@
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/pagehead_breadcrumb.css') }}" rel="stylesheet" type="text/css" />
-
 @endsection
 @section('content')
-
 <style>
     .ui-datepicker {
         width: 21.4em;
@@ -71,6 +68,40 @@
             width: 14.3em;
         }
     }
+    .add-btn {
+        color: #fff;
+        border-color: #0ABAB5;
+        background-color: #6FC6CC;
+        border-radius: 20px;
+        text-align: center;
+        width: 60px;
+    }
+
+    .widget-button:hover {
+        background-color: #D1E9EF !important;
+    }
+
+    .table1 {
+        font-size: 12px;
+        font-family: Open Sans;
+        color: #3A4265;
+    }
+
+    .table1 {
+        width: 100%;
+        margin-bottom: 1.5rem;
+        color: #6c757d;
+    }
+
+    .table1 tr:hover {
+        /* background-color: #D1E9EF; */
+        /* background-color: #60d2ee; */
+    }
+    .btn i {
+    font-size: 18px;
+    color: white;
+    font-family: Open Sans;
+}
 </style>
 <!-- Start Content-->
 <div class="container-fluid">
@@ -115,12 +146,12 @@
                             <div>
                                 <div class="container">
                                     <div class="row">
-                                        <button type="button" name="add" id="add" class="btn btn-primary" style="margin: 18px;border-color: #0ABAB5;background-color: #6FC6CC; margin-left: 25px;margin-bottom: 0px;">{{ __('messages.add_hideunhide') }}</button>
+                                    <button type="button" name="add" id="add" class="btn btn-primary" style="margin: 18px;border-color: #0ABAB5;background-color: #6FC6CC; margin-left: 25px;margin-bottom: 20px;border-radius: 15px;"> {{ __('messages.add_widget') }}</button>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <form id="addDynamicFilter" action="{{ route('teacher.widget.add') }}" method="post">
                                                     <div class="table-responsive">
-                                                        <table class="table table-borderless" id="dynamic_field">
+                                                        <table class="table1 table-borderless" id="dynamic_field">
                                                             @forelse($get_data_hide_unhide_dashboard as $r)
                                                             <tr class="widget" id="{{ $r['order_no'] }}" data-id="{{ $r['order_no'] }}" data-order="{{ $r['order_no'] }}">
                                                                 <td class="col-md-9">
@@ -133,14 +164,16 @@
                                                                     <input type="hidden" name="unhide_data[{{ $r['order_no'] }}][class_id]" id="classID{{ $r['order_no'] }}" value="{{ $r['class_id'] }}">
                                                                     <input type="hidden" name="unhide_data[{{ $r['order_no'] }}][section_id]" id="sectionID{{ $r['order_no'] }}" value="{{ $r['section_id'] }}">
                                                                     <input type="hidden" name="unhide_data[{{ $r['order_no'] }}][pattern]" id="patternName{{ $r['order_no'] }}" value="{{ $r['pattern'] }}">
-                                                                    <button type="button" data-widget="{{ $r['order_no'] }}" id="WidgetLabelName{{ $r['order_no'] }}" class="form-control name_list addWidget" style="height: 50px;border-radius: 10px;border: 1px solid #18161652;background-color: transparent;">{{ $r['widget_name'] }}</button>
+                                                                    @if($r['widget_value'] =="AttendanceReport")
+                                                                    <button type="button" data-widget="{{ $r['order_no'] }}" id="WidgetLabelName{{ $r['order_no'] }}" class="form-control name_list addWidget widget-button" style="height: 45px;border-radius: 10px;border: 1px solid #18161652;background-color: transparent;font-weight: bold;font-family: Open Sans;font-size: 13px;">{{ $r['widget_name'] }}</button>
+                                                                    @else
+                                                                    <button type="button" data-widget="{{ $r['order_no'] }}" id="WidgetLabelName{{ $r['order_no'] }}" class="form-control name_list addWidget widget-button" style="height: 45px;border-radius: 10px;border: 1px solid #18161652;background-color: transparent;font-weight: bold;font-family: Open Sans;font-size: 13px;">{{ __('messages.'.$r['widget_value']) }}</button>
+                                                                    @endif
                                                                 </td>
                                                                 <td class="col-md-3" style="padding:15px;">
-                                                                    <div class="btn-group">
-                                                                        <button type="button" class="fe-arrow-up move-up" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px; margin-right:10px;"><i class="fe-arrow-up"></i></button>
-                                                                        <button type="button" class="fe-arrow-down move-down" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px; margin-right:10px;"><i class="fe-arrow-down"></i></button>
-                                                                        <button type="button" class="fe-remove remove-widget" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;"><i class="fe-trash"></i></button>
-                                                                    </div>
+                                                                    <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light move-up"><i class="fe-arrow-up"></i></a>
+                                                                    <a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light move-down"><i class="fe-arrow-down"></i></a>
+                                                                    <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light remove-widget"><i class="fe-trash-2"></i></a>
                                                                 </td>
                                                             </tr>
                                                             @empty
@@ -178,7 +211,7 @@
                                 <table class="table table-bordered mb-0">
                                     <thead>
                                         <tr>
-                                            <th>{{ __('messages.s.no') }}</th>
+                                            <th style="width:10px;">{{ __('messages.s.no') }}</th>
                                             <th>{{ __('messages.dashboard_details') }}</th>
                                             <th>{{ __('messages.action') }}</th>
                                         </tr>
@@ -189,44 +222,44 @@
                                             <input type="hidden" value="" id="widgetDynamicID">
                                             <td>1</td>
                                             <td>{{ __('messages.AttendanceReport') }}</td>
-                                            <td><button class="btn btn-success waves-effect waves-light" data-widgetname="Attendance Report" data-orderno="1" data-widgetvalue="AttendanceReport" data-toggle="modal" data-target="#attendance-modal">{{ __('messages.add') }}</button></td>
+                                            <td><button class="btn add-btn btn-rounded waves-effect waves-light" data-widgetname="Attendance Report" data-orderno="1" data-widgetvalue="AttendanceReport" data-toggle="modal" data-target="#attendance-modal">{{ __('messages.add') }}</button></td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
                                             <td>{{ __('messages.Calendar') }}</td>
-                                            <td><button class="btn btn-success waves-effect waves-light addToWidget" data-widgetname="Calendar" data-orderno="2" data-widgetvalue="Calendar">{{ __('messages.add') }}</button></td>
+                                            <td><button class="btn add-btn btn-rounded waves-effect waves-light addToWidget" data-widgetname="Calendar" data-orderno="2" data-widgetvalue="Calendar">{{ __('messages.add') }}</button></td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
                                             <td>{{ __('messages.Task') }}</td>
-                                            <td><button class="btn btn-success waves-effect waves-light addToWidget" data-widgetname="Task" data-orderno="3" data-widgetvalue="Task">{{ __('messages.add') }}</button></td>
+                                            <td><button class="btn add-btn btn-rounded waves-effect waves-light addToWidget" data-widgetname="Task" data-orderno="3" data-widgetvalue="Task">{{ __('messages.add') }}</button></td>
                                         </tr>
                                         <tr>
                                             <td>4</td>
                                             <td>{{ __('messages.StudentTransferredList') }}</td>
-                                            <td><button class="btn btn-success waves-effect waves-light addToWidget" data-widgetname="StudentTransferredList" data-orderno="4" data-widgetvalue="StudentTransferredList">{{ __('messages.add') }}</button></td>
+                                            <td><button class="btn add-btn btn-rounded waves-effect waves-light addToWidget" data-widgetname="StudentTransferredList" data-orderno="4" data-widgetvalue="StudentTransferredList">{{ __('messages.add') }}</button></td>
                                         </tr>
                                         <tr>
                                             <td>5</td>
                                             <td>{{ __('messages.ShortcutLinks') }}</td>
-                                            <td><button class="btn btn-success waves-effect waves-light addToWidget" data-widgetname="ShortcutLinks" data-orderno="5" data-widgetvalue="ShortcutLinks">{{ __('messages.add') }}</button></td>
+                                            <td><button class="btn add-btn btn-rounded waves-effect waves-light addToWidget" data-widgetname="ShortcutLinks" data-orderno="5" data-widgetvalue="ShortcutLinks">{{ __('messages.add') }}</button></td>
                                         </tr>
                                         <tr>
                                             <td>6</td>
                                             <td>{{ __('messages.BulletinBoard') }}</td>
-                                            <td><button class="btn btn-success waves-effect waves-light addToWidget" data-widgetname="BulletinBoard" data-orderno="6" data-widgetvalue="BulletinBoard">{{ __('messages.add') }}</button></td>
+                                            <td><button class="btn add-btn btn-rounded waves-effect waves-light addToWidget" data-widgetname="BulletinBoard" data-orderno="6" data-widgetvalue="BulletinBoard">{{ __('messages.add') }}</button></td>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>7</td>
                                             <td>{{ __('messages.student_plan_to_leave') }}</td>
-                                            <td><button class="btn btn-success waves-effect waves-light addToWidget" data-widgetname="StudentPlanToLeave" data-orderno="7" data-widgetvalue="StudentPlanToLeave">{{ __('messages.add') }}</button></td>
+                                            <td><button class="btn add-btn btn-rounded waves-effect waves-light addToWidget" data-widgetname="StudentPlanToLeave" data-orderno="7" data-widgetvalue="StudentPlanToLeave">{{ __('messages.add') }}</button></td>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>8</td>
                                             <td>{{ __('messages.student_new_joining_list') }}</td>
-                                            <td><button class="btn btn-success waves-effect waves-light addToWidget" data-widgetname="StudentNewJoining" data-orderno="8" data-widgetvalue="StudentNewJoining">{{ __('messages.add') }}</button></td>
+                                            <td><button class="btn add-btn btn-rounded waves-effect waves-light addToWidget" data-widgetname="StudentNewJoining" data-orderno="8" data-widgetvalue="StudentNewJoining">{{ __('messages.add') }}</button></td>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -317,7 +350,7 @@
                                         </div>
                                         <!-- Button to fetch and display attendance information -->
                                         <div class="form-group text-right m-b-0">
-                                            <button class="btn btn-success waves-effect waves-light">{{ __('messages.add') }}</button>
+                                            <button class="btn add-btn btn-rounded waves-effect waves-light">{{ __('messages.add') }}</button>
                                         </div>
                                         <!-- Display the attendance information -->
                                     </form>
@@ -370,6 +403,13 @@
         var header_txt = "{{ __('messages.all_leaves') }}";
         var footer_txt = "{{ session()->get('footer_text') }}";
         // Get PDF Header & Footer Text End
+        // lang change name start
+        var deleteTitle = "{{ __('messages.are_you_sure') }}";
+        var deleteHtml = "{{ __('messages.you_want_to_delete_this_widget') }}";
+        var deletecancelButtonText = "{{ __('messages.cancel') }}";
+        var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+        var messages = {!! json_encode(__('messages')) !!};
+        // lang change name end 
     </script>
     <script src="{{ asset('js/custom/dashboard_widget_hide.js') }}"></script>
     @endsection
