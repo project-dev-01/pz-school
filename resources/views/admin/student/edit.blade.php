@@ -688,9 +688,9 @@
                                                 <div class="form-group" id="dual_nationality_container" style="{{ isset($student['dual_nationality']) ? '' : 'display: none;' }}">
                                                     <label for="dual_nationality">{{ __('messages.dual_nationality') }}</label>
                                                     <input type="text" maxlength="50" id="dual_nationality" class="form-control country" placeholder="{{ __('messages.dual_nationality') }}" name="dual_nationality" value="{{ isset($student['dual_nationality']) ? $student['dual_nationality'] : ''}}" data-parsley-trigger="change">
+                                                    <label for="dual_nationality" class="error"></label>
                                                 </div>
 
-                                                <span id ="error_message"></span>
                                             </div>
                                        
                                         @endif
@@ -1013,7 +1013,7 @@
                                                 </div>
                                             </div>
                                             <input type="hidden" name="japanese_association_membership_image_principal_old" id="japanese_association_membership_image_principal_old" value="{{ isset($student['japanese_association_membership_image_principal']) ? $student['japanese_association_membership_image_principal'] : ''}}" />
-                                            <div class="col-md-4">
+                                            <!-- <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="japanese_association_membership_image_principal">{{ __('messages.japanese_association_membership_image_principal') }}</label>
                                                     <div class="input-group">
@@ -1029,7 +1029,7 @@
                                                     <span id="japanese_association_membership_image_principal_name"></span>
                                                  
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             @if($form_field['nric'] == 0)
                                             <div class="col-md-4">
                                                 <div class="form-group">
@@ -1494,10 +1494,10 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                                    <label for="guardian_company_phone_number">{{ __('messages.work_company_phone_number') }}<span class="text-danger">*</span></label>
-                                                                    <input type="text" class="form-control  number_validation "  id="guardian_company_phone_number" name="guardian_company_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" >
-                                                                    <label for="guardian_company_phone_number" class="error"></label>
-                                                                </div>
+                                                    <label for="guardian_company_phone_number">{{ __('messages.work_company_phone_number') }}<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control  number_validation "  id="guardian_company_phone_number" name="guardian_company_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" >
+                                                    <label for="guardian_company_phone_number" class="error"></label>
+                                                </div>
                                             </div>
                                         </div>
                                             <div class="row">
@@ -1587,7 +1587,7 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input skip" id="skip_father_details"  name="skip_father_details" >
+                                                <input type="checkbox" class="custom-control-input skip" id="skip_father_details"  name="skip_father_details" checked>
                                                 <label class="custom-control-label" for="skip_father_details">{{ __('messages.skip_father_details') }}</label>
                                             </div>
                                         </div>
@@ -1606,7 +1606,7 @@
 
                                     </div>
                                     </div>
-                                    <div id="father_form">
+                                    <div id="father_form" style="display:none">
                                     <input type="hidden" name="father_id" id="father_id" value="{{ isset($student['father_id']) ? $student['father_id'] : ''}}">
                                         <div class="row">  
                                             <div class="col-md-4">
@@ -1822,7 +1822,7 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input skip" id="skip_mother_details"  name="skip_mother_details">
+                                                <input type="checkbox" class="custom-control-input skip" id="skip_mother_details"  name="skip_mother_details" checked>
                                                 <label class="custom-control-label" for="skip_mother_details">{{ __('messages.skip_mother_details') }}</label>
                                             </div>
                                         </div>
@@ -1842,7 +1842,7 @@
                                         </div>
 
                                     </div>
-                                    <div id="mother_form" >
+                                    <div id="mother_form"  style="display:none">
                                     <input type="hidden" name="mother_id" id="mother_id" value="{{ isset($student['mother_id']) ? $student['mother_id'] : ''}}">
                                         <div class="row">
                                            
@@ -2457,6 +2457,12 @@
     var studentList = null;
     var malaysiaPostalCode = "{{ route('admin.malaysia_postalCode') }}";
     var yyyy_mm_dd = "{{ __('messages.yyyy_mm_dd') }}";
+    var statusTitle = "{{ __('messages.are_you_sure') }}";
+    var statuscancelButtonText = "{{ __('messages.cancel') }}";
+    var statusUnLockText = "{{ __('messages.yes_unlock') }}";
+    var statusLockText = "{{ __('messages.yes_lock') }}";
+    var statusUnLockHtml = "{{ __('messages.you_want_to_unlock_this_student') }}";
+    var statusLockHtml = "{{ __('messages.you_want_to_lock_this_student') }}";
 </script>
 
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->
@@ -2484,7 +2490,7 @@
         //     required: true
         // });
 
-        $('#txt_nric').mask("000000-00-0000", {
+        $('#nric').mask("000000-00-0000", {
             reverse: true
         });
         // nric validation end
@@ -2584,7 +2590,7 @@
 
     
 </script>
-<script>
+<!-- <script>
         $(document).ready(function(){
     var nationality = $('#nationality').val();
     var dual_nationality = $('#dual_nationality').val();
@@ -2615,7 +2621,7 @@
     }
     });
 });
-</script>
+</script> -->
 
 
 @endsection

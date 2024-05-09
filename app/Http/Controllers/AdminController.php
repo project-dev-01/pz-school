@@ -4871,16 +4871,16 @@ class AdminController extends Controller
     // Update Student 
     public function updateStudent(Request $request)
     {
-        $rules = [
-            'nationality' => 'required|string|max:50',
-            'dual_nationality' => 'nullable|string|max:50|different:nationality',
-        ];
-        // Define custom error messages
-        $messages = [
-            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
-        ];
+        // $rules = [
+        //     'nationality' => 'required|string|max:50',
+        //     'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        // ];
+        // // Define custom error messages
+        // $messages = [
+        //     'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        // ];
         // Validate the request
-        $validatedData = $request->validate($rules, $messages);
+        // $validatedData = $request->validate($rules, $messages);
         $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
 
         $status = "0";
@@ -4939,8 +4939,8 @@ class AdminController extends Controller
             'old_photo' => $request->old_photo,
             'register_no' => $request->txt_regiter_no,
             'roll_no' => $request->txt_roll_no,
-            'passport' => $request->txt_passport,
-            'nric' => $request->txt_nric,
+            'passport' => $request->passport,
+            'nric' => $request->nric,
             'status' => $status,
             'admission_date' => $request->admission_date,
             'category_id' => $request->categy,
@@ -4983,7 +4983,8 @@ class AdminController extends Controller
             'password' => $request->password,
             'confirm_password' => $request->confirm_password,
             'school_roleid' => $request->school_roleid,
-            "middle_name" => $request->middle_name,
+            'school_name' => $request->txt_prev_schname,
+            "middle_name" => $request->mname,
             "middle_name_english" => $request->middle_name_english,
             "middle_name_furigana" => $request->middle_name_furigana,
             'first_name_english' => $request->first_name_english,
@@ -5063,6 +5064,7 @@ class AdminController extends Controller
             'guardian_last_name' => $request->guardian_last_name,
         ];
         // dd($data);
+        // return $data;
         $response = Helper::PostMethod(config('constants.api.student_update'), $data);
         return $response;
     }

@@ -1634,18 +1634,18 @@ class ParentController extends Controller
     // Update Student 
     public function updateStudent(Request $request)
     {
-        $rules = [
-            'nationality' => 'required|string|max:50',
-            'dual_nationality' => 'nullable|string|max:50|different:nationality',
-        ];
+        // $rules = [
+        //     'nationality' => 'required|string|max:50',
+        //     'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        // ];
 
-        // Define custom error messages
-        $messages = [
-            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
-        ];
+        // // Define custom error messages
+        // $messages = [
+        //     'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        // ];
 
         // Validate the request
-        $validatedData = $request->validate($rules, $messages);
+        // $validatedData = $request->validate($rules, $messages);
 
 
         // Set dual nationality based on checkbox

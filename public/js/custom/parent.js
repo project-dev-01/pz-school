@@ -996,4 +996,47 @@ function openBasicDetails() {
             basicDetailsSection.classList.add('show');
         }
     }
+
+    
+
+    
+    $('#edit_status').change(function() {
+        // $(document).on('change', '#edit_status', function () {
+            if ($(this).is(":checked")) {
+                var statusconfirmButtonText = statusLockText;
+                var statusHtml = statusLockHtml;
+            } else {
+                var statusconfirmButtonText = statusUnLockText;
+                var statusHtml = statusUnLockHtml;
+            }
+            swal.fire({
+                title: statusTitle + '?',
+                html: statusHtml,
+                showCancelButton: true,
+                showCloseButton: true,
+                cancelButtonText: statuscancelButtonText,
+                confirmButtonText: statusconfirmButtonText,
+                cancelButtonColor: '#d33',
+                confirmButtonColor: '#556ee6',
+                width: 400,
+                allowOutsideClick: false
+            }).then(function (result) {
+                if (result.value) {
+                    if($("#edit_status").is(":checked")){
+                        $("#edit_status").prop('checked', true);
+                    }else{
+    
+                        $("#edit_status").prop('checked', false);
+                    }
+                }else{
+                    if($("#edit_status").is(":checked")){
+                        $("#edit_status").prop('checked', false);
+                    }else{
+    
+                        $("#edit_status").prop('checked', true);
+                    }
+    
+                }
+            });
+        });
 }
