@@ -189,6 +189,7 @@
 
     var buletinBoardList = "{{ route('teacher.buletin_board.dashboradlist') }}";
     var image_url = "{{config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/'}}";
+    var no_file_uploaded_txt ="{{__('messages.no_file_uploaded')}}";
 
     var UserName = "{{ Session::get('name') }}";
     var hiddenWks = "{{ $hiddenWeekends }}";

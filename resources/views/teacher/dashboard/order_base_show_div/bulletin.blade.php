@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table dt-responsive nowrap w-100" id="buletin-table">
+                        <table class="table dt-responsive nowrap w-100" id="buletin-table-dashboard">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -65,11 +65,13 @@
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.download') }}</td>
-                                        <td class="publish_date"><a id="downloadLink" href="#" download>{{ __('messages.download') }}</a></td>
+                                        <td>
+                                            <ul id="fileLinksContainer"></ul>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.preview') }}</td>
-                                        <td class="target_user"><a href="#" id="previewLink" target="_blank">{{ __('messages.preview') }}</a></td>
+                                        <td > <ul id="fileLinksPreviewContainer"></ul></td>
                                     </tr>
                                 </table>
                             </div>

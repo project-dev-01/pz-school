@@ -1933,6 +1933,8 @@ return [
     "StudentTransferredList" => "Senarai Perpindahan Pelajar",
     "ShortcutLinks" => "Pautan Pintasan",
     "BulletinBoard" => "Papan buletin",
+    "StudentPlanToLeave" => "Student Plan To Leave",
+    "StudentNewJoining" => "Student New Joining",
     "add_hideunhide" => "tambah sorok/nyahkan",
     "dashboard_details" => "Butiran Papan Pemuka",
     "add_attendance_report" => "Tambah Laporan Kehadiran",
@@ -2227,4 +2229,7 @@ return [
       "lab_student_name" => "Student Name",
 
       "go_to_bulletin" => "Pergi ke Papan Buletin",
+      "no_file_uploaded"=> "tiada fail dimuat naik",
+      "you_want_to_delete_this_widget" => "You want to Delete this Widget",
+      
 ];

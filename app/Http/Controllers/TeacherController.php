@@ -2007,12 +2007,14 @@ class TeacherController extends Controller
                     'image_url' => $image_url,
                     'title' => $row['title'],
                     'description' => $description,
+                    'files' => explode(',', $row['file']),
                 ]);
                  // Check if file exists
                     if (!empty($row['file'])) {
-                        $downloadButton = '<a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
-                            <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
-                        </a>';
+                       
+                        $downloadButton = ' <button class="btn btn-danger waves-effect waves-light download-all" data-files="' . htmlspecialchars($row['file'], ENT_QUOTES, 'UTF-8') . '">
+                        <i class="fe-download" data-toggle="tooltip" title="Click to download all files..!"></i>
+                    </button>';
                     } else {
                         $downloadButton = ''; // If file doesn't exist, set empty string
                     }
@@ -2056,11 +2058,12 @@ class TeacherController extends Controller
                     'image_url' => $image_url,
                     'title' => $row['title'],
                     'description' => $description,
+                    'files' => explode(',', $row['file']),
                 ]);
                 if (!empty($row['file'])) {
-                    $downloadButton = '<a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
-                        <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
-                    </a>';
+                    $downloadButton = ' <button class="btn btn-danger waves-effect waves-light download-all" data-files="' . htmlspecialchars($row['file'], ENT_QUOTES, 'UTF-8') . '">
+                        <i class="fe-download" data-toggle="tooltip" title="Click to download all files..!"></i>
+                    </button>';
                 } else {
                     $downloadButton = ''; // If file doesn't exist, set empty string
                 }
@@ -2080,32 +2083,30 @@ class TeacherController extends Controller
         $response = Helper::PostMethod(config('constants.api.bulletinBoard_teacher_Dashboard'), $staff_id);
         $data = isset($response['data']) ? $response['data'] : [];
         return DataTables::of($data)
-            ->addIndexColumn()
-            ->addColumn('actions', function ($row) {
-                $image_url = !empty($row['file']) ? config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] : '';
-                $description = htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8'); // Encoding with quotes
-                $encoded_data = json_encode([
-                    'image_url' => $image_url,
-                    'title' => $row['title'],
-                    'description' => $description
-                ]);
-                $downloadLink = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
-                $buttons = '<div class="button-list">';
-                
-                // Check if file exists
-                if (!empty($row['file'])) {
-                    // If file exists, add download button
-                    $buttons .= '<a href="' . $downloadLink . '" class="btn btn-danger waves-effect waves-light" download><i class="dripicons-download" style="color: white;"></i></a>';
-                    
-                   
-                }
-                $buttons .= '<a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>';
-                $buttons .= '</div>';
-                
-                return $buttons;
-            })
-            ->rawColumns(['actions'])
-            ->make(true);
+        ->addIndexColumn()
+        ->addColumn('actions', function ($row) {
+            $image_url = !empty($row['file']) ? config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] : '';
+            $description = htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8'); // Encoding with quotes
+            $encoded_data = json_encode([
+                'image_url' => $image_url,
+                'title' => $row['title'],
+                'description' => $description,
+                'files' => explode(',', $row['file']),
+            ]);
+            if (!empty($row['file'])) {
+                $downloadButton = ' <button class="btn btn-danger waves-effect waves-light download-all" data-files="' . htmlspecialchars($row['file'], ENT_QUOTES, 'UTF-8') . '">
+                    <i class="fe-download" data-toggle="tooltip" title="Click to download all files..!"></i>
+                </button>';
+            } else {
+                $downloadButton = ''; // If file doesn't exist, set empty string
+            }
+            return '<div class="button-list">
+                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>'
+                .$downloadButton.
+            '</div>';
+        })
+        ->rawColumns(['publish', 'actions'])
+        ->make(true);
     }
     //promotion
     public function PromotionBulkImport(Request $request)

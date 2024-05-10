@@ -57,9 +57,9 @@ $(function () {
         moveWidget($(this), 'down');
     });
 
-    $(document).on('click', '.remove-widget', function () {
-        removeWidget($(this));
-    });
+    // $(document).on('click', '.remove-widget', function () {
+    //     removeWidget($(this));
+    // });
     function moveWidget(button, direction) {
         var row = button.closest('tr');
         var currentOrder = parseInt(row.attr('data-order'));
@@ -101,12 +101,17 @@ $(function () {
             '<input type="hidden" name="unhide_data[' + i + '][class_id]" id="classID' + i + '">' +
             '<input type="hidden" name="unhide_data[' + i + '][section_id]" id="sectionID' + i + '">' +
             '<input type="hidden" name="unhide_data[' + i + '][pattern]" id="patternName' + i + '">' +
-            '<button type="button" data-widget="' + i + '" id="WidgetLabelName' + i + '" class="form-control name_list addWidget" style="height: 50px;border-radius: 10px;border: 1px solid #18161652;background-color: transparent;">' + addWidgetH + '</button>' +
+            '<button type="button" data-widget="' + i + '" id="WidgetLabelName' + i + '" class="form-control name_list addWidget" style="height: 45px;border-radius: 10px;border: 1px solid #18161652;background-color: transparent;font-weight: bold;font-family: Open Sans;font-size: 13px;">' + addWidgetH + '</button>' +
             '</td>' +
+            // '<td class="col-md-3" style="padding:15px;">' +
+            // '<button type="button" class="fe-arrow-up move-up" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;margin-right:10px;"><i class="fe-arrow-up"></i></button>' +
+            // '<button type="button" class="fe-arrow-down move-down" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;margin-right:10px;"><i class="fe-arrow-down"></i></button>' +
+            // '<button type="button" class="fe-remove remove-widget" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;margin-right:10px;"><i class="fe-trash"></i></button>' +
+            // '</td>' +
             '<td class="col-md-3" style="padding:15px;">' +
-            '<button type="button" class="fe-arrow-up move-up" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;margin-right:10px;"><i class="fe-arrow-up"></i></button>' +
-            '<button type="button" class="fe-arrow-down move-down" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;margin-right:10px;"><i class="fe-arrow-down"></i></button>' +
-            '<button type="button" class="fe-remove remove-widget" style="background-color: transparent;border: 1px solid #18161652;height: 50px;border-radius: 10px;width: 45px;margin-right:10px;"><i class="fe-trash"></i></button>' +
+            '<a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light move-up" style="margin-right:3px;"><i class="fe-arrow-up"></i></a>' +
+            '<a href="javascript:void(0)" class="btn btn-blue waves-effect waves-light move-down" style="margin-right:3px;"><i class="fe-arrow-down"></i></a>' +
+            '<a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light remove-widget"><i class="fe-trash-2"></i></a>' +
             '</td>' +
             '</tr>';
 
@@ -117,8 +122,25 @@ $(function () {
 
     $(document).on('click', '.addWidget', function () {
         var widgetID = $(this).data('widget');
-        console.log("widgetID");
-        console.log(widgetID);
+        var ordernoValues = [];
+
+        // Iterate over each row in the table with id 'dynamic_field'
+        $('#dynamic_field tr.widget').each(function () {
+            var orderno = $(this).data('order');
+            var widgetValueID = "#widgetValue" + orderno;
+            var widgetValue = $(widgetValueID).val();
+            ordernoValues.push(widgetValue);
+        });
+
+        // Disable buttons with data-widgetvalue matching any value in ordernoValues
+        $('.addToWidget').each(function () {
+            var buttonValue = $(this).data('widgetvalue');
+            if (ordernoValues.includes(buttonValue)) {
+                $(this).prop('disabled', true);
+            }
+        });
+
+
         $("#widgetDynamicID").val(widgetID);
         $('#standard-modal').modal('show');
     });
@@ -126,14 +148,16 @@ $(function () {
         var widgetname = $(this).data('widgetname');
         var widgetvalue = $(this).data('widgetvalue');
         var visibility = 0; // default zero
+        var widgetvalues = messages[widgetvalue];
 
         var widgetDynamicID = $("#widgetDynamicID").val();
         $("#widgetName" + widgetDynamicID).val(widgetname);
         $("#widgetValue" + widgetDynamicID).val(widgetvalue);
         $("#visibility" + widgetDynamicID).val(visibility);
 
-        $("#WidgetLabelName" + widgetDynamicID).html(widgetname);
+        $("#WidgetLabelName" + widgetDynamicID).html(widgetvalues);
         $('#standard-modal').modal('hide');
+
     });
 
     $('#addDynamicFilter').on('submit', function (e) {
@@ -147,7 +171,6 @@ $(function () {
             dataType: 'json',
             contentType: false,
             success: function (response) {
-                console.log(response);
                 if (response.code == 200) {
                     toastr.success(response.message);
                 } else {
@@ -197,6 +220,20 @@ $(function () {
                 combinetext += "," + pattern_name;
             }
             addAttText += '(' + combinetext + ')';
+
+            var attRepValues = [];
+
+            // Iterate over each row in the table with id 'dynamic_field'
+            $('#dynamic_field tr.widget').each(function () {
+                var orderno = $(this).data('order');
+                var widgetValueID = "#widgetName" + orderno;
+                var widgetValue = $(widgetValueID).val();
+                attRepValues.push(widgetValue);
+            });
+            if (attRepValues.includes(addAttText)) {
+                toastr.error('Already Exist This Attendance');
+                return false;
+            }
             $("#WidgetLabelName" + widgetDynamicID).html(addAttText);
             // $("#orderNo" + widgetDynamicID).val(atOrderNo);
             $("#widgetName" + widgetDynamicID).val(addAttText);
@@ -210,5 +247,27 @@ $(function () {
             $('#standard-modal').modal('hide');
             $('#attendance-modal').modal('hide');
         }
+    });
+
+    // delete form
+    $(document).on('click', '.remove-widget', function () {
+        var $clickedButton = $(this); // Save reference to $(this) for later use
+
+        swal.fire({
+            title: deleteTitle + '?',
+            html: deleteHtml,
+            showCancelButton: true,
+            showCloseButton: true,
+            cancelButtonText: deletecancelButtonText,
+            confirmButtonText: deleteconfirmButtonText,
+            cancelButtonColor: '#d33',
+            confirmButtonColor: '#556ee6',
+            width: 400,
+            allowOutsideClick: false
+        }).then(function (result) {
+            if (result.isConfirmed) {
+                removeWidget($clickedButton); // Call removeWidget with the saved reference
+            }
+        });
     });
 });

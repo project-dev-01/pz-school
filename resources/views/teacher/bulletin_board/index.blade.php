@@ -259,11 +259,13 @@
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.download') }}</td>
-                                        <td class="publish_date"><a id="downloadLink" href="#" download>{{ __('messages.download') }}</a></td>
+                                        <td>
+                                            <ul id="fileLinksContainer"></ul>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>{{ __('messages.preview') }}</td>
-                                        <td class="target_user"><a href="#" id="previewLink" target="_blank">{{ __('messages.preview') }}</a></td>
+                                        <td > <ul id="fileLinksPreviewContainer"></ul></td>
                                     </tr>
                                 </table>
                             </div>
@@ -312,9 +314,10 @@
     // Get PDF Footer Text
     var header_txt = "{{ __('messages.event') }}";
     var footer_txt = "{{ session()->get('footer_text') }}";
-    var pdfPath = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/admin-documents/buletin_files' }}";
+    var pdfPath = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/admin-documents/buletin_files/' }}";
     var modelheader = "{{ __('messages.file_details') }}";
     var download = "{{ __('messages.download') }}";
+    var no_file_uploaded_txt ="{{__('messages.no_file_uploaded')}}";
 </script>
 <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script>
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>

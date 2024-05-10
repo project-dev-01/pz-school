@@ -152,19 +152,31 @@ $(function () {
 
                             // Create the HTML content for a file
                             const fileContent = `
+                            <div>
                                 <button class="star-button ${starClass}" data-item-id="${itemId}" data-important="${full.parent_imp}" onclick="toggleStar(${itemId}, ${full.parent_imp})"></button>
                                 ${isPDF ? '<i class="fa fa-file-pdf pdf-icon" aria-hidden="true"></i>' : ''}
                                 <span class="${isPDF ? 'pdf-file' : ''}">
-                                    ${data}
+                                    ${data.split(',').map(file => {
+                                        const trimmedFile = file.trim();
+                                        const isPDF = trimmedFile.toLowerCase().endsWith('.pdf');
+                                        const fileLink = pdfPath + trimmedFile;
+                        
+                                        return `
+                                            
+                                                <a href="${fileLink}" target="_blank">${trimmedFile}</a>
+                                            
+                                        `;
+                                    }).join('<br>')}
                                 </span>
-                            `;
+                            </div>
+                        `;
 
                             return `<div>${fileContent}</div>`;
                         } else {
                             const fileContent  = `
                                 <button class="star-button ${starClass}" data-item-id="${itemId}" data-important="${full.parent_imp}" onclick="toggleStar(${itemId}, ${full.parent_imp})"></button>`;
                             // Return empty content if data is null or empty
-                            return `<div>${fileContent} <span class="text-muted">no file uploaded</span></div>`;
+                            return `<div>${fileContent} <span class="text-muted">` + no_file_uploaded_txt + `</span></div>`;
                         }
                     }
                 },
@@ -300,19 +312,31 @@ $(function () {
 
                             // Create the HTML content for a file
                             const fileContent = `
+                            <div>
                                 <button class="star-button ${starClass}" data-item-id="${itemId}" data-important="${full.parent_imp}" onclick="toggleStar(${itemId}, ${full.parent_imp})"></button>
                                 ${isPDF ? '<i class="fa fa-file-pdf pdf-icon" aria-hidden="true"></i>' : ''}
                                 <span class="${isPDF ? 'pdf-file' : ''}">
-                                    ${data}
+                                    ${data.split(',').map(file => {
+                                        const trimmedFile = file.trim();
+                                        const isPDF = trimmedFile.toLowerCase().endsWith('.pdf');
+                                        const fileLink = pdfPath + trimmedFile;
+                        
+                                        return `
+                                            
+                                                <a href="${fileLink}" target="_blank">${trimmedFile}</a>
+                                            
+                                        `;
+                                    }).join('<br>')}
                                 </span>
-                            `;
+                            </div>
+                        `;
 
                             return `<div>${fileContent}</div>`;
                         } else {
                             const fileContent  = `
                                 <button class="star-button ${starClass}" data-item-id="${itemId}" data-important="${full.parent_imp}" onclick="toggleStar(${itemId}, ${full.parent_imp})"></button>`;
                             // Return empty content if data is null or empty
-                            return `<div>${fileContent}  <span class="text-muted">no file uploaded</span></div>`;
+                            return `<div>${fileContent}  <span class="text-muted">` + no_file_uploaded_txt + `</span></div>`;
                         }
                     }
                 },
@@ -326,6 +350,18 @@ $(function () {
         });
     }
      // Handle Download actio
+     $(document).on('click', '.download-all', function() {
+        var files = $(this).data('files').split(',');
+        files.forEach(function(file) {
+            // Construct the download link for each file and trigger download
+            var downloadLink = pdfPath + file;
+            var anchor = document.createElement('a');
+            anchor.href = downloadLink;
+            anchor.download = file;
+            anchor.click();
+        });
+    });
+    
      // Handle Download action
      $('#parent-bulletin-table').on('click', '.download-link', function (e) {
         e.preventDefault();
@@ -365,35 +401,49 @@ function openFilePopup(data) {
     const fileTitle = modal.querySelector("#fileTitle");
     const fileDescriptionElement = modal.querySelector("#fileDescription");
     const downloadLink = modal.querySelector("#downloadLink");
-    const filePreview = modal.querySelector("#filePreview");
+    const filePreview = modal.querySelector("#fileLinksPreviewContainer");
     const previewLink = modal.querySelector("#previewLink");
 
     modalTitle.innerText = "File Details";
-    fileTitle.innerText = data.title;
+    const fileLinksContainer = modal.querySelector("#fileLinksContainer");
+
+    // Set file title
+    fileTitle.textContent = data.title;
     
     // Set file description using innerHTML to handle HTML entities
     fileDescriptionElement.innerHTML = data.description;
-    if (data.image_url && data.image_url.trim() !== '') {
-        // Set the href attribute of the download link to the image URL
-        downloadLink.href = data.image_url;
-        
-        // Set the href attribute of the preview link to the image URL
-        previewLink.href = data.image_url;
-        
-        // Set the src attribute of the iframe for preview to the image URL
-        filePreview.src = data.image_url;
 
-        // Show the download link, preview link, and iframe
-       downloadLink.style.display = "inline";
-       previewLink.style.display = "inline";
-       // filePreview.style.display = "block";
-    } else {
-        // If image_url is null or empty, hide the download link, preview link, and set the iframe source to a placeholder
-        downloadLink.style.display = "none";
-        previewLink.style.display = "none";
-        filePreview.style.display = "none";
-    }
-    // Set the download link
+    // Clear existing file links
+    fileLinksContainer.innerHTML = '';
+    filePreview.innerHTML = '';
+    // Iterate over each file in the files array
+    data.files.forEach(function(file) {
+        // Create a new anchor element for the download link
+        var downloadLink = document.createElement('a');
+        downloadLink.href = pdfPath + file; // Assuming data.image_url is the base URL
+        downloadLink.textContent = file;
+        downloadLink.download = '';
+        //downloadLink.setAttribute('target', '_blank');
+
+        // Create a new list item to contain the download link
+        var listItem = document.createElement('li');
+        listItem.appendChild(downloadLink);
+
+        // Append the list item to the file links container
+        fileLinksContainer.appendChild(listItem);
+
+        var filePreviewLink = document.createElement('a');
+        filePreviewLink.href = pdfPath + file; // Assuming data.image_url is the base URL
+        filePreviewLink.textContent = file;
+        filePreviewLink.setAttribute('target', '_blank');
+
+        // Create a new list item to contain the download link
+        var listItems = document.createElement('li');
+        listItems.appendChild(filePreviewLink);
+
+        // Append the list item to the file links container
+        filePreview.appendChild(listItems);
+    });
 
     // Open the modal
     $(modal).modal("show");

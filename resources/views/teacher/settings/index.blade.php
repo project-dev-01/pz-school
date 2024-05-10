@@ -6,14 +6,18 @@
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/pagehead_breadcrumb.css') }}" rel="stylesheet" type="text/css" />
-
+<link rel="stylesheet" href="{{ asset('mobile-country/css/intlTelInput.css') }}">
 @endsection
 @section('css')
-<link rel="stylesheet" href="{{ asset('mobile-country/css/intlTelInput.css') }}">
 <style>
-
-.iti {
+.iti 
+{
     display: block;
+}
+.avatar-lg 
+{
+    height: 9.5rem;
+    width: 9.5rem;
 }
 </style>
 @endsection
@@ -47,7 +51,7 @@
         <div class="col-lg-4 col-xl-4">
             <div class="card-box text-center">
                 <img src="{{ Session::get('picture') && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') ? config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.Session::get('picture') : config('constants.image_url').'/common-asset/images/users/default.jpg' }}" class="rounded-circle avatar-lg img-thumbnail admin_picture" alt="profile-image">
-                <h4 class="mb-0 user_name">{{ __('messages.'.Str::lower(Session::get('role_name')).'') }}</h4>
+                <!--<h4 class="mb-0 user_name">{{ __('messages.'.Str::lower(Session::get('role_name')).'') }}</h4>-->
                 <div class="text-left mt-3">
                     <form method="post" id="upload_form" enctype="multipart/form-data">
                         {{ csrf_field() }}

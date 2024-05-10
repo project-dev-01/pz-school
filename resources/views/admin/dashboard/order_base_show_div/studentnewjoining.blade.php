@@ -27,6 +27,7 @@
                                 <th>{{ __('messages.class_Name') }}</th>
                                 <th>{{ __('messages.gender') }}</th>
                                 <th>{{ __('messages.admission_date') }}</th>
+                                <th>{{__('messages.status_after_approval')}}</th>
                                 <!-- <th>{{ __('messages.department_name') }}</th> -->
                             </tr>
                         </thead>

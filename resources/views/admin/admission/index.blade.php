@@ -843,7 +843,7 @@
                                     <input type="text" id="txt_roll_no" class="form-control" name="txt_roll_no" placeholder="{{ __('messages.enter_attendance_no') }}" data-parsley-trigger="change">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="text">{{ __('messages.admission_date') }}<span class="text-danger">*</span></label>
                                     <div class="input-group input-group-merge">
@@ -855,7 +855,7 @@
                                         <input type="text" class="form-control" id="admission_date" name="admission_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                     </div><label for="admission_date" class="error"></label>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="row">

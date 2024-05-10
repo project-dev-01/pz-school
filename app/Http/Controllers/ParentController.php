@@ -1615,30 +1615,30 @@ class ParentController extends Controller
 
         $data = isset($response['data']) ? $response['data'] : [];
         return DataTables::of($data)
-            ->addIndexColumn()
-            ->addColumn('actions', function ($row) {
-                $image_url = !empty($row['file']) ? config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] : '';
-                $description = htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8'); // Encoding with quotes
-                $encoded_data = json_encode([
-                    'image_url' => $image_url,
-                    'title' => $row['title'],
-                    'description' => $description,
-                ]);
-                if (!empty($row['file'])) {
-                    $downloadButton = '<a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
-                        <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
-                    </a>';
-                } else {
-                    $downloadButton = ''; // If file doesn't exist, set empty string
-                }
-                return '<div class="button-list">
-            <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>'
-            .$downloadButton.
-            
-        '</div>';
-            })
-            ->rawColumns(['publish', 'actions'])
-            ->make(true);
+        ->addIndexColumn()
+        ->addColumn('actions', function ($row) {
+            $image_url = !empty($row['file']) ? config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] : '';
+            $description = htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8'); // Encoding with quotes
+            $encoded_data = json_encode([
+                'image_url' => $image_url,
+                'title' => $row['title'],
+                'description' => $description,
+                'files' => explode(',', $row['file']),
+            ]);
+            if (!empty($row['file'])) {
+                $downloadButton = ' <button class="btn btn-danger waves-effect waves-light download-all" data-files="' . htmlspecialchars($row['file'], ENT_QUOTES, 'UTF-8') . '">
+                    <i class="fe-download" data-toggle="tooltip" title="Click to download all files..!"></i>
+                </button>';
+            } else {
+                $downloadButton = ''; // If file doesn't exist, set empty string
+            }
+            return '<div class="button-list">
+                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>'
+                .$downloadButton.
+            '</div>';
+        })
+        ->rawColumns(['publish', 'actions'])
+        ->make(true);
     }
     public function bulletinStar(Request $request)
     {
@@ -1664,46 +1664,47 @@ class ParentController extends Controller
         // dd($response);
         $data = isset($response['data']) ? $response['data'] : [];
         return DataTables::of($data)
-            ->addIndexColumn()
-            ->addColumn('actions', function ($row) {
-                $image_url = !empty($row['file']) ? config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] : '';
-                $description = htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8'); // Encoding with quotes
-                $encoded_data = json_encode([
-                    'image_url' => $image_url,
-                    'title' => $row['title'],
-                    'description' => $description,
-                ]);
-                if (!empty($row['file'])) {
-                    $downloadButton = '<a href="' . config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] . '" class="btn btn-danger waves-effect waves-light">
-                        <i class="fe-download" data-toggle="tooltip" title="Click to download..!"></i>
-                    </a>';
-                } else {
-                    $downloadButton = ''; // If file doesn't exist, set empty string
-                }
-                return '<div class="button-list">
-                    <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>'
-                   .$downloadButton.
-                '</div>';
-            })
-            ->rawColumns(['publish', 'actions'])
-            ->make(true);
+        ->addIndexColumn()
+        ->addColumn('actions', function ($row) {
+            $image_url = !empty($row['file']) ? config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'] : '';
+            $description = htmlspecialchars($row['discription'], ENT_QUOTES, 'UTF-8'); // Encoding with quotes
+            $encoded_data = json_encode([
+                'image_url' => $image_url,
+                'title' => $row['title'],
+                'description' => $description,
+                'files' => explode(',', $row['file']),
+            ]);
+            if (!empty($row['file'])) {
+                $downloadButton = ' <button class="btn btn-danger waves-effect waves-light download-all" data-files="' . htmlspecialchars($row['file'], ENT_QUOTES, 'UTF-8') . '">
+                    <i class="fe-download" data-toggle="tooltip" title="Click to download all files..!"></i>
+                </button>';
+            } else {
+                $downloadButton = ''; // If file doesn't exist, set empty string
+            }
+            return '<div class="button-list">
+                <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" onclick="openFilePopup(' . htmlspecialchars($encoded_data, ENT_QUOTES, 'UTF-8') . ')"><i class="fe-eye"></i></a>'
+                .$downloadButton.
+            '</div>';
+        })
+        ->rawColumns(['publish', 'actions'])
+        ->make(true);
     }
 
     // Update Student 
     public function updateStudent(Request $request)
     {
-        $rules = [
-            'nationality' => 'required|string|max:50',
-            'dual_nationality' => 'nullable|string|max:50|different:nationality',
-        ];
+        // $rules = [
+        //     'nationality' => 'required|string|max:50',
+        //     'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        // ];
 
-        // Define custom error messages
-        $messages = [
-            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
-        ];
+        // // Define custom error messages
+        // $messages = [
+        //     'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        // ];
 
         // Validate the request
-        $validatedData = $request->validate($rules, $messages);
+        // $validatedData = $request->validate($rules, $messages);
 
 
         // Set dual nationality based on checkbox

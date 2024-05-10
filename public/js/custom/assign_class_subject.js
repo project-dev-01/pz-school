@@ -510,7 +510,6 @@ $(function () {
                 // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 // },
                 "dataSrc": function (json) {
-                    console.log(data.data.length);
                     if (json && json.data.length > 0) {
                         console.log('ok');
                         $('#class-assign-subjects-table_wrapper .buttons-csv').removeClass('disabled');

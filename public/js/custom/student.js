@@ -91,11 +91,13 @@ $(function () {
     // $("#student").hide();
     var father_id = $("#father_id").val();
     if (father_id) {
+        $('#skip_father_details').prop('checked', false);
         father(father_id);
     }
 
     var mother_id = $("#mother_id").val();
     if (mother_id) {
+        $('#skip_mother_details').prop('checked', false);
         mother(mother_id);
     }
 
@@ -243,14 +245,15 @@ $(function () {
                 $("#guardian_middle_name").val(data.middle_name);
                 $("#guardian_last_name_furigana").val(data.last_name_furigana);
                 $("#guardian_middle_name_furigana").val(data.middle_name_furigana);
-                $("#guardian_middle_name_furigana").val(data.middle_name_furigana);
+                $("#guardian_first_name_furigana").val(data.first_name_furigana);
                 $("#guardian_last_name_english").val(data.last_name_english);
                 $("#guardian_middle_name_english").val(data.middle_name_english);
                 $("#guardian_first_name_english").val(data.first_name_english);
-                $("#guardian_company_name_japan").val(data.guardian_company_name_japan);
-                $("#guardian_company_name_local").val(data.guardian_company_name_local);
-                $("#guardian_company_phone_number").val(data.guardian_company_phone_number);
-                $("#guardian_employment_status").val(data.guardian_employment_status);
+                $("#guardian_company_name_japan").val(data.company_name_japan);
+                $("#guardian_company_name_local").val(data.company_name_local);
+                console.log('tes',data.company_phone_number)
+                $("#guardian_company_phone_number").val(data.company_phone_number);
+                $("#guardian_employment_status").val(data.employment_status);
                 $("#guardian_email").val(data.email);
                 $("#guardian_nric").val(data.nric);
                 $("#guardian_gender").val(data.gender);
@@ -1154,6 +1157,9 @@ $(function () {
 
         });
     });
+    $.validator.addMethod("notEqualToNationality", function(value, element) {
+        return value !== $("#nationality").val();
+    }, "Dual nationality cannot be the same as nationality");
     $('#has_dual_nationality_checkbox').change(function () {
         if (this.checked) {
             $('#dual_nationality_container').show();
@@ -1260,6 +1266,12 @@ $(function () {
                 email: true
             },
             guardian_occupation: "required",
+            "dual_nationality": {
+                required: function (element) {
+                    return $("#has_dual_nationality_checkbox").is(":checked");
+                },
+                notEqualToNationality: true
+            },
 
             "passport_photo": {
                 required: function (element) {
@@ -1411,6 +1423,47 @@ $(function () {
         }, 'json');
     });
 
+
+    
+    $('#edit_status').change(function() {
+        // $(document).on('change', '#edit_status', function () {
+            if ($(this).is(":checked")) {
+                var statusconfirmButtonText = statusLockText;
+                var statusHtml = statusLockHtml;
+            } else {
+                var statusconfirmButtonText = statusUnLockText;
+                var statusHtml = statusUnLockHtml;
+            }
+            swal.fire({
+                title: statusTitle + '?',
+                html: statusHtml,
+                showCancelButton: true,
+                showCloseButton: true,
+                cancelButtonText: statuscancelButtonText,
+                confirmButtonText: statusconfirmButtonText,
+                cancelButtonColor: '#d33',
+                confirmButtonColor: '#556ee6',
+                width: 400,
+                allowOutsideClick: false
+            }).then(function (result) {
+                if (result.value) {
+                    if($("#edit_status").is(":checked")){
+                        $("#edit_status").prop('checked', true);
+                    }else{
+    
+                        $("#edit_status").prop('checked', false);
+                    }
+                }else{
+                    if($("#edit_status").is(":checked")){
+                        $("#edit_status").prop('checked', false);
+                    }else{
+    
+                        $("#edit_status").prop('checked', true);
+                    }
+    
+                }
+            });
+        });
 
     // function getStudentList(formData){
     //     $("#student").show("slow");

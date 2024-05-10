@@ -4871,16 +4871,16 @@ class AdminController extends Controller
     // Update Student 
     public function updateStudent(Request $request)
     {
-        $rules = [
-            'nationality' => 'required|string|max:50',
-            'dual_nationality' => 'nullable|string|max:50|different:nationality',
-        ];
-        // Define custom error messages
-        $messages = [
-            'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
-        ];
+        // $rules = [
+        //     'nationality' => 'required|string|max:50',
+        //     'dual_nationality' => 'nullable|string|max:50|different:nationality',
+        // ];
+        // // Define custom error messages
+        // $messages = [
+        //     'dual_nationality.different' => 'The dual nationality cannot be the same as the nationality.',
+        // ];
         // Validate the request
-        $validatedData = $request->validate($rules, $messages);
+        // $validatedData = $request->validate($rules, $messages);
         $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
 
         $status = "0";
@@ -4939,8 +4939,8 @@ class AdminController extends Controller
             'old_photo' => $request->old_photo,
             'register_no' => $request->txt_regiter_no,
             'roll_no' => $request->txt_roll_no,
-            'passport' => $request->txt_passport,
-            'nric' => $request->txt_nric,
+            'passport' => $request->passport,
+            'nric' => $request->nric,
             'status' => $status,
             'admission_date' => $request->admission_date,
             'category_id' => $request->categy,
@@ -4983,7 +4983,8 @@ class AdminController extends Controller
             'password' => $request->password,
             'confirm_password' => $request->confirm_password,
             'school_roleid' => $request->school_roleid,
-            "middle_name" => $request->middle_name,
+            'school_name' => $request->txt_prev_schname,
+            "middle_name" => $request->mname,
             "middle_name_english" => $request->middle_name_english,
             "middle_name_furigana" => $request->middle_name_furigana,
             'first_name_english' => $request->first_name_english,
@@ -5063,6 +5064,7 @@ class AdminController extends Controller
             'guardian_last_name' => $request->guardian_last_name,
         ];
         // dd($data);
+        // return $data;
         $response = Helper::PostMethod(config('constants.api.student_update'), $data);
         return $response;
     }
@@ -10361,14 +10363,16 @@ class AdminController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
-                $downloadLink = config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/' . $row['file'];
+                
                 $buttons = '<div class="button-list">';
                 
                 // Check if file exists
                 if (!empty($row['file'])) {
                     // If file exists, add download button
-                    $buttons .= '<a href="' . $downloadLink . '" class="btn btn-danger waves-effect waves-light" download><i class="dripicons-download" style="color: white;"></i></a>';
                     
+                    $buttons .= ' <button class="btn btn-danger waves-effect waves-light download-all" data-files="' . htmlspecialchars($row['file'], ENT_QUOTES, 'UTF-8') . '">
+                    <i class="fe-download" data-toggle="tooltip" title="Click to download all files..!"></i>
+                </button>';
                     // If file exists, add preview button
                    
                 }
@@ -10398,21 +10402,42 @@ class AdminController extends Controller
 
         // Concatenate the admin ID with the target users
         $rollid_target_user = $adminId . ',' . $targetUserString;
-        $file = $request->file('file');
-        if ($file) {
-            $path = $file->path();
-            $data = file_get_contents($path);
-            $base64 = base64_encode($data);
-            $extension = $file->getClientOriginalExtension();
-        } else {
-            $base64 = null;
-            $extension = null;
+         // $file = $request->file('file');
+        // if ($file) {
+        //     $path = $file->path();
+        //     $data = file_get_contents($path);
+        //     $base64 = base64_encode($data);
+        //     $extension = $file->getClientOriginalExtension();
+        //     $filename = $file->getClientOriginalName();
+        // } else {
+        //     $base64 = null;
+        //     $extension = null;
+        //     $filename=null;
+        // }
+        $files = [];
+        if ($request->hasfile('file')) {
+            foreach ($request->file('file') as $file) {
+
+                $object = new \stdClass();
+                $path = $file->path();
+                $data = file_get_contents($path);
+                $base64 = base64_encode($data);
+                $extension = $file->getClientOriginalExtension();
+                $filename = $file->getClientOriginalName();
+                $orginalFilename = pathinfo($filename, PATHINFO_FILENAME);
+
+                $object->extension = $extension;
+                $object->base64 = $base64;
+                $object->filename = $orginalFilename;
+                array_push($files, $object);
+            }
         }
         $data = [
             'title' => $request->title,
             'description' => $request->discription,
-            'file' => $base64,
-            'file_extension' => $extension,
+            'file' => $files,
+            // 'file_extension' => $extension,
+            // 'fileName' => pathinfo($filename, PATHINFO_FILENAME),
             'target_user' => $rollid_target_user,
             'class_id' => $request->class_id,
             'section_id' => $request->section_id,
@@ -10489,24 +10514,51 @@ class AdminController extends Controller
 
         // Concatenate the admin ID with the target users
         $rollid_target_user = $adminId . ',' . $targetUserString;
-        $file = $request->file('file');
-        if ($file) {
-            $path = $file->path();
-            $data = file_get_contents($path);
-            $base64 = base64_encode($data);
-            $extension = $file->getClientOriginalExtension();
-        } else {
-            $base64 = null;
-            $extension = null;
+        // $file = $request->file('file');
+        // if ($file) {
+        //     $path = $file->path();
+        //     $data = file_get_contents($path);
+        //     $base64 = base64_encode($data);
+        //     $extension = $file->getClientOriginalExtension();
+        //     $filename = $file->getClientOriginalName(); 
+        // } else {
+        //     $base64 = null;
+        //     $extension = null;
+        //     $filename = null;
+        // }
+        $files = [];
+        if ($request->hasfile('file')) {
+            foreach ($request->file('file') as $file) {
+
+                $object = new \stdClass();
+                $path = $file->path();
+                $data = file_get_contents($path);
+                $base64 = base64_encode($data);
+                $extension = $file->getClientOriginalExtension();
+                $filename = $file->getClientOriginalName();
+                $orginalFilename = pathinfo($filename, PATHINFO_FILENAME);
+
+                $object->extension = $extension;
+                $object->base64 = $base64;
+                $object->filename = $orginalFilename;
+                array_push($files, $object);
+            }
         }
         $data = [
             'id' => $request->id,
             'title' => $request->title,
             'description' => $request->discription,
-            'file' => $base64,
-            'file_extension' => $extension,
+            'file' => $files,
+            // 'file_extension' => $extension,
+            // 'fileName' => pathinfo($filename, PATHINFO_FILENAME),
             'oldfile' => $request->oldfile,
             'target_user' => $rollid_target_user,
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'student_id' =>  $request->student_id,
+            'parent_id' =>  $request->parent_id,
+            'department_id' => $request->empDepartment,
+            'add_to_dash' => $request->add_to_dash,
            // 'publish' => $request->publish,
             'publish_date' => $request->date,
             'publish_end_dates' => $request->publish_end_dates,

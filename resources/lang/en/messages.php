@@ -1935,6 +1935,8 @@ return [
   "StudentTransferredList" => "Student Transferred List",
   "ShortcutLinks" => "Shortcut Links",
   "BulletinBoard" => "Bulletin Board",
+  "StudentPlanToLeave" => "Student Plan To Leave",
+  "StudentNewJoining" => "Student New Joining",
   "add_hideunhide" => "Add Hide/Unhide",
   "dashboard_details" => "Dashboard Details",
   "add_attendance_report" => "Add Attendance Report",
@@ -2327,5 +2329,15 @@ return [
   "japan_emergency_sms" => "Japan Emergency SMS",
 
   "go_to_bulletin" => "Go to Bulletin Board",
-  "phase_2_approved"=> "Approved"
+  "phase_2_approved"=> "Approved",
+  "no_file_uploaded" => "no file uploaded",
+  "you_want_to_delete_this_widget" => "You want to Delete this Widget",
+  "yes_unlock" => "Yes, Unlock ",
+  "yes_lock" => "Yes, Lock",
+  "you_want_to_unlock_this_employee" => "You want to Unlock this Employee",
+  "you_want_to_lock_this_employee" => "You want to Lock this Employee",
+  "you_want_to_unlock_this_student" => "You want to Unlock this Student",
+  "you_want_to_lock_this_student" => "You want to Lock this Student",
+  "you_want_to_unlock_this_parent" => "You want to Unlock this Parent",
+  "you_want_to_lock_this_parent" => "You want to Lock this Parent",
 ];

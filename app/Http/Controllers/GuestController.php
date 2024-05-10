@@ -143,7 +143,7 @@ class GuestController extends Controller
         //     $type = "Re-Admission";
         // }
         // // Set dual nationality based on checkbox
-        // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
+        $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
         $data = [
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,

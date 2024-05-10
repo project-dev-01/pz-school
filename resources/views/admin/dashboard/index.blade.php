@@ -25,6 +25,7 @@
 <link href="{{ asset('css/custom/greeting.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/calendar.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/calendarresponsive.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 <!-- <style>
     svg {
         height: 48px;
@@ -356,6 +357,7 @@
 
     var buletinBoardList = "{{ route('admin.buletin_board.dashboradlist') }}";
     var buletinBoardDetails = "{{ route('admin.buletin_board.details') }}";
+    var no_file_uploaded_txt ="{{__('messages.no_file_uploaded')}}";
     var image_url = "{{config('constants.image_url') . '/' . config('constants.branch_id') . '/admin-documents/buletin_files/'}}";
 
     var header_txt = "{{ __('messages.student_plan_to_leave') }}";
@@ -375,5 +377,6 @@
 var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
 </script>
 <script src="{{ asset('js/custom/permissions.js') }}"></script>
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endif
 @endsection

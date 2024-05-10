@@ -23,10 +23,10 @@
 
                         </div>
                     </div>
-                <div class="row">
-                    <div class="col-sm-12">
+                <!-- <div class="row">
+                    <div class="col-sm-12"> -->
                         <div class="table-responsive">
-                            <table class="table dt-responsive nowrap w-100" id="buletin-table">
+                            <table class="table dt-responsive nowrap w-100" id="buletin-table-dashboard">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -40,8 +40,8 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-                </div>
+                    <!-- </div>
+                </div> -->
             </div>
         </div>
     </div>

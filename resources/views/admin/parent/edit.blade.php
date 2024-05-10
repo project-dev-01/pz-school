@@ -1470,6 +1470,12 @@
 	var yyyy_mm_dd = "{{ __('messages.yyyy_mm_dd') }}";
 	var addButton = "{{ __('messages.add') }}";
 	var userImageUrl = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
+    var statusTitle = "{{ __('messages.are_you_sure') }}";
+    var statuscancelButtonText = "{{ __('messages.cancel') }}";
+    var statusUnLockText = "{{ __('messages.yes_unlock') }}";
+    var statusLockText = "{{ __('messages.yes_lock') }}";
+    var statusUnLockHtml = "{{ __('messages.you_want_to_unlock_this_parent') }}";
+    var statusLockHtml = "{{ __('messages.you_want_to_lock_this_parent') }}";
 </script>
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
 <!-- <script src="{{ asset('libs/dropzone/min/dropzone.min.js') }}"></script> -->

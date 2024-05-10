@@ -1308,6 +1308,13 @@
     var emp_department_list = @json($department);
     var emp_designation_list = @json($designation);
     var employee_type_list = @json($employee_type_list);
+    
+    var statusTitle = "{{ __('messages.are_you_sure') }}";
+    var statuscancelButtonText = "{{ __('messages.cancel') }}";
+    var statusUnLockText = "{{ __('messages.yes_unlock') }}";
+    var statusLockText = "{{ __('messages.yes_lock') }}";
+    var statusUnLockHtml = "{{ __('messages.you_want_to_unlock_this_employee') }}";
+    var statusLockHtml = "{{ __('messages.you_want_to_lock_this_employee') }}";
 </script>
 <script src="{{ asset('js/custom/employee.js') }}"></script>
 <script src="{{ asset('js/custom/edit_employee_add_more.js') }}"></script>

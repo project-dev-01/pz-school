@@ -45,8 +45,60 @@ $(function () {
         });
 
     });
-    buletinTable();
+    // Function to handle file input change event
+    document.getElementById('file').addEventListener('change', function(e) {
+        var files = e.target.files;
+        var fileList = document.getElementById('file-list');
 
+        // Clear existing file list
+        fileList.innerHTML = '';
+
+        var errorText = document.querySelector('.file_error');
+
+        if (files.length > 5) {
+            errorText.textContent = 'You can only select up to 5 files.';
+            this.value = ''; // Clear the file input to prevent selection of more files
+            return;
+        } else {
+            errorText.textContent = ''; // Clear error message if within limit
+        }
+
+        // Iterate over selected files
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var listItem = document.createElement('div');
+
+            // Display file name
+            listItem.textContent = file.name;
+
+            // Add remove button
+            var removeButton = document.createElement('button');
+            removeButton.textContent = 'X';
+            removeButton.setAttribute('type', 'button');
+            removeButton.classList.add('btn', 'btn-sm', 'btn-danger', 'ml-2');
+            removeButton.addEventListener('click', removeFile.bind(null, file));
+            listItem.appendChild(removeButton);
+
+            // Append file item to list
+            fileList.appendChild(listItem);
+        }
+    });
+
+    // Function to handle remove file button click
+    function removeFile(file) {
+        var input = document.getElementById('file');
+        var files = Array.from(input.files);
+        var index = files.indexOf(file);
+        if (index !== -1) {
+            files.splice(index, 1);
+            var dataTransfer = new DataTransfer();
+            files.forEach(function(file) {
+                dataTransfer.items.add(file);
+            });
+            input.files = dataTransfer.files;
+            input.dispatchEvent(new Event('change'));
+        }
+    }
     $("#buletinForm").validate({
         rules: {
             title: "required",
@@ -58,18 +110,18 @@ $(function () {
     $('#buletinForm').on('submit', function (e) {
         e.preventDefault();
         var form = this;
-        var fileName = $("#file").val();
+       // var fileName = $("#file").val();
 
         // Check if fileName is not empty
-        if (fileName.trim() !== '') {
-            var ext = fileName.split('.').pop().toLowerCase();
+        // if (fileName.trim() !== '') {
+        //     var ext = fileName.split('.').pop().toLowerCase();
         
-            // Validate file extension only if fileName is not empty and is a PDF file
-            if ($.inArray(ext, ['pdf']) === -1) {
-                $(form).find('span.file_error').text('Please select a PDF file.');
-                // You can optionally return false here to prevent form submission
-            }
-        }
+        //     // Validate file extension only if fileName is not empty and is a PDF file
+        //     if ($.inArray(ext, ['pdf']) === -1) {
+        //         $(form).find('span.file_error').text('Please select a PDF file.');
+        //         // You can optionally return false here to prevent form submission
+        //     }
+        // }
         if ($('#publish').is(":checked")) {
             var date = $("#date").val().trim(); // Trim to remove leading/trailing spaces
             if (date.length === 0) {
@@ -103,8 +155,9 @@ $(function () {
             var form = this;
             var title = $("#title").val();
             var discription = $("#discription").val();
-            var file = $('#file')[0].files[0];
-            console.log(file);
+            var files = $("#file").get(0).files;
+            // var file = $('#file')[0].files[0];
+            // console.log(file);
            // var publish = $("#publish").val();
             var add_to_dash = $("#add_to_dash").val();
             var date = $("#date").val();
@@ -121,6 +174,7 @@ $(function () {
                 }
             });
             console.log(target_user);
+           
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -136,7 +190,11 @@ $(function () {
             formData.append('empDepartment', empDepartment);
             formData.append('date', date);
             formData.append('endDate', endDate);
-            formData.append('file', file);
+          //  formData.append('file', file);
+            // Append each file to FormData
+            for (var i = 0; i < files.length; i++) {
+                formData.append('file[]', files[i]);
+            }
 
             $('#loaderOverlay').show();
             $.ajax({
@@ -166,6 +224,59 @@ $(function () {
             });
         }
     });
+    document.getElementById('files').addEventListener('change', function(e) {
+        var files = e.target.files;
+        var fileList = document.getElementById('file-lists');
+
+        // Clear existing file list
+        fileList.innerHTML = '';
+
+        var errorText = document.querySelector('.file_error');
+
+        if (files.length > 5) {
+            errorText.textContent = 'You can only select up to 5 files.';
+            this.value = ''; // Clear the file input to prevent selection of more files
+            return;
+        } else {
+            errorText.textContent = ''; // Clear error message if within limit
+        }
+
+        // Iterate over selected files
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var listItem = document.createElement('div');
+
+            // Display file name
+            listItem.textContent = file.name;
+
+            // Add remove button
+            var removeButton = document.createElement('button');
+            removeButton.textContent = 'X';
+            removeButton.setAttribute('type', 'button');
+            removeButton.classList.add('btn', 'btn-sm', 'btn-danger', 'ml-2');
+            removeButton.addEventListener('click', removeFiles.bind(null, file));
+            listItem.appendChild(removeButton);
+
+            // Append file item to list
+            fileList.appendChild(listItem);
+        }
+    });
+
+    // Function to handle remove file button click
+    function removeFiles(file) {
+        var input = document.getElementById('files');
+        var files = Array.from(input.files);
+        var index = files.indexOf(file);
+        if (index !== -1) {
+            files.splice(index, 1);
+            var dataTransfer = new DataTransfer();
+            files.forEach(function(file) {
+                dataTransfer.items.add(file);
+            });
+            input.files = dataTransfer.files;
+            input.dispatchEvent(new Event('change'));
+        }
+    }
     $(".add_class_name").on('change', function (e) {
         e.preventDefault();
         var Selector = '.buletinForm';
@@ -196,53 +307,8 @@ $(function () {
             }
         }, 'json');
     }
-    function sectionAllocation(class_id, Selector, sectionID) {
+  
     
-        $("#buletinEditForm").find("#filtersectionIDs").empty();
-        $("#buletinEditForm").find("#filtersectionIDs").append('<option value="">'+select_class+'</option>');
-        $.post(sectionByClassUrl, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
-            if (res.code == 200) {
-                $.each(res.data, function (key, val) {
-                    $("#buletinEditForm").find("#filtersectionIDs").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
-                    //console.log(val);
-                });
-                if (sectionID != '') {
-                    $("#buletinEditForm").find('select[name="section_ids"]').val(sectionID);
-                }
-            }
-        }, 'json');
-    }
-    function parentAllocation(class_id, sectionID, parent_id) {
-        $("#buletinEditForm").find("#parent_ids").empty();
-        $("#buletinEditForm").find("#parent_ids").append('<option value="">Select Parent</option>');
-        $.post(getParentList, { token: token, branch_id: branchID, class_id: class_id, section_id: sectionID }, function (res) {
-            console.log(res);
-            if (res.code == 200) {
-                $.each(res.data, function (key, val) {
-                    $("#parent_ids").append('<option value="' + val.id + '">' + val.parent_name + '</option>');
-                });
-                if (parent_id != '') {
-                    $("#buletinEditForm").find('select[name="parent_ids"]').val(parent_id);
-                }
-            }
-        }, 'json');
-
-    }
-    function studentAllocation(class_id, sectionID, student_id){
-        $("#buletinEditForm").find("#student_ids").empty();
-        $("#buletinEditForm").find("#student_ids").append('<option value="">'+select_student+'</option>');
-        $.post(getStudentList, { token: token, branch_id: branchID, class_id: class_id, section_id: sectionID }, function (res) {
-            console.log(res);
-            if (res.code == 200) {
-                $.each(res.data, function (key, val) {
-                    $("#student_ids").append('<option value="' + val.id + '">' + val.name + '</option>');
-                });
-                if (student_id != '') {
-                    $("#buletinEditForm").find('select[name="student_ids"]').val(student_id);
-                }
-            }
-        }, 'json');
-    }
     $("#buletinEditForm").validate({
         rules: {
             rules: {
@@ -261,11 +327,17 @@ $(function () {
            // console.log(id);
             var title = $("#titles").val();
             var discription = $("#descriptions").val();
-            var file = $('#files')[0].files[0];
+           // var file = $('#files')[0].files[0];
+           var files = $("#files").get(0).files;
             //console.log(file);
-            //var publish = $("#publishs").val();
+            var class_id = $("#changeClassNames").val();
+            var section_id = $("#filtersectionIDs").val();
+            var student_id = $("#student_ids").val();
+            var parent_id = $("#parent_ids").val();
+            var empDepartment = $("#empDepartments").val();
             var date = $("#publish_dates").val();
             var publish_end_dates = $("#publish_end_dates").val();
+            var add_to_dash = $("#add_to_dashs").val();
             var target_user = [];
             $('#target_users option').each(function(i) {
                 if (this.selected == true) {
@@ -281,11 +353,21 @@ $(function () {
             formData.append('title', title);
             formData.append('discription', discription);
             formData.append('target_user', target_user);
+            formData.append('class_id', class_id);
+            formData.append('section_id', section_id);
+            formData.append('student_id', student_id);
+            formData.append('parent_id', parent_id);
+            formData.append('empDepartment', empDepartment);
            // formData.append('publish', publish);
+           formData.append('add_to_dash', add_to_dash);
             formData.append('date', date);
             formData.append('publish_end_dates',publish_end_dates);
             formData.append('oldfile', $('#oldfile').text());
-            formData.append('file', file);
+            //formData.append('file', file);
+            // Append each file to FormData
+            for (var i = 0; i < files.length; i++) {
+                formData.append('file[]', files[i]);
+            }
             var form = this;
             $.ajax({
                 url: $(form).attr('action'),
@@ -315,324 +397,6 @@ $(function () {
                 }
             });
         }
-    });
-    function buletinTable() {
-        $('#buletin-table').DataTable({
-            processing: true,
-            info: true,
-            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
-            //dom: 'lBfrtip',
-            "language": {
-                
-                "emptyTable": no_data_available,
-                "infoFiltered": filter_from_total_entries,
-                "zeroRecords": no_matching_records_found,
-                "infoEmpty": showing_zero_entries,
-                "info": showing_entries,
-                "lengthMenu": show_entries,
-                "search": datatable_search,
-                "paginate": {
-                    "next": next,
-                    "previous": previous
-                },
-            },
-            buttons: [
-                {
-                    extend: 'csv',
-                    text: downloadcsv,
-                    extension: '.csv',
-                    charset: 'utf-8',
-                    bom: true,
-                    exportOptions: {
-                        columns: 'th:not(:last-child)'
-                    },
-                    enabled: false, // Initially disable CSV button
-                },
-                {
-                    extend: 'pdf',
-                    text: downloadpdf,
-                    extension: '.pdf',
-                    charset: 'utf-8',
-                    bom: true,
-                    exportOptions: {
-                        columns: 'th:not(:last-child)'
-                    },
-                    enabled: false, // Initially disable PDF button
-                    customize: function (doc) {
-                        doc.pageMargins = [50,50,50,50];
-                        doc.defaultStyle.fontSize = 10;
-                        doc.styles.tableHeader.fontSize = 12;
-                        doc.styles.title.fontSize = 14;
-                        // Remove spaces around page title
-                        doc.content[0].text = doc.content[0].text.trim();
-                        /*// Create a Header
-                        doc['header']=(function(page, pages) {
-                            return {
-                                columns: [
-                                    
-                                    {
-                                        // This is the right column
-                                        bold: true,
-                                        fontSize: 20,
-                                        color: 'Blue',
-                                        fillColor: '#fff',
-                                        alignment: 'center',
-                                        text: header_txt
-                                    }
-                                ],
-                                margin:  [50, 15,0,0]
-                            }
-                        });*/
-                        // Create a footer
-                        
-                        doc['footer']=(function(page, pages) {
-                            return {
-                                columns: [
-                                    { alignment: 'left', text: [ footer_txt ],width:400} ,
-                                    {
-                                        // This is the right column
-                                        alignment: 'right',
-                                        text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }],
-                                        width:100
-    
-                                    }
-                                ],
-                                margin: [50, 0,0,0]
-                            }
-                        });
-                        
-                    }
-
-                }
-            ],
-            initComplete: function () {
-                var table = this;
-                $.ajax({
-                    url: buletinBoardList,
-                    success: function(data) {
-                        console.log(data.data.length);
-                        if (data && data.data.length > 0) {
-                            console.log('ok');
-                            $('#buletin-table_wrapper .buttons-csv').removeClass('disabled');
-                            $('#buletin-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
-                        } else {
-                            console.log(data);
-                            $('#buletin-table_wrapper .buttons-csv').addClass('disabled');
-                            $('#buletin-table_wrapper .buttons-pdf').addClass('disabled');               
-                        }
-                    },
-                    error: function() {
-                        console.log('error');
-                        // Handle error if necessary
-                    }
-                });
-            },
-            ajax: buletinBoardList,
-            "pageLength": 10,
-            "aLengthMenu": [
-                [5, 10, 25, 50, -1],
-                [5, 10, 25, 50, "All"]
-            ],
-            columns: [
-                //  {data:'id', name:'id'},
-                // {
-                //     data: 'checkbox',
-                //     name: 'checkbox',
-                //     orderable: false,
-                //     searchable: false
-                // },
-                {
-                    searchable: false,
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                },
-                {
-                    data: 'title',
-                    name: 'title'
-                },
-                {
-                    data: 'discription',
-                    name: 'discription',
-                    render: function(data, type, row) {
-                        if (type === 'display' || type === 'filter') {
-                            // Preserve whitespace and display line breaks
-                            return '<div style="white-space: pre-line;">' + data + '</div>';
-                        }
-                        return data;
-                    }
-                },
-                {
-                    data: 'file',
-                    name: 'file',
-                    render: function(data, type, full, meta) {
-                        // Check if data is not null and not empty
-                        if (data && data.trim() !== '') {
-                            // Assuming 'image_url' contains the base URL for file links
-                            var fileLink = image_url + data;
-                            return '<a href="' + fileLink + '" target="_blank">' + data + '</a>';
-                        } else {
-                            // Return empty string if data is null or empty
-                            return '<span class="text-muted">no file uploaded</span>';
-                        }
-                    }
-                },
-                {
-                    data: 'target_user',
-                    name: 'target_user'
-                },{
-                    data: 'publish_date',
-                    name: 'publish_date',
-                    render: function(data, type, row) {
-                        if (data && (type === 'display' || type === 'filter')) {
-                            // Split the datetime string into date and time parts
-                            var parts = data.split(' ');
-                            // Display only the date part (assuming it's the first part of the split string)
-                            return parts[0];
-                        }
-                        return data;
-                    }
-                },
-                {
-                    data: 'actions',
-                    name: 'actions',
-                    orderable: false,
-                    searchable: false
-                },
-            ]
-        }).on('draw', function () {
-        });
-    }
-    // $('#buletin-table').on('click', '.view-description', function() {
-    //     // Get the full description from the data-description attribute of the button
-    //     var fullDescription = $(this).data('description');
-
-    //     // Update modal body with full description
-    //     $('#descriptionModalBody').text(fullDescription);
-    // });
-
-
-
-    // Publish Event 
-    $(document).on('click', '#publishEventBtn', function () {
-        var event_id = $(this).data('id');
-        if ($(this).prop('checked') == true) {
-            var value = 1;
-            var text = "Publish";
-        } else {
-            var value = 0;
-            var text = "UnPublish";
-        }
-        swal.fire({
-            title: deleteTitle + '?',
-            html: deleteHtml,
-            showCancelButton: true,
-            showCloseButton: true,
-            cancelButtonText: deletecancelButtonText,
-            confirmButtonText: deleteconfirmButtonText,
-            cancelButtonColor: '#d33',
-            confirmButtonColor: '#556ee6',
-            width: 400,
-            allowOutsideClick: false
-        }).then(function (result) {
-            if (result.value) {
-                $.post(eventPublish, { id: event_id, status: value }, function (data) {
-                    if (data.code == 200) {
-                        $('#buletin-table').DataTable().ajax.reload(null, false);
-                        toastr.success(data.message);
-                    } else {
-                        toastr.error(data.message);
-                    }
-                }, 'json');
-            }
-        });
-    });
-
-
-    $(document).on('click', '#viewBuletinBtn', function () {
-        var buletin_id = $(this).data('id');
-        $('.viewBuletin').find('span.error-text').text('');
-        $.post(buletinBoardDetails, { id: buletin_id }, function (data) {
-            console.log(data);
-            $('.viewBuletin').find('.title').text(data.data.title);
-            $('.viewBuletin').find('.file').text(data.data.file);
-            $('.viewBuletin').find('.publish_date').text(data.data.publish_date);
-            $('.viewBuletin').find('.publish_end_date').text(data.data.publish_end_date);
-           
-            var targetUserValues = data.data.target_user.split(',');
-            if (targetUserValues.includes('5')) {
-                var content = data.data.name + "<br>";
-
-                if (data.data.grade_name !== null) {
-                    content += "Grade: " + data.data.grade_name + "<br>";
-                }
-
-                if (data.data.section_name !== null) {
-                    content += "Class: " + data.data.section_name + "<br>";
-                }
-
-                if (data.data.parent_name !== null) {
-                    content += "Parent: " + data.data.parent_name;
-                }
-                $('.viewBuletin').find('.target_user').html(content);
-              
-            } else if (targetUserValues.includes('4')) {
-                var content = data.data.name + "<br>";
-
-                if (data.data.department_name !== null) {
-                    content += "Department: " + data.data.department_name + "<br>";
-                }
-                $('.viewBuletin').find('.target_user').html(content);
-            }else{
-                var content = data.data.name + "<br>";
-
-                if (data.data.grade_name !== null) {
-                    content += "Grade: " + data.data.grade_name + "<br>";
-                }
-
-                if (data.data.section_name !== null) {
-                    content += "Class: " + data.data.section_name + "<br>";
-                }
-
-                if (data.data.student_name !== null) {
-                    content += "Student: " + data.data.student_name;
-                }
-                $('.viewBuletin').find('.target_user').html(content);
-                
-            }
-            
-            $('.viewBuletin').find('.description').html(data.data.discription);
-            $('.viewBuletin').modal('show');
-        }, 'json');
-    });
-
-    // delete Event Type
-    $(document).on('click', '#deleteBuletin_boardBtn', function () {
-        var buletin_id = $(this).data('id');
-        swal.fire({
-            title: deleteTitle + '?',
-            html: deleteHtml,
-            showCancelButton: true,
-            showCloseButton: true,
-            cancelButtonText: deletecancelButtonText,
-            confirmButtonText: deleteconfirmButtonText,
-            cancelButtonColor: '#d33',
-            confirmButtonColor: '#556ee6',
-            width: 400,
-            allowOutsideClick: false
-        }).then(function (result) {
-            if (result.value) {
-                $.post(buletinBoardDelete, { id: buletin_id }, function (data) {
-                    if (data.code == 200) {
-                        $('#buletin-table').DataTable().ajax.reload(null, false);
-                        toastr.success(data.message);
-                    } else {
-                        toastr.error(data.message);
-                    }
-                }, 'json');
-            }
-        });
     });
 
     $('#class').hide();  // Initially disable the multi-select
@@ -766,15 +530,18 @@ $(function () {
             $('#departments').show();
             $('#students').show();
             $('#parents').show();
+            $('#selectionLegends').text('Parent Student Section');
         }else if (selectedOptions && selectedOptions.includes('4') && selectedOptions.includes('5')){
             $('#edit_class').show();
             $('#departments').show();
             $('#parents').show();
+            $('#selectionLegends').text('Parent Section');
             $('#students').hide();
         }else if (selectedOptions && selectedOptions.includes('5') && selectedOptions.includes('6')){
             $('#edit_class').show();
             $('#students').show();
             $('#parents').show();
+            $('#selectionLegends').text('Parent Student Section');
             $('#departments').hide();
         }else if (selectedOptions && selectedOptions.includes('4')) {
             // Hide the other dropdown and show class dropdown
@@ -788,12 +555,14 @@ $(function () {
             $('#edit_class').show();
             $('#students').hide();
              $('#parents').show();
+             $('#selectionLegends').text('Parent Section');
         }else if (selectedOptions && selectedOptions.includes('6')) {
             // Hide the other dropdown and show class dropdown
             $('#departments').hide();
             $('#edit_class').show();
             $('#students').show();
             $('#parents').hide();
+            $('#selectionLegends').text('Student Section');
         }else {
             // Show class dropdown and hide the other dropdown
             $('#edit_class').hide();
@@ -819,30 +588,59 @@ $(function () {
             $('.editBuletin').find('input[name="publish_end_dates"]').val(data.data.publish_end_date);
             $('#descriptions').html(data.data.discription);
             $('.editBuletin').find('.oldfile').text(data.data.file);
+          
             var targetUserValues = data.data.target_user.split(',');
             $('#target_users').val(targetUserValues).trigger('change');
             // Set class_id and trigger its change event
-            $('#changeClassNames').val(data.data.class_id);
+          //  $('#changeClassNames').val(data.data.class_id);
+            var class_idValues = [];
+
+            if (data.data.class_id) {
+                if (typeof data.data.class_id === 'string' && data.data.class_id.includes(',')) {
+                    // Split the values if there's a comma
+                    class_idValues = data.data.class_id.split(',');
+                } else {
+                    // Convert the single value to an array
+                    class_idValues = [data.data.class_id];
+                }
+            }
+    
+            // Populate and set the selected values for department_id dropdown
+            $('#changeClassNames').val(class_idValues).trigger('change');
     
             if (data.data.class_id != "") {
                 var class_id = data.data.class_id;
-                var Selector = '.buletinForm';
                 var sectionID = data.data.section_id;
-                sectionAllocation(class_id, Selector, sectionID);
+                sectionAllocation(class_id, sectionID);
             }
             if(data.data.class_id != "" && data.data.section_id != "" && data.data.parent_id != "")
             {
-                var class_id = data.data.class_id;
+                var class_idValues = [];
+                if (typeof data.data.class_id === 'string' && data.data.class_id.includes(',')) {
+                    // Split the values if there's a comma
+                    class_idValues = data.data.class_id.split(',');
+                } else {
+                    // Convert the single value to an array
+                    class_idValues = [data.data.class_id];
+                }
                 var sectionID = data.data.section_id;
                 var parent_id  = data.data.parent_id;
-                parentAllocation(class_id, sectionID, parent_id);
+                parentAllocation(class_idValues, sectionID, parent_id);
             }
             if(data.data.class_id != "" && data.data.section_id != "" && data.data.student_id != "")
             {
-                var class_id = data.data.class_id;
+                var class_idValues = [];
+                if (typeof data.data.class_id === 'string' && data.data.class_id.includes(',')) {
+                    // Split the values if there's a comma
+                    class_idValues = data.data.class_id.split(',');
+                } else {
+                    // Convert the single value to an array
+                    class_idValues = [data.data.class_id];
+                }
+                
                 var sectionID = data.data.section_id;
                 var student_id  = data.data.student_id;
-               studentAllocation(class_id, sectionID, student_id);
+               studentAllocation(class_idValues, sectionID, student_id);
             }
             var department_idValues = [];
 
@@ -865,47 +663,137 @@ $(function () {
             // } else {
             //     $('#publishs').prop('checked', false);
             // }
+             if (data.data.add_dashboard === 1) {
+                $('#add_to_dashs').prop('checked', true);
+            } else {
+                $('#add_to_dashs').prop('checked', false);
+            }
             $('.editBuletin').modal('show');
         }, 'json');
         //console.log(id);
     });
-   
-
-    // change branch id in add class,section and type in evvent 
-    $("#branch_id").on('change', function (e) {
+  
+    $(".add_class_names").on('change', function (e) {
         e.preventDefault();
-        var Selector = '#eventForm';
-        var branch_id = $(this).val();
-        if (branch_id) {
-            branchEvent(branch_id, Selector);
+       
+        
+        var selectedClassIds = $(this).val();
+        
+        if (selectedClassIds && selectedClassIds.length > 0) {
+            // Loop through each selected class ID
+            $.each(selectedClassIds, function(index, class_id) {
+                var sectionID = ""; // Initialize section ID (you can customize this based on your needs)
+                sectionAllocation(class_id, sectionID);
+            });
         }
     });
-    // branch Event
-    function branchEvent(branch_id, Selector) {
-
-        $(Selector).find("#type").empty();
-        $(Selector).find("#type").append('<option value="">'+select_type+'</option>');
-        $(Selector).find("#class_name").empty();
-        $(Selector).find("#class_name").append('<option value="">'+select_class+'</option>');
-        $(Selector).find("#section_name").empty();
-        $(Selector).find("#section_name").append('<option value="">'+select_section+'</option>');
-        $.post(branchByEvent, { branch_id: branch_id, token: token }, function (res) {
+    function sectionAllocation(class_id, sectionID) {
+    
+        $("#buletinEditForm").find("#filtersectionIDs").empty();
+        $("#buletinEditForm").find("#filtersectionIDs").append('<option value="">'+select_class+'</option>');
+        $.post(sectionByClassUrl, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
             if (res.code == 200) {
-                $.each(res.data.eventType, function (key, val) {
-                    $(Selector).find("#type").append('<option value="' + val.id + '">' + val.name + '</option>');
+                $.each(res.data, function (key, val) {
+                    $("#buletinEditForm").find("#filtersectionIDs").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                    //console.log(val);
                 });
-                $.each(res.data.class, function (key, val) {
-                    $(Selector).find("#class_name").append('<option value="' + val.id + '">' + val.name + '</option>');
-                    $(Selector).find("#section_name").append('<optgroup label="Class ' + val.name + '">');
-                    $.each(res.data.section, function (key, sec) {
-                        if (sec.class_id == val.id) {
-                            $(Selector).find("#section_name").append('<option value="' + sec.section_id + '">' + sec.section_name + '</option>');
-                        }
-                    });
-                    $(Selector).find("#section_name").append('</optgroup>');
-                });
+                if (sectionID != '') {
+                    $("#buletinEditForm").find('select[name="section_ids"]').val(sectionID);
+                }
             }
         }, 'json');
     }
+    function parentAllocation(class_id, sectionID, parent_id) {
+        $("#buletinEditForm").find("#parent_ids").empty();
+        $("#buletinEditForm").find("#parent_ids").append('<option value="">Select Parent</option>');
+        $.post(getParentList, { token: token, branch_id: branchID, class_id: class_id, section_id: sectionID }, function (res) {
+            console.log(res);
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#parent_ids").append('<option value="' + val.id + '">' + val.parent_name + '</option>');
+                });
+                if (parent_id != '') {
+                    $("#buletinEditForm").find('select[name="parent_ids"]').val(parent_id);
+                }
+            }
+        }, 'json');
 
+    }
+    function studentAllocation(class_id, sectionID, student_id){
+        $("#buletinEditForm").find("#student_ids").empty();
+        $("#buletinEditForm").find("#student_ids").append('<option value="">'+select_student+'</option>');
+        $.post(getStudentList, { token: token, branch_id: branchID, class_id: class_id, section_id: sectionID }, function (res) {
+            console.log(res);
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#student_ids").append('<option value="' + val.id + '">' + val.name + '</option>');
+                });
+                if (student_id != '') {
+                    $("#buletinEditForm").find('select[name="student_ids"]').val(student_id);
+                }
+            }
+        }, 'json');
+    }
+    
+    $("#filtersectionIDs").on('change', function (e) {
+        e.preventDefault();
+        var target_user = $("#target_users").val();
+        var class_id = $("#changeClassNames").val();
+        var section_id = $("#filtersectionIDs").val();
+       
+      // console.log('Active div data-value:', activeDivDataValue);  // Use the stored data-value
+        //console.log(target_user,class_id,section_id);
+       if(target_user.includes('6') && target_user.includes('5'))
+       {
+            $("#student_ids").empty();
+            $("#student_ids").append('<option value="">'+select_student+'</option>');
+            $.post(getStudentList, { token: token, branch_id: branchID, class_id: class_id, section_id: section_id }, function (res) {
+                console.log(res);
+                if (res.code == 200) {
+                    $.each(res.data, function (key, val) {
+                        $("#student_ids").append('<option value="' + val.id + '">' + val.name + '</option>');
+                    });
+                }
+            }, 'json');
+            $("#parent_ids").empty();
+            $("#parent_ids").append('<option value="">Select Parent</option>');
+
+            $.post(getParentList, { token: token, branch_id: branchID, class_id: class_id, section_id: section_id }, function (res) {
+                console.log(res);
+                if (res.code == 200) {
+                    $.each(res.data, function (key, val) {
+                        $("#parent_ids").append('<option value="' + val.id + '">' + val.parent_name + '</option>');
+                    });
+                }
+            }, 'json');
+       }else if(target_user.includes('5'))
+       {
+            $("#parent_ids").empty();
+            $("#parent_ids").append('<option value="">Select Parent</option>');
+            console.log(target_user,class_id,section_id);
+            console.log("testing");
+            $.post(getParentList, { token: token, branch_id: branchID, class_id: class_id, section_id: section_id }, function (res) {
+                console.log(res);
+                if (res.code == 200) {
+                    $.each(res.data, function (key, val) {
+                        $("#parent_ids").append('<option value="' + val.id + '">' + val.parent_name + '</option>');
+                    });
+                }
+            }, 'json');
+       }else {
+
+        $("#student_ids").empty();
+        $("#student_ids").append('<option value="">'+select_student+'</option>');
+        $.post(getStudentList, { token: token, branch_id: branchID, class_id: class_id, section_id: section_id }, function (res) {
+            console.log(res);
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#student_ids").append('<option value="' + val.id + '">' + val.name + '</option>');
+                });
+            }
+        }, 'json');
+       }
+       
+    });
+   
 });
