@@ -174,7 +174,7 @@
 
                                                                 <td class="col-md-9">
                                                                     <input type="hidden" name="unhide_data[{{ $r['order_no'] }}][order_no]" id="orderNo{{ $r['order_no'] }}" value="{{ $r['order_no'] }}">
-                                                                    <input type="hidden" name="unhide_data[{{ $r['order_no'] }}][widget_name]" id="widgetName{{ $r['order_no'] }}" value="{{ __('messages.'.$r['widget_name']) }}">
+                                                                    <input type="hidden" name="unhide_data[{{ $r['order_no'] }}][widget_name]" id="widgetName{{ $r['order_no'] }}" value="{{ $r['widget_name'] }}">
                                                                     <input type="hidden" name="unhide_data[{{ $r['order_no'] }}][widget_value]" id="widgetValue{{ $r['order_no'] }}" value="{{ $r['widget_value'] }}">
                                                                     <input type="hidden" name="unhide_data[{{ $r['order_no'] }}][visibility]" id="visibility{{ $r['order_no'] }}" value="{{ $r['visibility'] }}">
 
@@ -242,7 +242,7 @@
                                             <input type="hidden" value="" id="widgetDynamicID">
                                             <td>1</td>
                                             <td>{{ __('messages.AttendanceReport') }}</td>
-                                            <td><button class="btn add-btn btn-rounded waves-effect waves-light" data-widgetname="Attendance Report" data-orderno="1" data-widgetvalue="AttendanceReport" data-toggle="modal" data-target="#attendance-modal">{{ __('messages.add') }}</button></td>
+                                            <td><button class="btn add-btn btn-rounded waves-effect waves-light addToWidgetAttRep" data-widgetname="Attendance Report" data-orderno="1" data-widgetvalue="AttendanceReport" data-toggle="modal" data-target="#attendance-modal">{{ __('messages.add') }}</button></td>
                                         </tr>
                                         <tr>
                                             <td>2</td>

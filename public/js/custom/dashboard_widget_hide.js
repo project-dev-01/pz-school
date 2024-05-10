@@ -57,9 +57,9 @@ $(function () {
         moveWidget($(this), 'down');
     });
 
-    $(document).on('click', '.remove-widget', function () {
-        removeWidget($(this));
-    });
+    // $(document).on('click', '.remove-widget', function () {
+    //     removeWidget($(this));
+    // });
     function moveWidget(button, direction) {
         var row = button.closest('tr');
         var currentOrder = parseInt(row.attr('data-order'));
@@ -122,8 +122,25 @@ $(function () {
 
     $(document).on('click', '.addWidget', function () {
         var widgetID = $(this).data('widget');
-        console.log("widgetID");
-        console.log(widgetID);
+        var ordernoValues = [];
+
+        // Iterate over each row in the table with id 'dynamic_field'
+        $('#dynamic_field tr.widget').each(function () {
+            var orderno = $(this).data('order');
+            var widgetValueID = "#widgetValue" + orderno;
+            var widgetValue = $(widgetValueID).val();
+            ordernoValues.push(widgetValue);
+        });
+
+        // Disable buttons with data-widgetvalue matching any value in ordernoValues
+        $('.addToWidget').each(function () {
+            var buttonValue = $(this).data('widgetvalue');
+            if (ordernoValues.includes(buttonValue)) {
+                $(this).prop('disabled', true);
+            }
+        });
+
+
         $("#widgetDynamicID").val(widgetID);
         $('#standard-modal').modal('show');
     });
@@ -132,15 +149,15 @@ $(function () {
         var widgetvalue = $(this).data('widgetvalue');
         var visibility = 0; // default zero
         var widgetvalues = messages[widgetvalue];
- 
+
         var widgetDynamicID = $("#widgetDynamicID").val();
         $("#widgetName" + widgetDynamicID).val(widgetname);
         $("#widgetValue" + widgetDynamicID).val(widgetvalue);
         $("#visibility" + widgetDynamicID).val(visibility);
- 
+
         $("#WidgetLabelName" + widgetDynamicID).html(widgetvalues);
         $('#standard-modal').modal('hide');
-       
+
     });
 
     $('#addDynamicFilter').on('submit', function (e) {
@@ -154,7 +171,6 @@ $(function () {
             dataType: 'json',
             contentType: false,
             success: function (response) {
-                console.log(response);
                 if (response.code == 200) {
                     toastr.success(response.message);
                 } else {
@@ -204,6 +220,20 @@ $(function () {
                 combinetext += "," + pattern_name;
             }
             addAttText += '(' + combinetext + ')';
+
+            var attRepValues = [];
+
+            // Iterate over each row in the table with id 'dynamic_field'
+            $('#dynamic_field tr.widget').each(function () {
+                var orderno = $(this).data('order');
+                var widgetValueID = "#widgetName" + orderno;
+                var widgetValue = $(widgetValueID).val();
+                attRepValues.push(widgetValue);
+            });
+            if (attRepValues.includes(addAttText)) {
+                toastr.error('Already Exist This Attendance');
+                return false;
+            }
             $("#WidgetLabelName" + widgetDynamicID).html(addAttText);
             // $("#orderNo" + widgetDynamicID).val(atOrderNo);
             $("#widgetName" + widgetDynamicID).val(addAttText);
@@ -218,11 +248,11 @@ $(function () {
             $('#attendance-modal').modal('hide');
         }
     });
-    
+
     // delete form
     $(document).on('click', '.remove-widget', function () {
-        var class_id = $(this).data('id');
-        // var url = classDeleteUrl;
+        var $clickedButton = $(this); // Save reference to $(this) for later use
+
         swal.fire({
             title: deleteTitle + '?',
             html: deleteHtml,
@@ -235,21 +265,9 @@ $(function () {
             width: 400,
             allowOutsideClick: false
         }).then(function (result) {
-            //  if (result.value) {
-            //     $.post(url, {
-            //         class_id: class_id,
-            //         token: token,
-            //         branch_id: branchID
-            //     }, function (data) {
-
-            //         if (data.code == 200) {
-            //             $('#class-table').DataTable().ajax.reload(null, false);
-            //             toastr.success(data.message);
-            //         } else {
-            //             toastr.error(data.message);
-            //         }
-            //     }, 'json');
-            // }
+            if (result.isConfirmed) {
+                removeWidget($clickedButton); // Call removeWidget with the saved reference
+            }
         });
     });
 });

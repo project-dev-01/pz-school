@@ -95,7 +95,7 @@ $(function () {
     // rules validation
     // data bind 
     $('#studentLeaveList').on('submit', function (e) {
-        e.preventDefault();       
+        e.preventDefault();
         var form = this;
         var department_id = $("#department_id").val();
         var class_id = $("#changeClassName").val();
@@ -492,8 +492,7 @@ $(function () {
                 var table = this;
                 $.ajax({
                     url: dataSetNew,
-                    success: function(data) {
-                        console.log(data.data.length);
+                    success: function (data) {
                         if (data && data.data.length > 0) {
                             console.log('ok');
                             $('#student-leave-table_wrapper .buttons-csv').removeClass('disabled');
@@ -501,10 +500,10 @@ $(function () {
                         } else {
                             console.log(data);
                             $('#student-leave-table_wrapper .buttons-csv').addClass('disabled');
-                            $('#student-leave-table_wrapper .buttons-pdf').addClass('disabled');               
+                            $('#student-leave-table_wrapper .buttons-pdf').addClass('disabled');
                         }
                     },
-                    error: function() {
+                    error: function () {
                         console.log('error');
                         // Handle error if necessary
                     }
@@ -573,85 +572,85 @@ $(function () {
             ],
             columnDefs: [
                 {
-                targets: 5,
-                className: "table-user",
-                render: function (data, type, row, meta) {
-                    var first_name = '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
-                        '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
-                    return first_name;
-                }
-            },
-            {
-                targets: 6,
-                type: 'date-euro', // Custom sorting type for DD-MM-YYYY format
-                render: function(data, type, row, meta) {
-                    if (type === 'sort') {
-                        // Convert the date to a format that can be sorted correctly
-                        var parts = data.split('-');
-                        return parts[2] + '-' + parts[1] + '-' + parts[0]; // Convert to YYYY-MM-DD for sorting
-                    } else {
-                        // Format the date for display
-                        return data;
+                    targets: 5,
+                    className: "table-user",
+                    render: function (data, type, row, meta) {
+                        var first_name = '<img src="' + defaultImg + '" class="mr-2 rounded-circle">' +
+                            '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+                        return first_name;
                     }
-                }
-            },
-            {
-                targets: 7,
-                
-                type: 'date-euro', // Custom sorting type for DD-MM-YYYY format
-                render: function(data, type, row, meta) {
-                    if (type === 'sort') {
-                        // Convert the date to a format that can be sorted correctly
-                        var parts = data.split('-');
-                        return parts[2] + '-' + parts[1] + '-' + parts[0]; // Convert to YYYY-MM-DD for sorting
-                    } else {
-                        // Format the date for display
-                        return data;
+                },
+                {
+                    targets: 6,
+                    type: 'date-euro', // Custom sorting type for DD-MM-YYYY format
+                    render: function (data, type, row, meta) {
+                        if (type === 'sort') {
+                            // Convert the date to a format that can be sorted correctly
+                            var parts = data.split('-');
+                            return parts[2] + '-' + parts[1] + '-' + parts[0]; // Convert to YYYY-MM-DD for sorting
+                        } else {
+                            // Format the date for display
+                            return data;
+                        }
                     }
-                }
-            },
-            {
-                targets: 10,
-                render: function (data, type, row, meta) {
-                    var status = getStatusBadge(data);
-                    return status;
-                }
-            },
-            {
-                targets: 12,
-                render: function (data, type, row, meta) {
-                    var status = getStatusBadge(data);
-                    return status;
-                }
-            },
-            {
-                targets: 14,
-                render: function (data, type, row, meta) {
-                    var documentLink = getDocumentLink(row);
-                    return documentLink;
-                }
-            },
-            {
-                targets: 14,
-                render: function (data, type, row, meta) {
-                    var status = getStatusBadge(data);
-                    return status;
-                }
-            },
-            {
-                targets: 15,
-                render: function (data, type, row, meta) {
-                    var remarksButtons = getRemarksButtons(row);
-                    return remarksButtons;
-                }
-            },
-            {
-                targets: 16,
-                render: function (data, type, row, meta) {
-                    var viewDetailsButton = getViewDetailsButton(row);
-                    return viewDetailsButton;
-                }
-            },
+                },
+                {
+                    targets: 7,
+
+                    type: 'date-euro', // Custom sorting type for DD-MM-YYYY format
+                    render: function (data, type, row, meta) {
+                        if (type === 'sort') {
+                            // Convert the date to a format that can be sorted correctly
+                            var parts = data.split('-');
+                            return parts[2] + '-' + parts[1] + '-' + parts[0]; // Convert to YYYY-MM-DD for sorting
+                        } else {
+                            // Format the date for display
+                            return data;
+                        }
+                    }
+                },
+                {
+                    targets: 10,
+                    render: function (data, type, row, meta) {
+                        var status = getStatusBadge(data);
+                        return status;
+                    }
+                },
+                {
+                    targets: 12,
+                    render: function (data, type, row, meta) {
+                        var status = getStatusBadge(data);
+                        return status;
+                    }
+                },
+                {
+                    targets: 14,
+                    render: function (data, type, row, meta) {
+                        var documentLink = getDocumentLink(row);
+                        return documentLink;
+                    }
+                },
+                {
+                    targets: 14,
+                    render: function (data, type, row, meta) {
+                        var status = getStatusBadge(data);
+                        return status;
+                    }
+                },
+                {
+                    targets: 15,
+                    render: function (data, type, row, meta) {
+                        var remarksButtons = getRemarksButtons(row);
+                        return remarksButtons;
+                    }
+                },
+                {
+                    targets: 16,
+                    render: function (data, type, row, meta) {
+                        var viewDetailsButton = getViewDetailsButton(row);
+                        return viewDetailsButton;
+                    }
+                },
             ]
         });
 
@@ -755,7 +754,7 @@ $(function () {
                     $('#leave_status_name').val(leave_details.nursing_teacher_status);
                     $('#changeLevType').val(leave_details.nursing_leave_type);
                     $('#yourRemarks').val(leave_details.nursing_teacher_remarks);
-                    
+
                     var student_leave_type_id = leave_details.nursing_leave_type;
                     $("#changelevReasons1").empty();
                     $("#changelevReasons1").append('<option value="">' + select_reason + '</option>');
