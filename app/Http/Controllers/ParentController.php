@@ -109,7 +109,6 @@ class ParentController extends Controller
             'file_extension' => $extension
         ];
         $response = Helper::PostMethod(config('constants.api.std_leave_apply'), $data);        
-        dd('nman' . $response);
         return $response;
     }
 
@@ -194,16 +193,14 @@ class ParentController extends Controller
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
                 $upload_lang = __('messages.upload');
-                if ($row['status'] != "Approve") {
+                if ($row['status'] == "Approve") {
+                    return 'N/A';
+                } else {
                     $edit = route('admin.application.edit', $row['id']);
                     return '<div class="button-list">
                     <a href="javascript:void(0)" class="btn btn-warning waves-effect waves-light" data-id="' . $row['id'] . '" id="editLeaveBtn" ><i class="fe-edit"></i></a>
                                     <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteLeaveBtn"><i class="fe-trash-2"></i></a>
                              </div>';
-                } else {
-                    return '<div class="button-list">
-                    <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">Hello</a>
-                    </div>';
                 }
             })
             ->rawColumns(['actions'])

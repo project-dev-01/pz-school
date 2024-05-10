@@ -3,7 +3,6 @@ $(function () {
     getHolidays();
     function getHolidays() {
         $.get(holidayEventList, { token: token, branch_id: branchID }, function (res) {
-            // console.log('test',res)
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
                     dates.push(val.start_date);
@@ -45,7 +44,6 @@ $(function () {
     $("#changeLevType").on('change', function (e) {
         e.preventDefault();
         var student_leave_type_id = $(this).val();
-        // console.log(student_leave_type_id);
         $("#changelevReasons").empty();
         $("#changelevReasons").append('<option value="">' + select_reason + '</option>');
         $.post(getReasonsByLeaveType, { branch_id: branchID, student_leave_type_id: student_leave_type_id }, function (res) {
@@ -159,8 +157,6 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (response) {
-                    console.log("response");
-                    console.log(response);
                     if (response.code == 200) {
                         $('#studentleave-table').DataTable().ajax.reload(null, false);
                         toastr.success('Leave apply sucessfully');
@@ -171,16 +167,13 @@ $(function () {
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.log("err")
-                    console.log(xhr)
-                    console.log(xhr.responseText)
 
                     // Parse the responseText to get the error message
                     let responseJSON;
                     try {
                         responseJSON = JSON.parse(xhr.responseText);
                     } catch (e) {
-                        console.error("Error parsing JSON response:", e);
+                        // console.error("Error parsing JSON response:", e);
                     }
 
                     if (responseJSON && responseJSON.message) {
@@ -529,35 +522,56 @@ $(function () {
     });
 
 
-    $("#editfrm_ldate").datepicker({
-        // Append datepicker to modal dialog
-        appendTo: '#editForm',
-        dateFormat: 'dd-mm-yy',
-        changeMonth: true,
-        changeYear: true,
-        autoclose: true,
-        yearRange: "-100:+50", // last hundred years
-        minDate: 0,
-        beforeShowDay: DisableDates,        
-    });
-    $("#editto_ldate").datepicker({
-        // Append datepicker to modal dialog
-        appendTo: '#editForm',
-        dateFormat: 'dd-mm-yy',
-        changeMonth: true,
-        changeYear: true,
-        autoclose: true,
-        yearRange: "-100:+50", // last hundred years
-        minDate: 0,
-        beforeShowDay: DisableDates,        
-    });
+    // $("#editfrm_ldate").datepicker({
+    //     // Append datepicker to modal dialog
+    //     appendTo: '#editForm',
+    //     dateFormat: 'dd-mm-yy',
+    //     changeMonth: true,
+    //     changeYear: true,
+    //     autoclose: true,
+    //     yearRange: "-100:+50", // last hundred years
+    //     minDate: 0,
+    //     beforeShowDay: DisableDates,        
+    // });
+    // $("#editto_ldate").datepicker({
+    //     // Append datepicker to modal dialog
+    //     appendTo: '#editForm',
+    //     dateFormat: 'dd-mm-yy',
+    //     changeMonth: true,
+    //     changeYear: true,
+    //     autoclose: true,
+    //     yearRange: "-100:+50", // last hundred years
+    //     minDate: 0,
+    //     beforeShowDay: DisableDates,        
+    // });
     
-    $("#editto_ldate").on('change', function () {
-        let frm_ldate = $("#editfrm_ldate").val();
-        let to_ldate = $("#editto_ldate").val();
-        const businessDays = getBusinessDays(convertDigitIn(frm_ldate), convertDigitIn(to_ldate));
-        $("#edittotal_leave").val(businessDays);
+    // $("#editto_ldate").on('change', function () {
+    //     let frm_ldate = $("#editfrm_ldate").val();
+    //     let to_ldate = $("#editto_ldate").val();
+    //     const businessDays = getBusinessDays(convertDigitIn(frm_ldate), convertDigitIn(to_ldate));
+    //     $("#edittotal_leave").val(businessDays);
+    // });
+    $('#editForm').on('shown.bs.modal', function () {
+        $("#editfrm_ldate").datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            autoclose: true,
+            yearRange: "-100:+50", // last hundred years
+            container: '#editForm modal-body',
+            beforeShowDay: DisableDates,
+        });
+        $("#editto_ldate").datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            autoclose: true,
+            yearRange: "-100:+50", // last hundred years
+            container: '#editForm modal-body',
+            beforeShowDay: DisableDates,
+        });
     });
+
     $("#editchangeLevType").on('change', function (e) {
         e.preventDefault();
         var student_leave_type_id = $(this).val();
@@ -641,8 +655,6 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (response) {
-                    console.log("response");
-                    console.log(response);
                     $('#editForm').modal('hide');
                     if (response.code == 200) {
                         $('#studentleave-table').DataTable().ajax.reload(null, false);
@@ -655,15 +667,13 @@ $(function () {
                 },
                 error: function (xhr, status, error) {
                   
-                    console.log(xhr)
-                    console.log(xhr.responseText)
 
                     // Parse the responseText to get the error message
                     let responseJSON;
                     try {
                         responseJSON = JSON.parse(xhr.responseText);
                     } catch (e) {
-                        console.error("Error parsing JSON response:", e);
+                        // console.error("Error parsing JSON response:", e);
                     }
 
                     if (responseJSON && responseJSON.message) {
@@ -783,8 +793,6 @@ $(function () {
                         var selectedLeaveTypeId = reasons[0].leave_type_id;
                         var selectedReasonId = reasons[0].reason_id.id;
                         $("#changeLevType").val(selectedLeaveTypeId);
-console.log(selectedLeaveTypeId);
-console.log(selectedReasonId);
                         // Find the select element
                         $.post(getReasonsByLeaveType, { branch_id: branchID, student_leave_type_id: selectedLeaveTypeId }, function (res) {
                             if (res.code == 200) {

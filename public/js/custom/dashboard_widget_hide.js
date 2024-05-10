@@ -204,23 +204,27 @@ $(function () {
             var visibility = 0; // default zero
             var addAttText = AttendanceReportLabel;
             var combinetext = att_widget_name;
+            var combinetextValues = "";
             if (department_name && (department_id != "")) {
                 combinetext += "," + department_name;
+                combinetextValues += department_name;
             }
 
             if (class_name && (class_id != "")) {
                 combinetext += "," + class_name;
+                combinetextValues += "," + class_name;
             }
 
             if (section_name && (section_id != "")) {
                 combinetext += "," + section_name;
+                combinetextValues += "," + section_name;
             }
 
             if (pattern_name && (pattern != "")) {
                 combinetext += "," + pattern_name;
+                combinetextValues += "," + pattern_name;
             }
             addAttText += '(' + combinetext + ')';
-
             var attRepValues = [];
 
             // Iterate over each row in the table with id 'dynamic_field'
@@ -228,9 +232,19 @@ $(function () {
                 var orderno = $(this).data('order');
                 var widgetValueID = "#widgetName" + orderno;
                 var widgetValue = $(widgetValueID).val();
-                attRepValues.push(widgetValue);
+                // Check if widgetValue contains braces
+                if (/\[|\]|\(|\)|\{|\}/.test(widgetValue)) {
+                    attRepValues.push(widgetValue);
+                }
             });
-            if (attRepValues.includes(addAttText)) {
+            var matches = [];
+
+            attRepValues.forEach(function(item) {
+                if(item.includes(combinetextValues)) {
+                    matches.push(item);
+                }
+            });
+            if (matches.length > 0) {
                 toastr.error('Already Exist This Attendance');
                 return false;
             }
