@@ -1573,8 +1573,11 @@ Route::group(['prefix' => 'parent'], function () {
         Route::get('/analyticrep', [ParentController::class, 'analytic'])->name('parent.analyticrep.analyticreport');
         // student leave 
         Route::post('std_leave_apply/add', [ParentController::class, 'student_applyleave'])->name('parent.studentleave.add');
+        Route::post('std_leave_apply/update', [ParentController::class, 'student_updateleave'])->name('parent.studentleave.update');
         Route::get('qualification/list', [ParentController::class, 'getstudentleave_list'])->name('parent.student_leave.list');
         Route::post('std_leave_apply/reupload_file', [ParentController::class, 'reUploadLeaveFile'])->name('parent.reupload_file.add');
+        Route::post('std_leave/delete', [ParentController::class, 'student_deleteleave'])->name('parent.student_leave.delete');
+        
         // update child session
         Route::post('navbar-update-child_id', [CommonController::class, 'updateStudentID'])->name('navbar.update.child_id');
         Route::get('/student_leaves', [ParentController::class, 'studentLeaves'])->name('parent.student_leaves');

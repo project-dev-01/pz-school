@@ -278,7 +278,7 @@
                                     <th>{{ __('messages.tab_teacher_remarks') }}</th>
                                     <th>{{ __('messages.leave_type') }}</th>
                                     <th>{{ __('messages.reason') }}</th>
-                                    <th>{{ __('messages.tab_attachment') }}</th>
+                                    <!-- <th>{{ __('messages.tab_attachment') }}</th> -->
                                     <th>{{ __('messages.status') }}</th>
                                     <th>{{ __('messages.apply_date') }}</th>
                                     <th>{{ __('messages.tab_action') }}</th>
@@ -295,7 +295,7 @@
 
     <!-- Center modal content -->
     @include('parent.leave_application.reason')
-
+    @include('parent.leave_application.edit')
 </div> <!-- container -->
 @endsection
 @section('scripts')
@@ -321,6 +321,9 @@
     var UserName = "{{ Session::get('name') }}";
     // general details get student names
     var stutdentleaveList = "{{ route('parent.student_leave.list') }}";
+    var leaveListDelete = "{{ route('parent.student_leave.delete') }}";
+    var editStudentLeave = "{{ config('constants.api.edit_student_leave_form') }}";
+
     var reuploadFileUrl = "{{ route('parent.reupload_file.add') }}";
     // leave apply
     var StudentDocUrl = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/teacher/student-leaves/' }}";
@@ -336,6 +339,15 @@
 
     var parent_leaveapply_storage = localStorage.getItem('parent_leaveapply_details');
     var holidayEventList = "{{ config('constants.api.holidays_list_event') }}";
+
+
+
+
+    var deleteTitle = "{{ __('messages.are_you_sure') }}";
+    var deleteHtml = "{{ __('messages.delete_this_application') }}";
+    var deletecancelButtonText = "{{ __('messages.cancel') }}";
+    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    var footer_txt = "{{ session()->get('footer_text') }}";
 </script>
 <!-- to do list -->
 <script src="{{ asset('js/custom/parent_leave_app.js') }}"></script>

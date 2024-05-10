@@ -457,6 +457,7 @@ return [
         'get_students_parentdashboard' => $url.'/get_students_parentdashboard',
         //student leave apply 
         'std_leave_apply'=> $url.'/std_leave_apply',
+        'std_leave_update'=> $url.'/std_leave_update',
         'call_via_leave_approve'=> $url.'/call_via_leave_approve',
         'get_student_leave_types'=> $url.'/student_leave/get_student_leave_types',
         'get_reasons_by_leave_type'=> $url.'/student_leave/get_reasons_by_leave_type',
@@ -466,9 +467,12 @@ return [
         // get leave reasons
         'get_leave_reasons'=>$url.'/get_leave_reasons',
         // get student leave list particular
+        'studentleave_delete' => $url.'/studentleave/delete',
+        'edit_student_leave_form' => $url.'/studentleave/edit',
         'studentleave_list'=>$url.'/studentleave_list',
         'get_all_student_leaves'=>$url.'/get_all_student_leaves',
         'leave_type_wise_get_all_reason'=>$url.'/leave_type_wise_get_all_reason',
+        
         // teacher leave approve
         'teacher_leave_approve'=>$url.'/teacher_leave_approve',
         'leave_reupload_file'=>$url.'/std_leave_apply/reupload_file',

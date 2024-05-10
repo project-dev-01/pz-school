@@ -382,10 +382,10 @@ $(function () {
                     data: 'reason',
                     name: 'reason'
                 },
-                {
-                    data: 'document',
-                    name: 'document'
-                },
+                // {
+                //     data: 'document',
+                //     name: 'document'
+                // },
                 {
                     data: 'status',
                     name: 'status',
@@ -428,22 +428,22 @@ $(function () {
                         return document;
                     }
                 },
+                // {
+                //     "targets": 7,
+                //     "render": function (data, type, row, meta) {
+                //         var document = "";
+                //         if (data) {
+                //             document = '<a href="' + StudentDocUrl + '/' + data + '" download target="_blank"><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
+                //         } else {
+                //             document = '<div>' +
+                //                 '<input type="file" id="reissue_file' + row.id + '" name="file" class="reissue_file">' +
+                //                 '</div>';
+                //         }
+                //         return document;
+                //     }
+                // },
                 {
                     "targets": 7,
-                    "render": function (data, type, row, meta) {
-                        var document = "";
-                        if (data) {
-                            document = '<a href="' + StudentDocUrl + '/' + data + '" download target="_blank"><i class="fas fa-cloud-download-alt" data-toggle="tooltip" title="Click to download..!"></i></a>';
-                        } else {
-                            document = '<div>' +
-                                '<input type="file" id="reissue_file' + row.id + '" name="file" class="reissue_file">' +
-                                '</div>';
-                        }
-                        return document;
-                    }
-                },
-                {
-                    "targets": 8,
                     "render": function (data, type, row, meta) {
                         var badgeColor = "";
                         if (data == "Approve") {
@@ -459,22 +459,256 @@ $(function () {
                         return status;
                     }
                 },
-                {
-                    "targets": 10,
-                    "render": function (data, type, row, meta) {
-                        if (row.document) {
-                            return '-';
-                        } else {
-                            return '<div class="button-list"><a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' + row.id + '"  data-document="' + row.document + '" id="updateIssueFile">' + upload_lang + '</a></div>';
-                        }
-                    }
-                },
+                // {
+                //     "targets": 9,
+                //     "render": function (data, type, row, meta) {
+                        
+                //         // var editdeletebutton = "";
+
+                //         // if (data == "Approve") {
+                //         //     editdeletebutton = "-";
+                //         // }else{
+                //         //     editdeletebutton = '<div class="button-list"><a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' + row.id + '"   id="updateIssueFile">' + upload_lang + '</a></div>';
+                //         // }
+                //         // return  editdeletebutton ;
+                //         if (row.document) {
+                //             return '-';
+                //         } else {
+                //             return '<div class="button-list"><a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' + row.id + '"  data-document="' + row.document + '" id="updateIssueFile">' + upload_lang + '</a></div>';
+                //         }
+                //     }
+                // },
 
             ]
         }).on('draw', function () {
         });
     }
     let selectedLeaveType;
+
+    // student edit open model
+    $(document).on('click', '#editLeaveBtn', function () {
+        var id =  $(this).data('id');
+        // staffLeaveDetailsShowUrl
+        $.get(editStudentLeave,
+            {
+                id: id,
+                branch_id: branchID 
+            }, function (res) {
+                // console.log(res);
+                // $("#stdGeneralDetailsupdate").empty();
+                $('#editForm').modal('show');
+
+                if (res.code == 200) {
+                    var data = res.data;
+
+                    
+
+                    $("#id").val(data.id);
+                    $("#editchangeStdName").val(data.student_id);
+                    $("#editfrm_ldate").val(data.from_leave);
+                    $("#editto_ldate").val(data.to_leave);
+                    $("#edittotal_leave").val(data.total_leave);
+                    $("#edittxtarea_prev_remarks").val(data.remarks);
+                    $("#editchangeLevType").val(data.change_lev_type);
+
+
+                    var student_leave_type_id = data.change_lev_type;
+                    // console.log(student_leave_type_id);
+                    $("#editchangelevReasons").empty();
+                    $("#editchangelevReasons").append('<option value="">' + select_reason + '</option>');
+                    $.post(getReasonsByLeaveType, { branch_id: branchID, student_leave_type_id: student_leave_type_id }, function (res) {
+                        if (res.code == 200) {
+                            $.each(res.data, function (key, val) {
+                                $("#editchangelevReasons").append('<option value="' + val.id + '">' + val.name + '</option>');
+                            });
+                            $("#editchangelevReasons").val(data.reasonId);
+                        }
+                    }, 'json');
+                }
+            }, 'json');
+    });
+
+
+    $("#editfrm_ldate").datepicker({
+        // Append datepicker to modal dialog
+        appendTo: '#editForm',
+        dateFormat: 'dd-mm-yy',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-100:+50", // last hundred years
+        minDate: 0,
+        beforeShowDay: DisableDates,        
+    });
+    $("#editto_ldate").datepicker({
+        // Append datepicker to modal dialog
+        appendTo: '#editForm',
+        dateFormat: 'dd-mm-yy',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-100:+50", // last hundred years
+        minDate: 0,
+        beforeShowDay: DisableDates,        
+    });
+    
+    $("#editto_ldate").on('change', function () {
+        let frm_ldate = $("#editfrm_ldate").val();
+        let to_ldate = $("#editto_ldate").val();
+        const businessDays = getBusinessDays(convertDigitIn(frm_ldate), convertDigitIn(to_ldate));
+        $("#edittotal_leave").val(businessDays);
+    });
+    $("#editchangeLevType").on('change', function (e) {
+        e.preventDefault();
+        var student_leave_type_id = $(this).val();
+        // console.log(student_leave_type_id);
+        $("#editchangelevReasons").empty();
+        $("#editchangelevReasons").append('<option value="">' + select_reason + '</option>');
+        $.post(getReasonsByLeaveType, { branch_id: branchID, student_leave_type_id: student_leave_type_id }, function (res) {
+            if (res.code == 200) {
+                $.each(res.data, function (key, val) {
+                    $("#editchangelevReasons").append('<option value="' + val.id + '">' + val.name + '</option>');
+                });
+            }
+        }, 'json');
+    });
+
+
+
+    $("#stdGeneralDetailsupdate").validate({
+        rules: {
+            editchangeStdName: "required",
+            editto_ldate: "required",
+            editfrm_ldate: "required",
+            edittotal_leave: "required",
+            editchangeLevType: "required",
+            editchangelevReasons: "required",
+        }
+    });
+    $('#stdGeneralDetailsupdate').on('submit', function (e) {
+        e.preventDefault();
+        var start = convertDigitIn($("#editfrm_ldate").val());
+        var end = convertDigitIn($("#editto_ldate").val());
+        let startDate = new Date(start);
+        let endDate = new Date(end);
+        if (startDate > endDate) {
+            toastr.error("To date should be greater than leave from");
+            $("to_ldate").val("");
+            return false;
+        }
+        var std_details = $("#stdGeneralDetailsupdate").valid();
+
+        if (std_details === true) {           
+
+            var form = this;
+            var class_id = $('option:selected', '#editchangeStdName').attr('data-classid');
+            var section_id = $('option:selected', '#editchangeStdName').attr('data-sectionid');
+            var student_id = $("#editchangeStdName").val();
+            var frm_leavedate = $("#editfrm_ldate").val();
+            var to_leavedate = $("#editto_ldate").val();
+            var total_leave = $("#edittotal_leave").val();
+            var changeLevType = $("#editchangeLevType").val();
+            var reason = $("#editchangelevReasons").val();
+            var reason_text = $('option:selected', '#editchangelevReasons').text();
+            // var remarks = $("#remarks").val();
+            var remarks = $("#edittxtarea_prev_remarks").val();
+            var id = $("#id").val();
+
+            // var file = $("#file").val();
+
+            var formData = new FormData();
+            formData.append('token', token);
+            formData.append('branch_id', branchID);
+            formData.append('id', id);
+            formData.append('class_id', class_id);
+            formData.append('section_id', section_id);
+            formData.append('student_id', student_id);
+            formData.append('frm_leavedate', frm_leavedate);
+            formData.append('to_leavedate', to_leavedate);
+            formData.append('reason', reason);
+            formData.append('reason_text', reason_text);
+            formData.append('remarks', remarks);
+            formData.append('total_leave', total_leave);
+            formData.append('change_lev_type', changeLevType);
+            // formData.append('file', file);
+            formData.append('file', $('input[type=file]')[0].files[0]);
+            
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+                    console.log("response");
+                    console.log(response);
+                    $('#editForm').modal('hide');
+                    if (response.code == 200) {
+                        $('#studentleave-table').DataTable().ajax.reload(null, false);
+                        toastr.success('Leave updated sucessfully');
+                        $('#stdGeneralDetails')[0].reset();
+                        $("#file_name").html("");
+                    } else {
+                        toastr.error(response.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                  
+                    console.log(xhr)
+                    console.log(xhr.responseText)
+
+                    // Parse the responseText to get the error message
+                    let responseJSON;
+                    try {
+                        responseJSON = JSON.parse(xhr.responseText);
+                    } catch (e) {
+                        console.error("Error parsing JSON response:", e);
+                    }
+
+                    if (responseJSON && responseJSON.message) {
+                        toastr.error(responseJSON.message);
+                    } else {
+                        toastr.error('Something went wrong');
+                    }
+                }
+            });
+            // console.log(classObj);
+            // setLocalStorageForparentleaveapply(classObj);
+        };
+    });
+
+    // delete Application 
+    $(document).on('click', '#deleteLeaveBtn', function () {
+        var id = $(this).data('id');
+        var url = leaveListDelete;
+        swal.fire({
+            title: deleteTitle + '?',
+            html: deleteHtml,
+            showCancelButton: true,
+            showCloseButton: true,
+            cancelButtonText: deletecancelButtonText,
+            confirmButtonText: deleteconfirmButtonText,
+            cancelButtonColor: '#d33',
+            confirmButtonColor: '#556ee6',
+            width: 400,
+            allowOutsideClick: false
+        }).then(function (result) {
+            if (result.value) {
+                $.post(url, {
+                    id: id
+                }, function (data) {
+                    if (data.code == 200) {
+                        $('#studentleave-table').DataTable().ajax.reload(null, false);
+                        toastr.success(data.message);
+                    } else {
+                        toastr.error(data.message);
+                    }
+                }, 'json');
+            }
+        });
+    });
+
     // studentAllReasons
     $(document).on('click', '#studentAllReasons', function () {
         // staffLeaveDetailsShowUrl

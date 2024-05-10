@@ -16,7 +16,7 @@ class Helper
         try {
             $data["token"] = session('token');
             $data["branch_id"] = session('branch_id');
-            $data["name_status"] = 0; // session('name_sequence_flag');
+            $data["name_status"] = session('name_sequence_flag');
             $response = Http::withToken(session('token'))->get($url, $data);
 
             return self::handleResponse($response);
@@ -56,7 +56,7 @@ class Helper
         try {
             $data["token"] = session('token');
             $data["branch_id"] = session('branch_id');
-            $data["name_status"] = session('name_sequence_flag');
+            $data["name_status"] = session('name_sequence_flag');           
             $response = Http::withToken(session('token'))->post($url, $data);
 
             return self::handleResponse($response);

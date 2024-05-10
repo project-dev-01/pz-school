@@ -108,10 +108,52 @@ class ParentController extends Controller
             'file' => $base64,
             'file_extension' => $extension
         ];
-        // dd($data);
-        $response = Helper::PostMethod(config('constants.api.std_leave_apply'), $data);
+        $response = Helper::PostMethod(config('constants.api.std_leave_apply'), $data);        
+        dd('nman' . $response);
         return $response;
     }
+
+    
+
+    // student leave update
+    public function student_updateleave(Request $request)
+    {
+        $file = $request->file('file');
+
+        if ($file) {
+            $path = $file->path();
+            $data = file_get_contents($path);
+            $base64 = base64_encode($data);
+            $extension = $file->getClientOriginalExtension();
+        } else {
+            $base64 = null;
+            $extension = null;
+        }
+        $status = "Pending";
+        $parent_id = session()->get('ref_user_id');
+        $data = [
+            'id' => $request->id,
+            'class_id' => $request->class_id,
+            'section_id' => $request->section_id,
+            'student_id' => $request->student_id,
+            'parent_id' => $parent_id,
+            'frm_leavedate' => $request->frm_leavedate,
+            'to_leavedate' => $request->to_leavedate,
+            'total_leave' => $request->total_leave,
+            'change_lev_type' => $request->change_lev_type,
+            'reason_id' => $request->reason,
+            'reason_text' => $request->reason_text,
+            'remarks' => $request->remarks,
+            'status' => $status,
+            'file' => $base64,
+            'file_extension' => $extension
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.std_leave_update'), $data);
+               
+        return $response;
+    }
+    
     // reupload file
     public function reUploadLeaveFile(Request $request)
     {
@@ -146,7 +188,6 @@ class ParentController extends Controller
         ];
         $response = Helper::PostMethod(config('constants.api.studentleave_list'), $parent_id);
         // $response = Helper::GETMethodWithData(config('constants.api.studentleave_list'),$parent_id);
-
         // return $response;
         $data = isset($response['data']) ? $response['data'] : [];
         return DataTables::of($data)
@@ -154,16 +195,32 @@ class ParentController extends Controller
             ->addColumn('actions', function ($row) {
                 $upload_lang = __('messages.upload');
                 if ($row['status'] != "Approve") {
+                    $edit = route('admin.application.edit', $row['id']);
+                    return '<div class="button-list">
+                    <a href="javascript:void(0)" class="btn btn-warning waves-effect waves-light" data-id="' . $row['id'] . '" id="editLeaveBtn" ><i class="fe-edit"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteLeaveBtn"><i class="fe-trash-2"></i></a>
+                             </div>';
+                } else {
                     return '<div class="button-list">
                     <a href="javascript:void(0)" class="btn btn-primary-bl waves-effect waves-light" data-id="' . $row['id'] . '"  data-document="' . $row['document'] . '" id="updateIssueFile">Hello</a>
-            </div>';
-                } else {
-                    return '-';
+                    </div>';
                 }
             })
             ->rawColumns(['actions'])
             ->make(true);
     }
+
+    //Delete Student Leave
+    public function student_deleteleave(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+        $response = Helper::PostMethod(config('constants.api.studentleave_delete'), $data);
+        // $response = Helper::PostMethod(config('constants.api.application_delete'), $data);
+        return $response;
+    }
+
     public function settings()
     {
         $data = [
@@ -1087,6 +1144,7 @@ class ParentController extends Controller
         ];
         $get_std_names_dashboard = Helper::GETMethodWithData(config('constants.api.get_students_parentdashboard'), $parent_ids);
         $get_student_leave_types = Helper::GetMethod(config('constants.api.get_student_leave_types'));
+       
         return view(
             'parent.leave_application.index',
             [
