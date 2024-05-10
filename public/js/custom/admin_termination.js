@@ -14,19 +14,19 @@ $(function () {
         });
 
     });
-    // $('#termination_status').on('change', function () {
-    //     var status = $(this).val();
+    $('#termination_status').on('change', function () {
+        var status = $(this).val();
         
-    //     $("#remarks_row").hide();
-    //     $("#date_of_termination_row").hide();
-    //     if(status=="Approved"){
+        $("#remarks_row").hide();
+        $("#date_of_termination_row").hide();
+        if(status=="Approved"){
 
-    //         $("#date_of_termination_row").show();
-    //     }else if(status=="Send Back" || status=="Rejected"){
+            $("#date_of_termination_row").show();
+        }else if(status=="Send Back" || status=="Rejected"){
 
-    //         $("#remarks_row").show();
-    //     }
-    // });
+            $("#remarks_row").show();
+        }
+    });
     
     $(document).on('click', '#editTerminationBtn', function () {
         
