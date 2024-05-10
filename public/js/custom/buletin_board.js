@@ -49,6 +49,8 @@ $(function () {
     document.getElementById('file').addEventListener('change', function(e) {
         var files = e.target.files;
         var fileList = document.getElementById('file-list');
+        var maxSizeInBytes = 10 * 1024 * 1024;
+        var totalSize = 0; 
 
         // Clear existing file list
         fileList.innerHTML = '';
@@ -62,14 +64,35 @@ $(function () {
         } else {
             errorText.textContent = ''; // Clear error message if within limit
         }
+         // Calculate total size of all selected files
+            for (var i = 0; i < files.length; i++) {
+                totalSize += files[i].size;
+            }
+
+            // Check if total size exceeds the 20 MB limit
+            if (totalSize > maxSizeInBytes) {
+                var errorText = document.querySelector('.file_error');
+                errorText.textContent = 'Total files size should not exceed 10 MB.';
+                this.value = ''; // Clear the file input to prevent selection of more files
+                return;
+            }
 
         // Iterate over selected files
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
             var listItem = document.createElement('div');
-
+           
             // Display file name
             listItem.textContent = file.name;
+
+              // Check if file size exceeds the limit
+            if (file.size > maxSizeInBytes) {
+                errorText.textContent = 'File size should not exceed 20 MB.';
+                this.value = ''; // Clear the file input to prevent selection of more files
+                return;
+            } else {
+                errorText.textContent = ''; // Clear error message if within limit
+            }
 
             // Add remove button
             var removeButton = document.createElement('button');
@@ -214,6 +237,7 @@ $(function () {
                        
                         $('.addBuletin').find('form')[0].reset();
                         $('#loaderOverlay').hide();
+                        toastr.success(data.message);
                         window.location.href = bulletin;
                        
                     } else {
