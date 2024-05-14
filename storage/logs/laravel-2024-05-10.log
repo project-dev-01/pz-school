@@ -1,1 +1,0 @@
-[2024-05-10 12:59:03] local.ERROR: HTTP request failed to  {"url":"","body":{"login_id":null,"teacher_id":null,"token":null,"branch_id":null,"name_status":null},"error":"cURL error 3:  (see https://curl.haxx.se/libcurl/c/libcurl-errors.html)"} 
