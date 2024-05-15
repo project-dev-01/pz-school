@@ -358,8 +358,45 @@ $(function () {
             mother_email:"required",
             mother_mobile_no:"required",
             mother_occupation:"required",
-            passport_father_photo:"required",
-            passport_mother_photo:"required",
+            // passport_father_photo:"required",
+            // passport_mother_photo:"required",
+            
+            "japanese_association_membership_image_principal": {
+                required: function (element) {
+                    if ($("#japanese_association_membership_image_principal_old").val().length < 1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
+            "japanese_association_membership_image_supplimental": {
+                required: function (element) {
+                    if ($("#japanese_association_membership_image_supplimental_old").val().length < 1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
+            "passport_father_photo": {
+                required: function (element) {
+                    if ($("#passport_father_old_photo").val().length < 1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
+            "passport_mother_photo": {
+                required: function (element) {
+                    if ($("#passport_mother_old_photo").val().length < 1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            },
             
             "confirm_password": {
                 required: function (element) {

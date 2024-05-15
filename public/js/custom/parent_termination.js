@@ -42,11 +42,14 @@ $(function () {
             schedule_date_of_termination : "required", 
             reason_for_transfer : "required", 
             transfer_destination_school_name : "required", 
-            transfer_destination_tel : "required", 
+            transfer_destination_tel : {
+                required: true,
+                minlength: 8
+            }, 
             parent_phone_number_after_transfer: {
                 required: true,
-                number : true 
-            },         
+                minlength: 8
+            }, 
             parent_address_after_transfer : "required", 
             parent_email_address_after_transfer: {
                 required: true,
@@ -86,10 +89,13 @@ $(function () {
             schedule_date_of_termination : "required", 
             reason_for_transfer : "required", 
             transfer_destination_school_name : "required", 
-            transfer_destination_tel : "required", 
+            transfer_destination_tel : {
+                required: true,
+                minlength: 8
+            }, 
             parent_phone_number_after_transfer: {
                 required: true,
-                number : true 
+                minlength: 8
             }, 
             parent_address_after_transfer : "required", 
             parent_email_address_after_transfer: {

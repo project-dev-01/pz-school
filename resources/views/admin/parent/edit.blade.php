@@ -653,7 +653,7 @@
 													<option value="Local Hire" {{ isset($parent['employment_status']) ?$parent['employment_status'] == "Local Hire" ? 'selected' : '' : '' }}>{{ __('messages.local_hire') }}</option>
 													<option value="Public Servant" {{ isset($parent['employment_status']) ?$parent['employment_status'] == "Public Servant" ? 'selected' : '' : '' }}>{{ __('messages.public_servant') }}</option>
 													<option value="Self-Employed" {{ isset($parent['employment_status']) ?$parent['employment_status'] == "Self-Employed" ? 'selected' : '' : '' }}>{{ __('messages.self_employed') }}</option>
-													<option value="Others" {{ isset($parent['guardian_employment_status']) ? $parent['guardian_employment_status'] == "Others" ? 'selected' : '' : '' }}>{{ __('messages.others') }}</option>
+													<option value="Others" {{ isset($parent['employment_status']) ? $parent['employment_status'] == "Others" ? 'selected' : '' : '' }}>{{ __('messages.others') }}</option>
 												</select>
 											</div>
 										</div>

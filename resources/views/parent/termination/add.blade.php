@@ -400,12 +400,14 @@
                                     <div class="form-group">
                                         <label for="transfer_destination_tel">{{ __('messages.termination_transfer_destination_tel') }}<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control number_validation" id="transfer_destination_tel" value=""  name="transfer_destination_tel" placeholder="{{ __('messages.termination_enter_transfer_destination_tel') }}" aria-describedby="inputGroupPrepend">
+                                        <label for="transfer_destination_tel" class="error"></label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="parent_phone_number_after_transfer number_validation">{{ __('messages.termination_parent_guardian_phone_number_after_transfer') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="parent_phone_number_after_transfer" value=""  name="parent_phone_number_after_transfer" placeholder="{{ __('messages.termination_enter_parent_guardian_phone_number_after_transfer') }} " aria-describedby="inputGroupPrepend">
+                                        <label for="parent_phone_number_after_transfer">{{ __('messages.termination_parent_guardian_phone_number_after_transfer') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control number_validation" id="parent_phone_number_after_transfer" value=""  name="parent_phone_number_after_transfer" placeholder="{{ __('messages.termination_enter_parent_guardian_phone_number_after_transfer') }} " aria-describedby="inputGroupPrepend">
+										<label for="parent_phone_number_after_transfer" class="error"></label>		
                                     </div>
                                 </div>
                             <div class="col-md-4">
@@ -539,7 +541,7 @@
 </script>
 
 <script>
-    var input = document.querySelector(".mobile_no");
+    var input = document.querySelector("#transfer_destination_tel");
     intlTelInput(input, {
         allowExtensions: true,
         autoFormat: false,
@@ -556,6 +558,23 @@
         // utilsScript: "js/utils.js"
     });
 
+    
+    var input = document.querySelector("#parent_phone_number_after_transfer");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "my",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ['my', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
     $(".country").countrySelect({
         defaultCountry: "my",
         preferredCountries: ['my', 'jp'],

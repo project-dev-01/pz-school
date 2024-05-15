@@ -394,7 +394,7 @@ class CommonController extends Controller
                             $notificationlist .= '<a href="' . route('parent.termination.index') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                             <p class="notify-details">' . __('messages.termination') . '</p>
                             <p class="text-muted mb-0 user-msg">
-                                <small>' . $student_name . ' ' . __('messages.application_has_been_admin') . ' ' . $status . ' ' . __('messages.by') . ' (' . $date . ')</small>
+                                <small>' . $student_name . ' ' . __('messages.application_has_been') . ' ' . $status . ' ' . __('messages.by') . ' (' . $date . ')</small>
                             </p>
                             </a>';
                         }

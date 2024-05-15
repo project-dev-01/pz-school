@@ -436,7 +436,7 @@ $(function () {
 
     function mother(id) {
         $('#mother_id').val(id);
-        // $("#mother_form").show("slow");
+        $("#mother_form").show("slow");
         $("#mother_photo").show();
         $("#mother_info").show();
         $.post(parentDetails, { token: token, branch_id: branchID, id: id }, function (res) {

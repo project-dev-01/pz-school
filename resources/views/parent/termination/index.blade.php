@@ -100,6 +100,69 @@
     <!-- end page title -->
 
 
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+            <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                    <h4 class="nav-link">{{ __('messages.select_ground') }}
+                            <h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>             
+              
+                <div class="card-body collapse show">
+                    <form id="applicationFilter" autocomplete="off">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="academic_year">{{ __('messages.academic_year') }}</label>
+                                    <select id="academic_year" name="academic_year" class="form-control">
+                                        <option value="">{{ __('messages.admission_select_academic_year') }}</option>
+                                        @forelse($academic_year_list as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="academic_grade">{{ __('messages.grade') }}</label>
+                                    <select id="academic_grade" name="academic_grade" class="form-control">
+                                        <option value="">{{ __('messages.select_grade') }}</option>
+                                        @forelse($grade as $g)
+                                        <option value="{{$g['id']}}">{{$g['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="form-group text-right m-b-0">
+                            <!-- <button class="btn btn-primary-bl waves-effect waves-light" id="indexSubmit" type="submit">
+                                Filter
+                            </button> -->
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                {{ __('messages.filter') }}
+                            </button>
+                            <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                Cancel
+                            </button>-->
+                        </div>
+                    </form>
+
+                </div> <!-- end card-body -->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+
+    </div>
+    <!-- end row -->
+
 
     <div class="row">
         <div class="col-xl-12">

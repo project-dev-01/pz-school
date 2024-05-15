@@ -399,12 +399,14 @@
                                     <div class="form-group">
                                         <label for="transfer_destination_tel">{{ __('messages.transfer_destination_tel') }}<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control number_validation" {{$readonly}} id="transfer_destination_tel" value="{{ $termination['transfer_destination_tel']}}" name="transfer_destination_tel" placeholder="{{ __('messages.enter_transfer_destination_tel') }}" aria-describedby="inputGroupPrepend">
+                                        <label for="transfer_destination_tel" class="error"></label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="parent_phone_number_after_transfer">{{ __('messages.parent_guardian_phone_number_after_transfer') }}<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control number_validation" {{$readonly}} id="parent_phone_number_after_transfer" value="{{ $termination['parent_phone_number_after_transfer']}}" name="parent_phone_number_after_transfer" placeholder="{{ __('messages.enter_parent_guardian_phone_number_after_transfer') }} " aria-describedby="inputGroupPrepend">
+                                        <label for="parent_phone_number_after_transfer" class="error"></label>	
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -598,7 +600,25 @@
 </script>
 
 <script>
-    var input = document.querySelector(".mobile_no");
+    var input = document.querySelector("#transfer_destination_tel");
+    intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        defaultCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        initialCountry: "my",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        preferredCountries: ['my', 'jp'],
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js"
+    });
+
+    
+    var input = document.querySelector("#parent_phone_number_after_transfer");
     intlTelInput(input, {
         allowExtensions: true,
         autoFormat: false,
