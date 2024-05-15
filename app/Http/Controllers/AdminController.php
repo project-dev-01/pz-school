@@ -416,7 +416,7 @@ class AdminController extends Controller
                 'required',
                 'min:8',
                 // 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
-                'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'
+                'regex:/^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'
             ],
             'confirmed' => 'required|same:password|min:8'
         ]);
@@ -11383,7 +11383,35 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.student_interview_list'), $data);
         return $response;
     }
+    public function editStudentInterviewData(Request $request)
+    {
+        $data = [
+            'id' => $request->id
+        ];
+        $response = Helper::PostMethod(config('constants.api.student_interview_edit'), $data);
+        return $response;
+    }
+    public function updateStudentInterviewData(Request $request)
+    {
 
+        $data = [
+            'id' => $request->id,
+            'comment' => $request->comment,
+            'updated_by' => session()->get('ref_user_id'),
+        ];
+        $response = Helper::PostMethod(config('constants.api.student_interview_update'), $data);
+        return $response;
+    }
+     public function addStudentInterviewComment(Request $request){
+        $data = [
+            'id' => $request->id,
+            'comment' => $request->comment,
+            'type' => $request->type,
+            'created_by' => session()->get('ref_user_id'),
+        ];
+        $response = Helper::PostMethod(config('constants.api.student_interview_addComment'), $data);
+        return $response;
+    }
     public function childHealthImport(Request $request)
     {
 

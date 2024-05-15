@@ -775,7 +775,7 @@ class StudentController extends Controller
             'password' => [
                 'required',
                 'min:8',
-                'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'
+                'regex:/^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'
             ],
             'confirmed' => 'required|same:password|min:8'
         ]);

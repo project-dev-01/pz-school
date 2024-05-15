@@ -327,7 +327,7 @@ class TeacherController extends Controller
                 'required',
                 'min:8',
                 // 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/'
-                'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'
+                'regex:/^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/'
             ],
             'confirmed' => 'required|same:password|min:8'
         ]);
@@ -2347,11 +2347,13 @@ class TeacherController extends Controller
         $data = [
             'teacher_id' => session()->get('ref_user_id')
         ];
+       // dd($data);
         $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
         return view(
             'teacher.student_interview_notes.index',
             [
                 'classes' => isset($getclass['data']) ? $getclass['data'] : [],
+                'teacher_id' => session()->get('ref_user_id')
             ]
         );
     }
@@ -2400,7 +2402,7 @@ class TeacherController extends Controller
     public function getStudentInterviewData(Request $request)
     {
         $data = [
-            'grade_id' => $request->class_id,
+            'class_id' => $request->class_id,
             'section_id' => $request->section_id,
             'student_id' => $request->student_id,
         ];
@@ -2417,16 +2419,23 @@ class TeacherController extends Controller
     }
     public function updateStudentInterviewData(Request $request)
     {
+
+        $data = [
+            'id' => $request->id,
+            'comment' => $request->comment,
+            'updated_by' => session()->get('ref_user_id'),
+        ];
+        $response = Helper::PostMethod(config('constants.api.student_interview_update'), $data);
+        return $response;
+    }
+    public function addStudentInterviewComment(Request $request){
         $data = [
             'id' => $request->id,
             'comment' => $request->comment,
             'type' => $request->type,
             'created_by' => session()->get('ref_user_id'),
-            'updated_by' => session()->get('ref_user_id'),
-            'login_userid' => session()->get('user_id'),
-            'login_roleid' => session()->get('role_id'),
         ];
-        $response = Helper::PostMethod(config('constants.api.student_interview_update'), $data);
+        $response = Helper::PostMethod(config('constants.api.student_interview_addComment'), $data);
         return $response;
     }
     public function page403(Request $request)
