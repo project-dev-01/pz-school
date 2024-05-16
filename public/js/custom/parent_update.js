@@ -26,9 +26,16 @@ $(function () {
                     if(val.remark  != null){
                         remark = val.remark;
                     }
+
+                    if(key== "passport_photo" || key== "visa_photo" || key== "japanese_association_membership_image_supplimental" || key== "japanese_association_membership_image_principal"){
+                        row += '<tr> <td >'+window[field]+'</td><td ><a href= '+parentImg+val.old_value+' target="_blank">'+val.old_value+' </a></td> <td ><a href= '+parentImg+val.new_value+' target="_blank">'+val.new_value+' </a></td> <td ><div class="button-list"><span class="badge badge-soft-'+ color+' p-1">'+status+'</span></div></td><td >'+remark+'</td></tr>';
+                
+                    }else{
+                        row += '<tr> <td >'+window[field]+'</td><td >'+val.old_value+'</td> <td >'+val.new_value+'</td> <td ><div class="button-list"><span class="badge badge-soft-'+ color+' p-1">'+status+'</span></div></td><td >'+remark+'</td></tr>';
+                
+                    }
                     
-                    row += '<tr> <td >'+window[field]+'</td><td >'+val.old_value+'</td> <td >'+val.new_value+'</td> <td ><div class="button-list"><span class="badge badge-soft-'+ color+' p-1">'+status+'</span></div></td><td >'+remark+'</td></tr>';
-                });
+                    });
                 
                 $("#remarks").val(res.data.remarks);
                 $("#parent_update_view_body").append(row);
