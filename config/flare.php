@@ -77,4 +77,5 @@ return [
     */
 
     'send_logs_as_events' => false,
+    'report_view_data' => false
 ];

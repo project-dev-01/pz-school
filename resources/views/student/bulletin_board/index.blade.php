@@ -174,7 +174,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="table-responsive">
-                                        <table class="table w-100 nowrap" id="parent-bulletin-table">
+                                        <table class="table w-100 nowrap" id="student-bulletin-table">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
@@ -199,7 +199,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="table-responsive">
-                                        <table class="table w-100 nowrap" id="parent-bulletin-imp-table">
+                                        <table class="table w-100 nowrap" id="student-bulletin-imp-table">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
