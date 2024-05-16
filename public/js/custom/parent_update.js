@@ -27,7 +27,7 @@ $(function () {
                         remark = val.remark;
                     }
 
-                    if(key== "passport_photo" || key== "visa_photo" || key== "japanese_association_membership_image_supplimental" || key== "japanese_association_membership_image_principal"){
+                    if(key== "passport_photo" || key== "visa_photo" || key== "japanese_association_membership_image_supplimental" || key== "japanese_association_membership_image_principal" || key=="nric_photo"){
                         row += '<tr> <td >'+window[field]+'</td><td ><a href= '+parentImg+val.old_value+' target="_blank">'+val.old_value+' </a></td> <td ><a href= '+parentImg+val.new_value+' target="_blank">'+val.new_value+' </a></td> <td ><div class="button-list"><span class="badge badge-soft-'+ color+' p-1">'+status+'</span></div></td><td >'+remark+'</td></tr>';
                 
                     }else{
