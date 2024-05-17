@@ -10948,7 +10948,12 @@ class AdminController extends Controller
     public function getTerminationList(Request $request)
     {
 
-        $response = Helper::GETMethod(config('constants.api.termination_list'));
+        $data = [
+            "academic_year" => $request->academic_year,
+            "academic_grade" => $request->academic_grade,
+
+        ];
+        $response = Helper::GETMethodWithData(config('constants.api.termination_list'), $data);
         $data = isset($response['data']) ? $response['data'] : [];
         return DataTables::of($data)
             ->addIndexColumn()

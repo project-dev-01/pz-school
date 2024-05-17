@@ -13,6 +13,7 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ asset('mobile-country/css/intlTelInput.css') }}">
 <link href="{{ asset('css/custom/pagehead_breadcrumb.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
 @endsection
@@ -87,6 +88,67 @@
     <!-- end page title -->
 
 
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+            <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                    <h4 class="nav-link">{{ __('messages.select_ground') }}
+                            <h4>
+                                <!-- Up and Down Arrows -->
+                                <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
+                            </li>
+                        </ul>             
+              
+                <div class="card-body collapse show">
+                    <form id="applicationFilter" autocomplete="off">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="academic_year">{{ __('messages.academic_year') }}</label>
+                                    <select id="academic_year" name="academic_year" class="form-control">
+                                        <option value="">{{ __('messages.admission_select_academic_year') }}</option>
+                                        @forelse($academic_year_list as $r)
+                                        <option value="{{$r['id']}}">{{$r['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="academic_grade">{{ __('messages.grade') }}</label>
+                                    <select id="academic_grade" name="academic_grade" class="form-control">
+                                        <option value="">{{ __('messages.select_grade') }}</option>
+                                        @forelse($grade as $g)
+                                        <option value="{{$g['id']}}">{{$g['name']}}</option>
+                                        @empty
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="form-group text-right m-b-0">
+                            <!-- <button class="btn btn-primary-bl waves-effect waves-light" id="indexSubmit" type="submit">
+                                Filter
+                            </button> -->
+                            <button class="btn btn-primary-bl waves-effect waves-light" type="submit">
+                                {{ __('messages.filter') }}
+                            </button>
+                            <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                Cancel
+                            </button>-->
+                        </div>
+                    </form>
+
+                </div> <!-- end card-body -->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+
+    </div>
 
     <div class="row">
         <div class="col-xl-12">
@@ -153,6 +215,7 @@
 <script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('toastr/toastr.min.js') }}"></script>
 <script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
+<script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
 
@@ -171,6 +234,30 @@
     var footer_txt = "{{ session()->get('footer_text') }}";
 </script>
 <!-- button js added -->
+<script>
+    
+    function initializeIntlTelInput(inputSelector) {
+        var input = document.querySelector(inputSelector);
+        intlTelInput(input, {
+            allowExtensions: true,
+            autoFormat: false,
+            autoHideDialCode: false,
+            autoPlaceholder: false,
+            defaultCountry: "auto",
+            ipinfoToken: "yolo",
+            nationalMode: false,
+            numberType: "MOBILE",
+            initialCountry: "jp",
+            //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+            preferredCountries: ['my', 'jp'],
+            preventInvalidNumbers: true,
+            // utilsScript: "js/utils.js"
+        });
+    }
+
+initializeIntlTelInput("#transfer_destination_tel");
+initializeIntlTelInput("#parent_phone_number_after_transfer");
+</script>
 <script src="{{ asset('buttons-datatables/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('buttons-datatables/jszip.min.js') }}"></script>
 <script src="{{ asset('buttons-datatables/pdfmake.min.js') }}"></script>

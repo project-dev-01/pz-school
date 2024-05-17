@@ -136,17 +136,26 @@ $(function () {
         }
     });
     
+    
     terminationTable();
+    // get application list
+    $('#applicationFilter').on('submit', function (e) {
+        e.preventDefault();
+        terminationTable();
+    });
     
     function terminationTable() {
+        
         $('#termination-table').DataTable({
             processing: true,
             info: true,
+            bDestroy: true,
+            // dom: 'lBfrtip',
             dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             "language": {
-                
+
                 "emptyTable": no_data_available,
                 "infoFiltered": filter_from_total_entries,
                 "zeroRecords": no_matching_records_found,
@@ -168,7 +177,8 @@ $(function () {
                     bom: true,
                     exportOptions: {
                         columns: 'th:not(:last-child)'
-                    }
+                    },
+                    enabled: false, // Initially disable CSV button
                 },
                 {
                     extend: 'pdf',
@@ -179,7 +189,7 @@ $(function () {
                     exportOptions: {
                         columns: 'th:not(:last-child)'
                     },
-    
+                    enabled: false, // Initially disable PDF button
                 
                     customize: function (doc) {
                     doc.pageMargins = [50,50,50,50];
@@ -217,7 +227,7 @@ $(function () {
                                     alignment: 'right',
                                     text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }],
                                     width:100
-    
+
                                 }
                             ],
                             margin: [50, 0,0,0]
@@ -225,15 +235,49 @@ $(function () {
                     });
                     
                 }
-    
-                }
+            }
             ],
-            ajax: terminationList,
+            initComplete: function () {
+                var table = this;
+                $.ajax({
+                    url: terminationList,
+                    data: function (d) {                    
+                        d.academic_year = $('#academic_year').val(),
+                        d.academic_grade = $('#academic_grade').val()
+                    },
+                    success: function(data) {
+                        console.log(data.data.length);
+                        if (data && data.data.length > 0) {
+                            console.log('ok');
+                            $('#application-table_wrapper .buttons-csv').removeClass('disabled');
+                            $('#application-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
+                        } else {
+                            console.log(data);
+                            $('#application-table_wrapper .buttons-csv').addClass('disabled');
+                            $('#application-table_wrapper .buttons-pdf').addClass('disabled');               
+                        }
+                    },
+                    error: function() {
+                        console.log('error');
+                        // Handle error if necessary
+                    }
+                });
+            },
+            serverSide: true,
+            ajax: {
+                url: terminationList,
+                data: function (d) {
+                    
+                    d.academic_year = $('#academic_year').val(),
+                    d.academic_grade = $('#academic_grade').val()
+                }
+            },
             "pageLength": 10,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],
                 [5, 10, 25, 50, "All"]
             ],
+            
             columns: [
                 //  {data:'id', name:'id'},
                 // {
@@ -290,9 +334,8 @@ $(function () {
                     searchable: false
                 },
             ]
-        }).on('draw', function () {
         });
-   }
+    }
 
     // delete Termination Type
     $(document).on('click','#deleteTerminationBtn', function(){

@@ -64,7 +64,7 @@
                             <tr>
                                 <td>{{ __('messages.parent_guardian_phone_number_after_transfer') }}</td>
                                 <td>:</td>
-                                <td><input type="text" class="form-control" id="parent_phone_number_after_transfer" readonly  name="parent_phone_number_after_transfer" placeholder="{{ __('messages.enter_parent_guardian_phone_number_after_transfer') }}" aria-describedby="inputGroupPrepend">
+                                <td><input type="text" class="form-control parent_phone_number_after_transfer" id="parent_phone_number_after_transfer" readonly  name="parent_phone_number_after_transfer" placeholder="{{ __('messages.enter_parent_guardian_phone_number_after_transfer') }}" aria-describedby="inputGroupPrepend">
                                     
                                 </td>
                             </tr>

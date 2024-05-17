@@ -2470,7 +2470,10 @@ class ParentController extends Controller
     {
 
         $data = [
-            "parent_id" => session()->get('ref_user_id')
+            "parent_id" => session()->get('ref_user_id'),
+            "academic_year" => $request->academic_year,
+            "academic_grade" => $request->academic_grade,
+
         ];
         $response = Helper::GETMethodWithData(config('constants.api.termination_list'), $data);
         // dd($data);

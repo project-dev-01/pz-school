@@ -423,6 +423,12 @@
                                         <textarea type="text" class="form-control" {{$readonly}} id="parent_address_after_transfer" name="parent_address_after_transfer" placeholder="{{ __('messages.enter_parent_address_after_transfer') }} " aria-describedby="inputGroupPrepend">{{ $termination['parent_address_after_transfer']}}</textarea>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="remarks">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" {{$readonly}} id="remarks" value="{{ $termination['remarks']}}" name="remarks" placeholder="{{ __('messages.enter_remarks') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
                                 <!-- <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="school_fees_payment_status">{{ __('messages.school_fees_payment_status') }}<span class="text-danger">*</span></label>
