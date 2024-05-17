@@ -999,7 +999,7 @@
                                                                 <span class="far fa-calendar-alt"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control" id="visa_expiry_date"  name="visa_expiry_date" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : date('Y-m-d')}}" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control" id="visa_expiry_date"  name="visa_expiry_date" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : ' '}}" placeholder="{{ __('messages.yyyy_mm_dd') }}" value="{{ isset($student['visa_expiry_date']) ? $student['visa_expiry_date'] : ''}}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                     <label for="visa_expiry_date" class="error"></label>
                                                 </div>
