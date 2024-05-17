@@ -735,8 +735,8 @@ $(function () {
                 //     name: 'email'
                 // },
                 {
-                    data: 'admission_date',
-                    name: 'admission_date'
+                    data: 'official_date',
+                    name: 'official_date'
                 },
                 {
                     data: 'status_after_approval',
