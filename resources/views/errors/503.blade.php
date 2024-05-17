@@ -44,38 +44,6 @@
                     <div class="responsive">
                         <h1 class="eoppps">Service Unavailable</h1>
                         <p class="etext">This page should clearly state that the service is temporarily unavailable and provide some explanation for the inconvenience<br> It's essential to maintain transparency and reassure users that the issue is temporary</p>
-                        @if(Session::get('role_id'))
-                        <a href="javascript:void(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <span>Go to Home</span>
-                        </a>
-                        @if(Session::get('role_id') == '1')
-                        <form id="logout-form" action="{{ route('super_admin.logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                        @elseif(Session::get('role_id') == '3')
-                        <form id="logout-form" action="{{ route('staff.logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                        @elseif(Session::get('role_id') == '4')
-                        <form id="logout-form" action="{{ route('teacher.logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                        @elseif(Session::get('role_id') == '5')
-                        <form id="logout-form" action="{{ route('parent.logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                        @elseif(Session::get('role_id') == '6')
-                        <form id="logout-form" action="{{ route('student.logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                        @else
-                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                        @endif
-                        @else
-                        <a class="link_404" href="{{ url()->previous() }}">Back</a>
-                        @endif
                     </div>
                 </div> <!-- end .card-body -->
             </div> <!-- end .align-items-center.d-flex.h-100-->

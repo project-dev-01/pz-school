@@ -4,43 +4,25 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Auth\AuthenticationException;
-use League\OAuth2\Server\Exception\OAuthServerException;
 use Throwable;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Facades\Redirect;
 
 class Handler extends ExceptionHandler
 {
-    /**
-     * A list of the exception types that are not reported.
-     *
-     * @var array
-     */
     protected $dontReport = [
-        //
+        // Add exception types that should not be reported here
     ];
 
-    /**
-     * A list of the inputs that are never flashed for validation exceptions.
-     *
-     * @var array
-     */
     protected $dontFlash = [
         'password',
         'password_confirmation',
     ];
 
-    /**
-     * Report or log an exception.
-     *
-     * @param  \Throwable  $e
-     * @return void
-     *
-     * @throws \Exception
-     */
     public function report(Throwable $e)
     {
-        // Check if the exception should not be reported
         if ($this->shouldntReport($e)) {
             return;
         }
@@ -51,13 +33,29 @@ class Handler extends ExceptionHandler
         parent::report($e);
     }
 
-    /**
-     * Convert an authentication exception into a JSON response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
-     * @return \Illuminate\Http\Response
-     */
+    public function render($request, Throwable $e)
+    {
+        // Log the IP address for debugging
+        Log::info('Handling request from IP: ' . $request->ip());
+
+        // Check if the application is in maintenance mode
+        if (app()->isDownForMaintenance()) {
+            $allowedIps = ['127.0.0.1', '::1']; // Add your actual IP addresses
+
+            Log::info('Application in maintenance mode. Checking IP...');
+
+            // Check if the request IP is in the allowed IPs
+            if (in_array($request->ip(), $allowedIps)) {
+                Log::info('IP allowed: ' . $request->ip());
+                return Redirect::to($request->fullUrlWithoutQuery(['secret']));
+            } else {
+                Log::info('IP not allowed: ' . $request->ip());
+            }
+        }
+
+        return parent::render($request, $e);
+    }
+
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         return response()->json([
