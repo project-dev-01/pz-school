@@ -220,6 +220,7 @@ $(function () {
             }
 
             $('#loaderOverlay').show();
+            
             $.ajax({
                 url: $(form).attr('action'),
                 method: $(form).attr('method'),
@@ -235,10 +236,15 @@ $(function () {
                     console.log(data)
                     if (data.code == 200) {
                        
-                        $('.addBuletin').find('form')[0].reset();
+                        $('#buletin-table').DataTable().ajax.reload(null, false);
+                        // Redirect after a delay
+                        setTimeout(function() {
+                            window.location.href = bulletin;
+                        }, 500); // Redirect after 1 second
                         $('#loaderOverlay').hide();
                         toastr.success(data.message);
-                        window.location.href = bulletin;
+
+                        
                        
                     } else {
                         toastr.error(data.message);

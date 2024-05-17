@@ -1055,6 +1055,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // student interview notes
         Route::get('student_interview_details', [AdminController::class, 'studentInterviewIndex'])->name('admin.student_interview_details');
         Route::post('student_interview_details/list', [AdminController::class, 'getStudentInterviewData'])->name('admin.student_interview_details.list');
+        Route::post('student_interview_details/edit', [AdminController::class, 'editStudentInterviewData'])->name('admin.student_interview_details.edit');
+        Route::post('student_interview_details/update', [AdminController::class, 'updateStudentInterviewData'])->name('admin.student_interview_details.update');
+        Route::post('student_interview_notes/addComment', [AdminController::class, 'addStudentInterviewComment'])->name('admin.student_interview_notes.addComment');
     });
 });
 // admin routes end
@@ -1470,6 +1473,7 @@ Route::group(['prefix' => 'teacher'], function () {
          Route::post('student_interview_details/list', [TeacherController::class, 'getStudentInterviewData'])->name('teacher.student_interview_details.list');
          Route::post('student_interview_details/edit', [TeacherController::class, 'editStudentInterviewData'])->name('teacher.student_interview_details.edit');
          Route::post('student_interview_details/update', [TeacherController::class, 'updateStudentInterviewData'])->name('teacher.student_interview_details.update');
+         Route::post('student_interview_notes/addComment', [TeacherController::class, 'addStudentInterviewComment'])->name('teacher.student_interview_notes.addComment');
     });
 });
 // TEACHER CONTROLLER END
@@ -1606,7 +1610,7 @@ Route::group(['prefix' => 'parent'], function () {
         Route::get('/update_info/list', [ParentController::class, 'getParentUpdateInfoList'])->name('parent.update_info_list');
         Route::get('/update_info/view/{id}', [ParentController::class, 'viewParentUpdateInfo'])->name('parent.update_info_view');
         // student medical record
-        Route::get('/student-medical-record', [ParentController::class, 'studentMedicalRecord'])->name('student.medical.index');
+        Route::get('/student-medical-record', [ParentController::class, 'studentMedicalRecord'])->name('parent.medical.index');
         Route::post('school_role/checkpermissions', [ParentController::class, 'checkpermissions'])->name('parent.school_role.checkpermissions');
 
     });

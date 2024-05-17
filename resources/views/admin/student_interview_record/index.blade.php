@@ -144,9 +144,15 @@
     vertical-align: top;
     border-top: none;
 }
+.btn-green {
+    background-color: #28a745; /* Green color */
+    color: #fff; /* White text */
+    /* Add any other styles as needed */
+}
     </style>
      <!-- end row-->
      @include('admin.student_interview_record.edit')
+     @include('admin.student_interview_record.add_comment')
 </div> <!-- container -->
 @endsection
 @section('scripts')
@@ -171,7 +177,10 @@
     var getStudentInterviewList = "{{ route('admin.student_interview_details.list') }}";
     var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
     var sectionByClass = "{{ route('admin.section_by_class') }}";
-    var getStudentList = "{{ config('constants.api.get_student_details_buletin_board') }}";
+    var getStudentList = "{{ config('constants.api.get_student_list_interview') }}";
+    var editStudentInterview = "{{ route('admin.student_interview_details.edit') }}";
+    var updateStudentInterviewComment = "{{ route('admin.student_interview_details.update') }}";
+    var addStudentInterviewComment = "{{ route('admin.student_interview_notes.addComment') }}";
 </script>
 <script src="{{ asset('js/custom/student_interview.js') }}"></script>
 @endsection

@@ -17,6 +17,13 @@
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 @endsection
 @section('content')
+<style>
+    .btn-green {
+    background-color: #28a745; /* Green color */
+    color: #fff; /* White text */
+    /* Add any other styles as needed */
+}
+</style>
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
 <!-- Start Content-->
 <div class="container-fluid">
@@ -150,6 +157,7 @@
     </div>
     <!-- end row-->
     @include('teacher.student_interview_notes.edit')
+    @include('teacher.student_interview_notes.add_comment')
 </div> <!-- container -->
 
 @endsection
@@ -175,10 +183,12 @@
     
     var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
     var sectionByClass = "{{ route('teacher.section_by_class') }}";
-    var getStudentList = "{{ config('constants.api.get_student_details_buletin_board') }}";
+    var getStudentList = "{{ config('constants.api.get_student_list_interview') }}";
     var getStudentInterviewList = "{{ route('teacher.student_interview_details.list') }}";
     var editStudentInterview = "{{ route('teacher.student_interview_details.edit') }}";
     var updateStudentInterviewComment = "{{ route('teacher.student_interview_details.update') }}";
+    var addStudentInterviewComment = "{{ route('teacher.student_interview_notes.addComment') }}";
+    var currentUserId ="{{$teacher_id}}";
     var footer_txt = "{{ session()->get('footer_text') }}";
 </script>
 <script src="{{ asset('js/custom/student_interview_teacher.js') }}"></script>

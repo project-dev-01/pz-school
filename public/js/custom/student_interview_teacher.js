@@ -26,6 +26,7 @@ $(function () {
         $(Selector).find('select[name="section_id"]').append('<option value="">' + select_class + '</option>');
 
         $.post(sectionByClass, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
+            console.log(res);
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
                     $(Selector).find('select[name="section_id"]').append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
@@ -57,7 +58,7 @@ $(function () {
         }
     });
     function studentAllocation(class_id, sectionID, Selector, student_id){
-        //console.log(class_id, sectionID, Selector, student_id);
+        console.log(class_id, sectionID, Selector, student_id);
         $(Selector).find('select[name="student_id"]').empty();
         $(Selector).find('select[name="student_id"]').append('<option value="">'+select_student+'</option>');
         $.post(getStudentList, { token: token, branch_id: branchID, class_id: class_id, section_id: sectionID }, function (res) {
@@ -234,27 +235,40 @@ console.log(formData);
                     data: 'title'
                 }, 
                 {
-                    data: 'latest_type'
+                    data: 'message_count'
                 },{
                     data: null,
                     render: function (data, type, row) {
                         // Add edit and delete buttons
                         return '<div class="button-list">' +
-                        '<a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light" data-id="' + row.id + '"  id="editPartCBtn"><i class="fe-eye"></i></a>' +
+                        '<a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light" data-id="' + row.id + '"  id="editCommentCBtn"><i class="fe-eye"></i></a>' +
+                        '<a href="javascript:void(0)" class="btn btn-green btn-sm waves-effect waves-light" data-id="' + row.student_interviewId + '" data-type="' + row.type + '" id="addCommentBtn"><i class="fe-plus"></i></a>' +
                         '</div>';
 
                         
                     }
                 }
-            ]
+            ], columnDefs: [{
+                targets: 6, // Index of the 'type' column
+                type: 'num-fmt', // Use numeric formatting for this column
+                render: function(data, type, row) {
+                    // Check the value of 'type' and return the appropriate display
+                    if (data === 1) {
+                        return 'Three-parties interview';
+                    } else if (data === 2) {
+                        return 'Awareness';
+                    } else {
+                        return ''; // Return an empty string for other values
+                    }
+                }
+            }]
         }).on('draw', function () {
         });
     }
   
-    $(document).on('click', '#editPartCBtn', function () {
+    $(document).on('click', '#editCommentCBtn', function () {
         var id = $(this).data('id');
         console.log(id);
-    
         $.post(editStudentInterview, { id: id, token: token, branch_id: branchID }, function (data) {
             console.log(data);
     
@@ -265,110 +279,151 @@ console.log(formData);
             $('#editModal').modal('show');
         }, 'json');
     });
-      // Event handler for edit button click
-    $(document).on('click', '.editStudentRemarksBtn', function () {
-        // Find the closest comment wrapper within the same row
-        var commentWrapper = $(this).closest('tr').find('.comment-wrapper');
-
-        // Enable editing for the comment textarea
-        commentWrapper.find('.editable-comment').prop('readonly', false);
-    });
-    var commentsToSave = [];
-    $(document).on('click', '.saveStudentRemarksBtn', function () {
-        // Find the closest comment wrapper within the same row
-        var commentWrapper = $(this).closest('tr').find('.comment-wrapper');
-    
-        // Disable editing for the comment textarea
-        commentWrapper.find('.editable-comment').prop('readonly', ture);
-    
-        // Check if commentWrapper has elements
-        if (commentWrapper.length > 0) {
-            // If there's at least one comment
-            commentWrapper.each(function () {
-                var commentId = $(this).find('.editable-comment').data('comment-id');
-                var editedComment = $(this).find('.editable-comment').val();
-                commentsToSave.push({
-                    id: commentId,
-                    comment: editedComment,
-                });
-            });
-        } else {
-            // If there's only one comment
-            var singleCommentId = $('.editable-comment').data('comment-id');
-            var singleEditedComment = $('.editable-comment').val();
-            commentsToSave.push({
-                id: singleCommentId,
-                comment: singleEditedComment,
-            });
-        }
-    
-        // Log the array for debugging
-        console.log(commentsToSave);
-    
-        // Perform additional actions if needed, e.g., save the comments
-        // saveCommentToServer(commentsToSave);
-    });
+   
+   
     
     function updateModalContent(comments) {
         // Update modal content with the provided comment
-        var modalBody = $('#editModal').find('.modal-body');
-        
-    
-        // Iterate through the comments array
-        for (var i = 0; i < comments.length; i++) {
-            var commentData = comments[i];
-            var counter = i + 1; // Incrementing the counter for each comment
-            var commentHtml = `<tbody>
-            <tr>  
-            <td>${counter}</td>
-            <td>
-                <div class="comment-wrapper">
-                    <textarea class="form-control editable-comment" readonly name="comment" id="comment" data-comment-id="${commentData.id}">${commentData.comment}</textarea>
-                </div>
-            </td> 
-            <td>${commentData.created_date}</td>
-            <td>${commentData.register_name}</td>
-            <td>${commentData.updated_name}</td>
-            <td>${commentData.updated_date}</td>
-            <td>
-                <button type="button" class="btn btn-blue btn-sm waves-effect waves-light editStudentRemarksBtn" data-comment-id="${commentData.id}" data-comment-type="${commentData.type}" style="border-radius: 15px;width: 50px;"><i class="fe-edit"></i></button>
-            </td>
-        </tr></tbody>
-            `;
-            var commentTable = modalBody.find('#commentTable');
-     
-            commentTable.append(commentHtml);
-        
+    var modalBody = $('#editModal').find('.modal-body');
+    var commentTable = modalBody.find('#commentTable');
+    var tableBody = commentTable.find('tbody');
+    tableBody.empty();
+    // Create the tbody element outside the loop
+    var tbodyHtml = '<tbody>';
+
+    // Iterate through the comments array
+    for (var i = 0; i < comments.length; i++) {
+        var commentData = comments[i];
+       
+        var counter = i + 1; // Incrementing the counter for each comment
+        var editButtonHtml = ''; // Initialize the edit button HTML
+
+        // Check if the current user created the comment
+        if (commentData.created_by == currentUserId) {
+            // If the comment was created by the current user, show the edit button
+            editButtonHtml = `
+                <button type="button" class="btn btn-blue btn-sm waves-effect waves-light editStudentRemarksBtn" 
+                        data-comment-id="${commentData.id}" data-comment-type="${commentData.type}" 
+                        style="border-radius: 15px;width: 50px;">
+                    <i class="fe-edit"></i>
+                </button>`;
         }
+        var commentRowHtml = `
+            <tr>  
+                <td>${counter}</td>
+                <td>
+                    <div class="comment-wrapper">
+                        <textarea class="form-control editable-comment" readonly name="comment" id="comment" data-comment-id="${commentData.id}">${commentData.comment}</textarea>
+                    </div>
+                </td> 
+                <td>${commentData.created_date ? commentData.created_date : ''}</td>
+                <td>${commentData.register_name ? commentData.register_name : ''}</td>
+                <td>${commentData.updated_name ? commentData.updated_name : ''}</td>
+                <td>${commentData.updated_date ? commentData.updated_date : ''}</td>
+                <td>${editButtonHtml}</td> 
+            </tr>
+        `;
+        
+        // Append each comment row HTML to the tbody HTML
+        tbodyHtml += commentRowHtml;
     }
-    
-    
-    function saveCommentToServer(commentsToSave) {
-        console.log(commentsToSave);
-    
-        // Make an AJAX request to save the comment
-        $.ajax({
-            url: updateStudentInterviewComment,
+
+        // Close the tbody element
+        tbodyHtml += '</tbody>';
+
+        // Append the tbody HTML to the comment table
+       
+        commentTable.append(tbodyHtml);
+    }
+    var editedCommentRows = []; // Array to store references to rows with edited comments
+
+    // Event handler for edit button click
+    $(document).on('click', '.editStudentRemarksBtn', function () {
+        // Store a reference to the parent row containing the edited comment
+        var editedCommentRow = $(this).closest('tr');
+        
+        // Enable editing for the comment textarea
+        editedCommentRow.find('.editable-comment').prop('readonly', false);
+
+        // Add the edited row to the array
+        editedCommentRows.push(editedCommentRow);
+    });
+
+    // Event handler for save button click
+    $(document).on('click', '.saveStudentRemarksBtn', function () {
+        // Iterate over each edited row
+        editedCommentRows.forEach(function(editedCommentRow) {
+            // Retrieve the edited comment and its ID from the row
+            var editedCommentTextarea = editedCommentRow.find('.editable-comment');
+            var commentId = editedCommentTextarea.data('comment-id');
+            var editedComment = editedCommentTextarea.val();
+
+            // Log the retrieved comment and its ID for debugging
+            console.log("Retrieved comment ID:", commentId);
+            console.log("Retrieved comment:", editedComment);
+            $.ajax({
+                url: updateStudentInterviewComment,
+                method: 'POST',
+                data: {
+                    id: commentId,
+                    comment: editedComment
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    if (data.code == 200) {
+                        toastr.success(data.message);
+                    } else {
+                        toastr.error(data.message);
+                    }
+                },
+                error: function (error) {
+                    console.error('Error saving comment:', error);
+                }
+            });
+        });
+
+        // Clear the array after saving all edited comments
+        editedCommentRows = [];
+    });
+
+    $(document).on('click', '#addCommentBtn', function() {
+        var commentId = $(this).data('id');
+        var type = $(this).data('type');
+        // Populate modal with relevant data
+        $('#addCommentModal').modal('show');
+  
+        // Submit comment form
+        $('#commentForm').off('submit').on('submit', function(e) {
+          e.preventDefault();
+          var commentText = $('#commentText').val();
+  
+          // Send AJAX request to save the comment
+          $.ajax({
+            url: addStudentInterviewComment,
             method: 'POST',
             data: {
-                id: commentId,
-                comment: comment,
-                type: type
+              id: commentId,
+              comment: commentText,
+              type: type
             },
-            dataType: 'json',
-            success: function (data) {
-                console.log(data);
-                if (data.code == 200) {
-                    toastr.success(data.message);
+            success: function(data) {
+              // Handle success response
+              if (data.code == 200) {
+                toastr.success(data.message);
                 } else {
                     toastr.error(data.message);
                 }
+              // Close the modal
+              $('#addCommentModal').modal('hide');
             },
-            error: function (error) {
-                console.error('Error saving comment:', error);
+            error: function(xhr, status, error) {
+              // Handle error
+              console.error('Error adding comment:', error);
             }
+          });
         });
-    }
+      });
     
 });
 

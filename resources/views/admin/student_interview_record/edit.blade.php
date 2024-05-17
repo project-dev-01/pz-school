@@ -1,37 +1,35 @@
-<!-- student leave remarks popup -->
-<div class="modal fade editModal" id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+<!-- Modal Structure -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-full-width">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myviewEventModalLabel" style="color: #6FC6CC"> <i class="fas fa-info-circle" style="margin-right:10px;"></i>{{ __('messages.comments') }}</h4>
+                <h4 class="modal-title" style="color: #6FC6CC">{{ __('messages.comments') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col">
-                        <div class="card-box eventpopup" >
-                            <div class="table-responsive">
-                                <table class="table w-100 nowrap">
-                                    <tr>
-                                        <td>Student A Not behave Well</td>
-                                        <td><button type="button" id="studentRemarksSave" class="btn btn-blue btn-sm waves-effect waves-light" style="border-radius: 15px;width: 50px;">{{ __('messages.edit') }}</button></td>
+                <div class="card-box eventpopup">
+                    <div class="table-responsive">
+                        
+                        <table class="table dt-responsive nowrap w-100 dataTable no-footer" id="commentTable">
+                            <thead>
+                                <tr>
+                                <th>#</th>
+                                <th>{{ __('messages.Message') }}</th>
+                                <th>{{ __('messages.register_time') }}</th>
+                                <th>{{ __('messages.register') }}</th>
+                                <th>{{ __('messages.updated') }}</th>
+                                <th>{{ __('messages.updated_time') }}</th>
+                                <th>{{ __('messages.action') }}</th>                    
                                     </tr>
-                                    <tr>
-                                        <td>Student A Not behave Well</td>
-                                        <td> <button type="button" id="studentRemarksSave" class="btn btn-blue btn-sm waves-effect waves-light" style="border-radius: 15px;width: 50px;">{{ __('messages.edit') }}</button></td>
-                                    </tr>
-                                    
-                                </table>
-                                
-                            </div> 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
-                            <button type="button" id="studentRemarksSave" class="btn btn-primary-bl waves-effect waves-light" style="border-radius: 0px;width: 80px;">{{ __('messages.save') }}</button>
-                        </div>
-                     </div> <!-- end card-box -->
-                    </div> <!-- end col -->
+                                </thead>
+                               
+                        </table>
+                    </div>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">{{ __('messages.close') }}</button>
+                <button type="button" class="btn btn-primary-bl waves-effect waves-light saveStudentRemarksBtn">{{ __('messages.save') }}</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

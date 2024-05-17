@@ -309,10 +309,10 @@
     <!-- end page title -->
     <div class="row">
         <div class="col-xl-12">
-            <form id="addadmission" method="post" action="" enctype="multipart/form-data" autocomplete="off">
+            <form id="addstudentmedical" method="post" action="" enctype="multipart/form-data" autocomplete="off">
                 @csrf
 
-                <input type="hidden" name="sudent_application_id" id="sudent_application_id">
+                <input type="hidden" name="student_id" id="student_id">
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
@@ -325,21 +325,21 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Normal Temperature</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the normal temperature">
+                                    <input type="text" id="normal_temp" name="normal_temp" class="form-control" placeholder="Enter the normal temperature">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Hospital Name</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the hospital Name">
+                                    <input type="text" id="hospital_name" name="hospital_name" class="form-control" placeholder="Enter the hospital Name">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Doctor's Name</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the doctor's name">
+                                    <input type="text" id="doctor_name" name="doctor_name" class="form-control" placeholder="Enter the doctor's name">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
@@ -355,7 +355,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Company Name</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the insurance company name">
+                                    <input type="text" id="company_name" name="company_name" class="form-control" placeholder="Enter the insurance company name">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
@@ -394,60 +394,59 @@
                                 <tbody>
                                     <tr style="height: 30px;">
                                         <td>Food Allergies</td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control" name="food_age_onset"  id="food_age_onset" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control" name="food_treatment"  id="food_treatment" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control" name="food_follow_up"  id="food_follow_up" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="food_treated"  id="food_treated" placeholder="Enter the data"></td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>Drug Allergies</td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="drug_age_onset"  id="drug_age_onset" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="drug_treatment"  id="drug_treatment" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="drug_follow_up"  id="drug_follow_up" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="drug_treated"  id="drug_treated" placeholder="Enter the data"></td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>Other Allergies</td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="other_age_onset"  id="other_age_onset" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="other_treatment"  id="other_treatment" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="other_follow_up"  id="other_follow_up" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="other_treated"  id="other_treated" placeholder="Enter the data"></td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>Asthma</td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="asthma_age_onset"  id="asthma_age_onset" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="asthma_treatment"  id="asthma_treatment" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="asthma_follow_up"  id="asthma_follow_up" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="asthma_treated"  id="asthma_treated" placeholder="Enter the data"></td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>Atopic Dermatitis</td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="atopic_age_onset"  id="atopic_age_onset" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="atopic_treatment"  id="atopic_treatment" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="atopic_follow_up"  id="atopic_follow_up" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="atopic_treated"  id="atopic_treated" placeholder="Enter the data"></td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>Allergic Rhinitis</td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="allergic_age_onset"  id="allergic_age_onset" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="allergic_treatment"  id="allergic_treatment" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="allergic_follow_up"  id="allergic_follow_up" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="allergic_treated"  id="allergic_treated" placeholder="Enter the data"></td>
                                     </tr>
                                     <tr style="height: 30px;">
                                         <td>Allergic Conjunctivitis</td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td><input type="text" class="form-control" placeholder="Enter the data"></td>
-                                        <td>
-                                            <<input type="text" class="form-control" placeholder="Enter the data">
+                                        <td><input type="text" class="form-control"  name="conjunctivitis_age_onset"  id="conjunctivitis_age_onset" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="conjunctivitis_treatment"  id="conjunctivitis_treatment"  placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="conjunctivitis_follow_up"  id="conjunctivitis_follow_up" placeholder="Enter the data"></td>
+                                        <td><input type="text" class="form-control"  name="conjunctivitis_treated"  id="conjunctivitis_treated"  placeholder="Enter the data">
                                         </td>
                                     </tr>
 
                                     <tr>
                                         <td colspan="5"> <span style="margin-right:10px;">*</span>Please write about the allergen if any<br>
                                             <br>
-                                            <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="{{ __('messages.enter_the_remarks') }}" name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                                            <textarea maxlength="255" id="remark_allergen" class="form-control alloptions" placeholder="{{ __('messages.enter_the_remarks') }}" name="remark_allergen" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                             </textarea>
                                         </td>
 
@@ -501,126 +500,126 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Heart Problem</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="heart_problem" name="heart_problem" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Epilepsy</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="epilepsy" name="epilepsy" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Measles</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="measles" name="measles" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Kawasaki disease</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="kawasaki_disease" name="kawasaki_disease" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Febrile Convulsions</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="febrile_convulsion" name="febrile_convulsion" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Heart Problem</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="heart_problem" name="heart_problem" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Chicken Pox</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="chicken_pox" name="chicken_pox" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Scoliosis</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="scoliosis" name="scoliosis" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Tuberculosis</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the hospital Name">
+                                    <input type="text" id="tuberculosis" name="tuberculosis" class="form-control" placeholder="Enter the hospital Name">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Mumps</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="mumps" name="mumps" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Kindly Problems</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <label>Kidney problems</label>
+                                    <input type="text" id="kidney_problems" name="kidney_problems" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Others</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="others" name="others" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Rubella(German Measles)</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="rubella" name="rubella" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Diabetes</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="diabetes" name="diabetes" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Dengue Fever</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="dengue_fever" name="dengue_fever" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Operated Disease</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details>
+                                    <input type="text" id="operated_disease" name="operated_disease" class="form-control" placeholder="Enter the details>
                                     <span class=" text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Injury</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="injury" name="injury" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Illness</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="illness" name="illness" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
@@ -642,91 +641,91 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Japanese Encephalitis</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="japanese_encephalitis" name="japanese_encephalitis" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Streptococcus pneumoniae</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="streptococcus_pneumoniae" name="streptococcus_pneumoniae" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Triple Antigen</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="triple_antigen" name="triple_antigen" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Hib</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="hib" name="hib" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Quadruple Antigen</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="quadruple_antigen" name="quadruple_antigen" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Covid 19</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="covid" name="covid" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>BCG</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="bcg" name="bcg" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Rabies Vaccine</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="rabies_vaccine" name="rabies_vaccine" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Measles/Rubella(MR)</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the hospital Name">
+                                    <input type="text" id="measles" name="measles" class="form-control" placeholder="Enter the hospital Name">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Tetanus</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="tetanus" name="tetanus" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Chicken Pox</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="chicken_pox" name="chicken_pox" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Mumps</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="mumps_imm" name="mumps_imm" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Advised by doctors against vaccination</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="advised_doctors" name="advised_doctors" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
@@ -750,63 +749,63 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Develops a fever easily.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="develops_fever" name="develops_fever" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Frequent headaches.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="frequent_headaches" name="frequent_headaches" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Dyspepsia & stomachache and cliarrhea easily.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="dyspepsia" name="dyspepsia" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Constipates easily.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="constipates" name="constipates" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Vomits easily.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="vomits" name="vomits" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Faints easily.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="faints" name="faints" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Dizziness easily.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="dizziness" name="dizziness" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Nettle rash easily.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="nettle_rash" name="nettle_rash" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Prone to car sickness.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="prone_car_sickness" name="prone_car_sickness" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
@@ -822,35 +821,35 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Has poor hearing.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="poor_hearing" name="poor_hearing" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Has had otitis media before.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="otitis_media" name="otitis_media" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Bleeds from the nose easily.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="bleeds_nose" name="bleeds_nose" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Nasal congestion and sevene running nose easily.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="nasal_congestion_nose" name="nasal_congestion_nose" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Throat is swollen easily.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="throat_swollen" name="throat_swollen" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
@@ -866,14 +865,14 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Squinted eyes to view from a distance.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="squinted_eyes" name="squinted_eyes" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Eye irritation & redness easily.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="eye_irritation" name="eye_irritation" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
@@ -887,7 +886,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Wrong Colour.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="wrong_colour" name="wrong_colour" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
@@ -904,28 +903,28 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Has a sensistive tooth or toothache</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="sensistive_tooth" name="sensistive_tooth" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Bleed from gum.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="bleed_from_gum" name="bleed_from_gum" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Pain or sound in jaw joint.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="pain_sound_jaw_joint" name="pain_sound_jaw_joint" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Has been Orthodontics.</label>
-                                    <input type="text" id="total_leave" name="total_leave" class="form-control" placeholder="Enter the details">
+                                    <input type="text" id="orthodontics" name="orthodontics" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
@@ -938,7 +937,7 @@
 
                         <div class="form-group">
                             <label for="txtarea_prev_remarks">Any medicine to take daily?<br>(No/Yes) (Name of medicine:)</label>
-                            <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="{{ __('messages.enter_the_remarks') }}" name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                            <textarea maxlength="255" id="medicine_to_take_daily" class="form-control alloptions" placeholder="{{ __('messages.enter_the_remarks') }}" name="medicine_to_take_daily" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                             </textarea>
                         </div>
 
@@ -969,7 +968,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="admission_date" name="admission_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" id="date" name="date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -978,7 +977,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="txtarea_prev_remarks">Remarks:</label>
-                                    <textarea maxlength="255" id="txtarea_prev_remarks" class="form-control alloptions" placeholder="{{ __('messages.enter_the_remarks') }}" name="txtarea_prev_remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
+                                    <textarea maxlength="255" id="remarks" class="form-control alloptions" placeholder="{{ __('messages.enter_the_remarks') }}" name="remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                             </textarea>
                                 </div>
                             </div>
@@ -1100,7 +1099,7 @@
 <script src="{{ asset('libs/dropify/js/dropify.min.js') }}"></script>
 <script src="{{ asset('js/pages/form-fileuploads.init.js') }}"></script>
 <script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
-<script src="{{ asset('js/custom/admission.js') }}"></script>
+<script src="{{ asset('js/custom/student_medical.js') }}"></script>
 <script>
     $('.dropify-im').dropify({
         messages: {

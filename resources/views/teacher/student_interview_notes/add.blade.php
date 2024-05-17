@@ -162,7 +162,7 @@
 <script>
     var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
     var sectionByClass = "{{ route('teacher.section_by_class') }}";
-    var getStudentList = "{{ config('constants.api.get_student_details_buletin_board') }}";
+    var getStudentList = "{{ config('constants.api.get_student_list_interview') }}";
     var addStudentInterview = "{{ route('teacher.student_interview_notes.add') }}";
     var footer_txt = "{{ session()->get('footer_text') }}";
 </script>

@@ -195,23 +195,185 @@ $(function () {
                     data: 'title'
                 }, 
                 {
-                    data: 'latest_type'
+                    data: 'message_count'
                 },{
                     data: null,
                     render: function (data, type, row) {
                         // Add edit and delete buttons
                         return '<div class="button-list">' +
-                        '<a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light" data-id="' + row.id + '"  id="editPartCBtn"><i class="fe-edit"></i></a>' +
-                        '<a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' + row.id + '"  id="deletePartCBtn"><i class="fe-trash-2"></i></a>' +
+                        '<a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light" data-id="' + row.id + '"  id="editPartCBtn"><i class="fe-eye"></i></a>' +
+                        '<a href="javascript:void(0)" class="btn btn-green btn-sm waves-effect waves-light" data-id="' + row.student_interviewId + '" data-type="' + row.type + '" id="addCommentBtn"><i class="fe-plus"></i></a>' +
                         '</div>';
 
                         
                     }
                 }
-            ]
+            ], columnDefs: [{
+                targets: 6, // Index of the 'type' column
+                type: 'num-fmt', // Use numeric formatting for this column
+                render: function(data, type, row) {
+                    // Check the value of 'type' and return the appropriate display
+                    if (data === 1) {
+                        return 'Three-parties interview';
+                    } else if (data === 2) {
+                        return 'Awareness';
+                    } else {
+                        return ''; // Return an empty string for other values
+                    }
+                }
+            }]
         }).on('draw', function () {
         });
     }
+    $(document).on('click', '#editPartCBtn', function () {
+        var id = $(this).data('id');
+        console.log(id);
+    
+        $.post(editStudentInterview, { id: id, token: token, branch_id: branchID }, function (data) {
+            console.log(data);
+    
+            // Update modal content dynamically
+            updateModalContent(data.data);
+    
+            // Show the modal
+            $('#editModal').modal('show');
+        }, 'json');
+    });
+   
+   
+    
+    function updateModalContent(comments) {
+        // Update modal content with the provided comment
+    var modalBody = $('#editModal').find('.modal-body');
+    var commentTable = modalBody.find('#commentTable');
+    var tableBody = commentTable.find('tbody');
+    tableBody.empty();
+    // Create the tbody element outside the loop
+    var tbodyHtml = '<tbody>';
+
+    // Iterate through the comments array
+    for (var i = 0; i < comments.length; i++) {
+        var commentData = comments[i];
+        var counter = i + 1; // Incrementing the counter for each comment
+        var commentRowHtml = `
+            <tr>  
+                <td>${counter}</td>
+                <td>
+                    <div class="comment-wrapper">
+                        <textarea class="form-control editable-comment" readonly name="comment" id="comment" data-comment-id="${commentData.id}">${commentData.comment}</textarea>
+                    </div>
+                </td> 
+                <td>${commentData.created_date ? commentData.created_date : ''}</td>
+                <td>${commentData.register_name ? commentData.register_name : ''}</td>
+                <td>${commentData.updated_name ? commentData.updated_name : ''}</td>
+                <td>${commentData.updated_date ? commentData.updated_date : ''}</td>
+                <td>
+                    <button type="button" class="btn btn-blue btn-sm waves-effect waves-light editStudentRemarksBtn" data-comment-id="${commentData.id}" data-comment-type="${commentData.type}" style="border-radius: 15px;width: 50px;"><i class="fe-edit"></i></button>
+                </td>
+            </tr>
+        `;
+        
+        // Append each comment row HTML to the tbody HTML
+        tbodyHtml += commentRowHtml;
+    }
+
+        // Close the tbody element
+        tbodyHtml += '</tbody>';
+
+        // Append the tbody HTML to the comment table
+       
+        commentTable.append(tbodyHtml);
+    }
+    var editedCommentRows = []; // Array to store references to rows with edited comments
+
+    // Event handler for edit button click
+    $(document).on('click', '.editStudentRemarksBtn', function () {
+        // Store a reference to the parent row containing the edited comment
+        var editedCommentRow = $(this).closest('tr');
+        
+        // Enable editing for the comment textarea
+        editedCommentRow.find('.editable-comment').prop('readonly', false);
+
+        // Add the edited row to the array
+        editedCommentRows.push(editedCommentRow);
+    });
+
+    // Event handler for save button click
+    $(document).on('click', '.saveStudentRemarksBtn', function () {
+        // Iterate over each edited row
+        editedCommentRows.forEach(function(editedCommentRow) {
+            // Retrieve the edited comment and its ID from the row
+            var editedCommentTextarea = editedCommentRow.find('.editable-comment');
+            var commentId = editedCommentTextarea.data('comment-id');
+            var editedComment = editedCommentTextarea.val();
+
+            // Log the retrieved comment and its ID for debugging
+            console.log("Retrieved comment ID:", commentId);
+            console.log("Retrieved comment:", editedComment);
+            $.ajax({
+                url: updateStudentInterviewComment,
+                method: 'POST',
+                data: {
+                    id: commentId,
+                    comment: editedComment
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    if (data.code == 200) {
+                        toastr.success(data.message);
+                    } else {
+                        toastr.error(data.message);
+                    }
+                     // Close the modal
+              $('#editModal').modal('hide');
+                },
+                error: function (error) {
+                    console.error('Error saving comment:', error);
+                }
+            });
+        });
+
+        // Clear the array after saving all edited comments
+        editedCommentRows = [];
+    });
+    $(document).on('click', '#addCommentBtn', function() {
+        var commentId = $(this).data('id');
+        var type = $(this).data('type');
+        // Populate modal with relevant data
+        $('#addCommentModal').modal('show');
+  
+        // Submit comment form
+        $('#commentForm').off('submit').on('submit', function(e) {
+          e.preventDefault();
+          var commentText = $('#commentText').val();
+  
+          // Send AJAX request to save the comment
+          $.ajax({
+            url: addStudentInterviewComment,
+            method: 'POST',
+            data: {
+              id: commentId,
+              comment: commentText,
+              type: type
+            },
+            success: function(data) {
+              // Handle success response
+              if (data.code == 200) {
+                toastr.success(data.message);
+                } else {
+                    toastr.error(data.message);
+                }
+              // Close the modal
+              $('#addCommentModal').modal('hide');
+            },
+            error: function(xhr, status, error) {
+              // Handle error
+              console.error('Error adding comment:', error);
+            }
+          });
+        });
+    });
    
 });
 
