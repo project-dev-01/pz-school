@@ -243,6 +243,13 @@ $(function () {
         autoclose: true,
         yearRange: "-3:+6", // last hundred years
     });
+    $("#trail_end_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
     $("#official_date").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
@@ -532,9 +539,11 @@ $(function () {
         }else{
             $("#enrollment").val("");
             $("#trail_date").val("");
+            $("#trail_end_date").val("");
             $("#official_date").val("");
             $("#enrollment_show").hide();
             $("#trail_date_show").hide();
+            $("#trail_end_date_show").hide();
             $("#official_date_show").hide();
             $("#status_after_approval_show").hide();
         }
@@ -544,10 +553,12 @@ $(function () {
         if(status=="Trail Enrollment"){
 
             $("#trail_date_show").show();
+            $("#trail_end_date_show").show();
             $("#official_date_show").hide();
         }else if(status=="Official Enrollment"){
             $("#official_date_show").show();
             $("#trail_date_show").hide();
+            $("#trail_end_date_show").hide();
         }
     });
 

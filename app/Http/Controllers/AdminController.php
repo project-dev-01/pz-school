@@ -4423,6 +4423,7 @@ class AdminController extends Controller
 
             'enrollment' => $request->enrollment,
             'trail_date' => $request->trail_date,
+            'trail_end_date' =>  $request->trail_end_date,
             'official_date' => $request->official_date,
 
             'category_id' => $request->categy,
@@ -9269,8 +9270,10 @@ class AdminController extends Controller
         // $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
 
         $trail_date = "";
+        $trail_end_date = "";
         if ($request->enrollment == "Trail Enrollment") {
             $trail_date = $request->trail_date;
+            $trail_end_date = $request->trail_end_date ;
         }
         $official_date = "";
         if ($request->enrollment == "Official Enrollment") {
@@ -9421,6 +9424,7 @@ class AdminController extends Controller
             'status' => $request->status,
             'enrollment' => $request->enrollment,
             'trail_date' => $trail_date,
+            'trail_end_date' => $trail_end_date,
             'official_date' => $official_date,
             'passport' => $request->passport,
             'nric' => $request->nric,

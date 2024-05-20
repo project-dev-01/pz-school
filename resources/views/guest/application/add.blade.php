@@ -1278,8 +1278,7 @@
     //     preferredCountries: ['my', 'jp'],
     //     responsiveDropdown: true
     // });
-    
-    
+       
     function countrySelect(inputSelector,country) {
         $(inputSelector).countrySelect({
             defaultCountry: country,
