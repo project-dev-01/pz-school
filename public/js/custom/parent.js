@@ -88,34 +88,23 @@ $(function () {
     $("#skip_mother_details").on("change", function () {
         
         if ($(this).is(":checked")) {
-            
-            $(".mother_form").val("");
-            if ($("#copy_mother").is(":checked")) {
-                $("#copy_others").prop('checked', true)
-                value = "copy_others";
-                copyparent(value)
-            }
-            $("#copy_mother").prop('disabled', true);
-            $("#mother_details").hide("slow");
+
+            $("#mother_form input").val("");
+            $("#mother_form select").val("");
+            $("#mother_form").hide("slow");
         } else {
-            $("#copy_mother").prop('disabled', false);
-            $("#mother_details").show("slow");
+            $("#mother_form").show("slow");
         }
     });
     // skip_father_details
     $("#skip_father_details").on("change", function () {
         if ($(this).is(":checked")) {
-            $(".father_form").val("");
-            if ($("#copy_father").is(":checked")) {
-                $("#copy_others").prop('checked', true)
-                value = "copy_others";
-                copyparent(value)
-            }
-            $("#copy_father").prop('disabled', true);
-            $("#father_details").hide("slow");
+
+            $("#father_form input").val("");
+            $("#father_form select").val("");
+            $("#father_form").hide("slow");
         } else {
-            $("#copy_father").prop('disabled', false);
-            $("#father_details").show("slow");
+            $("#father_form").show("slow");
         }
     });
     // skip_guardian_details
@@ -135,43 +124,106 @@ $(function () {
             $("#" + guard_name).val(value);
         }
     });
-    $('.copy_parent').on('change', function () {
-        var value = $(this).val();
 
-        // if(value != "others"){
-        copyparent(value)
-        // }
-
+    $('.copy_guardian_info').on('change', function () {
+        var dataParentId = $('#guardian_relation').find(':selected').data('parent-id');
+        var field_name = $(this).attr('name');
+        if(field_name=="guardian_phone_number"){
+            field_name = "guardian_mobile_no";
+        }
+        var value = $("#" + field_name).val();
+        if (dataParentId === 1) {
+            var guard_name = field_name.replace("guardian", 'father');
+        }
+         if (dataParentId === 2) {
+            var guard_name = field_name.replace("guardian", 'mother');
+        }
+        $("#" + guard_name).val(value);
     });
-    function copyparent(value) {
-
-        var last_name = $("#" + value + "_last_name").val();
-        $("#guardian_last_name").val(last_name);
-        var middle_name = $("#" + value + "_middle_name").val();
-        $("#guardian_middle_name").val(middle_name);
-        var first_name = $("#" + value + "_first_name").val();
-        $("#guardian_first_name").val(first_name);
-
-        var last_name_furigana = $("#" + value + "_last_name_furigana").val();
-        $("#guardian_last_name_furigana").val(last_name_furigana);
-        var middle_name_furigana = $("#" + value + "_middle_name_furigana").val();
-        $("#guardian_middle_name_furigana").val(middle_name_furigana);
-        var first_name_furigana = $("#" + value + "_first_name_furigana").val();
-        $("#guardian_first_name_furigana").val(first_name_furigana);
-
-        var last_name_english = $("#" + value + "_last_name_english").val();
-        $("#guardian_last_name_english").val(last_name_english);
-        var middle_name_english = $("#" + value + "_middle_name_english").val();
-        $("#guardian_middle_name_english").val(middle_name_english);
-        var first_name_english = $("#" + value + "_first_name_english").val();
-        $("#guardian_first_name_english").val(first_name_english);
-
-        var email = $("#" + value + "_email").val();
-        $("#guardian_email").val(email);
-        var phone_number = $("#" + value + "_phone_number").val();
-        $("#guardian_phone_number").val(phone_number);
-        var occupation = $("#" + value + "_occupation").val();
-        $("#guardian_occupation").val(occupation);
+    
+    $("#guardian_relation").change(function () {
+        copyparent();
+    });
+   
+    function copyparent(dataParentId){
+        
+        var dataParentId = $('#guardian_relation').find(':selected').data('parent-id');
+        
+       // Check if data-parent-id is 1 for father or 2 for mother
+       
+       var guardianLastName = $('#guardian_last_name').val();
+       var guardianMiddleName = $('#guardian_middle_name').val();
+       var guardianFirstName = $('#guardian_first_name').val();
+       var guardianLastNameFurigana = $('#guardian_last_name_furigana').val();
+       var guardianMiddleNameFurigana = $('#guardian_middle_name_furigana').val();
+       var guardianFirstNameFurigana = $('#guardian_first_name_furigana').val();
+       var guardianLastNameEnglish = $('#guardian_last_name_english').val();
+       var guardianMiddleNameEnglish = $('#guardian_middle_name_english').val();
+       var guardianFirstNameEnglish = $('#guardian_first_name_english').val();
+       var guardianEmail = $('#guardian_email').val();
+       var guardianMobileNo = $('#guardian_mobile_no').val();
+       var guardianOccupation = $('#guardian_occupation').val();
+       var guardianId = $('#guardian_id').val();
+       if (dataParentId === 1 || dataParentId === 2) {
+        
+            if (dataParentId === 1) {
+                
+                $("#father_details").show("slow"); 
+                $('#skip_father_details').prop('checked', false);
+                $('#father_id').val(guardianId);
+                $('#father_last_name').val(guardianLastName);
+                $('#father_middle_name').val(guardianMiddleName);
+                $('#father_first_name').val(guardianFirstName);
+                $('#father_last_name_furigana').val(guardianLastNameFurigana);
+                $('#father_middle_name_furigana').val(guardianMiddleNameFurigana);
+                $('#father_first_name_furigana').val(guardianFirstNameFurigana);
+                $('#father_last_name_english').val(guardianLastNameEnglish);
+                $('#father_middle_name_english').val(guardianMiddleNameEnglish);
+                $('#father_first_name_english').val(guardianFirstNameEnglish);
+                $('#father_email').val(guardianEmail);
+                $('#father_mobile_no').val(guardianMobileNo);
+                $('#father_occupation').val(guardianOccupation);
+                $('#mother_details input').val('');
+                $('#mother_details select').val('');
+                $('#father_details input, #father_details select').prop('readonly', true);
+                $('#mother_details input, #mother_details select').prop('readonly', false);
+            } else if (dataParentId === 2) {
+                
+                $("#mother_details").show("slow"); 
+                $('#skip_mother_details').prop('checked', false);
+                $('#mother_id').val(guardianId);
+                $('#mother_last_name').val(guardianLastName);
+                $('#mother_middle_name').val(guardianMiddleName);
+                $('#mother_first_name').val(guardianFirstName);
+                $('#mother_last_name_furigana').val(guardianLastNameFurigana);
+                $('#mother_middle_name_furigana').val(guardianMiddleNameFurigana);
+                $('#mother_first_name_furigana').val(guardianFirstNameFurigana);
+                $('#mother_last_name_english').val(guardianLastNameEnglish);
+                $('#mother_middle_name_english').val(guardianMiddleNameEnglish);
+                $('#mother_first_name_english').val(guardianFirstNameEnglish);
+                $('#mother_email').val(guardianEmail);
+                $('#mother_mobile_no').val(guardianMobileNo);
+                $('#mother_occupation').val(guardianOccupation);
+                $('#father_details input').val('');
+                $('#father_details select').val('');
+                $('#mother_details input, #mother_details select').prop('readonly', true);
+                $('#father_details input, #father_details select').prop('readonly', false);
+            }
+        } else {
+            var fatherEmail = $('#father_email').val();
+            var motherEmail = $('#mother_email').val();
+            // Enable all fields if data-parent-id is neither 1 nor 2
+            if(guardianEmail == fatherEmail){
+                $('#father_details input').val('');
+                $('#father_details select').val('');
+                $('#father_details input, #father_details select').prop('readonly', false);
+            }else if(guardianEmail == motherEmail){
+                $('#mother_details input').val('');
+                $('#mother_details select').val('');
+                $('#mother_details input, #mother_details select').prop('readonly', false);
+            }
+            
+        }
     }
     $("#addparent").validate({
         rules: {
@@ -195,7 +247,7 @@ $(function () {
             },
             guardian_employment_status: "required",
             guardian_first_name: "required",
-            guardian_phone_number: {
+            guardian_mobile_no: {
                 required: true,
                 minlength: 8
             },
@@ -323,15 +375,11 @@ $(function () {
 
             guardian_employment_status: "required",
             // guardian_relation: "required",
-            guardian_phone_number: {
+            guardian_mobile_no: {
                 required: true,
                 minlength: 8
             },
             guardian_company_phone_number: {
-                required: true,
-                minlength: 8
-            },
-            guardian_phone_number: {
                 required: true,
                 minlength: 8
             },
@@ -427,7 +475,6 @@ $(function () {
 
     $('#editParent').on('submit', function (e) {
         e.preventDefault();
-        console.log('123')
         var parentcheck = $("#editParent").valid();
         if (parentcheck === true) {
             var form = this;
@@ -492,7 +539,6 @@ $(function () {
     // designation add start
     var sibling_increment = 1;
     $(document).on('click', '#add_sibling', function() {
-        console.log(sibling_increment);
         sibling_increment++;
         var siblingAppend = '<tr id="row_sibling' + sibling_increment + '">' +
             '<td>'+
@@ -571,10 +617,8 @@ function toggleBasicDetails(student_id) {
     var motherFatherSections = document.getElementById("mother_father_photos");
     var motherFatherSectionss = document.getElementById("mother_father_photoss");
     var passportdetails = document.getElementById("passportdetails");
-    console.log(student_id);
     if (student_id) {
         $.post(parentDetailsAccStudentId, { token: token, branch_id: branchID, student_id: student_id }, function (res) {
-            console.log(res.data);
             if (res.code == 200) {
                 var data = res.data.father;
                 var motherdata = res.data.mother;
@@ -583,6 +627,10 @@ function toggleBasicDetails(student_id) {
                 // } else {
                 //     var src = defaultImg;
                 // }
+                
+                if (data.id) {
+                    $('#skip_father_details').prop('checked', false);
+                }
                 $("#father_id").val(data.id);
                 $("#father_first_name").val(data.first_name);
                 $("#father_middle_name").val(data.middle_name);
@@ -619,6 +667,9 @@ function toggleBasicDetails(student_id) {
                     $("#visa_father_photo_link").hide();
                 }
 
+                if (motherdata.id) {
+                    $('#skip_mother_details').prop('checked', false);
+                }
                 $("#mother_id").val(motherdata.id)
                 $("#mother_first_name").val(motherdata.first_name);
                 $("#mother_last_name").val(motherdata.last_name);
@@ -658,11 +709,14 @@ function toggleBasicDetails(student_id) {
             }
         }, 'json');
          $.post(studentDetailsAccStudentId, { token: token, branch_id: branchID, id: student_id }, function (res) {
-            console.log(res.data);
             if (res.code == 200) {
                 var studentData = res.data.student;
-                console.log(studentData.relation);
                 $("#guardian_relation").val(studentData.relation);
+                if(studentData.relation==1){
+                    $('#father_email').attr('readonly', true);
+                }else if(studentData.relation==2){
+                    $('#mother_email').attr('readonly', true);
+                }
                 $("#student_id").val(studentData.id);
                 populateSiblingData(studentData);
                
@@ -1020,7 +1074,6 @@ function openBasicDetails() {
     if (basicDetailsRow) {
         // Count the number of child cards
         var childCount = basicDetailsRow.querySelectorAll('.card').length;
-        console.log(childCount);
         // Toggle the visibility of the basic details row based on child count
         if (childCount > 0) {
             // Show the basic details row if it's currently hidden
@@ -1076,4 +1129,18 @@ function openBasicDetails() {
                 }
             });
         });
+
+        
+    $('.copy_parent_info').on('change', function () {
+        var check = $('#guardian_relation').val();
+        if (check == "1") {
+            var parent = "father";
+        }else if (check == "2") {
+            var parent = "mother";
+        }
+        var field_name = $(this).attr('name');
+        var value = $("#" + field_name).val();
+        var guard_name = field_name.replace(parent, 'guardian');
+        $("#" + guard_name).val(value);
+    });
 }

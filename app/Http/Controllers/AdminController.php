@@ -5523,13 +5523,14 @@ class AdminController extends Controller
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $get_std_names_dashboard = Helper::GETMethodWithData(config('constants.api.get_students_parentdashboard'), $parentId);
-        // dd($response);
+        
         return view(
             'admin.parent.edit',
             [
                 'religion' => isset($religion['data']) ? $religion['data'] : [],
                 'races' => isset($races['data']) ? $races['data'] : [],
-                'relation' => isset($relation['data']) ? $relation['data'] : [],                'races' => isset($races['data']) ? $races['data'] : [],
+                'relation' => isset($relation['data']) ? $relation['data'] : [],                
+                'races' => isset($races['data']) ? $races['data'] : [],
                 'education' => isset($education['data']) ? $education['data'] : [],
                 'parent' => isset($response['data']['parent']) ? $response['data']['parent'] : [],
                 'childs' => isset($response['data']['childs']) ? $response['data']['childs'] : [],
