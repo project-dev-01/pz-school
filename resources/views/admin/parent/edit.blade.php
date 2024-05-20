@@ -1153,7 +1153,7 @@
 											<div class="form-group mb-3">
 												<label class="switch">{{ __('messages.authentication') }}
 
-													<input id="edit_status" name="status" type="checkbox" {{  isset($parent['status']) ? $parent['status'] == "1" ? "checked" : "" : "" }}>
+													<input id="edit_status" name="status" type="checkbox" {{  isset($user['status']) ? $user['status'] == "1" ? "checked" : "" : "" }}>
 													<span>
 														<em></em>
 														<strong></strong>

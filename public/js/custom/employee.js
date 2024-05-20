@@ -847,11 +847,11 @@ $(function () {
             var statusHtml = statusUnLockHtml;
         }
         swal.fire({
-            title: deleteTitle + '?',
+            title: statusTitle + '?',
             html: statusHtml,
             showCancelButton: true,
             showCloseButton: true,
-            cancelButtonText: deletecancelButtonText,
+            cancelButtonText: statuscancelButtonText,
             confirmButtonText: statusconfirmButtonText,
             cancelButtonColor: '#d33',
             confirmButtonColor: '#556ee6',
