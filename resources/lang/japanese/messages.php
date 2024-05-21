@@ -2306,4 +2306,8 @@ return [
       "phase_2_approved"=> "受理",
       "no_file_uploaded"=> "ファイルがアップロードされていません",
       "you_want_to_delete_this_widget" => "このウィッジを削除しますか",
+      "modify_data" => "Modified Data",
+      "existing_record" => "Already Data Exist",
+      "new_record" => "New Data Record",
+      "mark_info" => "Mark Information",
 ];

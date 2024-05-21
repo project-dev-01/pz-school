@@ -16,8 +16,10 @@ use App\Exports\StaffAttendanceExport;
 use App\Exports\StudentListExport;
 use App\Exports\FeesExpenseExport;
 use App\Exports\StudentAttendanceExport;
+use App\Exports\ExamStduentExport;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Http;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class AdminController extends Controller
 {
@@ -722,13 +724,15 @@ class AdminController extends Controller
     public function showSubjectsIndex()
     {
         //return view('admin.subjects.index');
+        $subject_report = Helper::GetMethod(config('constants.api.get_jsklsubjectlist'));
+        
         $pdf_report = Helper::GetMethod(config('constants.api.getpdf_report'));
         return view(
             'admin.subjects.index',
             [
 
-                'pdf_report' => isset($pdf_report['data']) ? $pdf_report['data'] : []
-
+                'pdf_report' => isset($pdf_report['data']) ? $pdf_report['data'] : [],
+                'subject_report' => isset($subject_report['data']) ? $subject_report['data'] : []
             ]
         );
     }
@@ -7232,12 +7236,15 @@ class AdminController extends Controller
         $get_paper_type = Helper::GetMethod(config('constants.api.get_paper_type'));
         $department = Helper::GetMethod(config('constants.api.department_list'));
         $pdf_report = Helper::GetMethod(config('constants.api.getpdf_report'));
+        $jsklexampaper_list = Helper::GetMethod(config('constants.api.getjsklexampaper_list'));
+        //dd($jsklexampaper_list);
         return view('admin.exam_paper.list', [
             'department' => isset($department['data']) ? $department['data'] : [],
             'classDetails' => isset($getClasses['data']) ? $getClasses['data'] : [],
             'grade_category' => isset($grade_category['data']) ? $grade_category['data'] : [],
             'get_paper_type' => isset($get_paper_type['data']) ? $get_paper_type['data'] : [],
-            'pdf_report' => isset($pdf_report['data']) ? $pdf_report['data'] : []
+            'pdf_report' => isset($pdf_report['data']) ? $pdf_report['data'] : [],
+            'jsklexampaper_list' => isset($jsklexampaper_list['data']) ? $jsklexampaper_list['data'] : []
         ]);
     }
     // get Exam paper list
@@ -7415,6 +7422,65 @@ class AdminController extends Controller
         return Excel::download(new FeesExpenseExport($branch_id, $request->department_id, $request->class_id, $request->section_id, $request->academic_session_id), $expense_report . '.xlsx');
     }
 
+    public function Examdownloadexcel(Request $request)
+    {
+        // dd($request);
+        $branch_id = session()->get('branch_id');
+        $expense_report = 'Download_excel';
+        $department_id = $request->department_id;
+        $class_id = $request->class_id;
+        $section_id = $request->section_id;
+        $exam_id = $request->exam_id;
+        $subject_id = $request->subject_id;
+        $paper_id = $request->paper_id;
+        $semester_id = $request->semester_id;
+        $session_id = $request->session_id;
+        $data = [
+            "academic_session_id" => session()->get('academic_session_id'),
+            "branch_id" => $branch_id,
+            "department_id" => $department_id,
+            "class_id" => $class_id,
+            "section_id" => $section_id,
+            "exam_id" => $exam_id,
+            "subject_id" => $subject_id,
+            "paper_id" => $paper_id,
+            "semester_id" => $semester_id,
+            "session_id" => $session_id
+        ];
+        //dd(5);
+        $response = Helper::PostMethod(config('constants.api.exam_file_name'), $data);
+        
+        //dd($response);
+        $exammark_report="ExamMarkUpload";
+        if($response!==null)
+        {
+            $exammark_report=$response['data']['department_name'].'-'.$response['data']['class_name'].'-'.$response['data']['section_name'].'-'.$response['data']['exam_name'].'-'.$response['data']['subject_name'].'-'.$response['data']['paper_name'];
+        }
+        //dd($exammark_report);
+        $export = new ExamStduentExport(
+            $response['data']['department_name'],
+            $response['data']['class_name'],
+            $response['data']['section_name'],
+            $response['data']['exam_name'],
+            $response['data']['subject_name'],
+            $response['data']['paper_name'],
+            $response['data']['semester_name'],
+            $response['data']['score_type'],
+            $branch_id,
+            $department_id,
+            $class_id,
+            $section_id,
+            $exam_id,
+            $subject_id,
+            $paper_id,
+            $semester_id,
+            $session_id
+        );
+
+        // Trigger the download
+        return Excel::download($export, $exammark_report. '.csv',\Maatwebsite\Excel\Excel::XLSX, ['charset' => 'UTF-8']);
+       // return Excel::download(new ExamStduentExport($branch_id, $department_id, $class_id,$section_id,$exam_id,$subject_id, $paper_id,$semester_id,$session_id), $exammark_report. '.csv');
+    }
     // index absent Reason
     public function absentReason()
     {
@@ -11058,55 +11124,240 @@ class AdminController extends Controller
     }
     public function ExamImportAdd(Request $request)
     {
-
+       
         $validator = \Validator::make($request->all(), [
             'file' => 'required'
         ]);
+       
         $department_id = $request->department_id;
         $class_id = $request->class_id;
         $section_id = $request->section_id;
         $exam_id = $request->exam_id;
         $subject_id = $request->subject_id;
+        $paper_id = $request->paper_id;
         $semester_id = $request->semester_id;
         $session_id = $request->session_id;
         if (!$validator->passes()) {
             return back()->with(['errors' => $validator->errors()->toArray()['file']]);
         } else {
-            $file = $request->file('file');
-            $filename = $file->getClientOriginalName();
-            $extension = $file->getClientOriginalExtension();
-            $tempPath = $file->getRealPath();
-            $fileSize = $file->getSize();
-            $mimeType = $file->getMimeType();
-            $base64 = base64_encode(file_get_contents($request->file('file')));
-
             $data = [
-
                 'academic_session_id' => session()->get('academic_session_id'),
                 'department_id' => $department_id,
                 'class_id' => $class_id,
                 'section_id' => $section_id,
                 'exam_id' => $exam_id,
                 'subject_id' => $subject_id,
+                'paper_id' => $paper_id,
                 'semester_id' => $semester_id,
                 'session_id' => $session_id,
-                'file' => $base64,
-                'fileName' => $filename,
-                'extension' => $extension,
-                'tempPath' => $tempPath,
-                'fileSize' => $fileSize,
-                'mimeType' => $mimeType,
+               
             ];
+            
+            $response = Helper::PostMethod(config('constants.api.exam_file_name'), $data);
+            $newfilename=$response['data']['department_name'].'-'.$response['data']['class_name'].'-'.$response['data']['section_name'].'-'.$response['data']['exam_name'].'-'.$response['data']['subject_name'].'-'.$response['data']['paper_name'];
+            // Get the uploaded file
+        $file = $request->file('file');
+        $filepath=$file->getClientOriginalName();
+        $filename=pathinfo($filepath, PATHINFO_FILENAME);
+       
+        //dd($filename,$newfilename);
+        if($filename==$newfilename)
+        {
+          
+        // Load the Excel file
+        $reader = IOFactory::createReaderForFile($file);
+        $spreadsheet = $reader->load($file->getPathname());
 
-            $response = Helper::PostMethod(config('constants.api.import_exam'), $data);
-            //dd($response);
-            //dd($data);
-            if ($response['code'] == 200) {
-                return redirect()->route('admin.exam.import')->with('success', ' Exam Mark  Imported Successfully');
-            } else {
-                return redirect()->route('admin.exam.import')->with('errors', $response['data']);
+        // Get the active sheet
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Get the highest row and column numbers
+        $highestRow = $sheet->getHighestDataRow(); // Get the highest row number with data
+        $highestColumn = $sheet->getHighestDataColumn(); // Get the highest column letter with data
+        $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); // Convert the highest column letter to a number
+
+        // Read data from the Excel file
+        $datas = [];
+        for ($row = 1; $row <= $highestRow; $row++) {
+            $rowData = [];
+            for ($col = 1; $col <= $highestColumnIndex; $col++) {
+                $cellValue = $sheet->getCellByColumnAndRow($col, $row)->getValue();
+                $rowData[] = $cellValue;
             }
+            $datas[] = $rowData;
         }
+           
+       
+            $data = [
+                'academic_session_id' => session()->get('academic_session_id'),
+                'department_id' => $department_id,
+                'class_id' => $class_id,
+                'section_id' => $section_id,
+                'exam_id' => $exam_id,
+                'subject_id' => $subject_id,
+                'paper_id' => $paper_id,
+                'semester_id' => $semester_id,
+                'session_id' => $session_id,
+               
+            ];
+            
+            $response = Helper::PostMethod(config('constants.api.exam_file_name'), $data);
+            
+            //dd($response['data']);
+            $department_name=($datas[0][1]==$response['data']['department_name'])?'Matched':'Wrong';
+            $class_name=($datas[1][1]==$response['data']['class_name'])?'Matched':'Wrong';
+            $section_name=($datas[2][1]==$response['data']['section_name'])?'Matched':'Wrong';
+            $exam_name=($datas[3][1]==$response['data']['exam_name'])?'Matched':'Wrong';
+            $semester_name=($datas[4][1]==$response['data']['semester_name'])?'Matched':'Wrong';
+            $subject_name=($datas[5][1]==$response['data']['subject_name'])?'Matched':'Wrong';
+            $paper_name=($datas[6][1]==$response['data']['paper_name'])?'Matched':'Wrong';
+            $score_type=($datas[7][1]==$response['data']['score_type'])?'Matched':'Wrong';
+            $headerdata=[
+                "0"=> $department_name, 
+                "1"=> $department_name,          
+                "2"=> $section_name,       
+                "3"=> $exam_name, 
+                "4"=> $semester_name,          
+                "5"=> $subject_name, 
+                "6"=> $paper_name, 
+                "7"=> $score_type  
+            ];
+            $arraydata[]=""; $row=0;
+            foreach($datas as $mdata)
+            { $row++;
+                if($row>9)
+                {
+                    $student_regno=$mdata[1];
+                    $data = [
+                        'academic_session_id' => session()->get('academic_session_id'),
+                        'department_id' => $department_id,
+                        'class_id' => $class_id,
+                        'section_id' => $section_id,
+                        'exam_id' => $exam_id,
+                        'subject_id' => $subject_id,
+                        'paper_id' => $paper_id,
+                        'semester_id' => $semester_id,
+                        'session_id' => $session_id,
+                        'student_regno' => $student_regno,
+                    ];
+                    $data1[]='';
+                    $markresponse = Helper::PostMethod(config('constants.api.mark_comparison'), $data);
+                    
+                    $mdata['oldmark']=($markresponse!==null)?$markresponse['data']:'';
+                    array_push($arraydata, $mdata);
+                }
+
+            }
+            //dd($arraydata);
+            $data=[
+                'code'=>'200',
+                'message'=>'Student Mark Details Get Successfully',
+                'result'=>'Success',
+                'studentlist' =>$datas,
+                'headerdata'=>$headerdata,
+                'studentmarks'=>$arraydata
+
+            ];
+             return $data;
+            //return view('admin.import.exam_mark', ['studentlist' =>$datas,'headerdata'=>$headerdata,'studentmarks'=>$arraydata,'requestdata'=>$data]);
+           
+         }
+           else
+           {
+            $data=[
+                'code'=>'403',
+                'message'=>'File Name Not Matched',
+                'result'=>'error'
+
+            ];
+             return $data;
+             //return redirect()->route('admin.exam.import')->with('errors', "File Name Not Matched");
+           } 
+        }
+    }
+    public function Examuploadmark(Request $request)
+    {
+       
+            
+        $department_id = $request->department_id;
+        $class_id = $request->class_id;
+        $section_id = $request->section_id;
+        $exam_id = $request->exam_id;
+        $subject_id = $request->subject_id;
+        $paper_id = $request->paper_id;
+        $semester_id = $request->semester_id;
+        $session_id = $request->session_id;
+       
+        // Get the uploaded file
+        $file = $request->file('file');
+        $filepath=$file->getClientOriginalName();
+        $filename=pathinfo($filepath, PATHINFO_FILENAME);
+       
+       
+          
+        // Load the Excel file
+        $reader = IOFactory::createReaderForFile($file);
+        $spreadsheet = $reader->load($file->getPathname());
+
+        // Get the active sheet
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Get the highest row and column numbers
+        $highestRow = $sheet->getHighestDataRow(); // Get the highest row number with data
+        $highestColumn = $sheet->getHighestDataColumn(); // Get the highest column letter with data
+        $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); // Convert the highest column letter to a number
+
+        // Read data from the Excel file
+        $datas = [];
+        for ($row = 1; $row <= $highestRow; $row++) {
+            $rowData = [];
+            for ($col = 1; $col <= $highestColumnIndex; $col++) {
+                $cellValue = $sheet->getCellByColumnAndRow($col, $row)->getValue();
+                $rowData[] = $cellValue;
+            }
+            if($row>9)
+            {
+                $datas[] = $rowData;
+            }
+            
+        }
+           
+       
+            $data = [
+                'academic_session_id' => session()->get('academic_session_id'),
+                'department_id' => $department_id,
+                'class_id' => $class_id,
+                'section_id' => $section_id,
+                'exam_id' => $exam_id,
+                'subject_id' => $subject_id,
+                'paper_id' => $paper_id,
+                'semester_id' => $semester_id,
+                'session_id' => $session_id,
+                'fdata'=> $datas
+            ];
+            
+            $response = Helper::PostMethod(config('constants.api.examuploadmark'), $data);
+            //dd($response);
+            if($response!=null)
+            {
+                $data=[
+                    'code'=>'200',
+                    'message'=>'Student Marks Import Successful',
+                    'result'=>'success'    
+                ];
+            }
+            else
+            {
+                $data=[
+                    'code'=>'403',
+                    'message'=>'Student Marks Import Failed',
+                    'result'=>'error'    
+                ];
+            }
+            return $data;
+            //return view('admin.import.exam_mark', ['studentlist' =>$datas,'headerdata'=>$headerdata,'studentmarks'=>$arraydata,'requestdata'=>$data]);
+           
+        
     }
     public function graduatesIndex()
     {

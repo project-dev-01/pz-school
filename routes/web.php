@@ -13,6 +13,7 @@ use App\Http\Controllers\CommonController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\LangController;
 use App\Http\Controllers\ExamPdfController;
+use App\Http\Controllers\ExamPdfController1;
 use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
@@ -652,8 +653,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('exam_results/downbyreportcard', [ExamPdfController::class, 'downbyreportcard'])->name('admin.exam_results.downbyreportcard');
         Route::post('exam_results/downbypersoanalreport', [ExamPdfController::class, 'downbypersoanalreport'])->name('admin.exam_results.downbypersoanalreport');
 
+        Route::get('exam_results/sampleformat', [ExamPdfController1::class, 'sampleformat'])->name('admin.exam_results.sampleformat');
         Route::get('exam/import', [AdminController::class, 'ExamImport'])->name('admin.exam.import');
-        Route::post('exam/import/add', [AdminController::class, 'ExamImportAdd'])->name('admin.exam.import.add');
+        Route::post('exam/import/add', [AdminController::class, 'ExamImportAdd'])->name('admin.exam.import.add');        
+        Route::post('exam/uploadmark', [AdminController::class, 'Examuploadmark'])->name('admin.exam.uploadmark');
+        Route::post('exam/examdownloadexcel', [AdminController::class, 'Examdownloadexcel'])->name('admin.exam.examdownloadexcel');
         Route::get('child_health/import', [AdminController::class, 'childHealthImport'])->name('admin.child_health.import');
         Route::post('child_health/import/add', [AdminController::class, 'childHealthImportAdd'])->name('admin.child_health.import.add');
         Route::get('child_health/index', [AdminController::class, 'childHealthIndex'])->name('admin.child_health.index');
