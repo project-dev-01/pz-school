@@ -123,7 +123,6 @@ $(function () {
     $(document).on('click', '.addWidget', function () {
         var widgetID = $(this).data('widget');
         var ordernoValues = [];
-
         // Iterate over each row in the table with id 'dynamic_field'
         $('#dynamic_field tr.widget').each(function () {
             var orderno = $(this).data('order');
@@ -131,7 +130,6 @@ $(function () {
             var widgetValue = $(widgetValueID).val();
             ordernoValues.push(widgetValue);
         });
-
         // Disable buttons with data-widgetvalue matching any value in ordernoValues
         $('.addToWidget').each(function () {
             var buttonValue = $(this).data('widgetvalue');
@@ -139,12 +137,10 @@ $(function () {
                 $(this).prop('disabled', true);
             }
         });
-
-
         $("#widgetDynamicID").val(widgetID);
         $('#standard-modal').modal('show');
     });
-    $(document).on('click', '.addToWidget', function () {
+    $(document). on('click', '.addToWidget', function () {
         var widgetname = $(this).data('widgetname');
         var widgetvalue = $(this).data('widgetvalue');
         var visibility = 0; // default zero
@@ -154,31 +150,41 @@ $(function () {
         $("#widgetName" + widgetDynamicID).val(widgetname);
         $("#widgetValue" + widgetDynamicID).val(widgetvalue);
         $("#visibility" + widgetDynamicID).val(visibility);
-
         $("#WidgetLabelName" + widgetDynamicID).html(widgetvalues);
         $('#standard-modal').modal('hide');
-
     });
 
     $('#addDynamicFilter').on('submit', function (e) {
         e.preventDefault();
+        var isValid = true;  // To track if all widgetValues are valid
         var form = this;
-        $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: new FormData(form),
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            success: function (response) {
-                if (response.code == 200) {
-                    toastr.success(response.message);
-                } else {
-                    toastr.error(response.message);
+        var buttonText = $('.addWidget').text(); // Get the button text
+         console.log('Button Text:', buttonText);
+        if (buttonText.includes("Add Widget")) 
+        {
+            toastr.error('Please fill in all widget values.');
+        } 
+        else
+        {
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+                    if (response.code == 200) {
+                        console.log(response);
+                        toastr.success(response.message);
+                    } else {
+                        toastr.error(response.message);
+                    }
                 }
-            }
-        });
+            });      
+        }
     });
+    
     // rules validation
     $("#attendanceFilter").validate({
         rules: {
@@ -265,8 +271,8 @@ $(function () {
 
     // delete form
     $(document).on('click', '.remove-widget', function () {
-        var $clickedButton = $(this); // Save reference to $(this) for later use
-
+        var $clickedButton = $(this); 
+           
         swal.fire({
             title: deleteTitle + '?',
             html: deleteHtml,
