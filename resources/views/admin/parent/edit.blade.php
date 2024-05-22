@@ -280,6 +280,10 @@
 		cursor: pointer;
 		/* Add cursor pointer to indicate clickability */
 	}
+	.custom-file-input:lang(en)~.custom-file-label::after
+    {
+    content: "{{ __('messages.butt_browse') }}";
+    }
 </style>
 @if(Session::get('locale')=="en")
 <style>
@@ -578,7 +582,7 @@
 
 
 									<div class="row">
-										<div class="col-md-4">
+										<div class="col-md-4" style="display:none" id="relation">
 											<div class="form-group">
 												<label for="guardian_relation">{{ __('messages.relation') }}<span class="text-danger">*</span></label>
 												<select id="guardian_relation" name="guardian_relation" class="form-control copy_guardian_info">
@@ -676,7 +680,7 @@
 									</div>
 									<div class="row">
 									<input type="hidden" name="passport_father_old_photo" id="passport_father_old_photo" />
-										<div class="col-md-4" id="passportdetails" style="display: none;">
+										<div class="col-md-4" id="passport_father_div" style="display: none;">
 											<div class="form-group">
 												<label for="passport_father_photo">{{ __('messages.passport_image_father_only_if_malaysian') }}<span class="text-danger">*</span></label>
 												<div class="input-group">
@@ -692,7 +696,7 @@
 										</div>
 										<input type="hidden" name="passport_mother_old_photo" id="passport_mother_old_photo" />
 
-										<div class="col-md-4" id="mother_father_photo" style="display: none;">
+										<div class="col-md-4" id="passport_mother_div" style="display: none;">
 											<div class="form-group">
 												<label for="passport_mother_photo">{{ __('messages.passport_image_mother_only_if_malaysian') }}<span class="text-danger">*</span></label>
 												<div class="input-group">
@@ -712,7 +716,7 @@
 
 										<input type="hidden" name="visa_father_old_photo" id="visa_father_old_photo" />
 
-										<div class="col-md-4" id="mother_father_photos" style="display: none;">
+										<div class="col-md-4" id="visa_father_div" style="display: none;">
 											<div class="form-group">
 												<label for="visa_father_photo">{{ __('messages.visa_image_father_only_for_non_malaysian') }}</label>
 												<div class="input-group">
@@ -728,7 +732,7 @@
 
 										<input type="hidden" name="visa_mother_old_photo" id="visa_mother_old_photo" />
 
-										<div class="col-md-4" id="mother_father_photoss" style="display: none;">
+										<div class="col-md-4" id="visa_mother_div" style="display: none;">
 											<div class="form-group">
 												<label for="visa_mother_photo">{{ __('messages.visa_image_mother_only_for_non_malaysian') }}</label>
 												<div class="input-group">
@@ -1166,7 +1170,7 @@
 											<div class="form-group mb-3">
 												<label class="switch">{{ __('messages.authentication') }}
 
-													<input id="edit_status" name="status" type="checkbox" {{  isset($user['status']) ? $user['status'] == "1" ? "checked" : "" : "" }}>
+													<input id="edit_status" data-user_id="{{  isset($user['id']) ? $user['id']  : '' }}" name="status" type="checkbox" {{  isset($user['status']) ? $user['status'] == "1" ? "checked" : "" : "" }}>
 													<span>
 														<em></em>
 														<strong></strong>
@@ -1480,6 +1484,7 @@
 	var indexAdmission = "{{ route('admin.admission') }}";
 	var parentDetailsAccStudentId = "{{ route('admin.parent.parentDetailsAccStudentId') }}";
 	var studentDetailsAccStudentId = "{{ config('constants.api.student_details') }}";
+	var changeUserStatus = "{{ config('constants.api.change_user_status') }}";
 	var yyyy_mm_dd = "{{ __('messages.yyyy_mm_dd') }}";
 	var addButton = "{{ __('messages.add') }}";
 	var userImageUrl = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";

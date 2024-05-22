@@ -122,25 +122,7 @@ $(function () {
 
     $(document).on('click', '.addWidget', function () {
         var widgetID = $(this).data('widget');
-        var ordernoValues = [];
-
-        // Iterate over each row in the table with id 'dynamic_field'
-        $('#dynamic_field tr.widget').each(function () {
-            var orderno = $(this).data('order');
-            var widgetValueID = "#widgetValue" + orderno;
-            var widgetValue = $(widgetValueID).val();
-            ordernoValues.push(widgetValue);
-        });
-
-        // Disable buttons with data-widgetvalue matching any value in ordernoValues
-        $('.addToWidget').each(function () {
-            var buttonValue = $(this).data('widgetvalue');
-            if (ordernoValues.includes(buttonValue)) {
-                $(this).prop('disabled', true);
-            }
-        });
-
-
+        enableDisableWidget();
         $("#widgetDynamicID").val(widgetID);
         $('#standard-modal').modal('show');
     });
@@ -149,36 +131,43 @@ $(function () {
         var widgetvalue = $(this).data('widgetvalue');
         var visibility = 0; // default zero
         var widgetvalues = messages[widgetvalue];
-
+        enableDisableWidget();
         var widgetDynamicID = $("#widgetDynamicID").val();
         $("#widgetName" + widgetDynamicID).val(widgetname);
         $("#widgetValue" + widgetDynamicID).val(widgetvalue);
         $("#visibility" + widgetDynamicID).val(visibility);
-
         $("#WidgetLabelName" + widgetDynamicID).html(widgetvalues);
         $('#standard-modal').modal('hide');
-
     });
 
     $('#addDynamicFilter').on('submit', function (e) {
         e.preventDefault();
+        var isValid = true;  // To track if all widgetValues are valid
         var form = this;
-        $.ajax({
-            url: $(form).attr('action'),
-            method: $(form).attr('method'),
-            data: new FormData(form),
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            success: function (response) {
-                if (response.code == 200) {
-                    toastr.success(response.message);
-                } else {
-                    toastr.error(response.message);
+        var buttonText = $('.addWidget').text(); // Get the button text
+        if (buttonText.includes(messages.add_widget)) {
+            toastr.error('Please fill in all widget values.');
+            isValid = false;
+        } else {
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+                    if (response.code == 200) {
+                        console.log(response);
+                        toastr.success(response.message);
+                    } else {
+                        toastr.error(response.message);
+                    }
                 }
-            }
-        });
+            });
+        }
     });
+
     // rules validation
     $("#attendanceFilter").validate({
         rules: {
@@ -239,8 +228,8 @@ $(function () {
             });
             var matches = [];
 
-            attRepValues.forEach(function(item) {
-                if(item.includes(combinetextValues)) {
+            attRepValues.forEach(function (item) {
+                if (item.includes(combinetextValues)) {
                     matches.push(item);
                 }
             });
@@ -265,7 +254,7 @@ $(function () {
 
     // delete form
     $(document).on('click', '.remove-widget', function () {
-        var $clickedButton = $(this); // Save reference to $(this) for later use
+        var $clickedButton = $(this);
 
         swal.fire({
             title: deleteTitle + '?',
@@ -281,7 +270,30 @@ $(function () {
         }).then(function (result) {
             if (result.isConfirmed) {
                 removeWidget($clickedButton); // Call removeWidget with the saved reference
+                enableDisableWidget();
             }
         });
     });
+
+    function enableDisableWidget() {
+        var removeordernoValues = [];
+        // Iterate over each row in the table with id 'dynamic_field'
+        $('#dynamic_field tr.widget').each(function () {
+            var orderno = $(this).data('order');
+            var widgetValueID = "#widgetValue" + orderno;
+            var widgetValue = $(widgetValueID).val();
+            removeordernoValues.push(widgetValue);
+        });
+        console.log(removeordernoValues);
+        // Disable buttons with data-widgetvalue matching any value in ordernoValues
+        $('.addToWidget').each(function () {
+            var buttonValue = $(this).data('widgetvalue');
+            if (!removeordernoValues.includes(buttonValue)) {
+                $(this).prop('disabled', false);
+            } else {
+                $(this).prop('disabled', true); // Optionally disable the matching buttons
+            }
+        });
+        return true;
+    }
 });

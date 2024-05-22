@@ -1706,7 +1706,7 @@
                                             $trail_date = "";
                                             }
                                             @endphp
-                                            <div class="col-md-4" id="trail_date_show" style="display:{{$trail_date}}">
+                                            <div class="col-md-4" id="trail_date_show" style="display:{{$trail_date}} ">
                                                 <div class="form-group">
                                                     <label for="text">{{ __('messages.trail_date') }}<span class="text-danger"></span></label>
                                                     <div class="input-group input-group-merge">
