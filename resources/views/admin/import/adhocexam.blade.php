@@ -1,6 +1,9 @@
 @extends('layouts.admin-layout')
-@section('title','Exam Import')
+@section('title','Adhoc Exam Import')
 @section('component_css')
+<!-- date picker -->
+<link href="{{ asset('date-picker/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('date-picker/style.css') }}" rel="stylesheet" type="text/css" />
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
@@ -30,7 +33,7 @@
 						</li>
 						</ul><br>
 						<div class="card-body">
-							<form id="resultsByPaper"  method="post" enctype="multipart/form-data" action="{{ route('admin.exam.examdownloadexcel') }}">
+							<form id="resultsByPaper"  method="post" enctype="multipart/form-data" action="{{ route('admin.exam.adhocexamdownloadexcel') }}">
 							{{ csrf_field() }}
 								
 								<div class="row">
@@ -64,14 +67,6 @@
 									</div>
 									<div class="col-md-3">
 										<div class="form-group">
-											<label for="examnames">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
-											<select id="examnames" class="form-control" name="exam_id" required>
-												<option value="">{{ __('messages.select_exams') }}</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-3">
-										<div class="form-group">
 											<label for="subjectID">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
 											<select id="subjectID" class="form-control" name="subject_id" required>
 												<option value="">{{ __('messages.select_subject') }}</option>
@@ -79,56 +74,54 @@
 										</div>
 									</div>
 									<div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="paperID">{{ __('messages.paper_name') }}<span class="text-danger">*</span></label>
-                                            <select id="paperID" class="form-control" name="paper_id" required>
-                                                <option value="">{{ __('messages.select_paper') }}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-									<div class="col-md-3">
 										<div class="form-group">
-											<label for="semester_id">{{ __('messages.semester') }}<span class="text-danger">*</span></label>
-											<select id="semester_id" class="form-control" name="semester_id" required>
-												<option value="">{{ __('messages.select_semester') }}</option>
-												@forelse($semester as $sem)
-												<option value="{{$sem['id']}}">{{$sem['name']}}</option>
+											<label for="examnames">{{ __('messages.test_name') }}<span class="text-danger">*</span></label>
+											<select id="examnames" class="form-control" name="exam_id" required>
+												<option value="">{{ __('messages.select_exams') }}</option>
+												@forelse($exam as $ex)
+												<option value="{{$ex['id']}}">{{$ex['name']}}</option>
 												@empty
 												@endforelse
 											</select>
-										</div>
-									</div>
-									<div class="col-md-3" >
-										<div class="form-group">
-											<label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
-											<select id="session_id" class="form-control" name="session_id" required>
-												<option value="">{{ __('messages.select_session') }}</option>
-												@forelse($session as $ses)
-												<option value="{{$ses['id']}}">{{ __('messages.' . strtolower($ses['name'])) }}</option>
-												@empty
-												@endforelse
-											</select>
-											<br>
-											<button type="submit" class="btn btn-warning" id="downloadexcel1"><i class="fa fa-download"></i> Download Excel format</button>
 										</div>
 									</div>
 									
+									
+									<div class="col-md-3">
+										<div class="form-group">
+											<label for="interview_date">{{ __('messages.date') }}<span class="text-danger">*</span></label>
+											<div class="input-group input-group-merge">
+												<div class="input-group-prepend">
+													<div class="input-group-text">
+														<span class="fas fa-calendar-alt"></span>
+													</div>
+												</div>
+												<input type="text" class="form-control" name="exam_date" id="exam_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" required>
+											</div>
+                                    	</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label for="score_type">{{ __('messages.score_type') }}<span class="text-danger">*</span></label>
+											<select class="form-control" name="score_type" id="score_type">
+												<option value="">{{ __('messages.select') }}</option>
+												<option value="Grade">{{ __('messages.grade') }}</option>
+												<option value="Mark">{{ __('messages.mark') }}</option>
+												<option value="Points">{{ __('messages.points') }}</option>
+												<option value="Freetext">{{ __('messages.freetext') }}</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group"><br>
+									<button type="submit" class="btn btn-warning" id="downloadexcel1"><i class="fa fa-download"></i> Download Excel format</button>
+									</div>
+									</div>
+									
+									
 								</div>
 							</div>
-							<div class="row">
-								<div class="col-md-12">
-									<h3 id="Marktype" class="text-center"></h3>
-										<div class="dt-buttons" id="downmark" style="text-align:center;display:none;"> 
-											<a href="{{ config('constants.image_url').'/common-asset/uploads/sample Exam - Mark(Numeric Value).csv'}}" target="_blank"><button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="employee-table" type="button"><span>{{ __('messages.download_sample_csv') }}</span></button></a>
-										</div>
-										<div class="dt-buttons" id="downpoints" style="text-align:center;display:none;"> 
-											<a href="{{ config('constants.image_url').'/common-asset/uploads/sample Exam - Mark(Points).csv'}}" target="_blank"><button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="employee-table" type="button"><span>{{ __('messages.download_sample_csv') }}</span></button></a>
-										</div>
-										<div class="dt-buttons" id="downfreetext"style="text-align:center;display:none;"> 
-											<a href="{{ config('constants.image_url').'/common-asset/uploads/sample Exam - Mark(Free Text).csv'}}" target="_blank"><button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="employee-table" type="button"><span>{{ __('messages.download_sample_csv') }}</span></button></a>
-										</div>
-								</div>
-							</div>
+							
 							
 							
 							@if($message = Session::get('success'))
@@ -185,8 +178,6 @@
 											<th>{{ __('messages.register_no') }}</th>
 											<th>{{ __('messages.student_name') }}</th>
 											<th>{{ __('messages.mark') }}</th>
-											<th>{{ __('messages.attendance') }}</th>
-											<th>{{ __('messages.memo') }}</th>
 										</tr>
 									</thead>
 									<tbody id="markdatas">
@@ -253,8 +244,8 @@
 				
 				<script src="{{ asset('js/dist/jquery.table2excel.js') }}"></script>
 				<script>
-					var savemarks="{{ route('admin.exam.uploadmark') }}";
-					var newRoute = "{{ route('admin.exam.import.add') }}";
+					var savemarks="{{ route('admin.exam.adhocuploadmark') }}";
+					var newRoute = "{{ route('admin.exam.import.adhocadd') }}";
 					var examdownloadexcel = "{{ route('admin.exam.examdownloadexcel') }}";
 					var teacherSectionUrl = "{{ config('constants.api.section_by_class') }}";
 					var subjectByExamNames = "{{ config('constants.api.subject_by_exam_names') }}";
@@ -264,7 +255,9 @@
     				var ExamPaperDetails = "{{ config('constants.api.exam_paper_details') }}";
 					var getExamPaperResults = "{{ config('constants.api.get_exam_paper_res') }}";
 					var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
+					var getAssignClassSubjUrl = "{{ config('constants.api.get_assign_class_subjects') }}";
 					
+					var academic_session_id = "{{ Session::get('academic_session_id') }}";
 					var teacherID = null;
 					// default image test
 					var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
@@ -276,7 +269,7 @@
 					var freetext="{{ __('messages.alertexamupload_freetext') }}";
 					var infotext="{{ __('messages.alertexamupload_info') }}";
 				</script>
-				<script src="{{ asset('js/custom/exam_import.js') }}"></script>
+				<script src="{{ asset('js/custom/adhocexam_import.js') }}"></script>
 				
 
 			@endsection												

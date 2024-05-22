@@ -16,6 +16,7 @@ use App\Exports\StaffAttendanceExport;
 use App\Exports\StudentListExport;
 use App\Exports\FeesExpenseExport;
 use App\Exports\StudentAttendanceExport;
+use App\Exports\AdhocExamStduentExport;
 use App\Exports\ExamStduentExport;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Http;
@@ -11105,6 +11106,303 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.termination_update_admin'), $data);
         return $response;
     }
+    
+    
+   
+    public function AdhocExamImport()
+    {
+
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id')
+        ];
+        $exam = Helper::GETMethodWithData(config('constants.api.exam_list'), $data);
+       
+        return view('admin.import.adhocexam', [
+            'exam' => isset($exam['data']) ? $exam['data'] : [],
+            'department' => isset($department['data']) ? $department['data'] : [],
+            'classes' => isset($getclass['data']) ? $getclass['data'] : [],
+            'classes' => isset($getclass['data']) ? $getclass['data'] : [],
+            'semester' => isset($semester['data']) ? $semester['data'] : [],
+            'session' => isset($session['data']) ? $session['data'] : [],
+            'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+            'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+        ]);
+    }
+    public function AdhocExamdownloadexcel(Request $request)
+    {
+        // dd($request);
+        $branch_id = session()->get('branch_id');
+       
+        $department_id = $request->department_id;
+        $class_id = $request->class_id;
+        $section_id = $request->section_id;
+        $exam_id = $request->exam_id;
+        $subject_id = $request->subject_id;
+        
+        $exam_date = $request->exam_date;
+        $score_type = $request->score_type;
+        $data = [
+            "academic_session_id" => session()->get('academic_session_id'),
+            "branch_id" => $branch_id,
+            "department_id" => $department_id,
+            "class_id" => $class_id,
+            "section_id" => $section_id,
+            "exam_id" => $exam_id,
+            "subject_id" => $subject_id
+        ];
+      
+        $response = Helper::PostMethod(config('constants.api.adhocexam_file_name'), $data);
+        
+        //dd($response);
+        $exammark_report="ExamMarkUpload";
+        if($response!==null)
+        {
+            $exammark_report='Adhoc-'.$response['data']['department_name'].'-'.$response['data']['class_name'].'-'.$response['data']['section_name'].'-'.$response['data']['exam_name'].'-'.$response['data']['subject_name'];
+        }
+        //dd($exammark_report);
+        $export = new AdhocExamStduentExport(
+            $response['data']['department_name'],
+            $response['data']['class_name'],
+            $response['data']['section_name'],
+            $response['data']['exam_name'],
+            $response['data']['subject_name'],
+            $branch_id,
+            $department_id,
+            $class_id,
+            $section_id,
+            $exam_id,
+            $subject_id,
+            $exam_date,
+            $score_type
+        );
+
+        // Trigger the download
+        return Excel::download($export, $exammark_report. '.csv',\Maatwebsite\Excel\Excel::XLSX, ['charset' => 'UTF-8']);
+       // return Excel::download(new ExamStduentExport($branch_id, $department_id, $class_id,$section_id,$exam_id,$subject_id, $paper_id,$semester_id,$session_id), $exammark_report. '.csv');
+    }
+    
+    public function AdhocExamImportAdd(Request $request)
+    {
+       
+        $validator = \Validator::make($request->all(), [
+            'file' => 'required'
+        ]);
+       
+        $department_id = $request->department_id;
+        $class_id = $request->class_id;
+        $section_id = $request->section_id;
+        $exam_id = $request->exam_id;
+        $subject_id = $request->subject_id;
+        $exam_date = $request->exam_date;
+        $exam_date1 = $request->exam_date;
+        $score_type = $request->score_type;
+        if (!$validator->passes()) {
+            return back()->with(['errors' => $validator->errors()->toArray()['file']]);
+        } else {
+            $data = [
+                'academic_session_id' => session()->get('academic_session_id'),
+                'department_id' => $department_id,
+                'class_id' => $class_id,
+                'section_id' => $section_id,
+                'exam_id' => $exam_id,
+                'subject_id' => $subject_id,
+               
+               
+            ];
+         
+        $response = Helper::PostMethod(config('constants.api.adhocexam_file_name'), $data);
+        
+            $newfilename='Adhoc-'.$response['data']['department_name'].'-'.$response['data']['class_name'].'-'.$response['data']['section_name'].'-'.$response['data']['exam_name'].'-'.$response['data']['subject_name'];
+            // Get the uploaded file
+        $file = $request->file('file');
+        $filepath=$file->getClientOriginalName();
+        $filename=pathinfo($filepath, PATHINFO_FILENAME);
+       
+        //dd($filename,$newfilename);
+       /* if($filename==$newfilename)
+        {*/
+          
+        // Load the Excel file
+        $reader = IOFactory::createReaderForFile($file);
+        $spreadsheet = $reader->load($file->getPathname());
+
+        // Get the active sheet
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Get the highest row and column numbers
+        $highestRow = $sheet->getHighestDataRow(); // Get the highest row number with data
+        $highestColumn = $sheet->getHighestDataColumn(); // Get the highest column letter with data
+        $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); // Convert the highest column letter to a number
+
+        // Read data from the Excel file
+        $datas = [];
+        for ($row = 1; $row <= $highestRow; $row++) {
+            $rowData = [];
+            for ($col = 1; $col <= $highestColumnIndex; $col++) {
+                $cellValue = $sheet->getCellByColumnAndRow($col, $row)->getValue();
+                $rowData[] = $cellValue;
+            }
+            $datas[] = $rowData;
+        }
+           
+       
+        $response = Helper::PostMethod(config('constants.api.adhocexam_file_name'), $data);
+            
+            //dd($response['data']);
+            $department_name=($datas[0][1]==$response['data']['department_name'])?'Matched':'Wrong';
+            $class_name=($datas[1][1]==$response['data']['class_name'])?'Matched':'Wrong';
+            $section_name=($datas[2][1]==$response['data']['section_name'])?'Matched':'Wrong';
+            $exam_name=($datas[3][1]==$response['data']['exam_name'])?'Matched':'Wrong';            
+            $subject_name=($datas[4][1]==$response['data']['subject_name'])?'Matched':'Wrong';
+            $exam_date=($datas[5][1]== $exam_date )?'Matched':'Wrong';            
+            $score_type=($datas[6][1]== $score_type )?'Matched':'Wrong';
+            $headerdata=[
+                "0"=> $department_name, 
+                "1"=> $department_name,          
+                "2"=> $section_name,       
+                "3"=> $exam_name, 
+                "4"=> $subject_name,          
+                "5"=> $exam_date, 
+                "6"=> $score_type 
+            ];
+            $arraydata[]=""; $row=0;
+            foreach($datas as $mdata)
+            { $row++;
+                if($row>8)
+                {
+                    $student_regno=$mdata[1];
+                    $data = [
+                        'academic_session_id' => session()->get('academic_session_id'),
+                        'department_id' => $department_id,
+                        'class_id' => $class_id,
+                        'section_id' => $section_id,
+                        'exam_id' => $exam_id,
+                        'subject_id' => $subject_id,
+                        'exam_date' => $exam_date1,
+                        'student_regno' => $student_regno,
+                    ];
+                    
+                    $markresponse = Helper::PostMethod(config('constants.api.adhocmark_comparison'), $data);
+                    
+                    $mdata['oldmark']=($markresponse!==null)?$markresponse['data']:'';
+                    array_push($arraydata, $mdata);
+                }
+
+            }
+            //dd($arraydata);
+            $data=[
+                'code'=>'200',
+                'message'=>'Student Mark Details Get Successfully',
+                'result'=>'Success',
+                'studentlist' =>$datas,
+                'headerdata'=>$headerdata,
+                'studentmarks'=>$arraydata
+
+            ];
+             return $data;
+            //return view('admin.import.exam_mark', ['studentlist' =>$datas,'headerdata'=>$headerdata,'studentmarks'=>$arraydata,'requestdata'=>$data]);
+           
+         /*}
+           else
+           {
+            $data=[
+                'code'=>'403',
+                'message'=>'File Name Not Matched',
+                'result'=>'error'
+
+            ];
+             return $data;
+             //return redirect()->route('admin.exam.import')->with('errors', "File Name Not Matched");
+           } */
+        }
+    }
+    
+    public function AdhocExamuploadmark(Request $request)
+    {
+        
+        $department_id = $request->department_id;
+        $class_id = $request->class_id;
+        $section_id = $request->section_id;
+        $exam_id = $request->exam_id;
+        $subject_id = $request->subject_id;
+        $exam_date = $request->exam_date;
+        $score_type = $request->score_type;
+       
+        // Get the uploaded file
+        $file = $request->file('file');
+        $filepath=$file->getClientOriginalName();
+        $filename=pathinfo($filepath, PATHINFO_FILENAME);
+       
+       
+          
+        // Load the Excel file
+        $reader = IOFactory::createReaderForFile($file);
+        $spreadsheet = $reader->load($file->getPathname());
+
+        // Get the active sheet
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Get the highest row and column numbers
+        $highestRow = $sheet->getHighestDataRow(); // Get the highest row number with data
+        $highestColumn = $sheet->getHighestDataColumn(); // Get the highest column letter with data
+        $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); // Convert the highest column letter to a number
+
+        // Read data from the Excel file
+        $datas = [];
+        for ($row = 1; $row <= $highestRow; $row++) {
+            $rowData = [];
+            for ($col = 1; $col <= $highestColumnIndex; $col++) {
+                $cellValue = $sheet->getCellByColumnAndRow($col, $row)->getValue();
+                $rowData[] = $cellValue;
+            }
+            if($row>8)
+            {
+                $datas[] = $rowData;
+            }
+            
+        }
+           
+       
+            $data = [
+                'academic_session_id' => session()->get('academic_session_id'),
+                'department_id' => $department_id,
+                'class_id' => $class_id,
+                'section_id' => $section_id,
+                'exam_id' => $exam_id,
+                'subject_id' => $subject_id,
+                'exam_date' => $exam_date,
+                'score_type' => $score_type,
+                'fdata'=> $datas
+            ];
+            
+            $response = Helper::PostMethod(config('constants.api.adhocexamuploadmark'), $data);
+            //dd($response);
+            if($response!=null)
+            {
+                $data=[
+                    'code'=>'200',
+                    'message'=>'Student Marks Import Successful',
+                    'result'=>'success'    
+                ];
+            }
+            else
+            {
+                $data=[
+                    'code'=>'403',
+                    'message'=>'Student Marks Import Failed',
+                    'result'=>'error'    
+                ];
+            }
+            return $data;
+            //return view('admin.import.exam_mark', ['studentlist' =>$datas,'headerdata'=>$headerdata,'studentmarks'=>$arraydata,'requestdata'=>$data]);
+           
+        
+    }
     public function ExamImport()
     {
 
@@ -11113,6 +11411,7 @@ class AdminController extends Controller
         $session = Helper::GetMethod(config('constants.api.session'));
         $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
         $department = Helper::GetMethod(config('constants.api.department_list'));
+        //dd($sem);
         return view('admin.import.exam', [
             'department' => isset($department['data']) ? $department['data'] : [],
             'classes' => isset($getclass['data']) ? $getclass['data'] : [],
@@ -11386,9 +11685,11 @@ class AdminController extends Controller
             "section_id" => $request->section_id,
             "student_name" => $request->student_name,
             "session_id" => $request->session_id,
+            "stu_status" => $request->stu_status,
             "academic_session_id" => session()->get('academic_session_id')
         ];
-        $response = Helper::PostMethod(config('constants.api.student_list'), $data);
+        //dd($data);
+        $response = Helper::PostMethod(config('constants.api.getgraduatestudentlist'), $data);
         $data = isset($response['data']) ? $response['data'] : [];
         return DataTables::of($data)
 

@@ -649,7 +649,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('exam/result', [AdminController::class, 'examResult'])->name('admin.exam.result');
         Route::get('exam_results/student_rank', [AdminController::class, 'byStudentRank'])->name('admin.exam_results.bystudentrank');
         Route::get('exam_results/byreport', [AdminController::class, 'byreport'])->name('admin.exam_results.byreport');
-        Route::post('exam_results/downbyecreport', [ExamPdfController::class, 'downbyecreport'])->name('admin.exam_results.downbyecreport');
+        Route::post('exam_results/downbyecreport', [ExamPdfController1::class, 'downbyecreport'])->name('admin.exam_results.downbyecreport');
         Route::post('exam_results/downbyreportcard', [ExamPdfController::class, 'downbyreportcard'])->name('admin.exam_results.downbyreportcard');
         Route::post('exam_results/downbypersoanalreport', [ExamPdfController::class, 'downbypersoanalreport'])->name('admin.exam_results.downbypersoanalreport');
 
@@ -662,7 +662,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('child_health/import/add', [AdminController::class, 'childHealthImportAdd'])->name('admin.child_health.import.add');
         Route::get('child_health/index', [AdminController::class, 'childHealthIndex'])->name('admin.child_health.index');
         Route::get('child_health/list', [AdminController::class, 'childHealthList'])->name('admin.child_health.list');
-      
+        Route::get('exam/adhocimport', [AdminController::class, 'AdhocExamImport'])->name('admin.exam.adhocimport');
+        Route::post('exam/adhocexamdownloadexcel', [AdminController::class, 'AdhocExamdownloadexcel'])->name('admin.exam.adhocexamdownloadexcel');
+        Route::post('exam/import/adhocadd', [AdminController::class, 'AdhocExamImportAdd'])->name('admin.exam.import.adhocadd');        
+        Route::post('exam/adhocuploadmark', [AdminController::class, 'AdhocExamuploadmark'])->name('admin.exam.adhocuploadmark');
+       
         //Graduates Yoroku primary /Secondary Report
 
         Route::get('primary/downloadform1/{id}', [ExamPdfController::class, 'downprimaryform1'])->name('admin.primary.downloadform1');
