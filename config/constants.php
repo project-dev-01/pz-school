@@ -1,6 +1,6 @@
 <?php
 $url = "http://localhost/paxsuzen-api-dev/public/api";
-// $url = "https://api.suzen.school/api";test
+// $url = "https://api.suzen.school/api";
 $schoolurl = "http://localhost/school-management-system/public"; // end line don't use "/"
 return [
     'branch_id'=>'5',

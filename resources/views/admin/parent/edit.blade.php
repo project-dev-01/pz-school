@@ -582,7 +582,7 @@
 
 
 									<div class="row">
-										<div class="col-md-4">
+										<div class="col-md-4" style="display:none" id="relation">
 											<div class="form-group">
 												<label for="guardian_relation">{{ __('messages.relation') }}<span class="text-danger">*</span></label>
 												<select id="guardian_relation" name="guardian_relation" class="form-control copy_guardian_info">
@@ -680,7 +680,7 @@
 									</div>
 									<div class="row">
 									<input type="hidden" name="passport_father_old_photo" id="passport_father_old_photo" />
-										<div class="col-md-4" id="passportdetails" style="display: none;">
+										<div class="col-md-4" id="passport_father_div" style="display: none;">
 											<div class="form-group">
 												<label for="passport_father_photo">{{ __('messages.passport_image_father_only_if_malaysian') }}<span class="text-danger">*</span></label>
 												<div class="input-group">
@@ -696,7 +696,7 @@
 										</div>
 										<input type="hidden" name="passport_mother_old_photo" id="passport_mother_old_photo" />
 
-										<div class="col-md-4" id="mother_father_photo" style="display: none;">
+										<div class="col-md-4" id="passport_mother_div" style="display: none;">
 											<div class="form-group">
 												<label for="passport_mother_photo">{{ __('messages.passport_image_mother_only_if_malaysian') }}<span class="text-danger">*</span></label>
 												<div class="input-group">
@@ -716,7 +716,7 @@
 
 										<input type="hidden" name="visa_father_old_photo" id="visa_father_old_photo" />
 
-										<div class="col-md-4" id="mother_father_photos" style="display: none;">
+										<div class="col-md-4" id="visa_father_div" style="display: none;">
 											<div class="form-group">
 												<label for="visa_father_photo">{{ __('messages.visa_image_father_only_for_non_malaysian') }}</label>
 												<div class="input-group">
@@ -732,7 +732,7 @@
 
 										<input type="hidden" name="visa_mother_old_photo" id="visa_mother_old_photo" />
 
-										<div class="col-md-4" id="mother_father_photoss" style="display: none;">
+										<div class="col-md-4" id="visa_mother_div" style="display: none;">
 											<div class="form-group">
 												<label for="visa_mother_photo">{{ __('messages.visa_image_mother_only_for_non_malaysian') }}</label>
 												<div class="input-group">
