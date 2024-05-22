@@ -1170,7 +1170,7 @@
 											<div class="form-group mb-3">
 												<label class="switch">{{ __('messages.authentication') }}
 
-													<input id="edit_status" name="status" type="checkbox" {{  isset($user['status']) ? $user['status'] == "1" ? "checked" : "" : "" }}>
+													<input id="edit_status" data-user_id="{{  isset($user['id']) ? $user['id']  : '' }}" name="status" type="checkbox" {{  isset($user['status']) ? $user['status'] == "1" ? "checked" : "" : "" }}>
 													<span>
 														<em></em>
 														<strong></strong>
@@ -1484,6 +1484,7 @@
 	var indexAdmission = "{{ route('admin.admission') }}";
 	var parentDetailsAccStudentId = "{{ route('admin.parent.parentDetailsAccStudentId') }}";
 	var studentDetailsAccStudentId = "{{ config('constants.api.student_details') }}";
+	var changeUserStatus = "{{ config('constants.api.change_user_status') }}";
 	var yyyy_mm_dd = "{{ __('messages.yyyy_mm_dd') }}";
 	var addButton = "{{ __('messages.add') }}";
 	var userImageUrl = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";

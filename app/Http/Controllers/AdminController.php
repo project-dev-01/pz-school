@@ -1716,6 +1716,7 @@ class AdminController extends Controller
         return view(
             'admin.employee.edit',
             [
+                'user' => isset($staff['data']['user']) ? $staff['data']['user'] : [],
                 'branches' => isset($getBranches['data']) ? $getBranches['data'] : [],
                 'roles' => isset($roles['data']) ? $roles['data'] : [],
                 'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
@@ -4859,6 +4860,7 @@ class AdminController extends Controller
                     'form_field' => isset($form_field['data'][0]) ? $form_field['data'][0] : [],
                     'role' => isset($student['data']['user']) ? $student['data']['user'] : [],
                     'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
+                    'user' => isset($student['data']['user']) ? $student['data']['user'] : [],
                 ]
             );
         }

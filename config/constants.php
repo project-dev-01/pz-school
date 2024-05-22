@@ -1106,6 +1106,8 @@ return [
         'stuexam_ppavgmarklist' => $url.'/exam_result/stuexam_ppavgmarklist',   
         'classteacher_principal' => $url.'/exam_result/classteacher_principal',  
         'getpaperoverallmarklist1' => $url.'/exam_result/getpaperoverallmarklist1',
+
+        'change_user_status' => $url.'/change_user_status',
         
       ]
 

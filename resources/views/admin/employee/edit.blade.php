@@ -1033,7 +1033,7 @@
                                 <div class="form-group mb-3">
                                     <label class="switch">{{ __('messages.authentication') }}
 
-                                        <input id="edit_status" name="status" type="checkbox" {{  isset($employee['status']) ? $employee['status'] == "1" ? "checked" : ""  : ""}}>
+                                        <input id="edit_status" data-user_id="{{  isset($user['id']) ? $user['id']  : '' }}" name="status" type="checkbox" {{  isset($user['status']) ? $user['status'] == "1" ? "checked" : ""  : ""}}>
                                         <span>
                                             <em></em>
                                             <strong></strong>
@@ -1310,6 +1310,7 @@
     var employee_type_list = @json($employee_type_list);
     
     var statusTitle = "{{ __('messages.are_you_sure') }}";
+	var changeUserStatus = "{{ config('constants.api.change_user_status') }}";
     var statuscancelButtonText = "{{ __('messages.cancel') }}";
     var statusUnLockText = "{{ __('messages.yes_unlock') }}";
     var statusLockText = "{{ __('messages.yes_lock') }}";

@@ -1091,11 +1091,17 @@ function openBasicDetails() {
 
     
     $('#edit_status').change(function() {
-        // $(document).on('change', '#edit_status', function () {
+        
+        var id = $(this).data('user_id');
+        var url = changeUserStatus;
+        var type = "Parent";
+        var status;
             if ($(this).is(":checked")) {
+                status = 1;
                 var statusconfirmButtonText = statusLockText;
                 var statusHtml = statusLockHtml;
             } else {
+                status = 0;
                 var statusconfirmButtonText = statusUnLockText;
                 var statusHtml = statusUnLockHtml;
             }
@@ -1112,12 +1118,13 @@ function openBasicDetails() {
                 allowOutsideClick: false
             }).then(function (result) {
                 if (result.value) {
-                    if($("#edit_status").is(":checked")){
-                        $("#edit_status").prop('checked', true);
-                    }else{
-    
-                        $("#edit_status").prop('checked', false);
-                    }
+                    $.post(url, { id: id, status: status,type:type }, function (data) {
+                        if (data.code == 200) {
+                            toastr.success(data.message);
+                        } else {
+                            toastr.error(data.message);
+                        }
+                    }, 'json');
                 }else{
                     if($("#edit_status").is(":checked")){
                         $("#edit_status").prop('checked', false);
