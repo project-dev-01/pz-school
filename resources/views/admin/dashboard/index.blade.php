@@ -372,11 +372,11 @@
 <script src="{{ asset('js/custom/admin/dashboard.js') }}"></script>
 <script src="{{ asset('js/custom/greeting.js') }}"></script>
 <script src="{{ asset('js/custom/dashboard_attendance_report_stg.js') }}"></script>
+<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @if(!empty(Session::get('school_roleid')))
 <script>
 var checkpermissions = "{{ route('admin.school_role.checkpermissions') }}";
 </script>
 <script src="{{ asset('js/custom/permissions.js') }}"></script>
-<script src="{{ asset('js/custom/collapse.js') }}"></script>
 @endif
 @endsection

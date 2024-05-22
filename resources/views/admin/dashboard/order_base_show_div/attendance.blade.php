@@ -16,11 +16,11 @@
                         ];
                         $absent_attendance_report = App\Helpers\Helper::PostMethod(config('constants.api.absent_attendance_report'), $details);
                         $type = "";
-                        $absent_count = '-';
+                        $absent_count = 'N/A';
                         if ($absent_attendance_report && $absent_attendance_report['code'] == '200') {
                         $data = $absent_attendance_report['data'];
                         $type = isset($data['type'])?$data['type']:'';
-                        $absent_count = isset($data['absent_details'][0]['absentCount'])?$data['absent_details'][0]['absentCount']:'';
+                        $absent_count = isset($data['absent_details'][0]['absentCount'])?$data['absent_details'][0]['absentCount']:'N/A';
                         }
                         @endphp
                     </h4>
@@ -45,7 +45,7 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="greetingCntRing" style="transform: translate(224%, 0%);">
-                                                        <p>{{ $absent_count }}</p>
+                                                        <p style="text-align:center;">{{ $absent_count }}</p>
                                                     </div>
                                                 </div>
                                             </div>
