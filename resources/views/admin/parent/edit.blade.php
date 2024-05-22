@@ -280,6 +280,10 @@
 		cursor: pointer;
 		/* Add cursor pointer to indicate clickability */
 	}
+	.custom-file-input:lang(en)~.custom-file-label::after
+    {
+    content: "{{ __('messages.butt_browse') }}";
+    }
 </style>
 @if(Session::get('locale')=="en")
 <style>
