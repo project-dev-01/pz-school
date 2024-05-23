@@ -1097,20 +1097,32 @@
                                         $trail_date = "block";
                                         }
                                         @endphp
-                                        <div class="col-md-4" id="trail_date_show" style="display:{{$trail_date}}">
+                                        <div class="col-md-4" id="trailstartdate_show" style="display:{{$trail_date}}">
                                             <div class="form-group">
-                                                <label for="text">{{ __('messages.trail_date') }}</label>
+                                                <label for="text">{{ __('messages.trail_start_date') }}</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
                                                             <span class="far fa-calendar-alt"></span>
                                                         </div>
                                                     </div>
-                                                    <input type="text" disabled class="form-control" id="trail_date" value="{{ isset($student['trail_date']) ? $student['trail_date'] : date('Y-m-d')}}" name="trail_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" disabled class="form-control" id="trail_start_date" value="{{ isset($student['trail_start_date']) ? $student['trail_start_date'] : date('Y-m-d')}}" name="trail_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="col-md-4" id="trailenddate_show" style="display:{{$trail_date}}">
+                                            <div class="form-group">
+                                                <label for="text">{{ __('messages.trail_end_date') }}</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <span class="far fa-calendar-alt"></span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" disabled class="form-control" id="trail_end_date" value="{{ isset($student['trail_end_date']) ? $student['trail_end_date'] : date('Y-m-d')}}" name="trail_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                </div>
+                                            </div>
+                                        </div>
                                         @php
                                         $official_date = "none";
                                         if($student['enrollment']=="Official Enrollment"){

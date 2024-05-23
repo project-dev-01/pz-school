@@ -1636,7 +1636,7 @@ return [
   "re-admission" => "Re-Admission",
   "phase_1" => "Phase 1",
   "phase_2" => "Phase 2",
-  "trail_date" => "Trial Start Date",
+  "trail_start_date" => "Trial Start Date",
   "trail_end_date" =>"Trial End Date",
   "process" => "Process",
   "send_back" => "Send Back",

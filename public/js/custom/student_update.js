@@ -1,5 +1,24 @@
 $(function () {
 
+
+    $('#enrollment').on('change', function(){
+        
+        if($(this).val() == 'Trail Enrollment'){
+            $('#trailstartdate_show').show();
+            $('#trailenddate_show').show();
+            $('#official_date_show').hide();
+        } else if($(this).val() == 'Official Enrollment'){
+            $('#trailstartdate_show').hide();
+            $('#trailenddate_show').hide();
+            $('#official_date_show').show();
+        } else {
+            $('#trailstartdate_show').hide();
+            $('#trailenddate_show').hide();
+            $('#official_date_show').hide();
+        }
+    }); 
+
+    
     $("#passport_expiry_date").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
