@@ -2608,17 +2608,101 @@ class ParentController extends Controller
     }
     public function studentMedicalRecord()
     {
-
+        $data= [
+            'student_id' => session()->get('student_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.get_student_medical_record'), $data);
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
-        // dd($student);
+        $allergies_name_list = Helper::GetMethod(config('constants.api.get_allergies_name_list'));
+        $student_id = session()->get('student_id');
         return view(
             'parent.student_medical.index',
             [
                 'grade' => isset($getclass['data']) ? $getclass['data'] : [],
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'student_id' => isset($student_id) ? $student_id : 0,
+                'studentmedical' => isset($response['data']['student']) ? $response['data']['student'] : [],
+                'allergies_name'=> isset($allergies_name_list['data']) ? $allergies_name_list['data'] : [],
+                'allergies_details' => isset($response['data']['allergies']) ? $response['data']['allergies'] : [],
             ]
         );
+    }
+    public function studentMedicalRecordAdd(Request $request)
+    { 
+        $data = [
+            'student_id' =>  $request->student_id,
+            'academic_session_id' => session()->get('academic_session_id'),
+            'normal_temp' => $request->normal_temp,
+            'hospital_name'=> $request->hospital_name,
+            'doctor_name' => $request->doctor_name,
+            'company_name'=> $request->company_name,
+            'insurance' => $request->insurance,
+            'allergies' => $request->allergies,
+            'remark_allergen'=> $request->remark_allergen,
+            'anaphylactic'=> $request->anaphylactic,
+            'epinephrine' => $request->epinephrine,
+            'other_medicines' => $request->other_medicines,
+            'heart_problem' => $request->heart_problem,
+            'epilepsy' => $request->epilepsy,
+            'measles'=> $request->measles,
+            'kawasaki_disease' => $request->kawasaki_disease,
+            'febrile_convulsion' => $request->febrile_convulsion,
+            'chicken_pox' => $request->chicken_pox,
+            'scoliosis' => $request->scoliosis,
+            'tuberculosis' => $request->tuberculosis,
+            'mumps' =>  $request->mumps,
+            'kidney_problems' => $request->kidney_problems,
+            'others' => $request->others,
+            'rubella' => $request->rubella,
+            'diabetes' => $request->diabetes,
+            'dengue_fever' => $request->dengue_fever,
+            'operated_disease' => $request->operated_disease,
+            'injury' => $request->injury,
+            'illness' => $request->illness,
+            'japanese_encephalitis' => $request->japanese_encephalitis,
+            'streptococcus_pneumoniae' => $request->streptococcus_pneumoniae,
+            'triple_antigen' => $request->triple_antigen,
+            'hib' => $request->hib,
+            'quadruple_antigen' => $request->quadruple_antigen,
+            'covid' => $request->covid,
+            'bcg' => $request->bcg,
+            'rabies_vaccine' => $request->rabies_vaccine,
+            'measles' => $request->measles,
+            'tetanus' => $request->tetanus,
+            'chicken_pox_imm' => $request->chicken_pox_imm,
+            'mumps_imm' => $request->mumps_imm,
+            'doctors_advised' => $request->advised_doctors,
+            'develops_fever' => $request->develops_fever,
+            'frequent_headaches' => $request->frequent_headaches,
+            'dyspepsia' => $request->dyspepsia,
+            'constipates' => $request->constipates,
+            'vomits' => $request->vomits,
+            'faints' => $request->faints,
+            'dizziness' => $request->dizziness,
+            'nettle_rash' => $request->nettle_rash,
+            'prone_car_sickness' => $request->prone_car_sickness,
+            'poor_hearing' => $request->poor_hearing,
+            'otitis_media' => $request->otitis_media,
+            'bleeds_nose' => $request->bleeds_nose,
+            'nasal_congestion_nose' => $request->nasal_congestion_nose,
+            'throat_swollen' => $request->throat_swollen,
+            'squinted_eyes' => $request->squinted_eyes,
+            'eye_irritation' => $request->eye_irritation,
+            'glasses_lenses' => $request->glasses_lenses,
+            'wrong_colour' => $request->wrong_colour,
+            'sensistive_tooth' => $request->sensistive_tooth,
+            'bleed_from_gum' => $request->bleed_from_gum,
+            'pain_sound_jaw_joint' => $request->pain_sound_jaw_joint,
+            'orthodontics' => $request->orthodontics,
+            'medicine_to_take_daily' => $request->medicine_to_take_daily,
+            'date' => $request->date,
+            'remarks' => $request->remarks,
+
+
+        ];
+        $response = Helper::PostMethod(config('constants.api.student_medical_record_add'), $data);
+        return $response;
     }
     public function checkpermissions(Request $request)
     {

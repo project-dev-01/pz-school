@@ -11674,7 +11674,26 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.getParentDetailsAccStudentId'), $data);
         return  $response;
     }
-    public function page403(Request $request)
+
+    public function studentMedicalRecord()
+    {
+       
+        
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        return view(
+            'admin.student_medical.index',
+            [
+                'grade' => isset($getclass['data']) ? $getclass['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'department' => isset($department['data']) ? $department['data'] : [],
+                'student_id' => isset($student_id) ? $student_id : 0,
+                
+            ]
+        );
+    } 
+     public function page403(Request $request)
     {
         return view('admin.dashboard.403');
     }

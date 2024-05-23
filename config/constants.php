@@ -1108,6 +1108,11 @@ return [
         'getpaperoverallmarklist1' => $url.'/exam_result/getpaperoverallmarklist1',
 
         'change_user_status' => $url.'/change_user_status',
+        //student Medical 
+        'student_medical_record_add' => $url.'/student_medical_record_add',
+        'get_student_medical_record' => $url.'/get_student_medical_record',
+        'get_student_medical_record_admin' => $url.'/get_student_medical_record_admin',
+        'get_allergies_name_list' => $url.'/get_allergies_name_list',
         
       ]
 

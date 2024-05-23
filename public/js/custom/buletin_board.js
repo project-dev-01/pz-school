@@ -237,14 +237,10 @@ $(function () {
                     if (data.code == 200) {
                        
                         $('#buletin-table').DataTable().ajax.reload(null, false);
-                        // Redirect after a delay
-                        setTimeout(function() {
-                            window.location.href = bulletin;
-                        }, 500); // Redirect after 1 second
-                        $('#loaderOverlay').hide();
+                        $('.addBuletin').modal('hide');
+                        $('.addBuletin').find('form')[0].reset(); 
+                        $('#loaderOverlay').hide();        
                         toastr.success(data.message);
-
-                        
                        
                     } else {
                         toastr.error(data.message);

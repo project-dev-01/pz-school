@@ -2089,7 +2089,7 @@ return [
   "shortcutlinks"  => "Shortcut Links",
   "add_shortcut_links" => "Add Shortcut Link",
   "important" => "Important.",
-  "student_medical_record" => "Student Medical Report.",
+  "student_medical_record" => "Student Medical Report",
   "file_details" => "File Details",
   "get_menus" => "Get Menus",
   "copy_academic,exam_masters" => "Copy Academic & Exam Masters",
