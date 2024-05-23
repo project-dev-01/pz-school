@@ -4427,7 +4427,7 @@ class AdminController extends Controller
             'admission_date' => $request->admission_date,
 
             'enrollment' => $request->enrollment,
-            'trail_date' => $request->trail_date,
+            'trail_start_date' => $request->trail_start_date,
             'trail_end_date' =>  $request->trail_end_date,
             'official_date' => $request->official_date,
 
@@ -4951,6 +4951,12 @@ class AdminController extends Controller
             'status' => $status,
             'admission_date' => $request->admission_date,
             'category_id' => $request->categy,
+
+            'enrollment' => $request->enrollment,
+            'trail_start_date' => $trail_start_date,
+            'trail_end_date' => $trail_end_date,
+            'official_date' => $official_date,
+            
             'first_name' => $request->fname,
             'last_name' => $request->lname,
             'father_id' => $request->father_id,
@@ -9338,13 +9344,13 @@ class AdminController extends Controller
         // Set dual nationality based on checkbox
         // $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
 
-        $trail_date = "";
-        $trail_end_date = "";
+        $trail_start_date = null;
+        $trail_end_date = null;
         if ($request->enrollment == "Trail Enrollment") {
-            $trail_date = $request->trail_date;
+            $trail_start_date = $request->trail_start_date;
             $trail_end_date = $request->trail_end_date ;
         }
-        $official_date = "";
+        $official_date = null;
         if ($request->enrollment == "Official Enrollment") {
             $official_date = $request->official_date;
         }
@@ -9491,10 +9497,12 @@ class AdminController extends Controller
             'blood_group' => $request->blood_group,
             'nationality' => $request->nationality,
             'status' => $request->status,
+
             'enrollment' => $request->enrollment,
-            'trail_date' => $trail_date,
+            'trail_start_date' => $trail_start_date,
             'trail_end_date' => $trail_end_date,
             'official_date' => $official_date,
+
             'passport' => $request->passport,
             'nric' => $request->nric,
             'passport_expiry_date' => $request->passport_expiry_date,
@@ -11917,7 +11925,26 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.getParentDetailsAccStudentId'), $data);
         return  $response;
     }
-    public function page403(Request $request)
+
+    public function studentMedicalRecord()
+    {
+       
+        
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        return view(
+            'admin.student_medical.index',
+            [
+                'grade' => isset($getclass['data']) ? $getclass['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'department' => isset($department['data']) ? $department['data'] : [],
+                'student_id' => isset($student_id) ? $student_id : 0,
+                
+            ]
+        );
+    } 
+     public function page403(Request $request)
     {
         return view('admin.dashboard.403');
     }

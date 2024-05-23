@@ -309,13 +309,15 @@ class GuestController extends Controller
             $phase_2_status = "Applied";
         }
 
-        $trail_date = "";
-        if($request->enrollment=="Trail Enrollment"){
-            $trail_date = $request->trail_date;
+        $trail_start_date = null;
+        $trail_end_date = null;
+        if ($request->enrollment == "Trail Enrollment") {
+            $trail_start_date = $request->trail_start_date;
+            $trail_end_date = $request->trail_end_date;
         }
         // Set dual nationality based on checkbox
         $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
-        $official_date = "";
+        $official_date = null;
         if($request->enrollment=="Official Enrollment"){
             $official_date = $request->official_date;
         }
@@ -469,7 +471,8 @@ class GuestController extends Controller
                 'passport_file_extension' => $passport_extension,
                 'phase_2_status' => $phase_2_status,
                 'enrollment' => $request->enrollment,
-                'trail_date' => $trail_date,
+                'trail_start_date' => $trail_start_date,
+                'trail_end_date' => $trail_end_date,
                 'official_date' => $official_date,
                 'phase_1_reason' => $request->phase_1_reason,
                 'phase_2_reason' => $request->phase_2_reason,

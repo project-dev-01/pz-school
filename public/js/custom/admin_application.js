@@ -236,7 +236,7 @@ $(function () {
         yearRange: "-1:+1", // last hundred years
         minDate: 0
     });
-    $("#trail_date").datepicker({
+    $("#trail_start_date").datepicker({
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
         changeYear: true,
@@ -549,16 +549,19 @@ $(function () {
         }
     });
     $('#enrollment').on('change', function () {
-        var status = $(this).val();
-        if(status=="Trail Enrollment"){
-
-            $("#trail_date_show").show();
-            $("#trail_end_date_show").show();
-            $("#official_date_show").hide();
-        }else if(status=="Official Enrollment"){
-            $("#official_date_show").show();
-            $("#trail_date_show").hide();
-            $("#trail_end_date_show").hide();
+      
+        if($(this).val() == 'Trail Enrollment'){
+            $('#trailstartdate_show').show();
+            $('#trailenddate_show').show();
+            $('#official_date_show').hide();
+        } else if($(this).val() == 'Official Enrollment'){
+            $('#trailstartdate_show').hide();
+            $('#trailenddate_show').hide();
+            $('#official_date_show').show();
+        } else {
+            $('#trailstartdate_show').hide();
+            $('#trailenddate_show').hide();
+            $('#official_date_show').hide();
         }
     });
 

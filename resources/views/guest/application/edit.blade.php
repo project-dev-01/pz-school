@@ -1706,20 +1706,36 @@
                                             $trail_date = "";
                                             }
                                             @endphp
-                                            <div class="col-md-4" id="trail_date_show" style="display:{{$trail_date}} ">
+                                            <div class="col-md-4" id="trailstartdate_show" style="display:{{$trail_date}}">
                                                 <div class="form-group">
-                                                    <label for="text">{{ __('messages.trail_date') }}<span class="text-danger"></span></label>
+                                                    <label for="text">{{ __('messages.trail_start_date') }}<span class="text-danger"></span></label>
                                                     <div class="input-group input-group-merge">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text">
                                                                 <span class="far fa-calendar-alt"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" disabled class="form-control" id="trail_date" value="{{ isset($application['trail_date']) ? $application['trail_date'] : date('Y-m-d')}}" name="trail_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" disabled class="form-control" id="trail_start_date" value="{{ isset($application['trail_start_date']) ? $application['trail_start_date'] : ''}}" name="trail_start_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="trail_date" value="{{ isset($application['trail_date']) ? $application['trail_date'] : '' }}">
+                                                <input type="hidden" name="trail_start_date" value="{{ isset($application['trail_start_date']) ? $application['trail_start_date'] : '' }}">
                                             </div>
+
+                                            <div class="col-md-4" id="trailenddate_show" style="display:{{$trail_date}}">
+                                                <div class="form-group">
+                                                    <label for="text">{{ __('messages.trail_end_date') }}<span class="text-danger"></span></label>
+                                                    <div class="input-group input-group-merge">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <span class="far fa-calendar-alt"></span>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" disabled class="form-control" id="trail_end_date" value="{{ isset($application['trail_end_date']) ? $application['trail_end_date'] : ''}}" name="trail_end_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="trail_end_date" value="{{ isset($application['trail_end_date']) ? $application['trail_end_date'] : '' }}">
+                                            </div>
+
                                             @php
 
                                             $official_date = "none";
@@ -1737,7 +1753,7 @@
                                                                 <span class="far fa-calendar-alt"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" disabled class="form-control" id="trail_date" value="{{ isset($application['trail_date']) ? $application['trail_date'] : date('Y-m-d')}}" name="trail_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" disabled class="form-control" id="trail_date" value="{{ isset($application['trail_date']) ? $application['trail_date'] : ''}}" name="trail_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="trail_date" value="{{ isset($application['trail_date']) ? $application['trail_date'] : '' }}">

@@ -856,9 +856,6 @@
                                     </div><label for="admission_date" class="error"></label>
                                 </div>
                             </div> -->
-                        </div>
-
-                        <div class="row">
                             <div class="col-md-4" id="enrollment_show" style="">
                                 <div class="form-group mb-3">
                                     <label for="enrollment">{{ __('messages.enrollment') }}</label>
@@ -869,17 +866,35 @@
                                     </select>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="col-md-4" id="trail_date_show" style="display: none;">
+                        <div class="row">
+                            
+
+                            <div class="col-md-4" id="trailstartdate_show" style="display: none;">
                                 <div class="form-group mb-3">
-                                    <label for="text">{{ __('messages.trail_date') }}</label>
+                                    <label for="text">{{ __('messages.trail_start_date') }}</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
                                                 <span class="far fa-calendar-alt"></span>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="trail_date" value="" name="trail_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control" id="trail_start_date" value="" name="trail_start_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4" id="trailenddate_show" style="display: none;">
+                                <div class="form-group mb-3">
+                                    <label for="text">{{ __('messages.trail_end_date') }}</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <span class="far fa-calendar-alt"></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" id="trail_end_date" value="" name="trail_end_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
