@@ -100,14 +100,7 @@
 									</div>
 									<div class="col-md-3" >
 										<div class="form-group">
-											<label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
-											<select id="session_id" class="form-control" name="session_id" required>
-												<option value="">{{ __('messages.select_session') }}</option>
-												@forelse($session as $ses)
-												<option value="{{$ses['id']}}">{{ __('messages.' . strtolower($ses['name'])) }}</option>
-												@empty
-												@endforelse
-											</select>
+											<input type="hidden" id="session_id" class="form-control" name="session_id" value="0">
 											<br>
 											<button type="submit" class="btn btn-warning" id="downloadexcel1"><i class="fa fa-download"></i> Download Excel format</button>
 										</div>

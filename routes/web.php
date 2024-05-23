@@ -650,7 +650,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('exam_results/student_rank', [AdminController::class, 'byStudentRank'])->name('admin.exam_results.bystudentrank');
         Route::get('exam_results/byreport', [AdminController::class, 'byreport'])->name('admin.exam_results.byreport');
         Route::post('exam_results/downbyecreport', [ExamPdfController1::class, 'downbyecreport'])->name('admin.exam_results.downbyecreport');
-        Route::post('exam_results/downbyreportcard', [ExamPdfController::class, 'downbyreportcard'])->name('admin.exam_results.downbyreportcard');
+        Route::post('exam_results/downbyreportcard', [ExamPdfController1::class, 'downbyreportcard'])->name('admin.exam_results.downbyreportcard');
         Route::post('exam_results/downbypersoanalreport', [ExamPdfController::class, 'downbypersoanalreport'])->name('admin.exam_results.downbypersoanalreport');
 
         Route::get('exam_results/sampleformat', [ExamPdfController1::class, 'sampleformat'])->name('admin.exam_results.sampleformat');
