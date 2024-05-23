@@ -295,3 +295,208 @@
 [2024-05-22 14:09:08] local.INFO: Handling request from IP: ::1  
 [2024-05-22 14:10:20] local.INFO: Handling request from IP: ::1  
 [2024-05-22 14:20:29] local.INFO: Handling request from IP: ::1  
+[2024-05-22 17:19:28] local.ERROR: HTTP request failed to  {"url":"","body":{"login_id":46009,"teacher_id":37,"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMmQ5ZmM1MTBlMGM1NTEyMzUxMWU4MzU5MjlhYzMyMTgwNjE1MjIxN2RhODNjZTZiNGFiZWM3ZmJhOTk1MmMwNTllNmM1MGVlMzBmNDkxYmQiLCJpYXQiOjE3MTYzNTQwNzcuODI2NjAzLCJuYmYiOjE3MTYzNTQwNzcuODI2NjA4LCJleHAiOjE3NDc4OTAwNzcuODExOTU1LCJzdWIiOiI0NjAwOSIsInNjb3BlcyI6W119.YHJEigKMjcwlRvDOT-VE7OINKSt_MP6dO77lXyhDEWGSb09RQtjomcZQF9L2Azn0uFuK4UZjnEXVyXAEBTgEchH2FLyO2pR5o6ELm8K5xaOLqYswjI4Gtd5ECRNVJlzXGrAM2LEbGWJ6TsKzXBTWmFy16hUDYe_f2AsbttGQ5OWp_0xTQMYZpnRjoNDo4c7N1oBdpWzxay1q_MIkVQAZZ_S2r4b-cGZQ1UXF4eSEnU8zmAzhc9fGVhbLVCeSfJ7U1fZ86g5FkUDgjzF4Wv3501orRdUQIoXt9gxUCCMXHzT2x3dFcx7w8LaQYDd1pfX6y-w6KCQ_Y50byOxR2z2f78A_ARRiOEr1BAmYW518fNr9bBhBn4a-AgaNALR5JO5sVGtTszvM9E_R1gUOTqaSKCzjumW8wAw1rmiiFkE0P4_BNdfeOt4Ybb6QFKNLcJDGLDDXE91lNuXEwmqr_fUV4zEI5tsXuG_tWisM0aY9K6UeKN4Q6OrHdZNi8u8rQF8ilF9DRFhh5hrvSHUgbem52sbfl-uQmmFpuBS5qLdc5CF_NcuCw0sxX8A5hBtUSXm0nw90ugOnBLUnNnFtkfS3lANtPx7lApKzSgZ1lDsubXwu9lJwo2Vn5LXtULKmyyCOkFjRpn5RCXW3q8EHFAw0-qLP0_ebFrUmRwMZNpvq3r8","branch_id":5,"name_status":1},"error":"cURL error 3:  (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for ?login_id=46009&teacher_id=37&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMmQ5ZmM1MTBlMGM1NTEyMzUxMWU4MzU5MjlhYzMyMTgwNjE1MjIxN2RhODNjZTZiNGFiZWM3ZmJhOTk1MmMwNTllNmM1MGVlMzBmNDkxYmQiLCJpYXQiOjE3MTYzNTQwNzcuODI2NjAzLCJuYmYiOjE3MTYzNTQwNzcuODI2NjA4LCJleHAiOjE3NDc4OTAwNzcuODExOTU1LCJzdWIiOiI0NjAwOSIsInNjb3BlcyI6W119.YHJEigKMjcwlRvDOT-VE7OINKSt_MP6dO77lXyhDEWGSb09RQtjomcZQF9L2Azn0uFuK4UZjnEXVyXAEBTgEchH2FLyO2pR5o6ELm8K5xaOLqYswjI4Gtd5ECRNVJlzXGrAM2LEbGWJ6TsKzXBTWmFy16hUDYe_f2AsbttGQ5OWp_0xTQMYZpnRjoNDo4c7N1oBdpWzxay1q_MIkVQAZZ_S2r4b-cGZQ1UXF4eSEnU8zmAzhc9fGVhbLVCeSfJ7U1fZ86g5FkUDgjzF4Wv3501orRdUQIoXt9gxUCCMXHzT2x3dFcx7w8LaQYDd1pfX6y-w6KCQ_Y50byOxR2z2f78A_ARRiOEr1BAmYW518fNr9bBhBn4a-AgaNALR5JO5sVGtTszvM9E_R1gUOTqaSKCzjumW8wAw1rmiiFkE0P4_BNdfeOt4Ybb6QFKNLcJDGLDDXE91lNuXEwmqr_fUV4zEI5tsXuG_tWisM0aY9K6UeKN4Q6OrHdZNi8u8rQF8ilF9DRFhh5hrvSHUgbem52sbfl-uQmmFpuBS5qLdc5CF_NcuCw0sxX8A5hBtUSXm0nw90ugOnBLUnNnFtkfS3lANtPx7lApKzSgZ1lDsubXwu9lJwo2Vn5LXtULKmyyCOkFjRpn5RCXW3q8EHFAw0-qLP0_ebFrUmRwMZNpvq3r8&branch_id=5&name_status=1"} 
+[2024-05-22 17:19:35] local.ERROR: HTTP request failed to  {"url":"","body":{"login_id":46009,"teacher_id":37,"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMmQ5ZmM1MTBlMGM1NTEyMzUxMWU4MzU5MjlhYzMyMTgwNjE1MjIxN2RhODNjZTZiNGFiZWM3ZmJhOTk1MmMwNTllNmM1MGVlMzBmNDkxYmQiLCJpYXQiOjE3MTYzNTQwNzcuODI2NjAzLCJuYmYiOjE3MTYzNTQwNzcuODI2NjA4LCJleHAiOjE3NDc4OTAwNzcuODExOTU1LCJzdWIiOiI0NjAwOSIsInNjb3BlcyI6W119.YHJEigKMjcwlRvDOT-VE7OINKSt_MP6dO77lXyhDEWGSb09RQtjomcZQF9L2Azn0uFuK4UZjnEXVyXAEBTgEchH2FLyO2pR5o6ELm8K5xaOLqYswjI4Gtd5ECRNVJlzXGrAM2LEbGWJ6TsKzXBTWmFy16hUDYe_f2AsbttGQ5OWp_0xTQMYZpnRjoNDo4c7N1oBdpWzxay1q_MIkVQAZZ_S2r4b-cGZQ1UXF4eSEnU8zmAzhc9fGVhbLVCeSfJ7U1fZ86g5FkUDgjzF4Wv3501orRdUQIoXt9gxUCCMXHzT2x3dFcx7w8LaQYDd1pfX6y-w6KCQ_Y50byOxR2z2f78A_ARRiOEr1BAmYW518fNr9bBhBn4a-AgaNALR5JO5sVGtTszvM9E_R1gUOTqaSKCzjumW8wAw1rmiiFkE0P4_BNdfeOt4Ybb6QFKNLcJDGLDDXE91lNuXEwmqr_fUV4zEI5tsXuG_tWisM0aY9K6UeKN4Q6OrHdZNi8u8rQF8ilF9DRFhh5hrvSHUgbem52sbfl-uQmmFpuBS5qLdc5CF_NcuCw0sxX8A5hBtUSXm0nw90ugOnBLUnNnFtkfS3lANtPx7lApKzSgZ1lDsubXwu9lJwo2Vn5LXtULKmyyCOkFjRpn5RCXW3q8EHFAw0-qLP0_ebFrUmRwMZNpvq3r8","branch_id":5,"name_status":1},"error":"cURL error 3:  (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for ?login_id=46009&teacher_id=37&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMmQ5ZmM1MTBlMGM1NTEyMzUxMWU4MzU5MjlhYzMyMTgwNjE1MjIxN2RhODNjZTZiNGFiZWM3ZmJhOTk1MmMwNTllNmM1MGVlMzBmNDkxYmQiLCJpYXQiOjE3MTYzNTQwNzcuODI2NjAzLCJuYmYiOjE3MTYzNTQwNzcuODI2NjA4LCJleHAiOjE3NDc4OTAwNzcuODExOTU1LCJzdWIiOiI0NjAwOSIsInNjb3BlcyI6W119.YHJEigKMjcwlRvDOT-VE7OINKSt_MP6dO77lXyhDEWGSb09RQtjomcZQF9L2Azn0uFuK4UZjnEXVyXAEBTgEchH2FLyO2pR5o6ELm8K5xaOLqYswjI4Gtd5ECRNVJlzXGrAM2LEbGWJ6TsKzXBTWmFy16hUDYe_f2AsbttGQ5OWp_0xTQMYZpnRjoNDo4c7N1oBdpWzxay1q_MIkVQAZZ_S2r4b-cGZQ1UXF4eSEnU8zmAzhc9fGVhbLVCeSfJ7U1fZ86g5FkUDgjzF4Wv3501orRdUQIoXt9gxUCCMXHzT2x3dFcx7w8LaQYDd1pfX6y-w6KCQ_Y50byOxR2z2f78A_ARRiOEr1BAmYW518fNr9bBhBn4a-AgaNALR5JO5sVGtTszvM9E_R1gUOTqaSKCzjumW8wAw1rmiiFkE0P4_BNdfeOt4Ybb6QFKNLcJDGLDDXE91lNuXEwmqr_fUV4zEI5tsXuG_tWisM0aY9K6UeKN4Q6OrHdZNi8u8rQF8ilF9DRFhh5hrvSHUgbem52sbfl-uQmmFpuBS5qLdc5CF_NcuCw0sxX8A5hBtUSXm0nw90ugOnBLUnNnFtkfS3lANtPx7lApKzSgZ1lDsubXwu9lJwo2Vn5LXtULKmyyCOkFjRpn5RCXW3q8EHFAw0-qLP0_ebFrUmRwMZNpvq3r8&branch_id=5&name_status=1"} 
+[2024-05-22 17:20:31] local.INFO: Handling request from IP: ::1  
+[2024-05-22 17:20:31] local.INFO: Handling request from IP: ::1  
+[2024-05-22 17:21:21] local.INFO: termination IS WORKING  
+[2024-05-22 17:25:10] local.INFO: Handling request from IP: ::1  
+[2024-05-22 17:29:40] local.INFO: Handling request from IP: ::1  
+[2024-05-22 17:29:54] local.INFO: Handling request from IP: ::1  
+[2024-05-22 17:30:10] local.INFO: Handling request from IP: ::1  
+[2024-05-22 17:47:04] local.INFO: Handling request from IP: ::1  
+[2024-05-22 17:48:40] local.INFO: Handling request from IP: ::1  
+[2024-05-22 17:52:50] local.INFO: Handling request from IP: ::1  
+[2024-05-22 17:55:14] local.INFO: Handling request from IP: ::1  
+[2024-05-22 17:57:32] local.INFO: Handling request from IP: ::1  
+[2024-05-22 17:58:14] local.INFO: Handling request from IP: ::1  
+[2024-05-22 17:59:18] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:01:35] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:03:39] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:04:58] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:05:36] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:07:25] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:10:04] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:10:04] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:10:18] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:15:28] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:15:28] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:19:48] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:25:56] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:27:25] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:29:15] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:31:01] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:31:02] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:31:13] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:32:14] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:32:14] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:32:22] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:34:15] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:34:16] local.INFO: Handling request from IP: ::1  
+[2024-05-22 18:34:47] local.INFO: Handling request from IP: ::1  
+[2024-05-22 19:03:21] local.ERROR: HTTP request failed to  {"url":"","body":{"login_id":46009,"teacher_id":37,"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMmQ5ZmM1MTBlMGM1NTEyMzUxMWU4MzU5MjlhYzMyMTgwNjE1MjIxN2RhODNjZTZiNGFiZWM3ZmJhOTk1MmMwNTllNmM1MGVlMzBmNDkxYmQiLCJpYXQiOjE3MTYzNTQwNzcuODI2NjAzLCJuYmYiOjE3MTYzNTQwNzcuODI2NjA4LCJleHAiOjE3NDc4OTAwNzcuODExOTU1LCJzdWIiOiI0NjAwOSIsInNjb3BlcyI6W119.YHJEigKMjcwlRvDOT-VE7OINKSt_MP6dO77lXyhDEWGSb09RQtjomcZQF9L2Azn0uFuK4UZjnEXVyXAEBTgEchH2FLyO2pR5o6ELm8K5xaOLqYswjI4Gtd5ECRNVJlzXGrAM2LEbGWJ6TsKzXBTWmFy16hUDYe_f2AsbttGQ5OWp_0xTQMYZpnRjoNDo4c7N1oBdpWzxay1q_MIkVQAZZ_S2r4b-cGZQ1UXF4eSEnU8zmAzhc9fGVhbLVCeSfJ7U1fZ86g5FkUDgjzF4Wv3501orRdUQIoXt9gxUCCMXHzT2x3dFcx7w8LaQYDd1pfX6y-w6KCQ_Y50byOxR2z2f78A_ARRiOEr1BAmYW518fNr9bBhBn4a-AgaNALR5JO5sVGtTszvM9E_R1gUOTqaSKCzjumW8wAw1rmiiFkE0P4_BNdfeOt4Ybb6QFKNLcJDGLDDXE91lNuXEwmqr_fUV4zEI5tsXuG_tWisM0aY9K6UeKN4Q6OrHdZNi8u8rQF8ilF9DRFhh5hrvSHUgbem52sbfl-uQmmFpuBS5qLdc5CF_NcuCw0sxX8A5hBtUSXm0nw90ugOnBLUnNnFtkfS3lANtPx7lApKzSgZ1lDsubXwu9lJwo2Vn5LXtULKmyyCOkFjRpn5RCXW3q8EHFAw0-qLP0_ebFrUmRwMZNpvq3r8","branch_id":5,"name_status":1},"error":"cURL error 3:  (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for ?login_id=46009&teacher_id=37&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMmQ5ZmM1MTBlMGM1NTEyMzUxMWU4MzU5MjlhYzMyMTgwNjE1MjIxN2RhODNjZTZiNGFiZWM3ZmJhOTk1MmMwNTllNmM1MGVlMzBmNDkxYmQiLCJpYXQiOjE3MTYzNTQwNzcuODI2NjAzLCJuYmYiOjE3MTYzNTQwNzcuODI2NjA4LCJleHAiOjE3NDc4OTAwNzcuODExOTU1LCJzdWIiOiI0NjAwOSIsInNjb3BlcyI6W119.YHJEigKMjcwlRvDOT-VE7OINKSt_MP6dO77lXyhDEWGSb09RQtjomcZQF9L2Azn0uFuK4UZjnEXVyXAEBTgEchH2FLyO2pR5o6ELm8K5xaOLqYswjI4Gtd5ECRNVJlzXGrAM2LEbGWJ6TsKzXBTWmFy16hUDYe_f2AsbttGQ5OWp_0xTQMYZpnRjoNDo4c7N1oBdpWzxay1q_MIkVQAZZ_S2r4b-cGZQ1UXF4eSEnU8zmAzhc9fGVhbLVCeSfJ7U1fZ86g5FkUDgjzF4Wv3501orRdUQIoXt9gxUCCMXHzT2x3dFcx7w8LaQYDd1pfX6y-w6KCQ_Y50byOxR2z2f78A_ARRiOEr1BAmYW518fNr9bBhBn4a-AgaNALR5JO5sVGtTszvM9E_R1gUOTqaSKCzjumW8wAw1rmiiFkE0P4_BNdfeOt4Ybb6QFKNLcJDGLDDXE91lNuXEwmqr_fUV4zEI5tsXuG_tWisM0aY9K6UeKN4Q6OrHdZNi8u8rQF8ilF9DRFhh5hrvSHUgbem52sbfl-uQmmFpuBS5qLdc5CF_NcuCw0sxX8A5hBtUSXm0nw90ugOnBLUnNnFtkfS3lANtPx7lApKzSgZ1lDsubXwu9lJwo2Vn5LXtULKmyyCOkFjRpn5RCXW3q8EHFAw0-qLP0_ebFrUmRwMZNpvq3r8&branch_id=5&name_status=1"} 
+[2024-05-22 19:03:22] local.ERROR: HTTP request failed to http://localhost/paxsuzen-api-dev/public/api/unread_notifications {"url":"http://localhost/paxsuzen-api-dev/public/api/unread_notifications","body":{"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMmQ5ZmM1MTBlMGM1NTEyMzUxMWU4MzU5MjlhYzMyMTgwNjE1MjIxN2RhODNjZTZiNGFiZWM3ZmJhOTk1MmMwNTllNmM1MGVlMzBmNDkxYmQiLCJpYXQiOjE3MTYzNTQwNzcuODI2NjAzLCJuYmYiOjE3MTYzNTQwNzcuODI2NjA4LCJleHAiOjE3NDc4OTAwNzcuODExOTU1LCJzdWIiOiI0NjAwOSIsInNjb3BlcyI6W119.YHJEigKMjcwlRvDOT-VE7OINKSt_MP6dO77lXyhDEWGSb09RQtjomcZQF9L2Azn0uFuK4UZjnEXVyXAEBTgEchH2FLyO2pR5o6ELm8K5xaOLqYswjI4Gtd5ECRNVJlzXGrAM2LEbGWJ6TsKzXBTWmFy16hUDYe_f2AsbttGQ5OWp_0xTQMYZpnRjoNDo4c7N1oBdpWzxay1q_MIkVQAZZ_S2r4b-cGZQ1UXF4eSEnU8zmAzhc9fGVhbLVCeSfJ7U1fZ86g5FkUDgjzF4Wv3501orRdUQIoXt9gxUCCMXHzT2x3dFcx7w8LaQYDd1pfX6y-w6KCQ_Y50byOxR2z2f78A_ARRiOEr1BAmYW518fNr9bBhBn4a-AgaNALR5JO5sVGtTszvM9E_R1gUOTqaSKCzjumW8wAw1rmiiFkE0P4_BNdfeOt4Ybb6QFKNLcJDGLDDXE91lNuXEwmqr_fUV4zEI5tsXuG_tWisM0aY9K6UeKN4Q6OrHdZNi8u8rQF8ilF9DRFhh5hrvSHUgbem52sbfl-uQmmFpuBS5qLdc5CF_NcuCw0sxX8A5hBtUSXm0nw90ugOnBLUnNnFtkfS3lANtPx7lApKzSgZ1lDsubXwu9lJwo2Vn5LXtULKmyyCOkFjRpn5RCXW3q8EHFAw0-qLP0_ebFrUmRwMZNpvq3r8","branch_id":5,"name_status":1},"error":"<!DOCTYPE html>
+
+<html lang=\"en\">
+
+
+
+<head>
+
+    <meta charset=\"utf-8\" />
+
+    <title>500</title>
+
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+
+    <meta name=\"description\" content=\"To learn as much as I can, attain good grades and advance my education further. I believe that self-motivation and a strict routine has helped me achieve my goals so far, and I will use the same method in the future.\">
+
+    <meta name=\"keywords\" content=\"Paxsuzen School, education, future leaders, curriculum\">
+
+    <meta content=\"Paxsuzen\" name=\"author\" />
+
+    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+
+    <!-- CSRF Token -->
+
+    <meta name=\"csrf-token\" content=\"26w6PZhrRpX4LK1ZvCO3IuCTHNGXVoUp0kKd5RH8\" />
+
+    <!-- App favicon -->
+
+    <link rel=\"shortcut icon\" href=\"http://localhost/paxsuzen-api-dev/public/common-asset/images/favicon.ico\">
+
+    <!-- App css -->
+
+    <link href=\"http://localhost/school-management-system/public/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"bs-default-stylesheet\" />
+
+    <link href=\"http://localhost/school-management-system/public/css/app.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"app-default-stylesheet\" />
+
+    <!-- icons -->
+
+    <link href=\"http://localhost/school-management-system/public/css/icons.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/school-management-system/public/css/custom-minified/admin_login.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/school-management-system/public/css/custom-minified/opensans-font.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/school-management-system/public/css/custom/errorpage.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+</head>
+
+
+
+<body class=\"loading auth-fluid-pages pb-0\">
+
+
+
+    <div class=\"auth-fluid\">
+
+        <!--Auth fluid left content -->
+
+        <div class=\"col-md-6\" style=\"background: #F4F7FC;\">
+
+            <div class=\"align-items-center d-flex h-100\">
+
+                <div class=\"card-body\">
+
+\t\t\t\t<div class=\"auth-brand text-center text-lg-left\">
+
+                            <div class=\"auth-logo\">
+
+                                <div class=\"auth-logo\">
+
+                                    <a href=\"\" class=\"logo logo-dark\">
+
+                                        <span class=\"logo-lg\">
+
+                                            <img src=\"http://localhost/paxsuzen-api-dev/public/common-asset/images/Suzen-app-logo.png\" alt=\"\" height=\"60px\">
+
+                                        </span>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <div class=\"responsive\">
+
+                        <h1 class=\"eoppps\">Internal Server<br> Error</h1>
+
+                        <p class=\"etext\">We currently having an internal problem with our<br> server. This might take a while.</p>
+
+                                                <a href=\"javascript:void(0);\" onclick=\"event.preventDefault(); document.getElementById('logout-form').submit();\">
+
+                            <span>Go to Home</span>
+
+                        </a>
+
+                                                <form id=\"logout-form\" action=\"http://localhost/school-management-system/public/parent/logout\" method=\"POST\" class=\"d-none\">
+
+                            <input type=\"hidden\" name=\"_token\" value=\"26w6PZhrRpX4LK1ZvCO3IuCTHNGXVoUp0kKd5RH8\" autocomplete=\"off\">                        </form>
+
+                                                                    </div>
+
+                </div> <!-- end .card-body -->
+
+            </div> <!-- end .align-items-center.d-flex.h-100-->
+
+        </div>
+
+        <!-- end auth-fluid-form-box-->
+
+
+
+        <!-- Auth fluid right content -->
+
+        <div class=\"col-md-6\">
+
+                <img src=\"http://localhost/school-management-system/public/images/error500.jpg\" class=\"bg-image-content\">
+
+        </div>
+
+        <!-- end Auth fluid right content -->
+
+    </div>
+
+    <!-- end auth-fluid-->
+
+
+
+    <!-- Vendor js -->
+
+    <script src=\"http://localhost/school-management-system/public/js/vendor.min.js\"></script>
+
+    <script type=\"text/javascript\">
+
+        $.ajaxSetup({
+
+            headers: {
+
+                'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')
+
+            }
+
+        });
+
+    </script>
+
+
+
+    <!-- App js -->
+
+    <script src=\"http://localhost/school-management-system/public/js/app.min.js\"></script>
+
+    <script>window.UserHelpPublicProjectID=\"Y7YyGqyq2\"</script>
+
+        <script src=\"https://run.userhelp.co\" async></script>
+
+
+
+</body>
+
+
+
+</html>"} 

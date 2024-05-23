@@ -613,11 +613,18 @@ function toggleBasicDetails(student_id) {
     var fatherSection = document.getElementById("father_details");
     var motherSection = document.getElementById("mother_details");
     var siblingSection = document.getElementById("sibling");
-    var motherFatherSection = document.getElementById("mother_father_photo");
-    var motherFatherSections = document.getElementById("mother_father_photos");
-    var motherFatherSectionss = document.getElementById("mother_father_photoss");
-    var passportdetails = document.getElementById("passportdetails");
+    var passport_father_div = document.getElementById("passport_father_div");
+    var passport_mother_div = document.getElementById("passport_mother_div");
+    var visa_father_div = document.getElementById("visa_father_div");
+    var visa_mother_div = document.getElementById("visa_mother_div");
     if (student_id) {
+        
+        $("#father_form input").val("");
+        $("#father_form").hide("slow");
+        $("#mother_form input").val("");
+        $("#mother_form").hide("slow");
+        $('#skip_father_details').prop('checked', true);
+        $('#skip_mother_details').prop('checked', true);
         $.post(parentDetailsAccStudentId, { token: token, branch_id: branchID, student_id: student_id }, function (res) {
             if (res.code == 200) {
                 var data = res.data.father;
@@ -628,89 +635,100 @@ function toggleBasicDetails(student_id) {
                 //     var src = defaultImg;
                 // }
                 
-                if (data.id) {
+                // if (data.id) {
+                //     $('#skip_father_details').prop('checked', false);
+                // }
+                if (data && data.id) {
+                    $("#father_form").show("slow");
                     $('#skip_father_details').prop('checked', false);
+                    $("#father_id").val(data.id);
+                    $("#father_first_name").val(data.first_name);
+                    $("#father_middle_name").val(data.middle_name);
+                    $("#father_last_name").val(data.last_name);
+                    $("#father_last_name_furigana").val(data.last_name_furigana);
+                    $("#father_middle_name_furigana").val(data.middle_name_furigana);
+                    $("#father_first_name_furigana").val(data.first_name_furigana);
+                    $("#father_last_name_english").val(data.last_name_english);
+                    $("#father_middle_name_english").val(data.middle_name_english);
+                    $("#father_first_name_english").val(data.first_name_english);
+                    $("#father_nationality").val(data.nationality);
+                    var nationalityName = data.nationality;
+                    var countryCode = getCountryCodeByNationality(nationalityName);
+                    // Find the flag element within the .selected-flag container and update its class
+                    $(".father .selected-flag .flag").removeClass().addClass("flag " + countryCode);
+                    $("#father_email").val(data.email);
+                    $("#father_occupation").val(data.occupation);
+                    $("#father_mobile_no").val(data.mobile_no);
+                    $("#passport_father_old_photo").val(data.passport_photo);
+                    var passportFatherPhoto = data.passport_photo;
+                    if (passportFatherPhoto) {
+                        var passportFatherImageUrl = userImageUrl + passportFatherPhoto;
+                        $("#passport_father_photo_link").attr("href", passportFatherImageUrl).show();
+                    } else {
+                        $("#passport_father_photo_link").hide();
+                    }
+                    $("#visa_father_old_photo").val(data.visa_photo);
+                    // Set visa father photo link
+                    var visaFatherPhoto = data.visa_photo;
+                    if (visaFatherPhoto) {
+                        var visaFatherImageUrl = userImageUrl + visaFatherPhoto;
+                        $("#visa_father_photo_link").attr("href", visaFatherImageUrl).show();
+                    } else {
+                        $("#visa_father_photo_link").hide();
+                    }
+                    
+                    passport_father_div.classList.add("show");
+                    visa_father_div.classList.add("show");
                 }
-                $("#father_id").val(data.id);
-                $("#father_first_name").val(data.first_name);
-                $("#father_middle_name").val(data.middle_name);
-                $("#father_last_name").val(data.last_name);
-                $("#father_last_name_furigana").val(data.last_name_furigana);
-                $("#father_middle_name_furigana").val(data.middle_name_furigana);
-                $("#father_first_name_furigana").val(data.first_name_furigana);
-                $("#father_last_name_english").val(data.last_name_english);
-                $("#father_middle_name_english").val(data.middle_name_english);
-                $("#father_first_name_english").val(data.first_name_english);
-                $("#father_nationality").val(data.nationality);
-                var nationalityName = data.nationality;
-                var countryCode = getCountryCodeByNationality(nationalityName);
-                // Find the flag element within the .selected-flag container and update its class
-                $(".father .selected-flag .flag").removeClass().addClass("flag " + countryCode);
-                $("#father_email").val(data.email);
-                $("#father_occupation").val(data.occupation);
-                $("#father_mobile_no").val(data.mobile_no);
-                $("#passport_father_old_photo").val(data.passport_photo);
-                var passportFatherPhoto = data.passport_photo;
-                if (passportFatherPhoto) {
-                    var passportFatherImageUrl = userImageUrl + passportFatherPhoto;
-                    $("#passport_father_photo_link").attr("href", passportFatherImageUrl).show();
-                } else {
-                    $("#passport_father_photo_link").hide();
-                }
-                $("#visa_father_old_photo").val(data.visa_photo);
-                // Set visa father photo link
-                var visaFatherPhoto = data.visa_photo;
-                if (visaFatherPhoto) {
-                    var visaFatherImageUrl = userImageUrl + visaFatherPhoto;
-                    $("#visa_father_photo_link").attr("href", visaFatherImageUrl).show();
-                } else {
-                    $("#visa_father_photo_link").hide();
-                }
-
-                if (motherdata.id) {
+                if (motherdata && motherdata.id) {
+                    $("#mother_form").show("slow");
                     $('#skip_mother_details').prop('checked', false);
-                }
-                $("#mother_id").val(motherdata.id)
-                $("#mother_first_name").val(motherdata.first_name);
-                $("#mother_last_name").val(motherdata.last_name);
-                $("#mother_middle_name").val(motherdata.middle_name);
-                $("#mother_last_name_furigana").val(motherdata.last_name_furigana);
-                $("#mother_middle_name_furigana").val(motherdata.middle_name_furigana);
-                $("#mother_first_name_furigana").val(motherdata.first_name_furigana);
-                $("#mother_last_name_english").val(motherdata.last_name_english);
-                $("#mother_middle_name_english").val(motherdata.middle_name_english);
-                $("#mother_first_name_english").val(motherdata.first_name_english);
-                $("#mother_nationality").val(motherdata.nationality);
-                var nationalityName1 = motherdata.nationality;
-                var countryCode1 = getCountryCodeByNationality(nationalityName1);
-                // Find the flag element within the .selected-flag container and update its class
-                $(".mother .selected-flag .flag").removeClass().addClass("flag " + countryCode1);
-                $("#mother_email").val(motherdata.email);
-                $("#mother_occupation").val(motherdata.occupation);
-                $("#mother_mobile_no").val(motherdata.mobile_no);
-                $("#passport_mother_old_photo").val(motherdata.passport_photo);
-                // Set passport mother photo link
-                var passportMotherPhoto = motherdata.passport_photo;
-                if (passportMotherPhoto) {
-                    var passportMotherImageUrl = userImageUrl + passportMotherPhoto;
-                    $("#passport_mother_photo_link").attr("href", passportMotherImageUrl).show();
-                } else {
-                    $("#passport_mother_photo_link").hide();
-                }
-                $("#visa_mother_old_photo").val(motherdata.visa_photo);
-                // Set visa mother photo link
-                var visaMotherPhoto = motherdata.visa_photo;
-                if (visaMotherPhoto) {
-                    var visaMotherImageUrl = userImageUrl + visaMotherPhoto;
-                    $("#visa_mother_photo_link").attr("href", visaMotherImageUrl).show();
-                } else {
-                    $("#visa_mother_photo_link").hide();
+                    
+                    $("#mother_id").val(motherdata.id)
+                    $("#mother_first_name").val(motherdata.first_name);
+                    $("#mother_last_name").val(motherdata.last_name);
+                    $("#mother_middle_name").val(motherdata.middle_name);
+                    $("#mother_last_name_furigana").val(motherdata.last_name_furigana);
+                    $("#mother_middle_name_furigana").val(motherdata.middle_name_furigana);
+                    $("#mother_first_name_furigana").val(motherdata.first_name_furigana);
+                    $("#mother_last_name_english").val(motherdata.last_name_english);
+                    $("#mother_middle_name_english").val(motherdata.middle_name_english);
+                    $("#mother_first_name_english").val(motherdata.first_name_english);
+                    $("#mother_nationality").val(motherdata.nationality);
+                    var nationalityName1 = motherdata.nationality;
+                    var countryCode1 = getCountryCodeByNationality(nationalityName1);
+                    // Find the flag element within the .selected-flag container and update its class
+                    $(".mother .selected-flag .flag").removeClass().addClass("flag " + countryCode1);
+                    $("#mother_email").val(motherdata.email);
+                    $("#mother_occupation").val(motherdata.occupation);
+                    $("#mother_mobile_no").val(motherdata.mobile_no);
+                    $("#passport_mother_old_photo").val(motherdata.passport_photo);
+                    // Set passport mother photo link
+                    var passportMotherPhoto = motherdata.passport_photo;
+                    if (passportMotherPhoto) {
+                        var passportMotherImageUrl = userImageUrl + passportMotherPhoto;
+                        $("#passport_mother_photo_link").attr("href", passportMotherImageUrl).show();
+                    } else {
+                        $("#passport_mother_photo_link").hide();
+                    }
+                    $("#visa_mother_old_photo").val(motherdata.visa_photo);
+                    // Set visa mother photo link
+                    var visaMotherPhoto = motherdata.visa_photo;
+                    if (visaMotherPhoto) {
+                        var visaMotherImageUrl = userImageUrl + visaMotherPhoto;
+                        $("#visa_mother_photo_link").attr("href", visaMotherImageUrl).show();
+                    } else {
+                        $("#visa_mother_photo_link").hide();
+                    }
+                    passport_mother_div.classList.add("show");
+                    visa_mother_div.classList.add("show");
                 }
             }
         }, 'json');
          $.post(studentDetailsAccStudentId, { token: token, branch_id: branchID, id: student_id }, function (res) {
             if (res.code == 200) {
                 var studentData = res.data.student;
+                $("#relation").show();
                 $("#guardian_relation").val(studentData.relation);
                 if(studentData.relation==1){
                     $('#father_email').attr('readonly', true);
@@ -726,10 +744,6 @@ function toggleBasicDetails(student_id) {
     fatherSection.classList.add("show");
     motherSection.classList.add("show");
     siblingSection.classList.add("show");
-    motherFatherSection.classList.add("show");
-    motherFatherSections.classList.add("show");
-    motherFatherSectionss.classList.add("show");
-    passportdetails.classList.add("show");
     }
 }
 // Function to populate sibling data rows
