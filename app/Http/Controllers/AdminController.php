@@ -11050,8 +11050,10 @@ class AdminController extends Controller
                     $color = "danger";
                 } else if ($row['termination_status'] == "Pending") {
                     $color = "warning";
-                } else if ($row['termination_status'] == "Send Back") {
+                } else if ($row['termination_status'] == "Applied") {
                     $color = "info";
+                } else if ($row['termination_status'] == "Send Back") {
+                    $color = "warning";
                 }
                 return '<div class="button-list">
                 
