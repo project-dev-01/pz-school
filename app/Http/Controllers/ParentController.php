@@ -2067,12 +2067,21 @@ class ParentController extends Controller
         // Set dual nationality based on checkbox
         $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
 
+        $status = $request->status;
+        if($request->status=="Send Back"){
+            $status = "Applied";
+        }
+        
         $phase_2_status = $request->phase_2_status;
         if ($request->status == "Approved") {
             if ($request->phase_2_status == null) {
 
                 $phase_2_status = "Applied";
             }
+        }
+        
+        if($request->phase_2_status=="Send Back"){
+            $phase_2_status = "Applied";
         }
         $trail_start_date = null;
         $trail_end_date = null;
@@ -2086,10 +2095,7 @@ class ParentController extends Controller
         }
         // Set dual nationality based on checkbox
         // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
-        $status = $request->status;
-        if ($request->status == "") {
-            $status = $request->phase_1_status;
-        }
+
         $visa_base64 = "";
         $visa_extension = "";
         $visa_file = $request->file('visa_photo');
@@ -2460,7 +2466,7 @@ class ParentController extends Controller
             'parent_phone_number_after_transfer' => $request->parent_phone_number_after_transfer,
             'parent_email_address_after_transfer' => $request->parent_email_address_after_transfer,
             'parent_address_after_transfer' => $request->parent_address_after_transfer,
-            "termination_status" => "Pending",
+            "termination_status" => "Applied",
             "created_by" => session()->get('ref_user_id'),
         ];
         // dd($data);
@@ -2491,8 +2497,10 @@ class ParentController extends Controller
                     $color = "danger";
                 } else if ($row['termination_status'] == "Pending") {
                     $color = "warning";
-                } else if ($row['termination_status'] == "Send Back") {
+                } else if ($row['termination_status'] == "Applied") {
                     $color = "info";
+                } else if ($row['termination_status'] == "Send Back") {
+                    $color = "warning";
                 }
                 return '<div class="button-list">
                 
@@ -2530,7 +2538,7 @@ class ParentController extends Controller
         $termination_status = $request->termination_status;
         if ($request->termination_status == "Approved") {
             if ($request->old_date_of_termination != $request->date_of_termination) {
-                $termination_status = "Pending";
+                $termination_status = "Applied";
                 $termination_notification = "Yes";
             }
         } else {
@@ -2567,7 +2575,7 @@ class ParentController extends Controller
             $old['remarks'] = $termination['data']['remarks'];
             $output  = array_diff($new, $old);
             if (count($output) > 0) {
-                $termination_status = "Pending";
+                $termination_status = "Applied";
             }
         }
         $data = [
@@ -2616,14 +2624,16 @@ class ParentController extends Controller
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $allergies_name_list = Helper::GetMethod(config('constants.api.get_allergies_name_list'));
         $student_id = session()->get('student_id');
+        $parent_id = session()->get('ref_user_id');
         return view(
             'parent.student_medical.index',
             [
                 'grade' => isset($getclass['data']) ? $getclass['data'] : [],
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'student_id' => isset($student_id) ? $student_id : 0,
-                'studentmedical' => isset($response['data']['student']) ? $response['data']['student'] : [],
-                'allergies_name'=> isset($allergies_name_list['data']) ? $allergies_name_list['data'] : [],
+                'parent_id' => isset($parent_id) ? $parent_id : 0,               
+                'studentmedical' => isset($response['data']['student']) ? $response['data']['student'] : [],                
+                'allergies_name'=> isset($allergies_name_list['data']) ? $allergies_name_list['data'] : [],                
                 'allergies_details' => isset($response['data']['allergies']) ? $response['data']['allergies'] : [],
             ]
         );
@@ -2632,6 +2642,7 @@ class ParentController extends Controller
     { 
         $data = [
             'student_id' =>  $request->student_id,
+            'parent_id' => $request->parent_id,
             'academic_session_id' => session()->get('academic_session_id'),
             'normal_temp' => $request->normal_temp,
             'hospital_name'=> $request->hospital_name,

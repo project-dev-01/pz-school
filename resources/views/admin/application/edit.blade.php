@@ -320,6 +320,7 @@
                         @php
                         $readonly_phase_1 = "";
                         $disabled_phase_1 = "";
+                        $disabled_phase_1_status = "";
                         $hidden_phase_2 = "none";
                         if($application['status']=="Approved"){
                         $disabled_phase_1 = "disabled";
@@ -335,11 +336,18 @@
                         $readonly_phase_2 = "";
                         $disabled_phase_2 = "";
                         if($application['phase_2_status']=="Approved"){
+                        $disabled_phase_1_status = "disabled";
                         $disabled_phase_2 = "disabled";
                         $readonly_phase_2 = "readonly";
                         }else if($application['phase_2_status']=="Reject"){
+                        $disabled_phase_1_status = "disabled";
                         $disabled_phase_2 = "disabled";
                         $readonly_phase_2 = "readonly";
+                        }
+                        if($application['status']== "Approved"){
+                            if($application['phase_2_status']=="Applied" || $application['phase_2_status']==Null){
+                            $disabled_phase_1_status = "disabled";
+                            }
                         }
                         @endphp
                         <input type="hidden" id="id" name="id" value="{{ isset($application['id']) ? $application['id'] : ''}}">
@@ -1228,14 +1236,14 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="phase_1_status">{{ __('messages.status') }}<span class="text-danger">*</span></label>
-                                                    <select id="phase_1_status" {{$disabled_phase_2}} name="status" class="form-control">
+                                                    <select id="phase_1_status" {{$disabled_phase_1_status}} name="status" class="form-control">
                                                         <option value="">{{ __('messages.status') }}</option>
                                                         <option {{ isset($application['status']) ? $application['status'] == "Applied" ? 'selected' : '' : '' }} value="Applied">{{ __('messages.applied') }}</option>
                                                         <option {{ isset($application['status']) ? $application['status'] == "Approved" ? 'selected' : '' : '' }} value="Approved">{{ __('messages.approved') }}</option>
                                                         <option {{ isset($application['status']) ? $application['status'] == "Send Back" ? 'selected' : '' : '' }} value="Send Back">{{ __('messages.send_back') }}</option>
                                                         <option {{ isset($application['status']) ? $application['status'] == "Reject" ? 'selected' : '' : '' }} value="Reject">{{ __('messages.reject') }}</option>
                                                     </select>
-                                                    @if($disabled_phase_2=="disabled")
+                                                    @if($disabled_phase_1_status=="disabled")
                                                     <input type="hidden" name="status" value="{{$application['status']}}">
                                                     @endif
                                                 </div>

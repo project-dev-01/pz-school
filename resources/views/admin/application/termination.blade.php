@@ -76,6 +76,13 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>{{ __('messages.termination_parent_address_after_transfer') }}</td>
+                                <td>:</td>
+                                <td><textarea type="text" class="form-control" id="parent_address_after_transfer" readonly  name="parent_address_after_transfer" placeholder="{{ __('messages.termination_enter_parent_address_after_transfer') }} " aria-describedby="inputGroupPrepend"></textarea>
+                                 
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>{{ __('messages.school_fees_payment_status') }}<span class="text-danger"></span></td>
                                 <td>:</td>
                                 <td> <select id="school_fees_payment_status" name="school_fees_payment_status" class="form-control" >
@@ -90,6 +97,7 @@
                                 <input type="hidden"  name="termination_status_old">
                                 <td> <select id="termination_status" class="form-control" name="termination_status">
                                         <option value="">{{ __('messages.select_status') }}</option>
+                                        <option value="Applied">{{ __('messages.applied') }}</option>
                                         <option value="Approved">{{ __('messages.approved') }}</option>
                                         <option value="Pending">{{ __('messages.pending') }}</option>
                                         <option value="Send Back">{{ __('messages.send_back') }}</option>

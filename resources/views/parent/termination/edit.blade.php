@@ -325,7 +325,7 @@
                         @php
                         $readonly = "";
                         $disabled = "";
-                        if($termination['termination_status']=="Approved") {
+                        if($termination['termination_status']!="Send Back") {
                         $readonly = "readonly";
                         $disabled = "disabled";
                         }
@@ -417,18 +417,21 @@
                                         
                                     </div>
                                 </div>
+                                <input type="hidden" name="school_fees_payment_status" value="{{ $termination['school_fees_payment_status']}}">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="parent_address_after_transfer">{{ __('messages.parent_address_after_transfer') }}<span class="text-danger">*</span></label>
                                         <textarea type="text" class="form-control" {{$readonly}} id="parent_address_after_transfer" name="parent_address_after_transfer" placeholder="{{ __('messages.enter_parent_address_after_transfer') }} " aria-describedby="inputGroupPrepend">{{ $termination['parent_address_after_transfer']}}</textarea>
                                     </div>
                                 </div>
+                                @if($termination['termination_status']=="Rejected" || $termination['termination_status']=="Send Back" || $termination['termination_status']=="Approved")
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="remarks">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" {{$readonly}} id="remarks" value="{{ $termination['remarks']}}" name="remarks" placeholder="{{ __('messages.enter_remarks') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
+                                @endif
                                 <!-- <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="school_fees_payment_status">{{ __('messages.school_fees_payment_status') }}<span class="text-danger">*</span></label>
@@ -560,7 +563,7 @@
                         </div>
                         <hr> -->
                             <div class="form-group text-right m-b-0">
-                                <button class="btn btn-primary-bl waves-effect waves-light" id="submit" type="submit">
+                                <button class="btn btn-primary-bl waves-effect waves-light" {{$disabled}} id="submit" type="submit">
                                     {{ __('messages.update') }}
                                 </button>
                                 <a href="{{ route('parent.termination.index') }}" class="btn btn-primary-bl waves-effect waves-light">

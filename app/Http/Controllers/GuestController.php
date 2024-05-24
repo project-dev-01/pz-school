@@ -291,9 +291,7 @@ class GuestController extends Controller
     
         // Set dual nationality based on checkbox
         $status = $request->status;
-        if($request->status==""){
-            $status = $request->phase_1_status;
-        }else if($request->status=="Send Back"){
+        if($request->status=="Send Back"){
             $status = "Applied";
         }
 

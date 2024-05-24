@@ -4131,4 +4131,786 @@ class PdfController extends Controller
         $fileName = __('messages.child_health_report') . $name . ".pdf";
         return $pdf->download($fileName);
     }
+    public function studentMedicalRecordPDF($id)
+    {
+        $data = [
+            'student_id' => $id,
+            "academic_session_id" => session()->get('academic_session_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.student_medical_report_pdf'), $data);
+        $allergies_name_list = Helper::GetMethod(config('constants.api.get_allergies_name_list'));
+        $allergies_details = isset($response['data']['allergies']) ? $response['data']['allergies'] : [];
+        $allergies_name = isset($allergies_name_list['data']) ? $allergies_name_list['data'] : [];
+        $studentmedical = isset($response['data']['student']) ? $response['data']['student'] : [];
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $response = "<!DOCTYPE html>";
+        $response .= "<html><head>";
+        $response .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $response .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $response .= '@font-face {
+            font-family: ipag;
+            font-style: normal;
+            font-weight: normal;
+            src: url("' . $fonturl . '");
+        } 
+        body{ font-family: ipag !important;}
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 13px;
+        }
+
+        td,
+        th {
+            border: 1px solid black;
+            text-align: left;
+            font-size: 13px;
+
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .line {
+            height: 10px;
+            right: 10px;
+            margin: auto;
+            left: -5px;
+            width: 100%;
+            border-top: 1px solid #000;
+            -webkit-transform: rotate(14deg);
+            -ms-transform: rotate(14deg);
+            transform: rotate(14deg);
+        }
+
+        .diagonal {
+            width: 150px;
+            height: 40px;
+        }
+
+        .diagonal span.lb {
+            bottom: 2px;
+            left: 2px;
+        }
+
+        .diagonal span.rt {
+            top: 2px;
+            right: 2px;
+        }
+
+        .diagonalCross2 {
+            background: linear-gradient(to top right, #fff calc(50% - 1px), black, #fff calc(50% + 1px))
+        }
+
+        .rtxt {
+            transform: rotate(90deg);
+            transform-origin: center;
+            position: relative;
+        }
+
+        .rtd {
+            white-space: nowrap;
+            vertical-align: bottom;
+            width: 0px;
+        }';
+        $response .= '</style>';
+        $response .= "</head>";
+        $response .= "<body>";
+        $response .= '<div class="content" style="box-sizing: border-box; max-width: 800px; display: block; margin: 0 auto; padding: 20px;border-radius: 7px; margin-top: 20px;background-color: #fff; border: 1px solid black;">
+        <table class="main" width="100%">
+            <div class="row">
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6">
+                    <h5 style="float:right;">The JAPANESE SCHOOL of KUALA LUMPUR</h5>
+                </div>
+            </div>
+            <!-- 1 -->
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 style="text-align:center;">MY MEDICAL RECORD</h3>
+                </div>
+            </div>
+            <table style="margin-bottom: 15px;">
+                <thead>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2">
+                            <p>Grade</p>
+                            <p style="text-align:center;">20</p>
+                            <p style="text-align:right;">Class</p>
+                        </td>
+                        <td>Grade</td>
+                        <td>P 1 20</td>
+                        <td>P 2 20</td>
+                        <td>P 3 20</td>
+                        <td>P 4 20</td>
+                        <td>P 5 20</td>
+                        <td>P 6 20</td>
+                        <td>S 1 20</td>
+                        <td>S 2 20</td>
+                        <td>S 3 20</td>
+                    </tr>
+                    <tr>
+                        <td>Class</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="8"></td>
+                        <td colspan="3">
+                            <p style="text-align:left;">Gender</p>
+                            <p style="text-align:center;">Male . Female</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="8">
+                            <p style="text-align:left;">Student Name:'. $studentmedical['name'] .'</p>
+                            <p style="text-align:center;">__________________ &nbsp; &nbsp; __________________</p>
+                            <p style="text-align:center;">Firstname &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Familyname</p>
+                        </td>
+                        <td colspan="3" style="text-align:left;">
+                            <p>Blood Type:</p>
+                            <p style="text-align:center;">A . B . O . AB</p>
+                            <p style="text-align:center;">Rh (+ -)</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="8">
+                            <p style="text-align:left;">Date of Birth:</p>
+                            <p style="text-align:center;">Date: &nbsp;&nbsp; Month : &nbsp;&nbsp; Year :&nbsp;&nbsp;</p>
+                        </td>
+                        <td colspan="3">
+                            <p style="text-align:left;">Normal Temparature: </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- 2 --->
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 style="text-align:left;">1</h3>
+                </div>
+            </div>
+            <table style="margin-bottom: 15px;">
+                <thead>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="3" style="width: 100px;">
+                            <p>Emergency Contact</p>
+                        </td>
+                        <td colspan="2" style="width: 132px;">
+                            <p>Name</p>
+                        </td>
+                        <td style="width: 50px;"></td>
+                        <td colspan="2">
+                            <p>Contact Number</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50px;">1</td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50px;">2</td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2"></td>
+                    <tr>
+                        <td>
+                            <p>Address</p>
+                        </td>
+                        <td colspan="5">
+                            <div class="column">
+                                <p>Condominium Address :</p>
+                            </div>
+                            <div class="column">
+                                <p>District :</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Home Doctor</p>
+                        </td>
+                        <td colspan="5">
+                            <div class="column">
+                                <p>Hospital</p>
+                            </div>
+                            <div class="column">
+                                <p>Doctors Name</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Insurance</p>
+                        </td>
+                        <td colspan="5">
+                            <div class="form-group">
+                                <p>
+                                    <input type="radio" name="yes_no" checked style="margin: 10px;">Yes</input>
+                                    <input type="radio" name="yes_no" style="margin: 10px;">No</input>
+                                    <label style="margin-left: 30px;">Company name :</label>
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- 3--->
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 style="text-align:left;">2 Place "O", if any of the condition are present.</h4>
+                </div>
+            </div>
+            <table style="margin-bottom: 15px;">
+                <tbody>
+                    <tr style="height: 30px;">
+                        <td rowspan="2">About allergies</td>
+                        <td rowspan="2 style=" width: 40px;">Age of onset</td>
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr style="height: 30px;">
+                        <td rowspan="1">Undern Treatment</td>
+                        <td rowspan="1">Follow up</td>
+                        <td rowspan="1">(age)
+                            Treated ( )
+                        </td>
+                    </tr>
+                    <tr>
+                    </tr>';
+                    foreach($allergies_name as $index => $allergies){
+                    $response .= '<tr style="height: 30px;">
+                        <td>' .$allergies['name']. '</td>
+                       <td>' .$allergies_details[$allergies['id']]['age_onset']. '</td>
+                       <td>' .$allergies_details[$allergies['id']]['under_treatment']. '</td>
+                       <td>' .$allergies_details[$allergies['id']]['follow_up']. '</td>
+                       <td>' .$allergies_details[$allergies['id']]['age_treat']. '</td>
+                    </tr>';
+                  
+                    }
+                   $response .= '<tr>
+                        <td colspan="5">Please write about the allergen if any</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <span style="margin-right:10px;">*</span>
+                                    <label>Anaphylactic Shock :</label>
+                                    <input type="radio" name="yes_no" checked style="margin: 10px;">Yes</input>
+                                    <input type="radio" name="yes_no" style="margin: 10px;">No</input>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <span style="margin-right:10px;">*</span>
+                                    <label>Epinephrine autoinjector :</label>
+                                    <input type="radio" name="yes_no" checked style="margin: 10px;">Yes</input>
+                                    <input type="radio" name="yes_no" style="margin: 10px;">No</input>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <span style="margin-right:10px;">*</span>
+                                    <label>Other Medicines :</label>
+                                    <input type="radio" name="yes_no" checked style="margin: 10px;">Yes</input>
+                                    <input type="radio" name="yes_no" style="margin: 10px;">No</input>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div><!--Col-12-->
+    </table>
+    </div>
+
+    <div class="content" style="box-sizing: border-box; max-width: 800px; display: block; margin: 0 auto; padding: 20px;border-radius: 7px; margin-top: 20px;background-color: #fff;border: 1px solid black;">
+        <table class="main" width="100%">
+            <!-- 1 -->
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 style="text-align:left;margin-top: 0px;">3 Medical History(Age)&nbsp;&nbsp; Name:</h4>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <table style="margin-bottom: 15px;">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Heart problem ( )</td>
+                            <td>Epilepsy ( )</td>
+                            <td>Measles ( )</td>
+                        </tr>
+                        <tr>
+                            <td>Kawasaki disease ( )</td>
+                            <td>Febrile convulsions ( )</td>
+                            <td>Chicken pox ( )</td>
+                        </tr>
+                        <tr>
+                            <td>Scoliosis ( )</td>
+                            <td>Tuberculosis ( )</td>
+                            <td>Mumps ( )</td>
+                        </tr>
+                        <tr>
+                            <td>Kidney problems ( )</td>
+                            <td rowspan="2">Others
+                                <br>( )
+                            </td>
+                            <td>Rubella<br>(German measles) ( )</td>
+                        </tr>
+                        <tr>
+                            <td>Diabetes ( )</td>
+                            <td>Dengue Fever ( )</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align:left;">Operated Disease ( )
+                                Injury ( )
+                                Illness ( )
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- 2 --->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 style="text-align:left;margin-top: 0px;">4 Immunization Histroy</h4>
+                    </div>
+                </div>
+                <table style="margin-bottom: 15px;">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Type</td>
+                            <td style="width: 125px;">times</td>
+                            <td>Type</td>
+                            <td style="width: 125px;">times</td>
+                        </tr>
+                        <tr>
+                            <td>Japanese encephalitis</td>
+                            <td style="width: 125px;"></td>
+                            <td>Streptpcpccus pneumoniae</td>
+                            <td style="width: 125px;"></td>
+                        </tr>
+                        <tr>
+                            <td>3 Triple antigen</td>
+                            <td style="width: 125px;"></td>
+                            <td>(Hib)</td>
+                            <td style="width: 125px;"></td>
+                        </tr>
+                        <tr>
+                            <td>4 Quadruple antigen</td>
+                            <td style="width: 125px;"></td>
+                            <td>Covid 19</td>
+                            <td style="width: 125px;"></td>
+                        </tr>
+                        <tr>
+                            <td>BCG</td>
+                            <td style="width: 125px;"></td>
+                            <td>Rabies vaccine</td>
+                            <td style="width: 125px;"></td>
+                        </tr>
+                        <tr>
+                            <td>Rubella (MR)</td>
+                            <td style="width: 125px;"></td>
+                            <td>Tetanus</td>
+                            <td style="width: 125px;"></td>
+                        </tr>
+                        <tr>
+                            <td>Chicken pox</td>
+                            <td style="width: 125px;"></td>
+                            <td rowspan="2" style="vertical-align:text-top;">Advised by doctors against vaccination.</td>
+                            <td rowspan="2" style="width: 125px;"></td>
+                        </tr>
+                        <tr>
+                            <td>Mumos</td>
+                            <td style="width: 125px;"></td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                <!-- 3--->
+                <div class="row">
+                    <div class="column" style="padding:0px;">
+                        <h4 style="text-align:left;margin-top: 0px;">5 Current Health Condition</h4>
+                    </div>
+                    <div class="column" style="padding:0px;">
+                        <h4 style="text-align:right;margin-top: 0px;">Grade()</h4>
+                    </div>
+                </div>
+                <table style="margin-bottom: 15px;">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <tr style="text-align:center;">
+                            <td></td>
+                            <td colspan="10" style="width:45px;">Place "O", if any of the conditions are present.</td>
+                            <td style="text-align:center;">P <br>1</td>
+                            <td style="text-align:center;">P <br>2</td>
+                            <td style="text-align:center;">P <br>3</td>
+                            <td style="text-align:center;">P <br>4</td>
+                            <td style="text-align:center;">P <br>5</td>
+                            <td style="text-align:center;">P <br>6</td>
+                            <td style="text-align:center;">S <br>1</td>
+                            <td style="text-align:center;">S <br>2</td>
+                            <td style="text-align:center;">S <br>3</td>
+
+                        </tr>
+
+                        <tr>
+                            <td rowspan="9" class="">
+                                <div class="rtxt">Internal Medicine</div>
+                            </td>
+                            <td colspan="10" style="width:45px;">Develops a fever asily.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="width:45px;">Frequent headaches.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="width:45px;">Dyspepsia & stomachache and cliarrhea easily.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="width:45px;">Constipates easily.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="width:45px;">Vomits easily.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="width:45px;">Faints easily.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="width:45px;">Dizziness easily.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="width:45px;">Nettle rash easily.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="width:45px;">Prone to car sickness.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td rowspan="5" class="rtd">
+                                <div class="rtxt">ENT</div>
+                            </td>
+                            <td colspan="10" style="width:45px;">Has poor hearing.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="width:45px;">Has had otitis media before.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="width:45px;">Bleeds from the nose easily.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="width:45px;">nasal congestion and sevene running nose easily. </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="width:45px;">Throat is swollen easily.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td rowspan="4" class="rtd">
+                                <div class="rtxt">Eye</div>
+                            </td>
+                            <td colspan="10" style="width:45px;">Squinted eyes to view from a distance</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="width:45px;">eye irritation & redness easily.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="width:45px;">Use glasses or lenses</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="width:45px;">Wrong Colour</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td rowspan="4" class="rtd">
+                                <div class="rtxt">Dent</div>
+                            </td>
+                            <td colspan="10" style="width:45px;">Has a sensistive tooth or toothache</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="width:45px;">Bleed from gum</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="width:45px;">Pain or sound in jaw joint</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="width:45px;">Has been Orthodontics</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td colspan="20">Any medicine to take daily?<br>(No/Yes) (Name of medicine:)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 style="text-align:left;">6 Any Other medical concerns which require the attention of the medical practitioner</h4>
+                    </div>
+                </div>
+                <table class="table table-bordered" style="margin-bottom: 15px;">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <tr style="vertical-align: text-top;">
+                            <td style="width:156px;height:60px;"><b>Date:</b></td>
+                            <td colspan="20"><b>Remarks:</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </table>
+        </div>
+    </body>
+
+
+    </body>
+
+    </html>';
+    $pdf = \App::make('dompdf.wrapper');
+    // set size
+    $customPaper = array(0, 0, 1920.00, 810.00);
+    $pdf->set_paper($customPaper);
+    // $paper_size = array(0, 0, 360, 360);
+    // $pdf->set_paper($paper_size);
+    $pdf->loadHTML($response);
+    // filename
+    $now = now();
+    $name = strtotime($now);
+    $fileName = __('messages.student_medical_record') . $name . ".pdf";
+   // return $pdf->download($fileName);
+    return $pdf->stream($fileName);
+    } 
 }

@@ -428,6 +428,7 @@ return [
         'student_delete' => $url.'/student/delete',
         'student_settings' => $url.'/student/student_settings',
         'get_student_download_settings' => $url.'/get_student_download_settings',
+        'getgraduatestudentlist' => $url.'/student/graduatelist',
         
         'relation_list' => $url.'/relation/list',
         //Parent Url
@@ -1029,6 +1030,12 @@ return [
         'getpaperoverallmarklist' => $url.'/exam_result/getpaperoverallmarklist',
         
         
+         
+        'adhocexam_file_name'=> $url.'/exam/adhocexam_file_name', 
+        'adhocexam_student_list'=> $url.'/exam/adhocexam_student_list',                     
+        'adhocmark_comparison'=> $url.'/exam/adhocmark_comparison',         
+        'adhocexamuploadmark'=> $url.'/exam/adhocexamuploadmark',    
+
         'stuexam_marklist' => $url.'/exam_result/stuexam_marklist',
         'stuexam_spmarklist' => $url.'/exam_result/stuexam_spmarklist',
         'stuexam_avgmarklist' => $url.'/exam_result/stuexam_avgmarklist',
@@ -1120,6 +1127,7 @@ return [
         'get_student_medical_record' => $url.'/get_student_medical_record',
         'get_student_medical_record_admin' => $url.'/get_student_medical_record_admin',
         'get_allergies_name_list' => $url.'/get_allergies_name_list',
+        'student_medical_report_pdf' => $url.'/student_medical_report_pdf',
         
       ]
 
