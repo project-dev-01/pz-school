@@ -136,6 +136,8 @@ $(function () {
             var class_id = $('#class_id').val();
             var section_id = $('#section_id').val();
             var session_id = $('#session_id').val();
+            var stu_status = $('#stu_status').val();
+            //alert(stu_status);
 
             var classObj = {
                 department_id:department_id,
@@ -144,6 +146,7 @@ $(function () {
                 sectionID: section_id,
                 sessionID: session_id,
                 userID: userID,
+                stu_status:stu_status
             };
             //setLocalStorageForStudentList(classObj);
 
@@ -153,6 +156,7 @@ $(function () {
                 class_id: class_id,
                 section_id: section_id,
                 session_id: session_id,
+                stu_status:stu_status
             };
             getStudentList(formData);
         } else {
@@ -200,6 +204,7 @@ $(function () {
                     d.section_id = formData.section_id,
                     d.session_id = formData.session_id,
                     d.session_id = formData.session_id
+                    d.stu_status = formData.stu_status
                 }
             },
             "pageLength": 10,
@@ -233,6 +238,13 @@ $(function () {
                 {
                     data: 'email',
                     name: 'email'
+                },
+                {
+                    data: 'termination_status',
+                    name: 'termination_status',
+                    render: function(data, type, row) {
+                        return data ? 'Terminated' : 'Active';
+                    }
                 },
                 {
                     data: 'actions',

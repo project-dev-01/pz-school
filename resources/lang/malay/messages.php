@@ -2231,5 +2231,10 @@ return [
       "go_to_bulletin" => "Pergi ke Papan Buletin",
       "no_file_uploaded"=> "tiada fail dimuat naik",
       "you_want_to_delete_this_widget" => "You want to Delete this Widget",
+      "modify_data" => "Data yang Diubah Suai",
+      "existing_record" => "Data Sudah Wujud",
+      "new_record" => "Rekod Data Baharu",
+      "mark_info" => "Tandakan Maklumat",      
+      "adhocexam_import" => "Muat Naik Pukal Peperiksaan Adhoc",
       
 ];

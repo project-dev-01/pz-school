@@ -128,7 +128,7 @@ $(function () {
             }
         }, 'json');
     });
-    $('#paperID').on('change', function () {
+    /*$('#paperID').on('change', function () {
         var paper_id = $(this).val();
         $.post(ExamPaperDetails, {
             token: token,
@@ -170,7 +170,7 @@ $(function () {
                 
             }
         }, 'json');
-    });
+    });*/
 	/*$(document).ready(function(){
     $('#resultsByPaper').on('submit', function(e){
         e.preventDefault();
@@ -180,6 +180,9 @@ $(function () {
     });
 	});*/
     // by paper result
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+      });
     $(document).on('click', '.exportToExcel', function (e) {
         // var table = $(this).prev('.table2excel');
         var table = $('.table2excel');
@@ -200,15 +203,228 @@ $(function () {
     // applyFilter
     // rules validation
     if ($('#parent-table').length) {
+        $("#resultsByPaper").validate({
+            rules: {
+                department_id: "required",
+                class_id: "required",
+                section_id: "required",
+                subject_id: "required",
+                exam_id: "required"
+            }
+        });
+    }
+    $(document).ready(function(){
     $("#resultsByPaper").validate({
         rules: {
             department_id: "required",
             class_id: "required",
             section_id: "required",
             subject_id: "required",
-            exam_id: "required"
+            paper_id: "required",
+            semester_id: "required"
         }
     });
-}
-    
+    $(document).ready(function(){
+        $('#fileInput').change(function(){
+            var fileName = $(this).val().split('\\').pop();		
+            
+                //$('#submitbtn').removeAttr("type").attr("type", "submit");	
+                $('#submitbtn').show();	
+                
+                   $('#resultsByPaper').attr('action', newRoute);	
+                $('#downloadexcel1').hide();	   		
+            
+        });
+    });
+    $(document).on('click', '#savestudentmarks', function (e) {
+        e.preventDefault(); // Prevent the default form submission
+       
+        // Get values from form fields
+        var department_id = $("#department_id").val();
+        var class_id = $("#changeClassName").val();
+        var section_id = $("#sectionID").val();
+        var exam_id = $("#examnames").val();
+        var subject_id = $("#subjectID").val();
+        var paper_id = $("#paperID").val();
+        var semester_id = $("#semester_id").val();
+        var session_id = $("#session_id").val();
+        
+        
+            var formData = new FormData();
+            formData.append('token', token);
+            formData.append('branch_id', branchID);
+            formData.append('department_id', department_id);
+            formData.append('class_id', class_id);
+            formData.append('section_id', section_id);
+            formData.append('subject_id', subject_id);
+            formData.append('exam_id', exam_id);
+            formData.append('paper_id', paper_id);
+            formData.append('semester_id', semester_id);
+            formData.append('session_id', session_id);
+            formData.append('file', $('input[type=file]')[0].files[0]);
+            formData.append('academic_session_id', academic_session_id);
+            //$("#overlay").fadeIn(300);
+            $.ajax({
+                url: savemarks,
+                method: "post",
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                Accept: 'application/json',
+                success: function (data) {
+                    if(data.result=='success')
+                    {
+                        $('#markModal').modal('hide');
+                        toastr.success(data.message);
+                        setTimeout(function() {
+                            window.location.href = window.location;
+                         }, 3000);
+                    }
+                    else
+
+                    {
+                        toastr.error(data.message);
+                    }
+                }
+            });
+        });
+    $(document).on('click', '#submitbtn', function (e) {
+        e.preventDefault(); // Prevent the default form submission
+        $('#exammark_preview').hide();
+        // Get values from form fields
+        var department_id = $("#department_id").val();
+        var class_id = $("#changeClassName").val();
+        var section_id = $("#sectionID").val();
+        var exam_id = $("#examnames").val();
+        var subject_id = $("#subjectID").val();
+        var paper_id = $("#paperID").val();
+        var semester_id = $("#semester_id").val();
+        var session_id = $("#session_id").val();
+        
+        // Validate the form
+        var isValid = $("#resultsByPaper").valid();
+        var marklist=0;
+        // Check if the form is valid
+        if (isValid) {
+            var formData = new FormData();
+            formData.append('token', token);
+            formData.append('branch_id', branchID);
+            formData.append('department_id', department_id);
+            formData.append('class_id', class_id);
+            formData.append('section_id', section_id);
+            formData.append('subject_id', subject_id);
+            formData.append('exam_id', exam_id);
+            formData.append('paper_id', paper_id);
+            formData.append('semester_id', semester_id);
+            formData.append('session_id', session_id);
+            formData.append('file', $('input[type=file]')[0].files[0]);
+            formData.append('academic_session_id', academic_session_id);
+            //$("#overlay").fadeIn(300);
+            $.ajax({
+                url: newRoute,
+                method: "post",
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                Accept: 'application/json',
+                success: function (data) {
+                    if(data.result=='error')
+                    {
+                        toastr.error(data.message);
+                    }
+                    if(data.result=='Success')
+                    {
+                        
+                        
+                        $('#exammark_preview').show();
+                        appendDataToTable(data.studentlist,data.headerdata);
+                        $.each(data.headerdata, function(index, item) {
+                            if(item=='Wrong')
+                            {
+                                marklist++;
+                            }
+                          
+                        });
+                        if(marklist==0)
+                        {
+                            toastr.success(data.message);
+                            $('.studentmark').show();
+                            appendDataToTablemark(data.studentmarks,data.studentlist);
+                            
+                        }
+                        else
+                        {
+                            $('.studentmark').hide();
+                            toastr.error("Check Your Excel datas");
+                        }
+                        
+                    }
+                }
+            });
+        }
+    });
+    function appendDataToTable(data1,data2) {
+        var headerdata1 = $("#headerdata1");
+        // Clear existing table rows
+        headerdata1.empty();
+        // Loop through data and append rows to table
+       
+        $.each(data1, function(index, item) {
+            if(index<8)
+                {
+                var btncolor= (data2[index] =='Matched')?'success':'danger';
+                var row = "<tr ><td>" + item[0] + "</td><td>" + item[1] + "</td><td class='btn btn-" + btncolor + "'>" + data2[index] + "</td></tr>";
+                headerdata1.append(row);
+                }
+          
+        });
+        
+    }
+    function appendDataToTablemark(data1,data2) {
+        var markdatas = $("#markdatas");
+        // Clear existing table rows
+        markdatas.empty();
+        // Loop through data and append rows to table
+        
+        $.each(data1, function(index, item) {
+            if(item!='')
+            {
+                var btncolor= (item['oldmark']['mark_id'] !='')?'warning':'success';
+                if(data2[7][1]=='Points')
+                {
+                    var markbtn=(item['oldmark']['points'] !='' && item['oldmark']['points']!=item[3])?'danger':'success';
+                    var markmsg=(item['oldmark']['points'] !='')?'Previous Data : '+item['oldmark']['points'] :'New Data';
+                    
+                }
+                else if(data2[7][1]=='Freetext')
+                {
+                    var markbtn=(item['oldmark']['freetext'] !='' && item['oldmark']['freetext']!=item[3])?'danger':'success';
+                    var markmsg=(item['oldmark']['freetext'] !='')?'Previous Data : '+item['oldmark']['freetext'] :'New Data';
+                    
+                }
+                else
+                {
+                    var markbtn=(item['oldmark']['score'] !='' && item['oldmark']['score']!=item[3])?'danger':'success';
+                    var markmsg=(item['oldmark']['score'] !='')?'Previous Data : '+item['oldmark']['score'] :'New Data';
+                    
+                }
+                var statusToLower = item[4].toLowerCase();
+                var mark=(statusToLower=='a')?'0':((item[4]!='')?item[3]:'');
+                var memobtn=(item['oldmark']['memo'] !='' && item['oldmark']['memo']!=item[5])?'danger':'success';
+                var memomsg=(item['oldmark']['memo'] !='')?'Previous Data : '+item['oldmark']['memo'] :'New Data';
+                var attbtn=(item['oldmark']['status'] !='' && item['oldmark']['status'][0]!=statusToLower)?'danger':'success';
+                var attmsg=(item['oldmark']['status'] !='')?'Previous Data : '+item['oldmark']['status'] :'New Data';
+                var row = "<tr><td>" + item[0] + "</td><td class='btn btn-" + btncolor + "'>" + item[1] + "</td><td>" + item[2] + "</td><td class='text-" + markbtn + "' title='" + markmsg + "'>" + mark + "</td><td class='text-" + attbtn + "'  title='" + attmsg + "' >" + item[4] + "</td><td class='text-" + memobtn + "' title='" + memomsg + "' >" + item[5] + "</td></tr>";
+                //var row = "<tr><td>" + item[0] + "</td><td class='btn btn-" + btncolor + "'>" + item[1] + "</td><td>" + item[2] + "</td><td class='text-" + markbtn + "' title='" + markmsg + "' data-toggle='tooltip' aria-haspopup='false' aria-expanded='false' data-original-title='" + markmsg + "'>" + mark + "</td><td class='text-" + attbtn + "' data-toggle='tooltip' title='" + attmsg + "' aria-haspopup='false' aria-expanded='false' data-original-title='" + attmsg + "'>" + item[4] + "</td><td class='text-" + memobtn + "' data-toggle='tooltip' title='" + memomsg + "' aria-haspopup='false' aria-expanded='false' data-original-title='" + memomsg + "'>" + item[5] + "</td></tr>";
+                markdatas.append(row);
+            }            
+        
+        });
+       
+        
+    }
+      
+});
 });
