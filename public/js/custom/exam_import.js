@@ -111,6 +111,7 @@ $(function () {
         var exam_id = $("#examnames").val();
         $("#resultsByPaper").find("#paperID").empty();
         $("#resultsByPaper").find("#paperID").append('<option value="">'+select_paper+'</option>');
+        // $("#resultsByPaper").find("#paperID").append('<option value="All">'+all+'</option>');
         // paper list
         $.post(subjectByPapers, {
             token: token,
@@ -123,7 +124,7 @@ $(function () {
         }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
-                    $("#resultsByPaper").find("#paperID").append('<option value="' + val.paper_id + '" data-grade_category="' + val.grade_category + '">' + val.paper_name + '</option>');
+                    $("#resultsByPaper").find("#paperID").append('<option value="' + val.paper_id + '" data-grade_category="' + val.grade_category + '" style="color:green">' + val.paper_name + '</option>');
                 });
             }
         }, 'json');
@@ -279,7 +280,7 @@ $(function () {
                         toastr.success(data.message);
                         setTimeout(function() {
                             window.location.href = window.location;
-                         }, 3000);
+                        }, 3000);
                     }
                     else
 
@@ -336,16 +337,13 @@ $(function () {
                     }
                     if(data.result=='Success')
                     {
-                        
-                        
                         $('#exammark_preview').show();
                         appendDataToTable(data.studentlist,data.headerdata);
                         $.each(data.headerdata, function(index, item) {
                             if(item=='Wrong')
                             {
                                 marklist++;
-                            }
-                          
+                            }                        
                         });
                         if(marklist==0)
                         {
@@ -387,7 +385,7 @@ $(function () {
         // Clear existing table rows
         markdatas.empty();
         // Loop through data and append rows to table
-        
+        var misdata=0;
         $.each(data1, function(index, item) {
             if(item!='')
             {
@@ -396,7 +394,13 @@ $(function () {
                 {
                     var markbtn=(item['oldmark']['points'] !='' && item['oldmark']['points']!=item[3])?'danger':'success';
                     var markmsg=(item['oldmark']['points'] !='')?'Previous Data : '+item['oldmark']['points'] :'New Data';
-                    
+                    if(item['oldmark']['point_grade']=='')
+                    {
+                        misdata++;
+                        var markmsg='Wrong Data';
+                        var markbtn='danger';
+                    }
+
                 }
                 else if(data2[7][1]=='Freetext')
                 {
@@ -422,7 +426,15 @@ $(function () {
             }            
         
         });
-       
+        alert(misdata);
+        if(misdata==0)
+            {
+                $('#save_modelbtn').show();
+            }
+            else
+            {
+                $('#save_modelbtn').hide();
+            }
         
     }
       

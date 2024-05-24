@@ -186,7 +186,7 @@
 									</tbody>									
 								</table>
 								<center>
-									<a href="{{route('admin.exam.import')}}" class="btn btn-warning"> <i class="fe fe-refresh"></i>  Re-Upload  </a> <input type="button" name="upload" class="btn btn-success" data-toggle="modal" data-target="#markModal" value="{{ __('messages.upload') }}">  </center> 
+									<input type="button" name="upload" id="save_modelbtn" class="btn btn-success" data-toggle="modal" data-target="#markModal" value="{{ __('messages.upload') }}">  </center> 
 								
 							</div>
 							</div>
@@ -268,6 +268,7 @@
 					var pointstext="{{ __('messages.alertexamupload_points') }}";
 					var freetext="{{ __('messages.alertexamupload_freetext') }}";
 					var infotext="{{ __('messages.alertexamupload_info') }}";
+					var all="{{ __('messages.all') }}";
 				</script>
 				<script src="{{ asset('js/custom/exam_import.js') }}"></script>
 				
