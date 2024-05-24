@@ -9277,7 +9277,10 @@ class AdminController extends Controller
     
         // Set dual nationality based on checkbox
         // $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
-
+        $phase_2_status = $request->phase_2_status;
+        if($request->status != "Approved"){
+            $phase_2_status = NULL;
+        }
         $trail_start_date = null;
         $trail_end_date = null;
         if ($request->enrollment == "Trail Enrollment") {
@@ -9447,7 +9450,7 @@ class AdminController extends Controller
             'visa_file_extension' => $visa_extension,
             'passport_photo' => $passport_base64,
             'passport_file_extension' => $passport_extension,
-            'phase_2_status' => $request->phase_2_status,
+            'phase_2_status' => $phase_2_status,
             'phase_1_reason' => $request->phase_1_reason,
             'phase_2_reason' => $request->phase_2_reason,
             'register_number' => $request->register_number,

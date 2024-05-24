@@ -76,6 +76,13 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>{{ __('messages.termination_parent_address_after_transfer') }}</td>
+                                <td>:</td>
+                                <td><textarea type="text" class="form-control" id="parent_address_after_transfer" readonly  name="parent_address_after_transfer" placeholder="{{ __('messages.termination_enter_parent_address_after_transfer') }} " aria-describedby="inputGroupPrepend"></textarea>
+                                 
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>{{ __('messages.school_fees_payment_status') }}<span class="text-danger"></span></td>
                                 <td>:</td>
                                 <td> <select id="school_fees_payment_status" name="school_fees_payment_status" class="form-control" >

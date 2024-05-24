@@ -56,6 +56,7 @@ $(function () {
                 // // Find the flag element within the .selected-flag container and update its class
                 // $(".parent_phone_number_after_transfer .selected-flag .flag").removeClass().addClass("flag " + parent_phone_number_after_transfer_flag);
                 $('#parent_email_address_after_transfer').val(data.data.parent_email_address_after_transfer);
+                $('#parent_address_after_transfer').val(data.data.parent_address_after_transfer);
                 $('#school_fees_payment_status').val(data.data.school_fees_payment_status);
                 $('#termination_status').val(data.data.termination_status);
                 $('#termination_status_old').val(data.data.termination_status);
@@ -319,6 +320,10 @@ $(function () {
                 {
                     data: 'date_of_termination',
                     name: 'date_of_termination'
+                },
+                {
+                    data: 'school_fees_payment_status',
+                    name: 'school_fees_payment_status'
                 },
                 {
                     data: 'actions',
