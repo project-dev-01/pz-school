@@ -1127,6 +1127,7 @@ return [
         'get_student_medical_record' => $url.'/get_student_medical_record',
         'get_student_medical_record_admin' => $url.'/get_student_medical_record_admin',
         'get_allergies_name_list' => $url.'/get_allergies_name_list',
+        'student_medical_report_pdf' => $url.'/student_medical_report_pdf',
         
       ]
 

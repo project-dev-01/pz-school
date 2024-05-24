@@ -1067,7 +1067,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('student_interview_details/update', [AdminController::class, 'updateStudentInterviewData'])->name('admin.student_interview_details.update');
         Route::post('student_interview_notes/addComment', [AdminController::class, 'addStudentInterviewComment'])->name('admin.student_interview_notes.addComment');
         //student medical 
-        Route::get('/student-medical-record', [AdminController::class, 'studentMedicalRecord'])->name('admin.medical.index');
+        Route::get('student-medical-record', [AdminController::class, 'studentMedicalRecord'])->name('admin.medical.index');
+        Route::get('student-medical-record/download/{id}', [PdfController::class, 'studentMedicalRecordPDF'])->name('admin.medical.downloadPDF');
     });
 });
 // admin routes end

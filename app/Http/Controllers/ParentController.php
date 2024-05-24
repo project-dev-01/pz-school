@@ -2624,14 +2624,16 @@ class ParentController extends Controller
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $allergies_name_list = Helper::GetMethod(config('constants.api.get_allergies_name_list'));
         $student_id = session()->get('student_id');
+        $parent_id = session()->get('ref_user_id');
         return view(
             'parent.student_medical.index',
             [
                 'grade' => isset($getclass['data']) ? $getclass['data'] : [],
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'student_id' => isset($student_id) ? $student_id : 0,
-                'studentmedical' => isset($response['data']['student']) ? $response['data']['student'] : [],
-                'allergies_name'=> isset($allergies_name_list['data']) ? $allergies_name_list['data'] : [],
+                'parent_id' => isset($parent_id) ? $parent_id : 0,               
+                'studentmedical' => isset($response['data']['student']) ? $response['data']['student'] : [],                
+                'allergies_name'=> isset($allergies_name_list['data']) ? $allergies_name_list['data'] : [],                
                 'allergies_details' => isset($response['data']['allergies']) ? $response['data']['allergies'] : [],
             ]
         );
@@ -2640,6 +2642,7 @@ class ParentController extends Controller
     { 
         $data = [
             'student_id' =>  $request->student_id,
+            'parent_id' => $request->parent_id,
             'academic_session_id' => session()->get('academic_session_id'),
             'normal_temp' => $request->normal_temp,
             'hospital_name'=> $request->hospital_name,
