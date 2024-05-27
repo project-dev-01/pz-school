@@ -96,7 +96,7 @@ class ExamStduentExport  implements FromCollection, WithHeadings, ShouldAutoSize
        
         if($this->score_type=='Points')
         {
-            $exammark_type="Enter Grade Point Label Name";
+            $exammark_type="Ex :  Improving , Satisfactory , Excellent";
 
         }
         else if($this->score_type=='Freetext')

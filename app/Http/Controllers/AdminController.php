@@ -11454,7 +11454,7 @@ class AdminController extends Controller
         if (!$validator->passes()) {
             return back()->with(['errors' => $validator->errors()->toArray()['file']]);
         } else {
-            $data = [
+           /* $data = [
                 'academic_session_id' => session()->get('academic_session_id'),
                 'department_id' => $department_id,
                 'class_id' => $class_id,
@@ -11476,8 +11476,12 @@ class AdminController extends Controller
        
         //dd($filename,$newfilename);
         if($filename==$newfilename)
-        {
+        {*/
           
+            // Get the uploaded file
+            $file = $request->file('file');
+            $filepath=$file->getClientOriginalName();
+            $filename=pathinfo($filepath, PATHINFO_FILENAME);
         // Load the Excel file
         $reader = IOFactory::createReaderForFile($file);
         $spreadsheet = $reader->load($file->getPathname());
@@ -11542,6 +11546,7 @@ class AdminController extends Controller
                 if($row>9)
                 {
                     $student_regno=$mdata[1];
+                    $mark=$mdata[3];
                     $data = [
                         'academic_session_id' => session()->get('academic_session_id'),
                         'department_id' => $department_id,
@@ -11553,8 +11558,11 @@ class AdminController extends Controller
                         'semester_id' => $semester_id,
                         'session_id' => $session_id,
                         'student_regno' => $student_regno,
+                        'score_type'=> $response['data']['score_type'],
+                        'mark'=>$mark
                     ];
                     $data1[]='';
+                   
                     $markresponse = Helper::PostMethod(config('constants.api.mark_comparison'), $data);
                     
                     $mdata['oldmark']=($markresponse!==null)?$markresponse['data']:'';
@@ -11575,7 +11583,7 @@ class AdminController extends Controller
              return $data;
             //return view('admin.import.exam_mark', ['studentlist' =>$datas,'headerdata'=>$headerdata,'studentmarks'=>$arraydata,'requestdata'=>$data]);
            
-         }
+        /* }
            else
            {
             $data=[
@@ -11586,7 +11594,7 @@ class AdminController extends Controller
             ];
              return $data;
              //return redirect()->route('admin.exam.import')->with('errors', "File Name Not Matched");
-           } 
+           } */
         }
     }
     public function Examuploadmark(Request $request)
