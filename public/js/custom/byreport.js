@@ -105,7 +105,8 @@ $(function () {
                 semesterID: semester_id,
                 sessionID: session_id,
                 examID: exam_id,
-                userID: userID,
+                academic_session_id: academic_session_id,
+                report_type:report_type,
             };
             setLocalStorageForExamResultBySubject(classObj);
 
@@ -160,6 +161,7 @@ $(function () {
         examResultBySubjectDetails.semester_id = classObj.semesterID;
         examResultBySubjectDetails.session_id = classObj.sessionID;
         examResultBySubjectDetails.department_id = classObj.department_id;
+        examResultBySubjectDetails.report_type = classObj.report_type,
         // here to attached to avoid localStorage other users to add
         examResultBySubjectDetails.branch_id = branchID;
         examResultBySubjectDetails.role_id = get_roll_id;
@@ -179,7 +181,7 @@ $(function () {
             if (exam_result_by_report_storage) {
                 var examResultByReportStorage = JSON.parse(exam_result_by_report_storage);
                 if (examResultByReportStorage.length == 1) {
-                    var classID, year,sectionID,departmentID, examID, semesterID, sessionID, userBranchID, userRoleID, userID;
+                    var classID, year,sectionID,departmentID, examID, userType ,semesterID, sessionID, userBranchID, userRoleID, userID;
                     examResultByReportStorage.forEach(function (user) {
                         departmentID = user.department_id;
                         classID = user.class_id;
@@ -191,23 +193,24 @@ $(function () {
                         userBranchID = user.branch_id;
                         userRoleID = user.role_id;
                         userID = user.user_id;
+                        userType = user.report_type;
                     });
                     if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
-                        $('#changeClassName').val(classID);
+                        //$('#changeClassName').val(classID);
                         $("#btwyears").val(year);
-                        $('#semester_id').val(semesterID);
+                        $('#report_type').val(report_type);
                         $('#session_id').val(sessionID);
                         $("#department_id").val(departmentID);
                         if(departmentID){
                             
-                            $("#bysubjectfilter").find("#class_id").empty();
-                            $("#resultsByPaper").find("#class_id").append('<option value="">'+select_class+'</option>');
+                            $("#resultsByPaper").find("#changeClassName").empty();
+                            $("#resultsByPaper").find("#changeClassName").append('<option value="">'+select_class+'</option>');
                             $.post(getGradeByDepartmentUrl, { token: token, branch_id: branchID, department_id: departmentID }, function (res) {
                                 if (res.code == 200) {
                                     $.each(res.data, function (key, val) {
-                                        $("#class_id").append('<option value="' + val.id + '">' + val.name + '</option>');
+                                        $("#changeClassName").append('<option value="' + val.id + '">' + val.name + '</option>');
                                     });
-                                    $("#class_id").val(classID);
+                                    $("#changeClassName").val(classID);
                                 }
                             }, 'json');
                         }

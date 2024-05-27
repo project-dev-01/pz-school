@@ -250,6 +250,7 @@ $(function () {
                 role_id: get_roll_id,
                 user_id: ref_user_id,
                 branch_id: branchID,
+                academic_session_id: academic_session_id,
             };
             // set local storage selected
             setLocalStorageForClassroom(classObj);
@@ -267,6 +268,7 @@ $(function () {
         teacherClassDetails.user_id = classObj.user_id;
         teacherClassDetails.branch_id = classObj.branch_id;
         teacherClassDetails.exam_id = classObj.exam_id;
+        teacherClassDetails.academic_session_id = classObj.academic_session_id,
         
         // here to attached to avoid localStorage other users to add
         teacherClassDetails.branch_id = branchID;
@@ -285,7 +287,7 @@ $(function () {
             if (exam_import_result_storage) {
                 var examImportResultStorage = JSON.parse(exam_import_result_storage);
                 if (examImportResultStorage.length == 1) {
-                    var classID, sectionID, subjectID,departmentID, examID, semesterID, sessionID, userBranchID, userRoleID, userID;
+                    var classID, sectionID, subjectID,departmentID, academicSessionID, examID, semesterID, sessionID,paperID, userBranchID, userRoleID, userID;
                     examImportResultStorage.forEach(function (user) {
                         departmentID = user.department_id;
                         classID = user.class_id;
@@ -297,12 +299,14 @@ $(function () {
                         userBranchID = user.branch_id;
                         userRoleID = user.role_id;
                         userID = user.user_id;
+                        paperID = user.paper_id;
+                        academicSessionID = user.academic_session_id;
                       
                     });
                     if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
                         // $('#changeClassName').val(classID);
                         // $('#semester_id').val(semesterID);
-                        // $('#session_id').val(sessionID);
+                         $('#session_id').val(sessionID);
                         $("#department_id").val(departmentID);
                         if(departmentID){
                             
@@ -378,6 +382,28 @@ $(function () {
                                     $("#resultsByPaper").find("#subjectID").val(subjectID);
                                 }
                             }, 'json');
+                        }
+                        if(paperID){
+                            $("#resultsByPaper").find("#paperID").empty();
+                            $("#resultsByPaper").find("#paperID").append('<option value="">'+select_paper+'</option>');
+                            // $("#resultsByPaper").find("#paperID").append('<option value="All">'+all+'</option>');
+                            // paper list
+                            $.post(subjectByPapers, {
+                                token: token,
+                                branch_id: branchID,
+                                class_id: classID,
+                                section_id: sectionID,
+                                subject_id: subjectID,
+                                academic_session_id: academicSessionID,
+                                exam_id: examID
+                            }, function (res) {
+                                if (res.code == 200) {
+                                    $.each(res.data, function (key, val) {
+                                        $("#resultsByPaper").find("#paperID").append('<option value="' + val.paper_id + '" data-grade_category="' + val.grade_category + '" style="color:green">' + val.paper_name + '</option>');
+                                    });
+                                }
+                            }, 'json');
+
                         }
 
                         // download set start
