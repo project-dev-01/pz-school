@@ -2341,4 +2341,5 @@ return [
   "you_want_to_lock_this_student" => "You want to Lock this Student",
   "you_want_to_unlock_this_parent" => "You want to Unlock this Parent",
   "you_want_to_lock_this_parent" => "You want to Lock this Parent",
+  "new_application" => "New Application",
 ];

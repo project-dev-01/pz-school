@@ -2231,5 +2231,6 @@ return [
       "go_to_bulletin" => "Pergi ke Papan Buletin",
       "no_file_uploaded"=> "tiada fail dimuat naik",
       "you_want_to_delete_this_widget" => "You want to Delete this Widget",
+      "new_application" => "New Application",
       
 ];

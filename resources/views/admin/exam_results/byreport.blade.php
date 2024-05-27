@@ -179,6 +179,7 @@
                         <h4 class="navv">
                         {{ __('messages.english_communication') }}
                             <h4>
+                                
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -228,6 +229,10 @@
                         {{ __('messages.report_card') }}
                             <h4>
                     </li>
+                    <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                 </ul><br>
                 <div class="card-body">
                     <div class="row">
