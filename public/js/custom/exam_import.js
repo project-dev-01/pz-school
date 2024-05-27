@@ -232,10 +232,11 @@ $(function () {
             //   $("#overlay").fadeIn(300);
             // jQuery("body").prepend('<div id="preloader">Loading...</div>');
             var departmentID = $("#department_id").val();
-            var classID = $("#class_id").val();
+            var classID = $("#changeClassName").val();
             var sectionID = $("#sectionID").val();
             var subjectID = $("#subject_id").val();
             var paperID = $("#paper_id").val();
+            var examID = $("#examnames").val();
             var semesterID = $("#semester_id").val();
 
             var classObj = {
@@ -244,7 +245,11 @@ $(function () {
                 subjectID: subjectID,
                 departmentID: departmentID,
                 semesterID: semesterID,
+                exam_id: examID,
                 paperID: paperID,
+                role_id: get_roll_id,
+                user_id: ref_user_id,
+                branch_id: branchID,
             };
             // set local storage selected
             setLocalStorageForClassroom(classObj);
@@ -258,6 +263,11 @@ $(function () {
         teacherClassDetails.department_id = classObj.departmentID;
         teacherClassDetails.semester_id = classObj.semesterID;
         teacherClassDetails.paper_id = classObj.paperID;
+        teacherClassDetails.role_id = classObj.role_id;
+        teacherClassDetails.user_id = classObj.user_id;
+        teacherClassDetails.branch_id = classObj.branch_id;
+        teacherClassDetails.exam_id = classObj.exam_id;
+        
         // here to attached to avoid localStorage other users to add
         teacherClassDetails.branch_id = branchID;
         var teacherClassroomArr = [];
@@ -270,6 +280,7 @@ $(function () {
         return true;
     }
     if (typeof exam_import_result_storage !== 'undefined') {
+        console.log(exam_import_result_storage);
         if ((exam_import_result_storage)) {
             if (exam_import_result_storage) {
                 var examImportResultStorage = JSON.parse(exam_import_result_storage);
@@ -289,20 +300,20 @@ $(function () {
                       
                     });
                     if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
-                        $('#changeClassName').val(classID);
-                        $('#semester_id').val(semesterID);
-                        $('#session_id').val(sessionID);
+                        // $('#changeClassName').val(classID);
+                        // $('#semester_id').val(semesterID);
+                        // $('#session_id').val(sessionID);
                         $("#department_id").val(departmentID);
                         if(departmentID){
                             
-                            $("#resultsByPaper").find("#class_id").empty();
-                            $("#resultsByPaper").find("#class_id").append('<option value="">'+select_class+'</option>');
+                            $("#resultsByPaper").find("#changeClassName").empty();
+                            $("#resultsByPaper").find("#changeClassName").append('<option value="">'+select_class+'</option>');
                             $.post(getGradeByDepartmentUrl, { token: token, branch_id: branchID, department_id: departmentID }, function (res) {
                                 if (res.code == 200) {
                                     $.each(res.data, function (key, val) {
-                                        $("#class_id").append('<option value="' + val.id + '">' + val.name + '</option>');
+                                        $("#changeClassName").append('<option value="' + val.id + '">' + val.name + '</option>');
                                     });
-                                    $("#class_id").val(classID);
+                                    $("#changeClassName").val(classID);
                                 }
                             }, 'json');
                         }
