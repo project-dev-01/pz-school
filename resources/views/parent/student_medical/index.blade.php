@@ -343,6 +343,7 @@
             <form id="addstudentmedical" method="post" action="{{ route('parent.medical.add') }}" enctype="multipart/form-data" autocomplete="off">
                 @csrf
                 <input type="hidden" name="student_id" id="student_id" value="{{ $student_id }}">
+                <input type="hidden" name="parent_id" id="parent_id" value="{{ $parent_id }}">
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
@@ -428,7 +429,7 @@
                                   @foreach($allergies_name as $index => $allergies)
                                     <tr style="height: 30px;">
                                         <td>{{$allergies['name']}}</td>
-                                        <input type="hidden" name="allergies[{{$index}}][name]" value="$allergies['name']">
+                                        <input type="hidden" name="allergies[{{$index}}][name]" value="{{$allergies['name']}}">
                                        <td> <input type="text" class="form-control" name="allergies[{{$index}}][age_onset]" placeholder="Enter the age of onset" value="{{$allergies_details[$allergies['id']]['age_onset']}}"></td>
                                        <td> <input type="text" class="form-control" name="allergies[{{$index}}][treatment]" placeholder="Enter the treatment"  value="{{$allergies_details[$allergies['id']]['under_treatment']}}"></td>
                                        <td><input type="text" class="form-control" name="allergies[{{$index}}][follow_up]" placeholder="Enter the follow up"  value="{{$allergies_details[$allergies['id']]['follow_up']}}"></td>
@@ -939,7 +940,7 @@
                         <div class="form-group">
                             <label for="txtarea_prev_remarks">Any medicine to take daily?<br>(No/Yes) (Name of medicine:)</label>
                             <textarea maxlength="255" id="medicine_to_take_daily" class="form-control alloptions" placeholder="{{ __('messages.enter_the_remarks') }}" name="medicine_to_take_daily" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
-                            {{ isset($studentmedical['any_medicine_take']) ? $studentmedical['any_medicine_take'] : ''}} </textarea>
+                            {{ isset($studentmedical['any_medicine_take_daily']) ? $studentmedical['any_medicine_take_daily'] : ''}} </textarea>
                         </div>
 
 

@@ -1731,7 +1731,7 @@ return [
   "get_pdf" => "Get PDF",
   "gradeandclasses" => "Grade AND Class",
   "studentadmission" => "Student Admission",
-  "compare_report" => "Bulk Data Comparition Report",
+  "compare_report" => "Bulk Data Comparison Report",
 
   "student_picture_bulkupload" => "Student Picture bulk Upload",
   "user_modify_report" => "User Modification Report",
@@ -2342,4 +2342,9 @@ return [
   "you_want_to_unlock_this_parent" => "You want to Unlock this Parent",
   "you_want_to_lock_this_parent" => "You want to Lock this Parent",
   "new_application" => "New Application",
+  "modify_data" => "Modified Data",
+  "existing_record" => "Already Data Exist",
+  "new_record" => "New Data Record",
+  "mark_info" => "Mark Information",
+  "adhocexam_import" => "Adhoc Exam Bulk Upload",
 ];

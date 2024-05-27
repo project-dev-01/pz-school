@@ -217,7 +217,7 @@ $(function () {
                     "targets": 5,
                     render: function (data, type, row, meta) {
                         if (row.medical_record_status === 'Download') {
-                            var url = editFeesPageUrl.replace(':id', row.student_id);
+                            var url = studentMedicalDownloadPDF.replace(':id', row.student_id);
                             return '<div class="button-list">' +
                                    '<a href="' + url + '" class="btn btn-danger btn-sm waves-effect waves-light">' +
                                    '<i class="dripicons-download" style="color: white;"></i></a>' +

@@ -239,7 +239,9 @@ $(function () {
                         $('#buletin-table').DataTable().ajax.reload(null, false);
                         $('.addBuletin').modal('hide');
                         $('.addBuletin').find('form')[0].reset(); 
-                        $('#loaderOverlay').hide();        
+                        $('#target_user').val(null).trigger('change');
+                        $('#file-list').empty();
+                        $('#loaderOverlay').hide();         
                         toastr.success(data.message);
                        
                     } else {

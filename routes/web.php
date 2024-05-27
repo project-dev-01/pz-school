@@ -13,6 +13,7 @@ use App\Http\Controllers\CommonController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\LangController;
 use App\Http\Controllers\ExamPdfController;
+use App\Http\Controllers\ExamPdfController1;
 use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
@@ -648,17 +649,24 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('exam/result', [AdminController::class, 'examResult'])->name('admin.exam.result');
         Route::get('exam_results/student_rank', [AdminController::class, 'byStudentRank'])->name('admin.exam_results.bystudentrank');
         Route::get('exam_results/byreport', [AdminController::class, 'byreport'])->name('admin.exam_results.byreport');
-        Route::post('exam_results/downbyecreport', [ExamPdfController::class, 'downbyecreport'])->name('admin.exam_results.downbyecreport');
-        Route::post('exam_results/downbyreportcard', [ExamPdfController::class, 'downbyreportcard'])->name('admin.exam_results.downbyreportcard');
+        Route::post('exam_results/downbyecreport', [ExamPdfController1::class, 'downbyecreport'])->name('admin.exam_results.downbyecreport');
+        Route::post('exam_results/downbyreportcard', [ExamPdfController1::class, 'downbyreportcard'])->name('admin.exam_results.downbyreportcard');
         Route::post('exam_results/downbypersoanalreport', [ExamPdfController::class, 'downbypersoanalreport'])->name('admin.exam_results.downbypersoanalreport');
 
+        Route::get('exam_results/sampleformat', [ExamPdfController1::class, 'sampleformat'])->name('admin.exam_results.sampleformat');
         Route::get('exam/import', [AdminController::class, 'ExamImport'])->name('admin.exam.import');
-        Route::post('exam/import/add', [AdminController::class, 'ExamImportAdd'])->name('admin.exam.import.add');
+        Route::post('exam/import/add', [AdminController::class, 'ExamImportAdd'])->name('admin.exam.import.add');        
+        Route::post('exam/uploadmark', [AdminController::class, 'Examuploadmark'])->name('admin.exam.uploadmark');
+        Route::post('exam/examdownloadexcel', [AdminController::class, 'Examdownloadexcel'])->name('admin.exam.examdownloadexcel');
         Route::get('child_health/import', [AdminController::class, 'childHealthImport'])->name('admin.child_health.import');
         Route::post('child_health/import/add', [AdminController::class, 'childHealthImportAdd'])->name('admin.child_health.import.add');
         Route::get('child_health/index', [AdminController::class, 'childHealthIndex'])->name('admin.child_health.index');
         Route::get('child_health/list', [AdminController::class, 'childHealthList'])->name('admin.child_health.list');
-      
+        Route::get('exam/adhocimport', [AdminController::class, 'AdhocExamImport'])->name('admin.exam.adhocimport');
+        Route::post('exam/adhocexamdownloadexcel', [AdminController::class, 'AdhocExamdownloadexcel'])->name('admin.exam.adhocexamdownloadexcel');
+        Route::post('exam/import/adhocadd', [AdminController::class, 'AdhocExamImportAdd'])->name('admin.exam.import.adhocadd');        
+        Route::post('exam/adhocuploadmark', [AdminController::class, 'AdhocExamuploadmark'])->name('admin.exam.adhocuploadmark');
+       
         //Graduates Yoroku primary /Secondary Report
 
         Route::get('primary/downloadform1/{id}', [ExamPdfController::class, 'downprimaryform1'])->name('admin.primary.downloadform1');
@@ -1059,7 +1067,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('student_interview_details/update', [AdminController::class, 'updateStudentInterviewData'])->name('admin.student_interview_details.update');
         Route::post('student_interview_notes/addComment', [AdminController::class, 'addStudentInterviewComment'])->name('admin.student_interview_notes.addComment');
         //student medical 
-        Route::get('/student-medical-record', [AdminController::class, 'studentMedicalRecord'])->name('admin.medical.index');
+        Route::get('student-medical-record', [AdminController::class, 'studentMedicalRecord'])->name('admin.medical.index');
+        Route::get('student-medical-record/download/{id}', [PdfController::class, 'studentMedicalRecordPDF'])->name('admin.medical.downloadPDF');
     });
 });
 // admin routes end

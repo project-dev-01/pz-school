@@ -428,6 +428,7 @@ return [
         'student_delete' => $url.'/student/delete',
         'student_settings' => $url.'/student/student_settings',
         'get_student_download_settings' => $url.'/get_student_download_settings',
+        'getgraduatestudentlist' => $url.'/student/graduatelist',
         
         'relation_list' => $url.'/relation/list',
         //Parent Url
@@ -1015,13 +1016,26 @@ return [
         'getsubjecpapertlist' => $url.'/exam_result/getsubjecpapertlist',
         'getsem_studentattendance' => $url.'/getsem_studentattendance',
         
+        'get_jsklsubjectlist' => $url.'/exam_result/get_jsklsubjectlist', 
+        'getjsklexampaper_list' => $url.'/exam_result/getjsklexampaper_list',             
+        
         'exam_papermarks' => $url.'/exam_result/papermark',  
         'import_exam'=> $url.'/importcsv/exam',
+        'exam_student_list'=> $url.'/exam/exam_student_list',        
+        'exam_file_name'=> $url.'/exam/exam_file_name',          
+        'mark_comparison'=> $url.'/exam/mark_comparison',         
+        'examuploadmark'=> $url.'/exam/examuploadmark',             
         'get_overallsubjectlist' => $url.'/exam_result/get_overallsubjectlist',
         'get_overallpaperlist' => $url.'/exam_result/get_overallpaperlist',
         'getpaperoverallmarklist' => $url.'/exam_result/getpaperoverallmarklist',
         
         
+         
+        'adhocexam_file_name'=> $url.'/exam/adhocexam_file_name', 
+        'adhocexam_student_list'=> $url.'/exam/adhocexam_student_list',                     
+        'adhocmark_comparison'=> $url.'/exam/adhocmark_comparison',         
+        'adhocexamuploadmark'=> $url.'/exam/adhocexamuploadmark',    
+
         'stuexam_marklist' => $url.'/exam_result/stuexam_marklist',
         'stuexam_spmarklist' => $url.'/exam_result/stuexam_spmarklist',
         'stuexam_avgmarklist' => $url.'/exam_result/stuexam_avgmarklist',
@@ -1113,6 +1127,7 @@ return [
         'get_student_medical_record' => $url.'/get_student_medical_record',
         'get_student_medical_record_admin' => $url.'/get_student_medical_record_admin',
         'get_allergies_name_list' => $url.'/get_allergies_name_list',
+        'student_medical_report_pdf' => $url.'/student_medical_report_pdf',
         
       ]
 

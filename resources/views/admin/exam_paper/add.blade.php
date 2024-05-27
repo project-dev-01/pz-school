@@ -33,7 +33,17 @@
                     </div>
                     <div class="form-group">
                         <label for="paper_name"> {{ __('messages.paper_name') }}<span class="text-danger">*</span></label>
-                        <input type="text" name="paper_name" class="form-control" placeholder="{{ __('messages.enter_paper_name') }}">
+                         <input type="text" name="paper_name" class="form-control" list="papers" placeholder="{{ __('messages.enter_paper_name') }}">
+                         <!--  <select id="paper_name" name="paper_name"  class="selectpicker" data-live-search="true">
+                            @forelse($jsklexampaper_list as $paper)
+                            <option data-tokens="{{$paper['name_jp']}}">{{$paper['name_jp']}}</option>
+                            @endforeach
+                        </select>-->
+                        <datalist id="papers">
+                        @forelse($jsklexampaper_list as $paper)
+                            <option values="{{$paper['name_jp']}}">{{$paper['name_jp']}}</option>
+                            @endforeach
+                        </datalist>   
                     </div>
                     <div class="form-group">
                         <label for="paper_type">{{ __('messages.paper_type') }}<span class="text-danger">*</span></label>
@@ -65,7 +75,7 @@
                             <option value="Freetext">{{ __('messages.freetext') }}</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group d-none">
                         <label for="subjectType">{{ __('messages.pdf_report') }}</label>
                         <select class="form-control" id="pdf_report" name="pdf_report">
                             <option value="0">{{ __('messages.select') }}</option>
@@ -74,6 +84,7 @@
                             @endforeach
                         </select>
                     </div>
+                    <input type="hidden" class="form-control" id="pdf_report" name="pdf_report">
                     <div class="form-group">
                         <label for="subject_weightage">{{ __('messages.subject_weightage') }}</label>
                         <input type="number" name="subject_weightage" class="form-control" placeholder="{{ __('messages.enter_subject_weightage') }}">

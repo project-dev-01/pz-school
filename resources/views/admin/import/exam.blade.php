@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title','Employee Import')
+@section('title','Exam Import')
 @section('component_css')
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
@@ -30,8 +30,8 @@
 						</li>
 						</ul><br>
 						<div class="card-body">
-							<form id="resultsByPaper" autocomplete="off" method="post" enctype="multipart/form-data" action="{{ route('admin.exam.import.add') }}">
-							 {{ csrf_field() }}
+							<form id="resultsByPaper"  method="post" enctype="multipart/form-data" action="{{ route('admin.exam.examdownloadexcel') }}">
+							{{ csrf_field() }}
 								
 								<div class="row">
 									<div class="col-md-3">
@@ -98,16 +98,11 @@
 											</select>
 										</div>
 									</div>
-									<div class="col-md-3" style="display:none;">
+									<div class="col-md-3" >
 										<div class="form-group">
-											<label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
-											<select id="session_id" class="form-control" name="session_id" required>
-												<option value="">{{ __('messages.select_session') }}</option>
-												@forelse($session as $ses)
-												<option value="{{$ses['id']}}">{{ __('messages.' . strtolower($ses['name'])) }}</option>
-												@empty
-												@endforelse
-											</select>
+											<input type="hidden" id="session_id" class="form-control" name="session_id" value="0">
+											<br>
+											<button type="submit" class="btn btn-warning" id="downloadexcel1"><i class="fa fa-download"></i> Download Excel format</button>
 										</div>
 									</div>
 									
@@ -127,16 +122,7 @@
 										</div>
 								</div>
 							</div>
-							@if(count($errors) > 0)
-							<div class="alert alert-danger">
-								{{ __('messages.upload_validation_error') }}<br><br>
-								<ul>
-									@foreach($errors as $error)
-									<li>{{ $error }}</li>
-									@endforeach
-								</ul>
-							</div>
-							@endif
+							
 							
 							@if($message = Session::get('success'))
 							<div class="alert alert-success alert-block">
@@ -144,109 +130,101 @@
 								<strong>{{ $message }}</strong>
 							</div>
 							@endif
-							
+							@if($message = Session::get('errors'))
+							<div class="alert alert-danger alert-block">
+								<button type="button" class="close" data-dismiss="alert">×</button>
+								<strong>{{ $message }}</strong>
+							</div>
+							@endif
 							<div class="form-group" style="text-align: center;">
 								<div class="card-body" style="margin-left: 17px;">
 									<label style="margin-right:10px;">{{ __('messages.select_file_for_upload') }}</label>
-									<input type="file" name="file" accept=".csv" required />
+									<input type="file" name="file" id="fileInput" accept=".csv" required />
 								</div>  
-								<input type="submit" name="upload" class="btn btn-success" value="{{ __('messages.upload') }}">   
+								<input type="button" name="upload" id="submitbtn" class="btn btn-success" value="{{ __('messages.submit') }}" style="display:none;">   
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
-			
+		</div>
+	</div>
+	
+	<!-- content start  -->
+	<div class="row " id="exammark_preview" style="display:none;">
+		<div class="col-md-12" >
+		<h4 class="page-title">{{ __('messages.exam_import') }}</h4>
+			<table class="table" id="headerdata1">
+				
+				
+			</table>
+		</div>
+		<div class="col-md-12 studentmark" >
+			<button class="btn btn-success" style="float:right;">{{ __('messages.new_record') }} </button><button class="btn btn-warning" style="float:right;">{{ __('messages.existing_record') }}</button><button class="btn btn-danger" style="float:right;">{{ __('messages.modify_data') }}</button> <br> <br>
+		</div>
+		<div class="col-md-12 studentmark">
+			<div class="card mb-0">
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<h4 class="nav-link">{{ __('messages.compare_report') }} <h4>
+						</li>
+						</ul><br>
+						<div class="card-body">
+							<div class="row">   <div class="col-12">
+								<table class="table">
+									<thead>
+										<tr>
+											<th># </th>
+											<th>{{ __('messages.register_no') }}</th>
+											<th>{{ __('messages.student_name') }}</th>
+											<th>{{ __('messages.mark') }}</th>
+											<th>{{ __('messages.attendance') }}</th>
+											<th>{{ __('messages.memo') }}</th>
+										</tr>
+									</thead>
+									<tbody id="markdatas">
+									</tbody>									
+								</table>
+								<center>
+									<input type="button" name="upload" id="save_modelbtn" class="btn btn-success" data-toggle="modal" data-target="#markModal" value="{{ __('messages.upload') }}">  </center> 
+								
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Modal -->
+			<div id="markModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					
+					<!-- Modal content-->
+					<div class="modal-content">
+						<form  method="post" enctype="multipart/form-data" action="{{ route('admin.exam.uploadmark') }}">
+								{{ csrf_field() }}
+							<div class="modal-header">
+								
+								<h4 class="modal-title">{{ __('messages.mark_info') }}</h4> 
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+							<div class="modal-body">
+								<p>
+								{{ __('messages.promotion_message') }}</p>
+							</div> 
+							
+							<div class="modal-footer">
+								<button type="button" id="savestudentmarks" class="btn btn-success" >{{ __('messages.save') }}</button>
+							</div>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
 			<!-- /Content End -->
 			<br>
-			<!-- content start  -->
-			<div class="row d-none">
-				<div class="col-md-12" >
-					<button class="btn btn-success" style="float:right;">{{ __('messages.new_record') }} </button><button class="btn btn-warning" style="float:right;">{{ __('messages.existing_record') }}</button><button class="btn btn-danger" style="float:right;">{{ __('messages.modify_data') }}</button> <br> <br>
-				</div>
-				<div class="col-md-12">
-					<div class="card mb-0">
-						<ul class="nav nav-tabs">
-							<li class="nav-item">
-								<h4 class="nav-link">{{ __('messages.compare_report') }}<h4>
-								</li>
-								</ul><br>
-								<div class="card-body">
-									<div class="row">   <div class="col-12">
-										<table class="table">
-											<tr>
-												<th>{{ __('messages.sno') }} sno </th>
-												<th>{{ __('messages.student_id') }}</th>
-												<th>{{ __('messages.student_name') }}</th>
-												<th>{{ __('messages.year') }}</th>
-												<th>{{ __('messages.department') }}</th>
-												<th>{{ __('messages.grade') }}</th>
-												<th>{{ __('messages.class') }}</th>
-											</tr>
-											<tr>
-												<th> 1 </th>
-												<th class="btn btn-warning"> 900000001</th>
-												<th> A</th>
-												<th> 2023</th>
-												<th class="btn-danger btn" data-toggle="tooltip" title=""  aria-haspopup="false" aria-expanded="false" data-original-title="Previous Data : Kinder"> Primary</th>
-												<th> 1</th>
-												<th> 1</th>
-											</tr>
-											<tr>
-												<th> 2 </th>
-												<th class="btn btn-warning"> 900000002</th>
-												<th class="btn-danger btn" data-toggle="tooltip" title=""  aria-haspopup="false" aria-expanded="false" data-original-title="Previous Data : Boy"> B</th>
-												
-												<th> 2023</th>
-												<th> Primary</th>
-												<th> 1</th>
-												<th> 1</th>
-											</tr> 
-											<tr>
-												<th> 3 </th>
-												<th class="btn btn-success"> 900000003</th>
-												<th> C</th>
-												<th> 2023</th>
-												<th> Primary</th>
-												<th> 1</th>
-												<th> 1</th>
-											</tr>
-											
-										</table>
-										<center><input type="button" name="upload" class="btn btn-success" data-toggle="modal" data-target="#myModal" value="{{ __('messages.save') }}">  </center> 
-										
-									</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- Modal -->
-					<div id="myModal" class="modal fade" role="dialog">
-						<div class="modal-dialog">
-							
-							<!-- Modal content-->
-							<div class="modal-content">
-								<div class="modal-header">
-									
-									<h4 class="modal-title">{{ __('messages.info') }}</h4> 
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-								</div>
-								<div class="modal-body">
-									<p>{{ __('messages.this_information_already_exist') }}
-										
-										
-										<br>
-										{{ __('messages.are_your_confirm_to_overwrite_informations') }}</p>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">{{ __('messages.close') }}</button>
-						 		</div>
-							</div>
-							
-						</div>
-					</div>
-				</div>
+			
 				<!-- /Page Content -->
 				@endsection
 				@section('scripts')
@@ -264,10 +242,13 @@
 				<script>
 					toastr.options.preventDuplicates = true;
 				</script>
-				<!--<script src="{{ asset('js/validation/validation.js') }}"></script>-->
+				<script src="{{ asset('js/validation/validation.js') }}"></script>
 				
 				<script src="{{ asset('js/dist/jquery.table2excel.js') }}"></script>
 				<script>
+					var savemarks="{{ route('admin.exam.uploadmark') }}";
+					var newRoute = "{{ route('admin.exam.import.add') }}";
+					var examdownloadexcel = "{{ route('admin.exam.examdownloadexcel') }}";
 					var teacherSectionUrl = "{{ config('constants.api.section_by_class') }}";
 					var subjectByExamNames = "{{ config('constants.api.subject_by_exam_names') }}";
 					var examBySubjects = "{{ config('constants.api.exam_by_subjects') }}";					
@@ -287,6 +268,9 @@
 					var pointstext="{{ __('messages.alertexamupload_points') }}";
 					var freetext="{{ __('messages.alertexamupload_freetext') }}";
 					var infotext="{{ __('messages.alertexamupload_info') }}";
+					var all="{{ __('messages.all') }}";
 				</script>
 				<script src="{{ asset('js/custom/exam_import.js') }}"></script>
+				
+
 			@endsection												

@@ -526,9 +526,10 @@ class ExamPdfController extends Controller
             // return $pdf->stream();
         
     }
-     public function downbyreportcard(Request $request)
+    
+    public function downbyreportcard(Request $request)
     {
-       
+        
         
         $data = [
             'branch_id' => session()->get('branch_id'),

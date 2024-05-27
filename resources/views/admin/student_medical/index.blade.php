@@ -163,7 +163,7 @@
     // default image test
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
     var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images' }}";
-    var editFeesPageUrl = '{{ route("admin.fees.edit", ":id") }}';
+    var studentMedicalDownloadPDF = '{{ route("admin.medical.downloadPDF", ":id") }}';
     var feesDelete = '{{ route("admin.fees.fees_delete") }}';
     // localStorage variables
     var fees_storage = localStorage.getItem('admin_fees_details');

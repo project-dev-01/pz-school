@@ -66,7 +66,7 @@
                             <option value="Freetext">{{ __('messages.freetext') }}</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group d-none">
                         <label for="subjectType">{{ __('messages.pdf_report') }}</label>
                         <select class="form-control" id="pdf_report" name="pdf_report">
                             <option value="0">{{ __('messages.select') }}</option>
@@ -75,6 +75,7 @@
                             @endforeach
                         </select>
                     </div>
+                    <input type="hidden" class="form-control" id="pdf_report" name="pdf_report">
                     <div class="form-group">
                         <label for="subject_weightage">{{ __('messages.subject_weightage') }}</label>
                         <input type="number" name="subject_weightage" class="form-control" placeholder="{{ __('messages.enter_subject_weightage') }}">
