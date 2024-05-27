@@ -1018,7 +1018,7 @@ return [
         
         'get_jsklsubjectlist' => $url.'/exam_result/get_jsklsubjectlist', 
         'getjsklexampaper_list' => $url.'/exam_result/getjsklexampaper_list',             
-        
+        'examsubject_by_papers' => $url.'/examsubject-by-papers', 
         'exam_papermarks' => $url.'/exam_result/papermark',  
         'import_exam'=> $url.'/importcsv/exam',
         'exam_student_list'=> $url.'/exam/exam_student_list',        

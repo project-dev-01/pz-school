@@ -72,6 +72,18 @@
 									</div>
 									<div class="col-md-3">
 										<div class="form-group">
+											<label for="semester_id">{{ __('messages.semester') }}<span class="text-danger">*</span></label>
+											<select id="semester_id" class="form-control" name="semester_id" required>
+												<option value="">{{ __('messages.select_semester') }}</option>
+												@forelse($semester as $sem)
+												<option value="{{$sem['id']}}">{{$sem['name']}}</option>
+												@empty
+												@endforelse
+											</select>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
 											<label for="subjectID">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
 											<select id="subjectID" class="form-control" name="subject_id" required>
 												<option value="">{{ __('messages.select_subject') }}</option>
@@ -86,18 +98,7 @@
                                             </select>
                                         </div>
                                     </div>
-									<div class="col-md-3">
-										<div class="form-group">
-											<label for="semester_id">{{ __('messages.semester') }}<span class="text-danger">*</span></label>
-											<select id="semester_id" class="form-control" name="semester_id" required>
-												<option value="">{{ __('messages.select_semester') }}</option>
-												@forelse($semester as $sem)
-												<option value="{{$sem['id']}}">{{$sem['name']}}</option>
-												@empty
-												@endforelse
-											</select>
-										</div>
-									</div>
+									
 									<div class="col-md-3" >
 										<div class="form-group">
 											<input type="hidden" id="session_id" class="form-control" name="session_id" value="0">
@@ -177,6 +178,8 @@
 											<th># </th>
 											<th>{{ __('messages.register_no') }}</th>
 											<th>{{ __('messages.student_name') }}</th>
+											<th>{{ __('messages.paper_name') }}</th>
+											<th>{{ __('messages.score_type') }}</th>
 											<th>{{ __('messages.mark') }}</th>
 											<th>{{ __('messages.attendance') }}</th>
 											<th>{{ __('messages.memo') }}</th>
@@ -252,8 +255,8 @@
 					var teacherSectionUrl = "{{ config('constants.api.section_by_class') }}";
 					var subjectByExamNames = "{{ config('constants.api.subject_by_exam_names') }}";
 					var examBySubjects = "{{ config('constants.api.exam_by_subjects') }}";					
-    				var subjectByPapers = "{{ config('constants.api.subject_by_papers') }}";
-									
+    				//var subjectByPapers = "{{ config('constants.api.subject_by_papers') }}";
+					var subjectByPapers = "{{ config('constants.api.examsubject_by_papers') }}";				
     				var ExamPaperDetails = "{{ config('constants.api.exam_paper_details') }}";
 					var getExamPaperResults = "{{ config('constants.api.get_exam_paper_res') }}";
 					var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";

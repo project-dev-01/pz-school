@@ -636,9 +636,20 @@
 			}
 			elseif($request->department_id==2) // Secondary 
 			{
+				$secspecialsubject1='基本的な生活習慣';	
+				$secspecialsubject2='健康・体力の向上';	 	
+				$secspecialsubject3='自主・自律';	 	
+				$secspecialsubject4='責任感';	 	
+				$secspecialsubject5='創意工夫';	 	
+				$secspecialsubject6='思いやり・協力';	 	
+				$secspecialsubject7='生命尊重・自然愛護';
+
+				$secspecialsubject8='勤労・奉仕';	
+				$secspecialsubject9='公正・公平';	
+				$secspecialsubject10='公共心・公徳心';
 				$getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
                 $getprimarypapers = array($primarypaper1,$primarypaper2,$primarypaper3,$primarypaper4);
-                $getspecialpapers = array($specialpaper1,$specialpaper2,$specialpaper3,$specialpaper4,$specialpaper5,$specialpaper6,$specialpaper7,$specialpaper8,$specialpaper9,$specialpaper10);
+                $getspecialpapers = array($secspecialsubject1,$secspecialsubject2,$secspecialsubject3,$secspecialsubject4,$secspecialsubject5,$secspecialsubject6,$secspecialsubject7,$secspecialsubject8,$secspecialsubject9,$secspecialsubject10);
                 $getspsubject1 = array($specialsubject1); // Records of actions and life- Excellent Report & only 3rd Semester                
                 $getspsubject2 = array($specialsubject2); // Special Subject: Morality ( 3rd Semester)              
                 $getspsubject3 = array($specialsubject3); // Records of special activities, etc (All Semester )
@@ -706,6 +717,7 @@
 						text-align: center;
 						line-height: 20px;
 						letter-spacing: 0.0133em;
+						word-wrap: break-word;
 						}
 						
 						.column1 {
@@ -1147,7 +1159,7 @@
 						}
 						$mark3='教材の主人公の思いや考えを自分の体験と重ねて、実感として捉えようとしていました。特に、「なかよしだけど」の学習では、登場人物の行動から、相手も自分も気持ちよく過ごすために大切なマナーに気付きました。';
 						
-						$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:30px;">
+						$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:30px;width:100%;">
 						<thead class="colspanHead">
 						<tr>
 						<td colspan="5" style="color: #3A4265;"> 所見　（3学期に記載）</td>
@@ -1155,8 +1167,8 @@
 						</thead>
 						<tbody>
 						<tr style="border-top: 2px solid black;">
-						<td colspan="5" style="text-align:center;color: #3A4265;">
-						'.$mark3.'
+						<td colspan="5" style="height:50px;text-align:center;color: #3A4265;">
+							'.$mark3.'
 						</td>
 						</tr>
 						</tbody>

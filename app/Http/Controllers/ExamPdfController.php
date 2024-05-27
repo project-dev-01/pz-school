@@ -2117,7 +2117,8 @@ class ExamPdfController extends Controller
             $sp_paper5="生徒会活動";   //Student Council Activities  
             $sp_paper6="学校行事";   //School Event  
             $sp_paper7="児童会活動";   //Children's Association Activities    
-            $sp_paper8="クラブ活動";   //Club Activities  
+            $sp_paper8="クラブ活動";   //Club Activities
+            $sp_paper9="学習状況及び道徳性に係る成長の様子"; //Progress in learning and morality
                     
             if($student['department_id']==1) // Primary 
             {
@@ -2128,7 +2129,7 @@ class ExamPdfController extends Controller
                     $getspsubject2 = array($specialsubject2); // Foreign Language Activities ( 3rd Semester)              
                     $getspsubject3 = array($specialsubject3); // Comprehensive study time notes (3rd Semester )
                     $getspsubject4 = array($specialsubject4); // Findings  ( 3rd Semester)  
-                    $specialsubject1papers=array("学習状況及び道徳性に係る成長の様子"); // Progress in learning and morality
+                    $specialsubject1papers=array(""); // Progress in learning and morality
                     $specialsubject2papers=array($primarypaper1,$primarypaper2,$primarypaper3); 
                     $specialsubject3papers=array($sp_paper1,$sp_paper2,$sp_paper3); 
                     $specialsubject4papers=array($sp_paper4,$sp_paper7,$sp_paper8,$sp_paper6);                   
@@ -2142,7 +2143,7 @@ class ExamPdfController extends Controller
                 $getspsubject2 = array(); // Foreign Language Activities ( 3rd Semester)              
                 $getspsubject3 = array($specialsubject3); // Comprehensive study time notes (3rd Semester )
                 $getspsubject4 = array($specialsubject4); // Findings  ( 3rd Semester)  
-                $specialsubject1papers=array("学習状況及び道徳性に係る成長の様子"); // Progress in learning and morality
+                $specialsubject1papers=array($sp_paper9); // Progress in learning and morality
                 $specialsubject2papers=array(); 
                 $specialsubject3papers=array($sp_paper1,$sp_paper2,$sp_paper3); 
                 $specialsubject4papers=array($sp_paper4,$sp_paper5,$sp_paper6);
