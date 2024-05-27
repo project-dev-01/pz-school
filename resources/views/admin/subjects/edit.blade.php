@@ -39,7 +39,7 @@
                             <option value="Practical">Practical</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group d-none">
                         <label for="subjectType">{{ __('messages.pdf_report') }}</label>
                         <select class="form-control" id="editpdf_report" name="pdf_report">
                             <option value="0">{{ __('messages.select') }}</option>
@@ -48,6 +48,8 @@
                             @endforeach
                         </select>
                     </div>
+                    
+                    <input type="hidden" class="form-control" id="editpdf_report" name="pdf_report">
                     <div class="form-group">
                         <label for="edit_times_per_week">{{ __('messages.minimum_times_per_week') }}</label>
                         <input type="number" id="edit_times_per_week" name="times_per_week" class="form-control times_per_week">

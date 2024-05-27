@@ -150,7 +150,6 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (data) {
-
                     if (data.code == 200) {
                         $('#class-assign-subjects-table').DataTable().ajax.reload(null, false);
                         $('.addAssignClassSubjectModal').modal('hide');

@@ -117,7 +117,9 @@
                                     <select id="semester_id" class="form-control" name="semester_id">
                                         <option value="0">{{ __('messages.select_semester') }}</option>
                                         @forelse($semester as $sem)
-                                        <option value="{{$sem['id']}}">{{$sem['name']}}</option>
+                                        <option value="{{ $sem['id'] }}" {{ $sem['id'] == $current_semester ? 'selected' : '' }}>
+											{{ $sem['name'] }}
+										</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -179,6 +181,7 @@
                         <h4 class="navv">
                         {{ __('messages.english_communication') }}
                             <h4>
+                                
                     </li>
                 </ul><br>
                 <div class="card-body">
@@ -230,6 +233,10 @@
                             {{ __('messages.students_list') }}
                             <h4>
                     </li>
+                    <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                </button>
                 </ul><br>
                 <div class="card-body">
                     <div class="row">
@@ -358,7 +365,7 @@
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
     var downloadFileName = "{{ __('messages.by_subject') }}";
     // localStorage variables
-    var exam_result_by_subject_storage = localStorage.getItem('admin_exam_result_by_subject_details');
+    var exam_result_by_report_storage = localStorage.getItem('admin_exam_result_by_report_details');
 </script>
 <script src="{{ asset('js/custom/byreport.js') }}"></script>
 <script src="{{ asset('js/custom/collapse.js') }}"></script>

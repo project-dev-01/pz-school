@@ -2306,4 +2306,10 @@ return [
       "phase_2_approved"=> "受理",
       "no_file_uploaded"=> "ファイルがアップロードされていません",
       "you_want_to_delete_this_widget" => "このウィッジを削除しますか",
+      "new_application" => "新しいアプリケーション",
+      "modify_data" => "変更されたデータ",
+      "existing_record" => "すでにデータが存在します",
+      "new_record" => "新しいデータレコード",
+      "mark_info" => "マーク情報",      
+      "adhocexam_import" => "アドホック試験の一括アップロード",
 ];

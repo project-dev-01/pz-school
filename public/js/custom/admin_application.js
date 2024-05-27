@@ -49,8 +49,13 @@ $(function () {
     });
     $('#phase_1_status').on('change', function () {
         var status = $(this).val();
+        // var phase_2_status = $('#phase_2_status').val();
+        // if(phase_2_status && phase_2_status != "Send Back"){
+        //     $('#phase_2_status').val("Send Back");
+        //     $("#enrollment_show").hide();
+        //     $("#status_after_approval_show").hide();
+        // }
         if(status=="Reject" || status=="Send Back"){
-
             $("#reason_1").show();
         }else{
             $("#reason_1").hide();

@@ -2067,12 +2067,21 @@ class ParentController extends Controller
         // Set dual nationality based on checkbox
         $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
 
+        $status = $request->status;
+        if($request->status=="Send Back"){
+            $status = "Applied";
+        }
+        
         $phase_2_status = $request->phase_2_status;
         if ($request->status == "Approved") {
             if ($request->phase_2_status == null) {
 
                 $phase_2_status = "Applied";
             }
+        }
+        
+        if($request->phase_2_status=="Send Back"){
+            $phase_2_status = "Applied";
         }
         $trail_start_date = null;
         $trail_end_date = null;
@@ -2086,10 +2095,7 @@ class ParentController extends Controller
         }
         // Set dual nationality based on checkbox
         // $dual_nationality = $request->has('has_dual_nationality_checkbox') ? $request->dual_nationality : null;
-        $status = $request->status;
-        if ($request->status == "") {
-            $status = $request->phase_1_status;
-        }
+
         $visa_base64 = "";
         $visa_extension = "";
         $visa_file = $request->file('visa_photo');
@@ -2460,7 +2466,7 @@ class ParentController extends Controller
             'parent_phone_number_after_transfer' => $request->parent_phone_number_after_transfer,
             'parent_email_address_after_transfer' => $request->parent_email_address_after_transfer,
             'parent_address_after_transfer' => $request->parent_address_after_transfer,
-            "termination_status" => "Pending",
+            "termination_status" => "Applied",
             "created_by" => session()->get('ref_user_id'),
         ];
         // dd($data);
@@ -2491,8 +2497,10 @@ class ParentController extends Controller
                     $color = "danger";
                 } else if ($row['termination_status'] == "Pending") {
                     $color = "warning";
-                } else if ($row['termination_status'] == "Send Back") {
+                } else if ($row['termination_status'] == "Applied") {
                     $color = "info";
+                } else if ($row['termination_status'] == "Send Back") {
+                    $color = "warning";
                 }
                 return '<div class="button-list">
                 
@@ -2530,7 +2538,7 @@ class ParentController extends Controller
         $termination_status = $request->termination_status;
         if ($request->termination_status == "Approved") {
             if ($request->old_date_of_termination != $request->date_of_termination) {
-                $termination_status = "Pending";
+                $termination_status = "Applied";
                 $termination_notification = "Yes";
             }
         } else {
@@ -2567,7 +2575,7 @@ class ParentController extends Controller
             $old['remarks'] = $termination['data']['remarks'];
             $output  = array_diff($new, $old);
             if (count($output) > 0) {
-                $termination_status = "Pending";
+                $termination_status = "Applied";
             }
         }
         $data = [
@@ -2608,17 +2616,104 @@ class ParentController extends Controller
     }
     public function studentMedicalRecord()
     {
-
+        $data= [
+            'student_id' => session()->get('student_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.get_student_medical_record'), $data);
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
-        // dd($student);
+        $allergies_name_list = Helper::GetMethod(config('constants.api.get_allergies_name_list'));
+        $student_id = session()->get('student_id');
+        $parent_id = session()->get('ref_user_id');
         return view(
             'parent.student_medical.index',
             [
                 'grade' => isset($getclass['data']) ? $getclass['data'] : [],
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'student_id' => isset($student_id) ? $student_id : 0,
+                'parent_id' => isset($parent_id) ? $parent_id : 0,               
+                'studentmedical' => isset($response['data']['student']) ? $response['data']['student'] : [],                
+                'allergies_name'=> isset($allergies_name_list['data']) ? $allergies_name_list['data'] : [],                
+                'allergies_details' => isset($response['data']['allergies']) ? $response['data']['allergies'] : [],
             ]
         );
+    }
+    public function studentMedicalRecordAdd(Request $request)
+    { 
+        $data = [
+            'student_id' =>  $request->student_id,
+            'parent_id' => $request->parent_id,
+            'academic_session_id' => session()->get('academic_session_id'),
+            'normal_temp' => $request->normal_temp,
+            'hospital_name'=> $request->hospital_name,
+            'doctor_name' => $request->doctor_name,
+            'company_name'=> $request->company_name,
+            'insurance' => $request->insurance,
+            'allergies' => $request->allergies,
+            'remark_allergen'=> $request->remark_allergen,
+            'anaphylactic'=> $request->anaphylactic,
+            'epinephrine' => $request->epinephrine,
+            'other_medicines' => $request->other_medicines,
+            'heart_problem' => $request->heart_problem,
+            'epilepsy' => $request->epilepsy,
+            'measles'=> $request->measles,
+            'kawasaki_disease' => $request->kawasaki_disease,
+            'febrile_convulsion' => $request->febrile_convulsion,
+            'chicken_pox' => $request->chicken_pox,
+            'scoliosis' => $request->scoliosis,
+            'tuberculosis' => $request->tuberculosis,
+            'mumps' =>  $request->mumps,
+            'kidney_problems' => $request->kidney_problems,
+            'others' => $request->others,
+            'rubella' => $request->rubella,
+            'diabetes' => $request->diabetes,
+            'dengue_fever' => $request->dengue_fever,
+            'operated_disease' => $request->operated_disease,
+            'injury' => $request->injury,
+            'illness' => $request->illness,
+            'japanese_encephalitis' => $request->japanese_encephalitis,
+            'streptococcus_pneumoniae' => $request->streptococcus_pneumoniae,
+            'triple_antigen' => $request->triple_antigen,
+            'hib' => $request->hib,
+            'quadruple_antigen' => $request->quadruple_antigen,
+            'covid' => $request->covid,
+            'bcg' => $request->bcg,
+            'rabies_vaccine' => $request->rabies_vaccine,
+            'measles' => $request->measles,
+            'tetanus' => $request->tetanus,
+            'chicken_pox_imm' => $request->chicken_pox_imm,
+            'mumps_imm' => $request->mumps_imm,
+            'doctors_advised' => $request->advised_doctors,
+            'develops_fever' => $request->develops_fever,
+            'frequent_headaches' => $request->frequent_headaches,
+            'dyspepsia' => $request->dyspepsia,
+            'constipates' => $request->constipates,
+            'vomits' => $request->vomits,
+            'faints' => $request->faints,
+            'dizziness' => $request->dizziness,
+            'nettle_rash' => $request->nettle_rash,
+            'prone_car_sickness' => $request->prone_car_sickness,
+            'poor_hearing' => $request->poor_hearing,
+            'otitis_media' => $request->otitis_media,
+            'bleeds_nose' => $request->bleeds_nose,
+            'nasal_congestion_nose' => $request->nasal_congestion_nose,
+            'throat_swollen' => $request->throat_swollen,
+            'squinted_eyes' => $request->squinted_eyes,
+            'eye_irritation' => $request->eye_irritation,
+            'glasses_lenses' => $request->glasses_lenses,
+            'wrong_colour' => $request->wrong_colour,
+            'sensistive_tooth' => $request->sensistive_tooth,
+            'bleed_from_gum' => $request->bleed_from_gum,
+            'pain_sound_jaw_joint' => $request->pain_sound_jaw_joint,
+            'orthodontics' => $request->orthodontics,
+            'medicine_to_take_daily' => $request->medicine_to_take_daily,
+            'date' => $request->date,
+            'remarks' => $request->remarks,
+
+
+        ];
+        $response = Helper::PostMethod(config('constants.api.student_medical_record_add'), $data);
+        return $response;
     }
     public function checkpermissions(Request $request)
     {

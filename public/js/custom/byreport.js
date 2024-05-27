@@ -105,9 +105,10 @@ $(function () {
                 semesterID: semester_id,
                 sessionID: session_id,
                 examID: exam_id,
-                userID: userID,
+                academic_session_id: academic_session_id,
+                report_type:report_type,
             };
-           // setLocalStorageForExamResultBySubject(classObj);
+            setLocalStorageForExamResultBySubject(classObj);
 
             // download set start
             $(".downExamID").val(exam_id);
@@ -151,6 +152,132 @@ $(function () {
             $("#student").hide("slow");
         }
     });
+    function setLocalStorageForExamResultBySubject(classObj) {
+
+        var examResultBySubjectDetails = new Object();
+        examResultBySubjectDetails.class_id = classObj.classID;
+        examResultBySubjectDetails.section_id = classObj.sectionID;
+        examResultBySubjectDetails.year = classObj.year;
+        examResultBySubjectDetails.exam_id = classObj.examID;
+        examResultBySubjectDetails.semester_id = classObj.semesterID;
+        examResultBySubjectDetails.session_id = classObj.sessionID;
+        examResultBySubjectDetails.department_id = classObj.department_id;
+        examResultBySubjectDetails.report_type = classObj.report_type,
+        // here to attached to avoid localStorage other users to add
+        examResultBySubjectDetails.branch_id = branchID;
+        examResultBySubjectDetails.role_id = get_roll_id;
+        examResultBySubjectDetails.user_id = ref_user_id;
+        var examResultBySubjectClassArr = [];
+        examResultBySubjectClassArr.push(examResultBySubjectDetails);
+        if (get_roll_id == "2") {
+            // admin
+            localStorage.removeItem("admin_exam_result_by_report_details");
+            localStorage.setItem('admin_exam_result_by_report_details', JSON.stringify(examResultBySubjectClassArr));
+        }
+        return true;
+    }
+     // if localStorage
+     if (typeof exam_result_by_report_storage !== 'undefined') {
+        if ((exam_result_by_report_storage)) {
+            if (exam_result_by_report_storage) {
+                var examResultByReportStorage = JSON.parse(exam_result_by_report_storage);
+                if (examResultByReportStorage.length == 1) {
+                    var classID, year,sectionID,departmentID, examID, userType ,semesterID, sessionID, userBranchID, userRoleID, userID;
+                    examResultByReportStorage.forEach(function (user) {
+                        departmentID = user.department_id;
+                        classID = user.class_id;
+                        year = user.year;
+                        sectionID = user.section_id;
+                        examID = user.exam_id;
+                        semesterID = user.semester_id;
+                        sessionID = user.session_id;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id;
+                        userType = user.report_type;
+                    });
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                        //$('#changeClassName').val(classID);
+                        $("#btwyears").val(year);
+                        $('#report_type').val(report_type);
+                        $('#session_id').val(sessionID);
+                        $("#department_id").val(departmentID);
+                        if(departmentID){
+                            
+                            $("#resultsByPaper").find("#changeClassName").empty();
+                            $("#resultsByPaper").find("#changeClassName").append('<option value="">'+select_class+'</option>');
+                            $.post(getGradeByDepartmentUrl, { token: token, branch_id: branchID, department_id: departmentID }, function (res) {
+                                if (res.code == 200) {
+                                    $.each(res.data, function (key, val) {
+                                        $("#changeClassName").append('<option value="' + val.id + '">' + val.name + '</option>');
+                                    });
+                                    $("#changeClassName").val(classID);
+                                }
+                            }, 'json');
+                        }
+                        if (classID) {
+                            $("#bysubjectfilter").find("#sectionID").empty();
+                            $("#bysubjectfilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
+                            $.post(sectionByClass, { token: token, branch_id: branchID, class_id: classID, teacher_id: userID }, function (res) {
+                                if (res.code == 200) {
+                                    $("#section_drp_div").show();
+                                    $.each(res.data, function (key, val) {
+                                        $("#bysubjectfilter").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                                    });
+                                    $("#bysubjectfilter").find("#sectionID").val(sectionID);
+                                }
+                            }, 'json');
+                        }
+                        if(sectionID){
+                            var today = new Date();
+                            var dd = String(today.getDate()).padStart(2, '0');
+                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                            var yyyy = today.getFullYear();
+                    
+                            today = yyyy + '/' + mm + '/' + dd;
+                            $("#bysubjectfilter").find("#examnames").empty();
+                            $("#bysubjectfilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
+                            $.post(examsByclassandsection, {
+                                token: token,
+                                branch_id: branchID,
+                                class_id: classID,
+                                section_id: sectionID,
+                                academic_session_id: academic_session_id,
+                                today: today
+                            }, function (res) {
+                                if (res.code == 200) {
+                                    $.each(res.data, function (key, val) {
+                                        $("#bysubjectfilter").find("#examnames").append('<option value="' + val.id + '" >' + val.name + '</option>');
+                                    });
+                                    $("#bysubjectfilter").find("#examnames").val(examID);
+                                }
+                            }, 'json');
+                        }
+                        
+                        // download set start
+                        $("#downExamID").val(examID);
+                        $("#downClassID").val(classID);
+                        $("#downSemesterID").val(sessionID);
+                        $("#downSessionID").val(sessionID);
+                        $("#downSectionID").val(sectionID);
+                        $("#downAcademicYear").val(year);
+                        // download set end
+                        var formData = new FormData();
+                        formData.append('token', token);
+                        formData.append('branch_id', branchID);
+                        formData.append('class_id', classID);
+                        formData.append('section_id', sectionID);
+                        formData.append('exam_id', examID);
+                        formData.append('semester_id', semesterID);
+                        formData.append('session_id', sessionID);
+                        formData.append('academic_year', year);
+                        examResultBySubject(formData);
+                    }
+                }
+            }
+        }
+    }
+
     function examResultBySubject(formData){
 
         // $("#overlay").fadeIn(300);

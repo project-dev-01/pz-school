@@ -10,8 +10,19 @@
                 <form id="addSubjectSubmit" autocomplete="off">
                     @csrf
                     <div class="form-group">
+                    
                         <label for="name">{{ __('messages.subject_name') }}<span class="text-danger">*</span></label>
-                        <input type="text" id="subjectName" name="name" class="form-control" placeholder="{{ __('messages.enter_subject_name') }}">
+                        <input type="text" id="subjectName" name="name" class="form-control" list="subjectslist" placeholder="{{ __('messages.enter_subject_name') }}">
+                        <!--<select id="subjectName" name="name" class="selectpicker" data-live-search="true">
+                            @forelse($subject_report as $sub)
+                            <option data-tokens="{{$sub['name_jp']}}">{{$sub['name_jp']}}-{{$sub['name_en']}}</option>
+                            @endforeach
+                        </select>   --> 
+                        <datalist id="subjectslist">
+                        @forelse($subject_report as $sub)
+                            <option values="{{$sub['name_jp']}}">{{$sub['name_jp']}}</option>
+                            @endforeach
+                        </datalist>                          
                     </div>
                     <div class="form-group">
                         <label for="short_name">{{ __('messages.short_name') }}<span class="text-danger">*</span></label>
@@ -38,7 +49,7 @@
                             <option value="Practical">{{ __('messages.practical') }}</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group d-none">
                         <label for="subjectType">{{ __('messages.pdf_report') }}</label>
                         <select class="form-control" id="pdf_report" name="pdf_report">
                             <option value="0">{{ __('messages.select') }}</option>
@@ -47,6 +58,7 @@
                             @endforeach
                         </select>
                     </div>
+                    <input type="hidden" class="form-control" id="pdf_report" name="pdf_report">
                     <div class="form-group">
                         <label for="times_per_week">{{ __('messages.minimum_times_per_week') }}</label>
                         <input type="number" id="times_per_week" name="times_per_week" class="form-control times_per_week">

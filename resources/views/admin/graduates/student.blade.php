@@ -102,6 +102,16 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-3" >
+                                <div class="form-group">
+                                    <label for="stu_status">{{ __('messages.status') }}<span class="text-danger">*</span></label>
+                                    <select id="stu_status" class="form-control" name="stu_status">
+                                        <option value="All">{{ __('messages.select_all') }}</option>
+                                        <option value="Active">{{ __('messages.active') }}</option>
+                                        <option value="Termination">{{ __('messages.termination') }}</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-md-3" style="display:none;">
                                 <div class="form-group">
                                     <label for="session_id">{{ __('messages.session') }}<span class="text-danger">*</span></label>
@@ -166,6 +176,7 @@
                                             <th> {{ __('messages.roll_no') }}</th>
                                             <th> {{ __('messages.gender') }}</th>
                                             <th> {{ __('messages.email') }}</th>
+                                            <th> {{ __('messages.status') }}</th>
                                             <th> {{ __('messages.actions') }}</th>
                                         </tr>
                                     </thead>
