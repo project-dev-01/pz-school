@@ -734,7 +734,7 @@
 						
 						.content {
 						box-sizing: border-box;
-						max-width: 850px;
+						
 						display: block;
 						margin: 0 auto;
 						padding: 20px;
@@ -742,8 +742,8 @@
 						margin-top: 20px;
 						background-color: #fff;
 						border: 1px solid #dddddd;
-						font-size: 15px;
-						"
+						font-size: 12px;
+						
 						
 						}
 						</style>
@@ -1005,8 +1005,8 @@
                             
                             }  
 							$fmark=($mark=="Excellent")?'<b>O</b>':''; 
-						$output.='<tr>
-						<td colspan="4" style="text-align:left;color: #3A4265;width:200px;">'.$papers['papers'].'</td>
+						$output.='<tr style="height:60px;">
+						<td colspan="4" style="text-align:left;color: #3A4265;width:100px;">'.$papers['papers'].'</td>
 						<td colspan="1">'.$fmark.'
 						</td>
 						</tr>';
@@ -1145,7 +1145,7 @@
 							}  
                         
 						}
-						//$mark3='教材の主人公の思いや考えを自分の体験と重ねて、実感として捉えようとしていました。特に、「なかよしだけど」の学習では、登場人物の行動から、相手も自分も気持ちよく過ごすために大切なマナーに気付きました。';
+						$mark3='教材の主人公の思いや考えを自分の体験と重ねて、実感として捉えようとしていました。特に、「なかよしだけど」の学習では、登場人物の行動から、相手も自分も気持ちよく過ごすために大切なマナーに気付きました。';
 						
 						$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:30px;">
 						<thead class="colspanHead">
@@ -1155,7 +1155,7 @@
 						</thead>
 						<tbody>
 						<tr style="border-top: 2px solid black;">
-						<td colspan="5" style="height:50px;text-align:center;color: #3A4265;">
+						<td colspan="5" style="text-align:center;color: #3A4265;">
 						'.$mark3.'
 						</td>
 						</tr>
@@ -3387,6 +3387,388 @@
 			return response()->download($zipFilePath)->deleteFileAfterSend(true);
 			
 		}
-		
+	
+   public function downprimaryform1($id)
+    {
+        //dd($student_id);
+        $footer_text = session()->get('footer_text');
+        $sdata = [
+        'id' => $id,
+       
+        ];      
+        $getstudent = Helper::PostMethod(config('constants.api.student_details'), $sdata);
+        $student=$getstudent['data']['student'];
+        $data = [
+        'id' => $id,
+        'department_id'=> $student['department_id'],
+        ];
+        $prev = json_decode($getstudent['data']['student']['previous_details']);
+        $school_name=$prev->school_name;
+        $pdata = [
+        'id' => $student['father_id'],
+        ];
+        $getparent = Helper::PostMethod(config('constants.api.parent_details'), $pdata);
+        $getclasssec = Helper::PostMethod(config('constants.api.studentclasssection'), $data);
+        $parent=$getparent['data']['parent'];
+       
+        $fonturl = storage_path('fonts/ipag.ttf');
+        $output = "<!DOCTYPE html>";
+        $output .= "<html><head>";
+        $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+        $output .= '<meta name="description"
+        content="Paxsuzen School is a premier educational institution that offers quality education to students of all ages.
+         Our curriculum is designed to prepare future leaders for success in the global marketplace.">';
+        $output .= '<meta name="keywords" content="Paxsuzen School, education, future leaders, curriculum">';
+        $output .='<meta content="Paxsuzen" name="author" />';
+        $output .= '<style>';
+        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
+        $output .= '@font-face {
+                   font-family: Open Sans ipag;
+                   font-style: normal;
+                   font-weight: 300;
+                   src: url("' . $fonturl . '");
+                   }
+                   body {
+                    font-family: "ipag", "Open Sans", !important;
+                    }  
+                    .table {
+                        width: 100%;
+                        color: black;
+                        text-align: center;
+                        border-collapse: collapse;
+                        /* Ensures borders are collapsed */
+                        border: 3px solid black;
+                    }
+                    .table {
+                        width: 100%;
+                        margin-bottom: 1px;
+                        color: black;
+                        text-align: center;
+                        border-collapse: collapse;
+                        /* Ensures borders are collapsed */
+                        border: 2px solid black;
+                    }
+       
+                    .table th,
+                    .table td {
+                        text-align: center;
+                        padding: 10px;
+                        /* Add padding for better spacing */
+                        border: 1px solid black;
+                    }
+           
+                    .table td {
+                        color: #3A4265;
+                    }
+           
+                    .diagonalCross {
+                        position: relative;
+                        padding: 10px;
+                        border: none;
+                        text-align: center;
+                    }
+           
+                    .diagonalCross::after {
+                        content: "";
+                        position: absolute;
+                        width: 2px;
+                        /* Thickness of the lines */
+                        height: 3.8%;
+                        background-color: black;
+                        /* Color of the lines */
+                        top: 0;
+                        left: 0%;
+                        transform-origin: center;
+                    }
+           
+                    .diagonalCross::after {
+                        transform: rotate(-45deg);
+                    }
+           
+                    .diagonalCross1 {
+                        position: relative;
+                        padding: 10px;
+                        border: none;
+                        text-align: center;
+                    }
+           
+                    .diagonalCross1::after {
+                        content: "";
+                        position: absolute;
+                        width: 2px;
+                        /* Thickness of the lines */
+                        height: 4%;
+                        background-color: black;
+                        /* Color of the lines */
+                        top: 0%;
+                        left: -62%;
+                        right: 50%;
+                        transform-origin: center;
+                    }
+           
+                    .diagonalCross1::after {
+                        transform: rotate(-45deg);
+                    }
+           
+                    .content {
+                        box-sizing: border-box;
+                        display: block;
+                        margin: 0 auto;
+                        padding: 20px;
+                        border-radius: 7px;
+                        background-color: #fff;
+                        border: 1px solid #dddddd;
+                        font-size: 15px;
+                    }
+        </style>';
+        $output .= "</head>";
+        $output .= "<body>";
+        $output .=' <div class="content">
+        <p style=" text-align:center;font-size:20px;">小　学　校　児　童　指　導　要　録</p>
+        <p class="float-left;">様式１（学籍に関する記録）</p>
+        <table class="main" width="100%">
+        <tr>
+        <table class="table table-bordered" style="width: 50%;">
+        <thead>
+        <tr>
+            <td>番号入力</td>
+        </tr>
+        <tr>
+           <td>'.$student['roll_no'].'</td>
+        </tr>
+         </thead>
+        </table>
+        <td>
+        <table class="table table-bordered" style="margin-bottom: 15px;">
+            <thead>
+                <tr>
+                    <td colspan="2" style="text-align:center;">区分</td>
+                    <td colspan="1" class="diagonalCross"
+                        style="width:50px;border-right:hidden; border-left:hidden;"></td>
+                    <td colspan="1" style="text-align:center;">学年</td>';
+                    $getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+                    //dd('$getgrade');
+                    foreach($getgrade['data'] as $grade)
+                    {
+                       
+                        $output.=' <td>'.$grade['name_numeric'].'</td>';
+                    }
+        $output.='</tr>
+            </thead>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4">学 級</td>';
+                    foreach($getclasssec['data'] as $sec)
+                    {
+                       
+                        $output.='<td> '.$sec['section'].'</td>';
+                    }
+                    $output.='</tr>
+                <tr>
+                    <td colspan="4">整 理 番 号</td>';
+                    foreach($getclasssec['data'] as $sec)
+                    {
+                       
+                        $output.='<td> '.$sec['studentPlace'].'</td>';
+                    }
+                    $output.='
+                    </tr>
+            </tbody>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td colspan="2">
+        <table class="table table-bordered">
+            <thead class="colspanHead">
+                <tr>
+                    <td colspan="13" style="text-align:center; border: 1px solid black;font-size:20px;">
+                        <p
+                            style="color:black; margin:0px 0px 0px 0px; letter-spacing:0; white-space:nowrap;">
+                            学　　　　籍　　　　の　　　　記　　　　録</p>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="2">児<br>童</td>
+                    <td>ふりがな<br>氏　　名</td>
+                    <td colspan="3">'.$student['first_name'].' '.$student['last_name'].'<br>
+                        東京　花子<br>
+                        3/28/2008<br>
+                        生<br></td>
+                    <td style="padding:0px !important; width:13px;">性 <br> 別</td>
+                    <td style="padding:0px !important; width:13px;">女</td>
+                    <td colspan="3">入学前の経歴 </td>
+                    <td colspan="3">岡山市立岡山中央小学校</td>
+                </tr>
+                <tr>
+                    <td>現住所(current Address)</td>
+                    <td colspan="5">'.$student['current_address'].'</td>
+                    <td colspan="3">入学・編入学等 </td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td rowspan="3">保 <br>護 <br>者</td>
+                    <td>ふりがな
+                        <br> 氏名 (Furgaina name)
+                    </td>
+                    <td colspan="5">'.$student['first_name'].' '.$student['last_name'].'</td>
+                    <td colspan="3">退　学　等 (Resignation)</td>
+                    <td colspan="3"></td>
+                </tr>
+ 
+                <tr style="height:70px">
+                    <td rowspan="2">現住所(Current Address)</td>
+                    <td rowspan="2" colspan="5">'.$student['current_address'].'</td>
+                    <td colspan="3">卒業</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="height:70px">進学先 </td>
+                    <td colspan="3"></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered">
+            <tr>
+                <td colspan="4" style="width:90px">学校名<br>
+                    及び<br>
+                    所在地</td>
+                <td colspan="7">在マレーシア日本国大使館附属・クアラルンプール日本人会日本人学校<br>
+                    The Japanese School of Kuala Lumpur<br>
+                    Saujana Resort Seksyen U2, 40150 Shah Alam, Selangor Darul Ehsan,
+                    Malaysia<br>
+                    Tel: 03-78465939 Fax: 03-78465949<br>
+                </td>
+            </tr>
+        </table>
+        <table class="table table-bordered">
+            <tr>
+                <td rowspan="2" style="width:50px;">区分</td>
+                <td class="diagonalCross1" style="width:50px;border-left:hidden">
+                    年度
+                </td>
+                <td style="width:30%;">平成○年度(Heisei year)</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="width:50px;border-left:hidden">学年</td>';
+                $getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+                //dd('$getgrade');
+				$i=0;
+                foreach($getgrade['data'] as $grade)
+                {
+                   $i++;
+				   if($i<=3)
+				   {
+                    $output.=' <td>'.$grade['name_numeric'].'</td>';
+				   }
+                }
+               
+                $output.='</tr>
+            <tr style="height:80px">
+                <td colspan="2">校長氏名印 </td>';
+				$i=0;
+                foreach($getclasssec['data'] as $princ)
+                {
+					$i++;
+					if($i<=3)
+					{
+						$output.=' <td >'.$princ['principal'].'</td>';
+					}
+                }
+               
+                $output.='</tr>
+            <tr style="height:80px">
+                <td colspan="2">学級担任者
+                    氏名印 </td>';
+					$i=0;
+					
+					foreach($getclasssec['data'] as $teach)
+					{
+							$i++;
+						if($i<=3)
+						{
+							$output.=' <td>'.$teach['teacher'].'</td>';
+						}
+					}
+                   
+                    $output.='</tr>
+            <tr>
+                <td rowspan="2" style="width:50px;">区分</td>
+                <td class="diagonalCross1" style="width:50px;border-left:hidden">
+                    年度
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="width:50px;border-left:hidden">学年 </td>';
+                $getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+                $getclasssec = Helper::PostMethod(config('constants.api.studentclasssection'), $data);
+                //dd('$getgrade');
+				$i=0;
+                foreach($getgrade['data'] as $grade)
+                {
+					$i++;
+					if($i>3)
+					{
+               			$output.=' <td >'.$grade['name_numeric'].'</td>';
+					}
+                }
+               
+                $output.='
+                </tr>
+            <tr style="height:80px">
+                <td colspan="2">校長氏名印 </td>';
+				$i=0;
+                foreach($getclasssec['data'] as $princ)
+                {
+                    $i++;
+					if($i>3)
+					{
+						$output.=' <td >'.$princ['principal'].'</td>';
+					}
+                }
+               
+                $output.='</tr>
+            <tr style="height:80px">
+                <td colspan="2">学級担任者
+                    氏名印 </td>';
+					$i=0;
+                    foreach($getclasssec['data'] as $teach)
+                    {
+						$i++;
+						if($i>3)
+						{
+							$output.=' <td >'.$teach['teacher'].'</td>';
+						}
+                    }
+                   
+                    $output.='
+                </tr>
+        </table>
+    </td>
+</tr>
+</table>';
+   
+        $output .= '</body></html>';
+        $pdf = \App::make('dompdf.wrapper');
+        // set size
+        $customPaper = array(0, 0, 792.00, 1224.00);
+        $pdf->set_paper($customPaper);
+        $pdf->loadHTML($output);
+        // filename
+        $now = now();
+        $name = strtotime($now);
+        $fileName = __('messages.download_form1') .'-'. $name . ".pdf";
+        return $pdf->download($fileName);
+        // return $pdf->stream();        
+       
+    }
 		
 	}

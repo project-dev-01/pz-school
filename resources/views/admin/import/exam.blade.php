@@ -92,7 +92,9 @@
 											<select id="semester_id" class="form-control" name="semester_id" required>
 												<option value="">{{ __('messages.select_semester') }}</option>
 												@forelse($semester as $sem)
-												<option value="{{$sem['id']}}">{{$sem['name']}}</option>
+												<option value="{{ $sem['id'] }}" {{ $sem['id'] == $current_semester ? 'selected' : '' }}>
+													{{ $sem['name'] }}
+												</option>
 												@empty
 												@endforelse
 											</select>
@@ -186,7 +188,7 @@
 									</tbody>									
 								</table>
 								<center>
-									<a href="{{route('admin.exam.import')}}" class="btn btn-warning"> <i class="fe fe-refresh"></i>  Re-Upload  </a> <input type="button" name="upload" class="btn btn-success" data-toggle="modal" data-target="#markModal" value="{{ __('messages.upload') }}">  </center> 
+									<input type="button" name="upload" id="save_modelbtn" class="btn btn-success" data-toggle="modal" data-target="#markModal" value="{{ __('messages.upload') }}">  </center> 
 								
 							</div>
 							</div>
@@ -263,11 +265,12 @@
 					var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
 					var downloadFileName = "{{ __('messages.exam_paper_result') }}";
 					// localStorage variables
-					var exam_paper_result_storage = localStorage.getItem('admin_exam_paper_result_details');
+					var exam_import_result_storage = localStorage.getItem('admin_exam_import_details');
 					var marktext="{{ __('messages.alertexamupload_mark') }}";
 					var pointstext="{{ __('messages.alertexamupload_points') }}";
 					var freetext="{{ __('messages.alertexamupload_freetext') }}";
 					var infotext="{{ __('messages.alertexamupload_info') }}";
+					var all="{{ __('messages.all') }}";
 				</script>
 				<script src="{{ asset('js/custom/exam_import.js') }}"></script>
 				
