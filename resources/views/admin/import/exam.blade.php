@@ -92,7 +92,9 @@
 											<select id="semester_id" class="form-control" name="semester_id" required>
 												<option value="">{{ __('messages.select_semester') }}</option>
 												@forelse($semester as $sem)
-												<option value="{{$sem['id']}}">{{$sem['name']}}</option>
+												<option value="{{ $sem['id'] }}" {{ $sem['id'] == $current_semester ? 'selected' : '' }}>
+													{{ $sem['name'] }}
+												</option>
 												@empty
 												@endforelse
 											</select>
@@ -263,7 +265,7 @@
 					var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
 					var downloadFileName = "{{ __('messages.exam_paper_result') }}";
 					// localStorage variables
-					var exam_paper_result_storage = localStorage.getItem('admin_exam_paper_result_details');
+					var exam_import_result_storage = localStorage.getItem('admin_exam_import_details');
 					var marktext="{{ __('messages.alertexamupload_mark') }}";
 					var pointstext="{{ __('messages.alertexamupload_points') }}";
 					var freetext="{{ __('messages.alertexamupload_freetext') }}";

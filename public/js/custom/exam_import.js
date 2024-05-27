@@ -225,6 +225,176 @@ $(function () {
             semester_id: "required"
         }
     });
+    $('#resultsByPaper').on('submit', function (e) {
+        e.preventDefault();
+        var classRoom = $("#resultsByPaper").valid();
+        if (classRoom === true) {
+            //   $("#overlay").fadeIn(300);
+            // jQuery("body").prepend('<div id="preloader">Loading...</div>');
+            var departmentID = $("#department_id").val();
+            var classID = $("#class_id").val();
+            var sectionID = $("#sectionID").val();
+            var subjectID = $("#subject_id").val();
+            var paperID = $("#paper_id").val();
+            var semesterID = $("#semester_id").val();
+
+            var classObj = {
+                classID: classID,
+                sectionID: sectionID,
+                subjectID: subjectID,
+                departmentID: departmentID,
+                semesterID: semesterID,
+                paperID: paperID,
+            };
+            // set local storage selected
+            setLocalStorageForClassroom(classObj);
+        }
+    });
+    function setLocalStorageForClassroom(classObj) {
+        var teacherClassDetails = new Object();
+        teacherClassDetails.class_id = classObj.classID;
+        teacherClassDetails.section_id = classObj.sectionID;
+        teacherClassDetails.subject_id = classObj.subjectID;
+        teacherClassDetails.department_id = classObj.departmentID;
+        teacherClassDetails.semester_id = classObj.semesterID;
+        teacherClassDetails.paper_id = classObj.paperID;
+        // here to attached to avoid localStorage other users to add
+        teacherClassDetails.branch_id = branchID;
+        var teacherClassroomArr = [];
+        teacherClassroomArr.push(teacherClassDetails);
+        if (get_roll_id == "2") {
+            // admin
+            localStorage.removeItem("admin_exam_import_details");
+            localStorage.setItem('admin_exam_import_details', JSON.stringify(teacherClassroomArr));
+        }
+        return true;
+    }
+    if (typeof exam_import_result_storage !== 'undefined') {
+        if ((exam_import_result_storage)) {
+            if (exam_import_result_storage) {
+                var examImportResultStorage = JSON.parse(exam_import_result_storage);
+                if (examImportResultStorage.length == 1) {
+                    var classID, sectionID, subjectID,departmentID, examID, semesterID, sessionID, userBranchID, userRoleID, userID;
+                    examImportResultStorage.forEach(function (user) {
+                        departmentID = user.department_id;
+                        classID = user.class_id;
+                        sectionID = user.section_id;
+                        subjectID = user.subject_id;
+                        examID = user.exam_id;
+                        semesterID = user.semester_id;
+                        sessionID = user.session_id;
+                        userBranchID = user.branch_id;
+                        userRoleID = user.role_id;
+                        userID = user.user_id;
+                      
+                    });
+                    if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
+                        $('#changeClassName').val(classID);
+                        $('#semester_id').val(semesterID);
+                        $('#session_id').val(sessionID);
+                        $("#department_id").val(departmentID);
+                        if(departmentID){
+                            
+                            $("#resultsByPaper").find("#class_id").empty();
+                            $("#resultsByPaper").find("#class_id").append('<option value="">'+select_class+'</option>');
+                            $.post(getGradeByDepartmentUrl, { token: token, branch_id: branchID, department_id: departmentID }, function (res) {
+                                if (res.code == 200) {
+                                    $.each(res.data, function (key, val) {
+                                        $("#class_id").append('<option value="' + val.id + '">' + val.name + '</option>');
+                                    });
+                                    $("#class_id").val(classID);
+                                }
+                            }, 'json');
+                        }
+                        if (classID) {
+                            
+                            $("#resultsByPaper").find("#sectionID").empty();
+                            $("#resultsByPaper").find("#sectionID").append('<option value="">'+select_class+'</option>');
+                            
+                            $.post(teacherSectionUrl, { token: token, branch_id: branchID, teacher_id: userID, class_id: classID }, function (res) {
+                                if (res.code == 200) {
+                                    $.each(res.data, function (key, val) {
+                                        $("#resultsByPaper").find("#sectionID").append('<option value="' + val.section_id + '">' + val.section_name + '</option>');
+                                    });
+                                    $("#resultsByPaper").find("#sectionID").val(sectionID);
+                                }
+                            }, 'json');
+                        }
+                        if(sectionID){
+                            
+                            var today = new Date();
+                            var dd = String(today.getDate()).padStart(2, '0');
+                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                            var yyyy = today.getFullYear();
+
+                            today = yyyy + '/' + mm + '/' + dd;
+                            $("#resultsByPaper").find("#examnames").empty();
+                            $("#resultsByPaper").find("#examnames").append('<option value="">'+select_exam+'</option>');
+
+                            $.post(subjectByExamNames, {
+                                token: token,
+                                branch_id: branchID,
+                                class_id: classID,
+                                section_id: sectionID,
+                                academic_session_id: academicSessionID,
+                                today: today
+                            }, function (res) {
+                                if (res.code == 200) {
+                                    $.each(res.data, function (key, val) {
+                                        $("#resultsByPaper").find("#examnames").append('<option value="' + val.id + '" >' + val.name + '</option>');
+                                    });
+                                    $("#resultsByPaper").find("#examnames").val(examID);
+                                }
+                            }, 'json');
+                        }
+
+                        if(examID){
+                            $("#resultsByPaper").find("#subjectID").empty();
+                            $("#resultsByPaper").find("#subjectID").append('<option value="">'+select_subject+'</option>');
+                            $.post(examBySubjects, {
+                                token: token,
+                                branch_id: branchID,
+                                class_id: classID,
+                                teacher_id: userID,
+                                section_id: sectionID,
+                                academic_session_id: academicSessionID,
+                                exam_id: examID
+                            }, function (res) {
+                                if (res.code == 200) {
+                                    $.each(res.data, function (key, val) {
+                                        $("#resultsByPaper").find("#subjectID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
+                                    });
+                                    $("#resultsByPaper").find("#subjectID").val(subjectID);
+                                }
+                            }, 'json');
+                        }
+
+                        // download set start
+                        // $("#downExamID").val(examID);
+                        // $("#downClassID").val(classID);
+                        // $("#downSectionID").val(sectionID);
+                        // $("#downSemesterID").val(semesterID);
+                        // $("#downSessionID").val(sessionID);
+                        // $("#downSubjectID").val(subjectID);
+                        // $("#downAcademicYear").val(academicSessionID);
+                        // download set end
+                        // var formData = new FormData();
+                        // formData.append('token', token);
+                        // formData.append('branch_id', branchID);
+                        // formData.append('class_id', classID);
+                        // formData.append('section_id', sectionID);
+                        // formData.append('subject_id', subjectID);
+                        // formData.append('exam_id', examID);
+                        // formData.append('semester_id', semesterID);
+                        // formData.append('session_id', sessionID);
+                        // formData.append('academic_session_id', academicSessionID);
+                        // $("#overlay").fadeIn(300);
+                        // examPaperResult(formData);
+                    }
+                }
+            }
+        }
+    }
     $(document).ready(function(){
         $('#fileInput').change(function(){
             var fileName = $(this).val().split('\\').pop();		
