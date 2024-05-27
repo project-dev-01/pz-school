@@ -219,56 +219,30 @@
         </div> <!-- end col -->
 
     </div>
-    <div class="row" style="display: none;" id="byreport_body">
-        <div class="col-xl-12">
+    
+
+    <div class="row" id="student" style="display: none;">
+        <div class="col-md-12">
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <h4 class="navv">
-                        {{ __('messages.report_card') }}
+                        <h4 class="nav-link">
+                            {{ __('messages.students_list') }}
                             <h4>
                     </li>
                 </ul><br>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-12">
-                            
-                            <!-- <div id="btnAppend">
-                            </div> -->
-                            <div class="col-md-12">
-                                <div class="clearfix mt-4">
-                                    <form method="post" action="{{ route('admin.exam_results.downbyreportcard') }}">
-                                        @csrf                                        
-                                        <input type="hidden" name="department_id" class="downDepartmentID">
-                                        <input type="hidden" name="exam_id" class="downExamID">
-                                        <input type="hidden" name="class_id" class="downClassID">
-                                        <input type="hidden" name="semester_id" class="downSemesterID">
-                                        <input type="hidden" name="session_id" class="downSessionID">
-                                        <input type="hidden" name="section_id" class="downSectionID">
-                                        <input type="hidden" name="academic_year" class="downAcademicYear">
-                                        <input type="hidden" name="report_type" class="downReport_type">
-                                        <div class="clearfix float-right" style="margin-bottom:5px;">
-                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.download') }} {{ __('messages.pdf') }}</button>
-                                            <!--<button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>-->
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- end row-->
-
-                    </div> <!-- end card-body -->
-                    <div class="row d-none">
-                        <div class="col-sm-12">
+                        <div class="col-md-12">
                             <div class="table-responsive">
                                 <table class="table w-100 nowrap " id="student-table">
                                     <thead>
                                         <tr>
                                             <th>#</th>
                                             <th> {{ __('messages.name') }}</th>
+                                            <th> {{ __('messages.name_common') }}</th>
                                             <th> {{ __('messages.register_no') }}</th>
-                                            <th> {{ __('messages.roll_no') }}</th>
+                                            <th> {{ __('messages.attendance_no') }}</th>
                                             <th> {{ __('messages.gender') }}</th>
                                             <th> {{ __('messages.email') }}</th>
                                             <th> {{ __('messages.actions') }}</th>
@@ -278,15 +252,16 @@
 
                                     </tbody>
                                 </table>
-                            </div> <!-- end table-responsive-->
-                        </div> <!-- end col-->
+                            </div>
+                        </div>
                         
                     </div>
-                </div> <!-- end card-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-
+                </div>
+            </div>
+        </div>
     </div>
+
+
     <div class="row" style="display: none;" id="bypersonal_body">
         <div class="col-xl-12">
             <div class="card">
@@ -304,7 +279,8 @@
                             <div id="primary_personal">
                                 <h4> Report  Secondary School Only </h4>
                             </div>
-
+                            <div id="bysubjectTableAppend">
+                            </div>
                             <div class="col-md-12" id="secondary_personal">
                                 <div class="clearfix mt-4">
                                     <form method="post" action="{{ route('admin.exam_results.downbypersoanalreport') }}">
@@ -366,9 +342,10 @@
 
 <script>
     
-    var studentList = "{{ route('admin.exam_result.sutdentlist') }}";
+    var studentList = "{{ route('admin.by_result.sutdentlist') }}";
     // var sectionByClass = "{{ config('constants.api.exam_results_get_class_by_section') }}";
     var sectionByClass = "{{ config('constants.api.section_by_class') }}";
+    // var studentList = "{{ route('admin.student.list') }}";
 
     var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
     var getbySubject = "{{ config('constants.api.tot_grade_calcu_bySubject') }}";

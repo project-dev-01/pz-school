@@ -11318,6 +11318,62 @@ class AdminController extends Controller
             ->rawColumns(['actions'])
             ->make(true);
     }
+
+     public function byreportsutdentlist(Request $request)
+    {
+        $data = [
+            "department_id" => $request->department_id,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "student_name" => $request->student_name,
+            "session_id" => $request->session_id,
+            "academic_session_id" => session()->get('academic_session_id')
+        ];
+        $response = Helper::PostMethod(config('constants.api.student_list'), $data);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $edit = route('admin.graduates.details', $row['id']);
+                return '<div class="button-list">
+                                 <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" id="editStudentBtn"><i class="fe-eye"></i></a>
+                                 
+                         </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+
+    public function drgrdyhydh(Request $request)
+    {
+        $data = [
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "student_name" => $request->student_name,
+            "session_id" => $request->session_id,
+            "academic_session_id" => $request->academic_year
+        ];
+        $response = Helper::PostMethod(config('constants.api.student_list'), $data);
+        //dd($data);
+        $data = isset($response['data']) ? $response['data'] : [];
+        return DataTables::of($data)
+
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+                $edit = route('admin.graduates.details', $row['id']);
+                return '<div class="button-list">
+                                 <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" id="editStudentBtn"><i class="fe-eye"></i></a>
+                                 
+                         </div>';
+            })
+
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+
+
     // index shortcutLinks 
     public function shortcutLinks()
     {

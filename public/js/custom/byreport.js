@@ -80,8 +80,8 @@ $(function () {
             year: "required",
             class_id: "required",
             section_id: "required",
-            examnames: "required",
-            report_type: "required"
+            // examnames: "required",
+            // report_type: "required"
         }
     });
     $('#bysubjectfilter').on('submit', function (e) {
@@ -132,7 +132,8 @@ $(function () {
             formData.append('session_id', session_id);
             formData.append('academic_year', year);
             formData.append('report_type', report_type);
-            examResultBySubject(formData);
+            // examResultBySubject(formData);
+            // getStudentList(formData);
 			var formData1 = {
                 student_name: "",
 				department_id:department_id,
@@ -144,7 +145,7 @@ $(function () {
 				academic_year:year,
 				report_type:report_type,
             };
-			//getStudentList(formData1);
+			getStudentList(formData1);
         }
 		else {
             $("#student").hide("slow");
@@ -152,7 +153,7 @@ $(function () {
     });
     function examResultBySubject(formData){
 
-        $("#overlay").fadeIn(300);
+        // $("#overlay").fadeIn(300);
             // list mode
             var report_type= $("#report_type").val();
             var department_id= $("#department_id").val();
@@ -166,11 +167,12 @@ $(function () {
                 dataType: 'json',
                 contentType: false,
                 success: function (response) {
+                    console.log(response);
                     if (response.code == 200) {
                         if (response.data.grade_list_master.length > 0) {
                             var datasetnew = response.data;
-                            //bysubjectdetails_class(datasetnew);
-                            $("#overlay").fadeOut(300);
+                            bysubjectdetails_class(datasetnew);
+                            // $("#overlay").fadeOut(300);
                             if(report_type=='english_communication')
                             {
                                 $("#byec_body").show("slow");
@@ -190,19 +192,21 @@ $(function () {
                                 $("#bypersonal_body").show("slow");
                                 if(department_id=='2')
                                 {
-                                    
+                                    console.log('2');
                                     $("#secondary_personal").show("slow");
                                     $("#primary_personal").hide("slow"); 
                                 }
                                 else
                                 {
+                                    console.log('all');
                                     $("#secondary_personal").hide("slow");
                                     $("#primary_personal").show("slow"); 
                                 }
                             }
                             
                         } else {
-                            $("#overlay").fadeOut(300);
+                            // $("#overlay").fadeOut(300);
+                            console.log('No records are available');
                             toastr.info('No records are available');
                         }
                     } else {
@@ -216,6 +220,186 @@ $(function () {
     }
 
 
+    function getStudentList(formData) {
+        $("#student").show("slow");
+        // set download filter value
+        $('#excelStudentName').val(formData.student_name);
+        $('#excelDepartment').val(formData.department_id);
+        $('#excelClassID').val(formData.class_id);
+        $('#excelSectionID').val(formData.section_id);
+        $('#excelStatus').val(formData.status);
+        $('#excelSession').val(formData.session_id);
+        // $('#academicYear').val(formData.academic_year);
+        var table = $('#student-table').DataTable({
+            processing: true,
+            info: true,
+            bDestroy: true,
+            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            "language": {
+
+                "emptyTable": no_data_available,
+                "infoFiltered": filter_from_total_entries,
+                "zeroRecords": no_matching_records_found,
+                "infoEmpty": showing_zero_entries,
+                "info": showing_entries,
+                "lengthMenu": show_entries,
+                "search": datatable_search,
+                "paginate": {
+                    "next": next,
+                    "previous": previous
+                },
+            },
+            // exportOptions: { rows: ':visible' },
+            ajax: {
+                url: studentList,
+                data: function (d) {
+                    Object.assign(d, formData);
+                }
+            },
+            pageLength: 10,
+            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            columns: [
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', searchable: false },
+                { data: 'name', name: 'name' },
+                { data: 'name_common', name: 'name_common' },
+                { data: 'register_no', name: 'register_no' },
+                { data: 'attendance_no', name: 'attendance_no' },
+                { data: 'gender', name: 'gender' },
+                { data: 'email', name: 'email' },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false }
+            ],
+            columnDefs: [
+                {
+                    targets: 1,
+                    className: 'table-user',
+                    // render: function (data, type, row, meta) {
+                    //     console.log(row);
+                    //     var currentImg = studentImg + row.photo;
+                    //     var img = (row.photo != null) ? currentImg : defaultImg;
+                    //     return '<img src="' + img + '" class="mr-2 rounded-circle">' +
+                    //         '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
+                    // }
+                }
+            ]
+        });
+
+    }
+
+    function bysubjectdetails_class(datasetnew) {
+        $('#bysubjectTableAppend').empty();
+        var sno = 0;
+        var bysubjectAllTable = "";
+        var headers = datasetnew.headers;
+        var grade_list_master = datasetnew.grade_list_master;
+        bysubjectAllTable += '<div class="table-responsive">' +
+            '<table id="tblbycls" class="table w-100 nowrap table-bordered table-striped table2excel" data-tableName="Test Table 1">' +
+            '<thead>' +
+            '<tr>' +
+            '<th class="align-top" rowspan="2">'+sl_no_lang+'</th>' +
+            '<th class="align-top" rowspan="2">'+grade_lang+'</th>' +
+            '<th class="align-top" rowspan="2">'+class_lang+'</th>' +
+            '<th class="align-top" rowspan="2">'+subject_name_lang+'</th>' +
+            '<th class="align-top th-sm - 6 rem" rowspan="2">'+total_student_lang+'</th>' +
+            '<th class="align-top" rowspan="2">'+absent_lang+'</th>' +
+            '<th class="align-top" rowspan="2">'+present_lang+'</th>' +
+            '<th class="align-top" rowspan="2">'+subject_teacher_name_lang+'</th>';
+        headers.forEach(function (resp) {
+            bysubjectAllTable += '<th class="text-center">' + resp.grade + '</th>';
+        });
+        bysubjectAllTable += '<th class="align-middle" rowspan="2">'+pass_lang+'</th>' +
+            '<th class="align-middle" rowspan="2">'+g_lang+'</th>' +
+            '<th class="align-middle" rowspan="2">'+gpa_lang+'</th>' +
+            '<th class="align-middle" rowspan="2">%</th>' +
+            '</tr>';
+        bysubjectAllTable += '<tr>';
+        headers.forEach(function (resp) {
+            bysubjectAllTable += '<td class="text-center">%</td>';
+        });
+        bysubjectAllTable += '</tr></thead><tbody>';
+        grade_list_master.forEach(function (res) {
+            sno++;
+            bysubjectAllTable += '<tr>' +
+                '<td class="text-center" rowspan="2">';
+            bysubjectAllTable += sno +
+                '</td>';
+            bysubjectAllTable += '<td class="text-left" rowspan="2">' +
+                '<label for="clsname">' + res.class_name + '</label>' +
+                '</td>';
+            bysubjectAllTable += '<td class="text-center" rowspan="2">' +
+                '<label for="stdcount"> ' + res.section_name + '</label>' +
+                '</td>';
+            bysubjectAllTable += '<td class="text-left" rowspan="2">' +
+                '<label for="clsname">' + res.subject_name + '</label>' +
+                '</td>';
+            bysubjectAllTable += '<td class="text-left" rowspan="2">' +
+                '<label for="clsname">' + res.totalstudentcount + '</label>' +
+                '</td>';
+            bysubjectAllTable += '<td class="text-left">' +
+                '<label for="clsname">' + res.absent_count + '</label>' +
+                '</td>';
+            bysubjectAllTable += '<td class="text-center">' +
+                '<label for="stdcount">' + res.present_count + '</label>' +
+                '</td>';
+            bysubjectAllTable += '<td class="text-left" rowspan="2">' +
+                '<label for="clsname">' + res.teacher_name + '</label>' +
+                '</td>';
+            headers.forEach(function (resp) {
+                var obj = res.gradecnt;
+                var exists = isKey(resp.grade, obj); // true
+                if (exists) {
+                    Object.keys(obj).forEach(key => {
+                        if (resp.grade == key) {
+                            // bysubjectAllTable += '<td class="text-center">' + key, obj[key] + '</td>';
+                            bysubjectAllTable += '<td class="text-center">' + obj[key] + '</td>';
+                        }
+                    });
+                } else {
+                    bysubjectAllTable += '<td class="text-center">0</td>';
+                }
+            });
+            bysubjectAllTable += '<td class="text-center">' + res.pass_count + '</td>' +
+                '<td class="text-center">' + res.fail_count + '</td>' +
+                '<td class="text-center" rowspan="2">' + res.gpa + '</td>' +
+                '<td class="text-center" rowspan="2">' + res.pass_percentage + '</td>';
+            bysubjectAllTable += '</tr>';
+            // show another row percentage
+            bysubjectAllTable += '<tr>';
+            var absentPer = (res.absent_count / res.totalstudentcount) * 100;
+            absentPer = parseFloat(absentPer, 10).toFixed(2);
+            var presentPer = (res.present_count / res.totalstudentcount) * 100;
+            presentPer = parseFloat(presentPer, 10).toFixed(2);
+            bysubjectAllTable += '<td class="text-left">' +
+                '<label for="clsname">' + absentPer + '</label>' +
+                '</td>';
+            bysubjectAllTable += '<td class="text-center">' +
+                '<label for="stdcount">' + presentPer + '</label>' +
+                '</td>';
+            headers.forEach(function (resp) {
+                var obj = res.gradecnt;
+                var exists = isKey(resp.grade, obj); // true
+                if (exists) {
+                    Object.keys(obj).forEach(key => {
+                        if (resp.grade == key) {
+                            // bysubjectAllTable += '<td class="text-center">' + key, obj[key] + '</td>';
+                            var gradepercentage = (obj[key] / res.totalstudentcount) * 100;
+                            gradepercentage = parseFloat(gradepercentage, 10).toFixed(2);
+                            bysubjectAllTable += '<td class="text-center">' + gradepercentage + '</td>';
+                        }
+                    });
+                } else {
+                    bysubjectAllTable += '<td class="text-center">0</td>';
+                }
+            });
+            bysubjectAllTable += '<td class="text-center">' + res.pass_percentage + '</td>' +
+                '<td class="text-center">' + res.fail_percentage + '</td>';
+            bysubjectAllTable += '</tr>';
+        });
+        bysubjectAllTable += '</tbody></table>' +
+            '</div>';
+        $("#bysubjectTableAppend").append(bysubjectAllTable);
+    }
 
     $(document).on('click', '.exportToExcel', function (e) {
         // var table = $(this).prev('.table2excel');
@@ -244,107 +428,4 @@ function isKey(key, obj) {
     });
     return keys.indexOf(key) !== -1;
 }
-function getStudentList(formData) {
-        //$("#student").show("slow");
-		///alert(2);
-        setTimeout(function () {
-            $('.btn-danger').removeClass('d-none');
-            }, 5000);   
-        var table = $('#student-table').DataTable({
-            processing: true,
-            info: true,
-            bDestroy: true,
-            // dom: 'lBfrtip',
-            dom: 'Blfrtip',
 
-            // dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-6 col-md-6'B><'col-sm-4 col-md-4'f>>" +
-            //     "<'row'<'col-sm-12'tr>>" +
-            //     "<'row'<'col-sm-6'i><'col-sm-6'p>>",
-            // dom: 'C&gt;"clear"&lt;lfrtip',
-            // "language": {
-
-            //     "emptyTable": no_data_available,
-            //     "infoFiltered": filter_from_total_entries,
-            //     "zeroRecords": no_matching_records_found,
-            //     "infoEmpty": showing_zero_entries,
-            //     "info": showing_entries,
-            //     "lengthMenu": show_entries,
-            //     "search": datatable_search,
-            //     "paginate": {
-            //         "next": next,
-            //         "previous": previous
-            //     },
-            // },
-            // exportOptions: { rows: ':visible' },
-            serverSide: true,
-            ajax: {
-                url: studentList,
-                data: function (d) {
-                    d.student_name = "",
-                        d.class_id = formData.class_id,
-                        d.section_id = formData.section_id,
-                        d.session_id = formData.session_id,
-                        d.semester_id = formData.semester_id,
-                        d.department_id = formData.department_id,
-                        d.exam_id = formData.exam_id,
-                        d.academic_year = formData.academic_year,
-                        d.report_type = formData.report_type
-                }
-            },
-            "pageLength": 10,
-            "aLengthMenu": [
-                [5, 10, 25, 50, -1],
-                [5, 10, 25, 50, "All"]
-            ],
-            columns: [
-                {
-                    searchable: false,
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                }
-                ,
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'register_no',
-                    name: 'register_no'
-                },
-                {
-                    data: 'roll_no',
-                    name: 'roll_no'
-                },
-                {
-                    data: 'gender',
-                    name: 'gender'
-                },
-                {
-                    data: 'email',
-                    name: 'email'
-                },
-                {
-                    data: 'actions',
-                    name: 'actions',
-                    orderable: false,
-                    searchable: false
-                },
-            ],
-            columnDefs: [
-                {
-                    "targets": 1,
-                    "className": "table-user",
-                    "render": function (data, type, row, meta) {
-                        var currentImg = studentImg + row.photo;
-                        // var existUrl = UrlExists(currentImg);
-                        // console.log(currentImg);
-                        var img = (row.photo != null) ? currentImg : defaultImg;
-                        var first_name = '<img src="' + img + '" class="mr-2 rounded-circle">' +
-                            '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
-                        return first_name;
-                    }
-                },
-            ]
-        });
-        
-    }
