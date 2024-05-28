@@ -51,11 +51,11 @@ $(function () {
     function getSubjects(class_id, IDnames, subject_id) {
 
         $(IDnames).find("#subjectID").empty();
-        $(IDnames).find("#subjectID").append('<option value="">'+select_subject+'</option>');
+        $(IDnames).find("#subjectID").append('<option value="">' + select_subject + '</option>');
         $.post(classesByAllSubjects, { token: token, branch_id: branchID, class_id: class_id }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
-                    $(IDnames).find("#subjectID").append('<option value="' + val.subject_id + '">' + val.subject_name + '</option>');
+                    $(IDnames).find("#subjectID").append('<option data-codes="' + val.codes + '" value="' + val.subject_id + '">' + val.subject_name + '</option>');
                 });
                 if (subject_id) {
                     $(IDnames).find('select[name="subject_id"]').val(subject_id);
@@ -64,6 +64,39 @@ $(function () {
         }, 'json');
     }
 
+    $('#subjectID').on('change', function () {
+        var department_id = $("#department_id").val();
+        var codes = $(this).find(':selected').data('codes'); // Corrected line
+        var IDnames = "#addExamPaperModal";
+        var papers = "#papers";
+        getPaperListBySubjects(department_id, IDnames, codes, papers);
+    });
+    $('.editSubjectID').on('change', function () {
+        var department_id = $("#editdepartment_id").val();
+        var codes = $(this).find(':selected').data('codes'); // Corrected line
+        var IDnames = "#editExamPaperModal";
+        var papers = "#editpapers";
+        getPaperListBySubjects(department_id, IDnames, codes, papers);
+    });
+
+    function getPaperListBySubjects(department_id, IDnames, codes, papers) {
+        console.log(department_id);
+        console.log(IDnames);
+        console.log(codes);
+        $(IDnames).find(papers).empty();
+        if (department_id && IDnames && codes) {
+            // $(IDnames).find("#subjectID").append('<option value="">'+select_subject+'</option>');
+            $.post(getSubjectWisePaperList, { branch_id: branchID, department_id: department_id, codes: codes }, function (res) {
+                console.log(res);
+
+                if (res.code == 200) {
+                    $.each(res.data, function (key, val) {
+                        $(IDnames).find(papers).append('<option value="' + val.name_jp + '">' + val.name_jp + '</option>');
+                    });
+                }
+            }, 'json');
+        }
+    }
     // rules validation
     $("#exam-paper-form").validate({
         rules: {
@@ -88,7 +121,7 @@ $(function () {
             var paper_name = $('.addExamPaper').find('input[name="paper_name"]').val();
             var paper_type = $('.addExamPaper').find('select[name="paper_type"]').val();
             var grade_category = $('.addExamPaper').find('select[name="grade_category"]').val();
-            var score_type = $('.addExamPaper').find('select[name="score_type"]').val();			
+            var score_type = $('.addExamPaper').find('select[name="score_type"]').val();
             var pdf_report = $('.addExamPaper').find('select[name="pdf_report"]').val();
             var subject_weightage = $('.addExamPaper').find('input[name="subject_weightage"]').val();
             var notes = $('.addExamPaper').find('textarea[name="notes"]').val();
@@ -144,11 +177,11 @@ $(function () {
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-6'i><'col-sm-6'p>>",
         "language": {
-            
-                "emptyTable": no_data_available,
-                "infoFiltered": filter_from_total_entries,
-                "zeroRecords": no_matching_records_found,
-                "infoEmpty": showing_zero_entries,
+
+            "emptyTable": no_data_available,
+            "infoFiltered": filter_from_total_entries,
+            "zeroRecords": no_matching_records_found,
+            "infoEmpty": showing_zero_entries,
             "info": showing_entries,
             "lengthMenu": show_entries,
             "search": datatable_search,
@@ -170,7 +203,7 @@ $(function () {
                 enabled: false, // Initially disable CSV button
             },
             {
-            extend: 'pdf',
+                extend: 'pdf',
                 text: downloadpdf,
                 extension: '.pdf',
                 charset: 'utf-8',
@@ -179,51 +212,51 @@ $(function () {
                     columns: 'th:not(:last-child)'
                 },
                 enabled: false, // Initially disable PDF button
-            
-                customize: function (doc) {
-                doc.pageMargins = [50,50,50,50];
-                doc.defaultStyle.fontSize = 10;
-                doc.styles.tableHeader.fontSize = 12;
-                doc.styles.title.fontSize = 14;
-                // Remove spaces around page title
-                doc.content[0].text = doc.content[0].text.trim();
-                /*// Create a Header
-                doc['header']=(function(page, pages) {
-                    return {
-                        columns: [
-                            
-                            {
-                                // This is the right column
-                                bold: true,
-                                fontSize: 20,
-                                color: 'Blue',
-                                fillColor: '#fff',
-                                alignment: 'center',
-                                text: header_txt
-                            }
-                        ],
-                        margin:  [50, 15,0,0]
-                    }
-                });*/
-                // Create a footer
-                
-                doc['footer']=(function(page, pages) {
-                    return {
-                        columns: [
-                            { alignment: 'left', text: [ footer_txt ],width:400} ,
-                            {
-                                // This is the right column
-                                alignment: 'right',
-                                text: ['page ', { text: page.toString() },  ' of ', { text: pages.toString() }],
-                                width:100
 
-                            }
-                        ],
-                        margin: [50, 0,0,0]
-                    }
-                });
-                
-            }
+                customize: function (doc) {
+                    doc.pageMargins = [50, 50, 50, 50];
+                    doc.defaultStyle.fontSize = 10;
+                    doc.styles.tableHeader.fontSize = 12;
+                    doc.styles.title.fontSize = 14;
+                    // Remove spaces around page title
+                    doc.content[0].text = doc.content[0].text.trim();
+                    /*// Create a Header
+                    doc['header']=(function(page, pages) {
+                        return {
+                            columns: [
+                                
+                                {
+                                    // This is the right column
+                                    bold: true,
+                                    fontSize: 20,
+                                    color: 'Blue',
+                                    fillColor: '#fff',
+                                    alignment: 'center',
+                                    text: header_txt
+                                }
+                            ],
+                            margin:  [50, 15,0,0]
+                        }
+                    });*/
+                    // Create a footer
+
+                    doc['footer'] = (function (page, pages) {
+                        return {
+                            columns: [
+                                { alignment: 'left', text: [footer_txt], width: 400 },
+                                {
+                                    // This is the right column
+                                    alignment: 'right',
+                                    text: ['page ', { text: page.toString() }, ' of ', { text: pages.toString() }],
+                                    width: 100
+
+                                }
+                            ],
+                            margin: [50, 0, 0, 0]
+                        }
+                    });
+
+                }
 
             }
         ],
@@ -231,7 +264,7 @@ $(function () {
             var table = this;
             $.ajax({
                 url: examPaperList,
-                success: function(data) {
+                success: function (data) {
                     console.log(data.data.length);
                     if (data && data.data.length > 0) {
                         console.log('ok');
@@ -240,10 +273,10 @@ $(function () {
                     } else {
                         console.log(data);
                         $('#exam-paper-table_wrapper .buttons-csv').addClass('disabled');
-                        $('#exam-paper-table_wrapper .buttons-pdf').addClass('disabled');               
+                        $('#exam-paper-table_wrapper .buttons-pdf').addClass('disabled');
                     }
                 },
-                error: function() {
+                error: function () {
                     console.log('error');
                     // Handle error if necessary
                 }
@@ -315,8 +348,8 @@ $(function () {
             $('.editExamPaper').find('select[name="class_id"]').val(data.data.class_id);
             $('.editExamPaper').find('input[name="paper_name"]').val(data.data.paper_name);
             $('.editExamPaper').find('select[name="paper_type"]').val(data.data.paper_type);
-            $('.editExamPaper').find('select[name="grade_category"]').val(data.data.grade_category);            
-            $('.editExamPaper').find('select[name="score_type"]').val(data.data.score_type);           
+            $('.editExamPaper').find('select[name="grade_category"]').val(data.data.grade_category);
+            $('.editExamPaper').find('select[name="score_type"]').val(data.data.score_type);
             $('.editExamPaper').find('select[name="pdf_report"]').val(data.data.pdf_report);
             $('.editExamPaper').find('input[name="subject_weightage"]').val(data.data.subject_weightage);
             $('.editExamPaper').find('textarea[name="notes"]').val(data.data.notes);
@@ -327,7 +360,7 @@ $(function () {
     // rules validation
     $("#edit-exam-paper-form").validate({
         rules: {
-            department_id : "required",
+            department_id: "required",
             class_id: "required",
             subject_id: "required",
             paper_name: "required",
@@ -349,7 +382,7 @@ $(function () {
             var paper_name = $('.editExamPaper').find('input[name="paper_name"]').val();
             var paper_type = $('.editExamPaper').find('select[name="paper_type"]').val();
             var grade_category = $('.editExamPaper').find('select[name="grade_category"]').val();
-            var score_type = $('.editExamPaper').find('select[name="score_type"]').val();			
+            var score_type = $('.editExamPaper').find('select[name="score_type"]').val();
             var pdf_report = $('.editExamPaper').find('select[name="pdf_report"]').val();
             var subject_weightage = $('.editExamPaper').find('input[name="subject_weightage"]').val();
             var notes = $('.editExamPaper').find('textarea[name="notes"]').val();
