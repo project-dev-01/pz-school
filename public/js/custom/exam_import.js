@@ -10,6 +10,14 @@ $(function () {
     function classAllocation(department_id, Selector, classID) {
         $(Selector).find('select[name="class_id"]').empty();
         $(Selector).find('select[name="class_id"]').append('<option value="">' + select_grade + '</option>');
+        $("#resultsByPaper").find("#sectionID").empty();
+        $("#resultsByPaper").find("#sectionID").append('<option value="">'+select_class+'</option>');
+        $("#resultsByPaper").find("#examnames").empty();
+        $("#resultsByPaper").find("#examnames").append('<option value="">'+select_exam+'</option>');
+        $("#resultsByPaper").find("#subjectID").empty();
+        $("#resultsByPaper").find("#subjectID").append('<option value="">'+select_subject+'</option>');
+        $("#resultsByPaper").find("#paperID").empty();
+        $("#resultsByPaper").find("#paperID").append('<option value="">'+select_paper+'</option>');
         if (department_id) {
             $.post(getGradeByDepartmentUrl,
                 {
