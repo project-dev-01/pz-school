@@ -133,6 +133,8 @@
     var examPaperDelete = "{{ config('constants.api.exam_paper_delete') }}";
     var classesByAllSubjects = "{{ config('constants.api.classes_by_all_subjects') }}";
     var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
+    var getSubjectWisePaperList = "{{ config('constants.api.get_subject_wise_paper_list') }}";
+    
     // lang change name start
     var deleteTitle = "{{ __('messages.are_you_sure') }}";
     var deleteHtml = "{{ __('messages.delete_this_exam_paper') }}";

@@ -28,14 +28,17 @@
                     </div>
                     <div class="form-group">
                         <label for="subjectID">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
-                        <select id="subjectID" class="form-control" name="subject_id">
+                        <select id="subjectID"  class="form-control editSubjectID" name="subject_id">
                             <option value="">{{ __('messages.select_subject') }}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="paper_name">{{ __('messages.paper_name') }}<span class="text-danger">*</span></label>
-                        <input type="text" name="paper_name" class="form-control" placeholder="{{ __('messages.enter_paper_name') }}">
+                        <input type="text" name="paper_name" class="form-control" list="editpapers" placeholder="{{ __('messages.enter_paper_name') }}">
+                        <datalist id="editpapers">
+                        </datalist>
                     </div>
+
                     <div class="form-group">
                         <label for="paper_type">{{ __('messages.paper_type') }}<span class="text-danger">*</span></label>
                         <select class="form-control" id="paper_type" name="paper_type">

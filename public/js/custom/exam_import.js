@@ -10,6 +10,14 @@ $(function () {
     function classAllocation(department_id, Selector, classID) {
         $(Selector).find('select[name="class_id"]').empty();
         $(Selector).find('select[name="class_id"]').append('<option value="">' + select_grade + '</option>');
+        $("#resultsByPaper").find("#sectionID").empty();
+        $("#resultsByPaper").find("#sectionID").append('<option value="">'+select_class+'</option>');
+        $("#resultsByPaper").find("#examnames").empty();
+        $("#resultsByPaper").find("#examnames").append('<option value="">'+select_exam+'</option>');
+        $("#resultsByPaper").find("#subjectID").empty();
+        $("#resultsByPaper").find("#subjectID").append('<option value="">'+select_subject+'</option>');
+        $("#resultsByPaper").find("#paperID").empty();
+        $("#resultsByPaper").find("#paperID").append('<option value="">'+select_paper+'</option>');
         if (department_id) {
             $.post(getGradeByDepartmentUrl,
                 {
@@ -234,8 +242,8 @@ $(function () {
             var departmentID = $("#department_id").val();
             var classID = $("#changeClassName").val();
             var sectionID = $("#sectionID").val();
-            var subjectID = $("#subject_id").val();
-            var paperID = $("#paper_id").val();
+            var subjectID = $("#subjectID").val();
+            var paperID = $("#paperID").val();
             var examID = $("#examnames").val();
             var semesterID = $("#semester_id").val();
 
@@ -401,6 +409,7 @@ $(function () {
                                     $.each(res.data, function (key, val) {
                                         $("#resultsByPaper").find("#paperID").append('<option value="' + val.paper_id + '" data-grade_category="' + val.grade_category + '" style="color:green">' + val.paper_name + '</option>');
                                     });
+                                    $("#resultsByPaper").find("#paperID").val(paperID);
                                 }
                             }, 'json');
 

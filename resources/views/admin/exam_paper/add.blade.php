@@ -40,9 +40,6 @@
                             @endforeach
                         </select>-->
                         <datalist id="papers">
-                        @forelse($jsklexampaper_list as $paper)
-                            <option values="{{$paper['name_jp']}}">{{$paper['name_jp']}}</option>
-                            @endforeach
                         </datalist>   
                     </div>
                     <div class="form-group">
