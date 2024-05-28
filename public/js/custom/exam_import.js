@@ -401,6 +401,7 @@ $(function () {
                                     $.each(res.data, function (key, val) {
                                         $("#resultsByPaper").find("#paperID").append('<option value="' + val.paper_id + '" data-grade_category="' + val.grade_category + '" style="color:green">' + val.paper_name + '</option>');
                                     });
+                                    $("#resultsByPaper").find("#paperID").val(paperID);
                                 }
                             }, 'json');
 
