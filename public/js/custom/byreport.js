@@ -140,7 +140,7 @@ $(function () {
             formData.append('session_id', session_id);
             formData.append('academic_year', year);
             formData.append('report_type', report_type);
-            // examResultBySubject(formData);
+            examResultBySubject(formData);
             // getStudentList(formData);
 			var formData1 = {
                 student_name: "",
@@ -153,7 +153,7 @@ $(function () {
 				academic_year:year,
 				report_type:report_type,
             };
-			getStudentList(formData1);
+			// getStudentList(formData1);
         }
 		else {
             $("#student").hide("slow");
@@ -417,6 +417,7 @@ $(function () {
                     // }
                 }
             ]
+            
         });
 
     }
