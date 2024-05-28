@@ -7465,7 +7465,8 @@ class AdminController extends Controller
             $response['data']['exam_name'],
             $response['data']['subject_name'],
             $response['data']['semester_name'],
-            $response['data']['teachername'],            
+            $response['data']['teachername'],
+            $response['data']['totalstudent'],               
             $branch_id,
             $department_id,
             $class_id,
@@ -11512,7 +11513,10 @@ class AdminController extends Controller
             $exam_name=($datas[3][1]==$response['data']['exam_name'])?'Matched':'Wrong';
             $semester_name=($datas[4][1]==$response['data']['semester_name'])?'Matched':'Wrong';
             $subject_name=($datas[5][1]==$response['data']['subject_name'])?'Matched':'Wrong';
-            $teachername=($datas[6][1]==$response['data']['teachername'])?'Matched':'Wrong';
+            $totalstudent=($datas[6][1]==$response['data']['totalstudent'])?'Matched':'Wrong';
+            $teachername=($datas[7][1]==$response['data']['teachername'])?'Matched':'Wrong';
+            
+            $exampapers= Helper::PostMethod(config('constants.api.exammark-by-papers'), $data);
             $headerdata=[
                 "0"=> $department_name, 
                 "1"=> $department_name,          
@@ -11520,12 +11524,13 @@ class AdminController extends Controller
                 "3"=> $exam_name, 
                 "4"=> $semester_name,          
                 "5"=> $subject_name, 
-                "6"=> $teachername
+                "6"=> $totalstudent,
+                "7"=> $teachername
             ];
             $arraydata[]=""; $row=0;
             foreach($datas as $mdata)
             { $row++;
-                if($row>8)
+                if($row>9)
                 {
                     $student_regno=$mdata[1];
                     $papername=$mdata[3];
@@ -11555,14 +11560,15 @@ class AdminController extends Controller
                 }
 
             }
-            //dd($arraydata);
+            
             $data=[
                 'code'=>'200',
                 'message'=>'Student Mark Details Get Successfully',
                 'result'=>'Success',
                 'studentlist' =>$datas,
                 'headerdata'=>$headerdata,
-                'studentmarks'=>$arraydata
+                'studentmarks'=>$arraydata,
+                'exampapers'=>$exampapers
 
             ];
              return $data;
@@ -11622,7 +11628,7 @@ class AdminController extends Controller
                 $cellValue = $sheet->getCellByColumnAndRow($col, $row)->getValue();
                 $rowData[] = $cellValue;
             }
-            if($row>8)
+            if($row>9)
             {
                 $datas[] = $rowData;
             }
@@ -11665,6 +11671,35 @@ class AdminController extends Controller
             //return view('admin.import.exam_mark', ['studentlist' =>$datas,'headerdata'=>$headerdata,'studentmarks'=>$arraydata,'requestdata'=>$data]);
            
         
+    }
+    public function byreportsutdentlist(Request $request)
+    {
+        $data = [
+            "department_id" => $request->department_id,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "student_name" => $request->student_name,
+            "session_id" => $request->session_id,
+            "stu_status" => 'Active',
+            "academic_session_id" => session()->get('academic_session_id')
+        ];
+        //dd($data);
+        $response = Helper::PostMethod(config('constants.api.getgraduatestudentlist'), $data);
+        $data = isset($response['data']) ? $response['data'] : [];
+       
+        return DataTables::of($data)
+ 
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+               
+                return '<div class="button-list">
+                                 <button type="button" data-student-id="'. $row['id'] .'" class="btn btn-blue waves-effect waves-light individual_pdf" ><i class="fe-eye"></i></button>
+                                 
+                         </div>';
+            })
+ 
+            ->rawColumns(['actions'])
+            ->make(true);
     }
     public function graduatesIndex()
     {

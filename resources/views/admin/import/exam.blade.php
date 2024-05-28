@@ -4,6 +4,7 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 @endsection
 @section('content')
 <!-- Page Content -->
@@ -141,7 +142,8 @@
 								<div class="card-body" style="margin-left: 17px;">
 									<label style="margin-right:10px;">{{ __('messages.select_file_for_upload') }}</label>
 									<input type="file" name="file" id="fileInput" accept=".csv" required />
-								</div>  
+								</div> 
+								<div id="exam_loader" style="display:none;"> <p style="font-size:18px;color:green;"> <i class="fa fa-refresh fa-spin"></i> Exam Marks Loading ... </p></div>
 								<input type="button" name="upload" id="submitbtn" class="btn btn-success" value="{{ __('messages.submit') }}" style="display:none;">   
 							</div>
 						</form>
@@ -178,8 +180,6 @@
 											<th># </th>
 											<th>{{ __('messages.register_no') }}</th>
 											<th>{{ __('messages.student_name') }}</th>
-											<th>{{ __('messages.paper_name') }}</th>
-											<th>{{ __('messages.score_type') }}</th>
 											<th>{{ __('messages.mark') }}</th>
 											<th>{{ __('messages.attendance') }}</th>
 											<th>{{ __('messages.memo') }}</th>

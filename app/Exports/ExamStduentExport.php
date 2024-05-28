@@ -27,9 +27,9 @@ class ExamStduentExport  implements FromCollection, WithHeadings, ShouldAutoSize
     protected $section_name;
     protected $exam_name;
     protected $subject_name;
-    protected $paper_name;
     protected $semester_name;
-    protected $score_type;
+    protected $teachername;
+    protected $totalstudent;
 
     protected $branch_id;
     protected $department_id;
@@ -41,16 +41,17 @@ class ExamStduentExport  implements FromCollection, WithHeadings, ShouldAutoSize
     protected $semester_id;
     protected $session_id;
 
-    function __construct($department_name,$class_name,$section_name,$exam_name,$subject_name,$paper_name,$semester_name,$score_type,$branch_id,$department_id,$class_id, $section_id, $exam_id,$subject_id, $paper_id, $semester_id, $session_id)
+    function __construct($department_name,$class_name,$section_name,$exam_name,$subject_name,$semester_name,$teachername,$totalstudent,$branch_id,$department_id,$class_id, $section_id, $exam_id,$subject_id, $paper_id, $semester_id, $session_id)
     {
         $this->department_name = $department_name;
         $this->class_name = $class_name;
         $this->section_name = $section_name;
         $this->exam_name = $exam_name;
         $this->subject_name = $subject_name;
-        $this->paper_name = $paper_name;
         $this->semester_name = $semester_name;
-        $this->score_type = $score_type;
+        $this->teachername = $teachername;
+        $this->totalstudent = $totalstudent;
+        
         $this->branch_id = $branch_id;
         $this->department_id = $department_id;
         $this->class_id = $class_id;
@@ -88,30 +89,15 @@ class ExamStduentExport  implements FromCollection, WithHeadings, ShouldAutoSize
         $rangeHeadings = [
             'sno',
             'Register No',
-            'Student Name',            
+            'Student Name',
+            'Paper Name',
+            'Score Type',               
             'Mark',
             'Attandance (P/A)',
             'Memo'
         ];
        
-        if($this->score_type=='Points')
-        {
-            $exammark_type="Ex :  Improving , Satisfactory , Excellent";
-
-        }
-        else if($this->score_type=='Freetext')
-        {
-            $exammark_type="Like Teacher Comments";
-        }
-        else if($this->score_type=='Grade' || $this->score_type=='Mark')
-        {
-            $exammark_type="Ex:80";
-        }
-        else 
-        {
-            $exammark_type="";
-            
-        }
+        $remarks="Score Type : 'Points' then Results: Improving, Satisfactory, Excellent";
         
         return [
             [
@@ -133,11 +119,12 @@ class ExamStduentExport  implements FromCollection, WithHeadings, ShouldAutoSize
                 "Subject Name :", $this->subject_name ,
             ],
             [
-                "Paper Name :", $this->paper_name ,
+                "Total  Student :", $this->totalstudent ,
             ],
             [
-                "Mark Type :", $this->score_type , $exammark_type,
+                "Teacher Name :", $this->teachername ,'', $remarks,
             ],
+            
             
             $rangeHeadings,
             
@@ -153,9 +140,9 @@ class ExamStduentExport  implements FromCollection, WithHeadings, ShouldAutoSize
                 $cellRange3 = 'A4:B4'; // Exam headers
                 $cellRange4 = 'A5:B5'; // Semester headers
                 $cellRange5 = 'A6:B6'; // Subject  headers
-                $cellRange6 = 'A7:B7'; // Paper name headers
-                $cellRange7 = 'A8:B8'; // Mark type headers
-                $cellRange8 = 'A9:F9'; // All headers
+                $cellRange6 = 'A7:B7'; // Total Sudent  headers
+                $cellRange7 = 'A8:B8'; // Teacher name headers
+                $cellRange8 = 'A9:H9'; // Mark type headers
                 $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(12)->setBold(true);
                 $event->sheet->getDelegate()->getStyle($cellRange1)->getFont()->setSize(12)->setBold(true);
                 $event->sheet->getDelegate()->getStyle($cellRange2)->getFont()->setSize(12)->setBold(true);
@@ -163,7 +150,7 @@ class ExamStduentExport  implements FromCollection, WithHeadings, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle($cellRange4)->getFont()->setSize(12)->setBold(true);
                 $event->sheet->getDelegate()->getStyle($cellRange5)->getFont()->setSize(12)->setBold(true);
                 $event->sheet->getDelegate()->getStyle($cellRange6)->getFont()->setSize(12)->setBold(true);
-                $event->sheet->getDelegate()->getStyle($cellRange7)->getFont()->setSize(12)->setBold(true);
+                $event->sheet->getDelegate()->getStyle($cellRange7)->getFont()->setSize(12)->setBold(true); 
                 $event->sheet->getDelegate()->getStyle($cellRange8)->getFont()->setSize(12)->setBold(true);
             },
         ];

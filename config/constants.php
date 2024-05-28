@@ -1030,7 +1030,7 @@ return [
         'getpaperoverallmarklist' => $url.'/exam_result/getpaperoverallmarklist',
         
         
-         
+        'exammark-by-papers'=> $url.'/exammark-by-papers', 
         'adhocexam_file_name'=> $url.'/exam/adhocexam_file_name', 
         'adhocexam_student_list'=> $url.'/exam/adhocexam_student_list',                     
         'adhocmark_comparison'=> $url.'/exam/adhocmark_comparison',         
