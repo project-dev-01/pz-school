@@ -234,8 +234,8 @@ $(function () {
             var departmentID = $("#department_id").val();
             var classID = $("#changeClassName").val();
             var sectionID = $("#sectionID").val();
-            var subjectID = $("#subject_id").val();
-            var paperID = $("#paper_id").val();
+            var subjectID = $("#subjectID").val();
+            var paperID = $("#paperID").val();
             var examID = $("#examnames").val();
             var semesterID = $("#semester_id").val();
 
