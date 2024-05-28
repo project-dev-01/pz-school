@@ -1176,7 +1176,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="txt_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                                    <label for="txt_occupation">{{ __('messages.occupation') }}</label>
                                                     <input type="text" maxlength="50" id="guardian_occupation" class="form-control" placeholder="{{ __('messages.enter_occupation') }}" data-parsley-trigger="change" readonly>
                                                 </div>
                                             </div>

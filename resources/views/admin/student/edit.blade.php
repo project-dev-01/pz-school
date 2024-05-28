@@ -1474,7 +1474,7 @@
                                             </div>--> 
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="txt_occupation">{{ __('messages.occupation') }}<span class="text-danger">*</span></label>
+                                                    <label for="txt_occupation">{{ __('messages.occupation') }}</label>
                                                     <input type="text" maxlength="50" id="guardian_occupation" name="guardian_occupation" class="form-control" placeholder="{{ __('messages.enter_occupation') }}" data-parsley-trigger="change" >
                                                 </div>
                                             </div>
@@ -1498,19 +1498,19 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                <label for="guardian_company_name_japan">{{ __('messages.work_company_name_japan') }}<span class="text-danger">*</span></label>
+                                                <label for="guardian_company_name_japan">{{ __('messages.work_company_name_japan') }}</label>
                                                 <input type="text" class="form-control"  id="guardian_company_name_japan" name="guardian_company_name_japan"  placeholder="{{ __('messages.enter_work_company_name_japan') }}" aria-describedby="inputGroupPrepend" >
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="guardian_company_name_local">{{ __('messages.work_company_name_local') }}<span class="text-danger">*</span></label>
+                                                    <label for="guardian_company_name_local">{{ __('messages.work_company_name_local') }}</label>
                                                     <input type="text" class="form-control"  id="guardian_company_name_local" name="guardian_company_name_local" placeholder="{{ __('messages.enter_work_company_name_local') }}" aria-describedby="inputGroupPrepend" >
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="guardian_company_phone_number">{{ __('messages.work_company_phone_number') }}<span class="text-danger">*</span></label>
+                                                    <label for="guardian_company_phone_number">{{ __('messages.work_company_phone_number') }}</label>
                                                     <input type="text" class="form-control  number_validation "  id="guardian_company_phone_number" name="guardian_company_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend" >
                                                     <label for="guardian_company_phone_number" class="error"></label>
                                                 </div>
@@ -1520,7 +1520,7 @@
                                                
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="guardian_employment_status">{{ __('messages.employment_status') }}<span class="text-danger">*</span></label>
+                                                        <label for="guardian_employment_status">{{ __('messages.employment_status') }}</label>
                                                         <select id="guardian_employment_status" name="guardian_employment_status"  class="form-control" >
                                                             <option value="">{{ __('messages.select_employment_status') }}</option>
                                                             <option value="Expat" >{{ __('messages.expat') }}</option>
