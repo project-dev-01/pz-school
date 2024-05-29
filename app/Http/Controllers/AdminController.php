@@ -7473,7 +7473,7 @@ class AdminController extends Controller
         $exammark_report="ExamMarkUpload";
         if($response!==null)
         {
-            $exammark_report=$response['data']['department_name'].'-'.$response['data']['class_name'].'-'.$response['data']['section_name'].'-'.$response['data']['exam_name'].'-'.$response['data']['subject_name'].'-'.$response['data']['paper_name'];
+            $exammark_report=$response['data']['department_name'].'-'.$response['data']['class_name'].'-'.$response['data']['section_name'].'-'.$response['data']['exam_name'].'-'.$response['data']['subject_name'];
         }
         //dd($exammark_report);
         $export = new ExamStduentExport(
@@ -7482,9 +7482,9 @@ class AdminController extends Controller
             $response['data']['section_name'],
             $response['data']['exam_name'],
             $response['data']['subject_name'],
-            $response['data']['paper_name'],
             $response['data']['semester_name'],
-            $response['data']['score_type'],
+            $response['data']['teachername'],
+            $response['data']['totalstudent'],               
             $branch_id,
             $department_id,
             $class_id,
@@ -11541,8 +11541,10 @@ class AdminController extends Controller
             $exam_name=($datas[3][1]==$response['data']['exam_name'])?'Matched':'Wrong';
             $semester_name=($datas[4][1]==$response['data']['semester_name'])?'Matched':'Wrong';
             $subject_name=($datas[5][1]==$response['data']['subject_name'])?'Matched':'Wrong';
-            $paper_name=($datas[6][1]==$response['data']['paper_name'])?'Matched':'Wrong';
-            $score_type=($datas[7][1]==$response['data']['score_type'])?'Matched':'Wrong';
+            $totalstudent=($datas[6][1]==$response['data']['totalstudent'])?'Matched':'Wrong';
+            $teachername=($datas[7][1]==$response['data']['teachername'])?'Matched':'Wrong';
+            
+            $exampapers= Helper::PostMethod(config('constants.api.exammark-by-papers'), $data);
             $headerdata=[
                 "0"=> $department_name, 
                 "1"=> $department_name,          
@@ -11550,8 +11552,8 @@ class AdminController extends Controller
                 "3"=> $exam_name, 
                 "4"=> $semester_name,          
                 "5"=> $subject_name, 
-                "6"=> $paper_name, 
-                "7"=> $score_type  
+                "6"=> $totalstudent,
+                "7"=> $teachername
             ];
             $arraydata[]=""; $row=0;
             foreach($datas as $mdata)
@@ -11559,7 +11561,9 @@ class AdminController extends Controller
                 if($row>9)
                 {
                     $student_regno=$mdata[1];
-                    $mark=$mdata[3];
+                    $papername=$mdata[3];
+                    $score_type=$mdata[4];
+                    $mark=$mdata[5];
                     $data = [
                         'academic_session_id' => session()->get('academic_session_id'),
                         'department_id' => $department_id,
@@ -11571,11 +11575,12 @@ class AdminController extends Controller
                         'semester_id' => $semester_id,
                         'session_id' => $session_id,
                         'student_regno' => $student_regno,
-                        'score_type'=> $response['data']['score_type'],
+                        'papername' => $papername,
+                        'score_type'=> $score_type,
                         'mark'=>$mark
                     ];
                     $data1[]='';
-                   
+                    
                     $markresponse = Helper::PostMethod(config('constants.api.mark_comparison'), $data);
                     
                     $mdata['oldmark']=($markresponse!==null)?$markresponse['data']:'';
@@ -11583,14 +11588,15 @@ class AdminController extends Controller
                 }
 
             }
-            //dd($arraydata);
+            
             $data=[
                 'code'=>'200',
                 'message'=>'Student Mark Details Get Successfully',
                 'result'=>'Success',
                 'studentlist' =>$datas,
                 'headerdata'=>$headerdata,
-                'studentmarks'=>$arraydata
+                'studentmarks'=>$arraydata,
+                'exampapers'=>$exampapers
 
             ];
              return $data;
@@ -11693,6 +11699,35 @@ class AdminController extends Controller
             //return view('admin.import.exam_mark', ['studentlist' =>$datas,'headerdata'=>$headerdata,'studentmarks'=>$arraydata,'requestdata'=>$data]);
            
         
+    }
+    public function byreportsutdentlist(Request $request)
+    {
+        $data = [
+            "department_id" => $request->department_id,
+            "class_id" => $request->class_id,
+            "section_id" => $request->section_id,
+            "student_name" => $request->student_name,
+            "session_id" => $request->session_id,
+            "stu_status" => 'Active',
+            "academic_session_id" => session()->get('academic_session_id')
+        ];
+        //dd($data);
+        $response = Helper::PostMethod(config('constants.api.getgraduatestudentlist'), $data);
+        $data = isset($response['data']) ? $response['data'] : [];
+       
+        return DataTables::of($data)
+ 
+            ->addIndexColumn()
+            ->addColumn('actions', function ($row) {
+               
+                return '<div class="button-list">
+                                 <button type="button" data-student-id="'. $row['id'] .'" class="btn btn-blue waves-effect waves-light individual_pdf" ><i class="fe-eye"></i></button>
+                                 
+                         </div>';
+            })
+ 
+            ->rawColumns(['actions'])
+            ->make(true);
     }
     public function graduatesIndex()
     {
