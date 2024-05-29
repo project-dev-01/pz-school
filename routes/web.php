@@ -643,7 +643,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         // exam Result Group 
         Route::get('exam_results/sutdentlist1', [AdminController::class, 'byreportsutdentlist'])->name('admin.by_result.sutdentlist');         
         Route::get('exam_results/sutdentlist', [AdminController::class, 'examsutdentlist'])->name('admin.exam_result.sutdentlist');      
-        Route::get('exam_results/sutdentlist', [AdminController::class, 'byreportsutdentlist'])->name('admin.by_result.sutdentlist');      
+        // Route::get('exam_results/sutdentlist', [AdminController::class, 'byreportsutdentlist'])->name('admin.by_result.sutdentlist');      
         Route::get('exam_results/byclass', [AdminController::class, 'byclasss'])->name('admin.exam_results.byclass');
         Route::get('exam_results/bysubject', [AdminController::class, 'bysubject'])->name('admin.exam_results.bysubject');
         Route::get('exam_results/overall', [AdminController::class, 'overall'])->name('admin.exam_results.overall');
