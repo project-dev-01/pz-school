@@ -1670,7 +1670,7 @@ return [
     "edit_termination" => "終了を編集します",
     "delete_this_termination" => "この終了を削除します",
     "date_of_termination" => "退学日",
-    "school_fees_payment_status" => "学費の支払いステータス 事務局入力",
+    "school_fees_payment_status" => "学費の支払いステータス",
     "delete_google_address" => "Googleアドレス削除",
     "termination_status" => "退学ステータス（教員入力）",
     "student_status" => "学生のステータス",
@@ -2312,4 +2312,5 @@ return [
       "new_record" => "新しいデータレコード",
       "mark_info" => "マーク情報",      
       "adhocexam_import" => "アドホック試験の一括アップロード",
+      "select_role_parent" => "Select Role for Parent",
 ];

@@ -2347,4 +2347,5 @@ return [
   "new_record" => "New Data Record",
   "mark_info" => "Mark Information",
   "adhocexam_import" => "Adhoc Exam Bulk Upload",
+  "select_role_parent" => "Select Role for Parent",
 ];

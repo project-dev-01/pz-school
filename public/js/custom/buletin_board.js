@@ -72,7 +72,7 @@ $(function () {
             // Check if total size exceeds the 20 MB limit
             if (totalSize > maxSizeInBytes) {
                 var errorText = document.querySelector('.file_error');
-                errorText.textContent = 'Total files size should not exceed 10 MB.';
+                errorText.textContent = 'Total files size should not exceed 20 MB.';
                 this.value = ''; // Clear the file input to prevent selection of more files
                 return;
             }
@@ -279,7 +279,7 @@ $(function () {
             // Check if total size exceeds the 20 MB limit
             if (totalSize > maxSizeInBytes) {
                 var errorText = document.querySelector('.file_error');
-                errorText.textContent = 'Total files size should not exceed 10 MB.';
+                errorText.textContent = 'Total files size should not exceed 20 MB.';
                 this.value = ''; // Clear the file input to prevent selection of more files
                 return;
             }

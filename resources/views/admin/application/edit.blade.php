@@ -1848,6 +1848,22 @@
                                                         </select>
                                                     </div>
                                                 </div>
+                                                @if($application['created_by_role'] == 7)
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="school_roleid">{{ __('messages.select_role_parent') }}<span class="text-danger">*</span></label>
+                                                        <select class="form-control" id="school_roleid" name="school_roleid" data-placeholder="{{ __('messages.choose_role') }}">
+                                                            <option value="">{{ __('messages.select_role') }}</option>
+                                                            @forelse($school_roles as $r)
+                                                            @if($r['portal_roleid']==2 && $r['roles']!=null)
+                                                            <option value="{{$r['id']}}" {{ isset($user['school_roleid']) ? $user['school_roleid'] == $r['id'] ? 'selected' : '' : '' }}>{{ $r['fullname'] }} ( {{ $r['roles'] }} )</option>
+                                                            @endif
+                                                            @empty
+                                                            @endforelse
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                @endif
                                             </div>
                                         </div><br>
                                     </div>

@@ -1017,7 +1017,8 @@ return [
         'getsem_studentattendance' => $url.'/getsem_studentattendance',
         
         'get_jsklsubjectlist' => $url.'/exam_result/get_jsklsubjectlist', 
-        'getjsklexampaper_list' => $url.'/exam_result/getjsklexampaper_list',             
+        'getjsklexampaper_list' => $url.'/exam_result/getjsklexampaper_list',
+        'examsubject_by_papers' => $url.'/examsubject-by-papers',             
         'get_subject_wise_paper_list' => $url.'/exam_result/get_subject_wise_paper_list',             
 
         'exam_papermarks' => $url.'/exam_result/papermark',  
@@ -1031,7 +1032,7 @@ return [
         'getpaperoverallmarklist' => $url.'/exam_result/getpaperoverallmarklist',
         
         
-         
+        'exammark-by-papers'=> $url.'/exammark-by-papers', 
         'adhocexam_file_name'=> $url.'/exam/adhocexam_file_name', 
         'adhocexam_student_list'=> $url.'/exam/adhocexam_student_list',                     
         'adhocmark_comparison'=> $url.'/exam/adhocmark_comparison',         

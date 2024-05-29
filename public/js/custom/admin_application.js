@@ -437,7 +437,7 @@ $(function () {
             phase2_remarks: "required",
             passport_father_photo: "required",
             passport_mother_photo: "required",
-
+            school_roleid:"required",
             // status_after_approval: "required",
             enrolled_academic_year: "required",
             enrolled_department: "required",
