@@ -149,7 +149,7 @@ $(function () {
                 section_id: section_id,
                 session_id: session_id
             };
-            getStudentList(formData1);
+            //getStudentList(formData1);
 			 // $("#overlay").fadeOut(300);
              if(report_type=='english_communication')
                 {
@@ -381,7 +381,7 @@ $(function () {
             });
     }
 
-    function getStudentList(formData) {
+    /*function getStudentList(formData) {
         $("#student").show("slow");
         setTimeout(function () {
             $('.btn-danger').removeClass('d-none');
@@ -473,7 +473,7 @@ $(function () {
                 },
             ]
         });
-    }
+    }*/
 
            
 

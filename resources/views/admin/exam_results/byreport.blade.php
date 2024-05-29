@@ -314,7 +314,7 @@
         </div> <!-- end col -->
 
     </div>
-    <div class="row" id="student">
+    <div class="row" id="student" style="display:none">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body collapse show">
