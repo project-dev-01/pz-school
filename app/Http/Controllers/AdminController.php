@@ -11568,7 +11568,8 @@ class AdminController extends Controller
                 'studentlist' =>$datas,
                 'headerdata'=>$headerdata,
                 'studentmarks'=>$arraydata,
-                'exampapers'=>$exampapers
+                'exampapers'=>$exampapers,
+                'totalstudent'=>$response['data']['totalstudent']
 
             ];
              return $data;
