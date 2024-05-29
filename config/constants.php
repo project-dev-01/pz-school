@@ -1017,8 +1017,8 @@ return [
         'getsem_studentattendance' => $url.'/getsem_studentattendance',
         
         'get_jsklsubjectlist' => $url.'/exam_result/get_jsklsubjectlist', 
-        'getjsklexampaper_list' => $url.'/exam_result/getjsklexampaper_list',             
-        'examsubject_by_papers' => $url.'/examsubject-by-papers',
+        'getjsklexampaper_list' => $url.'/exam_result/getjsklexampaper_list',
+        'examsubject_by_papers' => $url.'/examsubject-by-papers',             
         'get_subject_wise_paper_list' => $url.'/exam_result/get_subject_wise_paper_list',             
 
         'exam_papermarks' => $url.'/exam_result/papermark',  

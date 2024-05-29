@@ -3,21 +3,27 @@ $(function () {
     $("#department_id").on('change', function (e) {
         e.preventDefault();
         var Selector = '#addExamPaperModal';
+        var papers = "#papers";
         var department_id = $(this).val();
         var classID = "";
-        classAllocation(department_id, Selector, classID);
+        classAllocation(department_id, Selector, classID,papers);
     });
     $("#editdepartment_id").on('change', function (e) {
         e.preventDefault();
         var Selector = '#editExamPaperModal';
+        var papers = "#editpapers";
         var department_id = $(this).val();
         var classID = "";
-        classAllocation(department_id, Selector, classID);
+        classAllocation(department_id, Selector, classID,papers);
     });
-    function classAllocation(department_id, Selector, classID) {
+    function classAllocation(department_id, Selector, classID,papers) {
         //console.log(department_id);
         $(Selector).find('select[name="class_id"]').empty();
         $(Selector).find('select[name="class_id"]').append('<option value="">' + select_grade + '</option>');
+        $(Selector).find('select[name="subject_id"]').empty();
+        $(Selector).find('select[name="subject_id"]').append('<option value="">' + select_subject + '</option>');
+        $(Selector).find(papers).empty();
+
         if (department_id) {
             $.post(getGradeByDepartmentUrl,
                 {
@@ -84,7 +90,9 @@ $(function () {
         console.log(IDnames);
         console.log(codes);
         $(IDnames).find(papers).empty();
-        if (department_id && IDnames && codes) {
+        if (department_id !== undefined && department_id !== null &&
+            IDnames !== undefined && IDnames !== null &&
+            codes !== undefined && codes !== null) {
             // $(IDnames).find("#subjectID").append('<option value="">'+select_subject+'</option>');
             $.post(getSubjectWisePaperList, { branch_id: branchID, department_id: department_id, codes: codes }, function (res) {
                 console.log(res);
@@ -341,8 +349,9 @@ $(function () {
             var department_id = data.data.department_id;
             var subject_id = data.data.subject_id;
             var IDnames = "#editExamPaperModal";
+            var papers = "#editpapers";
             getSubjects(class_id, IDnames, subject_id);
-            classAllocation(department_id, IDnames, class_id);
+            classAllocation(department_id, IDnames, class_id,papers);
             $('.editExamPaper').find('input[name="id"]').val(data.data.id);
             $('.editExamPaper').find('select[name="department_id"]').val(data.data.department_id);
             $('.editExamPaper').find('select[name="class_id"]').val(data.data.class_id);
