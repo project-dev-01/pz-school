@@ -29,7 +29,6 @@ class ExamStduentExport  implements FromCollection, WithHeadings, ShouldAutoSize
     protected $subject_name;
     protected $semester_name;
     protected $teachername;
-    protected $totalstudent;
 
     protected $branch_id;
     protected $department_id;
@@ -41,7 +40,7 @@ class ExamStduentExport  implements FromCollection, WithHeadings, ShouldAutoSize
     protected $semester_id;
     protected $session_id;
 
-    function __construct($department_name,$class_name,$section_name,$exam_name,$subject_name,$semester_name,$teachername,$totalstudent,$branch_id,$department_id,$class_id, $section_id, $exam_id,$subject_id, $paper_id, $semester_id, $session_id)
+    function __construct($department_name,$class_name,$section_name,$exam_name,$subject_name,$semester_name,$teachername,$branch_id,$department_id,$class_id, $section_id, $exam_id,$subject_id, $paper_id, $semester_id, $session_id)
     {
         $this->department_name = $department_name;
         $this->class_name = $class_name;
@@ -50,7 +49,6 @@ class ExamStduentExport  implements FromCollection, WithHeadings, ShouldAutoSize
         $this->subject_name = $subject_name;
         $this->semester_name = $semester_name;
         $this->teachername = $teachername;
-        $this->totalstudent = $totalstudent;
         
         $this->branch_id = $branch_id;
         $this->department_id = $department_id;
@@ -119,12 +117,8 @@ class ExamStduentExport  implements FromCollection, WithHeadings, ShouldAutoSize
                 "Subject Name :", $this->subject_name ,
             ],
             [
-                "Total  Student :", $this->totalstudent ,
-            ],
-            [
                 "Teacher Name :", $this->teachername ,'', $remarks,
             ],
-            
             
             $rangeHeadings,
             
@@ -140,9 +134,8 @@ class ExamStduentExport  implements FromCollection, WithHeadings, ShouldAutoSize
                 $cellRange3 = 'A4:B4'; // Exam headers
                 $cellRange4 = 'A5:B5'; // Semester headers
                 $cellRange5 = 'A6:B6'; // Subject  headers
-                $cellRange6 = 'A7:B7'; // Total Sudent  headers
-                $cellRange7 = 'A8:B8'; // Teacher name headers
-                $cellRange8 = 'A9:H9'; // Mark type headers
+                $cellRange6 = 'A7:B7'; // Paper name headers
+                $cellRange7 = 'A8:H8'; // Mark type headers
                 $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(12)->setBold(true);
                 $event->sheet->getDelegate()->getStyle($cellRange1)->getFont()->setSize(12)->setBold(true);
                 $event->sheet->getDelegate()->getStyle($cellRange2)->getFont()->setSize(12)->setBold(true);
@@ -150,8 +143,7 @@ class ExamStduentExport  implements FromCollection, WithHeadings, ShouldAutoSize
                 $event->sheet->getDelegate()->getStyle($cellRange4)->getFont()->setSize(12)->setBold(true);
                 $event->sheet->getDelegate()->getStyle($cellRange5)->getFont()->setSize(12)->setBold(true);
                 $event->sheet->getDelegate()->getStyle($cellRange6)->getFont()->setSize(12)->setBold(true);
-                $event->sheet->getDelegate()->getStyle($cellRange7)->getFont()->setSize(12)->setBold(true); 
-                $event->sheet->getDelegate()->getStyle($cellRange8)->getFont()->setSize(12)->setBold(true);
+                $event->sheet->getDelegate()->getStyle($cellRange7)->getFont()->setSize(12)->setBold(true);
             },
         ];
         return $result;
