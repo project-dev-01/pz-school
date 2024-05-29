@@ -4879,6 +4879,16 @@ class AdminController extends Controller
     // Update Student 
     public function updateStudent(Request $request)
     {
+        $trail_start_date = null;
+        $trail_end_date = null;
+        if ($request->enrollment == "Trail Enrollment") {
+            $trail_start_date = $request->trail_start_date;
+            $trail_end_date = $request->trail_end_date ;
+        }
+        $official_date = null;
+        if ($request->enrollment == "Official Enrollment") {
+            $official_date = $request->official_date;
+        }
         // $rules = [
         //     'nationality' => 'required|string|max:50',
         //     'dual_nationality' => 'nullable|string|max:50|different:nationality',
@@ -9263,7 +9273,8 @@ class AdminController extends Controller
 
             $section_by_class = Helper::PostMethod(config('constants.api.section_by_class'), $class_data);
         }
-        // dd($gradebydepartment);
+        $school_roles = Helper::GetMethod(config('constants.api.school_role_list'));
+        // dd($application);
         return view(
             'admin.application.edit',
             [
@@ -9277,6 +9288,7 @@ class AdminController extends Controller
                 'department' => isset($department['data']) ? $department['data'] : [],
                 'gradebydepartment' => isset($gradebydepartment['data']) ? $gradebydepartment['data'] : [],
                 'section_by_class' => isset($section_by_class['data']) ? $section_by_class['data'] : [],
+                'school_roles' => isset($school_roles['data']) ? $school_roles['data'] : [],
             ]
         );
     }
@@ -9611,6 +9623,7 @@ class AdminController extends Controller
             "enrolled_class" => $request->enrolled_class,
             'stay_category'=> $request->stay_category,
             'url' => url('/'),
+            'school_roleid' => $request->school_roleid
         ];
         // dd($data);
         // return $data;

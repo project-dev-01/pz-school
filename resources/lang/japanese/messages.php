@@ -2312,4 +2312,5 @@ return [
       "new_record" => "新しいデータレコード",
       "mark_info" => "マーク情報",      
       "adhocexam_import" => "アドホック試験の一括アップロード",
+      "select_role_parent" => "Select Role for Parent",
 ];
