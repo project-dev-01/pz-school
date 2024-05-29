@@ -177,7 +177,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs">
-                    <li class="nav-item">
+                <li class="nav-item d-flex justify-content-between align-items-center">
                         <h4 class="navv">
                         {{ __('messages.english_communication') }}
                             <h4>
@@ -228,8 +228,8 @@
         <div class="col-md-12">
             <div class="card">
                 <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <h4 class="nav-link">
+                <li class="nav-item d-flex justify-content-between align-items-center">
+                        <h4 class="navlinkv">
                             {{ __('messages.students_list') }}
                             <h4>
                     </li>
@@ -241,25 +241,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table class="table w-100 nowrap " id="student-table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th> {{ __('messages.name') }}</th>
                                             <th> {{ __('messages.name_common') }}</th>
-                                            <th> {{ __('messages.register_no') }}</th>
-                                            <th> {{ __('messages.attendance_no') }}</th>
-                                            <th> {{ __('messages.gender') }}</th>
-                                            <th> {{ __('messages.email') }}</th>
-                                            <th> {{ __('messages.actions') }}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
-                            </div>
+                    
                         </div>
                         
                     </div>
@@ -273,7 +256,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <ul class="nav nav-tabs">
-                    <li class="nav-item">
+                <li class="nav-item d-flex justify-content-between align-items-center">
                         <h4 class="navv">
                         Secondary  {{ __('messages.personal_test_res') }} 
                             <h4>
@@ -317,19 +300,50 @@
         </div> <!-- end col -->
 
     </div>
-    <!-- <div class="row" id="bysubject_analysis">
+    <div class="row" id="student" style="display:none">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title">Subject Analysis</h4>
+                <div class="card-body collapse show">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="table-responsive">
+                                <table class="table w-100 nowrap " id="student-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th> {{ __('messages.name') }}</th>
+                                            <th> {{ __('messages.register_no') }}</th>
+                                            <th> {{ __('messages.roll_no') }}</th>
+                                            <th> {{ __('messages.gender') }}</th>
+                                            <th> {{ __('messages.email') }}</th>
+                                            <th> {{ __('messages.status') }}</th>
+                                            <th> {{ __('messages.actions') }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                    <div class="mt-4 chartjs-chart">
-                        <canvas id="radar-chart-test-bystudentmarks" height="350" data-colors="#39afd1,#a17fe0"></canvas>
+                                    </tbody>
+                                </table>
+                            </div> <!-- end table-responsive-->
+                        </div> <!-- end col-->
+                        
                     </div>
                 </div>
             </div>
         </div>
-    </div> -->
+    </div> 
+    <form method="post" id="individual_pdf" action="#">
+        @csrf
+        <input type="hidden" name="department_id" class="downDepartmentID">
+        <input type="hidden" name="exam_id" class="downExamID">
+        <input type="hidden" name="class_id" class="downClassID">
+        <input type="hidden" name="semester_id" class="downSemesterID">
+        <input type="hidden" name="session_id" class="downSessionID">
+        <input type="hidden" name="section_id" class="downSectionID">
+        <input type="hidden" name="academic_year" class="downAcademicYear">
+        <input type="hidden" name="report_type" class="downReport_type">
+        <input type="hidden" name="student_id" class="downstudent_id">
+    </form>
 </div> <!-- container -->
 
 @endsection
@@ -352,7 +366,7 @@
     var studentList = "{{ route('admin.by_result.sutdentlist') }}";
     // var sectionByClass = "{{ config('constants.api.exam_results_get_class_by_section') }}";
     var sectionByClass = "{{ config('constants.api.section_by_class') }}";
-    // var studentList = "{{ route('admin.student.list') }}";
+    //var studentList = "{{ route('admin.student.list') }}";
 
     var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
     var getbySubject = "{{ config('constants.api.tot_grade_calcu_bySubject') }}";

@@ -117,22 +117,37 @@ $(function () {
         var section_id = $("#sectionID").val();
         var class_id = $("#changeClassName").val();
         var exam_id = $("#examnames").val();
+        var semester_id = $("#semester_id").val();
         $("#resultsByPaper").find("#paperID").empty();
-        $("#resultsByPaper").find("#paperID").append('<option value="">'+select_paper+'</option>');
-        // $("#resultsByPaper").find("#paperID").append('<option value="All">'+all+'</option>');
+        //$("#resultsByPaper").find("#paperID").append('<option value="">'+select_paper+'</option>');
+        $("#resultsByPaper").find("#paperID").append('<option value="All">'+all+'</option>');
         // paper list
+        var color='red';
         $.post(subjectByPapers, {
             token: token,
             branch_id: branchID,
             class_id: class_id,
             section_id: section_id,
             subject_id: subject_id,
+            semester_id:semester_id,
             academic_session_id: academic_session_id,
             exam_id: exam_id
         }, function (res) {
             if (res.code == 200) {
                 $.each(res.data, function (key, val) {
-                    $("#resultsByPaper").find("#paperID").append('<option value="' + val.paper_id + '" data-grade_category="' + val.grade_category + '" style="color:green">' + val.paper_name + '</option>');
+                    if(val.totstu!=0 && val.examstu==0)
+                    {
+                        color='red';
+                    }
+                    else if(val.totstu!=0 && val.totstu!=val.examstu)
+                    {
+                        color='orange';
+                    }
+                    else if(val.totstu!=0 && val.totstu==val.examstu)
+                    {
+                        color='green';
+                    }
+                    $("#resultsByPaper").find("#paperID").append('<option value="' + val.paper_id + '" data-grade_category="' + val.grade_category + '" style="color:'+ color +'">' + val.paper_name + ' ['+ val.examstu +' / '+ val.totstu +'] </option>');
                 });
             }
         }, 'json');
@@ -509,6 +524,7 @@ $(function () {
     $(document).on('click', '#submitbtn', function (e) {
         e.preventDefault(); // Prevent the default form submission
         $('#exammark_preview').hide();
+        $('#exam_loader').show();        
         // Get values from form fields
         var department_id = $("#department_id").val();
         var class_id = $("#changeClassName").val();
@@ -554,6 +570,8 @@ $(function () {
                     if(data.result=='Success')
                     {
                         $('#exammark_preview').show();
+                        
+                        $('#exam_loader').hide();
                         appendDataToTable(data.studentlist,data.headerdata);
                         $.each(data.headerdata, function(index, item) {
                             if(item=='Wrong')
@@ -565,7 +583,7 @@ $(function () {
                         {
                             toastr.success(data.message);
                             $('.studentmark').show();
-                            appendDataToTablemark(data.studentmarks,data.studentlist);
+                            appendDataToTablemark(data.studentmarks,data.studentlist,data.exampapers);
                             
                         }
                         else
@@ -596,20 +614,32 @@ $(function () {
         });
         
     }
-    function appendDataToTablemark(data1,data2) {
+    function appendDataToTablemark(data1,data2,data3) {
         var markdatas = $("#markdatas");
         // Clear existing table rows
         markdatas.empty();
+        var totstu= data2[6][1];
+        
         // Loop through data and append rows to table
-        var misdata=0;
+        var misdata=0;var sturow=0; var paper=0;
         $.each(data1, function(index, item) {
+            sturow++;
+            
             if(item!='')
-            {
-                var btncolor= (item['oldmark']['mark_id'] !='')?'warning':'success';
-                if(data2[7][1]=='Points')
+            {   
+                if(sturow %  totstu === 2)        
                 {
-                    var markbtn=(item['oldmark']['points'] !='' && item['oldmark']['points']!=item[3])?'danger':'success';
-                    var markmsg=(item['oldmark']['points'] !='')?'Previous Data : '+item['oldmark']['points'] :'New Data';
+                    var totstu1=data3['data'][paper]['totstu'];
+                    var examstu1=data3['data'][paper]['examstu'];
+                    var row = "<tr style='background-color:#E9D528'><td colspan='8'>" + item[3] + " - " + item[4] + " [ " + examstu1 + " / " + totstu1 + "]</td>";
+                    markdatas.append(row);
+                    paper++;
+                }
+                var btncolor= (item['oldmark']['mark_id'] !='')?'warning':'success';
+                if(item[4]=='Points')
+                {
+                    var markbtn=(item['oldmark']['grade'] !='' && item['oldmark']['grade']!=item[5])?'danger':'success';
+                    var markmsg=(item['oldmark']['grade'] !='')?'Previous Data : '+item['oldmark']['grade'] :'New Data';
                     if(item['oldmark']['point_grade']=='')
                     {
                         misdata++;
@@ -618,31 +648,31 @@ $(function () {
                     }
 
                 }
-                else if(data2[7][1]=='Freetext')
+                else if(item[4]=='Freetext')
                 {
-                    var markbtn=(item['oldmark']['freetext'] !='' && item['oldmark']['freetext']!=item[3])?'danger':'success';
+                    var markbtn=(item['oldmark']['freetext'] !='' && item['oldmark']['freetext']!=item[5])?'danger':'success';
                     var markmsg=(item['oldmark']['freetext'] !='')?'Previous Data : '+item['oldmark']['freetext'] :'New Data';
                     
                 }
                 else
                 {
-                    var markbtn=(item['oldmark']['score'] !='' && item['oldmark']['score']!=item[3])?'danger':'success';
+                    var markbtn=(item['oldmark']['score'] !='' && item['oldmark']['score']!=item[5])?'danger':'success';
                     var markmsg=(item['oldmark']['score'] !='')?'Previous Data : '+item['oldmark']['score'] :'New Data';
                     
                 }
-                var statusToLower = item[4].toLowerCase();
-                var mark=(statusToLower=='a')?'0':((item[4]!='')?item[3]:'');
+                var statusToLower = (item[6]!='')?item[6].toLowerCase():'';
+                var mark=(statusToLower=='a')?'0':((item[6]!='')?item[5]:'');
                 var memobtn=(item['oldmark']['memo'] !='' && item['oldmark']['memo']!=item[5])?'danger':'success';
                 var memomsg=(item['oldmark']['memo'] !='')?'Previous Data : '+item['oldmark']['memo'] :'New Data';
                 var attbtn=(item['oldmark']['status'] !='' && item['oldmark']['status'][0]!=statusToLower)?'danger':'success';
                 var attmsg=(item['oldmark']['status'] !='')?'Previous Data : '+item['oldmark']['status'] :'New Data';
-                var row = "<tr><td>" + item[0] + "</td><td class='btn btn-" + btncolor + "'>" + item[1] + "</td><td>" + item[2] + "</td><td class='text-" + markbtn + "' title='" + markmsg + "'>" + mark + "</td><td class='text-" + attbtn + "'  title='" + attmsg + "' >" + item[4] + "</td><td class='text-" + memobtn + "' title='" + memomsg + "' >" + item[5] + "</td></tr>";
+                var row = "<tr><td>" + item[0] + "</td><td class='btn btn-" + btncolor + "'>" + item[1] + "</td><td>" + item[2] + "</td><td class='text-" + markbtn + "' title='" + markmsg + "'>" + mark + "</td><td class='text-" + attbtn + "'  title='" + attmsg + "' >" + item[6] + "</td><td class='text-" + memobtn + "' title='" + memomsg + "' >" + item[7] + "</td></tr>";
                 //var row = "<tr><td>" + item[0] + "</td><td class='btn btn-" + btncolor + "'>" + item[1] + "</td><td>" + item[2] + "</td><td class='text-" + markbtn + "' title='" + markmsg + "' data-toggle='tooltip' aria-haspopup='false' aria-expanded='false' data-original-title='" + markmsg + "'>" + mark + "</td><td class='text-" + attbtn + "' data-toggle='tooltip' title='" + attmsg + "' aria-haspopup='false' aria-expanded='false' data-original-title='" + attmsg + "'>" + item[4] + "</td><td class='text-" + memobtn + "' data-toggle='tooltip' title='" + memomsg + "' aria-haspopup='false' aria-expanded='false' data-original-title='" + memomsg + "'>" + item[5] + "</td></tr>";
                 markdatas.append(row);
             }            
         
         });
-        alert(misdata);
+        
         if(misdata==0)
             {
                 $('#save_modelbtn').show();
@@ -654,5 +684,5 @@ $(function () {
         
     }
       
-});
+    });
 });

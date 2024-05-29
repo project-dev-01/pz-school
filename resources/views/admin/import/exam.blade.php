@@ -4,6 +4,7 @@
 <!-- toaster alert -->
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 @endsection
 @section('content')
 <!-- Page Content -->
@@ -72,6 +73,18 @@
 									</div>
 									<div class="col-md-3">
 										<div class="form-group">
+											<label for="semester_id">{{ __('messages.semester') }}<span class="text-danger">*</span></label>
+											<select id="semester_id" class="form-control" name="semester_id" required>
+												<option value="">{{ __('messages.select_semester') }}</option>
+												@forelse($semester as $sem)
+												<option value="{{$sem['id']}}">{{$sem['name']}}</option>
+												@empty
+												@endforelse
+											</select>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
 											<label for="subjectID">{{ __('messages.subject') }}<span class="text-danger">*</span></label>
 											<select id="subjectID" class="form-control" name="subject_id" required>
 												<option value="">{{ __('messages.select_subject') }}</option>
@@ -86,20 +99,9 @@
                                             </select>
                                         </div>
                                     </div>
-									<div class="col-md-3">
-										<div class="form-group">
-											<label for="semester_id">{{ __('messages.semester') }}<span class="text-danger">*</span></label>
-											<select id="semester_id" class="form-control" name="semester_id" required>
-												<option value="">{{ __('messages.select_semester') }}</option>
-												@forelse($semester as $sem)
-												<option value="{{ $sem['id'] }}" {{ $sem['id'] == $current_semester ? 'selected' : '' }}>
+									
 													{{ $sem['name'] }}
 												</option>
-												@empty
-												@endforelse
-											</select>
-										</div>
-									</div>
 									<div class="col-md-3" >
 										<div class="form-group">
 											<input type="hidden" id="session_id" class="form-control" name="session_id" value="0">
@@ -142,7 +144,8 @@
 								<div class="card-body" style="margin-left: 17px;">
 									<label style="margin-right:10px;">{{ __('messages.select_file_for_upload') }}</label>
 									<input type="file" name="file" id="fileInput" accept=".csv" required />
-								</div>  
+								</div> 
+								<div id="exam_loader" style="display:none;"> <p style="font-size:18px;color:green;"> <i class="fa fa-refresh fa-spin"></i> Exam Marks Loading ... </p></div>
 								<input type="button" name="upload" id="submitbtn" class="btn btn-success" value="{{ __('messages.submit') }}" style="display:none;">   
 							</div>
 						</form>
@@ -254,8 +257,8 @@
 					var teacherSectionUrl = "{{ config('constants.api.section_by_class') }}";
 					var subjectByExamNames = "{{ config('constants.api.subject_by_exam_names') }}";
 					var examBySubjects = "{{ config('constants.api.exam_by_subjects') }}";					
-    				var subjectByPapers = "{{ config('constants.api.subject_by_papers') }}";
-									
+    				//var subjectByPapers = "{{ config('constants.api.subject_by_papers') }}";
+					var subjectByPapers = "{{ config('constants.api.examsubject_by_papers') }}";				
     				var ExamPaperDetails = "{{ config('constants.api.exam_paper_details') }}";
 					var getExamPaperResults = "{{ config('constants.api.get_exam_paper_res') }}";
 					var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
