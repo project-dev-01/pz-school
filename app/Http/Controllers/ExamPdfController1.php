@@ -525,7 +525,9 @@
 			}
 
 			// Download the ZIP file
-			return response()->download($zipFilePath)->deleteFileAfterSend(true);
+			if (File::exists($zipFilePath)) {
+				return response()->download($zipFilePath)->deleteFileAfterSend(true);
+			}
 			
 		}
 		
@@ -3160,7 +3162,367 @@
 			
 			
 		}
+		public function downbypersoanalreport(Request $request)
+		{
+			
+		   
+			$data = [
+				'branch_id' => session()->get('branch_id'),
+				'exam_id' => $request->exam_id,
+				'department_id' => $request->department_id,
+				'class_id' => $request->class_id,
+				'section_id' => $request->section_id,
+				'semester_id' => $request->semester_id,
+				'session_id' => $request->session_id,
+				'academic_session_id' => $request->academic_year,
+			];        
+			$language="国語";
+			$socity="社会";
+			$math="数学";
+			$science="理科";
+			$english="英語";
+			$music="音楽";
+			$art="美術";
+			$sport="保体";
+			$engineer="技家";
+			
+			$getstudents = Helper::PostMethod(config('constants.api.exam_studentslist'), $data);
+			
+			$getmainsubjects =array($language,$socity,$math,$science,$english);        
+			$getnonmainsubjects =array($music,$art,$sport,$engineer);  
+			$footer_text = session()->get('footer_text');
+			$personal_score="個人得点"; //   individual score
 	
+			$fonturl = storage_path('fonts/ipag.ttf');
+			$sno=0;
+			$storagePath = storage_path('app/public/pdfs');
+
+			// Ensure the storage directory exists
+			if (!File::exists($storagePath)) {
+				File::makeDirectory($storagePath, 0755, true);
+			}
+
+			$pdfFiles = [];
+			foreach($getstudents['data'] as $stu)
+			{
+				$sno++; 
+				$output = "<!DOCTYPE html>";
+				$output .= "<html><head>";
+				$output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
+				$output .= '<style>';
+				// $test .='* { font-family: DejaVu Sans, sans-serif; }';
+				$output .= '@font-face {
+					font-family: ipag;
+					font-style: normal;
+					font-weight: normal;
+					src: url("' . $fonturl . '");
+				} 
+				body {
+					font-family: "ipag", "Open Sans", !important;
+					}
+				
+				table {
+					border-collapse: collapse;
+					width: 100%;
+					line-height: 20px;
+					letter-spacing: 0.0133em;
+					}
+					
+					td,
+					th {
+					border: 1px solid black;
+					text-align: center;
+					line-height: 20px;
+					letter-spacing: 0.0133em;
+					word-wrap: break-word;
+					}
+				
+				.line {
+				height: 10px;
+				right: 10px;
+				margin: auto;
+				left: -5px;
+				width: 100%;
+				border-top: 1px solid #000;
+				-webkit-transform: rotate(14deg);
+				-ms-transform: rotate(14deg);
+				transform: rotate(14deg);
+				}
+				
+				.diagonal {
+				width: 150px;
+				height: 40px;
+				}
+				
+				.diagonal span.lb {
+				bottom: 2px;
+				left: 2px;
+				}
+				.table th, .table td {
+					border: none; /* Removes borders from table headers and cells */
+					padding: 8px; /* Adds padding for better readability */
+					text-align: left; /* Aligns text to the left */
+				}
+				
+				.diagonal span.rt {
+				top: 2px;
+				right: 2px;
+				}
+				.diagonalCross2 {
+				background: linear-gradient(to top right, #fff calc(50% - 1px), black , #fff calc(50% + 1px) )
+				}';
+				$output .= '</style>';
+				$output .= "</head>";
+				$output .= '<body>';
+				$sno=0;
+				
+				$grade = Helper::PostMethod(config('constants.api.class_details'), $data);
+				$section = Helper::PostMethod(config('constants.api.section_details'), $data);
+		
+				$acdata = [
+					'branch_id' => session()->get('branch_id'),                               
+					'id' => $request->academic_year            
+				];
+				$termdata = [
+					'branch_id' => session()->get('branch_id'),                               
+					'id' => $request->exam_id
+					
+				];
+				$term = Helper::PostMethod(config('constants.api.exam_details'), $termdata);
+				$acyear = Helper::PostMethod(config('constants.api.academic_year_details'), $acdata);
+				$bdata = [
+					'id' => session()->get('branch_id'),
+					];
+					$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
+				//dd($acyear['data']['name']);
+				$acy=$acyear['data']['name'];
+				
+					$output .= '<table class="table" width="100%" border=0>			
+					
+					<tr>
+						<td >
+							<p>'.$grade['data']['name'].' </p>
+						</td>
+						<td>
+							<p>'.$request->semester_id.' 学期</p>
+						</td>
+						<td>
+							<p><p>'.$term['data']['name'].'</p> </p>
+						</td>
+						<td>クラス : '.$section['data']['name'].'</td>
+						<td>番 : '.$sno.'</td>
+					</tr>
+				
+					<tr style="height:60px;">
+						<td colspan="2">ロール番号 : '.$stu['roll'].'</td>
+						<td colspan="3">名前 :'.$stu['name'].'</td>
+					</tr>
+					<tr> 
+						<td colspan="5" >
+						<table  width="100%" border=1>
+						<thead>                
+							<tr>
+								<td style=" border: 1px solid #959595;"></td>';
+								$main=0;$opt=0;
+		
+							foreach($getmainsubjects as $mainsubject)
+							{
+								$main++;
+							$output.=' <td style=" border: 1px solid #959595;">'.$mainsubject.'</td>';
+							}
+							foreach($getnonmainsubjects as $optsubject)
+							{
+								$opt++;
+							$output.=' <td style=" border: 1px solid #959595;">'.$optsubject.'</td>';
+							}
+								
+							$output.=' <td style=" border: 1px solid #959595;">5教科合計</td>
+								<td style=" border: 1px solid #959595;">9教科合計</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style=" border: 1px solid #959595;">個人得点</td>';
+								$i=0; $totalmain=0;$totalopt=0;
+								foreach($getmainsubjects as $subject)
+							{
+									$i++;
+									$studata = [
+									'branch_id' => session()->get('branch_id'),
+									'student_id' => $stu['student_id'],
+									'exam_id' => $request->exam_id,
+									'class_id' => $request->class_id,
+									'section_id' => $request->section_id,
+									'semester_id' => $request->semester_id,
+									'session_id' => $request->session_id,
+									'subject' => $subject,
+									'paper' => $personal_score,
+									'academic_session_id' => $request->academic_year
+									
+									];
+									$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppmarklist'), $studata);
+								
+									$mark=(isset($getmarks['data']['score']) && $getmarks['data']['score']!=null)?$getmarks['data']['score']:'';
+									
+									$output.='<td colspan="1" style=" border: 1px solid #959595;">'.$mark.'</td>';
+									$mark=($mark!='')?$mark:0;
+									$totalmain+=$mark;
+								}
+								foreach($getnonmainsubjects as $subject)
+								{
+									$i++;
+									$studata = [
+									'branch_id' => session()->get('branch_id'),
+									'student_id' => $stu['student_id'],
+									'exam_id' => $request->exam_id,
+									'class_id' => $request->class_id,
+									'section_id' => $request->section_id,
+									'semester_id' => $request->semester_id,
+									'session_id' => $request->session_id,
+									'subject' => $subject,
+									'paper' => $personal_score,
+									'academic_session_id' => $request->academic_year
+									
+									];
+									$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppmarklist'), $studata);
+									
+									
+									$mark=(isset($getmarks['data']['score']) && $getmarks['data']['score']!=null)?$getmarks['data']['score']:'';
+									
+									
+									$output.='<td colspan="1" style=" border: 1px solid #959595;">'.$mark.'</td>';
+									$mark=($mark!='')?$mark:0;
+									$totalopt+=$mark;
+								}
+								$totall=$totalmain+ $totalopt;
+								$output.='<td style=" border: 1px solid #959595;">'.$totalmain.'</td>
+										<td style=" border: 1px solid #959595;">'.$totall.'</td>';
+								
+								$output.='</tr>
+							<tr>
+								<td style=" border: 1px solid #959595;">学年平均</td>';
+								$ma=0; $totalavgmain=0;$totalavgopt=0;
+								foreach($getmainsubjects as $subject)
+							{
+									$ma++;
+									$studata = [
+									'branch_id' => session()->get('branch_id'),
+									'student_id' => $stu['student_id'],
+									'exam_id' => $request->exam_id,
+									'class_id' => $request->class_id,
+									'section_id' => $request->section_id,
+									'semester_id' => $request->semester_id,
+									'session_id' => $request->session_id,
+									'subject' => $subject,
+									'paper' => $personal_score,
+									'academic_session_id' => $request->academic_year
+									
+									];
+									$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppavgmarklist'), $studata);
+									
+									$mark=(isset($getmarks['data']['avg']) && $getmarks['data']['avg']!=null)?$getmarks['data']['avg']:'';
+									
+									$output.='<td colspan="1" style=" border: 1px solid #959595;">'.$mark.'</td>';
+									$mark=($mark!='')?$mark:0;
+									$totalavgmain+=$mark;
+		
+								}
+								$op=0;
+								foreach($getnonmainsubjects as $subject)
+							{
+									$op++;
+									$studata = [
+									'branch_id' => session()->get('branch_id'),
+									'student_id' => $stu['student_id'],
+									'exam_id' => $request->exam_id,
+									'class_id' => $request->class_id,
+									'section_id' => $request->section_id,
+									'semester_id' => $request->semester_id,
+									'session_id' => $request->session_id,
+									'subject' => $subject,
+									'paper' => $personal_score,
+									'academic_session_id' => $request->academic_year
+									
+									];
+									$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppavgmarklist'), $studata);
+									$mark=(isset($getmarks['data']['avg']) && $getmarks['data']['avg']!=null)?$getmarks['data']['avg']:'';
+									
+									$output.='<td colspan="1" style=" border: 1px solid #959595;">'.$mark.'</td>';
+									$mark=($mark!='')?$mark:0;
+									
+									$totalavgopt+=$mark;
+								}
+		
+							
+								$avgtotal1=$totalavgmain/$ma;
+								$avgtotal2= ($totalavgmain+$totalavgopt)/($ma+$op);
+								$output.='  <td style=" border: 1px solid #959595;">'.round($avgtotal1, 2).'</td>
+								<td style=" border: 1px solid #959595;">'.round($avgtotal2, 2).'</td>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+					<p style="text-align:left">学習の振り返り</p>
+					<table  width="100%">
+						<thead>
+							<tr style="height:60px;">
+								<td style=" border: 1px solid #959595;">できたこと・よかったこと </td>
+								<td style=" border: 1px solid #959595;">できなかったこと・反省，今後の学習に向けて</td>
+								<td style=" border: 1px solid #959595;">保護者の方のコメント</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style=" border: 1px solid #959595;height:200px;"></td>
+								<td style=" border: 1px solid #959595;height:200px;"></td>
+								<td style=" border: 1px solid #959595;height:200px;"></td>
+							</tr>
+						</tbody>
+					</table>
+						</td>
+					</tr>
+					
+					
+				</table>
+				
+				</body>
+				</html';
+				$pdf = \App::make('dompdf.wrapper');
+
+				// Set custom paper size
+				$customPaper = [0, 0, 792.00, 1224.00];
+				$pdf->set_paper($customPaper);
+				$pdf->loadHTML($output);
+			
+				// Filename setup
+				$fileName = __('messages.personal_test_res') .'-'. $stu['name'] . ".pdf";
+				$pdfFilePath = $storagePath . '/' . $fileName;
+			
+				// Save the PDF to the specified folder
+				$pdf->save($pdfFilePath);
+			
+				// Add the PDF file path to the array
+				$pdfFiles[] = $pdfFilePath;
+			}
+			// Create a ZIP file
+			$now = now();
+			$timestamp = strtotime($now);
+			$zipFileName = __('messages.personal_test_res') . $timestamp . ".zip";
+			$zipFilePath = $storagePath . '/' . $zipFileName;
+
+			$zip = new ZipArchive();
+			if ($zip->open($zipFilePath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+				foreach ($pdfFiles as $pdfFile) {
+					$zip->addFile($pdfFile, basename($pdfFile));
+				}
+				$zip->close();
+			}
+
+			// Download the ZIP file
+			if (File::exists($zipFilePath)) {
+				return response()->download($zipFilePath)->deleteFileAfterSend(true);
+			}
+		}
    	public function downprimaryform1($id)
     {
         //dd($student_id);

@@ -583,7 +583,7 @@ $(function () {
                         {
                             toastr.success(data.message);
                             $('.studentmark').show();
-                            appendDataToTablemark(data.studentmarks,data.studentlist,data.exampapers);
+                            appendDataToTablemark(data.studentmarks,data.studentlist,data.exampapers,data.totalstudent);
                             
                         }
                         else
@@ -614,11 +614,11 @@ $(function () {
         });
         
     }
-    function appendDataToTablemark(data1,data2,data3) {
+    function appendDataToTablemark(data1,data2,data3,data4) {
         var markdatas = $("#markdatas");
         // Clear existing table rows
         markdatas.empty();
-        var totstu= data2[6][1];
+        var totstu= data4;
         
         // Loop through data and append rows to table
         var misdata=0;var sturow=0; var paper=0;
