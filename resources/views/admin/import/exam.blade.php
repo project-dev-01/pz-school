@@ -100,8 +100,7 @@
                                         </div>
                                     </div>
 									
-													{{ $sem['name'] }}
-												</option>
+													
 									<div class="col-md-3" >
 										<div class="form-group">
 											<input type="hidden" id="session_id" class="form-control" name="session_id" value="0">

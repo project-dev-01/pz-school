@@ -248,62 +248,62 @@ $(function () {
             semester_id: "required"
         }
     });
-    $('#resultsByPaper').on('submit', function (e) {
-        e.preventDefault();
-        var classRoom = $("#resultsByPaper").valid();
-        if (classRoom === true) {
-            //   $("#overlay").fadeIn(300);
-            // jQuery("body").prepend('<div id="preloader">Loading...</div>');
-            var departmentID = $("#department_id").val();
-            var classID = $("#changeClassName").val();
-            var sectionID = $("#sectionID").val();
-            var subjectID = $("#subjectID").val();
-            var paperID = $("#paperID").val();
-            var examID = $("#examnames").val();
-            var semesterID = $("#semester_id").val();
+    // $('#resultsByPaper').on('submit', function (e) {
+    //     e.preventDefault();
+    //     var classRoom = $("#resultsByPaper").valid();
+    //     if (classRoom === true) {
+    //         //   $("#overlay").fadeIn(300);
+    //         // jQuery("body").prepend('<div id="preloader">Loading...</div>');
+    //         var departmentID = $("#department_id").val();
+    //         var classID = $("#changeClassName").val();
+    //         var sectionID = $("#sectionID").val();
+    //         var subjectID = $("#subjectID").val();
+    //         var paperID = $("#paperID").val();
+    //         var examID = $("#examnames").val();
+    //         var semesterID = $("#semester_id").val();
 
-            var classObj = {
-                classID: classID,
-                sectionID: sectionID,
-                subjectID: subjectID,
-                departmentID: departmentID,
-                semesterID: semesterID,
-                exam_id: examID,
-                paperID: paperID,
-                role_id: get_roll_id,
-                user_id: ref_user_id,
-                branch_id: branchID,
-                academic_session_id: academic_session_id,
-            };
-            // set local storage selected
-            setLocalStorageForClassroom(classObj);
-        }
-    });
-    function setLocalStorageForClassroom(classObj) {
-        var teacherClassDetails = new Object();
-        teacherClassDetails.class_id = classObj.classID;
-        teacherClassDetails.section_id = classObj.sectionID;
-        teacherClassDetails.subject_id = classObj.subjectID;
-        teacherClassDetails.department_id = classObj.departmentID;
-        teacherClassDetails.semester_id = classObj.semesterID;
-        teacherClassDetails.paper_id = classObj.paperID;
-        teacherClassDetails.role_id = classObj.role_id;
-        teacherClassDetails.user_id = classObj.user_id;
-        teacherClassDetails.branch_id = classObj.branch_id;
-        teacherClassDetails.exam_id = classObj.exam_id;
-        teacherClassDetails.academic_session_id = classObj.academic_session_id,
+    //         var classObj = {
+    //             classID: classID,
+    //             sectionID: sectionID,
+    //             subjectID: subjectID,
+    //             departmentID: departmentID,
+    //             semesterID: semesterID,
+    //             exam_id: examID,
+    //             paperID: paperID,
+    //             role_id: get_roll_id,
+    //             user_id: ref_user_id,
+    //             branch_id: branchID,
+    //             academic_session_id: academic_session_id,
+    //         };
+    //         // set local storage selected
+    //         setLocalStorageForClassroom(classObj);
+    //     }
+    // });
+    // function setLocalStorageForClassroom(classObj) {
+    //     var teacherClassDetails = new Object();
+    //     teacherClassDetails.class_id = classObj.classID;
+    //     teacherClassDetails.section_id = classObj.sectionID;
+    //     teacherClassDetails.subject_id = classObj.subjectID;
+    //     teacherClassDetails.department_id = classObj.departmentID;
+    //     teacherClassDetails.semester_id = classObj.semesterID;
+    //     teacherClassDetails.paper_id = classObj.paperID;
+    //     teacherClassDetails.role_id = classObj.role_id;
+    //     teacherClassDetails.user_id = classObj.user_id;
+    //     teacherClassDetails.branch_id = classObj.branch_id;
+    //     teacherClassDetails.exam_id = classObj.exam_id;
+    //     teacherClassDetails.academic_session_id = classObj.academic_session_id,
         
-        // here to attached to avoid localStorage other users to add
-        teacherClassDetails.branch_id = branchID;
-        var teacherClassroomArr = [];
-        teacherClassroomArr.push(teacherClassDetails);
-        if (get_roll_id == "2") {
-            // admin
-            localStorage.removeItem("admin_exam_import_details");
-            localStorage.setItem('admin_exam_import_details', JSON.stringify(teacherClassroomArr));
-        }
-        return true;
-    }
+    //     // here to attached to avoid localStorage other users to add
+    //     teacherClassDetails.branch_id = branchID;
+    //     var teacherClassroomArr = [];
+    //     teacherClassroomArr.push(teacherClassDetails);
+    //     if (get_roll_id == "2") {
+    //         // admin
+    //         localStorage.removeItem("admin_exam_import_details");
+    //         localStorage.setItem('admin_exam_import_details', JSON.stringify(teacherClassroomArr));
+    //     }
+    //     return true;
+    // }
     if (typeof exam_import_result_storage !== 'undefined') {
         console.log(exam_import_result_storage);
         if ((exam_import_result_storage)) {
