@@ -267,12 +267,13 @@
 					var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
 					var downloadFileName = "{{ __('messages.exam_paper_result') }}";
 					// localStorage variables
-					var exam_import_result_storage = localStorage.getItem('admin_exam_import_details');
+					var exam_import_result_storage = localStorage.getItem('admin_exam_bulk_import');
 					var marktext="{{ __('messages.alertexamupload_mark') }}";
 					var pointstext="{{ __('messages.alertexamupload_points') }}";
 					var freetext="{{ __('messages.alertexamupload_freetext') }}";
 					var infotext="{{ __('messages.alertexamupload_info') }}";
 					var all="{{ __('messages.all') }}";
+
 				</script>
 				<script src="{{ asset('js/custom/exam_import.js') }}"></script>
 				

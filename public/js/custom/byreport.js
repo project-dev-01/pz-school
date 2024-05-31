@@ -240,6 +240,7 @@ $(function () {
                         $('#report_type').val(report_type);
                         $('#session_id').val(sessionID);
                         $("#department_id").val(departmentID);
+                        $("#report_type").val(userType);
                         if (departmentID) {
 
                             $("#resultsByPaper").find("#changeClassName").empty();
