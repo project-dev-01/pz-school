@@ -14,6 +14,7 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\LangController;
 use App\Http\Controllers\ExamPdfController;
 use App\Http\Controllers\ExamPdfController1;
+use App\Http\Controllers\ExamindividualPdfController;
 use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
@@ -653,7 +654,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('exam_results/downbyecreport', [ExamPdfController1::class, 'downbyecreport'])->name('admin.exam_results.downbyecreport');
         Route::post('exam_results/downbyreportcard', [ExamPdfController1::class, 'downbyreportcard'])->name('admin.exam_results.downbyreportcard');
         Route::post('exam_results/downbypersoanalreport', [ExamPdfController1::class, 'downbypersoanalreport'])->name('admin.exam_results.downbypersoanalreport');
-
+        Route::get('exam_results/byreportindividual', [AdminController::class, 'byreportindividual'])->name('admin.exam_results.byreportindividual');
+        Route::post('individual/downbyecreport', [ExamindividualPdfController::class, 'downbyecreport'])->name('admin.individual.downbyecreport');
+        Route::post('individual/downbyreportcard', [ExamindividualPdfController::class, 'downbyreportcard'])->name('admin.individual.downbyreportcard');
+        Route::post('individual/downbypersoanalreport', [ExamindividualPdfController::class, 'downbypersoanalreport'])->name('admin.individual.downbypersoanalreport');
+        
         Route::get('exam_results/sampleformat', [ExamPdfController1::class, 'sampleformat'])->name('admin.exam_results.sampleformat');
         Route::get('exam/import', [AdminController::class, 'ExamImport'])->name('admin.exam.import');
         Route::post('exam/import/add', [AdminController::class, 'ExamImportAdd'])->name('admin.exam.import.add');        

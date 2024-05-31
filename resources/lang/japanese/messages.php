@@ -2310,5 +2310,6 @@ return [
       "existing_record" => "すでにデータが存在します",
       "new_record" => "新しいデータレコード",
       "mark_info" => "マーク情報",      
-      "adhocexam_import" => "アドホック試験の一括アップロード",
+      "adhocexam_import" => "アドホック試験の一括アップロード",      
+      "exam_individual_result" => "試験個人結果",
 ];

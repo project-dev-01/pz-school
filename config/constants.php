@@ -1011,6 +1011,7 @@ return [
         'import_expense'=> $url.'/importcsv/expense',
         //  Exam Report
         'exam_studentslist' => $url.'/exam_result/students',
+        'exam_individualstudentslist' => $url.'/exam_result/exam_individualstudentslist',
         'get_subjectlist' => $url.'/exam_result/get_subjectlist',        
         'get_mainsubjectlist' => $url.'/exam_result/get_mainsubjectlist',
         'getsubjecpapertlist' => $url.'/exam_result/getsubjecpapertlist',

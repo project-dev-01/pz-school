@@ -2345,5 +2345,6 @@ return [
   "existing_record" => "Already Data Exist",
   "new_record" => "New Data Record",
   "mark_info" => "Mark Information",
-  "adhocexam_import" => "Adhoc Exam Bulk Upload",
+  "adhocexam_import" => "Adhoc Exam Bulk Upload",  
+  "exam_individual_result" => "Exam Individual Result",
 ];
