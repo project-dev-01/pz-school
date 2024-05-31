@@ -2348,4 +2348,5 @@ return [
   "mark_info" => "Mark Information",
   "adhocexam_import" => "Adhoc Exam Bulk Upload",
   "select_role_parent" => "Select Role for Parent",
+  "exam_individual_result" => "Exam Individual Result",
 ];

@@ -47,8 +47,13 @@
 
         </div>
     </div>
-    <!-- end page title -->
-
+    <!-- end page title -->    
+    @if($message = Session::get('errors'))
+    <div class="alert alert-warning alert-block alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>{{ $message }}</strong>
+    </div>
+    @endif
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
@@ -151,7 +156,7 @@
                                     <select id="report_type" class="form-control" name="report_type">
                                         <option value="">{{ __('messages.select') }}</option>
                                         <option value="report_card">{{ __('messages.report_card') }}</option>
-                                        <option value="personal_test_res">{{ __('messages.personal_test_res') }}</option>
+                                        <option value="personal_test_result">{{ __('messages.personal_test_res') }}</option>
                                         <option value="english_communication">{{ __('messages.english_communication') }}</option>
                                     </select>
                                 </div>
@@ -226,7 +231,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="nav-item d-flex justify-content-between align-items-center">
-                        <h4 class="navlinkv">
+                        <h4 class="navv">
                             {{ __('messages.report_card') }}
                             <h4>
                     </li>

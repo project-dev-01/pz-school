@@ -11,7 +11,7 @@
 	use DateTimeZone;
 	use PDF;
 	
-	class ExamPdfController1 extends Controller
+	class ExamindividualPdfController extends Controller
 	{
 		
 		public function downbyecreport(Request $request)
@@ -26,15 +26,18 @@
             'semester_id' => $request->semester_id,
             'session_id' => $request->session_id,
             'academic_session_id' => $request->academic_year,
+			'student_id' => $request->student_id,
             'pdf_report' => 1
             
 			];        
-			
-			$getstudents = Helper::PostMethod(config('constants.api.exam_studentslist'), $data);
+			//dd($data);
+			$getstudents = Helper::PostMethod(config('constants.api.exam_individualstudentslist'), $data);
 			if (empty($getstudents['data'])) 
 			{
 				return redirect()->route('admin.exam_results.byreport')->with('errors', "No Student Data Found");
 			}
+			$stu=$getstudents['data'];
+			//dd($getstudents['data']);
 			$footer_text = session()->get('footer_text');
 			$sno=0;
 			
@@ -56,19 +59,11 @@
 			$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 			$term = Helper::PostMethod(config('constants.api.exam_details'), $termdata);
 			$acyear = Helper::PostMethod(config('constants.api.academic_year_details'), $acdata);
-			
+			$pdf_logo = config('constants.image_url') . '/common-asset/images/jskl_pdf_logo.png';
 			//dd($getbranch['data']);
 			$acy=$acyear['data']['name'];
-			$storagePath = storage_path('app/public/pdfs');
-
-			// Ensure the storage directory exists
-			if (!File::exists($storagePath)) {
-				File::makeDirectory($storagePath, 0755, true);
-			}
-			$pdfFiles = [];
-			foreach($getstudents['data'] as $stu)
-			{
-				$sno++; 
+			
+				
 				$n1=($request->department_id=='1')?'P':'S';
 				$n2=$grade['data']['name_numeric'];
 				$n3=$section['data']['name'];
@@ -90,45 +85,46 @@
 				src: url("' . $fonturl . '");
 				} 
 				body
-				{ 
-					font-family: "ipag", "Open Sans", !important;
-				}
-				tr,
-				td {
-				font-family: "Open Sans";
-				font-style: normal;
-				font-size: 14px;
-				letter-spacing: 0.0133em;
-				}
-				
-				h6 {
-				font-family: "Open Sans";
-				font-style: normal;
-				font-size: 14px;
-				letter-spacing: 0.0133em;
-				}
-				
-				h1 {
-				font-family: "Open Sans";
-				font-style: normal;
-				line-height: 60px;
-				letter-spacing: 0.0133em;
-				}
-				
-				h4 {
-				font-family: "Open Sans";
-				font-style: normal;
-				font-size: 24px;
-				letter-spacing: 0.0133em;
-				}
-				
-				h5 {
-				font-family: "Open Sans";
-				font-style: normal;
-				font-size: 15px;
-				letter-spacing: 0.0133em;
-				}
-				</style>
+            { 
+                font-family: "ipag", "Open Sans", !important;
+            }
+			tr,
+			td {
+            font-family: "Open Sans";
+            font-style: normal;
+            font-size: 14px;
+            letter-spacing: 0.0133em;
+			}
+			
+			h6 {
+            font-family: "Open Sans";
+            font-style: normal;
+            font-size: 14px;
+            letter-spacing: 0.0133em;
+			}
+			
+			h1 {
+            font-family: "Open Sans";
+            font-style: normal;
+            line-height: 60px;
+            letter-spacing: 0.0133em;
+			}
+			
+			h4 {
+            font-family: "Open Sans";
+            font-style: normal;
+            font-size: 24px;
+            letter-spacing: 0.0133em;
+            
+			}
+			
+			h5 {
+            font-family: "Open Sans";
+            font-style: normal;
+            font-size: 15px;
+            letter-spacing: 0.0133em;
+			}
+		</style>
 				</head>
 				
 				<body>';
@@ -166,8 +162,8 @@
 					<h4 style="margin: 0;">'.$number.'</h4>
 					</td>       
 					<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; text-align: left;">
-					<h5 style="margin: 0;">EC-Class</h5>
-					<h4 style="margin: 0;">Balsam</h4>
+					<h5 style="margin: 0;">EC-CLass</h5>
+					<h4 style="margin: 0;">Balasam</h4>
 					</td>       
 					<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; text-align: left;">
 					<h5 style="margin: 0;">Level</h5>
@@ -276,7 +272,7 @@
 								$output.='<tr>
 								<td style="border: 2px solid black; text-align: left;font-weight: normal;">'.$papername.'
 								</td>
-								<td style="border: 2px solid black; text-align: center;font-weight: normal;">'.$mark.'</td>
+								<td style="border: 2px solid black; text-align: center;font-weight: normal;"> '.$mark.'</td>
 								</tr>';
 								
 							}
@@ -484,40 +480,17 @@
 
 				$output .= '</body></html>';
 				$pdf = \App::make('dompdf.wrapper');
-
-				// Set custom paper size
-				$customPaper = [0, 0, 792.00, 1224.00];
+				// set size
+				$customPaper = array(0, 0, 700.00, 900.00);
 				$pdf->set_paper($customPaper);
 				$pdf->loadHTML($output);
-			
-				// Filename setup
-				$fileName = __('messages.english_communication') .'-'. $stu['name'] . ".pdf";
-				$pdfFilePath = $storagePath . '/' . $fileName;
-			
-				// Save the PDF to the specified folder
-				$pdf->save($pdfFilePath);
-			
-				// Add the PDF file path to the array
-				$pdfFiles[] = $pdfFilePath;
-			}
-			// Create a ZIP file
-			$now = now();
-			$timestamp = strtotime($now);
-			$zipFileName = __('messages.english_communication') . $timestamp . ".zip";
-			$zipFilePath = $storagePath . '/' . $zipFileName;
-
-			$zip = new ZipArchive();
-			if ($zip->open($zipFilePath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
-				foreach ($pdfFiles as $pdfFile) {
-					$zip->addFile($pdfFile, basename($pdfFile));
-				}
-				$zip->close();
-			}
-
-			// Download the ZIP file
-			if (File::exists($zipFilePath)) {
-				return response()->download($zipFilePath)->deleteFileAfterSend(true);
-			}
+				// filename
+				$now = now();
+				$name = strtotime($now);
+				$fileName = __('messages.english_communication') .$stu['name']. $name . ".pdf";
+				//return $pdf->download($fileName);
+				return $pdf->stream();
+				
 			
 		}
 		
@@ -533,27 +506,24 @@
             'semester_id' => $request->semester_id,
             'session_id' => $request->session_id,
             'academic_session_id' => $request->academic_year,
+			'student_id' => $request->student_id,
             'pdf_report' => 0 // All Primary Subjects
             
-			];
+			];	
+				
 			
 			$language="国語";
 			$math='算数';
 			$life='生活';
 			$music='音楽';
-			// $art='図工';
-			$art='図画工作';
+			$art='図工';
 			$sport='体育';
 			$science="理科";
 			$socity="社会";
-			$homeeconomics="家庭";
+			$homeeconomics="家庭科";
 			$foreignlanguage="外国語";
 			$english="英語";
-			// $tech_homeeconomics="技術・家庭科";
-			$tech_homeeconomics="技術・家庭";
-			$secondary_math='数学';
-			$secondary_sports='保健体育';
-			$secondary_arts='美術';
+			$tech_homeeconomics="技術・家庭科";
 			
 			
 			$primarypaper1="知識・技能"; //Knowledge & Skills
@@ -563,11 +533,11 @@
 			$personal_score="個人得点"; //   individual score / Personal Points
 			
 			$specialsubject1="行動及び生活の記録"; //Records of actions and life
-			$specialpaper1="気持ちのよい挨拶と返事をし、時間を守り、規則正しい生活をする。";// Greet and reply pleasantly, be punctual, and be regular Make a living.
+			$specialpaper1="気持ちのよい挨拶と返事をし、時間を守り、規則正しい生活を する。";// Greet and reply pleasantly, be punctual, and be regular Make a living.
 			$specialpaper2="体力の向上に努め、元気に生活をする。"; // Strive to improve own physical fitness and live a healthy life.						
 			$specialpaper3="より高い目標を決め、根気強く努力する。";	// Set higher goals and work hard.					
 			$specialpaper4="自分の役割と責任を自覚し、信頼される行動をする";	//Be aware of own roles and responsibilities and act in a way that is trustworthy.				
-			$specialpaper5="進んで新しい考えや方法を見付け、工夫して生活をよりよくしようとする。";	// willing to find new ideas and methods, and try to improve own living by devising ways to do so					
+			$specialpaper5="進んで新しい考えや方法を見付け、工夫して生活をよりよくしよう とする。";	// willing to find new ideas and methods, and try to improve own living by devising ways to do so					
 			$specialpaper6="思いやりや感謝の心をもつとともに、相手の考えや立場を尊重し、力を合わせて生活する。"	;	//Have compassion and gratitude, and understand the thoughts and positions of others.   Respect and live together.				
 			$specialpaper7="自然や自他の生命を大切にする。";	//Cherish nature, self and other life.					
 			$specialpaper8="人や社会に役立つことを考え、進んで仕事や奉仕活動をする。";	//Think about being useful to people and society, and be willing to work and do service activities.  Do.					
@@ -577,13 +547,14 @@
 			$specialsubject2="特別の教科 道徳"; // Special Subject: Morality
 			$specialsubject3="特 別 活 動 等 の 記 録"; // Records of special activities, etc
 			$specialsubject4="所見"; // Findings
-			// $specialsubject5="総合的な学習の時間"; // Hours of integrated study         
-			$specialsubject5="総合"; // Hours of integrated study         
+			$specialsubject5="総合的な学習の時間"; // Hours of integrated study         
 			$specialsubject6="外 国 語 活 動"; // Foreign Language Activities
 			$description=array("説明"); // Descriptions
 			
 			
-			$getstudents = Helper::PostMethod(config('constants.api.exam_studentslist'), $data); 
+			
+			$getstudents = Helper::PostMethod(config('constants.api.exam_individualstudentslist'), $data);
+			$stu=$getstudents['data'];	
             if (empty($getstudents['data'])) 
 			{
 				return redirect()->route('admin.exam_results.byreport')->with('errors', "No Student Data Found");
@@ -601,21 +572,37 @@
 					$getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
 					$getprimarypapers = array($primarypaper1,$primarypaper2,$primarypaper3);
 					$getspecialpapers = array($specialpaper1,$specialpaper2,$specialpaper3,$specialpaper4,$specialpaper5,$specialpaper6,$specialpaper7,$specialpaper8,$specialpaper9,$specialpaper10);
+					$getspsubject1 = array($specialsubject1); // Records of actions and life- Excellent Report & only 3rd Semester                
+					$getspsubject2 = array($specialsubject2); // Special Subject: Morality ( 3rd Semester)              
+					$getspsubject3 = array($specialsubject3); // Records of special activities, etc (All Semester )
+					$getspsubject4 = array($specialsubject4); // Findings  ( 3rd Semester) 
+					$getspsubject5 = array(); // Hours of integrated study (2nd Semester)
+					$getspsubject6 = array(); // Foreign Language Activities  ( 3rd Semester) 
 				}
 				if($stuclass==3 || $stuclass==4)
 				{
-					// $getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
-					$getprimarysubjects = array($language,$socity,$math,$science,$music,$art,$sport);
+					$getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
 					$getprimarypapers = array($primarypaper1,$primarypaper2,$primarypaper3);
 					$getspecialpapers = array($specialpaper1,$specialpaper2,$specialpaper3,$specialpaper4,$specialpaper5,$specialpaper6,$specialpaper7,$specialpaper8,$specialpaper9,$specialpaper10);
+					$getspsubject1 = array($specialsubject1); // Records of actions and life- Excellent Report & only 3rd Semester                
+					$getspsubject2 = array($specialsubject2); // Special Subject: Morality ( 3rd Semester)              
+					$getspsubject3 = array($specialsubject3); // Records of special activities, etc (All Semester )
+					$getspsubject4 = array($specialsubject4); // Findings  ( 3rd Semester) 
+					$getspsubject5 = array($specialsubject5); // Hours of integrated study (2nd Semester)
+					$getspsubject6 = array($specialsubject6); // Foreign Language Activities  ( 3rd Semester) 
+					
 				}
 				if($stuclass==5 || $stuclass==6)
 				{
-					
-					// $getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
-					$getprimarysubjects = array($language,$socity,$math,$science,$music,$art,$homeeconomics,$sport,$foreignlanguage);
+					$getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
 					$getprimarypapers = array($primarypaper1,$primarypaper2,$primarypaper3);
 					$getspecialpapers = array($specialpaper1,$specialpaper2,$specialpaper3,$specialpaper4,$specialpaper5,$specialpaper6,$specialpaper7,$specialpaper8,$specialpaper9,$specialpaper10);
+					$getspsubject1 = array($specialsubject1); // Records of actions and life- Excellent Report & only 3rd Semester                
+					$getspsubject2 = array($specialsubject2); // Special Subject: Morality ( 3rd Semester)              
+					$getspsubject3 = array($specialsubject3); // Records of special activities, etc (All Semester )
+					$getspsubject4 = array($specialsubject4); // Findings  ( 3rd Semester) 
+					$getspsubject5 = array($specialsubject5); // Hours of integrated study (2nd Semester)
+					$getspsubject6 = array(); // Foreign Language Activities  ( 3rd Semester) 
 				}
 				
 			}
@@ -632,8 +619,7 @@
 				$secspecialsubject8='勤労・奉仕';	
 				$secspecialsubject9='公正・公平';	
 				$secspecialsubject10='公共心・公徳心';
-				// $getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
-				$getprimarysubjects = array($language,$socity,$secondary_math,$science,$music,$secondary_arts,$secondary_sports,$tech_homeeconomics,$english);
+				$getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
                 $getprimarypapers = array($primarypaper1,$primarypaper2,$primarypaper3,$primarypaper4);
                 $getspecialpapers = array($secspecialsubject1,$secspecialsubject2,$secspecialsubject3,$secspecialsubject4,$secspecialsubject5,$secspecialsubject6,$secspecialsubject7,$secspecialsubject8,$secspecialsubject9,$secspecialsubject10);
                 $getspsubject1 = array($specialsubject1); // Records of actions and life- Excellent Report & only 3rd Semester                
@@ -660,14 +646,12 @@
 				if($stuclass==1 || $stuclass==2)
 				{
 					
-					$sno=0;
+					$sno=1;
 					$bdata = [
 					'id' => session()->get('branch_id'),
 					];
 					$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
-					foreach($getstudents['data'] as $stu)
-					{
-						$sno++;
+					
 						$output = '<!DOCTYPE html>
 						<html lang="en">
 						
@@ -849,12 +833,10 @@
                            
                             $getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
 							//$result1[] = $getmarks;
-						// dd(count($getmarks['data']));
+						
 						
 							$i=0;
-                            // $n=count($getmarks['data']); 
-							$data = $getmarks['data'] ?? [];
-							$n = count($data);
+                            $n=count($getmarks['data']); 
                             
                             foreach($getmarks['data'] as $papers)
                             {
@@ -1206,35 +1188,27 @@
 						</body>
 						
 						</html>';
-					
 						$pdf = \App::make('dompdf.wrapper');
-
-						// Set custom paper size
-						$customPaper = [0, 0, 792.00, 1224.00];
+						// set size
+						$customPaper = array(0, 0, 792.00, 1224.00);
 						$pdf->set_paper($customPaper);
 						$pdf->loadHTML($output);
-					
-						// Filename setup
-						$fileName = __('messages.report_card') .'-'. $stu['name'] . ".pdf";
-						$pdfFilePath = $storagePath . '/' . $fileName;
-					
-						// Save the PDF to the specified folder
-						$pdf->save($pdfFilePath);
-					
-						// Add the PDF file path to the array
-						$pdfFiles[] = $pdfFilePath;
-					}
+						// filename
+						$now = now();
+						$name = strtotime($now);
+						$fileName = __('messages.report_card') . $stu['name'].$name . ".pdf";
+						return $pdf->download($fileName);
+						// return $pdf->stream();
+						
 				}
 				if($stuclass==3 || $stuclass==4)
 				{
-					$sno=0;
+					$sno=1;
 					$bdata = [
 					'id' => session()->get('branch_id'),
 					];
 					$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
-					foreach($getstudents['data'] as $stu)
-					{
-						$sno++;
+					
 						
 						$output='<!DOCTYPE html>
 						<html lang="en">
@@ -1298,6 +1272,20 @@
 									width: 45%;
 									padding: 10px;
 								}
+						
+								.content {
+									box-sizing: border-box;
+									display: block;
+									margin: 0 auto;
+									padding: 20px;
+									border-radius: 7px;
+									margin-top: 20px;
+									background-color: #fff;
+									border: 1px solid #dddddd;
+									font-size: 13px;
+									"
+						
+								}
 							</style>
 						</head>
 						
@@ -1305,7 +1293,8 @@
 							<div class="content">
 								<div class="row">
 									<div class="column">
-										<p style="font-family:"ipag", "ＭＳ Ｐゴシック";font-size: 20px;">クアラルンプール日本人学校　小学部</p>
+										<p>クアラルンプール日本人学校　小学</p>
+										<p style="margin-left: 92px;margin-top:-13px;">部</p>
 									</div>
 								</div>
 						
@@ -1403,7 +1392,7 @@
 												$getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
 												//$result1[] = $getmarks;
 											
-											// dd($getmarks);
+											
 												$i=0;
 												$n=count($getmarks['data']); 
 												
@@ -1413,7 +1402,7 @@
 													$output.=' <tr>';
 													if($i==1)
 													{
-														$output.='<td rowspan="3" style="width:2%; height: 25px;color: #3A4265;">'.$subject.'</td>';
+														$output.='<td rowspan="3" style="width:2%;color: #3A4265;">'.$subject.'</td>';
 													}
 													$output.='<td style="width:15%; text-align:left; height: 25px;color: #3A4265;">'.$papers['papers'].'</td>';
 												
@@ -1466,6 +1455,7 @@
 											}  
 										
 										}
+						
 										$output.='<!-- Second table and additional content... -->
 										<table class="table table-bordered" style="border: 2px solid black;margin-top:35px;">
 											<thead class="colspanHead">
@@ -1547,6 +1537,8 @@
 										$output.='</tbody>
 										</table>
 									</div>
+									
+						
 									<div class="column2" style="width:1%;">
 									</div>
 									<div class="column2" style="width:44%;">
@@ -1848,34 +1840,26 @@
 						</body>
 						
 						</html>';
-					$pdf = \App::make('dompdf.wrapper');
-
-						// Set custom paper size
-						$customPaper = [0, 0, 792.00, 1224.00];
+						$pdf = \App::make('dompdf.wrapper');
+						// set size
+						$customPaper = array(0, 0, 792.00, 1224.00);
 						$pdf->set_paper($customPaper);
 						$pdf->loadHTML($output);
+						// filename
+						$now = now();
+						$name = strtotime($now);
+						$fileName = __('messages.report_card') . $stu['name'].$name . ".pdf";
+						return $pdf->download($fileName);
 						// return $pdf->stream();
-						// Filename setup
-						$fileName = __('messages.report_card') .'-'. $stu['name'] . ".pdf";
-						$pdfFilePath = $storagePath . '/' . $fileName;
-					
-						// Save the PDF to the specified folder
-						$pdf->save($pdfFilePath);
-					
-						// Add the PDF file path to the array
-						$pdfFiles[] = $pdfFilePath;
-				}
 				}
 				if($stuclass==5 || $stuclass==6)
 				{
-					$sno=0;
+					$sno=1;
 					$bdata = [
 					'id' => session()->get('branch_id'),
 					];
 					$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
-					foreach($getstudents['data'] as $stu)
-					{
-						$sno++;
+					
 						$output='<!DOCTYPE html>
 						<html lang="en">
 						
@@ -1910,7 +1894,6 @@
 								th {
 									border: 1px solid black;
 									text-align: center;
-									font-size: 18px;
 									line-height: 20px;
 									letter-spacing: 0.0133em;
 									word-wrap: break-word;
@@ -1939,6 +1922,20 @@
 									width: 45%;
 									padding: 10px;
 								}
+						
+								.content {
+									box-sizing: border-box;
+									display: block;
+									margin: 0 auto;
+									padding: 20px;
+									border-radius: 7px;
+									margin-top: 20px;
+									background-color: #fff;
+									border: 1px solid #dddddd;
+									font-size: 15px;
+									"
+						
+								}
 							</style>
 						</head>
 						
@@ -1946,27 +1943,27 @@
 							<div class="content">
 								<div class="row">
 									<div class="column">
-										<p style="margin: 0;font-size:18px;">クアラルンプール日本人学校　小学部</p>
+										<p>クアラルンプール日本人学校　小学部</p>
 									</div>
 								</div>
 						
 								<div class="row">
 									<div class="column1" style="width:10%;">
 										<div style="margin-top:20px;">
-											<p style="margin: 0;font-size:20px;">'.$grade['data']['name'].'</p>
+											<p style="margin: 0;">'.$grade['data']['name'].'</p>
 										</div>
 						
 									</div>
 									<div class="column1" style="width:10%;">
 						
 										<div style="margin-top:20px;">
-											<p style="margin: 0;font-size:20px;"> 学期</p>
+											<p style="margin: 0;"> 学期</p>
 										</div>
 						
 									</div>
 									<div class="column1" style="width:5%;">
 										<div style="margin-top:20px;">
-											<p style="margin: 0;font-size:20px;">通知表</p>
+											<p style="margin: 0;">通知表</p>
 										</div>
 									</div>
 									<div class="column1" style="width:18%;">
@@ -1975,15 +1972,13 @@
 											</thead>
 											<tbody>
 												<tr>
-													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;color: #3A4265;"> '.$section['data']['name'].'</td>
-													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;color: #3A4265;"> 組</td>
-													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;color: #3A4265;"> '.$sno.'</td>
-													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;color: #3A4265;"> 番</td>
+													<td style="text-align: right; vertical-align: bottom; height: 60px;color: #3A4265;">組 : '.$section['data']['name'].'</td>
+													<td style="text-align: right; vertical-align: bottom; height: 60px;color: #3A4265;">番 : '.$sno.'</td>
 												</tr>
 											</tbody>
 										</table>
 									</div>
-									<div class="column1" style="width:2%;">
+									<div class="column1" style="width:1%;">
 									</div>
 									<div class="column1" style="width:44%;">
 										<table>
@@ -1991,8 +1986,8 @@
 											</thead>
 											<tbody>
 												<tr>
-													<td style="margin: 0px;vertical-align: top;text-align: left; border-right:hidden;height: 60px;color: #3A4265;">氏<br>名</td>
-													<td style="vertical-align: inherit;font-size:20px;text-align:center; height: 60px;">'.$stu['name'].'</td>
+													<td style="vertical-align: top; text-align: left; border-right:hidden;height: 60px;color: #3A4265;">氏名</td>
+													<td style="vertical-align: inherit;text-align:center; height: 60px;">'.$stu['name'].'</td>
 												</tr>
 											</tbody>
 										</table>
@@ -2001,11 +1996,11 @@
 						
 								<div class="row">
 									<div class="column2" style="width:50%;">
-										<table style="border-collapse: collapse; margin-bottom: 0px; border: 2px solid black;">
+										<table style="border-collapse: collapse; margin-bottom: 15px; border: 2px solid black;">
 											<thead class="colspanHead">
 												<tr>
-													<td colspan="2" style="border: 2px solid black; border-right:hidden; height: 35px;color: #3A4265;">学 習 の 記 録</td>
-													<td colspan="3" style="border: 2px solid black; height: 35px;">
+													<td colspan="2" style="border: 2px solid black; border-right:hidden; height: 30px;color: #3A4265;">学 習 の 記 録</td>
+													<td colspan="3" style="border: 2px solid black; height: 30px;">
 														<ul style="list-style-type: none; padding: 0; margin: 0; text-align:left;">
 															<li style="margin-left: 10px;color: #3A4265;">(A　よくできる)</li>
 															<li style="margin-left: 10px;color: #3A4265;">(B　できる)</li>
@@ -2117,25 +2112,25 @@
 												$at_tot6+=$att['totlate'];
 												$at_tot7+=$att['totexc'];
 												$output.='<tr>
-												<td style="height: 23px;color: #3A4265;">'.$attarray[intval($att['month'])].'</td>
-												<td style="height: 23px;">'.$att['no_schooldays'].'</td>
-												<td style="height: 23px;">'.$att['suspension'].'</td>
-												<td style="height: 23px;">'.$att['totalcoming'].'</td>
-												<td style="height: 23px;">'.$att['totabs'].'</td>
-												<td style="height: 23px;">'.$att['totpres'].'</td>
-												<td style="height: 23px;">'.$att['totlate'].'</td>
-												<td style="height: 23px;">'.$att['totexc'].'</td>
+												<td style="height: 30px;color: #3A4265;">'.$attarray[intval($att['month'])].'</td>
+												<td style="height: 30px;">'.$att['no_schooldays'].'</td>
+												<td style="height: 30px;">'.$att['suspension'].'</td>
+												<td style="height: 30px;">'.$att['totalcoming'].'</td>
+												<td style="height: 30px;">'.$att['totabs'].'</td>
+												<td style="height: 30px;">'.$att['totpres'].'</td>
+												<td style="height: 30px;">'.$att['totlate'].'</td>
+												<td style="height: 30px;">'.$att['totexc'].'</td>
 											</tr>';
 											}
 											$output.='<tr style="border-top: 2px solid black;">
-											<td style="height: 25px;color: #3A4265;"> 合計</td>
-											<td style="height: 25px;">'.$at_tot1.'</td>
-											<td style="height: 25px;">'.$at_tot2.'</td>
-											<td style="height: 25px;">'.$at_tot3.'</td>
-											<td style="height: 25px;">'.$at_tot4.'</td>
-											<td style="height: 25px;">'.$at_tot5.'</td>
-											<td style="height: 25px;">'.$at_tot6.'</td>
-											<td style="height: 25px;">'.$at_tot7.'</td>
+											<td style="height: 34px;color: #3A4265;"> 合計</td>
+											<td style="height: 34px;">'.$at_tot1.'</td>
+											<td style="height: 34px;">'.$at_tot2.'</td>
+											<td style="height: 34px;">'.$at_tot3.'</td>
+											<td style="height: 34px;">'.$at_tot4.'</td>
+											<td style="height: 34px;">'.$at_tot5.'</td>
+											<td style="height: 34px;">'.$at_tot6.'</td>
+											<td style="height: 34px;">'.$at_tot7.'</td>
 										</tr>';
 											
 											
@@ -2160,12 +2155,12 @@
 										'papers' => $getspecialpapers
 									];
 									$getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
-									$output.='<table class="table table-bordered" style="height: 10px;border: 2px solid black;">
+									$output.='<table class="table table-bordered" style="border: 2px solid black;">
 											<thead class="colspanHead">
 												<tr>
 													<td colspan="2" style="text-align:center; border: 1px solid black; vertical-align: middle; height: 63px;border-right:hidden;color: #3A4265;">
 														行動及び生活の記録</td>
-													<td colspan="3" style="border: 1px solid black; height: 73px;">
+													<td colspan="3" style="border: 1px solid black; height: 63px;">
 														<ul style="list-style-type: none; padding: 0; margin: 0;text-align:left;">
 															<li style="margin-left: 60px;color: #3A4265;">（3学期に記載）</li>
 															<li style="margin-left: 60px;color: #3A4265;"></li>
@@ -2198,8 +2193,8 @@
 												
 												}  
 												$fmark=($mark=="Excellent")?'<b>O</b>':''; 
-											$output.='<tr style="height:80px;">
-											<td colspan="4" style="height:40px;text-align:left;color: #3A4265;width:100px;">'.$papers['papers'].'</td>
+											$output.='<tr style="height:60px;">
+											<td colspan="4" style="text-align:left;color: #3A4265;width:100px;">'.$papers['papers'].'</td>
 											<td colspan="1">'.$fmark.'
 											</td>
 											</tr>';
@@ -2242,7 +2237,7 @@
 											}  
 										
 										}
-										$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:30px;">
+										$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:10px;">
 											<thead class="colspanHead">
 												<tr>
 													<td colspan="5" style="color: #3A4265;">特別の教科　道徳　(3学期に記載)</td>
@@ -2250,7 +2245,7 @@
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:150px;text-align:center;color: #3A4265;">
+													<td colspan="5" style="height:120px;text-align:center;color: #3A4265;">
 														'.$mark1.'
 													</td>
 												</tr>
@@ -2293,15 +2288,18 @@
 											}  
 										
 										}
-										$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:30px;">
+										$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:10px;">
 											<thead class="colspanHead">
 												<tr>
 													<td colspan="5" style="color: #3A4265;">総合的な学習の時間　(2学期に記載)</td>
 												</tr>
+												<tr>
+													<td colspan="5" style="color: #3A4265;border-top: 1px solid black;">マラヤ大学生との国際交流会を成功させよう</td>
+												</tr>
 											</thead>
 											<tbody>
 												<tr style="border-top: 1px solid black;">
-													<td colspan="5" style="height:150px;text-align:center;color: #3A4265;">
+													<td colspan="5" style="height:120px;text-align:center;color: #3A4265;">
 														'.$mark2.'
 													</td>
 												</tr>
@@ -2338,7 +2336,7 @@
 											}  
 										
 										}
-										$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:30px;">
+										$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:10px;">
 											<thead class="colspanHead">
 												<tr>
 													<td colspan="5" style="color: #3A4265;">特 別 活 動 等 の 記 録 （毎学期記載）</td>
@@ -2346,7 +2344,7 @@
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:70px;text-align:left;color: #3A4265; ">
+													<td colspan="5" style="height:60px;text-align:left;color: #3A4265; ">
 														'.$mark3.'
 													</td>
 												</tr>
@@ -2387,7 +2385,7 @@
 											}  
 										
 										}
-										$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:30px;">
+										$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:10px;">
 											<thead class="colspanHead">
 												<tr>
 													<td colspan="5" style="color: #3A4265;">所見　(3学期に記載)</td>
@@ -2395,7 +2393,7 @@
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:187px;text-align:center;color: #3A4265;">
+													<td colspan="5" style="height:120px;text-align:center;color: #3A4265;">
 														'.$mark4.'
 													</td>
 												</tr>
@@ -2408,15 +2406,15 @@
 											</div>
 										</div>
 						
-										<div class="row" style="margin-top:10px;">
-											<div style="width: 50%;float: left;">
+										<div class="row" style="margin-top:5px;">
+											<div style="width: 40%;float: left;">
 												<table style="border-collapse: collapse; margin-top: 12px;  border: 2px solid black;">
 													<thead style="text-align: center;">
 														<!-- Your content here -->
 													</thead>
 													<tbody>
 														<tr>
-															<td style="text-align: left; height: 45px; border: 1px solid black;color: #3A4265;">
+															<td style="text-align: left; height: 40px; border: 1px solid black;color: #3A4265;">
 																校│<br>長│'.$getteacherdata['data']['principal'].'
 															</td>
 														</tr>
@@ -2431,7 +2429,7 @@
 													</thead>
 													<tbody>
 														<tr>
-															<td style="text-align: left; height: 45px; border: 1px solid black;color: #3A4265;">
+															<td style="text-align: left; height: 40px; border: 1px solid black;color: #3A4265;">
 																担│<br>任│ '.$getteacherdata['data']['teacher'].'
 															</td>
 														</tr>
@@ -2446,27 +2444,21 @@
 						
 						</html>';
 						$pdf = \App::make('dompdf.wrapper');
-
-						// Set custom paper size
-						$customPaper = [0, 0, 792.00, 1330.00];
+						// set size
+						$customPaper = array(0, 0, 792.00, 1224.00);
 						$pdf->set_paper($customPaper);
 						$pdf->loadHTML($output);
+						// filename
+						$now = now();
+						$name = strtotime($now);
+						$fileName = __('messages.report_card') . $stu['name'].$name . ".pdf";
+						return $pdf->download($fileName);
 						// return $pdf->stream();
-						// Filename setup
-						$fileName = __('messages.report_card') .'-'. $stu['name'] . ".pdf";
-						$pdfFilePath = $storagePath . '/' . $fileName;
-					
-						// Save the PDF to the specified folder
-						$pdf->save($pdfFilePath);
-					
-						// Add the PDF file path to the array
-						$pdfFiles[] = $pdfFilePath;
-					}
 				}
 			}
             elseif($request->department_id==2) // Secondary 
             {
-                $sno=0;
+                $sno=1;
 				
 					$bdata = [
 					'id' => session()->get('branch_id'),
@@ -2474,9 +2466,7 @@
 					$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 				
 				
-					foreach($getstudents['data'] as $stu)
-					{
-						$sno++;
+					
 						$output='<!DOCTYPE html>
 					<html lang="en">
 					
@@ -3080,40 +3070,18 @@
 					
 					</html>';
 					$pdf = \App::make('dompdf.wrapper');
-
-					// Set custom paper size
-					$customPaper = [0, 0, 792.00, 1224.00];
+					// set size
+					$customPaper = array(0, 0, 792.00, 1224.00);
 					$pdf->set_paper($customPaper);
 					$pdf->loadHTML($output);
-				
-					// Filename setup
-					$fileName = __('messages.report_card') .'-'. $stu['name'] . ".pdf";
-					$pdfFilePath = $storagePath . '/' . $fileName;
-				
-					// Save the PDF to the specified folder
-					$pdf->save($pdfFilePath);
-				
-					// Add the PDF file path to the array
-					$pdfFiles[] = $pdfFilePath;
-				}
+					// filename
+					$now = now();
+					$name = strtotime($now);
+					$fileName = __('messages.report_card') . $stu['name'].$name . ".pdf";
+					//return $pdf->download($fileName);
+					return $pdf->stream();
 			}
-			// Create a ZIP file
-			$now = now();
-			$timestamp = strtotime($now);
-			$zipFileName = __('messages.report_card') . $timestamp . ".zip";
-			$zipFilePath = $storagePath . '/' . $zipFileName;
-
-			$zip = new ZipArchive();
-			if ($zip->open($zipFilePath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
-				foreach ($pdfFiles as $pdfFile) {
-					$zip->addFile($pdfFile, basename($pdfFile));
-				}
-				$zip->close();
-			}
-			if (File::exists($zipFilePath)) {
-				return response()->download($zipFilePath)->deleteFileAfterSend(true);
-			}
-			// Download the ZIP file
+			
 			
 			
 		}
@@ -3130,6 +3098,8 @@
 				'semester_id' => $request->semester_id,
 				'session_id' => $request->session_id,
 				'academic_session_id' => $request->academic_year,
+				
+				'student_id' => $request->student_id,
 			];        
 			$language="国語";
 			$socity="社会";
@@ -3141,29 +3111,22 @@
 			$sport="保体";
 			$engineer="技家";
 			
-			$getstudents = Helper::PostMethod(config('constants.api.exam_studentslist'), $data);
+			$getstudents = Helper::PostMethod(config('constants.api.exam_individualstudentslist'), $data);
+			
 			if (empty($getstudents['data'])) 
 			{
 				return redirect()->route('admin.exam_results.byreport')->with('errors', "No Student Data Found");
 			}
+			$stu=$getstudents['data'];	
 			$getmainsubjects =array($language,$socity,$math,$science,$english);        
 			$getnonmainsubjects =array($music,$art,$sport,$engineer);  
 			$footer_text = session()->get('footer_text');
 			$personal_score="個人得点"; //   individual score
 	
 			$fonturl = storage_path('fonts/ipag.ttf');
-			$sno=0;
-			$storagePath = storage_path('app/public/pdfs');
-
-			// Ensure the storage directory exists
-			if (!File::exists($storagePath)) {
-				File::makeDirectory($storagePath, 0755, true);
-			}
-
-			$pdfFiles = [];
-			foreach($getstudents['data'] as $stu)
-			{
-				$sno++; 
+			$sno=1;
+			
+			
 				$output = "<!DOCTYPE html>";
 				$output .= "<html><head>";
 				$output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
@@ -3446,422 +3409,18 @@
 				</body>
 				</html';
 				$pdf = \App::make('dompdf.wrapper');
-
-				// Set custom paper size
-				$customPaper = [0, 0, 792.00, 1224.00];
-				$pdf->set_paper($customPaper);
-				$pdf->loadHTML($output);
-			
-				// Filename setup
-				$fileName = __('messages.personal_test_res') .'-'. $stu['name'] . ".pdf";
-				$pdfFilePath = $storagePath . '/' . $fileName;
-			
-				// Save the PDF to the specified folder
-				$pdf->save($pdfFilePath);
-			
-				// Add the PDF file path to the array
-				$pdfFiles[] = $pdfFilePath;
-			}
-			// Create a ZIP file
-			$now = now();
-			$timestamp = strtotime($now);
-			$zipFileName = __('messages.personal_test_res') . $timestamp . ".zip";
-			$zipFilePath = $storagePath . '/' . $zipFileName;
-
-			$zip = new ZipArchive();
-			if ($zip->open($zipFilePath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
-				foreach ($pdfFiles as $pdfFile) {
-					$zip->addFile($pdfFile, basename($pdfFile));
-				}
-				$zip->close();
-			}
-
-			// Download the ZIP file
-			if (File::exists($zipFilePath)) {
-				return response()->download($zipFilePath)->deleteFileAfterSend(true);
-			}
+            // set size
+            $customPaper = array(0, 0, 792.00, 1224.00);
+            $pdf->set_paper($customPaper);
+            $pdf->loadHTML($output);
+            // filename
+            $now = now();
+            $name = strtotime($now);
+            $fileName = __('messages.report_card') .$stu['name']. $name . ".pdf";
+            //return $pdf->download($fileName);
+			return $pdf->stream();
+           
 		}
-   	public function downprimaryform1($id)
-    {
-        //dd($student_id);
-        $footer_text = session()->get('footer_text');
-        $sdata = [
-        'id' => $id,
-       
-        ];      
-        $getstudent = Helper::PostMethod(config('constants.api.student_details'), $sdata);
-        $student=$getstudent['data']['student'];
-        $data = [
-        'id' => $id,
-        'department_id'=> $student['department_id'],
-        ];
-        $prev = json_decode($getstudent['data']['student']['previous_details']);
-        $school_name=$prev->school_name;
-        $pdata = [
-        'id' => $student['father_id'],
-        ];
-        $getparent = Helper::PostMethod(config('constants.api.parent_details'), $pdata);
-        $getclasssec = Helper::PostMethod(config('constants.api.studentclasssection'), $data);
-        $parent=$getparent['data']['parent'];
-       
-        $fonturl = storage_path('fonts/ipag.ttf');
-        $output = "<!DOCTYPE html>";
-        $output .= "<html><head>";
-        $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-        $output .= '<meta name="description"
-        content="Paxsuzen School is a premier educational institution that offers quality education to students of all ages.
-         Our curriculum is designed to prepare future leaders for success in the global marketplace.">';
-        $output .= '<meta name="keywords" content="Paxsuzen School, education, future leaders, curriculum">';
-        $output .='<meta content="Paxsuzen" name="author" />';
-        $output .= '<style>';
-        // $test .='* { font-family: DejaVu Sans, sans-serif; }';
-        $output .= '@font-face {
-                   font-family: Open Sans ipag;
-                   font-style: normal;
-                   font-weight: 300;
-                   src: url("' . $fonturl . '");
-                   }
-                   body {
-                    font-family: "ipag", "Open Sans", !important;
-                    }  
-                    .table {
-                        width: 100%;
-                        color: black;
-                        text-align: center;
-                        border-collapse: collapse;
-                        /* Ensures borders are collapsed */
-                        border: 3px solid black;
-                    }
-                    .table {
-                        width: 100%;
-                        margin-bottom: 1px;
-                        color: black;
-                        text-align: center;
-                        border-collapse: collapse;
-                        /* Ensures borders are collapsed */
-                        border: 2px solid black;
-                    }
-       
-                    .table th,
-                    .table td {
-                        text-align: center;
-                        padding: 10px;
-                        /* Add padding for better spacing */
-                        border: 1px solid black;
-                    }
-           
-                    .table td {
-                        color: #3A4265;
-                    }
-           
-                    .diagonalCross {
-                        position: relative;
-                        padding: 10px;
-                        border: none;
-                        text-align: center;
-                    }
-           
-                    .diagonalCross::after {
-                        content: "";
-                        position: absolute;
-                        width: 2px;
-                        /* Thickness of the lines */
-                        height: 3.8%;
-                        background-color: black;
-                        /* Color of the lines */
-                        top: 0;
-                        left: 0%;
-                        transform-origin: center;
-                    }
-           
-                    .diagonalCross::after {
-                        transform: rotate(-45deg);
-                    }
-           
-                    .diagonalCross1 {
-                        position: relative;
-                        padding: 10px;
-                        border: none;
-                        text-align: center;
-                    }
-           
-                    .diagonalCross1::after {
-                        content: "";
-                        position: absolute;
-                        width: 2px;
-                        /* Thickness of the lines */
-                        height: 4%;
-                        background-color: black;
-                        /* Color of the lines */
-                        top: 0%;
-                        left: -62%;
-                        right: 50%;
-                        transform-origin: center;
-                    }
-           
-                    .diagonalCross1::after {
-                        transform: rotate(-45deg);
-                    }
-           
-                    .content {
-                        box-sizing: border-box;
-                        display: block;
-                        margin: 0 auto;
-                        padding: 20px;
-                        border-radius: 7px;
-                        background-color: #fff;
-                        border: 1px solid #dddddd;
-                        font-size: 15px;
-                    }
-        </style>';
-        $output .= "</head>";
-        $output .= "<body>";
-        $output .=' <div class="content">
-        <p style=" text-align:center;font-size:20px;">小　学　校　児　童　指　導　要　録</p>
-        <p class="float-left;">様式１（学籍に関する記録）</p>
-        <table class="main" width="100%">
-        <tr>
-        <table class="table table-bordered" style="width: 50%;">
-        <thead>
-        <tr>
-            <td>番号入力</td>
-        </tr>
-        <tr>
-           <td>'.$student['roll_no'].'</td>
-        </tr>
-         </thead>
-        </table>
-        <td>
-        <table class="table table-bordered" style="margin-bottom: 15px;">
-            <thead>
-                <tr>
-                    <td colspan="2" style="text-align:center;">区分</td>
-                    <td colspan="1" class="diagonalCross"
-                        style="width:50px;border-right:hidden; border-left:hidden;"></td>
-                    <td colspan="1" style="text-align:center;">学年</td>';
-                    $getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
-                    //dd('$getgrade');
-                    foreach($getgrade['data'] as $grade)
-                    {
-                       
-                        $output.=' <td>'.$grade['name_numeric'].'</td>';
-                    }
-        $output.='</tr>
-            </thead>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="4">学 級</td>';
-                    foreach($getclasssec['data'] as $sec)
-                    {
-                       
-                        $output.='<td> '.$sec['section'].'</td>';
-                    }
-                    $output.='</tr>
-                <tr>
-                    <td colspan="4">整 理 番 号</td>';
-                    foreach($getclasssec['data'] as $sec)
-                    {
-                       
-                        $output.='<td> '.$sec['studentPlace'].'</td>';
-                    }
-                    $output.='
-                    </tr>
-            </tbody>
-        </table>
-    </td>
-</tr>
-<tr>
-    <td colspan="2">
-        <table class="table table-bordered">
-            <thead class="colspanHead">
-                <tr>
-                    <td colspan="13" style="text-align:center; border: 1px solid black;font-size:20px;">
-                        <p
-                            style="color:black; margin:0px 0px 0px 0px; letter-spacing:0; white-space:nowrap;">
-                            学　　　　籍　　　　の　　　　記　　　　録</p>
-                    </td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td rowspan="2">児<br>童</td>
-                    <td>ふりがな<br>氏　　名</td>
-                    <td colspan="3">'.$student['first_name'].' '.$student['last_name'].'<br>
-                        東京　花子<br>
-                        3/28/2008<br>
-                        生<br></td>
-                    <td style="padding:0px !important; width:13px;">性 <br> 別</td>
-                    <td style="padding:0px !important; width:13px;">女</td>
-                    <td colspan="3">入学前の経歴 </td>
-                    <td colspan="3">岡山市立岡山中央小学校</td>
-                </tr>
-                <tr>
-                    <td>現住所(current Address)</td>
-                    <td colspan="5">'.$student['current_address'].'</td>
-                    <td colspan="3">入学・編入学等 </td>
-                    <td colspan="3"></td>
-                </tr>
-                <tr>
-                    <td rowspan="3">保 <br>護 <br>者</td>
-                    <td>ふりがな
-                        <br> 氏名 (Furgaina name)
-                    </td>
-                    <td colspan="5">'.$student['first_name'].' '.$student['last_name'].'</td>
-                    <td colspan="3">退　学　等 (Resignation)</td>
-                    <td colspan="3"></td>
-                </tr>
- 
-                <tr style="height:70px">
-                    <td rowspan="2">現住所(Current Address)</td>
-                    <td rowspan="2" colspan="5">'.$student['current_address'].'</td>
-                    <td colspan="3">卒業</td>
-                    <td colspan="3"></td>
-                </tr>
-                <tr>
-                    <td colspan="3" style="height:70px">進学先 </td>
-                    <td colspan="3"></td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-bordered">
-            <tr>
-                <td colspan="4" style="width:90px">学校名<br>
-                    及び<br>
-                    所在地</td>
-                <td colspan="7">在マレーシア日本国大使館附属・クアラルンプール日本人会日本人学校<br>
-                    The Japanese School of Kuala Lumpur<br>
-                    Saujana Resort Seksyen U2, 40150 Shah Alam, Selangor Darul Ehsan,
-                    Malaysia<br>
-                    Tel: 03-78465939 Fax: 03-78465949<br>
-                </td>
-            </tr>
-        </table>
-        <table class="table table-bordered">
-            <tr>
-                <td rowspan="2" style="width:50px;">区分</td>
-                <td class="diagonalCross1" style="width:50px;border-left:hidden">
-                    年度
-                </td>
-                <td style="width:30%;">平成○年度(Heisei year)</td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td style="width:50px;border-left:hidden">学年</td>';
-                $getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
-                //dd('$getgrade');
-				$i=0;
-                foreach($getgrade['data'] as $grade)
-                {
-                   $i++;
-				   if($i<=3)
-				   {
-                    $output.=' <td>'.$grade['name_numeric'].'</td>';
-				   }
-                }
-               
-                $output.='</tr>
-            <tr style="height:80px">
-                <td colspan="2">校長氏名印 </td>';
-				$i=0;
-                foreach($getclasssec['data'] as $princ)
-                {
-					$i++;
-					if($i<=3)
-					{
-						$output.=' <td >'.$princ['principal'].'</td>';
-					}
-                }
-               
-                $output.='</tr>
-            <tr style="height:80px">
-                <td colspan="2">学級担任者
-                    氏名印 </td>';
-					$i=0;
-					
-					foreach($getclasssec['data'] as $teach)
-					{
-							$i++;
-						if($i<=3)
-						{
-							$output.=' <td>'.$teach['teacher'].'</td>';
-						}
-					}
-                   
-                    $output.='</tr>
-            <tr>
-                <td rowspan="2" style="width:50px;">区分</td>
-                <td class="diagonalCross1" style="width:50px;border-left:hidden">
-                    年度
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td style="width:50px;border-left:hidden">学年 </td>';
-                $getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
-                $getclasssec = Helper::PostMethod(config('constants.api.studentclasssection'), $data);
-                //dd('$getgrade');
-				$i=0;
-                foreach($getgrade['data'] as $grade)
-                {
-					$i++;
-					if($i>3)
-					{
-               			$output.=' <td >'.$grade['name_numeric'].'</td>';
-					}
-                }
-               
-                $output.='
-                </tr>
-            <tr style="height:80px">
-                <td colspan="2">校長氏名印 </td>';
-				$i=0;
-                foreach($getclasssec['data'] as $princ)
-                {
-                    $i++;
-					if($i>3)
-					{
-						$output.=' <td >'.$princ['principal'].'</td>';
-					}
-                }
-               
-                $output.='</tr>
-            <tr style="height:80px">
-                <td colspan="2">学級担任者
-                    氏名印 </td>';
-					$i=0;
-                    foreach($getclasssec['data'] as $teach)
-                    {
-						$i++;
-						if($i>3)
-						{
-							$output.=' <td >'.$teach['teacher'].'</td>';
-						}
-                    }
-                   
-                    $output.='
-                </tr>
-        </table>
-    </td>
-</tr>
-</table>';
    
-        $output .= '</body></html>';
-        $pdf = \App::make('dompdf.wrapper');
-        // set size
-        $customPaper = array(0, 0, 792.00, 1224.00);
-        $pdf->set_paper($customPaper);
-        $pdf->loadHTML($output);
-        // filename
-        $now = now();
-        $name = strtotime($now);
-        $fileName = __('messages.download_form1') .'-'. $name . ".pdf";
-        return $pdf->download($fileName);
-        // return $pdf->stream();        
-       
-    }
 		
 	}
