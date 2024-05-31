@@ -3,11 +3,11 @@ $(function () {
     $('#changeClassName').on('change', function () {
         var class_id = $(this).val();
         $("#bysubjectfilter").find("#examnames").empty();
-        $("#bysubjectfilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
+        $("#bysubjectfilter").find("#examnames").append('<option value="">' + select_exam + '</option>');
 
         $("#bysubjectfilter").find("#sectionID").empty();
 
-        $("#bysubjectfilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
+        $("#bysubjectfilter").find("#sectionID").append('<option value="">' + select_class + '</option>');
 
 
         $.post(sectionByClass, { token: token, branch_id: branchID, class_id: class_id, teacher_id: teacher_id }, function (res) {
@@ -31,11 +31,11 @@ $(function () {
         $(Selector).find('select[name="class_id"]').empty();
         $(Selector).find('select[name="class_id"]').append('<option value="">' + select_grade + '</option>');
         $("#bysubjectfilter").find("#examnames").empty();
-        $("#bysubjectfilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
+        $("#bysubjectfilter").find("#examnames").append('<option value="">' + select_exam + '</option>');
 
         $("#bysubjectfilter").find("#sectionID").empty();
 
-        $("#bysubjectfilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
+        $("#bysubjectfilter").find("#sectionID").append('<option value="">' + select_class + '</option>');
 
         if (department_id) {
             $.post(getGradeByDepartmentUrl,
@@ -65,7 +65,7 @@ $(function () {
 
         today = yyyy + '/' + mm + '/' + dd;
         $("#bysubjectfilter").find("#examnames").empty();
-        $("#bysubjectfilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
+        $("#bysubjectfilter").find("#examnames").append('<option value="">' + select_exam + '</option>');
         $.post(examsByclassandsection, {
             token: token,
             branch_id: branchID,
@@ -87,8 +87,8 @@ $(function () {
             year: "required",
             class_id: "required",
             section_id: "required",
-            // examnames: "required",
-            // report_type: "required"
+            examnames: "required",
+            report_type: "required"
         }
     });
     $('#bysubjectfilter').on('submit', function (e) {
@@ -113,23 +113,24 @@ $(function () {
                 sessionID: session_id,
                 examID: exam_id,
                 academic_session_id: academic_session_id,
-                report_type:report_type,
+                report_type: report_type,
             };
+            console.log(classObj);
             setLocalStorageForExamResultBySubject(classObj);
 
             // download set start
             $(".downExamID").val(exam_id);
-            $(".downDepartmentID").val(department_id);			
+            $(".downDepartmentID").val(department_id);
             $(".downClassID").val(class_id);
             $(".downSemesterID").val(semester_id);
             $(".downSessionID").val(session_id);
             $(".downSectionID").val(section_id);
             $(".downAcademicYear").val(year);
-            
+
             $(".downReport_type").val(report_type);
             // download set end
 
-            var formData = new FormData();			
+            var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
             formData.append('department_id', department_id);
@@ -141,49 +142,51 @@ $(function () {
             formData.append('academic_year', year);
             formData.append('report_type', report_type);
             // examResultBySubject(formData);
-           
-            var formData1 = {
-                student_name: '',
-                department_id: department_id,
-                class_id: class_id,
-                section_id: section_id,
-                session_id: session_id
-            };
+            console.log("report_type");
+            console.log(report_type);
+            // var formData1 = {
+            //     student_name: '',
+            //     department_id: department_id,
+            //     class_id: class_id,
+            //     section_id: section_id,
+            //     session_id: session_id
+            // };
             //getStudentList(formData1);
-			 // $("#overlay").fadeOut(300);
-             if(report_type=='english_communication')
-                {
-                    $("#byec_body").show("slow");
-                    $("#byreport_body").hide("slow");                                       
-                    $("#bypersonal_body").hide("slow");
+            // $("#overlay").fadeOut(300);
+            if (report_type == 'english_communication') {
+                console.log("english_communication");
+                console.log(report_type);
+                $("#byec_body").show("slow");
+                $("#byreport_body").hide("slow");
+                $("#bypersonal_body").hide("slow");
+            }
+            else if (report_type == 'report_card') {
+                console.log("report_card");
+                console.log(report_type);
+                $("#byec_body").hide("slow");
+                $("#byreport_body").show("slow");
+                $("#bypersonal_body").hide("slow");
+            }
+            else {
+                console.log("else report");
+                console.log(report_type);
+                $("#byec_body").hide("slow");
+                $("#byreport_body").hide("slow");
+                $("#bypersonal_body").show("slow");
+                if (department_id == '2') {
+                    console.log('2');
+                    $("#secondary_personal").show("slow");
+                    $("#primary_personal").hide("slow");
                 }
-                else if(report_type=='report_card')
-                {
-                    $("#byec_body").hide("slow");
-                    $("#byreport_body").show("slow");                                       
-                    $("#bypersonal_body").hide("slow"); 
+                else {
+                    console.log('all');
+                    $("#student").hide("slow");
+                    $("#secondary_personal").hide("slow");
+                    $("#primary_personal").show("slow");
                 }
-                else
-                {
-                    $("#byec_body").hide("slow"); 
-                    $("#byreport_body").hide("slow");                                      
-                    $("#bypersonal_body").show("slow");
-                    if(department_id=='2')
-                    {
-                        console.log('2');
-                        $("#secondary_personal").show("slow");
-                        $("#primary_personal").hide("slow"); 
-                    }
-                    else
-                    {
-                        console.log('all');
-                        $("#student").hide("slow");
-                        $("#secondary_personal").hide("slow");
-                        $("#primary_personal").show("slow"); 
-                    }
-                }
+            }
         }
-		else {
+        else {
             $("#student").hide("slow");
         }
     });
@@ -198,8 +201,8 @@ $(function () {
         examResultBySubjectDetails.session_id = classObj.sessionID;
         examResultBySubjectDetails.department_id = classObj.department_id;
         examResultBySubjectDetails.report_type = classObj.report_type,
-        // here to attached to avoid localStorage other users to add
-        examResultBySubjectDetails.branch_id = branchID;
+            // here to attached to avoid localStorage other users to add
+            examResultBySubjectDetails.branch_id = branchID;
         examResultBySubjectDetails.role_id = get_roll_id;
         examResultBySubjectDetails.user_id = ref_user_id;
         var examResultBySubjectClassArr = [];
@@ -211,13 +214,13 @@ $(function () {
         }
         return true;
     }
-     // if localStorage
-     if (typeof exam_result_by_report_storage !== 'undefined') {
+    // if localStorage
+    if (typeof exam_result_by_report_storage !== 'undefined') {
         if ((exam_result_by_report_storage)) {
             if (exam_result_by_report_storage) {
                 var examResultByReportStorage = JSON.parse(exam_result_by_report_storage);
                 if (examResultByReportStorage.length == 1) {
-                    var classID, year,sectionID,departmentID, examID, userType ,semesterID, sessionID, userBranchID, userRoleID, userID;
+                    var classID, year, sectionID, departmentID, examID, userType, semesterID, sessionID, userBranchID, userRoleID, userID;
                     examResultByReportStorage.forEach(function (user) {
                         departmentID = user.department_id;
                         classID = user.class_id;
@@ -237,10 +240,10 @@ $(function () {
                         $('#report_type').val(report_type);
                         $('#session_id').val(sessionID);
                         $("#department_id").val(departmentID);
-                        if(departmentID){
-                            
+                        if (departmentID) {
+
                             $("#resultsByPaper").find("#changeClassName").empty();
-                            $("#resultsByPaper").find("#changeClassName").append('<option value="">'+select_class+'</option>');
+                            $("#resultsByPaper").find("#changeClassName").append('<option value="">' + select_class + '</option>');
                             $.post(getGradeByDepartmentUrl, { token: token, branch_id: branchID, department_id: departmentID }, function (res) {
                                 if (res.code == 200) {
                                     $.each(res.data, function (key, val) {
@@ -252,7 +255,7 @@ $(function () {
                         }
                         if (classID) {
                             $("#bysubjectfilter").find("#sectionID").empty();
-                            $("#bysubjectfilter").find("#sectionID").append('<option value="">'+select_class+'</option>');
+                            $("#bysubjectfilter").find("#sectionID").append('<option value="">' + select_class + '</option>');
                             $.post(sectionByClass, { token: token, branch_id: branchID, class_id: classID, teacher_id: userID }, function (res) {
                                 if (res.code == 200) {
                                     $("#section_drp_div").show();
@@ -263,15 +266,15 @@ $(function () {
                                 }
                             }, 'json');
                         }
-                        if(sectionID){
+                        if (sectionID) {
                             var today = new Date();
                             var dd = String(today.getDate()).padStart(2, '0');
                             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                             var yyyy = today.getFullYear();
-                    
+
                             today = yyyy + '/' + mm + '/' + dd;
                             $("#bysubjectfilter").find("#examnames").empty();
-                            $("#bysubjectfilter").find("#examnames").append('<option value="">'+select_exam+'</option>');
+                            $("#bysubjectfilter").find("#examnames").append('<option value="">' + select_exam + '</option>');
                             $.post(examsByclassandsection, {
                                 token: token,
                                 branch_id: branchID,
@@ -288,7 +291,7 @@ $(function () {
                                 }
                             }, 'json');
                         }
-                        
+
                         // download set start
                         $("#downExamID").val(examID);
                         $("#downClassID").val(classID);
@@ -313,72 +316,67 @@ $(function () {
         }
     }
 
-    function examResultBySubject(formData){
+    function examResultBySubject(formData) {
 
         // $("#overlay").fadeIn(300);
-            // list mode
-            var report_type= $("#report_type").val();
-            var department_id= $("#department_id").val();
-            var class_id=$("#changeClassName option:selected" ).text();
-            //alert(class_id);
-            $.ajax({
-                url: getbySubject,
-                method: "Post",
-                data: formData,
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                success: function (response) {
-                    console.log(response);
-                    if (response.code == 200) {
-                        if (response.data.grade_list_master.length > 0) {
-                            var datasetnew = response.data;
-                            bysubjectdetails_class(datasetnew);
-                            // $("#overlay").fadeOut(300);
-                            if(report_type=='english_communication')
-                            {
-                                $("#byec_body").show("slow");
-                                $("#byreport_body").hide("slow");                                       
-                                $("#bypersonal_body").hide("slow");
-                            }
-                            else if(report_type=='report_card')
-                            {
-                                $("#byec_body").hide("slow");
-                                $("#byreport_body").show("slow");                                       
-                                $("#bypersonal_body").hide("slow"); 
-                            }
-                            else
-                            {
-                                $("#byec_body").hide("slow"); 
-                                $("#byreport_body").hide("slow");                                      
-                                $("#bypersonal_body").show("slow");
-                                if(department_id=='2')
-                                {
-                                    console.log('2');
-                                    $("#secondary_personal").show("slow");
-                                    $("#primary_personal").hide("slow"); 
-                                }
-                                else
-                                {
-                                    console.log('all');
-                                    $("#secondary_personal").hide("slow");
-                                    $("#primary_personal").show("slow"); 
-                                }
-                            }
-                            
-                        } else {
-                            // $("#overlay").fadeOut(300);
-                            console.log('No records are available');
-                            toastr.info('No records are available');
+        // list mode
+        var report_type = $("#report_type").val();
+        var department_id = $("#department_id").val();
+        var class_id = $("#changeClassName option:selected").text();
+        //alert(class_id);
+        $.ajax({
+            url: getbySubject,
+            method: "Post",
+            data: formData,
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+                console.log(response);
+                if (response.code == 200) {
+                    if (response.data.grade_list_master.length > 0) {
+                        var datasetnew = response.data;
+                        // bysubjectdetails_class(datasetnew);
+                        // $("#overlay").fadeOut(300);
+                        if (report_type == 'english_communication') {
+                            $("#byec_body").show("slow");
+                            $("#byreport_body").hide("slow");
+                            $("#bypersonal_body").hide("slow");
                         }
+                        else if (report_type == 'report_card') {
+                            $("#byec_body").hide("slow");
+                            $("#byreport_body").show("slow");
+                            $("#bypersonal_body").hide("slow");
+                        }
+                        else {
+                            $("#byec_body").hide("slow");
+                            $("#byreport_body").hide("slow");
+                            $("#bypersonal_body").show("slow");
+                            if (department_id == '2') {
+                                console.log('2');
+                                $("#secondary_personal").show("slow");
+                                $("#primary_personal").hide("slow");
+                            }
+                            else {
+                                console.log('all');
+                                $("#secondary_personal").hide("slow");
+                                $("#primary_personal").show("slow");
+                            }
+                        }
+
                     } else {
-                        toastr.error(data.message);
-                        $('#byec_body').hide();
-                        $('#byreport_body').hide();					                                     
-                        $("#bypersonal_body").hide("slow");
+                        // $("#overlay").fadeOut(300);
+                        console.log('No records are available');
+                        toastr.info('No records are available');
                     }
+                } else {
+                    toastr.error(data.message);
+                    $('#byec_body').hide();
+                    $('#byreport_body').hide();
+                    $("#bypersonal_body").hide("slow");
                 }
-            });
+            }
+        });
     }
 
     /*function getStudentList(formData) {
@@ -606,11 +604,11 @@ $(function () {
                 {
     }*/
 
-           
 
-    
 
-    
+
+
+
 
     $(document).on('click', '.exportToExcel', function (e) {
         // var table = $(this).prev('.table2excel');
@@ -657,7 +655,7 @@ $('.individual_pdf').on('click', function (e) {
 
         // download set start
         $(".downExamID").val(exam_id);
-        $(".downDepartmentID").val(department_id);			
+        $(".downDepartmentID").val(department_id);
         $(".downClassID").val(class_id);
         $(".downSemesterID").val(semester_id);
         $(".downSessionID").val(session_id);
