@@ -230,7 +230,6 @@ $(function () {
                         $('#report_type').val(report_type);
                         $('#session_id').val(sessionID);
                         $("#department_id").val(departmentID);
-                        $("#report_type").val(userType);
                         if (departmentID) {
 
                             $("#resultsByPaper").find("#changeClassName").empty();
@@ -286,12 +285,32 @@ $(function () {
                         // download set start
                         $("#downExamID").val(examID);
                         $("#downClassID").val(classID);
+                        // $("#downSemesterID").val(sessionID);
                         $("#semester_id").val(semesterID);
                         $("#downSessionID").val(sessionID);
                         $("#downSectionID").val(sectionID);
                         $("#downAcademicYear").val(year);
                         $("#report_type").val(userType);
+                        // download set end
+                        var formData = new FormData();
+                        formData.append('token', token);
+                        formData.append('branch_id', branchID);
+                        formData.append('class_id', classID);
+                        formData.append('section_id', sectionID);
+                        formData.append('exam_id', examID);
+                        formData.append('semester_id', semesterID);
+                        formData.append('session_id', sessionID);
+                        formData.append('academic_year', year);
+                        examResultBySubject(formData);
+                    }
+                }
+            }
+        }
+    }
+
     function examResultBySubject(formData) {
+
+        // $("#overlay").fadeIn(300);
         // list mode
         var report_type = $("#report_type").val();
         var department_id = $("#department_id").val();
@@ -350,6 +369,10 @@ $(function () {
                 }
             }
         });
+    }
+
+    /*function getStudentList(formData) {
+        $("#student").show("slow");
         $("#student").show("slow");
         // set download filter value
         $('#excelStudentName').val(formData.student_name);
@@ -359,6 +382,10 @@ $(function () {
         $('#excelStatus').val(formData.status);
         $('#excelSession').val(formData.session_id);
         // $('#academicYear').val(formData.academic_year);
+        var table = $('#student-table').DataTable({
+            processing: true,
+            info: true,
+            bDestroy: true,
             dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
@@ -528,20 +555,112 @@ $(function () {
     }
         }, 5000);
     
-        }
+            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
+                 "<'row'<'col-sm-12'tr>>" +
+                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            language: {
+                emptyTable: no_data_available,
+                infoFiltered: filter_from_total_entries,
+                zeroRecords: no_matching_records_found,
+                infoEmpty: showing_zero_entries,
+                info: showing_entries,
+                lengthMenu: show_entries,
+                search: datatable_search,
+                paginate: {
+                    next: next,
+                    previous: previous
+                },
+            },
+                    d.student_name = formData.student_name,
+                    d.department_id = formData.department_id,
+                    d.class_id = formData.class_id,
+                    d.section_id = formData.section_id,
+                    d.session_id = formData.session_id
+                },
+                dataSrc: function (json) {
+                    console.log(json); // Log the JSON response to check its validity
+                    return json.data;
+                },
+                error: function (xhr, error, thrown) {
+                    console.error("Error occurred: ", error, thrown); // Log any error that occurs during the AJAX request
+                    console.error("Response Text: ", xhr.responseText); // Log the server response text
+            pageLength: 10,
+            aLengthMenu: [
+                },
+                    data: 'termination_status',
+                    name: 'termination_status',
+                    render: function(data, type, row) {
+                        return data ? 'Terminated' : 'Active';
+                    }
+                },
+                {
+    }*/
 
 
 
-    }
 
-    // find matched
-        function isKey(key, obj) {
-            var keys = Object.keys(obj).map(function (x) {
-                return x;
+
+
+
+    $(document).on('click', '.exportToExcel', function (e) {
+        // var table = $(this).prev('.table2excel');
+        var table = $('.table2excel');
+        if (table && table.length) {
+            var preserveColors = (table.hasClass('table2excel_with_colors') ? true : false);
+            $(table).table2excel({
+                // exclude: ".noExl",
+                name: "By Subject",
+                filename: downloadFileName + new Date().toISOString().replace(/[\-\:\.]/g, "") + ".xls",
+                fileext: ".xls",
+                exclude_img: true,
+                exclude_links: true,
+                exclude_inputs: true,
+                preserveColors: preserveColors
             });
-            return keys.indexOf(key) !== -1;
         }
+    });
 
-    
+});
+
+// find matched
+function isKey(key, obj) {
+    var keys = Object.keys(obj).map(function (x) {
+        return x;
+    });
+    return keys.indexOf(key) !== -1;
+}
+
+$('.individual_pdf').on('click', function (e) {
+    e.preventDefault();
+    var student_id = $(this).data('student-id');
+    alert(student_id);
+    var byclass = $("#bysubjectfilter").valid();
+    if (byclass === true) {
+        var year = $("#btwyears").val();
+        var department_id = $("#department_id").val();
+        var semester_id = $("#semester_id").val();
+        var session_id = $("#session_id").val();
+        var class_id = $("#changeClassName").val();
+        var section_id = $("#sectionID").val();
+        var exam_id = $("#examnames").val();
+        var report_type = $("#report_type").val();
+
+        // download set start
+        $(".downExamID").val(exam_id);
         $(".downDepartmentID").val(department_id);
+        $(".downClassID").val(class_id);
+        $(".downSemesterID").val(semester_id);
+        $(".downSessionID").val(session_id);
+        $(".downSectionID").val(section_id);
+        $(".downAcademicYear").val(year);
+        $(".downReport_type").val(report_type);
+        $(".downstudent_id").val(student_id);
+    }
+    // find matched
+    function isKey(key, obj) {
+        var keys = Object.keys(obj).map(function (x) {
+            return x;
+        });
+        return keys.indexOf(key) !== -1;
+    }
 });

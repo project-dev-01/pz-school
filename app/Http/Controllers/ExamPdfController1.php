@@ -16,7 +16,7 @@
 		
 		public function downbyecreport(Request $request)
 		{
-			
+			$pdf_logo = config('constants.image_url') . '/common-asset/images/jskl_pdf_logo.png';
 			$data = [
             'branch_id' => session()->get('branch_id'),
             'exam_id' => $request->exam_id,
