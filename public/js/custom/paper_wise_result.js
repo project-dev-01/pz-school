@@ -134,6 +134,7 @@ $(function () {
         e.preventDefault();
         var valid = $("#resultsByPaper").valid();
         if (valid === true) {
+            var department_id = $("#department_id").val();
             var class_id = $("#changeClassName").val();
             var section_id = $("#sectionID").val();
             var subject_id = $("#subjectID").val();
@@ -142,6 +143,7 @@ $(function () {
             var session_id = $("#session_id").val();
 
             var classObj = {
+                departmentID: department_id,
                 classID: class_id,
                 sectionID: section_id,
                 subjectID: subject_id,
@@ -224,6 +226,7 @@ $(function () {
         examPaperResultDetails.exam_id = classObj.examID;
         examPaperResultDetails.semester_id = classObj.semesterID;
         examPaperResultDetails.session_id = classObj.sessionID;
+        examPaperResultDetails.department_id = classObj.departmentID;
         examPaperResultDetails.academicSessionID = classObj.academicSessionID;
         // here to attached to avoid localStorage other users to add
         examPaperResultDetails.branch_id = branchID;
@@ -250,7 +253,7 @@ $(function () {
             if (exam_paper_result_storage) {
                 var examPaperResultStorage = JSON.parse(exam_paper_result_storage);
                 if (examPaperResultStorage.length == 1) {
-                    var classID, sectionID, subjectID,academicSessionID, examID, semesterID, sessionID, userBranchID, userRoleID, userID;
+                    var departmentID,classID, sectionID, subjectID,academicSessionID, examID, semesterID, sessionID, userBranchID, userRoleID, userID;
                     examPaperResultStorage.forEach(function (user) {
                         classID = user.class_id;
                         sectionID = user.section_id;
@@ -261,12 +264,27 @@ $(function () {
                         userBranchID = user.branch_id;
                         userRoleID = user.role_id;
                         userID = user.user_id;
+                        departmentID = user.department_id;
                         academicSessionID = user.academicSessionID;
                     });
                     if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
                         $('#changeClassName').val(classID);
                         $('#semester_id').val(semesterID);
                         $('#session_id').val(sessionID);
+                        $("#department_id").val(departmentID);
+                        if(departmentID){
+                            
+                            $("#resultsByPaper").find("#changeClassName").empty();
+                            $("#resultsByPaper").find("#changeClassName").append('<option value="">'+select_class+'</option>');
+                            $.post(getGradeByDepartmentUrl, { token: token, branch_id: branchID, department_id: departmentID }, function (res) {
+                                if (res.code == 200) {
+                                    $.each(res.data, function (key, val) {
+                                        $("#changeClassName").append('<option value="' + val.id + '">' + val.name + '</option>');
+                                    });
+                                    $("#changeClassName").val(classID);
+                                }
+                            }, 'json');
+                        }
                         if (classID) {
                             
                             $("#resultsByPaper").find("#sectionID").empty();

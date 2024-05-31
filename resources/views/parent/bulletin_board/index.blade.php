@@ -166,18 +166,18 @@
                 <div class="card-body collapse show">             
                 <ul class="nav nav-pills navtab-bg nav-justified" id="myTabs" style="padding: 0px 20px 0px 20px;">
                     <li class="nav-item">
-                        <a href="#home1" id="tab1" data-toggle="tab" aria-expanded="false" class="nav-link">
+                        <a href="#home1" id="tab1" data-toggle="tab" aria-expanded="false" class="nav-link active">
                             {{ __('messages.buletin') }}
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#profile1" id="tab2" data-toggle="tab" aria-expanded="true" class="nav-link active">
+                        <a href="#profile1" id="tab2" data-toggle="tab" aria-expanded="true" class="nav-link ">
                             {{ __('messages.imp_buletin') }}
                         </a>
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane" id="home1">
+                    <div class="tab-pane active" id="home1">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12">
@@ -202,7 +202,7 @@
                     </div> <!-- end card-->
 
 
-                    <div class="tab-pane show active" id="profile1">
+                    <div class="tab-pane show " id="profile1">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12">
