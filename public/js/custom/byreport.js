@@ -142,8 +142,6 @@ $(function () {
             formData.append('academic_year', year);
             formData.append('report_type', report_type);
             // examResultBySubject(formData);
-            console.log("report_type");
-            console.log(report_type);
             // var formData1 = {
             //     student_name: '',
             //     department_id: department_id,
@@ -154,32 +152,24 @@ $(function () {
             //getStudentList(formData1);
             // $("#overlay").fadeOut(300);
             if (report_type == 'english_communication') {
-                console.log("english_communication");
-                console.log(report_type);
                 $("#byec_body").show("slow");
                 $("#byreport_body").hide("slow");
                 $("#bypersonal_body").hide("slow");
             }
             else if (report_type == 'report_card') {
-                console.log("report_card");
-                console.log(report_type);
                 $("#byec_body").hide("slow");
                 $("#byreport_body").show("slow");
                 $("#bypersonal_body").hide("slow");
             }
             else {
-                console.log("else report");
-                console.log(report_type);
                 $("#byec_body").hide("slow");
                 $("#byreport_body").hide("slow");
                 $("#bypersonal_body").show("slow");
                 if (department_id == '2') {
-                    console.log('2');
                     $("#secondary_personal").show("slow");
                     $("#primary_personal").hide("slow");
                 }
                 else {
-                    console.log('all');
                     $("#student").hide("slow");
                     $("#secondary_personal").hide("slow");
                     $("#primary_personal").show("slow");

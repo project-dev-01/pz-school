@@ -31,7 +31,6 @@
 			];        
 			
 			$getstudents = Helper::PostMethod(config('constants.api.exam_studentslist'), $data);
-			
 			$footer_text = session()->get('footer_text');
 			$sno=0;
 			
@@ -62,7 +61,6 @@
 			if (!File::exists($storagePath)) {
 				File::makeDirectory($storagePath, 0755, true);
 			}
-
 			$pdfFiles = [];
 			foreach($getstudents['data'] as $stu)
 			{
@@ -551,14 +549,19 @@
 			$math='算数';
 			$life='生活';
 			$music='音楽';
-			$art='図工';
+			// $art='図工';
+			$art='図画工作';
 			$sport='体育';
 			$science="理科";
 			$socity="社会";
-			$homeeconomics="家庭科";
+			$homeeconomics="家庭";
 			$foreignlanguage="外国語";
 			$english="英語";
-			$tech_homeeconomics="技術・家庭科";
+			// $tech_homeeconomics="技術・家庭科";
+			$tech_homeeconomics="技術・家庭";
+			$secondary_math='数学';
+			$secondary_sports='保健体育';
+			$secondary_arts='美術';
 			
 			
 			$primarypaper1="知識・技能"; //Knowledge & Skills
@@ -568,11 +571,11 @@
 			$personal_score="個人得点"; //   individual score / Personal Points
 			
 			$specialsubject1="行動及び生活の記録"; //Records of actions and life
-			$specialpaper1="気持ちのよい挨拶と返事をし、時間を守り、規則正しい生活を する。";// Greet and reply pleasantly, be punctual, and be regular Make a living.
+			$specialpaper1="気持ちのよい挨拶と返事をし、時間を守り、規則正しい生活をする。";// Greet and reply pleasantly, be punctual, and be regular Make a living.
 			$specialpaper2="体力の向上に努め、元気に生活をする。"; // Strive to improve own physical fitness and live a healthy life.						
 			$specialpaper3="より高い目標を決め、根気強く努力する。";	// Set higher goals and work hard.					
 			$specialpaper4="自分の役割と責任を自覚し、信頼される行動をする";	//Be aware of own roles and responsibilities and act in a way that is trustworthy.				
-			$specialpaper5="進んで新しい考えや方法を見付け、工夫して生活をよりよくしよう とする。";	// willing to find new ideas and methods, and try to improve own living by devising ways to do so					
+			$specialpaper5="進んで新しい考えや方法を見付け、工夫して生活をよりよくしようとする。";	// willing to find new ideas and methods, and try to improve own living by devising ways to do so					
 			$specialpaper6="思いやりや感謝の心をもつとともに、相手の考えや立場を尊重し、力を合わせて生活する。"	;	//Have compassion and gratitude, and understand the thoughts and positions of others.   Respect and live together.				
 			$specialpaper7="自然や自他の生命を大切にする。";	//Cherish nature, self and other life.					
 			$specialpaper8="人や社会に役立つことを考え、進んで仕事や奉仕活動をする。";	//Think about being useful to people and society, and be willing to work and do service activities.  Do.					
@@ -582,7 +585,8 @@
 			$specialsubject2="特別の教科 道徳"; // Special Subject: Morality
 			$specialsubject3="特 別 活 動 等 の 記 録"; // Records of special activities, etc
 			$specialsubject4="所見"; // Findings
-			$specialsubject5="総合的な学習の時間"; // Hours of integrated study         
+			// $specialsubject5="総合的な学習の時間"; // Hours of integrated study         
+			$specialsubject5="総合"; // Hours of integrated study         
 			$specialsubject6="外 国 語 活 動"; // Foreign Language Activities
 			$description=array("説明"); // Descriptions
 			
@@ -602,37 +606,21 @@
 					$getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
 					$getprimarypapers = array($primarypaper1,$primarypaper2,$primarypaper3);
 					$getspecialpapers = array($specialpaper1,$specialpaper2,$specialpaper3,$specialpaper4,$specialpaper5,$specialpaper6,$specialpaper7,$specialpaper8,$specialpaper9,$specialpaper10);
-					$getspsubject1 = array($specialsubject1); // Records of actions and life- Excellent Report & only 3rd Semester                
-					$getspsubject2 = array($specialsubject2); // Special Subject: Morality ( 3rd Semester)              
-					$getspsubject3 = array($specialsubject3); // Records of special activities, etc (All Semester )
-					$getspsubject4 = array($specialsubject4); // Findings  ( 3rd Semester) 
-					$getspsubject5 = array(); // Hours of integrated study (2nd Semester)
-					$getspsubject6 = array(); // Foreign Language Activities  ( 3rd Semester) 
 				}
 				if($stuclass==3 || $stuclass==4)
 				{
-					$getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
+					// $getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
+					$getprimarysubjects = array($language,$socity,$math,$science,$music,$art,$sport);
 					$getprimarypapers = array($primarypaper1,$primarypaper2,$primarypaper3);
 					$getspecialpapers = array($specialpaper1,$specialpaper2,$specialpaper3,$specialpaper4,$specialpaper5,$specialpaper6,$specialpaper7,$specialpaper8,$specialpaper9,$specialpaper10);
-					$getspsubject1 = array($specialsubject1); // Records of actions and life- Excellent Report & only 3rd Semester                
-					$getspsubject2 = array($specialsubject2); // Special Subject: Morality ( 3rd Semester)              
-					$getspsubject3 = array($specialsubject3); // Records of special activities, etc (All Semester )
-					$getspsubject4 = array($specialsubject4); // Findings  ( 3rd Semester) 
-					$getspsubject5 = array($specialsubject5); // Hours of integrated study (2nd Semester)
-					$getspsubject6 = array($specialsubject6); // Foreign Language Activities  ( 3rd Semester) 
-					
 				}
 				if($stuclass==5 || $stuclass==6)
 				{
-					$getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
+					
+					// $getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
+					$getprimarysubjects = array($language,$socity,$math,$science,$music,$art,$homeeconomics,$sport,$foreignlanguage);
 					$getprimarypapers = array($primarypaper1,$primarypaper2,$primarypaper3);
 					$getspecialpapers = array($specialpaper1,$specialpaper2,$specialpaper3,$specialpaper4,$specialpaper5,$specialpaper6,$specialpaper7,$specialpaper8,$specialpaper9,$specialpaper10);
-					$getspsubject1 = array($specialsubject1); // Records of actions and life- Excellent Report & only 3rd Semester                
-					$getspsubject2 = array($specialsubject2); // Special Subject: Morality ( 3rd Semester)              
-					$getspsubject3 = array($specialsubject3); // Records of special activities, etc (All Semester )
-					$getspsubject4 = array($specialsubject4); // Findings  ( 3rd Semester) 
-					$getspsubject5 = array($specialsubject5); // Hours of integrated study (2nd Semester)
-					$getspsubject6 = array(); // Foreign Language Activities  ( 3rd Semester) 
 				}
 				
 			}
@@ -649,7 +637,8 @@
 				$secspecialsubject8='勤労・奉仕';	
 				$secspecialsubject9='公正・公平';	
 				$secspecialsubject10='公共心・公徳心';
-				$getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
+				// $getprimarysubjects = array($language,$math,$life,$music,$art,$sport);
+				$getprimarysubjects = array($language,$socity,$secondary_math,$science,$music,$secondary_arts,$secondary_sports,$tech_homeeconomics,$english);
                 $getprimarypapers = array($primarypaper1,$primarypaper2,$primarypaper3,$primarypaper4);
                 $getspecialpapers = array($secspecialsubject1,$secspecialsubject2,$secspecialsubject3,$secspecialsubject4,$secspecialsubject5,$secspecialsubject6,$secspecialsubject7,$secspecialsubject8,$secspecialsubject9,$secspecialsubject10);
                 $getspsubject1 = array($specialsubject1); // Records of actions and life- Excellent Report & only 3rd Semester                
@@ -865,10 +854,12 @@
                            
                             $getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
 							//$result1[] = $getmarks;
-						
+						// dd(count($getmarks['data']));
 						
 							$i=0;
-                            $n=count($getmarks['data']); 
+                            // $n=count($getmarks['data']); 
+							$data = $getmarks['data'] ?? [];
+							$n = count($data);
                             
                             foreach($getmarks['data'] as $papers)
                             {
@@ -1312,20 +1303,6 @@
 									width: 45%;
 									padding: 10px;
 								}
-						
-								.content {
-									box-sizing: border-box;
-									display: block;
-									margin: 0 auto;
-									padding: 20px;
-									border-radius: 7px;
-									margin-top: 20px;
-									background-color: #fff;
-									border: 1px solid #dddddd;
-									font-size: 13px;
-									"
-						
-								}
 							</style>
 						</head>
 						
@@ -1333,8 +1310,7 @@
 							<div class="content">
 								<div class="row">
 									<div class="column">
-										<p>クアラルンプール日本人学校　小学</p>
-										<p style="margin-left: 92px;margin-top:-13px;">部</p>
+										<p style="font-family:"ipag", "ＭＳ Ｐゴシック";font-size: 20px;">クアラルンプール日本人学校　小学部</p>
 									</div>
 								</div>
 						
@@ -1432,7 +1408,7 @@
 												$getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
 												//$result1[] = $getmarks;
 											
-											
+											// dd($getmarks);
 												$i=0;
 												$n=count($getmarks['data']); 
 												
@@ -1442,16 +1418,16 @@
 													$output.=' <tr>';
 													if($i==1)
 													{
-														$output.='<td rowspan="3" style="width:2%; height: 30px;color: #3A4265;">'.$subject.'</td>';
+														$output.='<td rowspan="3" style="width:2%; height: 22px;color: #3A4265;">'.$subject.'</td>';
 													}
-													$output.='<td style="width:15%; text-align:left; height: 30px;color: #3A4265;">'.$papers['papers'].'</td>';
+													$output.='<td style="width:15%; text-align:left; height: 22px;color: #3A4265;">'.$papers['papers'].'</td>';
 												
 													foreach($papers['marks'] as $mark)
 													{
 														
 														$mark=(isset($mark['grade'])&& $mark['grade']!=null)?$mark['grade']:'';
 														
-														$output.='<td style="width:2%; font-weight: bold; height: 30px;">'.$mark.'</td>';
+														$output.='<td style="width:2%; font-weight: bold; height: 22px;">'.$mark.'</td>';
 													}          
 													$output.=' </tr>';
 													//dd($subject);
@@ -1495,7 +1471,6 @@
 											}  
 										
 										}
-						
 										$output.='<!-- Second table and additional content... -->
 										<table class="table table-bordered" style="border: 2px solid black;margin-top:35px;">
 											<thead class="colspanHead">
@@ -1554,25 +1529,25 @@
 												$at_tot6+=$att['totlate'];
 												$at_tot7+=$att['totexc'];
 												$output.='<tr>
-												<td style="height: 30px;color: #3A4265;">'.$attarray[intval($att['month'])].'</td>
-												<td style="height: 30px;">'.$att['no_schooldays'].'</td>
-												<td style="height: 30px;">'.$att['suspension'].'</td>
-												<td style="height: 30px;">'.$att['totalcoming'].'</td>
-												<td style="height: 30px;">'.$att['totabs'].'</td>
-												<td style="height: 30px;">'.$att['totpres'].'</td>
-												<td style="height: 30px;">'.$att['totlate'].'</td>
-												<td style="height: 30px;">'.$att['totexc'].'</td>
+												<td style="height: 22px;color: #3A4265;">'.$attarray[intval($att['month'])].'</td>
+												<td style="height: 22px;">'.$att['no_schooldays'].'</td>
+												<td style="height: 22px;">'.$att['suspension'].'</td>
+												<td style="height: 22px;">'.$att['totalcoming'].'</td>
+												<td style="height: 22px;">'.$att['totabs'].'</td>
+												<td style="height: 22px;">'.$att['totpres'].'</td>
+												<td style="height: 22px;">'.$att['totlate'].'</td>
+												<td style="height: 22px;">'.$att['totexc'].'</td>
 											</tr>';
 											}
 											$output.='<tr style="border-top: 2px solid black;">
-											<td style="height: 34px;color: #3A4265;"> 合計</td>
-											<td style="height: 34px;">'.$at_tot1.'</td>
-											<td style="height: 34px;">'.$at_tot2.'</td>
-											<td style="height: 34px;">'.$at_tot3.'</td>
-											<td style="height: 34px;">'.$at_tot4.'</td>
-											<td style="height: 34px;">'.$at_tot5.'</td>
-											<td style="height: 34px;">'.$at_tot6.'</td>
-											<td style="height: 34px;">'.$at_tot7.'</td>
+											<td style="height: 25px;color: #3A4265;"> 合計</td>
+											<td style="height: 25px;">'.$at_tot1.'</td>
+											<td style="height: 25px;">'.$at_tot2.'</td>
+											<td style="height: 25px;">'.$at_tot3.'</td>
+											<td style="height: 25px;">'.$at_tot4.'</td>
+											<td style="height: 25px;">'.$at_tot5.'</td>
+											<td style="height: 25px;">'.$at_tot6.'</td>
+											<td style="height: 25px;">'.$at_tot7.'</td>
 										</tr>';
 										$output.='</tbody>
 										</table>
@@ -1885,7 +1860,7 @@
 						$customPaper = [0, 0, 792.00, 1224.00];
 						$pdf->set_paper($customPaper);
 						$pdf->loadHTML($output);
-					
+						// return $pdf->stream();
 						// Filename setup
 						$fileName = __('messages.report_card') .'-'. $stu['name'] . ".pdf";
 						$pdfFilePath = $storagePath . '/' . $fileName;
@@ -1941,6 +1916,7 @@
 								th {
 									border: 1px solid black;
 									text-align: center;
+									font-size: 18px;
 									line-height: 20px;
 									letter-spacing: 0.0133em;
 									word-wrap: break-word;
@@ -1969,20 +1945,6 @@
 									width: 45%;
 									padding: 10px;
 								}
-						
-								.content {
-									box-sizing: border-box;
-									display: block;
-									margin: 0 auto;
-									padding: 20px;
-									border-radius: 7px;
-									margin-top: 20px;
-									background-color: #fff;
-									border: 1px solid #dddddd;
-									font-size: 15px;
-									"
-						
-								}
 							</style>
 						</head>
 						
@@ -1990,27 +1952,27 @@
 							<div class="content">
 								<div class="row">
 									<div class="column">
-										<p>クアラルンプール日本人学校　小学部</p>
+										<p style="margin: 0;font-size:18px;">クアラルンプール日本人学校　小学部</p>
 									</div>
 								</div>
 						
 								<div class="row">
 									<div class="column1" style="width:10%;">
 										<div style="margin-top:20px;">
-											<p style="margin: 0;">'.$grade['data']['name'].'</p>
+											<p style="margin: 0;font-size:20px;">'.$grade['data']['name'].'</p>
 										</div>
 						
 									</div>
 									<div class="column1" style="width:10%;">
 						
 										<div style="margin-top:20px;">
-											<p style="margin: 0;"> 学期</p>
+											<p style="margin: 0;font-size:20px;"> 学期</p>
 										</div>
 						
 									</div>
 									<div class="column1" style="width:5%;">
 										<div style="margin-top:20px;">
-											<p style="margin: 0;">通知表</p>
+											<p style="margin: 0;font-size:20px;">通知表</p>
 										</div>
 									</div>
 									<div class="column1" style="width:18%;">
@@ -2019,13 +1981,15 @@
 											</thead>
 											<tbody>
 												<tr>
-													<td style="text-align: right; vertical-align: bottom; height: 60px;color: #3A4265;">組 : '.$section['data']['name'].'</td>
-													<td style="text-align: right; vertical-align: bottom; height: 60px;color: #3A4265;">番 : '.$sno.'</td>
+													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;color: #3A4265;"> '.$section['data']['name'].'</td>
+													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;color: #3A4265;"> 組</td>
+													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;color: #3A4265;"> '.$sno.'</td>
+													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;color: #3A4265;"> 番</td>
 												</tr>
 											</tbody>
 										</table>
 									</div>
-									<div class="column1" style="width:1%;">
+									<div class="column1" style="width:2%;">
 									</div>
 									<div class="column1" style="width:44%;">
 										<table>
@@ -2033,8 +1997,8 @@
 											</thead>
 											<tbody>
 												<tr>
-													<td style="vertical-align: top; text-align: left; border-right:hidden;height: 60px;color: #3A4265;">氏名</td>
-													<td style="vertical-align: inherit;text-align:center; height: 60px;">'.$stu['name'].'</td>
+													<td style="margin: 0px;vertical-align: top;text-align: left; border-right:hidden;height: 60px;color: #3A4265;">氏<br>名</td>
+													<td style="vertical-align: inherit;font-size:20px;text-align:center; height: 60px;">'.$stu['name'].'</td>
 												</tr>
 											</tbody>
 										</table>
@@ -2043,11 +2007,11 @@
 						
 								<div class="row">
 									<div class="column2" style="width:50%;">
-										<table style="border-collapse: collapse; margin-bottom: 15px; border: 2px solid black;">
+										<table style="border-collapse: collapse; margin-bottom: 0px; border: 2px solid black;">
 											<thead class="colspanHead">
 												<tr>
-													<td colspan="2" style="border: 2px solid black; border-right:hidden; height: 30px;color: #3A4265;">学 習 の 記 録</td>
-													<td colspan="3" style="border: 2px solid black; height: 30px;">
+													<td colspan="2" style="border: 2px solid black; border-right:hidden; height: 35px;color: #3A4265;">学 習 の 記 録</td>
+													<td colspan="3" style="border: 2px solid black; height: 35px;">
 														<ul style="list-style-type: none; padding: 0; margin: 0; text-align:left;">
 															<li style="margin-left: 10px;color: #3A4265;">(A　よくできる)</li>
 															<li style="margin-left: 10px;color: #3A4265;">(B　できる)</li>
@@ -2159,25 +2123,25 @@
 												$at_tot6+=$att['totlate'];
 												$at_tot7+=$att['totexc'];
 												$output.='<tr>
-												<td style="height: 30px;color: #3A4265;">'.$attarray[intval($att['month'])].'</td>
-												<td style="height: 30px;">'.$att['no_schooldays'].'</td>
-												<td style="height: 30px;">'.$att['suspension'].'</td>
-												<td style="height: 30px;">'.$att['totalcoming'].'</td>
-												<td style="height: 30px;">'.$att['totabs'].'</td>
-												<td style="height: 30px;">'.$att['totpres'].'</td>
-												<td style="height: 30px;">'.$att['totlate'].'</td>
-												<td style="height: 30px;">'.$att['totexc'].'</td>
+												<td style="height: 23px;color: #3A4265;">'.$attarray[intval($att['month'])].'</td>
+												<td style="height: 23px;">'.$att['no_schooldays'].'</td>
+												<td style="height: 23px;">'.$att['suspension'].'</td>
+												<td style="height: 23px;">'.$att['totalcoming'].'</td>
+												<td style="height: 23px;">'.$att['totabs'].'</td>
+												<td style="height: 23px;">'.$att['totpres'].'</td>
+												<td style="height: 23px;">'.$att['totlate'].'</td>
+												<td style="height: 23px;">'.$att['totexc'].'</td>
 											</tr>';
 											}
 											$output.='<tr style="border-top: 2px solid black;">
-											<td style="height: 34px;color: #3A4265;"> 合計</td>
-											<td style="height: 34px;">'.$at_tot1.'</td>
-											<td style="height: 34px;">'.$at_tot2.'</td>
-											<td style="height: 34px;">'.$at_tot3.'</td>
-											<td style="height: 34px;">'.$at_tot4.'</td>
-											<td style="height: 34px;">'.$at_tot5.'</td>
-											<td style="height: 34px;">'.$at_tot6.'</td>
-											<td style="height: 34px;">'.$at_tot7.'</td>
+											<td style="height: 25px;color: #3A4265;"> 合計</td>
+											<td style="height: 25px;">'.$at_tot1.'</td>
+											<td style="height: 25px;">'.$at_tot2.'</td>
+											<td style="height: 25px;">'.$at_tot3.'</td>
+											<td style="height: 25px;">'.$at_tot4.'</td>
+											<td style="height: 25px;">'.$at_tot5.'</td>
+											<td style="height: 25px;">'.$at_tot6.'</td>
+											<td style="height: 25px;">'.$at_tot7.'</td>
 										</tr>';
 											
 											
@@ -2202,12 +2166,12 @@
 										'papers' => $getspecialpapers
 									];
 									$getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
-									$output.='<table class="table table-bordered" style="border: 2px solid black;">
+									$output.='<table class="table table-bordered" style="height: 10px;border: 2px solid black;">
 											<thead class="colspanHead">
 												<tr>
 													<td colspan="2" style="text-align:center; border: 1px solid black; vertical-align: middle; height: 63px;border-right:hidden;color: #3A4265;">
 														行動及び生活の記録</td>
-													<td colspan="3" style="border: 1px solid black; height: 63px;">
+													<td colspan="3" style="border: 1px solid black; height: 73px;">
 														<ul style="list-style-type: none; padding: 0; margin: 0;text-align:left;">
 															<li style="margin-left: 60px;color: #3A4265;">（3学期に記載）</li>
 															<li style="margin-left: 60px;color: #3A4265;"></li>
@@ -2240,8 +2204,8 @@
 												
 												}  
 												$fmark=($mark=="Excellent")?'<b>O</b>':''; 
-											$output.='<tr style="height:60px;">
-											<td colspan="4" style="text-align:left;color: #3A4265;width:100px;">'.$papers['papers'].'</td>
+											$output.='<tr style="height:80px;">
+											<td colspan="4" style="height:40px;text-align:left;color: #3A4265;width:100px;">'.$papers['papers'].'</td>
 											<td colspan="1">'.$fmark.'
 											</td>
 											</tr>';
@@ -2284,7 +2248,7 @@
 											}  
 										
 										}
-										$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:10px;">
+										$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:30px;">
 											<thead class="colspanHead">
 												<tr>
 													<td colspan="5" style="color: #3A4265;">特別の教科　道徳　(3学期に記載)</td>
@@ -2292,7 +2256,7 @@
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:120px;text-align:center;color: #3A4265;">
+													<td colspan="5" style="height:150px;text-align:center;color: #3A4265;">
 														'.$mark1.'
 													</td>
 												</tr>
@@ -2335,18 +2299,15 @@
 											}  
 										
 										}
-										$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:10px;">
+										$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:30px;">
 											<thead class="colspanHead">
 												<tr>
 													<td colspan="5" style="color: #3A4265;">総合的な学習の時間　(2学期に記載)</td>
 												</tr>
-												<tr>
-													<td colspan="5" style="color: #3A4265;border-top: 1px solid black;">マラヤ大学生との国際交流会を成功させよう</td>
-												</tr>
 											</thead>
 											<tbody>
 												<tr style="border-top: 1px solid black;">
-													<td colspan="5" style="height:120px;text-align:center;color: #3A4265;">
+													<td colspan="5" style="height:150px;text-align:center;color: #3A4265;">
 														'.$mark2.'
 													</td>
 												</tr>
@@ -2383,7 +2344,7 @@
 											}  
 										
 										}
-										$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:10px;">
+										$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:30px;">
 											<thead class="colspanHead">
 												<tr>
 													<td colspan="5" style="color: #3A4265;">特 別 活 動 等 の 記 録 （毎学期記載）</td>
@@ -2391,7 +2352,7 @@
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:60px;text-align:left;color: #3A4265; ">
+													<td colspan="5" style="height:70px;text-align:left;color: #3A4265; ">
 														'.$mark3.'
 													</td>
 												</tr>
@@ -2432,7 +2393,7 @@
 											}  
 										
 										}
-										$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:10px;">
+										$output.='<table class="table table-bordered" style="border: 2px solid black;margin-top:30px;">
 											<thead class="colspanHead">
 												<tr>
 													<td colspan="5" style="color: #3A4265;">所見　(3学期に記載)</td>
@@ -2440,7 +2401,7 @@
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:120px;text-align:center;color: #3A4265;">
+													<td colspan="5" style="height:187px;text-align:center;color: #3A4265;">
 														'.$mark4.'
 													</td>
 												</tr>
@@ -2453,15 +2414,15 @@
 											</div>
 										</div>
 						
-										<div class="row" style="margin-top:5px;">
-											<div style="width: 40%;float: left;">
+										<div class="row" style="margin-top:10px;">
+											<div style="width: 50%;float: left;">
 												<table style="border-collapse: collapse; margin-top: 12px;  border: 2px solid black;">
 													<thead style="text-align: center;">
 														<!-- Your content here -->
 													</thead>
 													<tbody>
 														<tr>
-															<td style="text-align: left; height: 40px; border: 1px solid black;color: #3A4265;">
+															<td style="text-align: left; height: 45px; border: 1px solid black;color: #3A4265;">
 																校│<br>長│'.$getteacherdata['data']['principal'].'
 															</td>
 														</tr>
@@ -2476,7 +2437,7 @@
 													</thead>
 													<tbody>
 														<tr>
-															<td style="text-align: left; height: 40px; border: 1px solid black;color: #3A4265;">
+															<td style="text-align: left; height: 45px; border: 1px solid black;color: #3A4265;">
 																担│<br>任│ '.$getteacherdata['data']['teacher'].'
 															</td>
 														</tr>
@@ -2493,10 +2454,10 @@
 						$pdf = \App::make('dompdf.wrapper');
 
 						// Set custom paper size
-						$customPaper = [0, 0, 792.00, 1224.00];
+						$customPaper = [0, 0, 792.00, 1330.00];
 						$pdf->set_paper($customPaper);
 						$pdf->loadHTML($output);
-					
+						// return $pdf->stream();
 						// Filename setup
 						$fileName = __('messages.report_card') .'-'. $stu['name'] . ".pdf";
 						$pdfFilePath = $storagePath . '/' . $fileName;
