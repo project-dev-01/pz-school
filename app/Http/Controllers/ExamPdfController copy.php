@@ -1395,32 +1395,7 @@ class ExamPdfController extends Controller
         }
         .diagonalCross2 {
         background: linear-gradient(to top right, #fff calc(50% - 1px), black , #fff calc(50% + 1px) )
-        }
-        
-        div.gallery {
-            border: 1px solid #ccc;
-        }    
-        
-        div.gallery img {
-        width: 100%;
-        height: auto;
-        }
-        
-        div.desc {
-        padding: 10px;
-        text-align: center;
-        }
-        
-        * {
-        box-sizing: border-box;
-        }
-        
-        .responsive {
-        padding: 0 6px;
-        float: left;
-        width: 24.99999%;
-        }
-        ';
+        }';
         $output .= '</style>';
         $output .= "</head>";
         $output .= '<body>';
@@ -1444,13 +1419,12 @@ class ExamPdfController extends Controller
 			'id' => session()->get('branch_id'),
 			];
 			$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
-        // dd($getstudents);
-       
+        //dd($acyear['data']['name']);
         $acy=$acyear['data']['name'];
 		foreach($getstudents['data'] as $stu)
         {
             $sno++; 
-            $output .= '<table class="table" width="100%" >			
+            $output .= '<table class="table" width="100%">			
             <tr>
 				<td colspan="5"> <p>クアラルンプール日本人学校　小学部</p> 
 				<p> 個人結果表 </p></td> 
@@ -1473,9 +1447,9 @@ class ExamPdfController extends Controller
 				<td colspan="2" style=" border: 1px solid black;">ロール番号 : '.$stu['roll'].'</td>
 				<td colspan="3"style=" border: 1px solid black;vertical-align: inherit;">名前 :'.$stu['name'].'</td>
 			</tr>
-			<tr>
+			<tr> 
 				<td colspan="5" >
-                <table class="table" width="100%" >
+                <table class="table" width="100%">
                 <thead>                
                     <tr>
                         <td></td>';
@@ -1499,14 +1473,13 @@ class ExamPdfController extends Controller
                 <tbody>
                     <tr>
                         <td>個人得点</td>';
-                        $craft = [];
                         $i=0; $totalmain=0;$totalopt=0;
                         foreach($getmainsubjects as $subject)
                        {
                             $i++;
                             $studata = [
                             'branch_id' => session()->get('branch_id'),
-                            'student_id' => '32',
+                            'student_id' => $stu['student_id'],
                             'exam_id' => $request->exam_id,
                             'class_id' => $request->class_id,
                             'section_id' => $request->section_id,
@@ -1518,63 +1491,13 @@ class ExamPdfController extends Controller
                             
                             ];
                             $getmarks = Helper::PostMethod(config('constants.api.stuexam_ppmarklist'), $studata);
-                            
+                           
                             $mark=(isset($getmarks['data']['score']) && $getmarks['data']['score']!=null)?$getmarks['data']['score']:'';
                             
-                            
-                            // Initialize an array to store the count of marks in each range
-                            $marks_distribution = [
-                                '100-90' => 36,
-                                '89-80' => 55,
-                                '79-70' => 30,
-                                '69-60' => 60,
-                                '59-50' => 110,
-                                '49-40' => 48,
-                                '39-30' => 27,
-                                '29-20' => 14,
-                                '19-10' => 12,
-                                '9-0' => 3,
-                            ];
-                            
-
-                            
-
-                            // Iterate through the array of marks and categorize each mark
-                            $craft[$subject] = $marks_distribution;
-                            if(isset($getmarks['data']['score']) && $getmarks['data']['score']!=null){
-                                $mark = $getmarks['data']['score'];
-                                
-                                // Initialize the distribution array for the subject if it doesn't exist
-                            
-                                if ($mark <= 100 && $mark >= 90) {
-                                    $craft[$subject]['100-90']++;
-                                } elseif ($mark <= 89 && $mark >= 80) {
-                                    $craft[$subject]['89-80']++;
-                                } elseif ($mark <= 79 && $mark >= 70) {
-                                    $craft[$subject]['79-70']++;
-                                } elseif ($mark <= 69 && $mark >= 60) {
-                                    $craft[$subject]['69-60']++;
-                                } elseif ($mark <= 59 && $mark >= 50) {
-                                    $craft[$subject]['59-50']++;
-                                } elseif ($mark <= 49 && $mark >= 40) {
-                                    $craft[$subject]['49-40']++;
-                                } elseif ($mark <= 39 && $mark >= 30) {
-                                    $craft[$subject]['39-30']++;
-                                } elseif ($mark <= 29 && $mark >= 20) {
-                                    $craft[$subject]['29-20']++;
-                                } elseif ($mark <= 19 && $mark >= 10) {
-                                    $craft[$subject]['19-10']++;
-                                } elseif ($mark <= 9 && $mark >= 0) {
-                                    $craft[$subject]['9-0']++;
-                                }
-                            }
-                               
-
                             $output.='<td colspan="1">'.$mark.'</td>';
                             $mark=($mark!='')?$mark:0;
                             $totalmain+=$mark;
                         }
-                       
                         foreach($getnonmainsubjects as $subject)
                         {
                             $i++;
@@ -1593,76 +1516,14 @@ class ExamPdfController extends Controller
                             ];
                             $getmarks = Helper::PostMethod(config('constants.api.stuexam_ppmarklist'), $studata);
                             
+                            
                             $mark=(isset($getmarks['data']['score']) && $getmarks['data']['score']!=null)?$getmarks['data']['score']:'';
                             
-                              // Initialize an array to store the count of marks in each range
-                            $marks_distribution = [
-                                '100-90' => 36,
-                                '89-80' => 55,
-                                '79-70' => 30,
-                                '69-60' => 60,
-                                '59-50' => 110,
-                                '49-40' => 48,
-                                '39-30' => 27,
-                                '29-20' => 14,
-                                '19-10' => 12,
-                                '9-0' => 3,
-                            ];
                             
-
-                            
-
-                            // Iterate through the array of marks and categorize each mark
-                            $craft[$subject] = $marks_distribution;
-                            if(isset($getmarks['data']['score']) && $getmarks['data']['score']!=null){
-                                $mark = $getmarks['data']['score'];
-                                
-                                // Initialize the distribution array for the subject if it doesn't exist
-                            
-                                if ($mark <= 100 && $mark >= 90) {
-                                    $craft[$subject]['100-90']++;
-                                } elseif ($mark <= 89 && $mark >= 80) {
-                                    $craft[$subject]['89-80']++;
-                                } elseif ($mark <= 79 && $mark >= 70) {
-                                    $craft[$subject]['79-70']++;
-                                } elseif ($mark <= 69 && $mark >= 60) {
-                                    $craft[$subject]['69-60']++;
-                                } elseif ($mark <= 59 && $mark >= 50) {
-                                    $craft[$subject]['59-50']++;
-                                } elseif ($mark <= 49 && $mark >= 40) {
-                                    $craft[$subject]['49-40']++;
-                                } elseif ($mark <= 39 && $mark >= 30) {
-                                    $craft[$subject]['39-30']++;
-                                } elseif ($mark <= 29 && $mark >= 20) {
-                                    $craft[$subject]['29-20']++;
-                                } elseif ($mark <= 19 && $mark >= 10) {
-                                    $craft[$subject]['19-10']++;
-                                } elseif ($mark <= 9 && $mark >= 0) {
-                                    $craft[$subject]['9-0']++;
-                                }
-                            }
-
                             $output.='<td colspan="1">'.$mark.'</td>';
                             $mark=($mark!='')?$mark:0;
                             $totalopt+=$mark;
                         }
-                            // Initialize an array to store the count of marks in each range
-                            $marks_distribution = [
-                                '100-90' => 36,
-                                '89-80' => 55,
-                                '79-70' => 30,
-                                '69-60' => 60,
-                                '59-50' => 110,
-                                '49-40' => 48,
-                                '39-30' => 27,
-                                '29-20' => 14,
-                                '19-10' => 12,
-                                '9-0' => 3,
-                            ];
-                            $craft['5教科合計'] = $marks_distribution;
-                            $craft['9教科合計'] = $marks_distribution;
-                            
-
                         $totall=$totalmain+ $totalopt;
                         $output.='<td>'.$totalmain.'</td>
                                   <td>'.$totall.'</td>';
@@ -1748,84 +1609,19 @@ class ExamPdfController extends Controller
                     </tr>
                 </tbody>
             </table>
-
-            <br> <p> </p><table><tr>';
-           
-            // Extract labels from the first subject's distribution as they are the same for all
-            $firstSubject = reset($craft);
-            $labels = array_keys($firstSubject);
-            foreach ($craft as $subject => $distribution) {
-                // Extract data from the distribution array
-                $data = array_values($distribution);
-                $xTitle = $request->input('xTitle', 'Number of incidents');
-                $yTitle = $request->input('yTitle', 'Names');
-    
-                try {
-
-
-                    // $chartImagePath = $this->generateBarChartSingle($labels, $data, $xTitle, $yTitle, $subject);         // Add the label and chart image for each graph
-                    // $output .= '<div style="text-align: center;">'; // Container div for each graph with center alignment
-                    // $output .= '<label style="display: block; margin-bottom: 10px;">' . $subject . '</label>'; // Label with margin-bottom for spacing
-                    // $output .= '<div style="position: relative;">'; // Container div for label and image with relative positioning
-                    // $output .= '<img src="' . htmlspecialchars($chartImagePath, ENT_QUOTES, 'UTF-8') . '" alt="Bar Chart" width="200" height="200" style="display: block; margin: 0 auto;"/>'; // Chart image with center alignment
-                    // $output .= '<label style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); background-color: white; padding: 5px;">' . $subject . '</label>'; // Label positioned on top and centered
-                    // $output .= '</div>'; // Close container div for label and image
-                    // $output .= '</div>'; // Close container div for each graph
-
-                    // $chartImagePath = $this->generateBarChartSingle($labels, $data, $xTitle, $yTitle, $subject); // Build the output string with the label and chart image
-                    // // $output .= '<div style="text-align: center;">'; // Container div with center alignment
-                    // $output .= '<label style="display: block;">' . $subject . '</label>'; // Label with margin-bottom for spacing
-                    // $output .= '</br>';
-                    // $output .= '<img src="' . htmlspecialchars($chartImagePath, ENT_QUOTES, 'UTF-8') . '" alt="Bar Chart" width="200" height="200" style="display: block; margin: 0 auto;"/>'; // Chart image with center alignment$output .= '<label style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); background-color: white; padding: 5px;">' . $subject . '</label>'; // Label positioned on top and centered$output .= '</div>'; // Close container div for label and image
-
-
-                        // $output .= '<div class="responsive">
-                        //                 <div class="gallery">'; // Container div with center alignment
-                        // $output .= '<div class="desc">' . $subject . '</div>'; // Label with margin-bottom for spacing$output .= '<img src="' . htmlspecialchars($chartImagePath, ENT_QUOTES, 'UTF-8') . '" alt="Bar Chart" width="200" height="200" style="display: block; margin: 0 auto;"/>'; // Chart image with center alignment
-                        $chartImagePath = $this->generateBarChartSingle($labels, $data, $xTitle, $yTitle, $subject);
-                        $output .= '<img src="'. $chartImagePath .'" alt="craft" width="310" height="200">';
-                        // $output .= '</div>
-                        //             </div>';
-
-                } catch (Exception $e) {
-                    // Handle the error appropriately
-                    $output .= '<p>Error generating chart for ' . htmlspecialchars($subject, ENT_QUOTES, 'UTF-8') . ': ' . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8') . '</p>';
-                }
-            }
-
-			$output.=' 	</tr></table>
-            </td>
+				</td>
 			</tr>
 			
 			
-            </table>';
-        
-          
-           
-              
-             // Get dynamic data from request or define it statically for testing
-            //  $crafdrrgrdgrdt = ['10-20', '20-30', '30-40', '40-50', '50-60', '60-70', '70-80', '80-90', '90-100'];
-            //  $labels = reset($crafdrrgrdgrdt);
-            // //  $labels = array_keys($firstSubject);
-            //  $data = [5, 13, 25, 111, 28, 56, 60, 64, 47];
-            //  $xTitle = $request->input('xTitle', 'Student mark range');
-            //  $yTitle = $request->input('yTitle', 'Student count');
-            //  for($i=0; $i<=10; $i++){
-            //      $chartImagePath = $this->generateBarChartSingle($labels, $data, $xTitle, $yTitle, $subject);
- 
-            //      $output .= '<img src="' . htmlspecialchars($chartImagePath, ENT_QUOTES, 'UTF-8') . '" alt="Bar Chart" width="300" height="250"/>';
- 
-            //  }
-                
-              
-
-            
-               $output.='  <div style="page-break-after: always;"></div>';
+		</table>
+        <div style="page-break-after: always;"></div>';
         }
        
         $output .= '</body>
     </html';
-           
+            //             $output .= '</main>
+            //      </body>
+            //  </html>';
             $pdf = \App::make('dompdf.wrapper');
             // set size
             $customPaper = array(0, 0, 792.00, 1224.00);
@@ -1837,6 +1633,7 @@ class ExamPdfController extends Controller
             $fileName = __('messages.personal_test_res') . $name . ".pdf";
             return $pdf->download($fileName);
             // return $pdf->stream();
+        
     }
     public function downprimaryform1($id)
 		{
@@ -2320,7 +2117,8 @@ class ExamPdfController extends Controller
             $sp_paper5="生徒会活動";   //Student Council Activities  
             $sp_paper6="学校行事";   //School Event  
             $sp_paper7="児童会活動";   //Children's Association Activities    
-            $sp_paper8="クラブ活動";   //Club Activities  
+            $sp_paper8="クラブ活動";   //Club Activities
+            $sp_paper9="学習状況及び道徳性に係る成長の様子"; //Progress in learning and morality
                     
             if($student['department_id']==1) // Primary 
             {
@@ -2331,7 +2129,7 @@ class ExamPdfController extends Controller
                     $getspsubject2 = array($specialsubject2); // Foreign Language Activities ( 3rd Semester)              
                     $getspsubject3 = array($specialsubject3); // Comprehensive study time notes (3rd Semester )
                     $getspsubject4 = array($specialsubject4); // Findings  ( 3rd Semester)  
-                    $specialsubject1papers=array("学習状況及び道徳性に係る成長の様子"); // Progress in learning and morality
+                    $specialsubject1papers=array(""); // Progress in learning and morality
                     $specialsubject2papers=array($primarypaper1,$primarypaper2,$primarypaper3); 
                     $specialsubject3papers=array($sp_paper1,$sp_paper2,$sp_paper3); 
                     $specialsubject4papers=array($sp_paper4,$sp_paper7,$sp_paper8,$sp_paper6);                   
@@ -2345,7 +2143,7 @@ class ExamPdfController extends Controller
                 $getspsubject2 = array(); // Foreign Language Activities ( 3rd Semester)              
                 $getspsubject3 = array($specialsubject3); // Comprehensive study time notes (3rd Semester )
                 $getspsubject4 = array($specialsubject4); // Findings  ( 3rd Semester)  
-                $specialsubject1papers=array("学習状況及び道徳性に係る成長の様子"); // Progress in learning and morality
+                $specialsubject1papers=array($sp_paper9); // Progress in learning and morality
                 $specialsubject2papers=array(); 
                 $specialsubject3papers=array($sp_paper1,$sp_paper2,$sp_paper3); 
                 $specialsubject4papers=array($sp_paper4,$sp_paper5,$sp_paper6);
@@ -3863,114 +3661,5 @@ class ExamPdfController extends Controller
         // return $pdf->stream();
         
     }  
-
-    
-    public function generateBarChart($labels, $data, $xTitle = 'Number of incidents', $yTitle = 'Names', $subject = 'default_subject') {
-        require_once public_path('jpgraph-4.4.2/src/jpgraph.php');
-        require_once public_path('jpgraph-4.4.2/src/jpgraph_bar.php');
-
-        // Define the directory and ensure it exists
-        $directory = public_path('barchart');
-        if (!is_dir($directory)) {
-            if (!mkdir($directory, 0777, true)) {
-                throw new Exception("Failed to create directory: $directory");
-            }
-        }
-
-        // Ensure the directory is writable
-        if (!is_writable($directory)) {
-            throw new Exception("Directory $directory is not writable");
-        }
-
-        // Create a unique file name using the subject and current timestamp
-        $timestamp = time();
-        $fileName = $subject . '_' . $timestamp . '.png';
-        $filePath = $directory . '/' . $fileName;
-
-        // Create the graph
-        $graph = new \Graph(600, 400, 'auto');
-        $graph->SetScale('textlin');
-
-        // Setup margin and titles
-        $graph->SetMargin(50, 20, 30, 30);
-        $graph->title->Set('Number of incidents');
-        // $graph->xaxis->title->Set($xTitle);
-        // $graph->yaxis->title->Set($yTitle);
-
-        // Setup X-axis labels with multi-line support if needed
-        $graph->xaxis->SetTickLabels($labels);
-        $graph->xaxis->SetLabelMargin(10);
-
-        // Create the bar plot (horizontal)
-        $bplot = new \BarPlot($data);
-        $bplot->SetFillColor('darkgray');
-
-        // Add the bar plot to the graph
-        $graph->Add($bplot);
-
-        // Display the graph
-        $graph->Stroke($filePath);
-
-        return $filePath;
-    }
-
-
-    public function generateBarChartSingle($labels, $data, $xTitle = 'Number of students', $yTitle = 'Mark range', $subject) {
-        require_once public_path('jpgraph-4.4.2/src/jpgraph.php');
-        require_once public_path('jpgraph-4.4.2/src/jpgraph_bar.php');
-    
-        // Define the directory and ensure it exists
-        $directory = public_path('barchart');
-        if (!is_dir($directory)) {
-            if (!mkdir($directory, 0777, true)) {
-                throw new Exception("Failed to create directory: $directory");
-            }
-        }
-    
-        // Ensure the directory is writable
-        if (!is_writable($directory)) {
-            throw new Exception("Directory $directory is not writable");
-        }
-    
-        // Create a unique file name using the subject and current timestamp
-        $timestamp = time();
-        $fileName = $subject . '_' . $timestamp . '.png';
-        $filePath = $directory . '/' . $fileName;
-    
-        // Create the graph
-        $graph = new \Graph(600, 400, 'auto');
-        $graph->SetScale('textlin');
-        $graph->Set90AndMargin(150, 30, 50, 50); // Rotate the graph to make horizontal bars
-    
-        // Setup margin and titles
-        // $graph->title->Set('Distribution of Student Marks');
-        // $graph->xaxis->title->Set($xTitle);
-        // $graph->yaxis->title->Set($yTitle);
-    
-        // Setup X-axis labels with the mark ranges (since the graph is rotated)
-        $graph->xaxis->SetTickLabels($labels);
-        $graph->xaxis->SetLabelMargin(10);
-    
-        // Create the bar plot (horizontal)
-        $bplot = new \BarPlot($data);
-       
-        // Add the bar plot to the graph
-        $graph->Add($bplot);
-        $bplot->SetFillColor('darkgray');
-        // $bplot->value->SetValuePos();
-        $bplot->value->SetFormat('%d');
-        $bplot->value->SetColor("black");
-        $bplot->value->SetAlign('left', 'center');
-        $bplot->value->SetFont(FF_FONT1, FS_BOLD);
-        $bplot->value->SetMargin(10);
-        $bplot->value->Show();
-        
-        // $graph->title->Set($subject);
-        // Display the graph
-        $graph->Stroke($filePath);
-    
-        return $filePath;
-    }
-    
 	
 }
