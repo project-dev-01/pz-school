@@ -250,7 +250,7 @@
 </script>
 <script src="{{ asset('js/dist/jquery.table2excel.js') }}"></script>
 <script>
-    var sectionByClass = "{{ config('constants.api.exam_results_get_class_by_section') }}";
+    var sectionByClass = "{{ config('constants.api.section_by_class') }}";
 
     var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
     var getbyresult = "{{ config('constants.api.student_result') }}";
