@@ -55,8 +55,9 @@ class ExamPdfController1 extends Controller
 		$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 		$term = Helper::PostMethod(config('constants.api.exam_details'), $termdata);
 		$acyear = Helper::PostMethod(config('constants.api.academic_year_details'), $acdata);
+
+		//dd($getbranch['data']);
 		$acy = $acyear['data']['name'];
-		$term_name = isset($term['data']['term_name']) ? $term['data']['term_name'] : '';
 		$storagePath = storage_path('app/public/pdfs');
 
 		// Ensure the storage directory exists
@@ -69,8 +70,7 @@ class ExamPdfController1 extends Controller
 			$n1 = ($request->department_id == '1') ? 'P' : 'S';
 			$n2 = $grade['data']['name_numeric'];
 			$n3 = $section['data']['name'];
-			$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
-			$number = $n1 . $n2 . $n3 . $attendance_no;
+			$number = $n1 . $n2 . $n3 . $stu['attendance_no'];
 			$fonturl = storage_path('fonts/ipag.ttf');
 
 			$output = '<!DOCTYPE html>
@@ -156,7 +156,7 @@ class ExamPdfController1 extends Controller
 					<h4 style="margin: 0;font-weight: bold;">English Communication</h4>
 					</td>       
 					<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; width:30%; text-align: left;">
-					<h4 style="margin: 0;font-weight: bold;">' . $term_name . ' Report</h4>
+					<h4 style="margin: 0;font-weight: bold;">' . $term['data']['name'] . ' Report</h4>
 					</td>
 					</tr> 
 					<tr>
@@ -375,7 +375,7 @@ class ExamPdfController1 extends Controller
 					
 					</td>
 					</tr>';
-			$papername = "先生方のコメント";
+			$papername = "Teachers Comments";
 			$pdata = [
 				'branch_id' => session()->get('branch_id'),
 				'exam_id' => $request->exam_id,
@@ -451,18 +451,10 @@ class ExamPdfController1 extends Controller
 			$pdf = \App::make('dompdf.wrapper');
 
 			// Set custom paper size
-			// $customPaper = [0, 0, 792.00, 1224.00];
-			if ($request->department_id == 1) {
-				$customPaper = array(0, 0, 700.00, 900.00);
-			} else if ($request->department_id == 2) {
-				$customPaper = array(0, 0, 700.00, 1000.00);
-			} else {
-				$customPaper = array(0, 0, 700.00, 1000.00);
-			}
-			// $customPaper = array(0, 0, 800.00, 1000.00);
+			$customPaper = [0, 0, 792.00, 1224.00];
 			$pdf->set_paper($customPaper);
 			$pdf->loadHTML($output);
-			// return $pdf->stream();
+
 			// Filename setup
 			$fileName = __('messages.english_communication') . '-' . $stu['name'] . ".pdf";
 			$pdfFilePath = $storagePath . '/' . $fileName;
@@ -940,25 +932,22 @@ class ExamPdfController1 extends Controller
 						$nsem = count($papers['marks']);
 						$s = 0;
 						$mark = '';
-						if (!empty($papers['marks'])) {
-							foreach ($papers['marks'] as $markItem) {
-								$s++;
-								// Check if the mark item is an array and contains 'grade_name'
-								if (is_array($markItem) && isset($markItem['grade_name']) && $markItem['grade_name'] != null) {
-									$mark = $markItem['grade_name'];
-								}
-								// Ensure that only the last semester's grade is used
-								if ($s == $nsem) {
-									break;
-								}
+						// dd($papers['marks']);
+						foreach ($papers['marks'] as $mark) {
+							$s++;
+
+							if ($s == $nsem) {
+
+
+								$mark = (isset($mark['grade_name']) && $mark['grade_name'] != null) ? $mark['grade_name'] : '';
 							}
 						}
 						$fmark = ($mark == "Excellent") ? '<b>O</b>' : '';
-
 						$output .= '<tr style="height:60px;">
-										<td colspan="4" style="text-align:left;vertical-align: top;width:100px;">' . $papers['papers'] . '</td>
-										<td colspan="1">' . $fmark . '</td>
-									</tr>';
+						<td colspan="4" style="text-align:left;width:100px;">' . $papers['papers'] . '</td>
+						<td colspan="1">' . $fmark . '
+						</td>
+						</tr>';
 					}
 
 					$output .= '</tbody>
@@ -977,42 +966,22 @@ class ExamPdfController1 extends Controller
 						'papers' => $description
 
 					];
-					// echo "subject   :".$specialsubject2;
-					// \print_r($description);
-					// echo "<br>";
 					$getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
-					// dd($getmarks);
 					$i = 0;
 					$n = count($getmarks['data']);
 					$mark1 = '';
-					// foreach ($getmarks['data'] as $papers) {
-					// 	$nsem = count($papers['marks']);
-					// 	$s = 0;
-					// 	foreach ($papers['marks'] as $mark) {
-					// 		$s++;
-					// 		if ($s == $nsem) {
-
-					// 			$mark1 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
-					// 		}
-					// 	}
-					// }
 					foreach ($getmarks['data'] as $papers) {
 						$nsem = count($papers['marks']);
 						$s = 0;
-						if (!empty($papers['marks'])) {
-							foreach ($papers['marks'] as $markItem) {
-								$s++;
-								// Check if the mark item is an array and contains 'freetext'
-								if (is_array($markItem) && isset($markItem['freetext']) && $markItem['freetext'] != null) {
-									$mark1 = $markItem['freetext'];
-								}
-								// Ensure that only the last semester's grade is used
-								if ($s == $nsem) {
-									break;
-								}
+						foreach ($papers['marks'] as $mark) {
+							$s++;
+							if ($s == $nsem) {
+
+								$mark1 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
 							}
 						}
 					}
+
 					$output .= '<table class="table table-bordered" style="border: 2px solid black;margin-top:30px;">
 						<thead class="colspanHead">
 						<tr>
@@ -1022,7 +991,7 @@ class ExamPdfController1 extends Controller
 						<tbody>
 						<tr style="border-top: 2px solid black;">
 						
-						<td colspan="5" style="height:170px;text-align:left;vertical-align: top;">
+						<td colspan="5" style="height:170px;text-align:center;">
 						' . $mark1 . '
 						</td>
 						</tr>
@@ -1043,38 +1012,20 @@ class ExamPdfController1 extends Controller
 
 					];
 					$getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
-					// dd($getmarks);
 					$i = 0;
 					$n = count($getmarks['data']);
 					$mark2 = '';
-					// foreach ($getmarks['data'] as $papers) {
-					// 	$nsem = count($papers['marks']);
-					// 	$s = 0;
-					// 	foreach ($papers['marks'] as $mark) {
-					// 		$mark = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
-
-					// 		$s++;
-					// 		$mark2 .= $s . ' 学期 - ' . $mark . '<br>';
-					// 	}
-					// }
 					foreach ($getmarks['data'] as $papers) {
 						$nsem = count($papers['marks']);
 						$s = 0;
-						if (!empty($papers['marks'])) {
-							foreach ($papers['marks'] as $markItem) {
-								$s++;
-								// Check if the mark item is an array and contains 'freetext'
-								if (is_array($markItem) && isset($markItem['freetext']) && $markItem['freetext'] != null) {
-									$mark = $markItem['freetext'];
-									$mark2 .= $s . ' 学期 - ' . $mark . '<br>';
-								}
-								// Ensure that only the last semester's grade is used
-								if ($s == $nsem) {
-									break;
-								}
-							}
+						foreach ($papers['marks'] as $mark) {
+							$mark = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
+
+							$s++;
+							$mark2 .= $s . ' 学期 - ' . $mark . '<br>';
 						}
 					}
+
 					$output .= '<table class="table table-bordered" style="border: 2px solid black;margin-top:30px;">
 						<thead class="colspanHead">
 						<tr>
@@ -1083,7 +1034,7 @@ class ExamPdfController1 extends Controller
 						</thead>
 						<tbody>
 						<tr style="border-top: 2px solid black;">
-						<td colspan="5" style="height:170px;text-align:left;vertical-align: top;">
+						<td colspan="5" style="height:170px;text-align:left;">
 						' . $mark2 . '
 						</td>
 						</tr>
@@ -1104,29 +1055,17 @@ class ExamPdfController1 extends Controller
 
 					];
 					$getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
-					// dd($getmarks);
 					$i = 0;
 					$n = count($getmarks['data']);
 					$mark3 = '';
 					foreach ($getmarks['data'] as $papers) {
 						$nsem = count($papers['marks']);
 						$s = 0;
-						if (!empty($papers['marks'])) {
-							foreach ($papers['marks'] as $markItem) {
-								$s++;
-								// Check if the mark item is an array and contains 'freetext'
-								if (is_array($markItem) && isset($markItem['freetext']) && $markItem['freetext'] != null) {
-									$mark3 = $markItem['freetext'];
-								}
-								// Ensure that only the last semester's grade is used
-								if ($s == $nsem) {
-									break;
-								}
-								// dd($mark3);
-								// if ($s == $nsem) {
+						foreach ($papers['marks'] as $mark) {
+							$s++;
+							if ($s == $nsem) {
 
-								// 	$mark3 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
-								// }
+								$mark3 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
 							}
 						}
 					}
@@ -1140,7 +1079,7 @@ class ExamPdfController1 extends Controller
 						</thead>
 						<tbody>
 						<tr style="border-top: 2px solid black;">
-						<td colspan="5" style="height:170px;text-align:left;vertical-align: top;">
+						<td colspan="5" style="height:170px;text-align:center;">
 							' . $mark3 . '
 						</td>
 						</tr>
@@ -1197,7 +1136,8 @@ class ExamPdfController1 extends Controller
 					$customPaper = [0, 0, 792.00, 1224.00];
 					$pdf->set_paper($customPaper);
 					$pdf->loadHTML($output);
-					// return $pdf->stream();
+					return $pdf->stream();
+
 					// Filename setup
 					$fileName = __('messages.report_card') . '-' . $stu['name'] . ".pdf";
 					$pdfFilePath = $storagePath . '/' . $fileName;
@@ -1429,26 +1369,15 @@ class ExamPdfController1 extends Controller
 					$getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
 					$i = 0;
 					$n = count($getmarks['data']);
-					$flmark = '';
+					$mark1 = '';
 					foreach ($getmarks['data'] as $papers) {
 						$nsem = count($papers['marks']);
 						$s = 0;
-						if (!empty($papers['marks'])) {
-							foreach ($papers['marks'] as $mark) {
-								$s++;
-								// if ($s == $nsem) {
+						foreach ($papers['marks'] as $mark) {
+							$s++;
+							if ($s == $nsem) {
 
-								// 	$flmark = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
-								// }
-
-								// Check if the mark item is an array and contains 'freetext'
-								if (is_array($mark) && isset($mark['freetext']) && $mark['freetext'] != null) {
-									$flmark = $mark['freetext'];
-								}
-								// Ensure that only the last semester's grade is used
-								if ($s == $nsem) {
-									break;
-								}
+								$flmark = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
 							}
 						}
 					}
@@ -1461,7 +1390,7 @@ class ExamPdfController1 extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:140px;text-align:left; vertical-align: top;">
+													<td colspan="5" style="height:140px;text-align:left;">
 														' . $flmark . '
 													</td>
 												</tr>
@@ -1575,17 +1504,14 @@ class ExamPdfController1 extends Controller
 						$nsem = count($papers['marks']);
 						$s = 0;
 						$mark = '';
-						if (!empty($papers['marks'])) {
-							foreach ($papers['marks'] as $markItem) {
-								$s++;
-								// Check if the mark item is an array and contains 'grade_name'
-								if (is_array($markItem) && isset($markItem['grade_name']) && $markItem['grade_name'] != null) {
-									$mark = $markItem['grade_name'];
-								}
-								// Ensure that only the last semester's grade is used
-								if ($s == $nsem) {
-									break;
-								}
+						// dd($papers['marks']);
+						foreach ($papers['marks'] as $mark) {
+							$s++;
+
+							if ($s == $nsem) {
+
+
+								$mark = (isset($mark['grade_name']) && $mark['grade_name'] != null) ? $mark['grade_name'] : '';
 							}
 						}
 						$fmark = ($mark == "Excellent") ? '<b>O</b>' : '';
@@ -1618,21 +1544,11 @@ class ExamPdfController1 extends Controller
 					foreach ($getmarks['data'] as $papers) {
 						$nsem = count($papers['marks']);
 						$s = 0;
-						if (!empty($papers['marks'])) {
-							foreach ($papers['marks'] as $mark) {
-								$s++;
-								// Check if the mark item is an array and contains 'freetext'
-								if (is_array($mark) && isset($mark['freetext']) && $mark['freetext'] != null) {
-									$mark1 = $mark['freetext'];
-								}
-								// Ensure that only the last semester's grade is used
-								if ($s == $nsem) {
-									break;
-								}
-								// if ($s == $nsem) {
+						foreach ($papers['marks'] as $mark) {
+							$s++;
+							if ($s == $nsem) {
 
-								// 	$mark1 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
-								// }
+								$mark1 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
 							}
 						}
 					}
@@ -1644,7 +1560,7 @@ class ExamPdfController1 extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:146px;text-align:left;vertical-align: top;">
+													<td colspan="5" style="height:146px;text-align:justify;">
 														' . $mark1 . '
 													</td>
 												</tr>
@@ -1667,26 +1583,15 @@ class ExamPdfController1 extends Controller
 					$getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
 					$i = 0;
 					$n = count($getmarks['data']);
-					$mark2 = '';
+
 					foreach ($getmarks['data'] as $papers) {
 						$nsem = count($papers['marks']);
 						$s = 0;
-						if (!empty($papers['marks'])) {
-							foreach ($papers['marks'] as $mark) {
-								$s++;
-								// if ($s == 2) {
+						foreach ($papers['marks'] as $mark) {
+							$s++;
+							if ($s == 2) {
 
-								// 	$mark2 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
-								// }
-
-								// Check if the mark item is an array and contains 'freetext'
-								if (is_array($mark) && isset($mark['freetext']) && $mark['freetext'] != null) {
-									$mark2 = $mark['freetext'];
-								}
-								// Ensure that only the last semester's grade is used
-								if ($s == $nsem) {
-									break;
-								}
+								$mark2 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
 							}
 						}
 					}
@@ -1699,7 +1604,7 @@ class ExamPdfController1 extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 1px solid black;">
-													<td colspan="5" style="height:146px;text-align:left;vertical-align: top;">
+													<td colspan="5" style="height:146px;text-align:justify;">
 														' . $mark2 . '
 													</td>
 												</tr>
@@ -1726,22 +1631,11 @@ class ExamPdfController1 extends Controller
 					foreach ($getmarks['data'] as $papers) {
 						$nsem = count($papers['marks']);
 						$s = 0;
-						if (!empty($papers['marks'])) {
-							foreach ($papers['marks'] as $mark) {
+						foreach ($papers['marks'] as $mark) {
 
-								// $mark = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
-								// $s++;
-								// $mark4 .= $s . ' 学期 - ' . $mark . '<br>';
-								// Check if the mark item is an array and contains 'freetext'
-								if (is_array($mark) && isset($mark['freetext']) && $mark['freetext'] != null) {
-									$mark = $mark['freetext'];
-									$mark4 .= $s . ' 学期 - ' . $mark . '<br>';
-								}
-								// Ensure that only the last semester's grade is used
-								if ($s == $nsem) {
-									break;
-								}
-							}
+							$mark = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
+							$s++;
+							$mark4 .= $s . ' 学期 - ' . $mark . '<br>';
 						}
 					}
 					$output .= '<table class="table table-bordered" style="border: 2px solid black;margin-top:20px;">
@@ -1752,7 +1646,7 @@ class ExamPdfController1 extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:146px;text-align:left;vertical-align: top;">
+													<td colspan="5" style="height:146px;text-align:left;">
 														' . $mark4 . '
 													</td>
 												</tr>
@@ -1775,25 +1669,15 @@ class ExamPdfController1 extends Controller
 					$getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
 					$i = 0;
 					$n = count($getmarks['data']);
-					$mark5 = '';
+					$mark3 = '';
 					foreach ($getmarks['data'] as $papers) {
 						$nsem = count($papers['marks']);
 						$s = 0;
-						if (!empty($papers['marks'])) {
-							foreach ($papers['marks'] as $mark) {
-								$s++;
-								// Check if the mark item is an array and contains 'freetext'
-								if (is_array($mark) && isset($mark['freetext']) && $mark['freetext'] != null) {
-									$mark5 = $mark['freetext'];
-								}
-								// Ensure that only the last semester's grade is used
-								if ($s == $nsem) {
-									break;
-								}
-								// if ($s == $nsem) {
+						foreach ($papers['marks'] as $mark) {
+							$s++;
+							if ($s == $nsem) {
 
-								// 	$mark5 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
-								// }
+								$mark5 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
 							}
 						}
 					}
@@ -1805,7 +1689,7 @@ class ExamPdfController1 extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:146px;text-align:left;vertical-align: top;">
+													<td colspan="5" style="height:146px;text-align:justify;">
 														' . $mark5 . '
 													</td>
 												</tr>
@@ -1861,7 +1745,7 @@ class ExamPdfController1 extends Controller
 					$customPaper = [0, 0, 792.00, 1224.00];
 					$pdf->set_paper($customPaper);
 					$pdf->loadHTML($output);
-					// return $pdf->stream();
+					return $pdf->stream();
 					// Filename setup
 					$fileName = __('messages.report_card') . '-' . $stu['name'] . ".pdf";
 					$pdfFilePath = $storagePath . '/' . $fileName;
@@ -2187,17 +2071,14 @@ class ExamPdfController1 extends Controller
 						$nsem = count($papers['marks']);
 						$s = 0;
 						$mark = '';
-						if (!empty($papers['marks'])) {
-							foreach ($papers['marks'] as $markItem) {
-								$s++;
-								// Check if the mark item is an array and contains 'grade_name'
-								if (is_array($markItem) && isset($markItem['grade_name']) && $markItem['grade_name'] != null) {
-									$mark = $markItem['grade_name'];
-								}
-								// Ensure that only the last semester's grade is used
-								if ($s == $nsem) {
-									break;
-								}
+						// dd($papers['marks']);
+						foreach ($papers['marks'] as $mark) {
+							$s++;
+
+							if ($s == $nsem) {
+
+
+								$mark = (isset($mark['grade_name']) && $mark['grade_name'] != null) ? $mark['grade_name'] : '';
 							}
 						}
 						$fmark = ($mark == "Excellent") ? '<b>O</b>' : '';
@@ -2231,21 +2112,11 @@ class ExamPdfController1 extends Controller
 					foreach ($getmarks['data'] as $papers) {
 						$nsem = count($papers['marks']);
 						$s = 0;
-						if (!empty($papers['marks'])) {
-							foreach ($papers['marks'] as $mark) {
-								$s++;
-								// Check if the mark item is an array and contains 'freetext'
-								if (is_array($mark) && isset($mark['freetext']) && $mark['freetext'] != null) {
-									$mark1 = $mark['freetext'];
-								}
-								// Ensure that only the last semester's grade is used
-								if ($s == $nsem) {
-									break;
-								}
-								// if ($s == $nsem) {
+						foreach ($papers['marks'] as $mark) {
+							$s++;
+							if ($s == $nsem) {
 
-								// 	$mark1 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
-								// }
+								$mark1 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
 							}
 						}
 					}
@@ -2257,7 +2128,7 @@ class ExamPdfController1 extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:150px;text-align:left;vertical-align: top;">
+													<td colspan="5" style="height:150px;text-align:center;">
 														' . $mark1 . '
 													</td>
 												</tr>
@@ -2286,22 +2157,11 @@ class ExamPdfController1 extends Controller
 					foreach ($getmarks['data'] as $papers) {
 						$nsem = count($papers['marks']);
 						$s = 0;
-						if (!empty($papers['marks'])) {
-							foreach ($papers['marks'] as $mark) {
-								$s++;
-								// if ($s == 2) {
+						foreach ($papers['marks'] as $mark) {
+							$s++;
+							if ($s == 2) {
 
-								// 	$mark2 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
-								// }
-
-								// Check if the mark item is an array and contains 'freetext'
-								if (is_array($mark) && isset($mark['freetext']) && $mark['freetext'] != null) {
-									$mark2 = $mark['freetext'];
-								}
-								// Ensure that only the last semester's grade is used
-								if ($s == $nsem) {
-									break;
-								}
+								$mark2 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
 							}
 						}
 					}
@@ -2313,7 +2173,7 @@ class ExamPdfController1 extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 1px solid black;">
-													<td colspan="5" style="height:150px;text-align:left;vertical-align: top;">
+													<td colspan="5" style="height:150px;text-align:center;">
 														' . $mark2 . '
 													</td>
 												</tr>
@@ -2340,21 +2200,11 @@ class ExamPdfController1 extends Controller
 					foreach ($getmarks['data'] as $papers) {
 						$nsem = count($papers['marks']);
 						$s = 0;
-						if (!empty($papers['marks'])) {
-							foreach ($papers['marks'] as $mark) {
-								$s++;
-								// $mark = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
+						foreach ($papers['marks'] as $mark) {
+							$s++;
+							$mark = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
 
-								// $mark3 .= $s . ' 学期 - ' . $mark . '<br>';
-								if (is_array($mark) && isset($mark['freetext']) && $mark['freetext'] != null) {
-									$mark = $mark['freetext'];
-									$mark3 .= $s . ' 学期 - ' . $mark . '<br>';
-								}
-								// Ensure that only the last semester's grade is used
-								if ($s == $nsem) {
-									break;
-								}
-							}
+							$mark3 .= $s . ' 学期 - ' . $mark . '<br>';
 						}
 					}
 					$output .= '<table class="table table-bordered" style="border: 2px solid black;margin-top:24px;">
@@ -2365,7 +2215,7 @@ class ExamPdfController1 extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="text-align:left;vertical-align: top;height:150px;">
+													<td colspan="5" style="text-align:left;height:150px;">
 														' . $mark3 . '
 													</td>
 												</tr>
@@ -2388,24 +2238,15 @@ class ExamPdfController1 extends Controller
 					$getmarks = Helper::PostMethod(config('constants.api.getsubjectpapermarks'), $pdata);
 					$i = 0;
 					$n = count($getmarks['data']);
-					$mark4 = '';
+					$mark3 = '';
 					foreach ($getmarks['data'] as $papers) {
 						$nsem = count($papers['marks']);
 						$s = 0;
-						if (!empty($papers['marks'])) {
-							foreach ($papers['marks'] as $mark) {
-								$s++;
-								if (is_array($mark) && isset($mark['freetext']) && $mark['freetext'] != null) {
-									$mark4 = $mark['freetext'];
-								}
-								// Ensure that only the last semester's grade is used
-								if ($s == $nsem) {
-									break;
-								}
-								// if ($s == $nsem) {
+						foreach ($papers['marks'] as $mark) {
+							$s++;
+							if ($s == $nsem) {
 
-								// 	$mark4 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
-								// }
+								$mark4 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
 							}
 						}
 					}
@@ -2417,7 +2258,7 @@ class ExamPdfController1 extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:187px;text-align:left;vertical-align: top;">
+													<td colspan="5" style="height:187px;text-align:center;">
 														' . $mark4 . '
 													</td>
 												</tr>
@@ -2473,7 +2314,7 @@ class ExamPdfController1 extends Controller
 					$customPaper = [0, 0, 792.00, 1330.00];
 					$pdf->set_paper($customPaper);
 					$pdf->loadHTML($output);
-					// return $pdf->stream();
+					return $pdf->stream();
 					// Filename setup
 					$fileName = __('messages.report_card') . '-' . $stu['name'] . ".pdf";
 					$pdfFilePath = $storagePath . '/' . $fileName;
@@ -2822,17 +2663,14 @@ class ExamPdfController1 extends Controller
 					$nsem = count($papers['marks']);
 					$s = 0;
 					$mark = '';
-					if (!empty($papers['marks'])) {
-						foreach ($papers['marks'] as $markItem) {
-							$s++;
-							// Check if the mark item is an array and contains 'grade_name'
-							if (is_array($markItem) && isset($markItem['grade_name']) && $markItem['grade_name'] != null) {
-								$mark = $markItem['grade_name'];
-							}
-							// Ensure that only the last semester's grade is used
-							if ($s == $nsem) {
-								break;
-							}
+					// dd($papers['marks']);
+					foreach ($papers['marks'] as $mark) {
+						$s++;
+
+						if ($s == $nsem) {
+
+
+							$mark = (isset($mark['grade_name']) && $mark['grade_name'] != null) ? $mark['grade_name'] : '';
 						}
 					}
 					$fmark = ($mark == "Excellent") ? '<b>O</b>' : '';
@@ -2866,21 +2704,11 @@ class ExamPdfController1 extends Controller
 				foreach ($getmarks['data'] as $papers) {
 					$nsem = count($papers['marks']);
 					$s = 0;
-					if (!empty($papers['marks'])) {
-						foreach ($papers['marks'] as $mark) {
-							$s++;
-							// Check if the mark item is an array and contains 'freetext'
-							if (is_array($mark) && isset($mark['freetext']) && $mark['freetext'] != null) {
-								$mark1 = $mark['freetext'];
-							}
-							// Ensure that only the last semester's grade is used
-							if ($s == $nsem) {
-								break;
-							}
-							// if ($s == 2) {
+					foreach ($papers['marks'] as $mark) {
+						$s++;
+						if ($s == 2) {
 
-							// 	$mark1 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
-							// }
+							$mark1 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
 						}
 					}
 				}
@@ -2892,7 +2720,7 @@ class ExamPdfController1 extends Controller
 					</thead>
 					<tbody>
 					<tr style="border-top: 2px solid black;">
-					<td colspan="5" style="height:180px;text-align:left;vertical-align: top;">
+					<td colspan="5" style="height:180px;text-align:center;">
 					' . $mark1 . '
 					</td>
 					</tr>
@@ -2919,21 +2747,11 @@ class ExamPdfController1 extends Controller
 				foreach ($getmarks['data'] as $papers) {
 					$nsem = count($papers['marks']);
 					$s = 0;
-					if (!empty($papers['marks'])) {
-						foreach ($papers['marks'] as $mark) {
-							$s++;
-							// if ($s == $nsem) {
+					foreach ($papers['marks'] as $mark) {
+						$s++;
+						if ($s == $nsem) {
 
-							// 	$mark2 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
-							// }
-							// Check if the mark item is an array and contains 'freetext'
-							if (is_array($mark) && isset($mark['freetext']) && $mark['freetext'] != null) {
-								$mark2 = $mark['freetext'];
-							}
-							// Ensure that only the last semester's grade is used
-							if ($s == $nsem) {
-								break;
-							}
+							$mark2 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
 						}
 					}
 				}
@@ -2945,7 +2763,7 @@ class ExamPdfController1 extends Controller
 					</thead>
 					<tbody>
 					<tr style="border-top: 1px solid black;">
-					<td colspan="5" style="height:180px;text-align:left;vertical-align: top;">
+					<td colspan="5" style="height:180px;text-align:center;">
 					' . $mark2 . '
 					</td>
 					</tr>
@@ -2972,20 +2790,10 @@ class ExamPdfController1 extends Controller
 				foreach ($getmarks['data'] as $papers) {
 					$nsem = count($papers['marks']);
 					$s = 0;
-					if (!empty($papers['marks'])) {
-						foreach ($papers['marks'] as $mark) {
-							$s++;
-							// $mark = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
-							// $mark3 .= $s . ' 学期 - ' . $mark . '<br>';
-							if (is_array($mark) && isset($mark['freetext']) && $mark['freetext'] != null) {
-								$mark = $mark['freetext'];
-								$mark3 .= $s . ' 学期 - ' . $mark . '<br>';
-							}
-							// Ensure that only the last semester's grade is used
-							if ($s == $nsem) {
-								break;
-							}
-						}
+					foreach ($papers['marks'] as $mark) {
+						$mark = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
+						$s++;
+						$mark3 .= $s . ' 学期 - ' . $mark . '<br>';
 					}
 				}
 				$output .= '<table class="table table-bordered" style="border: 2px solid black;margin-top:20px;">
@@ -2996,7 +2804,7 @@ class ExamPdfController1 extends Controller
 					</thead>
 					<tbody>
 					<tr style="border-top: 2px solid black;">
-					<td colspan="5" style="height:180px;text-align:left;vertical-align: top;">
+					<td colspan="5" style="height:180px;text-align:left;">
 					' . $mark3 . '
 					</td>
 					</tr>
@@ -3023,20 +2831,11 @@ class ExamPdfController1 extends Controller
 				foreach ($getmarks['data'] as $papers) {
 					$nsem = count($papers['marks']);
 					$s = 0;
-					if (!empty($papers['marks'])) {
-						foreach ($papers['marks'] as $mark) {
-							$s++;
-							if (is_array($mark) && isset($mark['freetext']) && $mark['freetext'] != null) {
-								$mark4 = $mark['freetext'];
-							}
-							// Ensure that only the last semester's grade is used
-							if ($s == $nsem) {
-								break;
-							}
-							// if ($s == $nsem) {
+					foreach ($papers['marks'] as $mark) {
+						$s++;
+						if ($s == $nsem) {
 
-							// 	$mark4 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
-							// }
+							$mark4 = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
 						}
 					}
 				}
@@ -3048,7 +2847,7 @@ class ExamPdfController1 extends Controller
 					</thead>
 					<tbody>
 					<tr style="border-top: 2px solid black;">
-					<td colspan="5" style="height:180px;text-align:left;vertical-align: top;">
+					<td colspan="5" style="height:180px;text-align:center;">
 					' . $mark4 . '
 					</td>
 					</tr>
@@ -3099,6 +2898,7 @@ class ExamPdfController1 extends Controller
 				$customPaper = [0, 0, 792.00, 1224.00];
 				$pdf->set_paper($customPaper);
 				$pdf->loadHTML($output);
+				return $pdf->stream();
 
 				// Filename setup
 				$fileName = __('messages.report_card') . '-' . $stu['name'] . ".pdf";
@@ -3461,6 +3261,7 @@ class ExamPdfController1 extends Controller
 			$customPaper = [0, 0, 792.00, 1224.00];
 			$pdf->set_paper($customPaper);
 			$pdf->loadHTML($output);
+			return $pdf->stream();
 
 			// Filename setup
 			$fileName = __('messages.personal_test_res') . '-' . $stu['name'] . ".pdf";
@@ -3841,6 +3642,7 @@ class ExamPdfController1 extends Controller
 		$customPaper = array(0, 0, 792.00, 1224.00);
 		$pdf->set_paper($customPaper);
 		$pdf->loadHTML($output);
+		return $pdf->stream();
 		// filename
 		$now = now();
 		$name = strtotime($now);
