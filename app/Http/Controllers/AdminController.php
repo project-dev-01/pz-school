@@ -11728,12 +11728,11 @@ class AdminController extends Controller
             "department_id" => $request->department_id,
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
-            "student_name" => $request->student_name,
-            "session_id" => $request->session_id,
-            "stu_status" => 'Active',
-            "academic_session_id" => session()->get('academic_session_id')
+            // "student_name" => $request->student_name,
+            // "session_id" => $request->session_id,
+            "academic_session_id" => $request->academic_year
         ];
-        //dd($data);
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.getgraduatestudentlist'), $data);
         $data = isset($response['data']) ? $response['data'] : [];
        
@@ -11743,8 +11742,7 @@ class AdminController extends Controller
             ->addColumn('actions', function ($row) {
                
                 return '<div class="button-list">
-                                 <button type="button" value="'. $row['id'] .'" class="btn btn-blue waves-effect waves-light individual_pdf" ><i class="fe-eye"></i></button>
-                                 
+                                 <button type="button" value="'. $row['id'] .'" title="Download" class="btn btn-blue waves-effect waves-light individual_pdf" ><i class="fe-download"></i></button>
                          </div>';
             })
  

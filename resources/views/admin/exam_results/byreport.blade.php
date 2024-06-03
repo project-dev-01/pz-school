@@ -47,7 +47,7 @@
 
         </div>
     </div>
-    <!-- end page title -->    
+    <!-- end page title -->
     @if($message = Session::get('errors'))
     <div class="alert alert-warning alert-block alert-dismissible">
         <button type="button" class="close" data-dismiss="alert">×</button>
@@ -92,7 +92,7 @@
                                     <select id="department_id" name="department_id" class="form-control">
                                         <option value="">{{ __('messages.select_department') }}</option>
                                         @forelse($department as $r)
-                                        
+
                                         <option value="{{$r['id']}}">{{$r['name']}}</option>
                                         @empty
                                         @endforelse
@@ -175,7 +175,19 @@
 
     </div>
     <!-- end row -->
-
+    
+    <form method="post" id="individual_pdf" action="#">
+        @csrf
+        <input type="hidden" name="department_id" class="downDepartmentID">
+        <input type="hidden" name="exam_id" class="downExamID">
+        <input type="hidden" name="class_id" class="downClassID">
+        <input type="hidden" name="semester_id" class="downSemesterID">
+        <input type="hidden" name="session_id" class="downSessionID">
+        <input type="hidden" name="section_id" class="downSectionID">
+        <input type="hidden" name="academic_year" class="downAcademicYear">
+        <input type="hidden" name="report_type" class="downReport_type">
+        <input type="hidden" name="student_id" class="downstudent_id">
+    </form>
 
     <div class="row" style="display: none;" id="byec_body">
         <div class="col-xl-12">
@@ -193,7 +205,7 @@
 
                             <!-- <div id="btnAppend">
                             </div> -->
-
+                            @include('admin.exam_results.ec_student_table')
                             <div class="col-md-12">
                                 <div class="clearfix mt-4">
                                     <form method="post" action="{{ route('admin.exam_results.downbyecreport') }}">
@@ -209,8 +221,7 @@
                                         <input type="hidden" name="report_type" class="downReport_type">
 
                                         <div class="clearfix float-right" style="margin-bottom:5px;">
-                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.download') }} {{ __('messages.pdf') }}</button>
-                                            <!--<button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>-->
+                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light"  style="white-space: nowrap;">{{ __('messages.download_all_pdf') }}</button>
                                         </div>
                                     </form>
                                 </div>
@@ -238,6 +249,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
+                        @include('admin.exam_results.student_table')
 
                             <!-- <div id="btnAppend">
                             </div> -->
@@ -254,7 +266,7 @@
                                         <input type="hidden" name="academic_year" class="downAcademicYear">
                                         <input type="hidden" name="report_type" class="downReport_type">
                                         <div class="clearfix float-right" style="margin-bottom:5px;">
-                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.download') }} {{ __('messages.pdf') }}</button>
+                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light" style="white-space: nowrap;">{{ __('messages.download_all_pdf') }}</button>
                                             <!--<button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>-->
                                         </div>
                                     </form>
@@ -302,8 +314,7 @@
                                         <input type="hidden" name="academic_year" class="downAcademicYear">
                                         <input type="hidden" name="report_type" class="downReport_type">
                                         <div class="clearfix float-right" style="margin-bottom:5px;">
-                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light exportToPDF" id="exportToPDF">{{ __('messages.download') }} {{ __('messages.pdf') }}</button>
-                                            <!--<button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>-->
+                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light" style="white-space: nowrap;">{{ __('messages.download_all_pdf') }}</button>
                                         </div>
                                     </form>
                                 </div>
@@ -318,50 +329,6 @@
         </div> <!-- end col -->
 
     </div>
-    <div class="row" id="student" style="display:none">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body collapse show">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="table-responsive">
-                                <table class="table w-100 nowrap " id="student-table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th> {{ __('messages.name') }}</th>
-                                            <th> {{ __('messages.register_no') }}</th>
-                                            <th> {{ __('messages.roll_no') }}</th>
-                                            <th> {{ __('messages.gender') }}</th>
-                                            <th> {{ __('messages.email') }}</th>
-                                            <th> {{ __('messages.status') }}</th>
-                                            <th> {{ __('messages.actions') }}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
-                            </div> <!-- end table-responsive-->
-                        </div> <!-- end col-->
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <form method="post" id="individual_pdf" action="#">
-        @csrf
-        <input type="hidden" name="department_id" class="downDepartmentID">
-        <input type="hidden" name="exam_id" class="downExamID">
-        <input type="hidden" name="class_id" class="downClassID">
-        <input type="hidden" name="semester_id" class="downSemesterID">
-        <input type="hidden" name="session_id" class="downSessionID">
-        <input type="hidden" name="section_id" class="downSectionID">
-        <input type="hidden" name="academic_year" class="downAcademicYear">
-        <input type="hidden" name="report_type" class="downReport_type">
-        <input type="hidden" name="student_id" class="downstudent_id">
-    </form>
 </div> <!-- container -->
 
 @endsection
@@ -384,6 +351,10 @@
     // var sectionByClass = "{{ config('constants.api.exam_results_get_class_by_section') }}";
     var sectionByClass = "{{ config('constants.api.section_by_class') }}";
     //var studentList = "{{ route('admin.student.list') }}";
+
+    var downbyecreport = "{{ route('admin.individual.downbyecreport') }}";
+    var downbyreportcard = "{{ route('admin.individual.downbyreportcard') }}";
+    var downbypersoanalreport = "{{ route('admin.individual.downbypersoanalreport') }}";
 
     var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
     var getbySubject = "{{ config('constants.api.tot_grade_calcu_bySubject') }}";

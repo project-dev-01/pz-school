@@ -90,6 +90,7 @@ return [
     "entries" => "行",
     "download_csv" => "CSVダウンロード",
     "download_pdf" => "PDFダウンロード",
+    "download_all_pdf" => "PDF一括ダウンロード",
     "name" => "名前",
     "register_no" => "学籍番号",
     "roll_no" => "出席番号",

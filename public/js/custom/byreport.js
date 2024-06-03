@@ -115,7 +115,7 @@ $(function () {
                 academic_session_id: academic_session_id,
                 report_type: report_type,
             };
-            console.log(classObj);
+            // console.log(classObj);
             setLocalStorageForExamResultBySubject(classObj);
 
             // download set start
@@ -141,45 +141,50 @@ $(function () {
             formData.append('session_id', session_id);
             formData.append('academic_year', year);
             formData.append('report_type', report_type);
-            // examResultBySubject(formData);
-            // var formData1 = {
-            //     student_name: '',
-            //     department_id: department_id,
-            //     class_id: class_id,
-            //     section_id: section_id,
-            //     session_id: session_id
-            // };
-            //getStudentList(formData1);
+            var formData1 = {
+                department_id: department_id,
+                class_id: class_id,
+                section_id: section_id,
+                academic_year: year
+            };
             // $("#overlay").fadeOut(300);
-            if (report_type == 'english_communication') {
-                $("#byec_body").show("slow");
-                $("#byreport_body").hide("slow");
-                $("#bypersonal_body").hide("slow");
-            }
-            else if (report_type == 'report_card') {
-                $("#byec_body").hide("slow");
-                $("#byreport_body").show("slow");
-                $("#bypersonal_body").hide("slow");
-            }
-            else {
-                $("#byec_body").hide("slow");
-                $("#byreport_body").hide("slow");
-                $("#bypersonal_body").show("slow");
-                if (department_id == '2') {
-                    $("#secondary_personal").show("slow");
-                    $("#primary_personal").hide("slow");
-                }
-                else {
-                    $("#student").hide("slow");
-                    $("#secondary_personal").hide("slow");
-                    $("#primary_personal").show("slow");
-                }
-            }
+            hideUnhideReport(report_type, department_id, formData1);
+
         }
         else {
             $("#student").hide("slow");
         }
     });
+    function hideUnhideReport(reportType, departmentId, formData1) {
+        if (reportType == 'english_communication') {
+            $("#byec_body").show("slow");
+            $("#byreport_body").hide("slow");
+            $("#bypersonal_body").hide("slow");
+        } else if (reportType == 'report_card') {
+            $("#byec_body").hide("slow");
+            $("#byreport_body").show("slow");
+            $("#bypersonal_body").hide("slow");
+        } else {
+            $("#byec_body").hide("slow");
+            $("#byreport_body").hide("slow");
+            $("#bypersonal_body").show("slow");
+            if (departmentId == '2') {
+                $("#secondary_personal").show("slow");
+                $("#primary_personal").hide("slow");
+            } else {
+                $("#student").hide("slow");
+                $("#secondary_personal").hide("slow");
+                $("#primary_personal").show("slow");
+            }
+        }
+        // Ensure formData1 is valid before calling getStudentList
+        if (formData1 && Object.keys(formData1).length > 0) {
+            // console.log("Calling getStudentList with:", formData1);
+            getStudentList(formData1, reportType);
+        } else {
+            // console.error("formData1 is invalid:", formData1);
+        }
+    }
     function setLocalStorageForExamResultBySubject(classObj) {
 
         var examResultBySubjectDetails = new Object();
@@ -210,7 +215,7 @@ $(function () {
             if (exam_result_by_report_storage) {
                 var examResultByReportStorage = JSON.parse(exam_result_by_report_storage);
                 if (examResultByReportStorage.length == 1) {
-                    var classID, year, sectionID, departmentID, examID, userType, semesterID, sessionID, userBranchID, userRoleID, userID;
+                    var classID, year, sectionID, departmentID, examID, reportType, semesterID, sessionID, userBranchID, userRoleID, userID;
                     examResultByReportStorage.forEach(function (user) {
                         departmentID = user.department_id;
                         classID = user.class_id;
@@ -222,7 +227,7 @@ $(function () {
                         userBranchID = user.branch_id;
                         userRoleID = user.role_id;
                         userID = user.user_id;
-                        userType = user.report_type;
+                        reportType = user.report_type;
                     });
                     if ((userBranchID == branchID) && (userRoleID == get_roll_id) && (userID == ref_user_id)) {
                         //$('#changeClassName').val(classID);
@@ -290,7 +295,7 @@ $(function () {
                         $("#downSessionID").val(sessionID);
                         $("#downSectionID").val(sectionID);
                         $("#downAcademicYear").val(year);
-                        $("#report_type").val(userType);
+                        $("#report_type").val(reportType);
                         // download set end
                         var formData = new FormData();
                         formData.append('token', token);
@@ -301,263 +306,52 @@ $(function () {
                         formData.append('semester_id', semesterID);
                         formData.append('session_id', sessionID);
                         formData.append('academic_year', year);
-                        examResultBySubject(formData);
+                        var formData1 = {
+                            department_id: departmentID,
+                            class_id: classID,
+                            section_id: sectionID,
+                            academic_year: year
+                        };
+                        // console.log("formData1");
+                        // console.log(formData1);
+                        // download set start
+                        $(".downExamID").val(examID);
+                        $(".downDepartmentID").val(departmentID);
+                        $(".downClassID").val(classID);
+                        $(".downSemesterID").val(semesterID);
+                        $(".downSessionID").val(sessionID);
+                        $(".downSectionID").val(sectionID);
+                        $(".downAcademicYear").val(year);
+
+                        $(".downReport_type").val(reportType);
+                        // download set end
+
+                        hideUnhideReport(reportType, departmentID, formData1);
                     }
                 }
             }
         }
     }
 
-    function examResultBySubject(formData) {
-
-        // $("#overlay").fadeIn(300);
-        // list mode
-        var report_type = $("#report_type").val();
-        var department_id = $("#department_id").val();
-        var class_id = $("#changeClassName option:selected").text();
-        //alert(class_id);
-        $.ajax({
-            url: getbySubject,
-            method: "Post",
-            data: formData,
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            success: function (response) {
-                console.log(response);
-                if (response.code == 200) {
-                    if (response.data.grade_list_master.length > 0) {
-                        var datasetnew = response.data;
-                        // bysubjectdetails_class(datasetnew);
-                        // $("#overlay").fadeOut(300);
-                        if (report_type == 'english_communication') {
-                            $("#byec_body").show("slow");
-                            $("#byreport_body").hide("slow");
-                            $("#bypersonal_body").hide("slow");
-                        }
-                        else if (report_type == 'report_card') {
-                            $("#byec_body").hide("slow");
-                            $("#byreport_body").show("slow");
-                            $("#bypersonal_body").hide("slow");
-                        }
-                        else {
-                            $("#byec_body").hide("slow");
-                            $("#byreport_body").hide("slow");
-                            $("#bypersonal_body").show("slow");
-                            if (department_id == '2') {
-                                console.log('2');
-                                $("#secondary_personal").show("slow");
-                                $("#primary_personal").hide("slow");
-                            }
-                            else {
-                                console.log('all');
-                                $("#secondary_personal").hide("slow");
-                                $("#primary_personal").show("slow");
-                            }
-                        }
-
-                    } else {
-                        // $("#overlay").fadeOut(300);
-                        console.log('No records are available');
-                        toastr.info('No records are available');
-                    }
-                } else {
-                    toastr.error(data.message);
-                    $('#byec_body').hide();
-                    $('#byreport_body').hide();
-                    $("#bypersonal_body").hide("slow");
-                }
-            }
-        });
-    }
-
-    /*function getStudentList(formData) {
-        $("#student").show("slow");
-        $("#student").show("slow");
-        // set download filter value
-        $('#excelStudentName').val(formData.student_name);
-        $('#excelDepartment').val(formData.department_id);
-        $('#excelClassID').val(formData.class_id);
-        $('#excelSectionID').val(formData.section_id);
-        $('#excelStatus').val(formData.status);
-        $('#excelSession').val(formData.session_id);
-        // $('#academicYear').val(formData.academic_year);
-        var table = $('#student-table').DataTable({
+    function getStudentList(formData, reportType) {
+        if (reportType == 'english_communication') {
+            var studentTableID = '#ec-student-table';
+        } else if (reportType == 'report_card') {
+            var studentTableID = '#student-table';
+        } else if (reportType == 'personal_test_result') {
+            var studentTableID = '#student-table';
+        } else {
+            // def
+            var studentTableID = '#student-table';
+        }
+        var table = $(studentTableID).DataTable({
             processing: true,
             info: true,
             bDestroy: true,
+            dom: 'Blfrtip',
             dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
-            "language": {
-
-                "emptyTable": no_data_available,
-                "infoFiltered": filter_from_total_entries,
-                "zeroRecords": no_matching_records_found,
-                "infoEmpty": showing_zero_entries,
-                "info": showing_entries,
-                "lengthMenu": show_entries,
-                "search": datatable_search,
-                "paginate": {
-                    "next": next,
-                    "previous": previous
-                },
-            },
-            // exportOptions: { rows: ':visible' },
-            ajax: {
-                url: studentList,
-                data: function (d) {
-                    Object.assign(d, formData);
-                }
-            },
-            pageLength: 10,
-            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-            columns: [
-                { data: 'DT_RowIndex', name: 'DT_RowIndex', searchable: false },
-                { data: 'name', name: 'name' },
-                { data: 'name_common', name: 'name_common' },
-                { data: 'register_no', name: 'register_no' },
-                { data: 'attendance_no', name: 'attendance_no' },
-                { data: 'gender', name: 'gender' },
-                { data: 'email', name: 'email' },
-                { data: 'actions', name: 'actions', orderable: false, searchable: false }
-            ],
-            columnDefs: [
-                {
-                    targets: 1,
-                    className: 'table-user',
-                    // render: function (data, type, row, meta) {
-                    //     console.log(row);
-                    //     var currentImg = studentImg + row.photo;
-                    //     var img = (row.photo != null) ? currentImg : defaultImg;
-                    //     return '<img src="' + img + '" class="mr-2 rounded-circle">' +
-                    //         '<a href="javascript:void(0);" class="text-body font-weight-semibold">' + data + '</a>';
-                    // }
-                }
-            ]
-            
-        });
-
-    }
-
-    function bysubjectdetails_class(datasetnew) {
-        $('#bysubjectTableAppend').empty();
-        var sno = 0;
-        var bysubjectAllTable = "";
-        var headers = datasetnew.headers;
-        var grade_list_master = datasetnew.grade_list_master;
-        bysubjectAllTable += '<div class="table-responsive">' +
-            '<table id="tblbycls" class="table w-100 nowrap table-bordered table-striped table2excel" data-tableName="Test Table 1">' +
-            '<thead>' +
-            '<tr>' +
-            '<th class="align-top" rowspan="2">'+sl_no_lang+'</th>' +
-            '<th class="align-top" rowspan="2">'+grade_lang+'</th>' +
-            '<th class="align-top" rowspan="2">'+class_lang+'</th>' +
-            '<th class="align-top" rowspan="2">'+subject_name_lang+'</th>' +
-            '<th class="align-top th-sm - 6 rem" rowspan="2">'+total_student_lang+'</th>' +
-            '<th class="align-top" rowspan="2">'+absent_lang+'</th>' +
-            '<th class="align-top" rowspan="2">'+present_lang+'</th>' +
-            '<th class="align-top" rowspan="2">'+subject_teacher_name_lang+'</th>';
-        headers.forEach(function (resp) {
-            bysubjectAllTable += '<th class="text-center">' + resp.grade + '</th>';
-        });
-        bysubjectAllTable += '<th class="align-middle" rowspan="2">'+pass_lang+'</th>' +
-            '<th class="align-middle" rowspan="2">'+g_lang+'</th>' +
-            '<th class="align-middle" rowspan="2">'+gpa_lang+'</th>' +
-            '<th class="align-middle" rowspan="2">%</th>' +
-            '</tr>';
-        bysubjectAllTable += '<tr>';
-        headers.forEach(function (resp) {
-            bysubjectAllTable += '<td class="text-center">%</td>';
-        });
-        bysubjectAllTable += '</tr></thead><tbody>';
-        grade_list_master.forEach(function (res) {
-            sno++;
-            bysubjectAllTable += '<tr>' +
-                '<td class="text-center" rowspan="2">';
-            bysubjectAllTable += sno +
-                '</td>';
-            bysubjectAllTable += '<td class="text-left" rowspan="2">' +
-                '<label for="clsname">' + res.class_name + '</label>' +
-                '</td>';
-            bysubjectAllTable += '<td class="text-center" rowspan="2">' +
-                '<label for="stdcount"> ' + res.section_name + '</label>' +
-                '</td>';
-            bysubjectAllTable += '<td class="text-left" rowspan="2">' +
-                '<label for="clsname">' + res.subject_name + '</label>' +
-                '</td>';
-            bysubjectAllTable += '<td class="text-left" rowspan="2">' +
-                '<label for="clsname">' + res.totalstudentcount + '</label>' +
-                '</td>';
-            bysubjectAllTable += '<td class="text-left">' +
-                '<label for="clsname">' + res.absent_count + '</label>' +
-                '</td>';
-            bysubjectAllTable += '<td class="text-center">' +
-                '<label for="stdcount">' + res.present_count + '</label>' +
-                '</td>';
-            bysubjectAllTable += '<td class="text-left" rowspan="2">' +
-                '<label for="clsname">' + res.teacher_name + '</label>' +
-                '</td>';
-            headers.forEach(function (resp) {
-                var obj = res.gradecnt;
-                var exists = isKey(resp.grade, obj); // true
-                if (exists) {
-                    Object.keys(obj).forEach(key => {
-                        if (resp.grade == key) {
-                            // bysubjectAllTable += '<td class="text-center">' + key, obj[key] + '</td>';
-                            bysubjectAllTable += '<td class="text-center">' + obj[key] + '</td>';
-                        }
-                    });
-                } else {
-                    bysubjectAllTable += '<td class="text-center">0</td>';
-                }
-            });
-            bysubjectAllTable += '<td class="text-center">' + res.pass_count + '</td>' +
-                '<td class="text-center">' + res.fail_count + '</td>' +
-                '<td class="text-center" rowspan="2">' + res.gpa + '</td>' +
-                '<td class="text-center" rowspan="2">' + res.pass_percentage + '</td>';
-            bysubjectAllTable += '</tr>';
-            // show another row percentage
-            bysubjectAllTable += '<tr>';
-            var absentPer = (res.absent_count / res.totalstudentcount) * 100;
-            absentPer = parseFloat(absentPer, 10).toFixed(2);
-            var presentPer = (res.present_count / res.totalstudentcount) * 100;
-            presentPer = parseFloat(presentPer, 10).toFixed(2);
-            bysubjectAllTable += '<td class="text-left">' +
-                '<label for="clsname">' + absentPer + '</label>' +
-                '</td>';
-            bysubjectAllTable += '<td class="text-center">' +
-                '<label for="stdcount">' + presentPer + '</label>' +
-                '</td>';
-            headers.forEach(function (resp) {
-                var obj = res.gradecnt;
-                var exists = isKey(resp.grade, obj); // true
-                if (exists) {
-                    Object.keys(obj).forEach(key => {
-                        if (resp.grade == key) {
-                            // bysubjectAllTable += '<td class="text-center">' + key, obj[key] + '</td>';
-                            var gradepercentage = (obj[key] / res.totalstudentcount) * 100;
-                            gradepercentage = parseFloat(gradepercentage, 10).toFixed(2);
-                            bysubjectAllTable += '<td class="text-center">' + gradepercentage + '</td>';
-                        }
-                    });
-                } else {
-                    bysubjectAllTable += '<td class="text-center">0</td>';
-                }
-            });
-            bysubjectAllTable += '<td class="text-center">' + res.pass_percentage + '</td>' +
-                '<td class="text-center">' + res.fail_percentage + '</td>';
-            bysubjectAllTable += '</tr>';
-        });
-        bysubjectAllTable += '</tbody></table>' +
-            '</div>';
-        $("#bysubjectTableAppend").append(bysubjectAllTable);
-    }
-        }, 5000);
-    
-            dom: "<'row'<'col-sm-2 col-md-2'l><'col-sm-4 col-md-4'B><'col-sm-6 col-md-6'f>>" +
-                 "<'row'<'col-sm-12'tr>>" +
-                 "<'row'<'col-sm-6'i><'col-sm-6'p>>",
             language: {
                 emptyTable: no_data_available,
                 infoFiltered: filter_from_total_entries,
@@ -571,36 +365,61 @@ $(function () {
                     previous: previous
                 },
             },
-                    d.student_name = formData.student_name,
+            // serverSide: true,
+            ajax: {
+                url: studentList,
+                data: function (d) {
                     d.department_id = formData.department_id,
-                    d.class_id = formData.class_id,
-                    d.section_id = formData.section_id,
-                    d.session_id = formData.session_id
+                        d.class_id = formData.class_id,
+                        d.section_id = formData.section_id,
+                        d.academic_year = formData.academic_year
                 },
                 dataSrc: function (json) {
-                    console.log(json); // Log the JSON response to check its validity
+                    // console.log("json"); // Log the JSON response to check its validity
+                    // console.log(json); // Log the JSON response to check its validity
                     return json.data;
                 },
                 error: function (xhr, error, thrown) {
-                    console.error("Error occurred: ", error, thrown); // Log any error that occurs during the AJAX request
-                    console.error("Response Text: ", xhr.responseText); // Log the server response text
+                    // console.error("Error occurred: ", error, thrown); // Log any error that occurs during the AJAX request
+                    // console.error("Response Text: ", xhr.responseText); // Log the server response text
+                }
+            },
             pageLength: 10,
             aLengthMenu: [
-                },
-                    data: 'termination_status',
-                    name: 'termination_status',
-                    render: function(data, type, row) {
-                        return data ? 'Terminated' : 'Active';
-                    }
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, "All"]
+            ],
+            columns: [
+                {
+                    searchable: false,
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
                 },
                 {
-    }*/
-
-
-
-
-
-
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'register_no',
+                    name: 'register_no'
+                },
+                {
+                    data: 'gender',
+                    name: 'gender'
+                },
+                {
+                    data: 'email',
+                    name: 'email'
+                },
+                {
+                    data: 'actions',
+                    name: 'actions',
+                    orderable: false,
+                    searchable: false
+                },
+            ]
+        });
+    }
 
     $(document).on('click', '.exportToExcel', function (e) {
         // var table = $(this).prev('.table2excel');
@@ -619,43 +438,6 @@ $(function () {
             });
         }
     });
-
-});
-
-// find matched
-function isKey(key, obj) {
-    var keys = Object.keys(obj).map(function (x) {
-        return x;
-    });
-    return keys.indexOf(key) !== -1;
-}
-
-$('.individual_pdf').on('click', function (e) {
-    e.preventDefault();
-    var student_id = $(this).data('student-id');
-    alert(student_id);
-    var byclass = $("#bysubjectfilter").valid();
-    if (byclass === true) {
-        var year = $("#btwyears").val();
-        var department_id = $("#department_id").val();
-        var semester_id = $("#semester_id").val();
-        var session_id = $("#session_id").val();
-        var class_id = $("#changeClassName").val();
-        var section_id = $("#sectionID").val();
-        var exam_id = $("#examnames").val();
-        var report_type = $("#report_type").val();
-
-        // download set start
-        $(".downExamID").val(exam_id);
-        $(".downDepartmentID").val(department_id);
-        $(".downClassID").val(class_id);
-        $(".downSemesterID").val(semester_id);
-        $(".downSessionID").val(session_id);
-        $(".downSectionID").val(section_id);
-        $(".downAcademicYear").val(year);
-        $(".downReport_type").val(report_type);
-        $(".downstudent_id").val(student_id);
-    }
     // find matched
     function isKey(key, obj) {
         var keys = Object.keys(obj).map(function (x) {
@@ -663,4 +445,40 @@ $('.individual_pdf').on('click', function (e) {
         });
         return keys.indexOf(key) !== -1;
     }
+    $('.induvidualStudents tbody').on('click', '.individual_pdf', function () {
+        var student_id = $(this).val();
+        var byclass = $("#bysubjectfilter").valid();
+        if (byclass === true) {
+            var year = $(".downAcademicYear").val();
+            var department_id = $(".downDepartmentID").val();
+            var semester_id = $(".downSemesterID").val();
+            var session_id = $(".downSessionID").val();
+            var class_id = $(".downClassID").val();
+            var section_id = $(".downSectionID").val();
+            var exam_id = $(".downExamID").val();
+            var report_type = $(".downReport_type").val();
+
+            // download set start
+            $(".downExamID").val(exam_id);
+            $(".downDepartmentID").val(department_id);
+            $(".downClassID").val(class_id);
+            $(".downSemesterID").val(semester_id);
+            $(".downSessionID").val(session_id);
+            $(".downSectionID").val(section_id);
+            $(".downAcademicYear").val(year);
+            $(".downReport_type").val(report_type);
+            $(".downstudent_id").val(student_id);
+            if (report_type == 'english_communication') {
+                $('#individual_pdf').attr('action', downbyecreport);
+            }
+            if (report_type == 'report_card') {
+                $('#individual_pdf').attr('action', downbyreportcard);
+            }
+            if (report_type == 'personal_test_result') {
+                $('#individual_pdf').attr('action', downbypersoanalreport);
+            }
+            $('#individual_pdf').submit();
+        }
+    });
+
 });

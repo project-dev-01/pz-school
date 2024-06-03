@@ -2698,16 +2698,15 @@ class ExamPdfController1 extends Controller
 									$output .= '<td style="width:2%; font-weight: bold; height: 30px;">' . $mark . '</td>';
 									if ($i == 1) {
 
-										if($getmarks["data"][3]["marks"][$k] != null){
-											$output .= '<td style="width:2%; font-weight: bold; height: 30px;" rowspan="3">' .$getmarks["data"][3]["marks"][$k]['score']. '</td>';
-										
-										}else{
+										if ($getmarks["data"][3]["marks"][$k] != null) {
+											$output .= '<td style="width:2%; font-weight: bold; height: 30px;" rowspan="3">' . $getmarks["data"][3]["marks"][$k]['score'] . '</td>';
+										} else {
 											$output .= '<td style="width:2%; font-weight: bold; height: 30px;" rowspan="3"> </td>';
 										}
 										// $output .= '<td style="width:2%; font-weight: bold; height: 30px;" rowspan="3">';
 										// $output .= is_array($getmarks["data"][3]["marks"][$k]) ? implode(', ', $getmarks["data"][3]["marks"][$k]) : $getmarks["data"][3]["marks"][$k];
 										// $output .= '</td>';
-										
+
 									}
 									$k++;
 								}

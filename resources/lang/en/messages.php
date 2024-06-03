@@ -90,6 +90,7 @@ return [
   "entries" => "Entries",
   "download_csv" => "Download CSV",
   "download_pdf" => "Download PDF",
+  "download_all_pdf" => "Download All PDF",
   "name" => "Name",
   "register_no" => "Register No",
   "roll_no" => "Roll No",

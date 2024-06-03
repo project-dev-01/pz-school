@@ -89,6 +89,7 @@ return [
     "entries" => "Entri",
     "download_csv" => "Muat Turun CSV",
     "download_pdf" => "Muat Turun PDF",
+    "download_all_pdf" => "Muat Turun All PDF",
     "name" => "Nama Kelas",
     "register_no" => "No Daftar",
     "roll_no" => "No Barisan",
