@@ -17,7 +17,12 @@ class ExamPdfController1 extends Controller
 
 	public function downbyecreport(Request $request)
 	{
-		$pdf_logo = config('constants.image_url') . '/common-asset/images/jskl_pdf_logo.png';
+		if ($request->department_id == 1) {
+			$pdf_logo = config('constants.image_url') . '/common-asset/images/primary_logo.png';
+		}
+		if ($request->department_id == 2) {
+			$pdf_logo = config('constants.image_url') . '/common-asset/images/secondary_logo.png';
+		}
 		$data = [
 			'branch_id' => session()->get('branch_id'),
 			'exam_id' => $request->exam_id,
@@ -96,7 +101,8 @@ class ExamPdfController1 extends Controller
 				font-family: "Open Sans";
 				font-style: normal;
 				font-size: 14px;
-				letter-spacing: 0.0133em;
+				letter-spacing: 0.0133em;				
+				word-wrap: break-word;
 				}
 				
 				h6 {
@@ -126,6 +132,8 @@ class ExamPdfController1 extends Controller
 				font-size: 15px;
 				letter-spacing: 0.0133em;
 				}
+				h3 { font-family:  "Open Sans";
+				 }
 				</style>
 				</head>
 				
@@ -150,13 +158,13 @@ class ExamPdfController1 extends Controller
 					<tr>
 					<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; width:30%; text-align: center;">
 					
-					<h4 style="margin: 0;font-weight: bold;">' . $acy . ' </h4>
+					<h4 style="margin: 0;">' . $acy . ' </h4>
 					</td>       
 					<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; width:30%; text-align: left;">
-					<h4 style="margin: 0;font-weight: bold;">English Communication</h4>
+					<h4 style="margin: 0;">English Communication</h4>
 					</td>       
-					<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; width:30%; text-align: left;">
-					<h4 style="margin: 0;font-weight: bold;">' . $term_name . ' Report</h4>
+					<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; width:30%; text-align: left;font-weight: bold;">
+					<h4>' . $term_name . ' Report</h4>
 					</td>
 					</tr> 
 					<tr>
@@ -178,7 +186,7 @@ class ExamPdfController1 extends Controller
 					<h3 style="margin: 0;">Student Name</h3>
 					</td>       
 					<td class="content-wrap aligncenter" style="margin: 0;padding-top:10px; padding-bottom:-10px;text-align: center;">
-					<h3 style="margin: 0;">' . strtoupper($stu['name']) . '</h3>
+					<h3 style="margin: 0;">' . strtoupper($stu['eng_name']) . '</h3>
 					</td>       
 					<td class="content-wrap aligncenter" style="margin: 0; padding-top:10px; padding-bottom:-10px;text-align: center;">
 					</td>
@@ -212,7 +220,7 @@ class ExamPdfController1 extends Controller
 				$heading = array('Listening', 'Reading', 'Speaking', 'Writing', 'Attitude');
 				$papers[0] = array($l1, $l2, $l3);
 				$papers[1] = array($r1, $r2);
-				$papers[2] = array($s1, $s2, $s3);
+				$papers[2] = array($s1, $s2, $s3, $s4);
 				$papers[3] = array($w1, $w2);
 				$papers[4] = array($a1, $a2, $a3);
 				$teachername = '';
@@ -222,7 +230,7 @@ class ExamPdfController1 extends Controller
 					$output .= '
 							<tr>
 							<td colspan="2"
-							style="text-align:center; border: 2px solid black;background-color:#40403a57;font-weight: bold;font-size:18px;">
+							style="text-align:center; border: 2px solid black;background-color:#40403a57;font-size:18px;">
 							' . $heads . '</td>
 							</tr>';
 
@@ -262,9 +270,9 @@ class ExamPdfController1 extends Controller
 						}
 
 						$output .= '<tr>
-								<td style="border: 2px solid black; text-align: left;font-weight: normal;">' . $papername . '
+								<td style="border: 2px solid black; text-align: left;font-weight: normal;height:15px;">' . $papername . '
 								</td>
-								<td style="border: 2px solid black; text-align: center;font-weight: normal;">' . $mark . '</td>
+								<td style="border: 2px solid black; text-align: center;font-weight: normal;height:15px;">' . $mark . '</td>
 								</tr>';
 					}
 				}
@@ -308,7 +316,7 @@ class ExamPdfController1 extends Controller
 					$output .= '
 							<tr>
 							<td colspan="2"
-							style="text-align:center; border: 2px solid black;background-color:#40403a57;font-weight: bold;font-size:18px;">
+							style="text-align:center; border: 2px solid black;background-color:#40403a57;font-size:18px;">
 							' . $heads . '</td>
 							</tr>';
 
@@ -348,9 +356,9 @@ class ExamPdfController1 extends Controller
 						}
 
 						$output .= '<tr>
-								<td style="border: 2px solid black; text-align: left;font-weight: normal;">' . $papername . '
+								<td style="border: 2px solid black; text-align: left;font-weight: normal;height:15px;">' . $papername . '
 								</td>
-								<td style="border: 2px solid black; text-align: center;font-weight: normal;">' . $mark . '</td>
+								<td style="border: 2px solid black; text-align: center;font-weight: normal;height:15px;">' . $mark . '</td>
 								</tr>';
 					}
 				}
@@ -407,7 +415,7 @@ class ExamPdfController1 extends Controller
 			$teachernameapi = Helper::PostMethod(config('constants.api.getec_teacher'), $pdata);
 			$teachername = '-';
 			if (!empty($teachernameapi['data'])) {
-				$teachername = $teachernameapi['data']['first_name'] . ' ' . $teachernameapi['data']['last_name'];
+				$teachername = $teachernameapi['data']['last_name'] . ' ' . $teachernameapi['data']['first_name'];
 			}
 			$output .= '<tr>
 					<td class="content-wrap aligncenter" colspan="3" style="margin: 0; padding-left: 20px;padding-right: 20px;padding-top:-10px; text-align: center;">
@@ -417,14 +425,18 @@ class ExamPdfController1 extends Controller
 					<tbody>
 					<tr>
 					<td colspan="2"
-					style="text-align: center; border: 2px solid black; background-color: #40403a57; color: black;font-weight: bold;font-size:18px;">
+					style="text-align: center; border: 2px solid black; background-color: #40403a57; color: black;font-size:18px;">
 					Teacher`s Comments</td>
 					</tr>
 					<tr>
 					<td colspan="2"
-					style="text-align: left; border: 2px solid black; height: 100px; color: black; padding: 10px;font-weight: normal;">
-					' . $teachercmd . '
-					</td>
+					style="text-align: left; border: 2px solid black; height: 100px; color: black; padding: 10px;">
+					';
+			$comment = explode("\n", $teachercmd);
+			foreach ($comment as $cmt) {
+				$output .= $cmt . '<br>';
+			}
+			$output .= '</td>
 					</tr>
 					</tbody>
 					</table>
@@ -436,7 +448,7 @@ class ExamPdfController1 extends Controller
 					<td class="content-wrap aligncenter"  style="margin: 0; padding: 10px; text-align: center;">
 					</td>
 					<td class="content-wrap aligncenter"  style="margin: 0; padding: 10px; text-align: center;">
-					<h5 style="margin: 0;font-weight: bold;">English Teacher`s Name</h5>
+					<h5 style="margin: 0;">English Teacher`s Name</h5>
 					</td>
 					<td class="content-wrap aligncenter"  style="margin: 0; padding: 10px; text-align: center;">
 					<h5 style="margin: 0;font-weight: normal;">' . $teachername . '</h5>
@@ -632,6 +644,7 @@ class ExamPdfController1 extends Controller
 				$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 				foreach ($getstudents['data'] as $stu) {
 					$sno++;
+					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
 					$output = '<!DOCTYPE html>
 						<html lang="en">
 						
@@ -708,14 +721,14 @@ class ExamPdfController1 extends Controller
 						<div class="row">
 						<div class="column1" style="width:10%;">
 						<div style="margin-top:20px;">
-						<p style="margin: 0;font-size:20px;">' . $grade['data']['name'] . '</p>
+						<p style="margin: 0;font-size:20px;">' . $stuclass .  '年生</p>
 						</div>
 						
 						</div>
 						<div class="column1" style="width:10%;">
 						
 						<div style="margin-top:20px;">
-						<p style="margin: 0;font-size:20px;"> 学期</p>
+						<p style="margin: 0;font-size:20px;"> 1学期</p>
 						</div>
 						
 						</div>
@@ -732,7 +745,7 @@ class ExamPdfController1 extends Controller
 						<tr>
 						<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;"> ' . $section['data']['name'] . '</td>
 													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;"> 組</td>
-													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;"> ' . $sno . '</td>
+													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;"> ' . $attendance_no . '</td>
 													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;"> 番</td>
 						</tr>
 						</tbody>
@@ -769,7 +782,7 @@ class ExamPdfController1 extends Controller
 						</td>
 						</tr>
 						<tr style="border-bottom: 2px solid black;">
-						<td style="width:2%; height: 30px;">教科</td>
+						<td style="width:2%; height: 30px;">教<br>科</td>
 						<td style="width:15%; height: 30px;">観点別学習状況</td>
 						<td style="width:2%; height: 30px;">1学期</td>
 						<td style="width:2%; height: 30px;">2学期</td>
@@ -810,7 +823,12 @@ class ExamPdfController1 extends Controller
 							$i++;
 							$output .= ' <tr>';
 							if ($i == 1) {
-								$output .= '<td rowspan="3" style="width:2%; height: 30px;">' . $subject . '</td>';
+								$output .= '<td rowspan="3" style="width:2%; height: 30px; writing-mode: vertical-rl; font-family: IPAG;">';
+								$subject_chars = preg_split('//u', $subject, null, PREG_SPLIT_NO_EMPTY);
+								foreach ($subject_chars as $char) {
+									$output .= '<span style="display: inline-block; transform: rotate(0deg);">' . $char . '</span><br>';
+								}
+								$output .= '</td>';
 							}
 							$output .= '<td style="width:15%; text-align:left; height: 30px;">' . $papers['papers'] . '</td>';
 
@@ -818,7 +836,7 @@ class ExamPdfController1 extends Controller
 
 								$mark = (isset($mark['grade']) && $mark['grade'] != null) ? $mark['grade'] : '';
 
-								$output .= '<td style="width:2%; font-weight: bold; height: 30px;">' . $mark . '</td>';
+								$output .= '<td style="width:2%;  height: 30px;">' . $mark . '</td>';
 							}
 							$output .= ' </tr>';
 							//dd($subject);
@@ -953,7 +971,7 @@ class ExamPdfController1 extends Controller
 								}
 							}
 						}
-						$fmark = ($mark == "Excellent") ? '<b>O</b>' : '';
+						$fmark = ($mark == "Excellent") ? 'O' : '';
 
 						$output .= '<tr style="height:60px;">
 										<td colspan="4" style="text-align:left;vertical-align: top;width:100px;">' . $papers['papers'] . '</td>
@@ -1065,8 +1083,8 @@ class ExamPdfController1 extends Controller
 								$s++;
 								// Check if the mark item is an array and contains 'freetext'
 								if (is_array($markItem) && isset($markItem['freetext']) && $markItem['freetext'] != null) {
-									$mark = $markItem['freetext'];
-									$mark2 .= $s . ' 学期 - ' . $mark . '<br>';
+									$mark2 = $markItem['freetext'];
+									// $mark2 .= $s . ' 学期 - ' . $mark . '<br>';
 								}
 								// Ensure that only the last semester's grade is used
 								if ($s == $nsem) {
@@ -1217,7 +1235,7 @@ class ExamPdfController1 extends Controller
 				$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 				foreach ($getstudents['data'] as $stu) {
 					$sno++;
-
+					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
 					$output = '<!DOCTYPE html>
 						<html lang="en">
 						
@@ -1295,14 +1313,14 @@ class ExamPdfController1 extends Controller
 								<div class="row">
 									<div class="column1" style="width:10%;">
 										<div style="margin-top:20px;">
-											<p style="margin: 0;font-size:20px;">' . $grade['data']['name'] . '</p>
+											<p style="margin: 0;font-size:20px;">' . $stuclass .  '年生</p>
 										</div>
 						
 									</div>
 									<div class="column1" style="width:10%;">
 						
 										<div style="margin-top:20px;">
-											<p style="margin: 0;font-size:20px;"> 学期</p>
+											<p style="margin: 0;font-size:20px;"> 1学期</p>
 										</div>
 						
 									</div>
@@ -1319,7 +1337,7 @@ class ExamPdfController1 extends Controller
 												<tr>
 													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;"> ' . $section['data']['name'] . '</td>
 													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;"> 組</td>
-													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;"> ' . $sno . '</td>
+													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;"> ' . $attendance_no . '</td>
 													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;"> 番</td>
 													</tr>
 											</tbody>
@@ -1356,7 +1374,7 @@ class ExamPdfController1 extends Controller
 													</td>
 												</tr>
 												<tr style="border-bottom: 2px solid black;">
-													<td style="width:2%;font-size:16px;">教科</td>
+													<td style="width:2%;font-size:16px;">教<br>科</td>
 													<td style="width:15%;font-size:16px;">観点別学習状況</td>
 													<td style="width:2%;font-size:16px;">1学期</td>
 													<td style="width:2%;font-size:16px;">2学期</td>
@@ -1395,7 +1413,12 @@ class ExamPdfController1 extends Controller
 							$i++;
 							$output .= ' <tr>';
 							if ($i == 1) {
-								$output .= '<td rowspan="3" style="width:2%; height: 25px;">' . $subject . '</td>';
+								$output .= '<td rowspan="3" style="width:2%; height: 25px; writing-mode: vertical-rl; font-family: IPAG;">';
+								$subject_chars = preg_split('//u', $subject, null, PREG_SPLIT_NO_EMPTY);
+								foreach ($subject_chars as $char) {
+									$output .= '<span style="display: inline-block; transform: rotate(0deg);">' . $char . '</span><br>';
+								}
+								$output .= '</td>';
 							}
 							$output .= '<td style="width:15%; text-align:left; height: 25px;">' . $papers['papers'] . '</td>';
 
@@ -1403,7 +1426,7 @@ class ExamPdfController1 extends Controller
 
 								$mark = (isset($mark['grade']) && $mark['grade'] != null) ? $mark['grade'] : '';
 
-								$output .= '<td style="width:2%; font-weight: bold; height: 25px;">' . $mark . '</td>';
+								$output .= '<td style="width:2%;  height: 25px;">' . $mark . '</td>';
 							}
 							$output .= ' </tr>';
 							//dd($subject);
@@ -1588,7 +1611,7 @@ class ExamPdfController1 extends Controller
 								}
 							}
 						}
-						$fmark = ($mark == "Excellent") ? '<b>O</b>' : '';
+						$fmark = ($mark == "Excellent") ? 'O' : '';
 						$output .= '<tr style="height:60px;">
 											<td colspan="4" style="text-align:left;width:100px;">' . $papers['papers'] . '</td>
 											<td colspan="1">' . $fmark . '
@@ -1734,8 +1757,8 @@ class ExamPdfController1 extends Controller
 								// $mark4 .= $s . ' 学期 - ' . $mark . '<br>';
 								// Check if the mark item is an array and contains 'freetext'
 								if (is_array($mark) && isset($mark['freetext']) && $mark['freetext'] != null) {
-									$mark = $mark['freetext'];
-									$mark4 .= $s . ' 学期 - ' . $mark . '<br>';
+									$mark4 = $mark['freetext'];
+									// $mark4 .= $s . ' 学期 - ' . $mark . '<br>';
 								}
 								// Ensure that only the last semester's grade is used
 								if ($s == $nsem) {
@@ -1858,7 +1881,7 @@ class ExamPdfController1 extends Controller
 					$pdf = \App::make('dompdf.wrapper');
 
 					// Set custom paper size
-					$customPaper = [0, 0, 792.00, 1224.00];
+					$customPaper = array(0, 0, 792.00, 1300.00);
 					$pdf->set_paper($customPaper);
 					$pdf->loadHTML($output);
 					// return $pdf->stream();
@@ -1881,6 +1904,7 @@ class ExamPdfController1 extends Controller
 				$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 				foreach ($getstudents['data'] as $stu) {
 					$sno++;
+					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
 					$output = '<!DOCTYPE html>
 						<html lang="en">
 						
@@ -1958,14 +1982,14 @@ class ExamPdfController1 extends Controller
 								<div class="row">
 									<div class="column1" style="width:10%;">
 										<div style="margin-top:20px;">
-											<p style="margin: 0;font-size:20px;">' . $grade['data']['name'] . '</p>
+											<p style="margin: 0;font-size:20px;">' . $stuclass .  '年生</p>
 										</div>
 						
 									</div>
 									<div class="column1" style="width:10%;">
 						
 										<div style="margin-top:20px;">
-											<p style="margin: 0;font-size:20px;"> 学期</p>
+											<p style="margin: 0;font-size:20px;"> 1学期</p>
 										</div>
 						
 									</div>
@@ -1982,7 +2006,7 @@ class ExamPdfController1 extends Controller
 												<tr>
 													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;"> ' . $section['data']['name'] . '</td>
 													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;"> 組</td>
-													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;"> ' . $sno . '</td>
+													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;"> ' . $attendance_no . '</td>
 													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;"> 番</td>
 												</tr>
 											</tbody>
@@ -2058,7 +2082,12 @@ class ExamPdfController1 extends Controller
 							$i++;
 							$output .= ' <tr>';
 							if ($i == 1) {
-								$output .= '<td rowspan="3" style="width:2%; height: 30px;">' . $subject . '</td>';
+								$output .= '<td rowspan="3" style="width:2%; height: 30px; writing-mode: vertical-rl; font-family: IPAG;">';
+								$subject_chars = preg_split('//u', $subject, null, PREG_SPLIT_NO_EMPTY);
+								foreach ($subject_chars as $char) {
+									$output .= '<span style="display: inline-block; transform: rotate(0deg);">' . $char . '</span><br>';
+								}
+								$output .= '</td>';
 							}
 							$output .= '<td style="width:15%; text-align:left; height: 30px;">' . $papers['papers'] . '</td>';
 
@@ -2066,7 +2095,7 @@ class ExamPdfController1 extends Controller
 
 								$mark = (isset($mark['grade']) && $mark['grade'] != null) ? $mark['grade'] : '';
 
-								$output .= '<td style="width:2%; font-weight: bold; height: 30px;">' . $mark . '</td>';
+								$output .= '<td style="width:2%;  height: 30px;">' . $mark . '</td>';
 							}
 							$output .= ' </tr>';
 							//dd($subject);
@@ -2200,7 +2229,7 @@ class ExamPdfController1 extends Controller
 								}
 							}
 						}
-						$fmark = ($mark == "Excellent") ? '<b>O</b>' : '';
+						$fmark = ($mark == "Excellent") ? 'O' : '';
 						$output .= '<tr style="height:40px;">
 											<td colspan="4" style="height:40px;text-align:left;width:100px;">' . $papers['papers'] . '</td>
 											<td colspan="1">' . $fmark . '
@@ -2347,8 +2376,8 @@ class ExamPdfController1 extends Controller
 
 								// $mark3 .= $s . ' 学期 - ' . $mark . '<br>';
 								if (is_array($mark) && isset($mark['freetext']) && $mark['freetext'] != null) {
-									$mark = $mark['freetext'];
-									$mark3 .= $s . ' 学期 - ' . $mark . '<br>';
+									$mark3 = $mark['freetext'];
+									// $mark3 .= $s . ' 学期 - ' . $mark . '<br>';
 								}
 								// Ensure that only the last semester's grade is used
 								if ($s == $nsem) {
@@ -2497,6 +2526,7 @@ class ExamPdfController1 extends Controller
 
 			foreach ($getstudents['data'] as $stu) {
 				$sno++;
+				$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
 				$output = '<!DOCTYPE html>
 					<html lang="en">
 					
@@ -2568,21 +2598,21 @@ class ExamPdfController1 extends Controller
 					<div class="content">
 					<div class="row">
 					<div class="column">
-					<p style="margin: 0;font-size:20px;">クアラルンプール日本人学校　小学部</p>
+					<p style="margin: 0;font-size:20px;">クアラルンプール日本人学校　中学部</p>
 					</div>
 					</div>
 					
 					<div class="row">
 					<div class="column1" style="width:10%;">
 					<div style="margin-top:20px;">
-					<p style="margin: 0;font-size:20px;">' . $grade['data']['name'] . '</p>
+					<p style="margin: 0;font-size:20px;">' . $stuclass .  '年生</p>
 					</div>
 					
 					</div>
 					<div class="column1" style="width:10%;">
 					
 					<div style="margin-top:20px;">
-					<p style="margin: 0;font-size:20px;">2 学期</p>
+					<p style="margin: 0;font-size:20px;"> 1学期</p>
 					</div>
 					
 					</div>
@@ -2600,7 +2630,7 @@ class ExamPdfController1 extends Controller
 					<tr>
 					<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;"> ' . $section['data']['name'] . '</td>
 													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;"> 組</td>
-													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;"> ' . $sno . '</td>
+													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;"> ' . $attendance_no . '</td>
 													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;"> 番</td>
 					</tr>
 					
@@ -2638,7 +2668,7 @@ class ExamPdfController1 extends Controller
 					</td>
 					</tr>
 					<tr>
-					<td rowspan="2">観<br>点</td>
+					<td rowspan="2">教<br>科</td>
 					<td rowspan="2" style="width:15%;">観点別学習状況</td>
 					<td colspan="2" style="width:2%;">1学期</td>
 					<td colspan="2" style="width:2%;">2学期</td>
@@ -2686,7 +2716,12 @@ class ExamPdfController1 extends Controller
 						if ($i <= 3) {
 							$output .= ' <tr>';
 							if ($i == 1) {
-								$output .= '<td rowspan="3" style="width:2%; height: 30px;">' . $subject . '</td>';
+								$output .= '<td rowspan="3" style="width:2%; height: 30px; writing-mode: vertical-rl; font-family: IPAG;">';
+								$subject_chars = preg_split('//u', $subject, null, PREG_SPLIT_NO_EMPTY);
+								foreach ($subject_chars as $char) {
+									$output .= '<span style="display: inline-block; transform: rotate(0deg);">' . $char . '</span><br>';
+								}
+								$output .= '</td>';
 							}
 							$output .= '<td style="width:15%; text-align:left; height: 30px;">' . $papers['papers'] . '</td>';
 							$k = 0;
@@ -2695,15 +2730,15 @@ class ExamPdfController1 extends Controller
 
 									$mark = (isset($mark['grade']) && $mark['grade'] != null) ? $mark['grade'] : '';
 
-									$output .= '<td style="width:2%; font-weight: bold; height: 30px;">' . $mark . '</td>';
+									$output .= '<td style="width:2%;  height: 30px;">' . $mark . '</td>';
 									if ($i == 1) {
 
 										if ($getmarks["data"][3]["marks"][$k] != null) {
-											$output .= '<td style="width:2%; font-weight: bold; height: 30px;" rowspan="3">' . $getmarks["data"][3]["marks"][$k]['score'] . '</td>';
+											$output .= '<td style="width:2%;  height: 30px;" rowspan="3">' . $getmarks["data"][3]["marks"][$k]['score'] . '</td>';
 										} else {
-											$output .= '<td style="width:2%; font-weight: bold; height: 30px;" rowspan="3"> </td>';
+											$output .= '<td style="width:2%;  height: 30px;" rowspan="3"> </td>';
 										}
-										// $output .= '<td style="width:2%; font-weight: bold; height: 30px;" rowspan="3">';
+										// $output .= '<td style="width:2%;  height: 30px;" rowspan="3">';
 										// $output .= is_array($getmarks["data"][3]["marks"][$k]) ? implode(', ', $getmarks["data"][3]["marks"][$k]) : $getmarks["data"][3]["marks"][$k];
 										// $output .= '</td>';
 
@@ -2846,7 +2881,7 @@ class ExamPdfController1 extends Controller
 							}
 						}
 					}
-					$fmark = ($mark == "Excellent") ? '<b>O</b>' : '';
+					$fmark = ($mark == "Excellent") ? 'O' : '';
 					$output .= '<tr style="height:60px;">
 					<td colspan="4" style="text-align:left;width:100px;">' . $papers['papers'] . '</td>
 					<td colspan="1">' . $fmark . '
@@ -2989,8 +3024,8 @@ class ExamPdfController1 extends Controller
 							// $mark = (isset($mark['freetext']) && $mark['freetext'] != null) ? $mark['freetext'] : '';
 							// $mark3 .= $s . ' 学期 - ' . $mark . '<br>';
 							if (is_array($mark) && isset($mark['freetext']) && $mark['freetext'] != null) {
-								$mark = $mark['freetext'];
-								$mark3 .= $s . ' 学期 - ' . $mark . '<br>';
+								$mark3 = $mark['freetext'];
+								// $mark3 .= $s . ' 学期 - ' . $mark . '<br>';
 							}
 							// Ensure that only the last semester's grade is used
 							if ($s == $nsem) {
@@ -3067,47 +3102,54 @@ class ExamPdfController1 extends Controller
 					</table>';
 
 				$output .= '<div style="display: flex; flex-wrap: wrap;">
-					<div style="width: 100%; box-sizing: border-box;">
+				<div style="width: 100%; box-sizing: border-box;">
 					<p style="text-align: right; margin-top:0px;marign-bottom:20px;font-size:12px;">※1,2学期の内容は、三者懇談でお伝えさせていただきます。                                </p>
-					</div>
-					</div>
-					
-					<div style="width:100%;margin-top:45px;">
-					<table
-					style="margin-top: 12px; width: 100%;border: 2px solid black;">
-					<thead>
-					<!-- Your content here -->
-					</thead>
-					<tbody>
-					<tr>
-					<td colspan="1" style="text-align: left; height: 40px; width:5%;">
-					校<br>長
-					</td>
-					<td colspan="1" style="text-align: left; height: 40px; border-top: 2px solid black;">
-					' . $getteacherdata['data']['principal'] . '
-					</td>
-					</tr>
-					<tr>
-					<td colspan="1" style="text-align: left; height: 40px; width:5%;">
-					担<br>任
-					</td>
-					<td colspan="1" style="text-align: left; height: 40px; border-top: 1px solid black;">
-					' . $getteacherdata['data']['teacher'] . '
-					</td>
-					</tr>
-					</tbody>
-					</table>
-					</div>
-					</div>
-					</div>
-					</div>
-					</body>
+				</div>
+			</div>
+			
+			
+			<div class="row" style="margin-top:82px;">
+									<div style="width: 50%;float: left;">
+										<table style="border-collapse: collapse; margin-top: 22px;  border: 2px solid black;">
+											<thead style="text-align: center;">
+												<!-- Your content here -->
+											</thead>
+											<tbody>
+												<tr>
+													<td style="text-align: left; height: 45px; border: 1px solid black;">
+														校│<br>長│' . $getteacherdata['data']['principal'] . '
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div style="width: 1%;"></div>
+									<div style="width: 48%; float: right;">
+										<table style="border-collapse: collapse; margin-top: 22px; border: 2px solid black;">
+											<thead style="text-align: center;">
+												<!-- Your content here -->
+											</thead>
+											<tbody>
+												<tr>
+													<td style="text-align: left; height: 45px; border: 1px solid black;">
+														担│<br>任│ ' . $getteacherdata['data']['teacher'] . '
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								
+			</div>
+			</div>
+			</div>
+			</body>
 					
 					</html>';
 				$pdf = \App::make('dompdf.wrapper');
 
 				// Set custom paper size
-				$customPaper = [0, 0, 792.00, 1224.00];
+				$customPaper = [0, 0, 792.00, 1300.00];
 				$pdf->set_paper($customPaper);
 				$pdf->loadHTML($output);
 
