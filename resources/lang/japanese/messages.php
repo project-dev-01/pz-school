@@ -2314,5 +2314,6 @@ return [
       "mark_info" => "マーク情報",      
       "adhocexam_import" => "アドホック試験の一括アップロード",
       "select_role_parent" => "Select Role for Parent",
-      "exam_individual_result" => "試験個人結果",
+      "exam_individual_result" => "試験個人結果",        
+      "download_zip_file" => "Download All Zip",
 ];

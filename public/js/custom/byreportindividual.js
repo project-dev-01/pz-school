@@ -124,7 +124,8 @@ $(function () {
                 department_id: department_id,
                 class_id: class_id,
                 section_id: section_id,
-                session_id: session_id
+                session_id: session_id,
+                year: year
             };
             getStudentList(formData1);
 
@@ -285,7 +286,8 @@ $(function () {
                         d.department_id = formData.department_id,
                         d.class_id = formData.class_id,
                         d.section_id = formData.section_id,
-                        d.session_id = formData.session_id
+                        d.session_id = formData.session_id,
+                        d.academic_year = formData.year
                 },
                 dataSrc: function (json) {
                     console.log(json); // Log the JSON response to check its validity

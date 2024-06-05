@@ -11472,7 +11472,7 @@ class AdminController extends Controller
     }
     public function ExamImportAdd(Request $request)
     {
-       
+        ini_set('max_execution_time', 300);
         $validator = \Validator::make($request->all(), [
             'file' => 'required'
         ]);
@@ -11641,7 +11641,7 @@ class AdminController extends Controller
     public function Examuploadmark(Request $request)
     {
        
-            
+        ini_set('max_execution_time', 300);    
         $department_id = $request->department_id;
         $class_id = $request->class_id;
         $section_id = $request->section_id;
@@ -11732,7 +11732,7 @@ class AdminController extends Controller
             // "session_id" => $request->session_id,
             "academic_session_id" => $request->academic_year
         ];
-        // dd($data);
+        //dd($data);
         $response = Helper::PostMethod(config('constants.api.getgraduatestudentlist'), $data);
         $data = isset($response['data']) ? $response['data'] : [];
        

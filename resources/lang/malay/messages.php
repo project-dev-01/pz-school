@@ -2238,6 +2238,7 @@ return [
       "new_record" => "Rekod Data Baharu",
       "mark_info" => "Tandakan Maklumat",      
       "adhocexam_import" => "Muat Naik Pukal Peperiksaan Adhoc",
-      "exam_individual_result" => "Exam Individual Result",
+      "exam_individual_result" => "Exam Individual Result",       
+      "download_zip_file" => "Download All Zip",
       
 ];

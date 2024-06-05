@@ -659,6 +659,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('individual/downbyecreport', [ExamindividualPdfController::class, 'downbyecreport'])->name('admin.individual.downbyecreport');
         Route::post('individual/downbyreportcard', [ExamindividualPdfController::class, 'downbyreportcard'])->name('admin.individual.downbyreportcard');
         Route::post('individual/downbypersoanalreport', [ExamindividualPdfController::class, 'downbypersoanalreport'])->name('admin.individual.downbypersoanalreport');
+        Route::post('exam_results/downbyecreportfile', [ExamPdfController::class, 'downbyecreport'])->name('admin.exam_results.downbyecreportfile');
+        Route::post('exam_results/downbyreportcardfile', [ExamPdfController::class, 'downbyreportcard'])->name('admin.exam_results.downbyreportcardfile');
         
         Route::get('exam_results/sampleformat', [ExamPdfController1::class, 'sampleformat'])->name('admin.exam_results.sampleformat');
         Route::get('exam/import', [AdminController::class, 'ExamImport'])->name('admin.exam.import');
@@ -676,10 +678,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
        
         //Graduates Yoroku primary /Secondary Report
 
-        Route::get('primary/downloadform1/{id}', [ExamPdfController::class, 'downprimaryform1'])->name('admin.primary.downloadform1');
+        Route::get('primary/downloadform1/{id}', [ExamPdfController1::class, 'downprimaryform1'])->name('admin.primary.downloadform1');
         Route::get('yoroku/downloadform2a/{id}', [ExamPdfController::class, 'downloadYorokuform2a'])->name('admin.yoroku.downloadform2a');
         Route::get('yoroku/downloadform2b/{id}', [ExamPdfController::class, 'downloadYorokuform2b'])->name('admin.yoroku.downloadform2b');
-        Route::get('secondary/downloadform1/{id}', [ExamPdfController::class, 'downsecondaryform1'])->name('admin.secondary.downloadform1');
+        Route::get('secondary/downloadform1/{id}', [ExamPdfController1::class, 'downsecondaryform1'])->name('admin.secondary.downloadform1');
         // exam result end
         // download pdf
         Route::post('exam_results/downbyclass', [PdfController::class, 'downbyclass'])->name('admin.exam_results.downbyclass');

@@ -73,7 +73,7 @@ class ExamindividualPdfController extends Controller
 		$n2 = $grade['data']['name_numeric'];
 		$n3 = $section['data']['name'];
 		$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
-		$number = $n1 . $n2 . $n3 . $attendance_no;
+		$number = $n1 . $n2 . $n3 . sprintf("%02d", $attendance_no);
 		$fonturl = storage_path('fonts/ipag.ttf');
 		$output = '<!DOCTYPE html>
 				<html lang="en">
@@ -858,7 +858,7 @@ class ExamindividualPdfController extends Controller
 
 				$attarray = array('', '1月', ' 2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月');
 				$getattendance = Helper::PostMethod(config('constants.api.getsem_studentattendance'), $attdata);
-				//dd($getattendance);
+				dd($getattendance);
 				$at_tot1 = 0;
 				$at_tot2 = 0;
 				$at_tot3 = 0;
