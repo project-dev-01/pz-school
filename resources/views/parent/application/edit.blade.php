@@ -1787,7 +1787,7 @@
                                     </div>
                                     <div class="form-group text-right m-b-0">
                                         <button class="btn btn-primary-bl waves-effect waves-light" {{$disabled_phase_2}} id="submit" type="submit">
-                                            {{ __('messages.update') }}
+                                            {{ __('messages.apply') }}
                                         </button>
                                         <a href="{{ route('parent.application.index') }}" class="btn btn-primary-bl waves-effect waves-light">
                                             {{ __('messages.back') }}

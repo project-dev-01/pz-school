@@ -410,6 +410,7 @@ $(function () {
                             $("#resultsByPaper").find("#paperID").empty();
                             $("#resultsByPaper").find("#paperID").append('<option value="">'+select_paper+'</option>');
                             // $("#resultsByPaper").find("#paperID").append('<option value="All">'+all+'</option>');
+                            $("#resultsByPaper").find("#paperID").append('<option value="All">'+all+'</option>');
                             // paper list
                             $.post(subjectByPapers, {
                                 token: token,
@@ -429,7 +430,10 @@ $(function () {
                             }, 'json');
 
                         }
+                        if(semesterID){
 
+                            $("#resultsByPaper").find("#semester_id").val(semesterID);
+                        }
                         // download set start
                         // $("#downExamID").val(examID);
                         // $("#downClassID").val(classID);
@@ -540,6 +544,19 @@ $(function () {
         var marklist=0;
         // Check if the form is valid
         if (isValid) {
+            var examObj = {
+                department_id: department_id,
+                class_id: class_id,
+                section_id: section_id,
+                exam_id: exam_id,
+                subject_id: subject_id,
+                paper_id: paper_id,
+                semester_id: semester_id,
+                session_id: session_id,
+                academic_session_id: academic_session_id,
+                userID: userID,
+            };
+            setLocalStorageForExamBulkImport(examObj);
             var formData = new FormData();
             formData.append('token', token);
             formData.append('branch_id', branchID);
@@ -642,7 +659,7 @@ $(function () {
                     var markmsg=(item['oldmark']['grade'] !='')?'Previous Data : '+item['oldmark']['grade'] :'New Data';
                     if(item['oldmark']['point_grade']=='')
                     {
-                        misdata++;
+                        // misdata++;
                         var markmsg='Wrong Data';
                         var markbtn='danger';
                     }
@@ -685,4 +702,33 @@ $(function () {
     }
       
     });
+
+    
+    function setLocalStorageForExamBulkImport(examObj) {
+
+        var adminExamBulkImport = new Object();
+        adminExamBulkImport.department_id = examObj.department_id;
+        adminExamBulkImport.class_id = examObj.class_id;
+        adminExamBulkImport.section_id = examObj.section_id;
+        adminExamBulkImport.exam_id = examObj.exam_id;
+        adminExamBulkImport.subject_id = examObj.subject_id;
+        adminExamBulkImport.paper_id = examObj.paper_id;
+        adminExamBulkImport.semester_id = examObj.semester_id;
+        adminExamBulkImport.session_id = examObj.session_id;
+        adminExamBulkImport.academic_session_id = examObj.academic_session_id;
+        // here to attached to avoid localStorage other users to add
+        adminExamBulkImport.branch_id = branchID;
+        adminExamBulkImport.role_id = get_roll_id;
+        adminExamBulkImport.user_id = ref_user_id;
+        var adminExamBulkImportArr = [];
+        adminExamBulkImportArr.push(adminExamBulkImport);
+        if (get_roll_id == "2") {
+            // Admin
+
+            localStorage.removeItem("admin_exam_bulk_import");
+            localStorage.setItem('admin_exam_bulk_import', JSON.stringify(adminExamBulkImportArr));
+        }
+        return true;
+    }
+    
 });

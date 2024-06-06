@@ -4616,6 +4616,27 @@ class AdminController extends Controller
             ]
         );
     }
+    public function byreportindividual()
+    {
+        $getclass = Helper::GetMethod(config('constants.api.class_list'));
+        $semester = Helper::GetMethod(config('constants.api.semester'));
+        $session = Helper::GetMethod(config('constants.api.session'));
+        $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
+        $sem = Helper::GetMethod(config('constants.api.get_semester_session'));
+        $department = Helper::GetMethod(config('constants.api.department_list'));
+        return view(
+            'admin.exam_results.byreportindividual',
+            [
+                'department' => isset($department['data']) ? $department['data'] : [],
+                'classnames' => isset($getclass['data']) ? $getclass['data'] : [],
+                'semester' => isset($semester['data']) ? $semester['data'] : [],
+                'session' => isset($session['data']) ? $session['data'] : [],
+                'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
+                'current_semester' => isset($sem['data']['semester']['id']) ? $sem['data']['semester']['id'] : "",
+                'current_session' => isset($sem['data']['session']) ? $sem['data']['session'] : ""
+            ]
+        );
+    }
     public function bystudent()
     {
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
@@ -11707,12 +11728,11 @@ class AdminController extends Controller
             "department_id" => $request->department_id,
             "class_id" => $request->class_id,
             "section_id" => $request->section_id,
-            "student_name" => $request->student_name,
-            "session_id" => $request->session_id,
-            "stu_status" => 'Active',
-            "academic_session_id" => session()->get('academic_session_id')
+            // "student_name" => $request->student_name,
+            // "session_id" => $request->session_id,
+            "academic_session_id" => $request->academic_year
         ];
-        //dd($data);
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.getgraduatestudentlist'), $data);
         $data = isset($response['data']) ? $response['data'] : [];
        
@@ -11722,8 +11742,7 @@ class AdminController extends Controller
             ->addColumn('actions', function ($row) {
                
                 return '<div class="button-list">
-                                 <button type="button" data-student-id="'. $row['id'] .'" class="btn btn-blue waves-effect waves-light individual_pdf" ><i class="fe-eye"></i></button>
-                                 
+                                 <button type="button" value="'. $row['id'] .'" title="Download" class="btn btn-blue waves-effect waves-light individual_pdf" ><i class="fe-download"></i></button>
                          </div>';
             })
  

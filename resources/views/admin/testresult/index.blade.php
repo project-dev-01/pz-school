@@ -489,7 +489,7 @@
     // var teacherSubjectUrl = "{{ config('constants.api.subject_by_class') }}";
     var subjectByExamNames = "{{ config('constants.api.subject_by_exam_names') }}";
     var examBySubjects = "{{ config('constants.api.exam_by_subjects') }}";
-    var subjectByPapers = "{{ config('constants.api.subject_by_papers') }}";
+    var subjectByPapers = "{{ config('constants.api.examsubject_by_papers') }}";
 
     var examsList = "{{ config('constants.api.get_testresult_exams') }}";
     var paperList = "{{ config('constants.api.get_paper_list') }}";

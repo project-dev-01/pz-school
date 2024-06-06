@@ -89,6 +89,7 @@ return [
     "entries" => "Entri",
     "download_csv" => "Muat Turun CSV",
     "download_pdf" => "Muat Turun PDF",
+    "download_all_pdf" => "Muat Turun All PDF",
     "name" => "Nama Kelas",
     "register_no" => "No Daftar",
     "roll_no" => "No Barisan",
@@ -2237,5 +2238,10 @@ return [
       "new_record" => "Rekod Data Baharu",
       "mark_info" => "Tandakan Maklumat",      
       "adhocexam_import" => "Muat Naik Pukal Peperiksaan Adhoc",
-      
+      "exam_individual_result" => "Exam Individual Result",
+      "studentnewjoining_grade_name" => "Grade Name",
+      "studentnewjoining_class_Name" => "Class Name",
+      "accepted" => "Accepted",
+      "trail_start_date" => "Trail Start Date",
+      "login_details_will_send_to_your_mailbox" => "Login details will send to your mailbox. Please follow the instruction to login.",
 ];
