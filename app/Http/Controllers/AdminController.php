@@ -5478,13 +5478,15 @@ class AdminController extends Controller
             'id' => $id,
         ];
         $religion = Helper::GetMethod(config('constants.api.religion'));
+        $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $races = Helper::GetMethod(config('constants.api.races'));
         $education = Helper::GetMethod(config('constants.api.education_list'));
         $response = Helper::PostMethod(config('constants.api.parent_update_info_view'), $data);
-        //dd($response);
+        // dd($relation);
         return view(
             'admin.parent.update_view',
             [
+                'relation' => isset($relation['data']) ? $relation['data'] : [],
                 'religion' => isset($religion['data']) ? $religion['data'] : [],
                 'races' => isset($races['data']) ? $races['data'] : [],
                 'education' => isset($education['data']) ? $education['data'] : [],
@@ -5529,6 +5531,7 @@ class AdminController extends Controller
         $races = Helper::GetMethod(config('constants.api.races'));
         $education = Helper::GetMethod(config('constants.api.education_list'));
         $response = Helper::PostMethod(config('constants.api.student_update_info_view'), $data);
+        // dd($response );
         return view(
             'admin.student.update_view',
             [

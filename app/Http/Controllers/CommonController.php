@@ -275,7 +275,6 @@ class CommonController extends Controller
                         // Log::info("HTTP request failed to ". $notification['type']);
             
                         if ($notification['type'] == "App\Notifications\NewApplication") {
-                        //    return $notification['data'];
                             $student_name = isset($notification['data']['student_name']) ? $notification['data']['student_name'] : 'mannn';
                             $notificationlist .= '<a href="' . route('admin.application.index') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                             <p class="notify-details">' . __('messages.new_application') . '</p>
@@ -284,6 +283,17 @@ class CommonController extends Controller
                             </p>
                             </a>';
                         }
+
+                        if ($notification['type'] == "App\Notifications\UpdateApplication") {
+                            $student_name = isset($notification['data']['student_name']) ? $notification['data']['student_name'] : 'mannn';
+                            $notificationlist .= '<a href="' . route('admin.application.index') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
+                            <p class="notify-details">' . __('messages.update_application') . '</p>
+                            <p class="text-muted mb-0 user-msg">
+                            <small>' . $student_name . ' ' . __('messages.update_application', ['student_name' => $student_name]) . ' ' . $student_name . '</small>
+                            </p>
+                            </a>';
+                        }
+                        
                        
                         if ($notification['type'] == "App\Notifications\LeaveApprove") {
                             $redirectRoute = "javascript:void(0)";

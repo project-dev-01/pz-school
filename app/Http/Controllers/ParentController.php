@@ -1354,6 +1354,7 @@ class ParentController extends Controller
         // dd($data);
         // return $data;
         $response = Helper::PostMethod(config('constants.api.parent_update'), $data);
+        // dd($response);
         return $response;
     }
 
@@ -1767,6 +1768,7 @@ class ParentController extends Controller
             "middle_name" => $request->mname,
             "middle_name_english" => $request->middle_name_english,
             "middle_name_furigana" => $request->middle_name_furigana,
+            'birthday' => $request->dob,
             'visa_photo' => $visa_base64,
             'visa_file_extension' => $visa_extension,
             'passport_photo' => $passport_base64,

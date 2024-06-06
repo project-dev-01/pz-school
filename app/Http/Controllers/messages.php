@@ -2184,6 +2184,7 @@ return [
     "guest_portal" => "Guest Portal",
 
     "new_application" => "New Application",
+    "update_application" => "Update Application",
     "your_leave-application_for" => "Your leave application for",
     "was_approved" => "was approved",
     "leave_start_from" => "Leave Start from",
