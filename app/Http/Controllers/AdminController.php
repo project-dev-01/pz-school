@@ -726,7 +726,7 @@ class AdminController extends Controller
     {
         //return view('admin.subjects.index');
         $subject_report = Helper::GetMethod(config('constants.api.get_jsklsubjectlist'));
-        
+
         $pdf_report = Helper::GetMethod(config('constants.api.getpdf_report'));
         return view(
             'admin.subjects.index',
@@ -1649,7 +1649,7 @@ class AdminController extends Controller
         $response = Helper::GetMethod(config('constants.api.employee_list'));
         //dd($response);
         $data = isset($response['data']) ? $response['data'] : [];
-        
+
         return DataTables::of($data)
 
             ->addIndexColumn()
@@ -2861,7 +2861,7 @@ class AdminController extends Controller
             'selectedHealth_treatment' => $request->selectedHealth_treatment,
             'date' => $request->date
         ];
-       // dd($data);
+        // dd($data);
 
         $response = Helper::PostMethod(config('constants.api.health_logbook_update'), $data);
         return $response;
@@ -4373,7 +4373,7 @@ class AdminController extends Controller
         }
 
         // $type = $request->filled('last_date_of_withdrawal') ? 'Re-Admission' : 'Admission';
-    
+
         // Set dual nationality based on checkbox
         // $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
         $status = "0";
@@ -4517,8 +4517,8 @@ class AdminController extends Controller
             "mother_nationality" => $request->mother_nationality,
             'mother_email' => $request->mother_email,
             'mother_occupation' => $request->mother_occupation,
-            'mother_mobile_no'=> $request->mother_mobile_no,
-            'father_mobile_no'=> $request->father_mobile_no,
+            'mother_mobile_no' => $request->mother_mobile_no,
+            'father_mobile_no' => $request->father_mobile_no,
             'father_first_name' => $request->father_first_name,
             'father_last_name' => $request->father_last_name,
             "father_middle_name" => $request->father_middle_name,
@@ -4836,11 +4836,10 @@ class AdminController extends Controller
     // get Student  details
     public function getStudentDetails($id)
     {
-        
-        if($id!==null || $id!==0)
-        {
+
+        if ($id !== null || $id !== 0) {
             $data = [
-            'id' => $id,
+                'id' => $id,
             ];
             $getclass = Helper::GetMethod(config('constants.api.class_list'));
             $gettransport = Helper::GetMethod(config('constants.api.transport_route_list'));
@@ -4889,9 +4888,7 @@ class AdminController extends Controller
                     'user' => isset($student['data']['user']) ? $student['data']['user'] : [],
                 ]
             );
-        }
-        else
-        {
+        } else {
             return redirect()->route('admin.student')->with('errors', "Invalid Student");
         }
     }
@@ -4904,7 +4901,7 @@ class AdminController extends Controller
         $trail_end_date = null;
         if ($request->enrollment == "Trail Enrollment") {
             $trail_start_date = $request->trail_start_date;
-            $trail_end_date = $request->trail_end_date ;
+            $trail_end_date = $request->trail_end_date;
         }
         $official_date = null;
         if ($request->enrollment == "Official Enrollment") {
@@ -4988,7 +4985,7 @@ class AdminController extends Controller
             'trail_start_date' => $trail_start_date,
             'trail_end_date' => $trail_end_date,
             'official_date' => $official_date,
-            
+
             'first_name' => $request->fname,
             'last_name' => $request->lname,
             'father_id' => $request->father_id,
@@ -5091,9 +5088,9 @@ class AdminController extends Controller
             "father_nationality" => $request->father_nationality,
             'father_email' => $request->father_email,
             'father_occupation' => $request->father_occupation,
-             "guardian_middle_name" => $request->guardian_middle_name,
-             "guardian_last_name_furigana" => $request->guardian_last_name_furigana,
-             "guardian_middle_name_furigana" => $request->guardian_middle_name_furigana,
+            "guardian_middle_name" => $request->guardian_middle_name,
+            "guardian_last_name_furigana" => $request->guardian_last_name_furigana,
+            "guardian_middle_name_furigana" => $request->guardian_middle_name_furigana,
             "guardian_first_name_furigana" => $request->guardian_first_name_furigana,
             "guardian_last_name_english" => $request->guardian_last_name_english,
             "guardian_middle_name_english" => $request->guardian_middle_name_english,
@@ -5271,7 +5268,7 @@ class AdminController extends Controller
             $passport_extension = $passport_file->getClientOriginalExtension();
         }*/
 
-        
+
         $image_principal_base64 = "";
         $image_principal_extension = "";
         $image_principal_file = $request->file('japanese_association_membership_image_principal');
@@ -5404,7 +5401,7 @@ class AdminController extends Controller
             'japanese_association_membership_image_supplimental_file_extension' => $japanese_association_membership_image_supplimental_extension,
             'image_principal_photo' => $image_principal_base64,
             'image_principal_file_extension' => $image_principal_extension,
-    
+
 
             'school_roleid' => isset($request->school_roleid) ? $request->school_roleid : '',
             'japan_postalcode' => $request->japan_postalcode,
@@ -5550,12 +5547,12 @@ class AdminController extends Controller
             'academic_session_id' => session()->get('academic_session_id'),
         ];
         $parentId = [
-            'parent_id'=> $id,
-           ];
+            'parent_id' => $id,
+        ];
         $data1 = [
             'email' => session()->get('email'),
         ];
-        
+
         $religion = Helper::GetMethod(config('constants.api.religion'));
         $races = Helper::GetMethod(config('constants.api.races'));
         $education = Helper::GetMethod(config('constants.api.education_list'));
@@ -5570,13 +5567,13 @@ class AdminController extends Controller
         $relation = Helper::GetMethod(config('constants.api.relation_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $get_std_names_dashboard = Helper::GETMethodWithData(config('constants.api.get_students_parentdashboard'), $parentId);
-        
+
         return view(
             'admin.parent.edit',
             [
                 'religion' => isset($religion['data']) ? $religion['data'] : [],
                 'races' => isset($races['data']) ? $races['data'] : [],
-                'relation' => isset($relation['data']) ? $relation['data'] : [],                
+                'relation' => isset($relation['data']) ? $relation['data'] : [],
                 'races' => isset($races['data']) ? $races['data'] : [],
                 'education' => isset($education['data']) ? $education['data'] : [],
                 'parent' => isset($response['data']['parent']) ? $response['data']['parent'] : [],
@@ -5653,25 +5650,25 @@ class AdminController extends Controller
             $father_passport_base64 = base64_encode($father_passport_data);
             $father_passport_extension = $father_passport_file->getClientOriginalExtension();
         }
-//         $visa_base64 = "";
-//         $visa_extension = "";
-//         $visa_file = $request->file('visa_photo');
-//         if ($visa_file) {
-//             $visa_path = $visa_file->path();
-//             $visa_data = file_get_contents($visa_path);
-//             $visa_base64 = base64_encode($visa_data);
-//             $visa_extension = $visa_file->getClientOriginalExtension();
-//         }
+        //         $visa_base64 = "";
+        //         $visa_extension = "";
+        //         $visa_file = $request->file('visa_photo');
+        //         if ($visa_file) {
+        //             $visa_path = $visa_file->path();
+        //             $visa_data = file_get_contents($visa_path);
+        //             $visa_base64 = base64_encode($visa_data);
+        //             $visa_extension = $visa_file->getClientOriginalExtension();
+        //         }
 
-//         $passport_base64 = "";
-//         $passport_extension = "";
-//         $passport_file = $request->file('passport_photo');
-//         if ($passport_file) {
-//             $passport_path = $passport_file->path();
-//             $passport_data = file_get_contents($passport_path);
-//             $passport_base64 = base64_encode($passport_data);
-//             $passport_extension = $passport_file->getClientOriginalExtension();
-//         }
+        //         $passport_base64 = "";
+        //         $passport_extension = "";
+        //         $passport_file = $request->file('passport_photo');
+        //         if ($passport_file) {
+        //             $passport_path = $passport_file->path();
+        //             $passport_data = file_get_contents($passport_path);
+        //             $passport_base64 = base64_encode($passport_data);
+        //             $passport_extension = $passport_file->getClientOriginalExtension();
+        //         }
 
         $image_principal_base64 = "";
         $image_principal_extension = "";
@@ -5696,7 +5693,7 @@ class AdminController extends Controller
         $relationship = $request->input('relationship', []);
         $data = [
 
-            "mother_id"=>  $request->mother_id,
+            "mother_id" =>  $request->mother_id,
             "mother_last_name_furigana" => $request->mother_last_name_furigana,
             "mother_middle_name_furigana" => $request->mother_middle_name_furigana,
             "mother_first_name_furigana" => $request->mother_first_name_furigana,
@@ -5722,11 +5719,11 @@ class AdminController extends Controller
             'mother_passport_number' => $request->mother_passport_number, 
             'mother_passport_expiry_date' => $request->mother_passport_expiry_date,
             'passport_mother_photo' => $mother_passport_base64,           
-            'mother_passport_file_extension' => $mother_passport_extension, */          
+            'mother_passport_file_extension' => $mother_passport_extension, */
             'passport_mother_photo_old' => $request->passport_mother_old_photo,
             'visa_mother_photo_old' => $request->visa_mother_old_photo,
 
-            "father_id"=>  $request->father_id,
+            "father_id" =>  $request->father_id,
             "father_last_name_furigana" => $request->father_last_name_furigana,
             "father_middle_name_furigana" => $request->father_middle_name_furigana,
             "father_first_name_furigana" => $request->father_first_name_furigana,
@@ -5752,7 +5749,7 @@ class AdminController extends Controller
             'father_passport_number' => $request->father_passport_number,
             'passport_father_photo' => $father_passport_base64,            
             'father_passport_expiry_date' => $request->father_passport_expiry_date,
-            'father_passport_file_extension' => $father_passport_extension,  */          
+            'father_passport_file_extension' => $father_passport_extension,  */
             'passport_father_photo_old' => $request->passport_father_old_photo,
             'visa_father_photo_old' => $request->visa_father_old_photo,
 
@@ -5761,8 +5758,8 @@ class AdminController extends Controller
             'first_name' => $request->guardian_first_name,
             'middle_name' => $request->guardian_middle_name,
             'last_name' => $request->guardian_last_name,
-            'status' => $status, 
-            'occupation' => $request->guardian_occupation,     
+            'status' => $status,
+            'occupation' => $request->guardian_occupation,
             'mobile_no' => $request->guardian_phone_number,
             /*'gender' => $request->gender,
             'date_of_birth' => $request->date_of_birth,
@@ -5790,10 +5787,10 @@ class AdminController extends Controller
             'linkedin_url' => $request->linkedin_url,
             'twitter_url' => $request->twitter_url,*/
             'first_name_english' => $request->guardian_first_name_english,
-            'middle_name_english' => $request->guardian_middle_name_english,                    
+            'middle_name_english' => $request->guardian_middle_name_english,
             'last_name_english' => $request->guardian_last_name_english,
             'first_name_furigana' => $request->guardian_first_name_furigana,
-            'middle_name_furigana' => $request->guardian_middle_name_furigana, 
+            'middle_name_furigana' => $request->guardian_middle_name_furigana,
             'last_name_furigana' => $request->guardian_last_name_furigana,
             /*'passport_expiry_date' => $request->passport_expiry_date,
             'visa_number' => $request->visa_number,
@@ -5805,7 +5802,7 @@ class AdminController extends Controller
             'visa_old_photo' => $request->visa_old_photo,
             'passport_old_photo' => $request->passport_old_photo,*/
 
-           
+
             'guardian_company_name_japan' => $request->guardian_company_name_japan,
             'guardian_company_name_local' => $request->guardian_company_name_local,
             'guardian_company_phone_number' => $request->guardian_company_phone_number,
@@ -7455,7 +7452,7 @@ class AdminController extends Controller
         $staff_id = session()->get('ref_user_id');
         $student_list_report = __('messages.student_list');
         // dd($request);
-        return Excel::download(new StudentListExport($branch_id, $staff_id, $request->student_name, $request->department_id, $request->class_id, $request->section_id,$request->status, $request->session, $request->academic_year), $student_list_report . '.xlsx');
+        return Excel::download(new StudentListExport($branch_id, $staff_id, $request->student_name, $request->department_id, $request->class_id, $request->section_id, $request->status, $request->session, $request->academic_year), $student_list_report . '.xlsx');
     }
     public function feesExpenseExcel(Request $request)
     {
@@ -7492,12 +7489,11 @@ class AdminController extends Controller
         ];
         //dd(5);
         $response = Helper::PostMethod(config('constants.api.exam_file_name'), $data);
-        
+
         //dd($response);
-        $exammark_report="ExamMarkUpload";
-        if($response!==null)
-        {
-            $exammark_report=$response['data']['department_name'].'-'.$response['data']['class_name'].'-'.$response['data']['section_name'].'-'.$response['data']['exam_name'].'-'.$response['data']['subject_name'];
+        $exammark_report = "ExamMarkUpload";
+        if ($response !== null) {
+            $exammark_report = $response['data']['department_name'] . '-' . $response['data']['class_name'] . '-' . $response['data']['section_name'] . '-' . $response['data']['exam_name'] . '-' . $response['data']['subject_name'];
         }
         //dd($exammark_report);
         $export = new ExamStduentExport(
@@ -7508,7 +7504,7 @@ class AdminController extends Controller
             $response['data']['subject_name'],
             $response['data']['semester_name'],
             $response['data']['teachername'],
-            $response['data']['totalstudent'],               
+            $response['data']['totalstudent'],
             $branch_id,
             $department_id,
             $class_id,
@@ -7521,8 +7517,8 @@ class AdminController extends Controller
         );
 
         // Trigger the download
-        return Excel::download($export, $exammark_report. '.csv',\Maatwebsite\Excel\Excel::XLSX, ['charset' => 'UTF-8']);
-       // return Excel::download(new ExamStduentExport($branch_id, $department_id, $class_id,$section_id,$exam_id,$subject_id, $paper_id,$semester_id,$session_id), $exammark_report. '.csv');
+        return Excel::download($export, $exammark_report . '.csv', \Maatwebsite\Excel\Excel::XLSX, ['charset' => 'UTF-8']);
+        // return Excel::download(new ExamStduentExport($branch_id, $department_id, $class_id,$section_id,$exam_id,$subject_id, $paper_id,$semester_id,$session_id), $exammark_report. '.csv');
     }
     // index absent Reason
     public function absentReason()
@@ -9267,7 +9263,7 @@ class AdminController extends Controller
 
     public function applicationEdit($id)
     {
-       
+
         $data = [
             'id' => $id,
         ];
@@ -9367,8 +9363,8 @@ class AdminController extends Controller
 
     public function updateApplication(Request $request)
     {
-      
-    
+
+
         // Validate the request    
         // Set type based on the last date of withdrawal
         // $type = "Admission";
@@ -9377,18 +9373,18 @@ class AdminController extends Controller
         // }
 
         // $type = $request->filled('last_date_of_withdrawal') ? 'Re-Admission' : 'Admission';
-    
+
         // Set dual nationality based on checkbox
         // $dual_nationality = $request->filled('has_dual_nationality_checkbox') ? $request->input('dual_nationality') : null;
         $phase_2_status = $request->phase_2_status;
-        if($request->status != "Approved"){
+        if ($request->status != "Approved") {
             $phase_2_status = NULL;
         }
         $trail_start_date = null;
         $trail_end_date = null;
         if ($request->enrollment == "Trail Enrollment") {
             $trail_start_date = $request->trail_start_date;
-            $trail_end_date = $request->trail_end_date ;
+            $trail_end_date = $request->trail_end_date;
         }
         $official_date = null;
         if ($request->enrollment == "Official Enrollment") {
@@ -9645,7 +9641,7 @@ class AdminController extends Controller
             "enrolled_department" => $request->enrolled_department,
             "enrolled_grade" => $request->enrolled_grade,
             "enrolled_class" => $request->enrolled_class,
-            'stay_category'=> $request->stay_category,
+            'stay_category' => $request->stay_category,
             'url' => url('/'),
             'school_roleid' => $request->school_roleid
         ];
@@ -10144,11 +10140,11 @@ class AdminController extends Controller
             'id' => $request->id,
         ];
         if ($request->id !== null) {
-        $response = Helper::PostMethod(config('constants.api.school_role_details'), $data);
-        return $response;
+            $response = Helper::PostMethod(config('constants.api.school_role_details'), $data);
+            return $response;
         } else {
             return response()->json(['error' => 'School Menu Role ID is empty.'], 403);
-        } 
+        }
     }
     public function school_menurole_details(Request $request)
     {
@@ -10156,12 +10152,11 @@ class AdminController extends Controller
             'id' => $request->id,
         ];
         if ($request->id !== null) {
-        $response = Helper::PostMethod(config('constants.api.school_menurole_details'), $data);
-        return $response;   
-            
+            $response = Helper::PostMethod(config('constants.api.school_menurole_details'), $data);
+            return $response;
         } else {
             return response()->json(['error' => 'School Menu Role ID is empty.'], 403);
-        } 
+        }
     }
 
     public function updateschool_role(Request $request)
@@ -10299,24 +10294,21 @@ class AdminController extends Controller
             'deletes' => $request->deletes,
             'export' => $request->export
         ];
-        if($request->read !== null)
-        {
+        if ($request->read !== null) {
             // dd($data);
             $response = Helper::PostMethod(config('constants.api.setschoolpermission'), $data);
             // dd($response);        
             //return redirect('admin/school_role/menuaccess');
-            if($response){
-            if ($response['code'] == 200) {
-                return redirect()->route('admin.school_role.menuaccess')->with('success', $response['message']);
+            if ($response) {
+                if ($response['code'] == 200) {
+                    return redirect()->route('admin.school_role.menuaccess')->with('success', $response['message']);
+                } else {
+                    return redirect()->route('admin.school_role.menuaccess')->with('errors', $response['message']);
+                }
             } else {
-                return redirect()->route('admin.school_role.menuaccess')->with('errors', $response['message']);
+                return redirect()->route('admin.school_role.menuaccess')->with('errors', 'Set Menu Pemission Failed.');
             }
-        }
-        else {
-            return redirect()->route('admin.school_role.menuaccess')->with('errors', 'Set Menu Pemission Failed.');
-        }
-        }
-        else {
+        } else {
             return redirect()->route('admin.school_role.menuaccess')->with('errors', 'At least one menu must be selected to set permissions.');
         }
     }
@@ -10485,22 +10477,22 @@ class AdminController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
-                
+
                 $buttons = '<div class="button-list">';
-                
+
                 // Check if file exists
                 if (!empty($row['file'])) {
                     // If file exists, add download button
-                    
+
                     $buttons .= ' <button class="btn btn-danger waves-effect waves-light download-all" data-files="' . htmlspecialchars($row['file'], ENT_QUOTES, 'UTF-8') . '">
                     <i class="fe-download" data-toggle="tooltip" title="Click to download all files..!"></i>
                 </button>';
                     // If file exists, add preview button
-                   
+
                 }
                 $buttons .= ' <a href="javascript:void(0)" class="btn btn-info waves-effect waves-light" data-id="' . $row['id'] . '" id="viewBuletinBtn"><i class="fe-eye"></i></a>';
                 $buttons .= '</div>';
-                
+
                 return $buttons;
             })
             ->rawColumns(['actions'])
@@ -10524,7 +10516,7 @@ class AdminController extends Controller
 
         // Concatenate the admin ID with the target users
         $rollid_target_user = $adminId . ',' . $targetUserString;
-         // $file = $request->file('file');
+        // $file = $request->file('file');
         // if ($file) {
         //     $path = $file->path();
         //     $data = file_get_contents($path);
@@ -10566,7 +10558,7 @@ class AdminController extends Controller
             'student_id' =>  $request->student_id,
             'parent_id' =>  $request->parent_id,
             'department_id' => $request->empDepartment,
-           // 'publish' => $request->publish,
+            // 'publish' => $request->publish,
             'add_to_dash' => $request->add_to_dash,
             'publish_date' => $request->date,
             'publish_end_date' => $request->endDate,
@@ -10681,7 +10673,7 @@ class AdminController extends Controller
             'parent_id' =>  $request->parent_id,
             'department_id' => $request->empDepartment,
             'add_to_dash' => $request->add_to_dash,
-           // 'publish' => $request->publish,
+            // 'publish' => $request->publish,
             'publish_date' => $request->date,
             'publish_end_dates' => $request->publish_end_dates,
             'updated_by' => session()->get('ref_user_id')
@@ -11096,15 +11088,15 @@ class AdminController extends Controller
                 
                 <span class="badge badge-soft-' . $color . ' p-1">' . $row['termination_status'] . '</span>
             </div>';
-        })
-        ->addColumn('school_fees_payment_status', function ($row) {
-            $color = "";
-            if ($row['school_fees_payment_status'] == "Paid") {
-                $color = "success";
-            } else if ($row['school_fees_payment_status'] == "Unpaid") {
-                $color = "danger";
-            } 
-            return '<div class="button-list">
+            })
+            ->addColumn('school_fees_payment_status', function ($row) {
+                $color = "";
+                if ($row['school_fees_payment_status'] == "Paid") {
+                    $color = "success";
+                } else if ($row['school_fees_payment_status'] == "Unpaid") {
+                    $color = "danger";
+                }
+                return '<div class="button-list">
             
             <span class="badge badge-soft-' . $color . ' p-1">' . $row['school_fees_payment_status'] . '</span>
         </div>';
@@ -11116,7 +11108,7 @@ class AdminController extends Controller
                     <a href="javascript:void(0)" class="btn btn-danger waves-effect waves-light" data-id="' . $row['id'] . '" id="deleteTerminationBtn"><i class="fe-trash-2"></i></a>
                         </div>';
             })
-            ->rawColumns(['actions', 'termination_status','school_fees_payment_status'])
+            ->rawColumns(['actions', 'termination_status', 'school_fees_payment_status'])
             ->make(true);
     }
     public function getTerminationDetails(Request $request)
@@ -11158,9 +11150,9 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.termination_update_admin'), $data);
         return $response;
     }
-    
-    
-   
+
+
+
     public function AdhocExamImport()
     {
 
@@ -11173,7 +11165,7 @@ class AdminController extends Controller
             'academic_session_id' => session()->get('academic_session_id')
         ];
         $exam = Helper::GETMethodWithData(config('constants.api.exam_list'), $data);
-       
+
         return view('admin.import.adhocexam', [
             'exam' => isset($exam['data']) ? $exam['data'] : [],
             'department' => isset($department['data']) ? $department['data'] : [],
@@ -11189,13 +11181,13 @@ class AdminController extends Controller
     {
         // dd($request);
         $branch_id = session()->get('branch_id');
-       
+
         $department_id = $request->department_id;
         $class_id = $request->class_id;
         $section_id = $request->section_id;
         $exam_id = $request->exam_id;
         $subject_id = $request->subject_id;
-        
+
         $exam_date = $request->exam_date;
         $score_type = $request->score_type;
         $data = [
@@ -11207,14 +11199,13 @@ class AdminController extends Controller
             "exam_id" => $exam_id,
             "subject_id" => $subject_id
         ];
-      
+
         $response = Helper::PostMethod(config('constants.api.adhocexam_file_name'), $data);
-        
+
         //dd($response);
-        $exammark_report="ExamMarkUpload";
-        if($response!==null)
-        {
-            $exammark_report='Adhoc-'.$response['data']['department_name'].'-'.$response['data']['class_name'].'-'.$response['data']['section_name'].'-'.$response['data']['exam_name'].'-'.$response['data']['subject_name'];
+        $exammark_report = "ExamMarkUpload";
+        if ($response !== null) {
+            $exammark_report = 'Adhoc-' . $response['data']['department_name'] . '-' . $response['data']['class_name'] . '-' . $response['data']['section_name'] . '-' . $response['data']['exam_name'] . '-' . $response['data']['subject_name'];
         }
         //dd($exammark_report);
         $export = new AdhocExamStduentExport(
@@ -11234,17 +11225,17 @@ class AdminController extends Controller
         );
 
         // Trigger the download
-        return Excel::download($export, $exammark_report. '.csv',\Maatwebsite\Excel\Excel::XLSX, ['charset' => 'UTF-8']);
-       // return Excel::download(new ExamStduentExport($branch_id, $department_id, $class_id,$section_id,$exam_id,$subject_id, $paper_id,$semester_id,$session_id), $exammark_report. '.csv');
+        return Excel::download($export, $exammark_report . '.csv', \Maatwebsite\Excel\Excel::XLSX, ['charset' => 'UTF-8']);
+        // return Excel::download(new ExamStduentExport($branch_id, $department_id, $class_id,$section_id,$exam_id,$subject_id, $paper_id,$semester_id,$session_id), $exammark_report. '.csv');
     }
-    
+
     public function AdhocExamImportAdd(Request $request)
     {
-       
+
         $validator = \Validator::make($request->all(), [
             'file' => 'required'
         ]);
-       
+
         $department_id = $request->department_id;
         $class_id = $request->class_id;
         $section_id = $request->section_id;
@@ -11263,71 +11254,71 @@ class AdminController extends Controller
                 'section_id' => $section_id,
                 'exam_id' => $exam_id,
                 'subject_id' => $subject_id,
-               
-               
+
+
             ];
-         
-        $response = Helper::PostMethod(config('constants.api.adhocexam_file_name'), $data);
-        
-            $newfilename='Adhoc-'.$response['data']['department_name'].'-'.$response['data']['class_name'].'-'.$response['data']['section_name'].'-'.$response['data']['exam_name'].'-'.$response['data']['subject_name'];
+
+            $response = Helper::PostMethod(config('constants.api.adhocexam_file_name'), $data);
+
+            $newfilename = 'Adhoc-' . $response['data']['department_name'] . '-' . $response['data']['class_name'] . '-' . $response['data']['section_name'] . '-' . $response['data']['exam_name'] . '-' . $response['data']['subject_name'];
             // Get the uploaded file
-        $file = $request->file('file');
-        $filepath=$file->getClientOriginalName();
-        $filename=pathinfo($filepath, PATHINFO_FILENAME);
-       
-        //dd($filename,$newfilename);
-       /* if($filename==$newfilename)
+            $file = $request->file('file');
+            $filepath = $file->getClientOriginalName();
+            $filename = pathinfo($filepath, PATHINFO_FILENAME);
+
+            //dd($filename,$newfilename);
+            /* if($filename==$newfilename)
         {*/
-          
-        // Load the Excel file
-        $reader = IOFactory::createReaderForFile($file);
-        $spreadsheet = $reader->load($file->getPathname());
 
-        // Get the active sheet
-        $sheet = $spreadsheet->getActiveSheet();
+            // Load the Excel file
+            $reader = IOFactory::createReaderForFile($file);
+            $spreadsheet = $reader->load($file->getPathname());
 
-        // Get the highest row and column numbers
-        $highestRow = $sheet->getHighestDataRow(); // Get the highest row number with data
-        $highestColumn = $sheet->getHighestDataColumn(); // Get the highest column letter with data
-        $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); // Convert the highest column letter to a number
+            // Get the active sheet
+            $sheet = $spreadsheet->getActiveSheet();
 
-        // Read data from the Excel file
-        $datas = [];
-        for ($row = 1; $row <= $highestRow; $row++) {
-            $rowData = [];
-            for ($col = 1; $col <= $highestColumnIndex; $col++) {
-                $cellValue = $sheet->getCellByColumnAndRow($col, $row)->getValue();
-                $rowData[] = $cellValue;
+            // Get the highest row and column numbers
+            $highestRow = $sheet->getHighestDataRow(); // Get the highest row number with data
+            $highestColumn = $sheet->getHighestDataColumn(); // Get the highest column letter with data
+            $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); // Convert the highest column letter to a number
+
+            // Read data from the Excel file
+            $datas = [];
+            for ($row = 1; $row <= $highestRow; $row++) {
+                $rowData = [];
+                for ($col = 1; $col <= $highestColumnIndex; $col++) {
+                    $cellValue = $sheet->getCellByColumnAndRow($col, $row)->getValue();
+                    $rowData[] = $cellValue;
+                }
+                $datas[] = $rowData;
             }
-            $datas[] = $rowData;
-        }
-           
-       
-        $response = Helper::PostMethod(config('constants.api.adhocexam_file_name'), $data);
-            
+
+
+            $response = Helper::PostMethod(config('constants.api.adhocexam_file_name'), $data);
+
             //dd($response['data']);
-            $department_name=($datas[0][1]==$response['data']['department_name'])?'Matched':'Wrong';
-            $class_name=($datas[1][1]==$response['data']['class_name'])?'Matched':'Wrong';
-            $section_name=($datas[2][1]==$response['data']['section_name'])?'Matched':'Wrong';
-            $exam_name=($datas[3][1]==$response['data']['exam_name'])?'Matched':'Wrong';            
-            $subject_name=($datas[4][1]==$response['data']['subject_name'])?'Matched':'Wrong';
-            $exam_date=($datas[5][1]== $exam_date )?'Matched':'Wrong';            
-            $score_type=($datas[6][1]== $score_type )?'Matched':'Wrong';
-            $headerdata=[
-                "0"=> $department_name, 
-                "1"=> $department_name,          
-                "2"=> $section_name,       
-                "3"=> $exam_name, 
-                "4"=> $subject_name,          
-                "5"=> $exam_date, 
-                "6"=> $score_type 
+            $department_name = ($datas[0][1] == $response['data']['department_name']) ? 'Matched' : 'Wrong';
+            $class_name = ($datas[1][1] == $response['data']['class_name']) ? 'Matched' : 'Wrong';
+            $section_name = ($datas[2][1] == $response['data']['section_name']) ? 'Matched' : 'Wrong';
+            $exam_name = ($datas[3][1] == $response['data']['exam_name']) ? 'Matched' : 'Wrong';
+            $subject_name = ($datas[4][1] == $response['data']['subject_name']) ? 'Matched' : 'Wrong';
+            $exam_date = ($datas[5][1] == $exam_date) ? 'Matched' : 'Wrong';
+            $score_type = ($datas[6][1] == $score_type) ? 'Matched' : 'Wrong';
+            $headerdata = [
+                "0" => $department_name,
+                "1" => $department_name,
+                "2" => $section_name,
+                "3" => $exam_name,
+                "4" => $subject_name,
+                "5" => $exam_date,
+                "6" => $score_type
             ];
-            $arraydata[]=""; $row=0;
-            foreach($datas as $mdata)
-            { $row++;
-                if($row>8)
-                {
-                    $student_regno=$mdata[1];
+            $arraydata[] = "";
+            $row = 0;
+            foreach ($datas as $mdata) {
+                $row++;
+                if ($row > 8) {
+                    $student_regno = $mdata[1];
                     $data = [
                         'academic_session_id' => session()->get('academic_session_id'),
                         'department_id' => $department_id,
@@ -11338,28 +11329,27 @@ class AdminController extends Controller
                         'exam_date' => $exam_date1,
                         'student_regno' => $student_regno,
                     ];
-                    
+
                     $markresponse = Helper::PostMethod(config('constants.api.adhocmark_comparison'), $data);
-                    
-                    $mdata['oldmark']=($markresponse!==null)?$markresponse['data']:'';
+
+                    $mdata['oldmark'] = ($markresponse !== null) ? $markresponse['data'] : '';
                     array_push($arraydata, $mdata);
                 }
-
             }
             //dd($arraydata);
-            $data=[
-                'code'=>'200',
-                'message'=>'Student Mark Details Get Successfully',
-                'result'=>'Success',
-                'studentlist' =>$datas,
-                'headerdata'=>$headerdata,
-                'studentmarks'=>$arraydata
+            $data = [
+                'code' => '200',
+                'message' => 'Student Mark Details Get Successfully',
+                'result' => 'Success',
+                'studentlist' => $datas,
+                'headerdata' => $headerdata,
+                'studentmarks' => $arraydata
 
             ];
-             return $data;
+            return $data;
             //return view('admin.import.exam_mark', ['studentlist' =>$datas,'headerdata'=>$headerdata,'studentmarks'=>$arraydata,'requestdata'=>$data]);
-           
-         /*}
+
+            /*}
            else
            {
             $data=[
@@ -11373,10 +11363,10 @@ class AdminController extends Controller
            } */
         }
     }
-    
+
     public function AdhocExamuploadmark(Request $request)
     {
-        
+
         $department_id = $request->department_id;
         $class_id = $request->class_id;
         $section_id = $request->section_id;
@@ -11384,14 +11374,14 @@ class AdminController extends Controller
         $subject_id = $request->subject_id;
         $exam_date = $request->exam_date;
         $score_type = $request->score_type;
-       
+
         // Get the uploaded file
         $file = $request->file('file');
-        $filepath=$file->getClientOriginalName();
-        $filename=pathinfo($filepath, PATHINFO_FILENAME);
-       
-       
-          
+        $filepath = $file->getClientOriginalName();
+        $filename = pathinfo($filepath, PATHINFO_FILENAME);
+
+
+
         // Load the Excel file
         $reader = IOFactory::createReaderForFile($file);
         $spreadsheet = $reader->load($file->getPathname());
@@ -11412,48 +11402,43 @@ class AdminController extends Controller
                 $cellValue = $sheet->getCellByColumnAndRow($col, $row)->getValue();
                 $rowData[] = $cellValue;
             }
-            if($row>8)
-            {
+            if ($row > 8) {
                 $datas[] = $rowData;
             }
-            
         }
-           
-       
+
+
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id'),
+            'department_id' => $department_id,
+            'class_id' => $class_id,
+            'section_id' => $section_id,
+            'exam_id' => $exam_id,
+            'subject_id' => $subject_id,
+            'exam_date' => $exam_date,
+            'score_type' => $score_type,
+            'fdata' => $datas
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.adhocexamuploadmark'), $data);
+        //dd($response);
+        if ($response != null) {
             $data = [
-                'academic_session_id' => session()->get('academic_session_id'),
-                'department_id' => $department_id,
-                'class_id' => $class_id,
-                'section_id' => $section_id,
-                'exam_id' => $exam_id,
-                'subject_id' => $subject_id,
-                'exam_date' => $exam_date,
-                'score_type' => $score_type,
-                'fdata'=> $datas
+                'code' => '200',
+                'message' => 'Student Marks Import Successful',
+                'result' => 'success'
             ];
-            
-            $response = Helper::PostMethod(config('constants.api.adhocexamuploadmark'), $data);
-            //dd($response);
-            if($response!=null)
-            {
-                $data=[
-                    'code'=>'200',
-                    'message'=>'Student Marks Import Successful',
-                    'result'=>'success'    
-                ];
-            }
-            else
-            {
-                $data=[
-                    'code'=>'403',
-                    'message'=>'Student Marks Import Failed',
-                    'result'=>'error'    
-                ];
-            }
-            return $data;
-            //return view('admin.import.exam_mark', ['studentlist' =>$datas,'headerdata'=>$headerdata,'studentmarks'=>$arraydata,'requestdata'=>$data]);
-           
-        
+        } else {
+            $data = [
+                'code' => '403',
+                'message' => 'Student Marks Import Failed',
+                'result' => 'error'
+            ];
+        }
+        return $data;
+        //return view('admin.import.exam_mark', ['studentlist' =>$datas,'headerdata'=>$headerdata,'studentmarks'=>$arraydata,'requestdata'=>$data]);
+
+
     }
     public function ExamImport()
     {
@@ -11475,11 +11460,16 @@ class AdminController extends Controller
     }
     public function ExamImportAdd(Request $request)
     {
-       
+        ini_set('max_execution_time', 300);
         $validator = \Validator::make($request->all(), [
             'file' => 'required'
         ]);
-       
+
+        if (!$validator->passes()) {
+            return back()->with(['errors' => $validator->errors()->toArray()['file']]);
+        }
+
+        // Extracting request parameters
         $department_id = $request->department_id;
         $class_id = $request->class_id;
         $section_id = $request->section_id;
@@ -11491,7 +11481,7 @@ class AdminController extends Controller
         if (!$validator->passes()) {
             return back()->with(['errors' => $validator->errors()->toArray()['file']]);
         } else {
-           /* $data = [
+            /* $data = [
                 'academic_session_id' => session()->get('academic_session_id'),
                 'department_id' => $department_id,
                 'class_id' => $class_id,
@@ -11514,35 +11504,35 @@ class AdminController extends Controller
         //dd($filename,$newfilename);
         if($filename==$newfilename)
         {*/
-          
+
             // Get the uploaded file
             $file = $request->file('file');
-            $filepath=$file->getClientOriginalName();
-            $filename=pathinfo($filepath, PATHINFO_FILENAME);
-        // Load the Excel file
-        $reader = IOFactory::createReaderForFile($file);
-        $spreadsheet = $reader->load($file->getPathname());
+            $filepath = $file->getClientOriginalName();
+            $filename = pathinfo($filepath, PATHINFO_FILENAME);
+            // Load the Excel file
+            $reader = IOFactory::createReaderForFile($file);
+            $spreadsheet = $reader->load($file->getPathname());
 
-        // Get the active sheet
-        $sheet = $spreadsheet->getActiveSheet();
+            // Get the active sheet
+            $sheet = $spreadsheet->getActiveSheet();
 
-        // Get the highest row and column numbers
-        $highestRow = $sheet->getHighestDataRow(); // Get the highest row number with data
-        $highestColumn = $sheet->getHighestDataColumn(); // Get the highest column letter with data
-        $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); // Convert the highest column letter to a number
+            // Get the highest row and column numbers
+            $highestRow = $sheet->getHighestDataRow(); // Get the highest row number with data
+            $highestColumn = $sheet->getHighestDataColumn(); // Get the highest column letter with data
+            $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); // Convert the highest column letter to a number
 
-        // Read data from the Excel file
-        $datas = [];
-        for ($row = 1; $row <= $highestRow; $row++) {
-            $rowData = [];
-            for ($col = 1; $col <= $highestColumnIndex; $col++) {
-                $cellValue = $sheet->getCellByColumnAndRow($col, $row)->getValue();
-                $rowData[] = $cellValue;
+            // Read data from the Excel file
+            $datas = [];
+            for ($row = 1; $row <= $highestRow; $row++) {
+                $rowData = [];
+                for ($col = 1; $col <= $highestColumnIndex; $col++) {
+                    $cellValue = $sheet->getCellByColumnAndRow($col, $row)->getValue();
+                    $rowData[] = $cellValue;
+                }
+                $datas[] = $rowData;
             }
-            $datas[] = $rowData;
-        }
-           
-       
+
+
             $data = [
                 'academic_session_id' => session()->get('academic_session_id'),
                 'department_id' => $department_id,
@@ -11553,41 +11543,41 @@ class AdminController extends Controller
                 'paper_id' => $paper_id,
                 'semester_id' => $semester_id,
                 'session_id' => $session_id,
-               
+
             ];
-            
+
             $response = Helper::PostMethod(config('constants.api.exam_file_name'), $data);
-            
+
             //dd($response['data']);
-            $department_name=($datas[0][1]==$response['data']['department_name'])?'Matched':'Wrong';
-            $class_name=($datas[1][1]==$response['data']['class_name'])?'Matched':'Wrong';
-            $section_name=($datas[2][1]==$response['data']['section_name'])?'Matched':'Wrong';
-            $exam_name=($datas[3][1]==$response['data']['exam_name'])?'Matched':'Wrong';
-            $semester_name=($datas[4][1]==$response['data']['semester_name'])?'Matched':'Wrong';
-            $subject_name=($datas[5][1]==$response['data']['subject_name'])?'Matched':'Wrong';
-            $totalstudent=($datas[6][1]==$response['data']['totalstudent'])?'Matched':'Wrong';
-            $teachername=($datas[7][1]==$response['data']['teachername'])?'Matched':'Wrong';
-            
-            $exampapers= Helper::PostMethod(config('constants.api.exammark-by-papers'), $data);
-            $headerdata=[
-                "0"=> $department_name, 
-                "1"=> $department_name,          
-                "2"=> $section_name,       
-                "3"=> $exam_name, 
-                "4"=> $semester_name,          
-                "5"=> $subject_name, 
-                "6"=> $totalstudent,
-                "7"=> $teachername
+            $department_name = ($datas[0][1] == $response['data']['department_name']) ? 'Matched' : 'Wrong';
+            $class_name = ($datas[1][1] == $response['data']['class_name']) ? 'Matched' : 'Wrong';
+            $section_name = ($datas[2][1] == $response['data']['section_name']) ? 'Matched' : 'Wrong';
+            $exam_name = ($datas[3][1] == $response['data']['exam_name']) ? 'Matched' : 'Wrong';
+            $semester_name = ($datas[4][1] == $response['data']['semester_name']) ? 'Matched' : 'Wrong';
+            $subject_name = ($datas[5][1] == $response['data']['subject_name']) ? 'Matched' : 'Wrong';
+            $totalstudent = ($datas[6][1] == $response['data']['totalstudent']) ? 'Matched' : 'Wrong';
+            $teachername = ($datas[7][1] == $response['data']['teachername']) ? 'Matched' : 'Wrong';
+
+            $exampapers = Helper::PostMethod(config('constants.api.exammark-by-papers'), $data);
+            $headerdata = [
+                "0" => $department_name,
+                "1" => $department_name,
+                "2" => $section_name,
+                "3" => $exam_name,
+                "4" => $semester_name,
+                "5" => $subject_name,
+                "6" => $totalstudent,
+                "7" => $teachername
             ];
-            $arraydata[]=""; $row=0;
-            foreach($datas as $mdata)
-            { $row++;
-                if($row>9)
-                {
-                    $student_regno=$mdata[1];
-                    $papername=$mdata[3];
-                    $score_type=$mdata[4];
-                    $mark=$mdata[5];
+            $arraydata[] = "";
+            $row = 0;
+            foreach ($datas as $mdata) {
+                $row++;
+                if ($row > 9) {
+                    $student_regno = $mdata[1];
+                    $papername = $mdata[3];
+                    $score_type = $mdata[4];
+                    $mark = $mdata[5];
                     $data = [
                         'academic_session_id' => session()->get('academic_session_id'),
                         'department_id' => $department_id,
@@ -11600,34 +11590,33 @@ class AdminController extends Controller
                         'session_id' => $session_id,
                         'student_regno' => $student_regno,
                         'papername' => $papername,
-                        'score_type'=> $score_type,
-                        'mark'=>$mark
+                        'score_type' => $score_type,
+                        'mark' => $mark
                     ];
-                    $data1[]='';
-                    
+                    $data1[] = '';
+
                     $markresponse = Helper::PostMethod(config('constants.api.mark_comparison'), $data);
-                    
-                    $mdata['oldmark']=($markresponse!==null)?$markresponse['data']:'';
+
+                    $mdata['oldmark'] = ($markresponse !== null) ? $markresponse['data'] : '';
                     array_push($arraydata, $mdata);
                 }
-
             }
-            
-            $data=[
-                'code'=>'200',
-                'message'=>'Student Mark Details Get Successfully',
-                'result'=>'Success',
-                'studentlist' =>$datas,
-                'headerdata'=>$headerdata,
-                'studentmarks'=>$arraydata,
-                'exampapers'=>$exampapers,
-                'totalstudent'=>$response['data']['totalstudent']
+
+            $data = [
+                'code' => '200',
+                'message' => 'Student Mark Details Get Successfully',
+                'result' => 'Success',
+                'studentlist' => $datas,
+                'headerdata' => $headerdata,
+                'studentmarks' => $arraydata,
+                'exampapers' => $exampapers,
+                'totalstudent' => $response['data']['totalstudent']
 
             ];
-             return $data;
+            return $data;
             //return view('admin.import.exam_mark', ['studentlist' =>$datas,'headerdata'=>$headerdata,'studentmarks'=>$arraydata,'requestdata'=>$data]);
-           
-        /* }
+
+            /* }
            else
            {
             $data=[
@@ -11643,8 +11632,8 @@ class AdminController extends Controller
     }
     public function Examuploadmark(Request $request)
     {
-       
-            
+
+        ini_set('max_execution_time', 300);
         $department_id = $request->department_id;
         $class_id = $request->class_id;
         $section_id = $request->section_id;
@@ -11653,14 +11642,14 @@ class AdminController extends Controller
         $paper_id = $request->paper_id;
         $semester_id = $request->semester_id;
         $session_id = $request->session_id;
-       
+
         // Get the uploaded file
         $file = $request->file('file');
-        $filepath=$file->getClientOriginalName();
-        $filename=pathinfo($filepath, PATHINFO_FILENAME);
-       
-       
-          
+        $filepath = $file->getClientOriginalName();
+        $filename = pathinfo($filepath, PATHINFO_FILENAME);
+
+
+
         // Load the Excel file
         $reader = IOFactory::createReaderForFile($file);
         $spreadsheet = $reader->load($file->getPathname());
@@ -11681,49 +11670,44 @@ class AdminController extends Controller
                 $cellValue = $sheet->getCellByColumnAndRow($col, $row)->getValue();
                 $rowData[] = $cellValue;
             }
-            if($row>9)
-            {
+            if ($row > 9) {
                 $datas[] = $rowData;
             }
-            
         }
-           
-       
+
+
+        $data = [
+            'academic_session_id' => session()->get('academic_session_id'),
+            'department_id' => $department_id,
+            'class_id' => $class_id,
+            'section_id' => $section_id,
+            'exam_id' => $exam_id,
+            'subject_id' => $subject_id,
+            'paper_id' => $paper_id,
+            'semester_id' => $semester_id,
+            'session_id' => $session_id,
+            'fdata' => $datas
+        ];
+
+        $response = Helper::PostMethod(config('constants.api.examuploadmark'), $data);
+        //dd($response);
+        if ($response != null) {
             $data = [
-                'academic_session_id' => session()->get('academic_session_id'),
-                'department_id' => $department_id,
-                'class_id' => $class_id,
-                'section_id' => $section_id,
-                'exam_id' => $exam_id,
-                'subject_id' => $subject_id,
-                'paper_id' => $paper_id,
-                'semester_id' => $semester_id,
-                'session_id' => $session_id,
-                'fdata'=> $datas
+                'code' => '200',
+                'message' => 'Student Marks Import Successful',
+                'result' => 'success'
             ];
-            
-            $response = Helper::PostMethod(config('constants.api.examuploadmark'), $data);
-            //dd($response);
-            if($response!=null)
-            {
-                $data=[
-                    'code'=>'200',
-                    'message'=>'Student Marks Import Successful',
-                    'result'=>'success'    
-                ];
-            }
-            else
-            {
-                $data=[
-                    'code'=>'403',
-                    'message'=>'Student Marks Import Failed',
-                    'result'=>'error'    
-                ];
-            }
-            return $data;
-            //return view('admin.import.exam_mark', ['studentlist' =>$datas,'headerdata'=>$headerdata,'studentmarks'=>$arraydata,'requestdata'=>$data]);
-           
-        
+        } else {
+            $data = [
+                'code' => '403',
+                'message' => 'Student Marks Import Failed',
+                'result' => 'error'
+            ];
+        }
+        return $data;
+        //return view('admin.import.exam_mark', ['studentlist' =>$datas,'headerdata'=>$headerdata,'studentmarks'=>$arraydata,'requestdata'=>$data]);
+
+
     }
     public function byreportsutdentlist(Request $request)
     {
@@ -11738,17 +11722,17 @@ class AdminController extends Controller
         // dd($data);
         $response = Helper::PostMethod(config('constants.api.getgraduatestudentlist'), $data);
         $data = isset($response['data']) ? $response['data'] : [];
-       
+
         return DataTables::of($data)
- 
+
             ->addIndexColumn()
             ->addColumn('actions', function ($row) {
-               
+
                 return '<div class="button-list">
-                                 <button type="button" value="'. $row['id'] .'" title="Download" class="btn btn-blue waves-effect waves-light individual_pdf" ><i class="fe-download"></i></button>
+                                 <button type="button" value="' . $row['id'] . '" title="Download" class="btn btn-blue waves-effect waves-light individual_pdf" ><i class="fe-download"></i></button>
                          </div>';
             })
- 
+
             ->rawColumns(['actions'])
             ->make(true);
     }
@@ -11876,15 +11860,13 @@ class AdminController extends Controller
 
             $response = Helper::PostMethod(config('constants.api.addstupicture'), $data);
             //dd($response);
-            if(isset($response))
-            {
+            if (isset($response)) {
                 if ($response['code'] == 200) {
                     return redirect()->route('admin.student.picture')->with('success', $response['message']);
                 } else {
                     return redirect()->route('admin.student.picture')->with('errors', $response['message']);
                 }
-            }
-            else {
+            } else {
                 return redirect()->route('admin.student.picture')->with('errors', "Student Register No. Not exist");
             }
         }
@@ -11916,15 +11898,13 @@ class AdminController extends Controller
                 $response = Helper::PostMethod(config('constants.api.addstupicture'), $data);
             }
         }
-        if(isset($response))
-        {
+        if (isset($response)) {
             if ($response['code'] == 200) {
                 return redirect()->route('admin.student.picture')->with('success', $response['message']);
             } else {
                 return redirect()->route('admin.student.picture')->with('errors', $response['message']);
             }
-        }
-        else {
+        } else {
             return redirect()->route('admin.student.picture')->with('errors', "Student Register No. Not exist");
         }
     }
@@ -12087,7 +12067,8 @@ class AdminController extends Controller
         $response = Helper::PostMethod(config('constants.api.student_interview_update'), $data);
         return $response;
     }
-     public function addStudentInterviewComment(Request $request){
+    public function addStudentInterviewComment(Request $request)
+    {
         $data = [
             'id' => $request->id,
             'comment' => $request->comment,
@@ -12332,7 +12313,8 @@ class AdminController extends Controller
             ->rawColumns(['actions'])
             ->make(true);
     }
-    public function parentDetailsAccStudentId(Request $request){
+    public function parentDetailsAccStudentId(Request $request)
+    {
         $data = [
             "student_id" => $request->student_id
         ];
@@ -12342,8 +12324,8 @@ class AdminController extends Controller
 
     public function studentMedicalRecord()
     {
-       
-        
+
+
         $getclass = Helper::GetMethod(config('constants.api.class_list'));
         $academic_year_list = Helper::GetMethod(config('constants.api.academic_year_list'));
         $department = Helper::GetMethod(config('constants.api.department_list'));
@@ -12354,11 +12336,11 @@ class AdminController extends Controller
                 'academic_year_list' => isset($academic_year_list['data']) ? $academic_year_list['data'] : [],
                 'department' => isset($department['data']) ? $department['data'] : [],
                 'student_id' => isset($student_id) ? $student_id : 0,
-                
+
             ]
         );
-    } 
-     public function page403(Request $request)
+    }
+    public function page403(Request $request)
     {
         return view('admin.dashboard.403');
     }

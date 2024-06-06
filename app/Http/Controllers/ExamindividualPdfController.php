@@ -33,6 +33,7 @@ class ExamindividualPdfController extends Controller
 		];
 		//dd($data);
 		$getstudents = Helper::PostMethod(config('constants.api.exam_individualstudentslist'), $data);
+		// dd($getstudents);
 		if (empty($getstudents['data'])) {
 			return redirect()->route('admin.exam_results.byreport')->with('errors', "No Student Data Found");
 		}
@@ -73,7 +74,7 @@ class ExamindividualPdfController extends Controller
 		$n2 = $grade['data']['name_numeric'];
 		$n3 = $section['data']['name'];
 		$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
-		$number = $n1 . $n2 . $n3 . $attendance_no;
+		$number = $n1 . $n2 . $n3 . sprintf("%02d", $attendance_no);
 		$fonturl = storage_path('fonts/ipag.ttf');
 		$output = '<!DOCTYPE html>
 				<html lang="en">
@@ -380,7 +381,7 @@ class ExamindividualPdfController extends Controller
 					
 					</td>
 					</tr>';
-		$papername = "先生方のコメント";
+		$papername = "Teacher`s Comments";
 		$pdata = [
 			'branch_id' => session()->get('branch_id'),
 			'exam_id' => $request->exam_id,
@@ -394,7 +395,11 @@ class ExamindividualPdfController extends Controller
 			'paper_name' => $papername
 
 		];
+		// dd($pdata);
+
 		$paper = Helper::PostMethod(config('constants.api.getec_marks'), $pdata);
+		// dd($paper);
+
 		//dd($getspsubject1);//dd($pdata);
 		$teachercmd = "";
 		if (!empty($paper['data'])) {
@@ -475,7 +480,7 @@ class ExamindividualPdfController extends Controller
 		// filename
 		$now = now();
 		$name = strtotime($now);
-		$fileName = __('messages.english_communication') . $stu['name'] . $name . ".pdf";
+		$fileName = __('messages.english_communication') . $stu['eng_name'] . $name . ".pdf";
 		return $pdf->download($fileName);
 		// return $pdf->stream();
 	}
@@ -684,10 +689,6 @@ class ExamindividualPdfController extends Controller
 						float: left;
 						width: 45%;
 						padding: 10px;
-						}
-						.vertical-text {
-							writing-mode: vertical-rl;
-							text-align: center;
 						}
 						</style>
 						</head>
@@ -953,7 +954,7 @@ class ExamindividualPdfController extends Controller
 							}
 						}
 					}
-					$fmark = ($mark == "Excellent") ? 'O' : '';
+					$fmark = ($mark == "Excellent") ? '○' : '';
 
 					$output .= '<tr style="height:60px;">
 										<td colspan="4" style="text-align:left;vertical-align: top;width:100px;">' . $papers['papers'] . '</td>
@@ -1007,10 +1008,12 @@ class ExamindividualPdfController extends Controller
 						</thead>
 						<tbody>
 						<tr style="border-top: 2px solid black;">
-						
-						<td colspan="5" style="height:170px;text-align:left;vertical-align: top;">
-						' . $mark1 . '
-						</td>
+						<td colspan="5" style="height:170px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+				$comment = explode("\n", $mark1);
+				foreach ($comment as $cmt) {
+					$output .= $cmt . '<br>';
+				}
+				$output .= '</td>
 						</tr>
 						</tbody>
 						</table>';
@@ -1058,9 +1061,12 @@ class ExamindividualPdfController extends Controller
 						</thead>
 						<tbody>
 						<tr style="border-top: 2px solid black;">
-						<td colspan="5" style="height:170px;text-align:left;vertical-align: top;">
-						' . $mark2 . '
-						</td>
+						<td colspan="5" style="height:170px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+				$comment = explode("\n", $mark2);
+				foreach ($comment as $cmt) {
+					$output .= $cmt . '<br>';
+				}
+				$output .= '</td>
 						</tr>
 						</tbody>
 						</table>';
@@ -1115,9 +1121,12 @@ class ExamindividualPdfController extends Controller
 						</thead>
 						<tbody>
 						<tr style="border-top: 2px solid black;">
-						<td colspan="5" style="height:170px;text-align:left;vertical-align: top;">
-							' . $mark3 . '
-						</td>
+						<td colspan="5" style="height:170px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+				$comment = explode("\n", $mark3);
+				foreach ($comment as $cmt) {
+					$output .= $cmt . '<br>';
+				}
+				$output .= '</td>
 						</tr>
 						</tbody>
 						</table>
@@ -1435,9 +1444,12 @@ class ExamindividualPdfController extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:140px;text-align:left; vertical-align: top;">
-														' . $flmark . '
-													</td>
+													<td colspan="5" style="height:140px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+				$comment = explode("\n", $flmark);
+				foreach ($comment as $cmt) {
+					$output .= $cmt . '<br>';
+				}
+				$output .= '</td>
 												</tr>
 											</tbody>
 										</table>
@@ -1562,7 +1574,7 @@ class ExamindividualPdfController extends Controller
 							}
 						}
 					}
-					$fmark = ($mark == "Excellent") ? 'O' : '';
+					$fmark = ($mark == "Excellent") ? '○' : '';
 					$output .= '<tr style="height:60px;">
 											<td colspan="4" style="text-align:left;width:100px;">' . $papers['papers'] . '</td>
 											<td colspan="1">' . $fmark . '
@@ -1618,9 +1630,12 @@ class ExamindividualPdfController extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:146px;text-align:left;vertical-align: top;">
-														' . $mark1 . '
-													</td>
+													<td colspan="5" style="height:146px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+				$comment = explode("\n", $mark1);
+				foreach ($comment as $cmt) {
+					$output .= $cmt . '<br>';
+				}
+				$output .= '</td>
 												</tr>
 											</tbody>
 										</table>';
@@ -1673,9 +1688,12 @@ class ExamindividualPdfController extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 1px solid black;">
-													<td colspan="5" style="height:146px;text-align:left;vertical-align: top;">
-														' . $mark2 . '
-													</td>
+													<td colspan="5" style="height:146px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+				$comment = explode("\n", $mark2);
+				foreach ($comment as $cmt) {
+					$output .= $cmt . '<br>';
+				}
+				$output .= '</td>
 												</tr>
 											</tbody>
 										</table>';
@@ -1726,9 +1744,12 @@ class ExamindividualPdfController extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:146px;text-align:left;vertical-align: top;">
-														' . $mark4 . '
-													</td>
+													<td colspan="5" style="height:146px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+				$comment = explode("\n", $mark4);
+				foreach ($comment as $cmt) {
+					$output .= $cmt . '<br>';
+				}
+				$output .= '</td>
 												</tr>
 											</tbody>
 										</table>';
@@ -1779,9 +1800,12 @@ class ExamindividualPdfController extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:146px;text-align:left;vertical-align: top;">
-														' . $mark5 . '
-													</td>
+													<td colspan="5" style="height:146px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+				$comment = explode("\n", $mark5);
+				foreach ($comment as $cmt) {
+					$output .= $cmt . '<br>';
+				}
+				$output .= '</td>
 												</tr>
 											</tbody>
 										</table>
@@ -1792,7 +1816,7 @@ class ExamindividualPdfController extends Controller
 											</div>
 										</div>
 						
-										<div class="row" style="margin-top:46px;">
+										<div class="row" style="margin-top:17px;">
 											<div style="width: 50%;float: left;">
 												<table style="border-collapse: collapse; margin-top: 20px;  border: 2px solid black;">
 													<thead style="text-align: center;">
@@ -2173,7 +2197,7 @@ class ExamindividualPdfController extends Controller
 							}
 						}
 					}
-					$fmark = ($mark == "Excellent") ? 'O' : '';
+					$fmark = ($mark == "Excellent") ? '○' : '';
 					$output .= '<tr style="height:40px;">
 											<td colspan="4" style="height:40px;text-align:left;width:100px;">' . $papers['papers'] . '</td>
 											<td colspan="1">' . $fmark . '
@@ -2230,9 +2254,12 @@ class ExamindividualPdfController extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:150px;text-align:left;vertical-align: top;">
-														' . $mark1 . '
-													</td>
+													<td colspan="5" style="height:150px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+				$comment = explode("\n", $mark1);
+				foreach ($comment as $cmt) {
+					$output .= $cmt . '<br>';
+				}
+				$output .= '</td>
 												</tr>
 											</tbody>
 										</table>';
@@ -2286,9 +2313,12 @@ class ExamindividualPdfController extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 1px solid black;">
-													<td colspan="5" style="height:150px;text-align:left;vertical-align: top;">
-														' . $mark2 . '
-													</td>
+													<td colspan="5" style="height:150px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+				$comment = explode("\n", $mark2);
+				foreach ($comment as $cmt) {
+					$output .= $cmt . '<br>';
+				}
+				$output .= '</td>
 												</tr>
 											</tbody>
 										</table>';
@@ -2338,9 +2368,12 @@ class ExamindividualPdfController extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="text-align:left;vertical-align: top;height:150px;">
-														' . $mark3 . '
-													</td>
+													<td colspan="5" style="height:150px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+				$comment = explode("\n", $mark3);
+				foreach ($comment as $cmt) {
+					$output .= $cmt . '<br>';
+				}
+				$output .= '</td>
 												</tr>
 											</tbody>
 										</table>';
@@ -2390,9 +2423,12 @@ class ExamindividualPdfController extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:187px;text-align:left;vertical-align: top;">
-														' . $mark4 . '
-													</td>
+													<td colspan="5" style="height:187px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+				$comment = explode("\n", $mark4);
+				foreach ($comment as $cmt) {
+					$output .= $cmt . '<br>';
+				}
+				$output .= '</td>
 												</tr>
 											</tbody>
 										</table>
@@ -2818,7 +2854,7 @@ class ExamindividualPdfController extends Controller
 						}
 					}
 				}
-				$fmark = ($mark == "Excellent") ? 'O' : '';
+				$fmark = ($mark == "Excellent") ? '○' : '';
 				$output .= '<tr style="height:60px;">
 					<td colspan="4" style="text-align:left;width:100px;">' . $papers['papers'] . '</td>
 					<td colspan="1">' . $fmark . '
@@ -2875,9 +2911,12 @@ class ExamindividualPdfController extends Controller
 					</thead>
 					<tbody>
 					<tr style="border-top: 2px solid black;">
-					<td colspan="5" style="height:180px;text-align:left;vertical-align: top;">
-					' . $mark1 . '
-					</td>
+					<td colspan="5" style="height:180px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+			$comment = explode("\n", $mark1);
+			foreach ($comment as $cmt) {
+				$output .= $cmt . '<br>';
+			}
+			$output .= '</td>
 					</tr>
 					</tbody>
 					</table>';
@@ -2928,9 +2967,12 @@ class ExamindividualPdfController extends Controller
 					</thead>
 					<tbody>
 					<tr style="border-top: 1px solid black;">
-					<td colspan="5" style="height:180px;text-align:left;vertical-align: top;">
-					' . $mark2 . '
-					</td>
+					<td colspan="5" style="height:180px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+			$comment = explode("\n", $mark2);
+			foreach ($comment as $cmt) {
+				$output .= $cmt . '<br>';
+			}
+			$output .= '</td>
 					</tr>
 					</tbody>
 					</table>';
@@ -2979,9 +3021,12 @@ class ExamindividualPdfController extends Controller
 					</thead>
 					<tbody>
 					<tr style="border-top: 2px solid black;">
-					<td colspan="5" style="height:180px;text-align:left;vertical-align: top;">
-					' . $mark3 . '
-					</td>
+					<td colspan="5" style="height:180px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+			$comment = explode("\n", $mark3);
+			foreach ($comment as $cmt) {
+				$output .= $cmt . '<br>';
+			}
+			$output .= '</td>
 					</tr>
 					</tbody>
 					</table>';
@@ -3031,9 +3076,12 @@ class ExamindividualPdfController extends Controller
 					</thead>
 					<tbody>
 					<tr style="border-top: 2px solid black;">
-					<td colspan="5" style="height:180px;text-align:left;vertical-align: top;">
-					' . $mark4 . '
-					</td>
+					<td colspan="5" style="height:180px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+			$comment = explode("\n", $mark4);
+			foreach ($comment as $cmt) {
+				$output .= $cmt . '<br>';
+			}
+			$output .= '</td>
 					</tr>
 					</tbody>
 					</table>';
@@ -3246,7 +3294,7 @@ class ExamindividualPdfController extends Controller
 					</tr>
 				
 					<tr style="height:60px;">
-						<td colspan="2">ロール番号 : ' . $stu['roll'] . '</td>
+						<td colspan="2">ロール番号 : ' . $stu['attendance_no'] . '</td>
 						<td colspan="3">名前 :' . $stu['name'] . '</td>
 					</tr>
 					<tr> 

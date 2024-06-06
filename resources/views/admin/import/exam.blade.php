@@ -105,7 +105,7 @@
 										<div class="form-group">
 											<input type="hidden" id="session_id" class="form-control" name="session_id" value="0">
 											<br>
-											<button type="submit" class="btn btn-warning" id="downloadexcel1"><i class="fa fa-download"></i> Download Excel format</button>
+											<button type="submit" class="btn btn-warning" id="downloadexcel1"><i class="fa fa-download"></i> Download CSV format</button>
 										</div>
 									</div>
 									

@@ -477,7 +477,86 @@ $(function () {
             if (report_type == 'personal_test_result') {
                 $('#individual_pdf').attr('action', downbypersoanalreport);
             }
-            $('#individual_pdf').submit();
+            // $('#individual_pdf').submit();
+            // Perform AJAX submission
+            // $.ajax({
+            //     url: $('#individual_pdf').attr('action'),
+            //     type: 'POST',
+            //     data: $('#individual_pdf').serialize(),
+            //     success: function(response) {
+            //         console.log("response");
+            //         console.log(response);
+            //         // Handle success response
+            //         // $('#modalMessage').text('Download successful!');
+            //         // $('#downloadModal').modal('show');
+            //     },
+            //     error: function(xhr, status, error) {
+            //         console.log("error");
+            //         console.log(error);
+            //         console.log(status);
+            //         // Handle error response
+            //         // $('#modalMessage').text('Error occurred during download.');
+            //         // $('#downloadModal').modal('show');
+            //     },
+            //     complete: function() {
+            //         console.log("completed");
+            //         // Enable button after request completes
+            //         // $('.individual_pdf').prop('disabled', false);
+            //     }
+            // });
+            // Show loader
+            $("#loaderss").show();
+
+            // Perform AJAX submission
+            // $.ajax({
+            //     url: $('#individual_pdf').attr('action'),
+            //     type: 'POST',
+            //     data: $('#individual_pdf').serialize(),
+            //     xhrFields: {
+            //         responseType: 'blob'
+            //     },
+            //     success: function(response) {
+            //         // Create a link to download the file
+            //         var link = document.createElement('a');
+            //         link.href = window.URL.createObjectURL(response);
+            //         link.download = 'downloaded_file.pdf'; // Change the file name if needed
+            //         link.click();
+            //     },
+            //     error: function(xhr, status, error) {
+            //         alert("Error occurred during download.");
+            //     },
+            //     complete: function() {
+            //         // Hide loader after request completes
+            //         $("#loaderss").hide();
+            //     }
+            // });
+            // Show loader
+            // $("#loaderss").show();
+            $("#overlay").fadeIn(300);
+            // Perform AJAX submission
+            $.ajax({
+                url: $('#individual_pdf').attr('action'),
+                type: 'POST',
+                data: $('#individual_pdf').serialize(),
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function(response) {
+                    // Create a link to download the file
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(response);
+                    link.download = 'downloaded_file.pdf'; // Change the file name if needed
+                    link.click();
+                },
+                error: function(xhr, status, error) {
+                    alert("Error occurred during download.");
+                },
+                complete: function() {
+                    // Hide loader after request completes
+                    // $("#loaderss").hide();
+                    $("#overlay").fadeOut(300);
+                }
+            });
         }
     });
 

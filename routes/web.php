@@ -200,7 +200,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::get('/failed_logout', [AuthController::class, 'failed_logout'])->name('admin.failed_logout');
 
-    Route::group(['middleware' => ['isAdmin', 'logroute','Checkmenuaccess']], function () {
+    Route::group(['middleware' => ['isAdmin', 'logroute', 'Checkmenuaccess']], function () {
         Route::post('/staff_attendance/excel', [AdminController::class, 'staffAttendanceExcel'])->name('admin.staff_attendance.excel');
         Route::post('/student_list/excel', [AdminController::class, 'StudentListExcel'])->name('admin.student_list.excel');
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -642,8 +642,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('room-by-hostel', [AdminController::class, 'roomByHostel'])->name('admin.room_by_hostel');
 
         // exam Result Group 
-        Route::get('exam_results/sutdentlist1', [AdminController::class, 'byreportsutdentlist'])->name('admin.by_result.sutdentlist');         
-        Route::get('exam_results/sutdentlist', [AdminController::class, 'examsutdentlist'])->name('admin.exam_result.sutdentlist');      
+        Route::get('exam_results/sutdentlist1', [AdminController::class, 'byreportsutdentlist'])->name('admin.by_result.sutdentlist');
+        Route::get('exam_results/sutdentlist', [AdminController::class, 'examsutdentlist'])->name('admin.exam_result.sutdentlist');
         // Route::get('exam_results/sutdentlist', [AdminController::class, 'byreportsutdentlist'])->name('admin.by_result.sutdentlist');      
         Route::get('exam_results/byclass', [AdminController::class, 'byclasss'])->name('admin.exam_results.byclass');
         Route::get('exam_results/bysubject', [AdminController::class, 'bysubject'])->name('admin.exam_results.bysubject');
@@ -659,10 +659,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('individual/downbyecreport', [ExamindividualPdfController::class, 'downbyecreport'])->name('admin.individual.downbyecreport');
         Route::post('individual/downbyreportcard', [ExamindividualPdfController::class, 'downbyreportcard'])->name('admin.individual.downbyreportcard');
         Route::post('individual/downbypersoanalreport', [ExamindividualPdfController::class, 'downbypersoanalreport'])->name('admin.individual.downbypersoanalreport');
-        
+        Route::post('exam_results/downbyecreportfile', [ExamPdfController::class, 'downbyecreport'])->name('admin.exam_results.downbyecreportfile');
+        Route::post('exam_results/downbyreportcardfile', [ExamPdfController::class, 'downbyreportcard'])->name('admin.exam_results.downbyreportcardfile');
+
         Route::get('exam_results/sampleformat', [ExamPdfController1::class, 'sampleformat'])->name('admin.exam_results.sampleformat');
         Route::get('exam/import', [AdminController::class, 'ExamImport'])->name('admin.exam.import');
-        Route::post('exam/import/add', [AdminController::class, 'ExamImportAdd'])->name('admin.exam.import.add');        
+        Route::post('exam/import/add', [AdminController::class, 'ExamImportAdd'])->name('admin.exam.import.add');
         Route::post('exam/uploadmark', [AdminController::class, 'Examuploadmark'])->name('admin.exam.uploadmark');
         Route::post('exam/examdownloadexcel', [AdminController::class, 'Examdownloadexcel'])->name('admin.exam.examdownloadexcel');
         Route::get('child_health/import', [AdminController::class, 'childHealthImport'])->name('admin.child_health.import');
@@ -671,15 +673,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('child_health/list', [AdminController::class, 'childHealthList'])->name('admin.child_health.list');
         Route::get('exam/adhocimport', [AdminController::class, 'AdhocExamImport'])->name('admin.exam.adhocimport');
         Route::post('exam/adhocexamdownloadexcel', [AdminController::class, 'AdhocExamdownloadexcel'])->name('admin.exam.adhocexamdownloadexcel');
-        Route::post('exam/import/adhocadd', [AdminController::class, 'AdhocExamImportAdd'])->name('admin.exam.import.adhocadd');        
+        Route::post('exam/import/adhocadd', [AdminController::class, 'AdhocExamImportAdd'])->name('admin.exam.import.adhocadd');
         Route::post('exam/adhocuploadmark', [AdminController::class, 'AdhocExamuploadmark'])->name('admin.exam.adhocuploadmark');
-       
+
         //Graduates Yoroku primary /Secondary Report
 
-        Route::get('primary/downloadform1/{id}', [ExamPdfController::class, 'downprimaryform1'])->name('admin.primary.downloadform1');
+        Route::get('primary/downloadform1/{id}', [ExamPdfController1::class, 'downprimaryform1'])->name('admin.primary.downloadform1');
         Route::get('yoroku/downloadform2a/{id}', [ExamPdfController::class, 'downloadYorokuform2a'])->name('admin.yoroku.downloadform2a');
         Route::get('yoroku/downloadform2b/{id}', [ExamPdfController::class, 'downloadYorokuform2b'])->name('admin.yoroku.downloadform2b');
-        Route::get('secondary/downloadform1/{id}', [ExamPdfController::class, 'downsecondaryform1'])->name('admin.secondary.downloadform1');
+        Route::get('secondary/downloadform1/{id}', [ExamPdfController1::class, 'downsecondaryform1'])->name('admin.secondary.downloadform1');
         // exam result end
         // download pdf
         Route::post('exam_results/downbyclass', [PdfController::class, 'downbyclass'])->name('admin.exam_results.downbyclass');
@@ -1060,13 +1062,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('shortcut_link/delete', [AdminController::class, 'deleteShortcutLinks'])->name('admin.shortcut_link.delete');
         Route::get('student_termination/list', [AdminController::class, 'presentStudentTerminationList'])->name('admin.student_termination.list');
         //KinderGardern Personal Interview
-		Route::get('personalinterview/add', [AdminController::class, 'personalinterviewIndex'])->name('admin.personalinterview.index');
-		Route::post('personalinterview/store', [AdminController::class, 'personalinterviewstore'])->name('admin.personalinterview.store');
+        Route::get('personalinterview/add', [AdminController::class, 'personalinterviewIndex'])->name('admin.personalinterview.index');
+        Route::post('personalinterview/store', [AdminController::class, 'personalinterviewstore'])->name('admin.personalinterview.store');
         Route::get('personalinterview/list', [AdminController::class, 'personalinterviewlist'])->name('admin.personalinterview.list');
         Route::get('personalinterview/show', [AdminController::class, 'personalinterviewshow'])->name('admin.personalinterview.show');
         Route::get('personalinterviewdownload/{id}', [ExamPdfController::class, 'personalinterviewdownload'])->name('admin.personalinterviewdownload');
         Route::post('personalinterviewdownload/all', [ExamPdfController::class, 'personalinterviewdownloadall'])->name('admin.personalinterviewdownload.all');
-        
+
         // student interview notes
         Route::get('student_interview_details', [AdminController::class, 'studentInterviewIndex'])->name('admin.student_interview_details');
         Route::post('student_interview_details/list', [AdminController::class, 'getStudentInterviewData'])->name('admin.student_interview_details.list');
@@ -1485,13 +1487,13 @@ Route::group(['prefix' => 'teacher'], function () {
         Route::post('widget/add', [TeacherController::class, 'widgetAddUpdate'])->name('teacher.widget.add');
         Route::get('dashboard/widget', [TeacherController::class, 'dashboardWidget'])->name('teacher.dashboard.widget');
         //student interview notes
-         Route::get('student_interview_notes', [TeacherController::class, 'studentInterviewNotesIndex'])->name('teacher.student_interview_notes');
-         Route::get('student_interview_notes/create', [TeacherController::class, 'createStudentInterviewNotes'])->name('teacher.student_interview_notes.create');
-         Route::post('student_interview_notes/add', [TeacherController::class, 'addStudentInterviewNotes'])->name('teacher.student_interview_notes.add');
-         Route::post('student_interview_details/list', [TeacherController::class, 'getStudentInterviewData'])->name('teacher.student_interview_details.list');
-         Route::post('student_interview_details/edit', [TeacherController::class, 'editStudentInterviewData'])->name('teacher.student_interview_details.edit');
-         Route::post('student_interview_details/update', [TeacherController::class, 'updateStudentInterviewData'])->name('teacher.student_interview_details.update');
-         Route::post('student_interview_notes/addComment', [TeacherController::class, 'addStudentInterviewComment'])->name('teacher.student_interview_notes.addComment');
+        Route::get('student_interview_notes', [TeacherController::class, 'studentInterviewNotesIndex'])->name('teacher.student_interview_notes');
+        Route::get('student_interview_notes/create', [TeacherController::class, 'createStudentInterviewNotes'])->name('teacher.student_interview_notes.create');
+        Route::post('student_interview_notes/add', [TeacherController::class, 'addStudentInterviewNotes'])->name('teacher.student_interview_notes.add');
+        Route::post('student_interview_details/list', [TeacherController::class, 'getStudentInterviewData'])->name('teacher.student_interview_details.list');
+        Route::post('student_interview_details/edit', [TeacherController::class, 'editStudentInterviewData'])->name('teacher.student_interview_details.edit');
+        Route::post('student_interview_details/update', [TeacherController::class, 'updateStudentInterviewData'])->name('teacher.student_interview_details.update');
+        Route::post('student_interview_notes/addComment', [TeacherController::class, 'addStudentInterviewComment'])->name('teacher.student_interview_notes.addComment');
     });
 });
 // TEACHER CONTROLLER END
@@ -1502,7 +1504,7 @@ Route::group(['prefix' => 'parent'], function () {
     Route::get('/login', [AuthController::class, 'parentLoginForm'])->name('parent.login');
     Route::any('/authenticate', [AuthController::class, 'authenticateParent'])->name('parent.authenticate');
     Route::post('/logout', [AuthController::class, 'logoutParent'])->name('parent.logout');
-    Route::group(['middleware' => ['isParent', 'logroute','Checkmenuaccess']], function () {
+    Route::group(['middleware' => ['isParent', 'logroute', 'Checkmenuaccess']], function () {
         Route::get('/dashboard', [ParentController::class, 'index'])->name('parent.dashboard');
         Route::get('page/403', [ParentController::class, 'page403'])->name('parent.page.403');
         // Termination routes
@@ -1529,7 +1531,7 @@ Route::group(['prefix' => 'parent'], function () {
         Route::post('update-profile-info', [ParentController::class, 'updateProfileInfo'])->name('parent.settings.updateProfileInfo');
         // faq        
         Route::get('faq/index', [ParentController::class, 'faqIndex'])->name('parent.faq.Index');
-        
+
         //schedule routes  
         Route::get('exam/schedule', [ParentController::class, 'examSchedule'])->name('parent.exam.schedule');
 
@@ -1599,7 +1601,7 @@ Route::group(['prefix' => 'parent'], function () {
         Route::get('qualification/list', [ParentController::class, 'getstudentleave_list'])->name('parent.student_leave.list');
         Route::post('std_leave_apply/reupload_file', [ParentController::class, 'reUploadLeaveFile'])->name('parent.reupload_file.add');
         Route::post('std_leave/delete', [ParentController::class, 'student_deleteleave'])->name('parent.student_leave.delete');
-        
+
         // update child session
         Route::post('navbar-update-child_id', [CommonController::class, 'updateStudentID'])->name('navbar.update.child_id');
         Route::get('/student_leaves', [ParentController::class, 'studentLeaves'])->name('parent.student_leaves');
@@ -1631,7 +1633,6 @@ Route::group(['prefix' => 'parent'], function () {
         Route::get('/student-medical-record', [ParentController::class, 'studentMedicalRecord'])->name('parent.medical.index');
         Route::post('/student-medical-record/add', [ParentController::class, 'studentMedicalRecordAdd'])->name('parent.medical.add');
         Route::post('school_role/checkpermissions', [ParentController::class, 'checkpermissions'])->name('parent.school_role.checkpermissions');
-
     });
 });
 
