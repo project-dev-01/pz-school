@@ -416,7 +416,7 @@ class ExamPdfController1 extends Controller
 				}
 			}
 			$teachernameapi = Helper::PostMethod(config('constants.api.getec_teacher'), $pdata);
-			$teachername = '-';
+			$teachername = "-";
 			if (!empty($teachernameapi['data'])) {
 				$teachername = $teachernameapi['data']['last_name'] . ' ' . $teachernameapi['data']['first_name'];
 			}
@@ -479,7 +479,7 @@ class ExamPdfController1 extends Controller
 			$pdf->loadHTML($output);
 			// return $pdf->stream();
 			// Filename setup
-			$fileName = __('messages.english_communication') . '-' . $stu['name'] . ".pdf";
+			$fileName = __('messages.english_communication') . "-" . $stu['name'] . ".pdf";
 			$pdfFilePath = $storagePath . '/' . $fileName;
 
 			// Save the PDF to the specified folder
@@ -490,8 +490,9 @@ class ExamPdfController1 extends Controller
 		}
 		// Create a ZIP file
 		$now = now();
+		$department=($request->department_id == 1)?'Primary':'Secondary';
 		$timestamp = strtotime($now);
-		$zipFileName = __('messages.english_communication') .'-'.  $gradename .'-'. $classname .'-'. $timestamp . ".zip";
+		$zipFileName = __('messages.english_communication') ."-". $department."-". $gradename ."-". $classname ."-". $timestamp . ".zip";
 		$zipFilePath = $storagePath . '/' . $zipFileName;
 
 		$zip = new ZipArchive();
@@ -1223,7 +1224,7 @@ class ExamPdfController1 extends Controller
 					$pdf->loadHTML($output);
 					// return $pdf->stream();
 					// Filename setup
-					$fileName = __('messages.report_card') . '-' . $stu['name'] . ".pdf";
+					$fileName = __('messages.report_card') . "-" . $stu['name'] . ".pdf";
 					$pdfFilePath = $storagePath . '/' . $fileName;
 
 					// Save the PDF to the specified folder
@@ -1892,7 +1893,7 @@ class ExamPdfController1 extends Controller
 					$pdf->loadHTML($output);
 					// return $pdf->stream();
 					// Filename setup
-					$fileName = __('messages.report_card') . '-' . $stu['name'] . ".pdf";
+					$fileName = __('messages.report_card') . "-" . $stu['name'] . ".pdf";
 					$pdfFilePath = $storagePath . '/' . $fileName;
 
 					// Save the PDF to the specified folder
@@ -2510,7 +2511,7 @@ class ExamPdfController1 extends Controller
 					$pdf->loadHTML($output);
 					// return $pdf->stream();
 					// Filename setup
-					$fileName = __('messages.report_card') . '-' . $stu['name'] . ".pdf";
+					$fileName = __('messages.report_card') . "-" . $stu['name'] . ".pdf";
 					$pdfFilePath = $storagePath . '/' . $fileName;
 
 					// Save the PDF to the specified folder
@@ -3160,7 +3161,7 @@ class ExamPdfController1 extends Controller
 				$pdf->loadHTML($output);
 
 				// Filename setup
-				$fileName = __('messages.report_card') . '-' . $stu['name'] . ".pdf";
+				$fileName = __('messages.report_card') . "-" . $stu['name'] . ".pdf";
 				$pdfFilePath = $storagePath . '/' . $fileName;
 
 				// Save the PDF to the specified folder
@@ -3173,7 +3174,12 @@ class ExamPdfController1 extends Controller
 		// Create a ZIP file
 		$now = now();
 		$timestamp = strtotime($now);
-		$zipFileName = __('messages.report_card') .'-'. $gradename .'-'. $classname .'-'. $timestamp . ".zip";
+		$depdata = [
+            'id' => $request->department_id,
+        ];
+        $departmentinfo = Helper::PostMethod(config('constants.api.department_details'), $depdata);
+        
+		$zipFileName = __('messages.report_card') ."-".$departmentinfo['data']['name']."-". $gradename ."-". $classname ."-". $timestamp . ".zip";
 		$zipFilePath = $storagePath . '/' . $zipFileName;
 
 		$zip = new ZipArchive();
@@ -3523,7 +3529,7 @@ class ExamPdfController1 extends Controller
 			$pdf->loadHTML($output);
 
 			// Filename setup
-			$fileName = __('messages.personal_test_res') . '-' . $stu['name'] . ".pdf";
+			$fileName = __('messages.personal_test_res') . "-" . $stu['name'] . ".pdf";
 			$pdfFilePath = $storagePath . '/' . $fileName;
 
 			// Save the PDF to the specified folder
@@ -3535,7 +3541,13 @@ class ExamPdfController1 extends Controller
 		// Create a ZIP file
 		$now = now();
 		$timestamp = strtotime($now);
-		$zipFileName = __('messages.personal_test_res') .'-'. $gradename .'-'. $classname .'-'. $timestamp . ".zip";
+		$depdata = [
+            'id' => $request->department_id,
+        ];
+        $departmentinfo = Helper::PostMethod(config('constants.api.department_details'), $depdata);
+        
+		$zipFileName = __('messages.personal_test_res') ."-".$departmentinfo['data']['name']."-". $gradename ."-". $classname ."-". $timestamp . ".zip";
+		
 		$zipFilePath = $storagePath . '/' . $zipFileName;
 
 		$zip = new ZipArchive();
@@ -3918,7 +3930,7 @@ class ExamPdfController1 extends Controller
 		// filename
 		$now = now();
 		$name = strtotime($now);
-		$fileName = __('messages.download_form1') . '-' . $name . ".pdf";
+		$fileName = __('messages.download_form1') . "-" . $name . ".pdf";
 		return $pdf->download($fileName);
 		// return $pdf->stream();        
 

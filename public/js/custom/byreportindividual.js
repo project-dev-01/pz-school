@@ -318,6 +318,10 @@ $(function () {
                     name: 'register_no'
                 },
                 {
+                    data: 'attendance_no',
+                    name: 'attendance_no'
+                },
+                {
                     data: 'roll_no',
                     name: 'roll_no'
                 },

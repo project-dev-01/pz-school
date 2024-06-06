@@ -11,6 +11,7 @@
                                         <th>#</th>
                                         <th> {{ __('messages.name') }}</th>
                                         <th> {{ __('messages.register_no') }}</th>
+                                        <th> {{ __('messages.attendance_no') }}</th>
                                         <th> {{ __('messages.gender') }}</th>
                                         <th> {{ __('messages.email') }}</th>
                                         <th> {{ __('messages.actions') }}</th>
