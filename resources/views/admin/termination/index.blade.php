@@ -247,7 +247,7 @@
             ipinfoToken: "yolo",
             nationalMode: false,
             numberType: "MOBILE",
-            initialCountry: "jp",
+            initialCountry: "my",
             //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
             preferredCountries: ['my', 'jp'],
             preventInvalidNumbers: true,

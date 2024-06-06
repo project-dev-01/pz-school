@@ -355,19 +355,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="last_name" name="last_name" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="last_name" name="last_name" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="middle_name">{{ __('messages.middle_name') }}</label>
-                                                <input type="text" class="form-control" id="middle_name" name="middle_name" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="middle_name" name="middle_name" maxlength="50"  aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="first_name" name="first_name" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="first_name" name="first_name" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
                                     </div>
@@ -376,19 +376,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="last_name_furigana" name="last_name_furigana" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="last_name_furigana" name="last_name_furigana" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="middle_name_furigana">{{ __('messages.middle_name_furigana') }}<span class="text-danger"></span></label>
-                                                <input type="text" class="form-control" id="middle_name_furigana" name="middle_name_furigana" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="middle_name_furigana" name="middle_name_furigana" maxlength="50" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="first_name_furigana" name="first_name_furigana" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="first_name_furigana" name="first_name_furigana" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
                                     </div>
@@ -398,19 +398,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="last_name_english" name="last_name_english" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="last_name_english" name="last_name_english" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="middle_name_english">{{ __('messages.middle_name_roma') }}</label>
-                                                <input type="text" class="form-control" id="middle_name_english" name="middle_name_english" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="middle_name_english" name="middle_name_english" maxlength="50"  aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="first_name_english" name="first_name_english" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="first_name_english" name="first_name_english" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
                                     </div>
@@ -420,13 +420,13 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="first_name_common">{{ __('messages.first_name_common') }}</label>
-                                                <input type="text" class="form-control" id="first_name_common" name="first_name_common" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="first_name_common" name="first_name_common" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="last_name_common">{{ __('messages.last_name_common') }}</label>
-                                                <input type="text" class="form-control" id="last_name_common" name="last_name_common" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                <input type="text" class="form-control" id="last_name_common" name="last_name_common" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                             </div>
                                         </div>
                                         @endif
@@ -641,8 +641,7 @@
                                     <h4>
                                         <!-- Up and Down Arrows -->
                                         <button class="btn btn-link collapse-button" type="button" id="collapseButton3" aria-expanded="true" aria-controls="toDoList">
-                                            <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
-                         background: white; color: blue;width: 25px;padding:-1px"></i></b>
+                                            <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; background: white; color: blue;width: 25px;padding:-1px"></i></b>
                                         </button>
                             </li>
                         </ul>
@@ -661,19 +660,19 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="mother_last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name" value="{{ isset($guardian['mother_last_name']) ? $guardian['mother_last_name'] : ''}}" name="mother_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name" value="{{ isset($guardian['mother_last_name']) ? $guardian['mother_last_name'] : ''}}" name="mother_last_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="mother_middle_name">{{ __('messages.middle_name') }}</label>
-                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name" value="{{ isset($guardian['mother_middle_name']) ? $guardian['mother_middle_name'] : ''}}" name="mother_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name" value="{{ isset($guardian['mother_middle_name']) ? $guardian['mother_middle_name'] : ''}}" name="mother_middle_name"  aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="mother_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name" value="{{ isset($guardian['mother_first_name']) ? $guardian['mother_first_name'] : ''}}" name="mother_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name" value="{{ isset($guardian['mother_first_name']) ? $guardian['mother_first_name'] : ''}}" name="mother_first_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                 </div>
@@ -681,19 +680,19 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="mother_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name_furigana" value="{{ isset($guardian['mother_last_name_furigana']) ? $guardian['mother_last_name_furigana'] : ''}}" name="mother_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name_furigana" value="{{ isset($guardian['mother_last_name_furigana']) ? $guardian['mother_last_name_furigana'] : ''}}" name="mother_last_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="mother_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
-                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name_furigana" value="{{ isset($guardian['mother_middle_name_furigana']) ? $guardian['mother_middle_name_furigana'] : ''}}" name="mother_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name_furigana" value="{{ isset($guardian['mother_middle_name_furigana']) ? $guardian['mother_middle_name_furigana'] : ''}}" name="mother_middle_name_furigana"  aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="mother_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name_furigana" value="{{ isset($guardian['mother_first_name_furigana']) ? $guardian['mother_first_name_furigana'] : ''}}" name="mother_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name_furigana" value="{{ isset($guardian['mother_first_name_furigana']) ? $guardian['mother_first_name_furigana'] : ''}}" name="mother_first_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                 </div>
@@ -701,19 +700,19 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="mother_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name_english" value="{{ isset($guardian['mother_last_name_english']) ? $guardian['mother_last_name_english'] : ''}}" name="mother_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name_english" value="{{ isset($guardian['mother_last_name_english']) ? $guardian['mother_last_name_english'] : ''}}" name="mother_last_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="mother_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
-                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name_english" value="{{ isset($guardian['mother_middle_name_english']) ? $guardian['mother_middle_name_english'] : ''}}" name="mother_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name_english" value="{{ isset($guardian['mother_middle_name_english']) ? $guardian['mother_middle_name_english'] : ''}}" name="mother_middle_name_english"  aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="mother_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name_english" value="{{ isset($guardian['mother_first_name_english']) ? $guardian['mother_first_name_english'] : ''}}" name="mother_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name_english" value="{{ isset($guardian['mother_first_name_english']) ? $guardian['mother_first_name_english'] : ''}}" name="mother_first_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                 </div>
@@ -790,19 +789,19 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="father_last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control copy_parent_info father_form" id="father_last_name" value="{{ isset($guardian['father_last_name']) ? $guardian['father_last_name'] : ''}}" name="father_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_last_name" value="{{ isset($guardian['father_last_name']) ? $guardian['father_last_name'] : ''}}" name="father_last_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="father_middle_name">{{ __('messages.middle_name') }}</label>
-                                            <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name" value="{{ isset($guardian['father_middle_name']) ? $guardian['father_middle_name'] : ''}}" name="father_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name" value="{{ isset($guardian['father_middle_name']) ? $guardian['father_middle_name'] : ''}}" name="father_middle_name"  aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="father_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control copy_parent_info father_form" id="father_first_name" value="{{ isset($guardian['father_first_name']) ? $guardian['father_first_name'] : ''}}" name="father_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_first_name" value="{{ isset($guardian['father_first_name']) ? $guardian['father_first_name'] : ''}}" name="father_first_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                 </div>
@@ -810,19 +809,19 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="father_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_furigana" value="{{ isset($guardian['father_last_name_furigana']) ? $guardian['father_last_name_furigana'] : ''}}" name="father_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_furigana" value="{{ isset($guardian['father_last_name_furigana']) ? $guardian['father_last_name_furigana'] : ''}}" name="father_last_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="father_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
-                                            <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_furigana" value="{{ isset($guardian['father_middle_name_furigana']) ? $guardian['father_middle_name_furigana'] : ''}}" name="father_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_furigana" value="{{ isset($guardian['father_middle_name_furigana']) ? $guardian['father_middle_name_furigana'] : ''}}" name="father_middle_name_furigana"  aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="father_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control copy_parent_info father_form" id="father_first_name_furigana" value="{{ isset($guardian['father_first_name_furigana']) ? $guardian['father_first_name_furigana'] : ''}}" name="father_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_first_name_furigana" value="{{ isset($guardian['father_first_name_furigana']) ? $guardian['father_first_name_furigana'] : ''}}" name="father_first_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                 </div>
@@ -830,19 +829,19 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="father_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_english" value="{{ isset($guardian['father_last_name_english']) ? $guardian['father_last_name_english'] : ''}}" name="father_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_english" value="{{ isset($guardian['father_last_name_english']) ? $guardian['father_last_name_english'] : ''}}" name="father_last_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="father_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
-                                            <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_english" value="{{ isset($guardian['father_middle_name_english']) ? $guardian['father_middle_name_english'] : ''}}" name="father_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_english" value="{{ isset($guardian['father_middle_name_english']) ? $guardian['father_middle_name_english'] : ''}}" name="father_middle_name_english"  aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="father_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control copy_parent_info father_form" id="father_first_name_english" value="{{ isset($guardian['father_first_name_english']) ? $guardian['father_first_name_english'] : ''}}" name="father_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info father_form" id="father_first_name_english" value="{{ isset($guardian['father_first_name_english']) ? $guardian['father_first_name_english'] : ''}}" name="father_first_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                 </div>
@@ -953,19 +952,19 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="guardian_last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="guardian_last_name" {{$guardian_readonly}} value="{{ isset($guardian['guardian_last_name']) ? $guardian['guardian_last_name'] : ''}}" name="guardian_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control" id="guardian_last_name" {{$guardian_readonly}} value="{{ isset($guardian['guardian_last_name']) ? $guardian['guardian_last_name'] : ''}}" name="guardian_last_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="guardian_middle_name">{{ __('messages.middle_name') }}</label>
-                                            <input type="text" class="form-control" id="guardian_middle_name" {{$guardian_readonly}} value="{{ isset($guardian['guardian_middle_name']) ? $guardian['guardian_middle_name'] : ''}}" name="guardian_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control" id="guardian_middle_name" {{$guardian_readonly}} value="{{ isset($guardian['guardian_middle_name']) ? $guardian['guardian_middle_name'] : ''}}" name="guardian_middle_name"  aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="guardian_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="guardian_first_name" {{$guardian_readonly}} value="{{ isset($guardian['guardian_first_name']) ? $guardian['guardian_first_name'] : ''}}" name="guardian_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control" id="guardian_first_name" {{$guardian_readonly}} value="{{ isset($guardian['guardian_first_name']) ? $guardian['guardian_first_name'] : ''}}" name="guardian_first_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                 </div>
@@ -973,19 +972,19 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="guardian_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="guardian_last_name_furigana" {{$guardian_readonly}} value="{{ isset($guardian['guardian_last_name_furigana']) ? $guardian['guardian_last_name_furigana'] : ''}}" name="guardian_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control" id="guardian_last_name_furigana" {{$guardian_readonly}} value="{{ isset($guardian['guardian_last_name_furigana']) ? $guardian['guardian_last_name_furigana'] : ''}}" name="guardian_last_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="guardian_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
-                                            <input type="text" class="form-control" id="guardian_middle_name_furigana" {{$guardian_readonly}} value="{{ isset($guardian['guardian_middle_name_furigana']) ? $guardian['guardian_middle_name_furigana'] : ''}}" name="guardian_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control" id="guardian_middle_name_furigana" {{$guardian_readonly}} value="{{ isset($guardian['guardian_middle_name_furigana']) ? $guardian['guardian_middle_name_furigana'] : ''}}" name="guardian_middle_name_furigana"  aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="guardian_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="guardian_first_name_furigana" {{$guardian_readonly}} value="{{ isset($guardian['guardian_first_name_furigana']) ? $guardian['guardian_first_name_furigana'] : ''}}" name="guardian_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control" id="guardian_first_name_furigana" {{$guardian_readonly}} value="{{ isset($guardian['guardian_first_name_furigana']) ? $guardian['guardian_first_name_furigana'] : ''}}" name="guardian_first_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                 </div>
@@ -993,19 +992,19 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="guardian_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="guardian_last_name_english" {{$guardian_readonly}} value="{{ isset($guardian['guardian_last_name_english']) ? $guardian['guardian_last_name_english'] : ''}}" name="guardian_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control" id="guardian_last_name_english" {{$guardian_readonly}} value="{{ isset($guardian['guardian_last_name_english']) ? $guardian['guardian_last_name_english'] : ''}}" name="guardian_last_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="guardian_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
-                                            <input type="text" class="form-control" id="guardian_middle_name_english" {{$guardian_readonly}} value="{{ isset($guardian['guardian_middle_name_english']) ? $guardian['guardian_middle_name_english'] : ''}}" name="guardian_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control" id="guardian_middle_name_english" {{$guardian_readonly}} value="{{ isset($guardian['guardian_middle_name_english']) ? $guardian['guardian_middle_name_english'] : ''}}" name="guardian_middle_name_english" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="guardian_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="guardian_first_name_english" {{$guardian_readonly}} value="{{ isset($guardian['guardian_first_name_english']) ? $guardian['guardian_first_name_english'] : ''}}" name="guardian_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control" id="guardian_first_name_english" {{$guardian_readonly}} value="{{ isset($guardian['guardian_first_name_english']) ? $guardian['guardian_first_name_english'] : ''}}" name="guardian_first_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                         </div>
                                     </div>
                                 </div>
@@ -1351,7 +1350,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "jp",
+        initialCountry: "my",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
@@ -1367,7 +1366,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "jp",
+        initialCountry: "my",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
@@ -1383,7 +1382,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "jp",
+        initialCountry: "my",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
@@ -1399,7 +1398,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "jp",
+        initialCountry: "my",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
@@ -1415,16 +1414,13 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "jp",
+        initialCountry: "my",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
         // utilsScript: "js/utils.js"
     });
- 
 </script>
-
-
 <script>
     var applicationList = "{{ route('parent.application.list') }}";
     var applicationIndex = "{{ route('parent.application.index') }}";

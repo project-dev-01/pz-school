@@ -21,6 +21,14 @@ $(function () {
         autoclose: true,
         yearRange: "-3:+6", // last hundred years
     });
+    $("#date_of_termination").datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true,
+        yearRange: "-3:+6", // last hundred years
+    });
+
 
     
 

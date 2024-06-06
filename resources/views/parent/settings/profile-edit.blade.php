@@ -624,19 +624,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mother_last_name labelres">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name" value="{{ isset($mother['last_name']) ? $mother['last_name'] : ''}}" name="mother_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name" value="{{ isset($mother['last_name']) ? $mother['last_name'] : ''}}" name="mother_last_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mother_middle_name labelres">{{ __('messages.middle_name') }}</label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name" value="{{ isset($mother['middle_name']) ? $mother['middle_name'] : ''}}" name="mother_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name" value="{{ isset($mother['middle_name']) ? $mother['middle_name'] : ''}}" name="mother_middle_name"  aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mother_first_name labelres">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name" value="{{ isset($mother['first_name']) ? $mother['first_name'] : ''}}" name="mother_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name" value="{{ isset($mother['first_name']) ? $mother['first_name'] : ''}}" name="mother_first_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -644,19 +644,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mother_last_name_furigana labelres">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name_furigana" value="{{ isset($mother['last_name_furigana']) ? $mother['last_name_furigana'] : ''}}" name="mother_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name_furigana" value="{{ isset($mother['last_name_furigana']) ? $mother['last_name_furigana'] : ''}}" name="mother_last_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mother_middle_name_furigana labelres">{{ __('messages.middle_name_furigana') }}</label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name_furigana" value="{{ isset($mother['middle_name_furigana']) ? $mother['middle_name_furigana'] : ''}}" name="mother_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name_furigana" value="{{ isset($mother['middle_name_furigana']) ? $mother['middle_name_furigana'] : ''}}" name="mother_middle_name_furigana"  aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mother_first_name_furigana labelres">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name_furigana" value="{{ isset($mother['first_name_furigana']) ? $mother['first_name_furigana'] : ''}}" name="mother_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name_furigana" value="{{ isset($mother['first_name_furigana']) ? $mother['first_name_furigana'] : ''}}" name="mother_first_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -664,19 +664,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mother_last_name_english labelres">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name_english" value="{{ isset($mother['last_name_english']) ? $mother['last_name_english'] : ''}}" name="mother_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_last_name_english" value="{{ isset($mother['last_name_english']) ? $mother['last_name_english'] : ''}}" name="mother_last_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mother_middle_name_english labelres">{{ __('messages.middle_name_roma') }}</label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name_english" value="{{ isset($mother['middle_name_english']) ? $mother['middle_name_english'] : ''}}" name="mother_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name_english" value="{{ isset($mother['middle_name_english']) ? $mother['middle_name_english'] : ''}}" name="mother_middle_name_english"  aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mother_first_name_english labelres">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name_english" value="{{ isset($mother['first_name_english']) ? $mother['first_name_english'] : ''}}" name="mother_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_first_name_english" value="{{ isset($mother['first_name_english']) ? $mother['first_name_english'] : ''}}" name="mother_first_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -745,19 +745,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="father_last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_last_name" value="{{ isset($father['last_name']) ? $father['last_name'] : ''}}" name="father_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_last_name" value="{{ isset($father['last_name']) ? $father['last_name'] : ''}}" name="father_last_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="father_middle_name">{{ __('messages.middle_name') }}</label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name" value="{{ isset($father['middle_name']) ? $father['middle_name'] : ''}}" name="father_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name" value="{{ isset($father['middle_name']) ? $father['middle_name'] : ''}}" name="father_middle_name"  aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="father_first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_first_name" value="{{ isset($father['first_name']) ? $father['first_name'] : ''}}" name="father_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_first_name" value="{{ isset($father['first_name']) ? $father['first_name'] : ''}}" name="father_first_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -765,19 +765,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="father_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_furigana" value="{{ isset($father['last_name_furigana']) ? $father['last_name_furigana'] : ''}}" name="father_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_furigana" value="{{ isset($father['last_name_furigana']) ? $father['last_name_furigana'] : ''}}" name="father_last_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="father_middle_name_furigana">{{ __('messages.middle_name_furigana') }}</label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_furigana" value="{{ isset($father['middle_name_furigana']) ? $father['middle_name_furigana'] : ''}}" name="father_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_furigana" value="{{ isset($father['middle_name_furigana']) ? $father['middle_name_furigana'] : ''}}" name="father_middle_name_furigana"  aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="father_first_name_furigana">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_first_name_furigana" value="{{ isset($father['first_name_furigana']) ? $father['first_name_furigana'] : ''}}" name="father_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_first_name_furigana" value="{{ isset($father['first_name_furigana']) ? $father['first_name_furigana'] : ''}}" name="father_first_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -785,19 +785,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="father_last_name_english">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_english" value="{{ isset($father['last_name_english']) ? $father['last_name_english'] : ''}}" name="father_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_last_name_english" value="{{ isset($father['last_name_english']) ? $father['last_name_english'] : ''}}" name="father_last_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="father_middle_name_english">{{ __('messages.middle_name_roma') }}</label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_english" value="{{ isset($father['middle_name_english']) ? $father['middle_name_english'] : ''}}" name="father_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_middle_name_english" value="{{ isset($father['middle_name_english']) ? $father['middle_name_english'] : ''}}" name="father_middle_name_english" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="father_first_name_english">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_parent_info father_form" id="father_first_name_english" value="{{ isset($father['first_name_english']) ? $father['first_name_english'] : ''}}" name="father_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_parent_info father_form" id="father_first_name_english" value="{{ isset($father['first_name_english']) ? $father['first_name_english'] : ''}}" name="father_first_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -1070,7 +1070,7 @@
             ipinfoToken: "yolo",
             nationalMode: false,
             numberType: "MOBILE",
-            initialCountry: "jp",
+            initialCountry: "my",
             //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
             preferredCountries: ['my', 'jp'],
             preventInvalidNumbers: true,

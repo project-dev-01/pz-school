@@ -1227,12 +1227,17 @@
                                             </div>
 
                                             <div class="col-md-4">
-                                                <div class="form-group ">
-                                                    <label for="">{{ __('messages.date_of_termination') }}</label>
-                                                    <div class="input-group input-group-merge">                                                    
-                                                        <input type="text" disabled class="form-control" value="{{ isset($student['date_of_termination']) ? $student['date_of_termination'] : ''}}"  placeholder="{{ __('messages.date_of_termination') }}"  >
+                                                <div class="form-group">
+                                                        <label for="date_of_termination">{{ __('messages.date_of_termination') }}</label>
+                                                        <div class="input-group input-group-merge">
+                                                            <input type="text" class="form-control" id="date_of_termination" name="date_of_termination" value="{{ isset($student['date_of_termination']) ? $student['date_of_termination'] : date('Y-m-d') }}"   placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                            <div class="input-group-prepend">
+                                                                <!-- <div class="input-group-text">
+                                                                    <span class="far fa-calendar-alt"></span>
+                                                                </div> -->
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
                                             </div>
                                             
                                     </div>
@@ -2534,7 +2539,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "jp",
+        initialCountry: "my",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         //preferredCountries: ['cn', 'jp'],
         preventInvalidNumbers: true,
@@ -2550,7 +2555,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "jp",
+        initialCountry: "my",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
@@ -2566,7 +2571,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "jp",
+        initialCountry: "my",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
@@ -2582,7 +2587,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "jp",
+        initialCountry: "my",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
@@ -2598,7 +2603,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "jp",
+        initialCountry: "my",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,

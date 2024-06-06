@@ -1871,7 +1871,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="phase2_remarks">{{ __('messages.remarks') }}<span class="text-danger">*</span></label>
+                                                    <label for="phase2_remarks">{{ __('messages.remarks') }}</label>
                                                     <textarea type="text" id="phase2_remarks" class="form-control" placeholder="{{ __('messages.enter_remarks') }}" name="phase2_remarks" data-parsley-trigger="change"> {{ isset($application['phase2_remarks']) ? $application['phase2_remarks'] : ''}} </textarea>
                                                 </div>
                                             </div>
@@ -1992,7 +1992,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "jp",
+        initialCountry: "my",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
@@ -2008,7 +2008,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "jp",
+        initialCountry: "my",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
@@ -2024,7 +2024,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "jp",
+        initialCountry: "my",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,
@@ -2040,7 +2040,7 @@
         ipinfoToken: "yolo",
         nationalMode: false,
         numberType: "MOBILE",
-        initialCountry: "jp",
+        initialCountry: "my",
         //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
         preferredCountries: ['my', 'jp'],
         preventInvalidNumbers: true,

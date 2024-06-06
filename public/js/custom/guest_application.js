@@ -545,7 +545,7 @@ $(function () {
             japanese_association_membership_number_student: "required",
             // japanese_association_membership_image_principal:"required",
             // japanese_association_membership_image_supplimental:"required",
-            phase2_remarks: "required",
+            // phase2_remarks: "required",
             passport_father_photo: "required",
             passport_mother_photo: "required",
             stay_category:"required",
