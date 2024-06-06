@@ -23,8 +23,8 @@
                                 <th>#</th>
                                 <th>{{ __('messages.name') }}</th>
                                 <!-- <th>{{ __('messages.email') }}</th> -->
-                                <th>{{ __('messages.grade_name') }}</th>
-                                <th>{{ __('messages.class_Name') }}</th>
+                                <th>{{ __('messages.studentnewjoining_grade_name') }}</th>
+                                <th>{{ __('messages.studentnewjoining_class_Name') }}</th>
                                 <th>{{ __('messages.gender') }}</th>
                                 <th>{{ __('messages.admission_date') }}</th>
                                 <th>{{__('messages.status_after_approval')}}</th>

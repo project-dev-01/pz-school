@@ -92,9 +92,10 @@
                                 @endif
                             </div>
                             <div class="form-group" style="text-align: center;">
-                            <a href="{{ route('schoolcrm.app.form') }}" class="btn btn-primary-bl waves-effect waves-light"  style="text-align: center;">
+                            <!--<a href="{{ route('schoolcrm.app.form') }}" class="btn btn-primary-bl waves-effect waves-light"  style="text-align: center;">
                              {{ __('messages.go_to_home') }}
-                            </a>
+                            </a>-->
+                            <h6 class="text-center"> {{ __('messages.login_details_will_send_to_your_mailbox') }}</h6>
                             </div>
                         </div> <!-- end card-body -->
                     </div>

@@ -2239,5 +2239,9 @@ return [
       "mark_info" => "Tandakan Maklumat",      
       "adhocexam_import" => "Muat Naik Pukal Peperiksaan Adhoc",
       "exam_individual_result" => "Exam Individual Result",
-      
+      "studentnewjoining_grade_name" => "Grade Name",
+      "studentnewjoining_class_Name" => "Class Name",
+      "accepted" => "Accepted",
+      "trail_start_date" => "Trail Start Date",
+      "login_details_will_send_to_your_mailbox" => "Login details will send to your mailbox. Please follow the instruction to login.",
 ];

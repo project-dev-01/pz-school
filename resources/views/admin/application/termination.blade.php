@@ -98,6 +98,7 @@
                                 <td> <select id="termination_status" class="form-control" name="termination_status">
                                         <option value="">{{ __('messages.select_status') }}</option>
                                         <option value="Applied">{{ __('messages.applied') }}</option>
+                                        <option value="Accepted">{{ __('messages.accepted') }}</option>
                                         <option value="Approved">{{ __('messages.approved') }}</option>
                                         <option value="Pending">{{ __('messages.pending') }}</option>
                                         <option value="Send Back">{{ __('messages.send_back') }}</option>
