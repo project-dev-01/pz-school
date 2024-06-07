@@ -934,7 +934,7 @@
                                                         <span class="fas fa-calendar"></span>
                                                     </div>
                                                 </div>
-                                                <input type="text" class="form-control dobDatepicker" value="{{ isset($siblingdobs[$etkey]) ? $siblingdobs[$etkey] : ''}}" name="siblingdob[]" id="siblingdob" placeholder="{{ __('messages.yyyy_mm_dd') }}">
+                                                <input type="text" class="form-control dobDatepicker" value="{{ isset($siblingdobs[$etkey]) ? $siblingdobs[$etkey] : ''}}" name="siblingdob[]" id="siblingdob{{ $addRemove }}" placeholder="{{ __('messages.yyyy_mm_dd') }}">
                                             </div>
                                         </td>
                                         <td>
