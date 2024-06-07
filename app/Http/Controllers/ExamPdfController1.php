@@ -14,10 +14,10 @@ use PDF;
 
 class ExamPdfController1 extends Controller
 {
-	
+
 	public function downbyecreport(Request $request)
 	{
-		ini_set('max_execution_time', 300); 
+		ini_set('max_execution_time', 300);
 		if ($request->department_id == 1) {
 			$pdf_logo = config('constants.image_url') . '/common-asset/images/primary_logo.png';
 		}
@@ -46,8 +46,8 @@ class ExamPdfController1 extends Controller
 
 		$grade = Helper::PostMethod(config('constants.api.class_details'), $data);
 		$section = Helper::PostMethod(config('constants.api.section_details'), $data);
-		$gradename=$grade['data']['name'];
-		$classname=$section['data']['name'];
+		$gradename = $grade['data']['name'];
+		$classname = $section['data']['name'];
 		$acdata = [
 			'branch_id' => session()->get('branch_id'),
 			'id' => $request->academic_year
@@ -490,9 +490,9 @@ class ExamPdfController1 extends Controller
 		}
 		// Create a ZIP file
 		$now = now();
-		$department=($request->department_id == 1)?'Primary':'Secondary';
+		$department = ($request->department_id == 1) ? 'Primary' : 'Secondary';
 		$timestamp = strtotime($now);
-		$zipFileName = __('messages.english_communication') ."-". $department."-". $gradename ."-". $classname ."-". $timestamp . ".zip";
+		$zipFileName = __('messages.english_communication') . "-" . $department . "-" . $gradename . "-" . $classname . "-" . $timestamp . ".zip";
 		$zipFilePath = $storagePath . '/' . $zipFileName;
 
 		$zip = new ZipArchive();
@@ -512,7 +512,7 @@ class ExamPdfController1 extends Controller
 	public function downbyreportcard(Request $request)
 	{
 
-		ini_set('max_execution_time', 300); 
+		ini_set('max_execution_time', 300);
 		$data = [
 			'branch_id' => session()->get('branch_id'),
 			'exam_id' => $request->exam_id,
@@ -582,8 +582,8 @@ class ExamPdfController1 extends Controller
 		$grade = Helper::PostMethod(config('constants.api.class_details'), $data);
 		$section = Helper::PostMethod(config('constants.api.section_details'), $data);
 		$stuclass = $grade['data']['name_numeric'];
-		$gradename=$grade['data']['name'];
-		$classname=$section['data']['name'];
+		$gradename = $grade['data']['name'];
+		$classname = $section['data']['name'];
 		if ($request->department_id == 1) // Primary 
 		{
 			if ($stuclass == 1 || $stuclass == 2) {
@@ -3222,11 +3222,11 @@ class ExamPdfController1 extends Controller
 		$now = now();
 		$timestamp = strtotime($now);
 		$depdata = [
-            'id' => $request->department_id,
-        ];
-        $departmentinfo = Helper::PostMethod(config('constants.api.department_details'), $depdata);
-        
-		$zipFileName = __('messages.report_card') ."-".$departmentinfo['data']['name']."-". $gradename ."-". $classname ."-". $timestamp . ".zip";
+			'id' => $request->department_id,
+		];
+		$departmentinfo = Helper::PostMethod(config('constants.api.department_details'), $depdata);
+
+		$zipFileName = __('messages.report_card') . "-" . $departmentinfo['data']['name'] . "-" . $gradename . "-" . $classname . "-" . $timestamp . ".zip";
 		$zipFilePath = $storagePath . '/' . $zipFileName;
 
 		$zip = new ZipArchive();
@@ -3246,7 +3246,7 @@ class ExamPdfController1 extends Controller
 	public function downbypersoanalreport(Request $request)
 	{
 
-		ini_set('max_execution_time', 300); 
+		ini_set('max_execution_time', 300);
 		$data = [
 			'branch_id' => session()->get('branch_id'),
 			'exam_id' => $request->exam_id,
@@ -3360,8 +3360,8 @@ class ExamPdfController1 extends Controller
 
 			$grade = Helper::PostMethod(config('constants.api.class_details'), $data);
 			$section = Helper::PostMethod(config('constants.api.section_details'), $data);
-			$gradename=$grade['data']['name'];
-			$classname=$section['data']['name'];
+			$gradename = $grade['data']['name'];
+			$classname = $section['data']['name'];
 			$acdata = [
 				'branch_id' => session()->get('branch_id'),
 				'id' => $request->academic_year
@@ -3589,12 +3589,12 @@ class ExamPdfController1 extends Controller
 		$now = now();
 		$timestamp = strtotime($now);
 		$depdata = [
-            'id' => $request->department_id,
-        ];
-        $departmentinfo = Helper::PostMethod(config('constants.api.department_details'), $depdata);
-        
-		$zipFileName = __('messages.personal_test_res') ."-".$departmentinfo['data']['name']."-". $gradename ."-". $classname ."-". $timestamp . ".zip";
-		
+			'id' => $request->department_id,
+		];
+		$departmentinfo = Helper::PostMethod(config('constants.api.department_details'), $depdata);
+
+		$zipFileName = __('messages.personal_test_res') . "-" . $departmentinfo['data']['name'] . "-" . $gradename . "-" . $classname . "-" . $timestamp . ".zip";
+
 		$zipFilePath = $storagePath . '/' . $zipFileName;
 
 		$zip = new ZipArchive();
@@ -3612,7 +3612,7 @@ class ExamPdfController1 extends Controller
 	}
 	public function downprimaryform1($id)
 	{
-		ini_set('max_execution_time', 300); 
+		ini_set('max_execution_time', 300);
 		$footer_text = session()->get('footer_text');
 		$sdata = [
 			'id' => $id,
@@ -3761,14 +3761,12 @@ class ExamPdfController1 extends Controller
                     <td colspan="1" style="text-align:center;">学年</td>';
 		$getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
 		//dd('$getgrade');
-		$i=1;
+		$i = 1;
 		foreach ($getgrade['data'] as $grade) {
-			if($i<=6)
-			{
+			if ($i <= 6) {
 				$output .= ' <td>' . $grade['name_numeric'] . '</td>';
 			}
 			$i++;
-			
 		}
 		$output .= '</tr>
             </thead>
@@ -3776,11 +3774,10 @@ class ExamPdfController1 extends Controller
             <tbody>
                 <tr>
                     <td colspan="4">学 級</td>';
-					$i=1;
+		$i = 1;
 
 		foreach ($getclasssec['data'] as $sec) {
-			if($i<=6)
-			{
+			if ($i <= 6) {
 				$output .= '<td> ' . $sec['section'] . '</td>';
 			}
 			$i++;
@@ -3788,13 +3785,12 @@ class ExamPdfController1 extends Controller
 		$output .= '</tr>
                 <tr>
                     <td colspan="4">整 理 番 号</td>';
-					$i=1;
+		$i = 1;
 		foreach ($getclasssec['data'] as $sec) {
-			if($i<=6)
-			{
+			if ($i <= 6) {
 				$output .= '<td> ' . $sec['studentPlace'] . '</td>';
 			}
-		$i++;
+			$i++;
 		}
 		$output .= '
                     </tr>
@@ -3932,7 +3928,7 @@ class ExamPdfController1 extends Controller
 		$i = 0;
 		foreach ($getgrade['data'] as $grade) {
 			$i++;
-			if ($i > 3 && $i<=6) {
+			if ($i > 3 && $i <= 6) {
 				$output .= ' <td >' . $grade['name_numeric'] . '</td>';
 			}
 		}
@@ -3944,7 +3940,7 @@ class ExamPdfController1 extends Controller
 		$i = 0;
 		foreach ($getclasssec['data'] as $princ) {
 			$i++;
-			if ($i > 3 && $i<=6) {
+			if ($i > 3 && $i <= 6) {
 				$output .= ' <td >' . $princ['principal'] . '</td>';
 			}
 		}
@@ -3956,7 +3952,7 @@ class ExamPdfController1 extends Controller
 		$i = 0;
 		foreach ($getclasssec['data'] as $teach) {
 			$i++;
-			if ($i > 3 && $i<=6) {
+			if ($i > 3 && $i <= 6) {
 				$output .= ' <td >' . $teach['teacher'] . '</td>';
 			}
 		}
@@ -3983,41 +3979,41 @@ class ExamPdfController1 extends Controller
 
 	}
 	public function downsecondaryform1($id)
-        {
-            ini_set('max_execution_time', 300); 
-			$student_id=$id;
-            $sdata = [
-            'id' => $id,
-            ];
-           
-            $getstudent = Helper::PostMethod(config('constants.api.student_details'), $sdata);
-            $student=$getstudent['data']['student'];
-            $prev = json_decode($getstudent['data']['student']['previous_details']);
-            $data = [
-                'id' => $id,
-                'department_id'=> $student['department_id'],
-            ];
-            $school_name=$prev->school_name;
-            $pdata = [
-            'id' => $student['father_id'],
-            ];
-            $getparent = Helper::PostMethod(config('constants.api.parent_details'), $pdata);
-            $parent=$getparent['data']['parent'];
-            //dd($student);
-            $footer_text = session()->get('footer_text');
-           
-            $fonturl = storage_path('fonts/ipag.ttf');
-            $output = "<!DOCTYPE html>";
-            $output .= "<html lang='en'><head>";
-            $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
-            $output .= '<meta name="description" content="Paxsuzen School is a premier educational institution that offers quality education to students of all ages. Our curriculum is designed to prepare future leaders for success in the global marketplace.">
+	{
+		ini_set('max_execution_time', 300);
+		$student_id = $id;
+		$sdata = [
+			'id' => $id,
+		];
+
+		$getstudent = Helper::PostMethod(config('constants.api.student_details'), $sdata);
+		$student = $getstudent['data']['student'];
+		$prev = json_decode($getstudent['data']['student']['previous_details']);
+		$data = [
+			'id' => $id,
+			'department_id' => $student['department_id'],
+		];
+		$school_name = $prev->school_name;
+		$pdata = [
+			'id' => $student['father_id'],
+		];
+		$getparent = Helper::PostMethod(config('constants.api.parent_details'), $pdata);
+		$parent = $getparent['data']['parent'];
+		//dd($student);
+		$footer_text = session()->get('footer_text');
+
+		$fonturl = storage_path('fonts/ipag.ttf');
+		$output = "<!DOCTYPE html>";
+		$output .= "<html lang='en'><head>";
+		$output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+		$output .= '<meta name="description" content="Paxsuzen School is a premier educational institution that offers quality education to students of all ages. Our curriculum is designed to prepare future leaders for success in the global marketplace.">
             ';
-            $output .= '<meta name="keywords" content="Paxsuzen School, education, future leaders, curriculum">
+		$output .= '<meta name="keywords" content="Paxsuzen School, education, future leaders, curriculum">
             ';
-            $output .= '<meta content="Paxsuzen" name="author" />';
-            $output .= '<style>';
-            // $test .='* { font-family: DejaVu Sans, sans-serif; }';
-            $output .='@font-face {
+		$output .= '<meta content="Paxsuzen" name="author" />';
+		$output .= '<style>';
+		// $test .='* { font-family: DejaVu Sans, sans-serif; }';
+		$output .= '@font-face {
                 font-family: Open Sans ipag;
                 font-style: normal;
                 font-weight: 300;
@@ -4135,8 +4131,8 @@ class ExamPdfController1 extends Controller
                     font-size: 15px;
                 }
             </style>';
-            $output .= "</head>";
-            $output .= '<body><div class="content">
+		$output .= "</head>";
+		$output .= '<body><div class="content">
             <p style="text-align:center;">中　学　校　生　徒　指　導　要　録　</p>
             <p style="padding: 20px; float: left;">様式１（学籍に関する記録)</p>
             <table class="main" width="100%" style="font-size: 14px;">
@@ -4149,38 +4145,36 @@ class ExamPdfController1 extends Controller
                                 <td>区分</td>
                                 <td class="diagonalCross" style="border-right:hidden; border-left:hidden;"></td>
                                 <td>学年</td>';
-            $getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
-            $getclasssec = Helper::PostMethod(config('constants.api.studentclasssection'), $data);
-			$i=1;
-            foreach($getgrade['data'] as $grade)
-            {  
-				if($i<=3)
-				{
-           			$output.=' <td style=" border: 1px solid black;">'.$grade['name_numeric'].'</td>';
-				}
-				$i++;
-            }
-           
-            $output.='
+		$getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+		$getclasssec = Helper::PostMethod(config('constants.api.studentclasssection'), $data);
+		$i = 1;
+		foreach ($getgrade['data'] as $grade) {
+			if ($i <= 3) {
+				$output .= ' <td style=" border: 1px solid black;">' . $grade['name_numeric'] . '</td>';
+			}
+			$i++;
+		}
+
+		$output .= '
             </tr>
            
             </thead>
             <tbody>
             <tr>
-            <td colspan="3">学 級</td>'; foreach($getclasssec['data'] as $sec)
-            {
-           
-            $output.='<td> '.$sec['section'].'</td>';
-            }
-            $output.='
+            <td colspan="3">学 級</td>';
+		foreach ($getclasssec['data'] as $sec) {
+
+			$output .= '<td> ' . $sec['section'] . '</td>';
+		}
+		$output .= '
             </tr>
             <tr>
-            <td colspan="3">整理番号</td>'; foreach($getclasssec['data'] as $sec)
-            {
-           
-            $output.='<td> '.$sec['studentPlace'].'</td>';
-            }
-            $output.='
+            <td colspan="3">整理番号</td>';
+		foreach ($getclasssec['data'] as $sec) {
+
+			$output .= '<td> ' . $sec['studentPlace'] . '</td>';
+		}
+		$output .= '
             </tr>
             </tbody>
             </table>
@@ -4202,11 +4196,11 @@ class ExamPdfController1 extends Controller
                 </tr>
                 <tr>
             <td>氏 名</td>                                          
-            <td colspan="6"> '.$student['first_name'].' '.$student['last_name'].'</td>
+            <td colspan="6"> ' . $student['first_name'] . ' ' . $student['last_name'] . '</td>
             </tr>
             <tr>
             <td rowspan="2">生年月日</td>
-            <td rowspan="2" colspan="8">'.$student['birthday'].'</td>
+            <td rowspan="2" colspan="8">' . $student['birthday'] . '</td>
             <td style="border-top:hidden; font-size: 10px; text-align: left;" align="left">編入前<br>在学校名</td>
             </tr>
             <tr>                      
@@ -4215,7 +4209,7 @@ class ExamPdfController1 extends Controller
             </tr>
             <tr>
             <td rowspan="2">現住所</td>
-            <td rowspan="2" colspan="8">'.$parent['address'].','.$parent['address_2'].','.$parent['city'].','.$parent['state'].','.$parent['post_code'].','.$parent['country'].'</td>
+            <td rowspan="2" colspan="8">' . $parent['address'] . ',' . $parent['address_2'] . ',' . $parent['city'] . ',' . $parent['state'] . ',' . $parent['post_code'] . ',' . $parent['country'] . '</td>
             <td  colspan="2" style="border-top:hidden"></td>
             <td style="border-top:hidden;"></td>
            </tr>
@@ -4233,7 +4227,7 @@ class ExamPdfController1 extends Controller
           </tr>
           <tr>
             <td rowspan="2">氏 名</td>
-            <td colspan="8" rowspan="2">'.$parent['first_name'].' '.$parent['last_name'].'</td>
+            <td colspan="8" rowspan="2">' . $parent['first_name'] . ' ' . $parent['last_name'] . '</td>
           </tr>
             <tr>
                 <td>転学先学校名</td>
@@ -4241,7 +4235,7 @@ class ExamPdfController1 extends Controller
             </tr>
             <tr>
                <td rowspan="2" >現住所</td>
-               <td colspan="8" rowspan="2">'.$parent['address'].','.$parent['address_2'].','.$parent['city'].','.$parent['state'].','.$parent['post_code'].','.$parent['country'].'</td>
+               <td colspan="8" rowspan="2">' . $parent['address'] . ',' . $parent['address_2'] . ',' . $parent['city'] . ',' . $parent['state'] . ',' . $parent['post_code'] . ',' . $parent['country'] . '</td>
                <td>同上所在地</td>
                <td ></td>
             </tr>
@@ -4288,28 +4282,25 @@ class ExamPdfController1 extends Controller
             <td class="cell-left">区分</td>
             <td class="diagonalCross" style="border-right:hidden; border-left:hidden;"></td>
             <td class="cell-right">学年</td>';
-            $getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
-            $getclasssec = Helper::PostMethod(config('constants.api.studentclasssection'), $data);
-            $i=1;
-            foreach($getgrade['data'] as $grade)
-            {  
-				if($i<=3)
-				{ 
-            $output.=' <td style=" border: 1px solid black;">'.$grade['name_numeric'].'</td>';
-				}
-				$i++;
-            }
-           
-            $output.='</tr>';
-            '<tr style="height:80px">
+		$getgrade = Helper::PostMethod(config('constants.api.grade_list_by_departmentId'), $data);
+		$getclasssec = Helper::PostMethod(config('constants.api.studentclasssection'), $data);
+		$i = 1;
+		foreach ($getgrade['data'] as $grade) {
+			if ($i <= 3) {
+				$output .= ' <td style=" border: 1px solid black;">' . $grade['name_numeric'] . '</td>';
+			}
+			$i++;
+		}
+
+		$output .= '</tr>';
+		'<tr style="height:80px">
             <td colspan="3">校長氏名印</td>';
-            foreach($getclasssec['data'] as $princ)
-            {
-                $output.=' <td style=" border: 1px solid black;">'.$princ['principal'].'</td>';
-            }
-           
-            $output.='</tr>';      
-            '<tr style="height:80px">
+		foreach ($getclasssec['data'] as $princ) {
+			$output .= ' <td style=" border: 1px solid black;">' . $princ['principal'] . '</td>';
+		}
+
+		$output .= '</tr>';
+		'<tr style="height:80px">
             <td colspan="3">学級担任者氏 名 印</td>
             <td></td>
             <td></td>
@@ -4319,7 +4310,7 @@ class ExamPdfController1 extends Controller
 			</td>
 			</tr>
 			</table>
-			</div>';	
+			</div>';
 		$output .= '</body></html>';
 		$pdf = \App::make('dompdf.wrapper');
 		// set size

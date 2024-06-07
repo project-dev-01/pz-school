@@ -36,20 +36,20 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $e)
     {
         // Log the IP address for debugging
-        Log::info('Handling request from IP: ' . $request->ip());
+        // Log::info('Handling request from IP: ' . $request->ip());
 
         // Check if the application is in maintenance mode
         if (app()->isDownForMaintenance()) {
             $allowedIps = ['127.0.0.1', '::1']; // Add your actual IP addresses
 
-            Log::info('Application in maintenance mode. Checking IP...');
+            // Log::info('Application in maintenance mode. Checking IP...');
 
             // Check if the request IP is in the allowed IPs
             if (in_array($request->ip(), $allowedIps)) {
-                Log::info('IP allowed: ' . $request->ip());
+                // Log::info('IP allowed: ' . $request->ip());
                 return Redirect::to($request->fullUrlWithoutQuery(['secret']));
             } else {
-                Log::info('IP not allowed: ' . $request->ip());
+                // Log::info('IP not allowed: ' . $request->ip());
             }
         }
 

@@ -864,7 +864,7 @@ class ExamindividualPdfController extends Controller
 
 				$attarray = array('', '1月', ' 2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月');
 				$getattendance = Helper::PostMethod(config('constants.api.getsem_studentattendance'), $attdata);
-				dd($getattendance);
+				// dd($getattendance);
 				$at_tot1 = 0;
 				$at_tot2 = 0;
 				$at_tot3 = 0;
@@ -1188,7 +1188,7 @@ class ExamindividualPdfController extends Controller
 				// filename
 				$now = now();
 				$name = strtotime($now);
-				$fileName = __('messages.report_card') ."-".$number."-". $stu['name'] . "-".$name . ".pdf";
+				$fileName = __('messages.report_card') . "-" . $number . "-" . $stu['name'] . "-" . $name . ".pdf";
 				return $pdf->download($fileName);
 				// return $pdf->stream();
 
@@ -1867,7 +1867,7 @@ class ExamindividualPdfController extends Controller
 				// filename
 				$now = now();
 				$name = strtotime($now);
-				$fileName = __('messages.report_card') ."-".$number."-". $stu['name'] . "-".$name .".pdf";
+				$fileName = __('messages.report_card') . "-" . $number . "-" . $stu['name'] . "-" . $name . ".pdf";
 				return $pdf->download($fileName);
 				// return $pdf->stream();
 			}
@@ -2490,7 +2490,7 @@ class ExamindividualPdfController extends Controller
 				// filename
 				$now = now();
 				$name = strtotime($now);
-				$fileName = __('messages.report_card') ."-".$number."-". $stu['name'] . "-".$name .".pdf";
+				$fileName = __('messages.report_card') . "-" . $number . "-" . $stu['name'] . "-" . $name . ".pdf";
 				return $pdf->download($fileName);
 				// return $pdf->stream();
 			}
@@ -3145,7 +3145,7 @@ class ExamindividualPdfController extends Controller
 			// filename
 			$now = now();
 			$name = strtotime($now);
-			$fileName = __('messages.report_card') ."-".$number."-". $stu['name'] . "-".$name .".pdf";
+			$fileName = __('messages.report_card') . "-" . $number . "-" . $stu['name'] . "-" . $name . ".pdf";
 			return $pdf->download($fileName);
 			// return $pdf->stream();
 		}
@@ -3482,7 +3482,7 @@ class ExamindividualPdfController extends Controller
 		// filename
 		$now = now();
 		$name = strtotime($now);
-		$fileName = __('messages.personal_test_res') ."-".$number."-". $stu['name'] . "-".$name .".pdf";
+		$fileName = __('messages.personal_test_res') . "-" . $number . "-" . $stu['name'] . "-" . $name . ".pdf";
 		return $pdf->download($fileName);
 		// return $pdf->stream();
 	}
