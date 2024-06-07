@@ -923,7 +923,7 @@
                                     @php
                                     $addRemove = $etkey+1;
                                     @endphp
-                                    <tr id="row_department">
+                                    <tr id="row_sibling{{ $addRemove }}" class="siblingscount">
                                         <td>
                                             <input type="text" class="form-control" value="{{ isset($siblingTypeLists[$etkey]) ? $siblingTypeLists[$etkey] : ''}}" name="full_name[]" id="full_name">
                                         </td>
@@ -943,7 +943,8 @@
                                         </td>
                                         <td>
                                             @if($addRemove > 1)
-                                            <button type="button" name="remove_emp_type" data-emptype="{{$addRemove}}" id="{{$addRemove}}" class="btn btn-danger btn_remove_emp_type">X</button>
+                                            {{-- <button type="button" name="remove_emp_type" data-emptype="{{$addRemove}}" id="{{$addRemove}}" class="btn btn-danger btn_remove_emp_type">X</button> --}}
+                                            <button type="button" name="remove_designation" data-emptype="{{$addRemove}}" id="{{$addRemove}}" class="btn btn-danger btn_remove_designation">X</button>
                                             @else
                                             <button type="button" name="add_sibling" id="add_sibling" class="btn btn-primary">{{ __('messages.add') }} +</button>
                                             @endif

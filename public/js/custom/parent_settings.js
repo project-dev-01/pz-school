@@ -251,11 +251,15 @@ $(function () {
         yearRange: "-100:+50", // last hundred years
     });
     // designation add start
-    var sibling_increment = 1;
+    // var sibling_increment = 1;
+
     $(document).on('click', '#add_sibling', function() {
+        var sibRow = document.getElementsByClassName('siblingscount');
+        // Return the number of elements found
+        var sibling_increment = sibRow.length;
         console.log(sibling_increment);
         sibling_increment++;
-        var siblingAppend = '<tr id="row_sibling' + sibling_increment + '">' +
+        var siblingAppend = '<tr id="row_sibling' + sibling_increment + '" class="siblingscount">' +
             '<td>'+
             '<input type="text" class="form-control" id="full_name" name="full_name[]" placeholder="" aria-describedby="inputGroupPrepend">' +
             '</td>' +
