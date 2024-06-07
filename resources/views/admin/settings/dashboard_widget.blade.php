@@ -231,7 +231,7 @@
                                 <table class="table table-bordered mb-0">
                                     <thead>
                                         <tr>
-                                            <th style="width:10px;">{{ __('messages.s.no') }}</th>
+                                            <th>{{ __('messages.s.no') }}</th>
                                             <th>{{ __('messages.dashboard_details') }}</th>
                                             <th>{{ __('messages.action') }}</th>
                                         </tr>
@@ -241,7 +241,7 @@
                                         <tr>
                                             <input type="hidden" value="" id="widgetDynamicID">
                                             <td>1</td>
-                                            <td>{{ __('messages.AttendanceReport') }}</td>
+                                            <td>{{ __('messages.attendance_report') }}</td>
                                             <td><button class="btn add-btn btn-rounded waves-effect waves-light addToWidgetAttRep" data-widgetname="Attendance Report" data-orderno="1" data-widgetvalue="AttendanceReport" data-toggle="modal" data-target="#attendance-modal">{{ __('messages.add') }}</button></td>
                                         </tr>
                                         <tr>
