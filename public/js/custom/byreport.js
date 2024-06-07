@@ -404,6 +404,10 @@ $(function () {
                     name: 'register_no'
                 },
                 {
+                    data: 'attendance_no',
+                    name: 'attendance_no'
+                },
+                {
                     data: 'gender',
                     name: 'gender'
                 },

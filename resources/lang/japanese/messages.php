@@ -2315,6 +2315,7 @@ return [
       "adhocexam_import" => "アドホック試験の一括アップロード",
       "select_role_parent" => "Select Role for Parent",
       "exam_individual_result" => "試験個人結果",
+      "download_zip_file" => "Download All Zip",
       "studentnewjoining_grade_name" => "学年",
       "studentnewjoining_class_Name" => "組",
       "accepted" => "申請受理",

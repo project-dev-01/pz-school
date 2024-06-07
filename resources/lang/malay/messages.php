@@ -2239,6 +2239,7 @@ return [
       "mark_info" => "Tandakan Maklumat",      
       "adhocexam_import" => "Muat Naik Pukal Peperiksaan Adhoc",
       "exam_individual_result" => "Exam Individual Result",
+      "download_zip_file" => "Download All Zip",
       "studentnewjoining_grade_name" => "Grade Name",
       "studentnewjoining_class_Name" => "Class Name",
       "accepted" => "Accepted",

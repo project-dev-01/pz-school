@@ -634,6 +634,8 @@ $(function () {
                     if (sturow % totstu === 2) {
                         var totstu1 = (data3['data'][paper]['totstu'] != null) ? data3['data'][paper]['totstu'] : 0;
                         var examstu1 = (data3['data'][paper]['examstu'] != null) ? data3['data'][paper]['examstu'] : 0;
+                    var totstu1=(data3['data'][paper]['totstu']!=null)?data3['data'][paper]['totstu']:0;
+                    var examstu1=(data3['data'][paper]['examstu']!=null)?data3['data'][paper]['examstu']:0;
                         var row = "<tr style='background-color:#E9D528'><td colspan='8'>" + item[3] + " - " + item[4] + " [ " + examstu1 + " / " + totstu1 + "]</td>";
                         markdatas.append(row);
                         paper++;

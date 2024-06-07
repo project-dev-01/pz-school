@@ -5,7 +5,7 @@ pathname=pathname.substring(1);
 //alert(pathname);
 $.post(checkpermissions, { menu_id:pathname }, function (data) {
     
-    if(data.data!='' || data.data!=null)
+    if (data.data !== '' && data.data !== null) 
     {
         var addbtn = '';
         if (data && data.data && typeof data.data.add !== "undefined" && data.data.add !== null) {

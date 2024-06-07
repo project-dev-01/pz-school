@@ -415,7 +415,7 @@ class ExamindividualPdfController extends Controller
 			}
 		}
 		$teachernameapi = Helper::PostMethod(config('constants.api.getec_teacher'), $pdata);
-		$teachername = '-';
+		$teachername = "-";
 		if (!empty($teachernameapi['data'])) {
 			$teachername = $teachernameapi['data']['last_name'] . ' ' . $teachernameapi['data']['first_name'];
 		}
@@ -561,6 +561,11 @@ class ExamindividualPdfController extends Controller
 		$grade = Helper::PostMethod(config('constants.api.class_details'), $data);
 		$section = Helper::PostMethod(config('constants.api.section_details'), $data);
 		$stuclass = $grade['data']['name_numeric'];
+		$n1 = ($request->department_id == '1') ? 'P' : 'S';
+		$n2 = $grade['data']['name_numeric'];
+		$n3 = $section['data']['name'];
+		$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
+		$number = $n1 . $n2 . $n3 . sprintf("%02d", $attendance_no);
 		if ($request->department_id == 1) // Primary 
 		{
 			if ($stuclass == 1 || $stuclass == 2) {
@@ -859,7 +864,7 @@ class ExamindividualPdfController extends Controller
 
 				$attarray = array('', '1月', ' 2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月');
 				$getattendance = Helper::PostMethod(config('constants.api.getsem_studentattendance'), $attdata);
-				//dd($getattendance);
+				dd($getattendance);
 				$at_tot1 = 0;
 				$at_tot2 = 0;
 				$at_tot3 = 0;
@@ -1183,7 +1188,7 @@ class ExamindividualPdfController extends Controller
 				// filename
 				$now = now();
 				$name = strtotime($now);
-				$fileName = __('messages.report_card') . $stu['name'] . $name . ".pdf";
+				$fileName = __('messages.report_card') ."-".$number."-". $stu['name'] . "-".$name . ".pdf";
 				return $pdf->download($fileName);
 				// return $pdf->stream();
 
@@ -1862,7 +1867,7 @@ class ExamindividualPdfController extends Controller
 				// filename
 				$now = now();
 				$name = strtotime($now);
-				$fileName = __('messages.report_card') . $stu['name'] . $name . ".pdf";
+				$fileName = __('messages.report_card') ."-".$number."-". $stu['name'] . "-".$name .".pdf";
 				return $pdf->download($fileName);
 				// return $pdf->stream();
 			}
@@ -2485,7 +2490,7 @@ class ExamindividualPdfController extends Controller
 				// filename
 				$now = now();
 				$name = strtotime($now);
-				$fileName = __('messages.report_card') . $stu['name'] . $name . ".pdf";
+				$fileName = __('messages.report_card') ."-".$number."-". $stu['name'] . "-".$name .".pdf";
 				return $pdf->download($fileName);
 				// return $pdf->stream();
 			}
@@ -3140,7 +3145,7 @@ class ExamindividualPdfController extends Controller
 			// filename
 			$now = now();
 			$name = strtotime($now);
-			$fileName = __('messages.report_card') . $stu['name'] . $name . ".pdf";
+			$fileName = __('messages.report_card') ."-".$number."-". $stu['name'] . "-".$name .".pdf";
 			return $pdf->download($fileName);
 			// return $pdf->stream();
 		}
@@ -3258,7 +3263,11 @@ class ExamindividualPdfController extends Controller
 
 		$grade = Helper::PostMethod(config('constants.api.class_details'), $data);
 		$section = Helper::PostMethod(config('constants.api.section_details'), $data);
-
+		$n1 = ($request->department_id == '1') ? 'P' : 'S';
+		$n2 = $grade['data']['name_numeric'];
+		$n3 = $section['data']['name'];
+		$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
+		$number = $n1 . $n2 . $n3 . sprintf("%02d", $attendance_no);
 		$acdata = [
 			'branch_id' => session()->get('branch_id'),
 			'id' => $request->academic_year
@@ -3473,7 +3482,7 @@ class ExamindividualPdfController extends Controller
 		// filename
 		$now = now();
 		$name = strtotime($now);
-		$fileName = __('messages.report_card') . $stu['name'] . $name . ".pdf";
+		$fileName = __('messages.personal_test_res') ."-".$number."-". $stu['name'] . "-".$name .".pdf";
 		return $pdf->download($fileName);
 		// return $pdf->stream();
 	}
