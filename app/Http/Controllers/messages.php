@@ -2185,6 +2185,9 @@ return [
 
     "new_application" => "New Application",
     "update_application" => "Update Application",
+    "application_status" => "Application Status",
+    "application_phase_1_status" => "Phase 1-",
+    "application_phase_2_status" => "Phase 2-",
     "your_leave-application_for" => "Your leave application for",
     "was_approved" => "was approved",
     "leave_start_from" => "Leave Start from",
