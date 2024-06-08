@@ -190,6 +190,7 @@
                                             <th> {{ __('messages.grade') }}</th>
                                             <th> {{ __('messages.phase_1_status') }}</th>
                                             <th> {{ __('messages.phase_2_status') }}</th>
+                                            <th> {{ __('messages.status_after_approval') }}</th>
                                             <!-- <th> {{ __('messages.created_by') }}</th> -->
                                             <th> {{ __('messages.actions') }}</th>
                                             <!--<th>#</th>

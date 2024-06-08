@@ -2619,7 +2619,8 @@ class ParentController extends Controller
     public function studentMedicalRecord()
     {
         $data= [
-            'student_id' => session()->get('student_id')
+            'student_id' => session()->get('student_id'),
+            'academic_session_id' => session()->get('academic_session_id')
         ];
         $response = Helper::PostMethod(config('constants.api.get_student_medical_record'), $data);
         $getclass = Helper::GetMethod(config('constants.api.class_list'));

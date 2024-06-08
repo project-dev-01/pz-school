@@ -263,6 +263,7 @@ initializeIntlTelInput("#parent_phone_number_after_transfer");
 <script src="{{ asset('buttons-datatables/pdfmake.min.js') }}"></script>
 <script src="{{ asset('buttons-datatables/vfs_fonts.js') }}" async></script>
 <script src="{{ asset('buttons-datatables/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('js/pages/form-advanced.init.js') }}"></script>
 <!-- validation js -->
 <script src="{{ asset('js/validation/validation.js') }}"></script>
 <script src="{{ asset('js/custom/admin_termination.js') }}"></script>

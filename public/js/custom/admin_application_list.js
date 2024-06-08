@@ -141,6 +141,7 @@ $(function () {
                 { data: 'academic_grade', name: 'academic_grade' },
                 { data: 'status', name: 'status' },
                 { data: 'phase_2_status', name: 'phase_2_status' },
+                { data: 'status_after_approval', name: 'status_after_approval' },
                 { data: 'actions', name: 'actions', orderable: false, searchable: false },
             ]
         });

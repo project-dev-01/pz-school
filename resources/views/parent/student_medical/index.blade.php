@@ -347,7 +347,7 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">1. Basic Details
+                            <h4 class="navv">1. {{ __('messages.basic_details') }}
                                 <h4>
                         </li>
                     </ul>
@@ -356,28 +356,28 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Normal Temperature</label>
+                                    <label>{{ __('messages.normal_temperature') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['normal_temperature']) ? $studentmedical['normal_temperature'] : '' }}" id="normal_temp" name="normal_temp" class="form-control" placeholder="Enter the normal temperature">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Hospital Name</label>
+                                    <label>{{ __('messages.hospital_name') }}</label>
                                     <input type="text" id="hospital_name" value="{{ isset($studentmedical['hospital_name']) ? $studentmedical['hospital_name'] : '' }}" name="hospital_name" class="form-control" placeholder="Enter the hospital Name">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Doctor's Name</label>
+                                    <label>{{ __('messages.doctor_name') }}</label>
                                     <input type="text" id="doctor_name"  value="{{ isset($studentmedical['doctor_name']) ? $studentmedical['doctor_name'] : '' }}" name="doctor_name" class="form-control" placeholder="Enter the doctor's name">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Insurance</label>
+                                    <label>{{ __('messages.insurance') }}</label>
                                     <p>
                                         <input type="radio" name="insurance" value="yes" style="margin: 10px;"
                                             {{ !isset($studentmedical['insurance_yes_no']) || $studentmedical['insurance_yes_no'] == 'yes' ? 'checked' : '' }}>Yes</input>
@@ -388,7 +388,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Company Name</label>
+                                    <label>{{ __('messages.company_name') }}</label>
                                     <input type="text" id="company_name"  value="{{ isset($studentmedical['company_name']) ? $studentmedical['company_name'] : '' }}" name="company_name" class="form-control" placeholder="Enter the insurance company name">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
@@ -401,7 +401,7 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">2. Place "O", if any of the condition are present.
+                            <h4 class="navv">2.{{ __('messages.place_o_condition') }}
                                 <h4>
                         </li>
                     </ul>
@@ -410,15 +410,14 @@
                             <table class="table table-centered table-bordered mb-0">
                                 <thead>
                                     <tr style="height: 30px;text-align:center;">
-                                        <th rowspan="2">About allergies</th>
-                                        <th rowspan="2">Age of onset</th>
+                                        <th rowspan="2">{{ __('messages.about_allergies') }}</th>
+                                        <th rowspan="2">{{ __('messages.age_of_onset') }}</th>
                                         <th colspan="3"></th>
                                     </tr>
                                     <tr style="height: 30px;text-align:center;">
-                                        <th rowspan="1">Undern Treatment</th>
-                                        <th rowspan="1">Follow up</th>
-                                        <th rowspan="1">(age)
-                                            Treated ( )
+                                        <th rowspan="1">{{ __('messages.under_treatment') }}</th>
+                                        <th rowspan="1">{{ __('messages.follow_up') }}</th>
+                                        <th rowspan="1">{{ __('messages.age_treated') }}
                                         </th>
                                     </tr>
                                     <tr>
@@ -439,7 +438,7 @@
                                     
 
                                     <tr>
-                                        <td colspan="5"> <span style="margin-right:10px;">*</span>Please write about the allergen if any<br>
+                                        <td colspan="5"> <span style="margin-right:10px;">*</span>{{ __('messages.please_write_about') }}<br>
                                             <br>
                                             <textarea maxlength="255" id="remark_allergen" class="form-control alloptions" placeholder="{{ __('messages.enter_the_remarks') }}" name="remark_allergen" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                                             {{ isset($studentmedical['allergen_if_any']) ? $studentmedical['allergen_if_any'] : '' }}
@@ -452,7 +451,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <span style="margin-right:10px;">*</span>
-                                                    <label>Anaphylactic Shock :</label>
+                                                    <label>{{ __('messages.anaphylactic_shock') }} :</label>
                                                     <input type="radio" name="anaphylactic" value="yes" checked style="margin: 10px;"
                                                     {{ !isset($studentmedical['anaphylactic_shock']) || $studentmedical['anaphylactic_shock'] == 'yes' ? 'checked' : '' }}>Yes</input>
                                                     <input type="radio" name="anaphylactic" value="no" style="margin: 10px;"
@@ -462,7 +461,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <span style="margin-right:10px;">*</span>
-                                                    <label>Epinephrine autoinjector :</label>
+                                                    <label>{{ __('messages.epinephrine_autoinjector') }} :</label>
                                                     <input type="radio" name="epinephrine" value="yes"  checked style="margin: 10px;"
                                                     {{ !isset($studentmedical['epinephrine_autoinjector']) || $studentmedical['epinephrine_autoinjector'] == 'yes' ? 'checked' : '' }}>Yes</input>
                                                     <input type="radio" name="epinephrine" value="no"  style="margin: 10px;" 
@@ -472,7 +471,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <span style="margin-right:10px;">*</span>
-                                                    <label>Other Medicines :</label>
+                                                    <label>{{ __('messages.other_medicines') }} :</label>
                                                     <input type="radio" name="other_medicines" value="yes" checked style="margin: 10px;" 
                                                     {{ !isset($studentmedical['other_medicines']) || $studentmedical['other_medicines'] == 'yes' ? 'checked' : '' }}>Yes</input>
                                                     <input type="radio" name="other_medicines" value="no" style="margin: 10px;"
@@ -493,7 +492,7 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">3. Medical Histroy
+                            <h4 class="navv">3. {{ __('messages.medical_history') }}
                                 <h4>
                         </li>
                     </ul>
@@ -501,126 +500,126 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Heart Problem</label>
+                                    <label>{{ __('messages.heart_problem') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['heart_problem']) ? $studentmedical['heart_problem'] : '' }}"  id="heart_problem" name="heart_problem" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Epilepsy</label>
+                                    <label>{{ __('messages.epilepsy') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['epilepsy']) ? $studentmedical['epilepsy'] : '' }}"  id="epilepsy" name="epilepsy" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Measles</label>
+                                    <label>{{ __('messages.measles') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['measles']) ? $studentmedical['measles'] : '' }}"  id="measles" name="measles" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Kawasaki disease</label>
+                                    <label>{{ __('messages.kawasaki_disease') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['kawasaki_disease']) ? $studentmedical['kawasaki_disease'] : '' }}"  id="kawasaki_disease" name="kawasaki_disease" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Febrile Convulsions</label>
+                                    <label>{{ __('messages.febrile_convulsions') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['febrile_convulsions']) ? $studentmedical['febrile_convulsions'] : '' }}"  id="febrile_convulsion" name="febrile_convulsion" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Heart Problem</label>
+                                    <label>{{ __('messages.heart_problem') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['heart_problem']) ? $studentmedical['heart_problem'] : '' }}"  id="heart_problem" name="heart_problem" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Chicken Pox</label>
+                                    <label>{{ __('messages.chicken_pox') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['chicken_pox']) ? $studentmedical['chicken_pox'] : '' }}"  id="chicken_pox" name="chicken_pox" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Scoliosis</label>
+                                    <label>{{ __('messages.scoliosis') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['scoliosis']) ? $studentmedical['scoliosis'] : '' }}"  id="scoliosis" name="scoliosis" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Tuberculosis</label>
+                                    <label>{{ __('messages.tuberculosis') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['tuberculosis']) ? $studentmedical['tuberculosis'] : '' }}"  id="tuberculosis" name="tuberculosis" class="form-control" placeholder="Enter the hospital Name">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Mumps</label>
+                                    <label>{{ __('messages.mumps') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['mumps']) ? $studentmedical['mumps'] : '' }}"  id="mumps" name="mumps" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Kidney problems</label>
+                                    <label>{{ __('messages.kidney_problems') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['kidny_problems']) ? $studentmedical['kidny_problems'] : '' }}"  id="kidney_problems" name="kidney_problems" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Others</label>
+                                    <label>{{ __('messages.others') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['others']) ? $studentmedical['others'] : '' }}"  id="others" name="others" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Rubella(German Measles)</label>
+                                    <label>{{ __('messages.rubella') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['rubella']) ? $studentmedical['rubella'] : '' }}"  id="rubella" name="rubella" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Diabetes</label>
+                                    <label>{{ __('messages.diabetes') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['diabetes']) ? $studentmedical['diabetes'] : '' }}"  id="diabetes" name="diabetes" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Dengue Fever</label>
+                                    <label>{{ __('messages.dengue_fever') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['dengue_fever']) ? $studentmedical['dengue_fever'] : '' }}"  id="dengue_fever" name="dengue_fever" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Operated Disease</label>
+                                    <label>{{ __('messages.operated_disease') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['operated_disease']) ? $studentmedical['operated_disease'] : '' }}"  id="operated_disease" name="operated_disease" class="form-control" placeholder="Enter the details">
                                     <span class=" text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Injury</label>
+                                    <label>{{ __('messages.injury') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['injury']) ? $studentmedical['injury'] : '' }}"  id="injury" name="injury" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Illness</label>
+                                    <label>{{ __('messages.illness') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['illness']) ? $studentmedical['illness'] : '' }}"  id="illness" name="illness" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
@@ -634,7 +633,7 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">4. Immunization History
+                            <h4 class="navv">4. {{ __('messages.immunization_history') }}
                                 <h4>
                         </li>
                     </ul>
@@ -642,91 +641,91 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Japanese Encephalitis</label>
+                                    <label>{{ __('messages.japanese_encephalitis') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['japanese_encephalitis']) ? $studentmedical['japanese_encephalitis'] : '' }}" id="japanese_encephalitis" name="japanese_encephalitis" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Streptococcus pneumoniae</label>
+                                    <label>{{ __('messages.streptococcus_pneumoniae') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['streptococcus_pneumoniae']) ? $studentmedical['streptococcus_pneumoniae'] : '' }}" id="streptococcus_pneumoniae" name="streptococcus_pneumoniae" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Triple Antigen</label>
+                                    <label>{{ __('messages.triple_antigen') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['triple_antigen']) ? $studentmedical['triple_antigen'] : '' }}" id="triple_antigen" name="triple_antigen" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Hib</label>
+                                    <label>{{ __('messages.hib') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['hib']) ? $studentmedical['hib'] : '' }}" id="hib" name="hib" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Quadruple Antigen</label>
+                                    <label>{{ __('messages.quadruple_antigen') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['quadruple_antigen']) ? $studentmedical['quadruple_antigen'] : '' }}" id="quadruple_antigen" name="quadruple_antigen" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Covid 19</label>
+                                    <label>{{ __('messages.covid') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['covid_19']) ? $studentmedical['covid_19'] : '' }}" id="covid" name="covid" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>BCG</label>
+                                    <label>{{ __('messages.bcg') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['bcg']) ? $studentmedical['bcg'] : '' }}" id="bcg" name="bcg" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Rabies Vaccine</label>
+                                    <label>{{ __('messages.rabies_vaccine') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['rabies_vaccine']) ? $studentmedical['rabies_vaccine'] : '' }}" id="rabies_vaccine" name="rabies_vaccine" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Measles/Rubella(MR)</label>
+                                    <label>{{ __('messages.measles/rubella') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['measles_rubella']) ? $studentmedical['measles_rubella'] : '' }}" id="measles" name="measles" class="form-control" placeholder="Enter the hospital Name">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Tetanus</label>
+                                    <label>{{ __('messages.tetanus') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['tetanus']) ? $studentmedical['tetanus'] : '' }}" id="tetanus" name="tetanus" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Chicken Pox</label>
+                                    <label>{{ __('messages.chicken_pox') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['chicken_pox_imm']) ? $studentmedical['chicken_pox_imm'] : '' }}" id="chicken_pox_imm" name="chicken_pox_imm" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Mumps</label>
+                                    <label>{{ __('messages.mumps') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['mumps_imm']) ? $studentmedical['mumps_imm'] : '' }}" id="mumps_imm" name="mumps_imm" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Advised by doctors against vaccination</label>
+                                    <label>{{ __('messages.advised_doctors_vaccination') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['doctors_advised']) ? $studentmedical['doctors_advised'] : '' }}" id="advised_doctors" name="advised_doctors" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
@@ -740,73 +739,73 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">5. Current Health Condition<h4>
+                            <h4 class="navv">5. {{ __('messages.current_health_condition') }}<h4>
                         </li>
                     </ul>
                     <div>
-                        <h4 class="navv">Internal Medicine<h4>
+                        <h4 class="navv">{{ __('messages.internal_medicine') }}<h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Develops a fever easily.</label>
+                                    <label>{{ __('messages.develops_fever_easily') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['develops_fever_easily']) ? $studentmedical['develops_fever_easily'] : '' }}" id="develops_fever" name="develops_fever" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Frequent headaches.</label>
+                                    <label>{{ __('messages.frequent_headaches') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['frequent_headaches']) ? $studentmedical['frequent_headaches'] : '' }}" id="frequent_headaches" name="frequent_headaches" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Dyspepsia & stomachache and cliarrhea easily.</label>
+                                    <label>{{ __('messages.dyspepsia_stomachache_cliarrhea_easily') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['dyspepsia_stomachache_cliarrhea']) ? $studentmedical['dyspepsia_stomachache_cliarrhea'] : '' }}" id="dyspepsia" name="dyspepsia" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Constipates easily.</label>
+                                    <label>{{ __('messages.constipates_easily') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['constipates']) ? $studentmedical['constipates'] : '' }}" id="constipates" name="constipates" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Vomits easily.</label>
+                                    <label>{{ __('messages.vomits_easily') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['vomits']) ? $studentmedical['vomits'] : '' }}" id="vomits" name="vomits" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Faints easily.</label>
+                                    <label>{{ __('messages.faints_easily') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['faints']) ? $studentmedical['faints'] : '' }}" id="faints" name="faints" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Dizziness easily.</label>
+                                    <label>{{ __('messages.dizziness_easily') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['dizziness']) ? $studentmedical['dizziness'] : '' }}" id="dizziness" name="dizziness" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Nettle rash easily.</label>
+                                    <label>{{ __('messages.nettle_rash_easily') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['nettle_rash']) ? $studentmedical['nettle_rash'] : '' }}" id="nettle_rash" name="nettle_rash" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Prone to car sickness.</label>
+                                    <label>{{ __('messages.prone_car_sickness') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['prone_to_car_sickness']) ? $studentmedical['prone_to_car_sickness'] : '' }}" id="prone_car_sickness" name="prone_car_sickness" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
@@ -816,41 +815,41 @@
 
 
                     <div>
-                        <h4 class="navv">ENT<h4>
+                        <h4 class="navv">{{ __('messages.ent') }}<h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Has poor hearing.</label>
+                                    <label>{{ __('messages.has_poor_hearing') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['has_poor_hearing']) ? $studentmedical['has_poor_hearing'] : '' }}" id="poor_hearing" name="poor_hearing" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Has had otitis media before.</label>
+                                    <label>{{ __('messages.has_had_otitis_media_before') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['has_had_otitis_media_before']) ? $studentmedical['has_had_otitis_media_before'] : '' }}" id="otitis_media" name="otitis_media" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Bleeds from the nose easily.</label>
+                                    <label>{{ __('messages.bleeds_from_the_nose_easily') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['bleeds_from_the_nose']) ? $studentmedical['bleeds_from_the_nose'] : '' }}" id="bleeds_nose" name="bleeds_nose" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Nasal congestion and sevene running nose easily.</label>
+                                    <label>{{ __('messages.nasal_congestion') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['nasal_congestion']) ? $studentmedical['nasal_congestion'] : '' }}" id="nasal_congestion_nose" name="nasal_congestion_nose" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Throat is swollen easily.</label>
+                                    <label>{{ __('messages.throat_swollen_easily') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['throat_is_swollen']) ? $studentmedical['throat_is_swollen'] : '' }}" id="throat_swollen" name="throat_swollen" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
@@ -860,34 +859,34 @@
                     </div>
 
                     <div>
-                        <h4 class="navv">Eye<h4>
+                        <h4 class="navv">{{ __('messages.eye') }}<h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Squinted eyes to view from a distance.</label>
+                                    <label>{{ __('messages.squinted_eyes_view_distance') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['squinted_eyes']) ? $studentmedical['squinted_eyes'] : '' }}" id="squinted_eyes" name="squinted_eyes" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Eye irritation & redness easily.</label>
+                                    <label>{{ __('messages.eye_irritation_redness_easily') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['eye_irritation_redness']) ? $studentmedical['eye_irritation_redness'] : '' }}" id="eye_irritation" name="eye_irritation" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Use glasses or lenses.</label>
+                                    <label>{{ __('messages.use_glasses_lenses') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['glasses_lenses']) ? $studentmedical['glasses_lenses'] : '' }}" id="glasses_lenses" name="glasses_lenses" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Wrong Colour.</label>
+                                    <label>{{ __('messages.wrong_colour') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['wrong_colour']) ? $studentmedical['wrong_colour'] : '' }}" id="wrong_colour" name="wrong_colour" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
@@ -898,34 +897,34 @@
 
 
                     <div>
-                        <h4 class="navv">Dent<h4>
+                        <h4 class="navv">{{ __('messages.dent') }}<h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Has a sensistive tooth or toothache</label>
+                                    <label>{{ __('messages.has_sensistive_tooth_toothache') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['tooth_toothache']) ? $studentmedical['tooth_toothache'] : '' }}" id="sensistive_tooth" name="sensistive_tooth" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Bleed from gum.</label>
+                                    <label>{{ __('messages.bleed_from_gum') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['bleed_gum']) ? $studentmedical['bleed_gum'] : '' }}" id="bleed_from_gum" name="bleed_from_gum" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Pain or sound in jaw joint.</label>
+                                    <label>{{ __('messages.pain_sound_jaw_joint') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['pain_sound_jaw_joint']) ? $studentmedical['pain_sound_jaw_joint'] : '' }}" id="pain_sound_jaw_joint" name="pain_sound_jaw_joint" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Has been Orthodontics.</label>
+                                    <label>{{ __('messages.has_been_orthodontics') }}</label>
                                     <input type="text" value="{{ isset($studentmedical['orthodontics']) ? $studentmedical['orthodontics'] : '' }}" id="orthodontics" name="orthodontics" class="form-control" placeholder="Enter the details">
                                     <span class="text-danger error-text name_error"></span>
                                 </div>
@@ -938,7 +937,7 @@
                     <div class="card-body">
 
                         <div class="form-group">
-                            <label for="txtarea_prev_remarks">Any medicine to take daily?<br>(No/Yes) (Name of medicine:)</label>
+                            <label for="txtarea_prev_remarks">{{ __('messages.any_medicine_take_daily') }}<br>{{ __('messages.no_yes_Name_medicine') }}</label>
                             <textarea maxlength="255" id="medicine_to_take_daily" class="form-control alloptions" placeholder="{{ __('messages.enter_the_remarks') }}" name="medicine_to_take_daily" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                             {{ isset($studentmedical['any_medicine_take_daily']) ? $studentmedical['any_medicine_take_daily'] : ''}} </textarea>
                         </div>
@@ -955,7 +954,7 @@
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <h4 class="navv">6. Any Other medical concerns which require the attention of the medical practitioner
+                            <h4 class="navv">6.{{ __('messages.any_medical_practitioner') }}
                                 <h4>
                         </li>
                     </ul>
@@ -963,7 +962,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Date:</label>
+                                    <label>{{ __('messages.date') }}:</label>
                                     <div class="input-group input-group-merge">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -978,7 +977,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="txtarea_prev_remarks">Remarks:</label>
+                                    <label for="txtarea_prev_remarks">{{ __('messages.remarks') }}:</label>
                                     <textarea maxlength="255" id="remarks" class="form-control alloptions" placeholder="{{ __('messages.enter_the_remarks') }}" name="remarks" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10">
                                     {{ isset($studentmedical['remarks']) ? $studentmedical['remarks'] : ''}}
                                 </textarea>
