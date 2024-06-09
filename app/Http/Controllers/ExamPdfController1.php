@@ -17,7 +17,8 @@ class ExamPdfController1 extends Controller
 
 	public function downbyecreport(Request $request)
 	{
-		ini_set('max_execution_time', 300);
+		ini_set('max_execution_time', 600);
+    	ini_set('memory_limit', '1024M');
 		if ($request->department_id == 1) {
 			$pdf_logo = config('constants.image_url') . '/common-asset/images/primary_logo.png';
 		}
@@ -80,7 +81,38 @@ class ExamPdfController1 extends Controller
 			$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
 			$number = $n1 . $n2 . $n3 . sprintf("%02d", $attendance_no);
 			$fonturl = storage_path('fonts/ipag.ttf');
+			$papername1 = "EC-Class";
+			$pdata = [
+				'branch_id' => session()->get('branch_id'),
+				'exam_id' => $request->exam_id,
+				'department_id' => $request->department_id,
+				'class_id' => $request->class_id,
+				'section_id' => $request->section_id,
+				'semester_id' => $request->semester_id,
+				'session_id' => $request->session_id,
+				'academic_session_id' => $request->academic_year,
+				'student_id' => $stu['student_id'],
+				'paper_name' => $papername1
 
+			]; // dd($pdata);
+			$paper = Helper::PostMethod(config('constants.api.getec_marks'), $pdata);
+			$ec_classname = $paper['data']['freetext'] ?? '';
+			$papername2 = "Level";
+			$pdata = [
+				'branch_id' => session()->get('branch_id'),
+				'exam_id' => $request->exam_id,
+				'department_id' => $request->department_id,
+				'class_id' => $request->class_id,
+				'section_id' => $request->section_id,
+				'semester_id' => $request->semester_id,
+				'session_id' => $request->session_id,
+				'academic_session_id' => $request->academic_year,
+				'student_id' => $stu['student_id'],
+				'paper_name' => $papername2
+
+			]; // dd($pdata);
+			$paper = Helper::PostMethod(config('constants.api.getec_marks'), $pdata);
+			$levelname = $paper['data']['freetext']  ?? '';
 			$output = '<!DOCTYPE html>
 				<html lang="en">
 				<head>
@@ -176,11 +208,11 @@ class ExamPdfController1 extends Controller
 					</td>       
 					<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; text-align: left;">
 					<h5 style="margin: 0;">EC-Class</h5>
-					<h4 style="margin: 0;">Balsam</h4>
+					<h4 style="margin: 0;">' . $ec_classname . '</h4>
 					</td>       
 					<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; text-align: left;">
 					<h5 style="margin: 0;">Level</h5>
-					<h4 style="margin: 0;">Advanced</h4>
+					<h4 style="margin: 0;">' . $levelname . '</h4>
 					</td>
 					</tr> 
 					<tr>
@@ -188,10 +220,8 @@ class ExamPdfController1 extends Controller
 					
 					<h3 style="margin: 0;">Student Name</h3>
 					</td>       
-					<td class="content-wrap aligncenter" style="margin: 0;padding-top:10px; padding-bottom:-10px;text-align: center;">
+					<td colspan="2" class="content-wrap aligncenter" style="margin: 0;padding-top:10px; padding-bottom:-10px;text-align: center;">
 					<h3 style="margin: 0;">' . strtoupper($stu['eng_name']) . '</h3>
-					</td>       
-					<td class="content-wrap aligncenter" style="margin: 0; padding-top:10px; padding-bottom:-10px;text-align: center;">
 					</td>
 					</tr> 
 					<tr>
@@ -415,11 +445,24 @@ class ExamPdfController1 extends Controller
 					$teachercmd = $paper['data']['score'];
 				}
 			}
-			$teachernameapi = Helper::PostMethod(config('constants.api.getec_teacher'), $pdata);
-			$teachername = "-";
-			if (!empty($teachernameapi['data'])) {
-				$teachername = $teachernameapi['data']['last_name'] . ' ' . $teachernameapi['data']['first_name'];
-			}
+			$papername = "Teacher Name";
+			$pdata = [
+				'branch_id' => session()->get('branch_id'),
+				'exam_id' => $request->exam_id,
+				'department_id' => $request->department_id,
+				'class_id' => $request->class_id,
+				'section_id' => $request->section_id,
+				'semester_id' => $request->semester_id,
+				'session_id' => $request->session_id,
+				'academic_session_id' => $request->academic_year,
+				'student_id' => $stu['student_id'],
+				'paper_name' => $papername
+
+			];
+			// dd($pdata);
+
+			$paper = Helper::PostMethod(config('constants.api.getec_marks'), $pdata);
+			$teachername = $paper['data']['freetext'] ?? '';
 			$output .= '<tr>
 					<td class="content-wrap aligncenter" colspan="3" style="margin: 0; padding-left: 20px;padding-right: 20px;padding-top:-10px; text-align: center;">
 					
@@ -479,7 +522,7 @@ class ExamPdfController1 extends Controller
 			$pdf->loadHTML($output);
 			// return $pdf->stream();
 			// Filename setup
-			$fileName = __('messages.english_communication') . "-" . $stu['name'] . ".pdf";
+			$fileName = __('messages.english_communication') . "-" . $stu['eng_name'] . ".pdf";
 			$pdfFilePath = $storagePath . '/' . $fileName;
 
 			// Save the PDF to the specified folder
@@ -505,14 +548,33 @@ class ExamPdfController1 extends Controller
 
 		// Download the ZIP file
 		if (File::exists($zipFilePath)) {
-			return response()->download($zipFilePath)->deleteFileAfterSend(true);
+			// Read the ZIP file content
+			$zipContent = File::get($zipFilePath);
+
+			// Set the appropriate HTTP headers
+			$headers = [
+				'Content-Type' => 'application/zip',
+				'Content-Disposition' => 'attachment; filename=' . rawurlencode($zipFileName),
+				'Content-Length' => strlen($zipContent),
+			];
+
+			// Return the response with headers and delete the file after sending
+			$response = response($zipContent)->withHeaders($headers);
+
+			// Delete the file after sending the response
+			File::delete($zipFilePath);
+
+			// Return the response
+			return $response;
+			//return response()->download($zipFilePath)->deleteFileAfterSend(true);
 		}
 	}
 
 	public function downbyreportcard(Request $request)
 	{
 
-		ini_set('max_execution_time', 300);
+		ini_set('max_execution_time', 600);
+    	ini_set('memory_limit', '1024M');
 		$data = [
 			'branch_id' => session()->get('branch_id'),
 			'exam_id' => $request->exam_id,
@@ -3237,7 +3299,25 @@ class ExamPdfController1 extends Controller
 			$zip->close();
 		}
 		if (File::exists($zipFilePath)) {
-			return response()->download($zipFilePath)->deleteFileAfterSend(true);
+			// Read the ZIP file content
+			$zipContent = File::get($zipFilePath);
+
+			// Set the appropriate HTTP headers
+			$headers = [
+				'Content-Type' => 'application/zip',
+				'Content-Disposition' => 'attachment; filename=' . rawurlencode($zipFileName),
+				'Content-Length' => strlen($zipContent),
+			];
+
+			// Return the response with headers and delete the file after sending
+			$response = response($zipContent)->withHeaders($headers);
+
+			// Delete the file after sending the response
+			File::delete($zipFilePath);
+
+			// Return the response
+			return $response;
+			//return response()->download($zipFilePath)->deleteFileAfterSend(true);
 		}
 		// Download the ZIP file
 
@@ -3246,7 +3326,8 @@ class ExamPdfController1 extends Controller
 	public function downbypersoanalreport(Request $request)
 	{
 
-		ini_set('max_execution_time', 300);
+		ini_set('max_execution_time', 600);
+    	ini_set('memory_limit', '1024M');
 		$data = [
 			'branch_id' => session()->get('branch_id'),
 			'exam_id' => $request->exam_id,
@@ -3612,7 +3693,8 @@ class ExamPdfController1 extends Controller
 	}
 	public function downprimaryform1($id)
 	{
-		ini_set('max_execution_time', 300);
+		ini_set('max_execution_time', 600);
+    	ini_set('memory_limit', '1024M');
 		$footer_text = session()->get('footer_text');
 		$sdata = [
 			'id' => $id,
@@ -3980,7 +4062,8 @@ class ExamPdfController1 extends Controller
 	}
 	public function downsecondaryform1($id)
 	{
-		ini_set('max_execution_time', 300);
+		ini_set('max_execution_time', 600);
+    	ini_set('memory_limit', '1024M');
 		$student_id = $id;
 		$sdata = [
 			'id' => $id,

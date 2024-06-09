@@ -449,6 +449,14 @@ $(function () {
         });
         return keys.indexOf(key) !== -1;
     }
+    const loadingScreen = $('#loadingScreen');
+
+    function showLoading() {
+        loadingScreen.css('display', 'flex');
+    }
+    function hideLoading() {
+        loadingScreen.css('display', 'none');
+    }
     $('.induvidualStudents tbody').on('click', '.individual_pdf', function () {
         var student_id = $(this).val();
         var byclass = $("#bysubjectfilter").valid();
@@ -481,87 +489,106 @@ $(function () {
             if (report_type == 'personal_test_result') {
                 $('#individual_pdf').attr('action', downbypersoanalreport);
             }
-            $('#individual_pdf').submit();
-            // Perform AJAX submission
-            // $.ajax({
-            //     url: $('#individual_pdf').attr('action'),
-            //     type: 'POST',
-            //     data: $('#individual_pdf').serialize(),
-            //     success: function(response) {
-            //         console.log("response");
-            //         console.log(response);
-            //         // Handle success response
-            //         // $('#modalMessage').text('Download successful!');
-            //         // $('#downloadModal').modal('show');
-            //     },
-            //     error: function(xhr, status, error) {
-            //         console.log("error");
-            //         console.log(error);
-            //         console.log(status);
-            //         // Handle error response
-            //         // $('#modalMessage').text('Error occurred during download.');
-            //         // $('#downloadModal').modal('show');
-            //     },
-            //     complete: function() {
-            //         console.log("completed");
-            //         // Enable button after request completes
-            //         // $('.individual_pdf').prop('disabled', false);
-            //     }
-            // });
-            // Show loader
-            // $("#loaderss").show();
+            // $('#individual_pdf').submit();
+            showLoading();
 
             // Perform AJAX submission
-            // $.ajax({
-            //     url: $('#individual_pdf').attr('action'),
-            //     type: 'POST',
-            //     data: $('#individual_pdf').serialize(),
-            //     xhrFields: {
-            //         responseType: 'blob'
-            //     },
-            //     success: function(response) {
-            //         // Create a link to download the file
-            //         var link = document.createElement('a');
-            //         link.href = window.URL.createObjectURL(response);
-            //         link.download = 'downloaded_file.pdf'; // Change the file name if needed
-            //         link.click();
-            //     },
-            //     error: function(xhr, status, error) {
-            //         alert("Error occurred during download.");
-            //     },
-            //     complete: function() {
-            //         // Hide loader after request completes
-            //         $("#loaderss").hide();
-            //     }
-            // });
-            // Show loader
-            // $("#loaderss").show();
-            // $("#overlay").fadeIn(300);
-            // // Perform AJAX submission
-            // $.ajax({
-            //     url: $('#individual_pdf').attr('action'),
-            //     type: 'POST',
-            //     data: $('#individual_pdf').serialize(),
-            //     xhrFields: {
-            //         responseType: 'blob'
-            //     },
-            //     success: function(response) {
-            //         // Create a link to download the file
-            //         var link = document.createElement('a');
-            //         link.href = window.URL.createObjectURL(response);
-            //         link.download = 'downloaded_file.pdf'; // Change the file name if needed
-            //         link.click();
-            //     },
-            //     error: function(xhr, status, error) {
-            //         alert("Error occurred during download.");
-            //     },
-            //     complete: function() {
-            //         // Hide loader after request completes
-            //         // $("#loaderss").hide();
-            //         $("#overlay").fadeOut(300);
-            //     }
-            // });
+            $.ajax({
+                url: $('#individual_pdf').attr('action'),
+                type: 'POST',
+                data: $('#individual_pdf').serialize(),
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function (response, status, xhr) {
+                    // Get the filename from the response headers
+                    var disposition = xhr.getResponseHeader('Content-Disposition');
+
+                    var fileName = '';
+                    if (disposition && disposition.indexOf('attachment') !== -1) {
+                        var matches = /filename\*?=['"]?(?:UTF-8'')?([^;'"\n]*)['"]?/.exec(disposition);
+                        if (matches != null && matches[1]) {
+                            fileName = decodeURIComponent(matches[1].replace(/\+/g, ' '));
+                        }
+                    }
+
+                    // Create a link to download the file
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(response);
+                    link.download = fileName;
+
+                    // Trigger the download
+                    link.click();
+                },
+                error: function (xhr, status, error) {
+                    hideLoading();
+                    console.log(error);
+                    toastr.error("Error occurred during download: " + error);
+                },
+                complete: function () {
+                    // Hide loader after request completes
+                    hideLoading();
+                }
+            });
         }
     });
+    function handleFormSubmit(formId) {
+
+        $(formId).on('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            showLoading(); // Show the loader
+
+            var form = $(this);
+            var actionUrl = form.attr('action');
+            var formData = form.serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: actionUrl,
+                data: formData,
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function (response, status, xhr) {
+                    // Get the filename from the response headers
+                    var disposition = xhr.getResponseHeader('Content-Disposition');
+
+                    var fileName = '';
+                    if (disposition && disposition.indexOf('attachment') !== -1) {
+                        var matches = /filename\*?=['"]?(?:UTF-8'')?([^;'"\n]*)['"]?/.exec(disposition);
+                        if (matches != null && matches[1]) {
+                            fileName = decodeURIComponent(matches[1].replace(/\+/g, ' '));
+                        }
+                    }
+
+                    // Create a link to download the file
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(response);
+                    link.download = fileName;
+
+                    // Trigger the download
+                    link.click();
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                    hideLoading();
+                    toastr.error("Error occurred during download: " + error);
+
+                },
+                complete: function () {
+                    // Hide loader after request completes
+                    hideLoading();
+                }
+            });
+        });
+    }
+
+    // Attach the AJAX form submission to each form
+    handleFormSubmit('#form1');
+    handleFormSubmit('#form2');
+    handleFormSubmit('#form3');
+    handleFormSubmit('#allPdfForm1');
+    handleFormSubmit('#allPdfForm2');
 
 });

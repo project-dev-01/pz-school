@@ -12,8 +12,32 @@
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 <link href="{{ asset('css/custom/pagehead_breadcrumb.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
+<style>
+    #loadingScreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+    }
+
+    .loading-text {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+    }
+</style>
 @endsection
 @section('content')
+
+<div id="loadingScreen" style="display: none;">
+    <div class="loading-text">Downloading Please Wait...</div>
+</div>
 <!-- Start Content-->
 <div class="container-fluid">
 
@@ -175,7 +199,7 @@
 
     </div>
     <!-- end row -->
-    
+
     <form method="post" id="individual_pdf" action="#">
         @csrf
         <input type="hidden" name="department_id" class="downDepartmentID">
@@ -208,7 +232,7 @@
                             @include('admin.exam_results.ec_student_table')
                             <div class="col-md-12">
                                 <div class="clearfix mt-4">
-                                    <form method="post" action="{{ route('admin.exam_results.downbyecreport') }}">
+                                    <form id="form1" method="post" action="{{ route('admin.exam_results.downbyecreport') }}">
                                         @csrf
 
                                         <input type="hidden" name="department_id" class="downDepartmentID">
@@ -220,11 +244,11 @@
                                         <input type="hidden" name="academic_year" class="downAcademicYear">
                                         <input type="hidden" name="report_type" class="downReport_type">
 
-                                        <div class="clearfix float-right" style="margin-bottom:5px;">
-                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light"  style="white-space: nowrap;">{{ __('messages.download_zip_file') }}</button>
+                                        <div class="clearfix float-right" style="margin-bottom:5px; margin-left: 10px;">
+                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light" style="white-space: nowrap;">{{ __('messages.download_zip_file') }}</button>
                                         </div>
                                     </form>
-                                    <form method="post" action="{{ route('admin.exam_results.downbyecreportfile') }}">
+                                    <form id="allPdfForm1" method="post" action="{{ route('admin.exam_results.downbyecreportfile') }}">
                                         @csrf
 
                                         <input type="hidden" name="department_id" class="downDepartmentID">
@@ -236,8 +260,8 @@
                                         <input type="hidden" name="academic_year" class="downAcademicYear">
                                         <input type="hidden" name="report_type" class="downReport_type">
 
-                                        <div class="clearfix float-right" style="margin-bottom:5px;">
-                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light"  style="white-space: nowrap;">{{ __('messages.download_all_pdf') }}</button>
+                                        <div class="clearfix float-right" style="margin-bottom:5px; margin-left: 10px;">
+                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light" style="white-space: nowrap;">{{ __('messages.download_all_pdf') }}</button>
                                         </div>
                                     </form>
                                 </div>
@@ -265,13 +289,13 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                        @include('admin.exam_results.student_table')
+                            @include('admin.exam_results.student_table')
 
                             <!-- <div id="btnAppend">
                             </div> -->
                             <div class="col-md-12">
                                 <div class="clearfix mt-4">
-                                    <form method="post" action="{{ route('admin.exam_results.downbyreportcard') }}">
+                                    <form id="form2" method="post" action="{{ route('admin.exam_results.downbyreportcard') }}">
                                         @csrf
 
                                         <input type="hidden" name="department_id" class="downDepartmentID">
@@ -283,11 +307,11 @@
                                         <input type="hidden" name="academic_year" class="downAcademicYear">
                                         <input type="hidden" name="report_type" class="downReport_type">
 
-                                        <div class="clearfix float-right" style="margin-bottom:5px;">
-                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light"  style="white-space: nowrap;">{{ __('messages.download_zip_file') }}</button>
+                                        <div class="clearfix float-right" style="margin-bottom:5px; margin-left: 10px;">
+                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light" style="white-space: nowrap;">{{ __('messages.download_zip_file') }}</button>
                                         </div>
                                     </form>
-                                    <form method="post" action="{{ route('admin.exam_results.downbyreportcardfile') }}">
+                                    <form id="allPdfForm2" method="post" action="{{ route('admin.exam_results.downbyreportcardfile') }}">
                                         @csrf
                                         <input type="hidden" name="department_id" class="downDepartmentID">
                                         <input type="hidden" name="exam_id" class="downExamID">
@@ -297,13 +321,13 @@
                                         <input type="hidden" name="section_id" class="downSectionID">
                                         <input type="hidden" name="academic_year" class="downAcademicYear">
                                         <input type="hidden" name="report_type" class="downReport_type">
-                                        <div class="clearfix float-right" style="margin-bottom:5px;">
+                                        <div class="clearfix float-right" style="margin-bottom:5px; margin-left: 10px;">
                                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light" style="white-space: nowrap;">{{ __('messages.download_all_pdf') }}</button>
                                             <!--<button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>-->
                                         </div>
                                     </form>
                                 </div>
-                                
+
                             </div>
 
                         </div>
@@ -336,7 +360,7 @@
 
                             <div class="col-md-12" id="secondary_personal">
                                 <div class="clearfix mt-4">
-                                    <form method="post" action="{{ route('admin.exam_results.downbypersoanalreport') }}">
+                                    <form id="form3" method="post" action="{{ route('admin.exam_results.downbypersoanalreport') }}">
                                         @csrf
                                         <input type="hidden" name="department_id" class="downDepartmentID">
                                         <input type="hidden" name="exam_id" class="downExamID">
@@ -346,7 +370,7 @@
                                         <input type="hidden" name="section_id" class="downSectionID">
                                         <input type="hidden" name="academic_year" class="downAcademicYear">
                                         <input type="hidden" name="report_type" class="downReport_type">
-                                        <div class="clearfix float-right" style="margin-bottom:5px;">
+                                        <div class="clearfix float-right" style="margin-bottom:5px; margin-left: 10px;">
                                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light" style="white-space: nowrap;">{{ __('messages.download_all_pdf') }}</button>
                                         </div>
                                     </form>

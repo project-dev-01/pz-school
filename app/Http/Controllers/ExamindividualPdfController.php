@@ -66,6 +66,38 @@ class ExamindividualPdfController extends Controller
 		if ($request->department_id == 2) {
 			$pdf_logo = config('constants.image_url') . '/common-asset/images/secondary_logo.png';
 		}
+		$papername1 = "EC-Class";
+		$pdata = [
+			'branch_id' => session()->get('branch_id'),
+			'exam_id' => $request->exam_id,
+			'department_id' => $request->department_id,
+			'class_id' => $request->class_id,
+			'section_id' => $request->section_id,
+			'semester_id' => $request->semester_id,
+			'session_id' => $request->session_id,
+			'academic_session_id' => $request->academic_year,
+			'student_id' => $stu['student_id'],
+			'paper_name' => $papername1
+
+		]; // dd($pdata);
+		$paper = Helper::PostMethod(config('constants.api.getec_marks'), $pdata);
+		$ec_classname = $paper['data']['freetext'] ?? '';
+		$papername2 = "Level";
+		$pdata = [
+			'branch_id' => session()->get('branch_id'),
+			'exam_id' => $request->exam_id,
+			'department_id' => $request->department_id,
+			'class_id' => $request->class_id,
+			'section_id' => $request->section_id,
+			'semester_id' => $request->semester_id,
+			'session_id' => $request->session_id,
+			'academic_session_id' => $request->academic_year,
+			'student_id' => $stu['student_id'],
+			'paper_name' => $papername2
+
+		]; // dd($pdata);
+		$paper = Helper::PostMethod(config('constants.api.getec_marks'), $pdata);
+		$levelname = $paper['data']['freetext']  ?? '';
 		//dd($getbranch['data']);
 		$acy = $acyear['data']['name'];
 		$term = Helper::PostMethod(config('constants.api.exam_details'), $termdata);
@@ -171,11 +203,11 @@ class ExamindividualPdfController extends Controller
 					</td>       
 					<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; text-align: left;">
 					<h5 style="margin: 0;">EC-Class</h5>
-					<h4 style="margin: 0;">Balsam</h4>
+					<h4 style="margin: 0;">' . $ec_classname . '</h4>
 					</td>       
 					<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; text-align: left;">
 					<h5 style="margin: 0;">Level</h5>
-					<h4 style="margin: 0;">Advanced</h4>
+					<h4 style="margin: 0;">' . $levelname . '</h4>
 					</td>
 					</tr> 
 					<tr>
@@ -183,10 +215,8 @@ class ExamindividualPdfController extends Controller
 					
 					<h3 style="margin: 0;">Student Name</h3>
 					</td>       
-					<td class="content-wrap aligncenter" style="margin: 0;padding-top:10px; padding-bottom:-10px;text-align: center;">
+					<td colspan="2" class="content-wrap aligncenter" style="margin: 0;padding-top:10px; padding-bottom:-10px;text-align: center;">
 					<h3 style="margin: 0;">' . strtoupper($stu['eng_name']) . '</h3>
-					</td>       
-					<td class="content-wrap aligncenter" style="margin: 0; padding-top:10px; padding-bottom:-10px;text-align: center;">
 					</td>
 					</tr> 
 					<tr>
@@ -414,11 +444,25 @@ class ExamindividualPdfController extends Controller
 				$teachercmd = $paper['data']['score'];
 			}
 		}
-		$teachernameapi = Helper::PostMethod(config('constants.api.getec_teacher'), $pdata);
-		$teachername = "-";
-		if (!empty($teachernameapi['data'])) {
-			$teachername = $teachernameapi['data']['last_name'] . ' ' . $teachernameapi['data']['first_name'];
-		}
+
+		$papername = "Teacher Name";
+		$pdata = [
+			'branch_id' => session()->get('branch_id'),
+			'exam_id' => $request->exam_id,
+			'department_id' => $request->department_id,
+			'class_id' => $request->class_id,
+			'section_id' => $request->section_id,
+			'semester_id' => $request->semester_id,
+			'session_id' => $request->session_id,
+			'academic_session_id' => $request->academic_year,
+			'student_id' => $stu['student_id'],
+			'paper_name' => $papername
+
+		];
+		// dd($pdata);
+
+		$paper = Helper::PostMethod(config('constants.api.getec_marks'), $pdata);
+		$teachername = $paper['data']['freetext'] ?? '';
 		$output .= '<tr>
 					<td class="content-wrap aligncenter" colspan="3" style="margin: 0; padding-left: 20px;padding-right: 20px;padding-top:-10px; text-align: center;">
 					
@@ -463,6 +507,7 @@ class ExamindividualPdfController extends Controller
 					<div style="page-break-after: always;"></div>';
 
 		$output .= '</body></html>';
+		
 		$pdf = \App::make('dompdf.wrapper');
 
 		// Set custom paper size
@@ -477,11 +522,20 @@ class ExamindividualPdfController extends Controller
 		// $customPaper = array(0, 0, 800.00, 1000.00);
 		$pdf->set_paper($customPaper);
 		$pdf->loadHTML($output);
+		$pdfContent = $pdf->output();
+		// Set default headers
+		$headers = [
+			'Content-Type' => 'application/pdf',
+			'Content-Length' => strlen($pdfContent)
+		];
 		// filename
 		$now = now();
 		$name = strtotime($now);
 		$fileName = __('messages.english_communication') . $stu['eng_name'] . $name . ".pdf";
-		return $pdf->download($fileName);
+		// Set the appropriate HTTP headers
+		$headers['Content-Disposition'] = 'attachment; filename="' . rawurlencode($fileName)  . '"';
+		return response($pdfContent)->withHeaders($headers);
+		//return $pdf->download($fileName);
 		// return $pdf->stream();
 	}
 
@@ -1184,12 +1238,19 @@ class ExamindividualPdfController extends Controller
 				$customPaper = array(0, 0, 792.00, 1224.00);
 				$pdf->set_paper($customPaper);
 				$pdf->loadHTML($output);
+				$pdfContent = $pdf->output();
+				$headers = [
+					'Content-Type' => 'application/pdf',
+					'Content-Length' => strlen($pdfContent)
+				];
 				// return $pdf->stream();
 				// filename
 				$now = now();
 				$name = strtotime($now);
 				$fileName = __('messages.report_card') . "-" . $number . "-" . $stu['name'] . "-" . $name . ".pdf";
-				return $pdf->download($fileName);
+				$headers['Content-Disposition'] = 'attachment; filename="' . rawurlencode($fileName)  . '"';
+				return response($pdfContent)->withHeaders($headers);
+				//return $pdf->download($fileName);
 				// return $pdf->stream();
 
 			}
@@ -1863,12 +1924,21 @@ class ExamindividualPdfController extends Controller
 				$customPaper = array(0, 0, 792.00, 1300.00);
 				$pdf->set_paper($customPaper);
 				$pdf->loadHTML($output);
+				$pdfContent = $pdf->output();
+				// Set default headers
+				$headers = [
+					'Content-Type' => 'application/pdf',
+					'Content-Length' => strlen($pdfContent)
+				];
 				// return $pdf->stream();
 				// filename
 				$now = now();
 				$name = strtotime($now);
 				$fileName = __('messages.report_card') . "-" . $number . "-" . $stu['name'] . "-" . $name . ".pdf";
-				return $pdf->download($fileName);
+				// Set the appropriate HTTP headers
+				$headers['Content-Disposition'] = 'attachment; filename="' . rawurlencode($fileName)  . '"';
+				return response($pdfContent)->withHeaders($headers);
+				//return $pdf->download($fileName);
 				// return $pdf->stream();
 			}
 			if ($stuclass == 5 || $stuclass == 6) {
@@ -2486,12 +2556,22 @@ class ExamindividualPdfController extends Controller
 				$customPaper = array(0, 0, 792.00, 1330.00);
 				$pdf->set_paper($customPaper);
 				$pdf->loadHTML($output);
+				// Generate the PDF content
+				$pdfContent = $pdf->output();
+				// Set default headers
+				$headers = [
+					'Content-Type' => 'application/pdf',
+					'Content-Length' => strlen($pdfContent)
+				];
 				// return $pdf->stream();
 				// filename
 				$now = now();
 				$name = strtotime($now);
 				$fileName = __('messages.report_card') . "-" . $number . "-" . $stu['name'] . "-" . $name . ".pdf";
-				return $pdf->download($fileName);
+				// Set the appropriate HTTP headers
+				$headers['Content-Disposition'] = 'attachment; filename="' . rawurlencode($fileName)  . '"';
+				return response($pdfContent)->withHeaders($headers);
+
 				// return $pdf->stream();
 			}
 		} elseif ($request->department_id == 2) // Secondary 
@@ -3141,12 +3221,20 @@ class ExamindividualPdfController extends Controller
 			$customPaper = array(0, 0, 792.00, 1300.00);
 			$pdf->set_paper($customPaper);
 			$pdf->loadHTML($output);
+			$pdfContent = $pdf->output();
+			$headers = [
+				'Content-Type' => 'application/pdf',
+				'Content-Length' => strlen($pdfContent)
+			];
 			// return $pdf->stream();
 			// filename
 			$now = now();
 			$name = strtotime($now);
 			$fileName = __('messages.report_card') . "-" . $number . "-" . $stu['name'] . "-" . $name . ".pdf";
-			return $pdf->download($fileName);
+			// Set the appropriate HTTP headers
+			$headers['Content-Disposition'] = 'attachment; filename="' . rawurlencode($fileName)  . '"';
+			return response($pdfContent)->withHeaders($headers);
+			//return $pdf->download($fileName);
 			// return $pdf->stream();
 		}
 	}
@@ -3479,11 +3567,20 @@ class ExamindividualPdfController extends Controller
 		$customPaper = array(0, 0, 792.00, 1224.00);
 		$pdf->set_paper($customPaper);
 		$pdf->loadHTML($output);
+		$pdfContent = $pdf->output();
+		// Set default headers
+		$headers = [
+			'Content-Type' => 'application/pdf',
+			'Content-Length' => strlen($pdfContent)
+		];
 		// filename
 		$now = now();
 		$name = strtotime($now);
 		$fileName = __('messages.personal_test_res') . "-" . $number . "-" . $stu['name'] . "-" . $name . ".pdf";
-		return $pdf->download($fileName);
+		// Set the appropriate HTTP headers
+		$headers['Content-Disposition'] = 'attachment; filename="' . rawurlencode($fileName)  . '"';
+		return response($pdfContent)->withHeaders($headers);
+		//return $pdf->download($fileName);
 		// return $pdf->stream();
 	}
 }

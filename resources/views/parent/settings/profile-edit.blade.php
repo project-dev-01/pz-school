@@ -943,7 +943,6 @@
                                         </td>
                                         <td>
                                             @if($addRemove > 1)
-                                            {{-- <button type="button" name="remove_emp_type" data-emptype="{{$addRemove}}" id="{{$addRemove}}" class="btn btn-danger btn_remove_emp_type">X</button> --}}
                                             <button type="button" name="remove_designation" data-emptype="{{$addRemove}}" id="{{$addRemove}}" class="btn btn-danger btn_remove_designation">X</button>
                                             @else
                                             <button type="button" name="add_sibling" id="add_sibling" class="btn btn-primary">{{ __('messages.add') }} +</button>
@@ -1005,20 +1004,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group text-right m-b-0">
-                        <button class="btn btn-primary-bl waves-effect waves-light" style="width: 100px; margin-right: 15px;">
-                            {{ __('messages.update') }}
-                        </button>
-                        <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+
+                </div>
+                <div class="form-group text-right m-b-0">
+                    <button class="btn btn-primary-bl waves-effect waves-light" style=" margin-right: 60px;">
+                        {{ __('messages.update') }}
+                    </button>
+                    <!-- <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                         Cancel
                     </button>-->
-                    </div>
                 </div>
 
-
+            </form>
         </div>
     </div> <!-- end col -->
-    </form>
 </div>
 <!-- end row -->
 </div>
