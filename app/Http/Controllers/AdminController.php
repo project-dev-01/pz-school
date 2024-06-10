@@ -9648,7 +9648,6 @@ class AdminController extends Controller
         // dd($data);
         // return $data;
         $response = Helper::PostMethod(config('constants.api.application_update'), $data);
-
         return $response;
     }
     // index FeesGroup
