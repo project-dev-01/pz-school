@@ -18,7 +18,7 @@ class ExamPdfController1 extends Controller
 	public function downbyecreport(Request $request)
 	{
 		ini_set('max_execution_time', 600);
-    	ini_set('memory_limit', '1024M');
+		ini_set('memory_limit', '1024M');
 		if ($request->department_id == 1) {
 			$pdf_logo = config('constants.image_url') . '/common-asset/images/primary_logo.png';
 		}
@@ -129,105 +129,106 @@ class ExamPdfController1 extends Controller
 				} 
 				body
 				{ 
-					font-family: "ipag", "Open Sans", !important;
+					font-family: "ipag", "Times New Roman", !important;
 				}
 				tr,
 				td {
-				font-family: "Open Sans";
-				font-style: normal;
-				font-size: 14px;
-				letter-spacing: 0.0133em;				
+				font-family: "Times New Roman";
 				word-wrap: break-word;
+				font-style: normal;
+				font-size: 16px;
+				letter-spacing: 0.0133em;
 				}
 				
 				h6 {
-				font-family: "Open Sans";
+				font-family: "Times New Roman";
 				font-style: normal;
 				font-size: 14px;
 				letter-spacing: 0.0133em;
 				}
 				
 				h1 {
-				font-family: "Open Sans";
+				font-family: "Times New Roman";
 				font-style: normal;
 				line-height: 60px;
 				letter-spacing: 0.0133em;
 				}
 				
 				h4 {
-				font-family: "Open Sans";
+				font-family: "Times New Roman";
 				font-style: normal;
 				font-size: 24px;
 				letter-spacing: 0.0133em;
 				}
 				
 				h5 {
-				font-family: "Open Sans";
+				font-family: "Times New Roman";
 				font-style: normal;
 				font-size: 15px;
 				letter-spacing: 0.0133em;
 				}
-				h3 { font-family:  "Open Sans";
-				 }
+				h3 { font-family: "Times New Roman";
+				}
 				</style>
 				</head>
 				
 				<body>';
 
 			$output .= '<div class="content" >
-					<table class="main" width="100%" style="border-collapse: collapse;">
-					<tr>
-					<td class="content-wrap aligncenter" colspan="3" style="margin: 0; padding: 10px; text-align: center;">
-					<img src="' . $pdf_logo . '" alt="logo" height="100px"
-					style="margin-left: 15px;">
-					
-					</td>
-					</tr> 
-					<tr>
-					<td class="content-wrap aligncenter" colspan="3" style="margin: 0; padding: 10px; text-align: center;">
-					
-					<h1 style="line-height: 0px;text-align: center;">Japanese School of Kuala Lumpur</h1>
-					
-					</td>
-					</tr> 
-					<tr>
-					<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; width:30%; text-align: center;">
-					
-					<h4 style="margin: 0;">' . $acy . ' </h4>
-					</td>       
-					<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; width:30%; text-align: left;">
-					<h4 style="margin: 0;">English Communication</h4>
-					</td>       
-					<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; width:30%; text-align: left;font-weight: bold;">
-					<h4>' . $term_name . ' Report</h4>
-					</td>
-					</tr> 
-					<tr>
-					<td class="content-wrap aligncenter" style="margin: 0; padding-left: 20px; text-align: left;">                   <h5 style="margin: 0;">Number</h5>
-					<h4 style="margin: 0;">' . $number . '</h4>
-					</td>       
-					<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; text-align: left;">
-					<h5 style="margin: 0;">EC-Class</h5>
-					<h4 style="margin: 0;">' . $ec_classname . '</h4>
-					</td>       
-					<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; text-align: left;">
-					<h5 style="margin: 0;">Level</h5>
-					<h4 style="margin: 0;">' . $levelname . '</h4>
-					</td>
-					</tr> 
-					<tr>
-					<td class="content-wrap aligncenter" style="margin: 0; padding-left: 20px;padding-top:10px; padding-bottom:-10px; text-align: left;">
-					
-					<h3 style="margin: 0;">Student Name</h3>
-					</td>       
-					<td colspan="2" class="content-wrap aligncenter" style="margin: 0;padding-top:10px; padding-bottom:-10px;text-align: center;">
-					<h3 style="margin: 0;">' . strtoupper($stu['eng_name']) . '</h3>
-					</td>
-					</tr> 
-					<tr>
-					<td class="content-wrap aligncenter" colspan="3" style="margin: 0; padding-left: 20px;padding-right: 20px;padding-top:-10px; text-align: center;">
-					<table style="border-collapse: collapse; width: 100%;">
-					<tbody>';
+			<table class="main" width="100%" style="border-collapse: collapse;">
+			<tr>
+			<td class="content-wrap aligncenter" colspan="3" style="margin: 0; padding: 10px; text-align: center;">
+			<img src="' . $pdf_logo . '" alt="logo" height="100px"
+			style="margin-left: 15px;">
+			
+			</td>
+			</tr> 
+			<tr>
+			<td class="content-wrap aligncenter" colspan="3" style="margin: 0; padding: 10px; text-align: center;">
+			
+			<h1 style="line-height: 0px;text-align: center;margin-top:5px;font-size:40px;">Japanese School of Kuala Lumpur</h1>
+			
+			</td>
+			</tr> 
+			<tr>
+			<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; width:30%; text-align: center;">
+			
+			<h4 style="margin: 0;margin-top:-30;">' . $acy . ' </h4>
+			</td>       
+			<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; width:30%; text-align: left;">
+			<h4 style="margin: 0;margin-top:-30;">English Communication</h4>
+			</td>       
+			<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; width:30%; text-align: left;">
+			<h4 style="margin-top:-20px;">' . $term_name . ' Report</h4>
+			</td>
+			</tr> 
+			<tr>
+			<td class="content-wrap aligncenter" style="margin: 0; padding-left: 20px; text-align: left;">                   
+			<h5 style="margin: 0;margin-top:-30px;">Number</h5>
+			<h4 style="margin: 0;">' . $number . '</h4>
+			</td>       
+			<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; text-align: left;">
+			<h5 style="margin: 0;margin-top:-30px;">EC-Class</h5>
+			<h4 style="margin: 0;">' . $ec_classname . '</h4>
+			</td>       
+			<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; text-align: left;">
+			<h5 style="margin: 0;margin-top:-30px;">Level</h5>
+			<h4 style="margin: 0;">' . $levelname . '</h4>
+			</td>
+			</tr> 
+			<tr>
+			<td class="content-wrap aligncenter" style="margin: 0; padding-left: 20px;padding-top:20px; padding-bottom:-10px; text-align: left;">
+			
+			<h3 style="margin: 0;">Student Name</h3>
+			</td>       
+			<td colspan="2" class="content-wrap aligncenter" style="margin: 0;padding-left: 10px;padding-top:20px; padding-bottom:-10px;text-align: left;">
+			<h3 style="margin: 0;">' . strtoupper($stu['eng_name']) . '</h3>
+			</td>
+			</tr> 
+			<tr>
+			<td class="content-wrap aligncenter" colspan="3" style="margin: 0; padding-left: 20px;padding-right: 20px;padding-top:-10px; text-align: center;">
+			<table style="border-collapse: collapse; width: 100%;">
+			<tbody>';
 			if ($request->department_id == 1) {
 				// Subject Name => "English Communication"
 
@@ -263,7 +264,7 @@ class ExamPdfController1 extends Controller
 					$output .= '
 							<tr>
 							<td colspan="2"
-							style="text-align:center; border: 2px solid black;background-color:#40403a57;font-size:18px;">
+							style="text-align:center; border: 2px solid black;background-color:#40403a57;font-size:20px;">
 							' . $heads . '</td>
 							</tr>';
 
@@ -303,9 +304,9 @@ class ExamPdfController1 extends Controller
 						}
 
 						$output .= '<tr>
-								<td style="border: 2px solid black; text-align: left;font-weight: normal;height:15px;">' . $papername . '
+								<td style="border: 2px solid black; text-align: left;font-weight: normal;height:25px;font-size:16px;">' . $papername . '
 								</td>
-								<td style="border: 2px solid black; text-align: center;font-weight: normal;height:15px;">' . $mark . '</td>
+								<td style="border: 2px solid black; text-align: center;font-weight: normal;height:25px;font-size:16px;">' . $mark . '</td>
 								</tr>';
 					}
 				}
@@ -349,7 +350,7 @@ class ExamPdfController1 extends Controller
 					$output .= '
 							<tr>
 							<td colspan="2"
-							style="text-align:center; border: 2px solid black;background-color:#40403a57;font-size:18px;">
+							style="text-align:center; border: 2px solid black;background-color:#40403a57;font-size:20px;">
 							' . $heads . '</td>
 							</tr>';
 
@@ -389,9 +390,9 @@ class ExamPdfController1 extends Controller
 						}
 
 						$output .= '<tr>
-								<td style="border: 2px solid black; text-align: left;font-weight: normal;height:15px;">' . $papername . '
+								<td style="border: 2px solid black; text-align: left;font-weight: normal;height:25px;font-size:16px;">' . $papername . '
 								</td>
-								<td style="border: 2px solid black; text-align: center;font-weight: normal;height:15px;">' . $mark . '</td>
+								<td style="border: 2px solid black; text-align: center;font-weight: normal;height:25px;font-size:16px;">' . $mark . '</td>
 								</tr>';
 					}
 				}
@@ -411,7 +412,7 @@ class ExamPdfController1 extends Controller
 					<td class="content-wrap aligncenter"  colspan="2" style="margin: 0; padding-right: 20px; text-align: center;">
 					
 					<div style="text-align: right;">
-					<h6 style="margin: 0;font-weight: normal;">Results: Improving, Satisfactory, Excellent</h6>
+					<h6 style="margin: 0;font-weight: normal;font-size:16px;">Results: Improving, Satisfactory, Excellent</h6>
 					</div>
 					
 					</td>
@@ -467,7 +468,7 @@ class ExamPdfController1 extends Controller
 					<td class="content-wrap aligncenter" colspan="3" style="margin: 0; padding-left: 20px;padding-right: 20px;padding-top:-10px; text-align: center;">
 					
 					<!-- Teacher`s Comments -->
-					<table style="margin-top: 30px; border-collapse: collapse; width: 100%;">
+					<table style="margin-top: 40px; border-collapse: collapse; width: 100%;">
 					<tbody>
 					<tr>
 					<td colspan="2"
@@ -476,36 +477,38 @@ class ExamPdfController1 extends Controller
 					</tr>
 					<tr>
 					<td colspan="2"
-					style="text-align: left; border: 2px solid black; height: 100px; color: black; padding: 10px;">
+					style="text-align: left; border: 2px solid black; height: 100px; color: black; padding: 10px;
+					word-wrap: break-word;">
 					';
 			$comment = explode("\n", $teachercmd);
 			foreach ($comment as $cmt) {
 				$output .= $cmt . '<br>';
 			}
 			$output .= '</td>
-					</tr>
-					</tbody>
-					</table>
-					
-					
-					</td>
-					</tr>
-					<tr>
-					<td class="content-wrap aligncenter"  style="margin: 0; padding: 10px; text-align: center;">
-					</td>
-					<td class="content-wrap aligncenter"  style="margin: 0; padding: 10px; text-align: center;">
-					<h5 style="margin: 0;">English Teacher`s Name</h5>
-					</td>
-					<td class="content-wrap aligncenter"  style="margin: 0; padding: 10px; text-align: center;">
-					<h5 style="margin: 0;font-weight: normal;">' . $teachername . '</h5>
-					
-					</td>
-					</tr>
-					</table>
-					</div>
-					<div style="page-break-after: always;"></div>';
+								</tr>
+								</tbody>
+								</table>
+								
+								
+								</td>
+								</tr>
+								<tr>
+								<td class="content-wrap aligncenter"  style="margin: 0; padding: 10px; text-align: center;">
+								</td>
+								<td class="content-wrap aligncenter"  style="margin: 0; padding: 10px; text-align: center;font-size:16px;">
+								<h5 style="margin: 0;">English Teacher`s Name</h5>
+								</td>
+								<td class="content-wrap aligncenter"  style="margin: 0; padding: 10px; text-align: center;">
+								<h5 style="margin: 0;font-weight: normal;font-size:16px;">' . $teachername . '</h5>
+								
+								</td>
+								</tr>
+								</table>
+								</div>
+								<div style="page-break-after: always;"></div>';
 
 			$output .= '</body></html>';
+			
 			$pdf = \App::make('dompdf.wrapper');
 
 			// Set custom paper size
@@ -574,7 +577,7 @@ class ExamPdfController1 extends Controller
 	{
 
 		ini_set('max_execution_time', 600);
-    	ini_set('memory_limit', '1024M');
+		ini_set('memory_limit', '1024M');
 		$data = [
 			'branch_id' => session()->get('branch_id'),
 			'exam_id' => $request->exam_id,
@@ -702,6 +705,7 @@ class ExamPdfController1 extends Controller
 		}
 
 		$pdfFiles = [];
+		$output = '';
 		if ($request->department_id == 1) // Primary 
 		{
 			if ($stuclass == 1 || $stuclass == 2) {
@@ -714,7 +718,7 @@ class ExamPdfController1 extends Controller
 				foreach ($getstudents['data'] as $stu) {
 					$sno++;
 					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
-					$output = '<!DOCTYPE html>
+					$output .= '<!DOCTYPE html>
 						<html lang="en">
 						
 						<head>
@@ -726,14 +730,14 @@ class ExamPdfController1 extends Controller
 						<meta content="Paxsuzen" name="author" />
 						<style>
 						@font-face {
-						font-family: Open Sans ipag;
+						font-family: Times New Roman ipag;
 						font-style: normal;
 						font-weight: 300;
 						src: url("' . $fonturl . '");
 						}
 						
 						body {
-						font-family: "ipag", "Open Sans", !important;
+						font-family: "ipag", "Times New Roman", !important;
 						}
 						
 						table {
@@ -750,7 +754,7 @@ class ExamPdfController1 extends Controller
 						line-height: 20px;
 						letter-spacing: 0.0133em;
 						word-wrap: break-word;
-						font-size: 16px;
+						font-size: 18px;
 						}
 						
 						.column1 {
@@ -790,37 +794,37 @@ class ExamPdfController1 extends Controller
 						<div class="row">
 						<div class="column1" style="width:10%;">
 						<div style="margin-top:20px;">
-						<p style="margin: 0;font-size:20px;">' . $stuclass .  '年生</p>
+						<p style="margin-left:20px;font-size:20px;">' . $stuclass .  '年生</p>
 						</div>
 						
 						</div>
 						<div class="column1" style="width:10%;">
 						
 						<div style="margin-top:20px;">
-						<p style="margin: 0;font-size:20px;"> 1学期</p>
+						<p style="margin-left:20px;font-size:20px;"> 1学期</p>
 						</div>
 						
 						</div>
 						<div class="column1" style="width:5%;">
 						<div style="margin-top:20px;">
-						<p style="margin: 0;font-size:20px;">通知表</p>
+						<p style="margin-left:20px;font-size:20px;">通知表</p>
 						</div>
 						</div>
-						<div class="column1" style="width:18%;">
+						<div class="column1" style="margin-left:37px;width:15%;">
 						<table>
 						<thead>
 						</thead>
 						<tbody>
 						<tr>
-						<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;"> ' . $section['data']['name'] . '</td>
-													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;"> 組</td>
-													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;"> ' . $attendance_no . '</td>
-													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;"> 番</td>
+						<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;width:7%;"> ' . $section['data']['name'] . '</td>
+													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;width:7%;"> 組</td>
+													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;width:7%;"> ' . $attendance_no . '</td>
+													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;width:7%;"> 番</td>
 						</tr>
 						</tbody>
 						</table>
 						</div>
-						<div class="column1" style="width:2%;">
+						<div class="column1" style="width:1%;">
 						</div>
 						<div class="column1" style="width:44%;">
 						<table>
@@ -836,7 +840,7 @@ class ExamPdfController1 extends Controller
 						</div>
 						</div>
 						
-						<div class="row">
+						<div class="row" style="margin-top:-25px;line-height:50%;">
 						<div class="column2" style="width:50%;">
 						<table style="border-collapse: collapse; margin-bottom: 15px; border: 2px solid black;">
 						<thead class="colspanHead">
@@ -916,17 +920,17 @@ class ExamPdfController1 extends Controller
 						</table>
 						
 						<!-- Second table and additional content... -->
-						<table class="table table-bordered table-responsive" style="border: 2px solid black;margin-top:45px;">
+						<table class="table table-bordered table-responsive" style="border: 2px solid black;margin-top:40px;">
 						<thead class="colspanHead">
 						<tr>
-						<th style="border: 1px solid black; font-weight:italic; text-align: center; height: 52px;">出欠の記録</th>
-						<th style="border: 1px solid black; font-weight:italic; text-align: center; height: 52px;">授業<br>日数</th>
-						<th style="border: 1px solid black; font-weight:italic; text-align: center; height: 52px;font-size:10px;">出席停止<br>忌引き等</th>
-						<th style="border: 1px solid black; font-weight:italic; text-align: center; height: 52px;font-size:10px;">出席しなければ<br>ならない日<br>数</th>
-						<th style="border: 1px solid black; font-weight:italic; text-align: center; height: 52px;">欠席<br>日数</th>
-						<th style="border: 1px solid black; font-weight:italic; text-align: center; height: 52px;">出席<br>日数</th>
-						<th style="border: 1px solid black; font-weight:italic; text-align: center; height: 52px;">遅刻</th>
-						<th style="border: 1px solid black; font-weight:italic; text-align: center; height: 52px;">早退</th>
+						<th style="border: 1px solid black; font-weight:italic; text-align: center; height: 55px;">出欠の<br>記録</th>
+						<th style="border: 1px solid black; font-weight:italic; text-align: center; height: 55px;">授業<br>日数</th>
+						<th style="border: 1px solid black; font-weight:italic; text-align: center; height: 55px;font-size:10px;">出席停止<br>忌引き等</th>
+						<th style="border: 1px solid black; font-weight:italic; text-align: center; height: 55px;font-size:10px;">出席しなければ<br>ならない日数</th>
+						<th style="border: 1px solid black; font-weight:italic; text-align: center; height: 55px;">欠席<br>日数</th>
+						<th style="border: 1px solid black; font-weight:italic; text-align: center; height: 55px;">出席<br>日数</th>
+						<th style="border: 1px solid black; font-weight:italic; text-align: center; height: 55px;">遅刻</th>
+						<th style="border: 1px solid black; font-weight:italic; text-align: center; height: 55px;">早退</th>
 						</tr>
 						</thead>
 						<tbody style="border: 1px solid black;">';
@@ -961,17 +965,19 @@ class ExamPdfController1 extends Controller
 						$at_tot5 += $att['totpres'];
 						$at_tot6 += $att['totlate'];
 						$at_tot7 += $att['totexc'];
+
 						$output .= '<tr>
-							<td style="height: 30px;">' . $attarray[intval($att['month'])] . '</td>
-							<td style="height: 30px;">' . $att['no_schooldays'] . '</td>
-							<td style="height: 30px;">' . $att['suspension'] . '</td>
-							<td style="height: 30px;">' . $att['totalcoming'] . '</td>
-							<td style="height: 30px;">' . $att['totabs'] . '</td>
-							<td style="height: 30px;">' . $att['totpres'] . '</td>
-							<td style="height: 30px;">' . $att['totlate'] . '</td>
-							<td style="height: 30px;">' . $att['totexc'] . '</td>
+							<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
+							<td style="height: 32px;">' . $att['no_schooldays'] . '</td>
+							<td style="height: 32px;">' . $att['suspension'] . '</td>
+							<td style="height: 32px;">' . $att['totalcoming'] . '</td>
+							<td style="height: 32px;">' . $att['totabs'] . '</td>
+							<td style="height: 32px;">' . $att['totpres'] . '</td>
+							<td style="height: 32px;">' . $att['totlate'] . '</td>
+							<td style="height: 32px;">' . $att['totexc'] . '</td>
 						</tr>';
 					}
+
 					$output .= '<tr style="border-top: 2px solid black;">
 						<td style="height: 34px;"> 合計</td>
 						<td style="height: 34px;">' . $at_tot1 . '</td>
@@ -1043,7 +1049,7 @@ class ExamPdfController1 extends Controller
 						$fmark = ($mark == "Excellent") ? '○' : '';
 
 						$output .= '<tr style="height:60px;">
-										<td colspan="4" style="text-align:left;vertical-align: top;width:100px;">' . $papers['papers'] . '</td>
+										<td colspan="4" style="text-align:left;vertical-align: top;width:100px;height:30px;">' . $papers['papers'] . '</td>
 										<td colspan="1">' . $fmark . '</td>
 									</tr>';
 					}
@@ -1100,6 +1106,8 @@ class ExamPdfController1 extends Controller
 							}
 						}
 					}
+
+
 					$output .= '<table class="table table-bordered" style="border: 2px solid black;margin-top:30px;">
 						<thead class="colspanHead">
 						<tr>
@@ -1164,6 +1172,7 @@ class ExamPdfController1 extends Controller
 							}
 						}
 					}
+
 					$output .= '<table class="table table-bordered" style="border: 2px solid black;margin-top:30px;">
 						<thead class="colspanHead">
 						<tr>
@@ -1172,7 +1181,7 @@ class ExamPdfController1 extends Controller
 						</thead>
 						<tbody>
 						<tr style="border-top: 2px solid black;">
-						<td colspan="5" style="height:170px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+						<td colspan="5" style="height:180px;text-align:left;vertical-align: top;word-wrap: break-word;">';
 					$comment = explode("\n", $mark2);
 					foreach ($comment as $cmt) {
 						$output .= $cmt . '<br>';
@@ -1232,7 +1241,7 @@ class ExamPdfController1 extends Controller
 						</thead>
 						<tbody>
 						<tr style="border-top: 2px solid black;">
-						<td colspan="5" style="height:170px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+						<td colspan="5" style="height:200px;text-align:left;vertical-align: top;word-wrap: break-word;">';
 					$comment = explode("\n", $mark3);
 					foreach ($comment as $cmt) {
 						$output .= $cmt . '<br>';
@@ -1244,11 +1253,11 @@ class ExamPdfController1 extends Controller
 						
 						<div style="display: flex; flex-wrap: wrap;">
 						<div style="width: 100%; box-sizing: border-box;">
-						<p style="text-align: right; margin-top:0px;marign-bottom:20px;font-size:14px;">※1，2学期の内容は、三者懇談でお伝えさせていただきます。</p>
+						<p style="text-align: right;margin-top:px; marign-bottom:50px;font-size:14px;">※1，2学期の内容は、三者懇談でお伝えさせていただきます。</p>
 						</div>
 						</div>
 						
-						<div class="row" style="margin-top:22px;">
+						<div class="row" style="margin-top:72px;">
 						<div style="width: 50%;float: left;">
 						<table style="border-collapse: collapse; margin-top: 22px;  border: 2px solid black;">
 						<thead style="text-align: center;">
@@ -1256,8 +1265,8 @@ class ExamPdfController1 extends Controller
 						</thead>
 						<tbody>
 						<tr>
-						<td style="text-align: left; height: 45px; border: 1px solid black;">
-						校│<br>長│' . $getteacherdata['data']['principal'] . '
+						<td style="text-align: left; height: 45px; border: 1px solid black;font-size:15px;">
+						校│長│' . $getteacherdata['data']['principal'] . '
 						</td>
 						</tr>
 						</tbody>
@@ -1271,8 +1280,8 @@ class ExamPdfController1 extends Controller
 						</thead>
 						<tbody>
 						<tr>
-						<td style="text-align: left; height: 45px; border: 1px solid black;">
-						担│<br>任│ ' . $getteacherdata['data']['teacher'] . '
+						<td style="text-align: left; height: 45px; border: 1px solid black;font-size:15px;">
+						担│任│ ' . $getteacherdata['data']['teacher'] . '
 						</td>
 						</tr>
 						</tbody>
@@ -1313,7 +1322,7 @@ class ExamPdfController1 extends Controller
 				foreach ($getstudents['data'] as $stu) {
 					$sno++;
 					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
-					$output = '<!DOCTYPE html>
+					$output .= '<!DOCTYPE html>
 						<html lang="en">
 						
 						<head>
@@ -1326,14 +1335,14 @@ class ExamPdfController1 extends Controller
 							<style>
 								';
 					$output .= '@font-face {
-						 font-family: Open Sans ipag;
+						 font-family: Times New Roman ipag;
 								font-style: normal;
 								font-weight: 300;
 								src: url("' . $fonturl . '");
 								}
 						
 								body {
-									font-family: "ipag", "Open Sans", !important;
+									font-family: "ipag", "Times New Roman", !important;
 								}
 						
 								table {
@@ -1350,7 +1359,7 @@ class ExamPdfController1 extends Controller
 									line-height: 20px;
 									letter-spacing: 0.0133em;
 									word-wrap: break-word;
-									font-size: 16px;
+									font-size: 18px;
 								}
 						
 								.column1 {
@@ -1383,39 +1392,39 @@ class ExamPdfController1 extends Controller
 							<div class="content">
 								<div class="row">
 									<div class="column">
-										<p style="font-size: 20px;">クアラルンプール日本人学校　小学部</p>
+										<p style="margin: 0;font-size: 20px;">クアラルンプール日本人学校　小学部</p>
 									</div>
 								</div>
 						
 								<div class="row">
 									<div class="column1" style="width:10%;">
 										<div style="margin-top:20px;">
-											<p style="margin: 0;font-size:20px;">' . $stuclass .  '年生</p>
+											<p style="margin-left:20px;font-size:20px;">' . $stuclass .  '年生</p>
 										</div>
 						
 									</div>
 									<div class="column1" style="width:10%;">
 						
 										<div style="margin-top:20px;">
-											<p style="margin: 0;font-size:20px;"> 1学期</p>
+											<p style="margin-left:20px;font-size:20px;"> 1学期</p>
 										</div>
 						
 									</div>
 									<div class="column1" style="width:5%;">
 										<div style="margin-top:20px;">
-											<p style="margin: 0;font-size:20px;">通知表</p>
+											<p style="margin-left:20px;font-size:20px;">通知表</p>
 										</div>
 									</div>
-									<div class="column1" style="width:19%;">
+									<div class="column1" style="margin-left:37px;width:15%;">
 										<table>
 											<thead>
 											</thead>
 											<tbody>
 												<tr>
-													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;"> ' . $section['data']['name'] . '</td>
-													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;"> 組</td>
-													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;"> ' . $attendance_no . '</td>
-													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;"> 番</td>
+													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;width:7%;"> ' . $section['data']['name'] . '</td>
+													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;width:7%;"> 組</td>
+													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;width:7%;"> ' . $attendance_no . '</td>
+													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;width:7%;"> 番</td>
 													</tr>
 											</tbody>
 										</table>
@@ -1436,7 +1445,7 @@ class ExamPdfController1 extends Controller
 									</div>
 								</div>
 						
-								<div class="row">
+								<div class="row" style="margin-top:-25px;line-height:70%;">
 									<div class="column2" style="width:50%;">
 										<table style="border-collapse: collapse; margin-bottom: 15px; border: 2px solid black;">
 											<thead class="colspanHead">
@@ -1561,7 +1570,7 @@ class ExamPdfController1 extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:140px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+													<td colspan="5" style="height:160px;text-align:left;vertical-align: top;word-wrap: break-word;">';
 					$comment = explode("\n", $flmark);
 					foreach ($comment as $cmt) {
 						$output .= $cmt . '<br>';
@@ -1575,14 +1584,14 @@ class ExamPdfController1 extends Controller
 										<table class="table table-bordered table-responsive" style="border: 2px solid black;margin-top:45px;">
 											<thead class="colspanHead">
 												<tr>
-													<th style="border: 1px solid black; font-weight:italic; text-align: center;">出欠の記録</th>
-													<th style="border: 1px solid black; font-weight:italic; text-align: center;">授業<br>日数</th>
-													<th style="border: 1px solid black; font-weight:italic; text-align: center;font-size:10px;">出席停止<br>忌引き等</th>
-													<th style="border: 1px solid black; font-weight:italic; text-align: center;font-size:10px;">出席しなければ<br>ならない日<br>数</th>
-													<th style="border: 1px solid black; font-weight:italic; text-align: center;">欠席<br>日数</th>
-													<th style="border: 1px solid black; font-weight:italic; text-align: center;">出席<br>日数</th>
-													<th style="border: 1px solid black; font-weight:italic; text-align: center;">遅刻</th>
-													<th style="border: 1px solid black; font-weight:italic; text-align: center;">早退</th>
+													<th style="border: 1px solid black; font-weight:italic; text-align: center;height: 40px;">出欠の記録</th>
+													<th style="border: 1px solid black; font-weight:italic; text-align: center;height: 40px;">授業<br>日数</th>
+													<th style="border: 1px solid black; font-weight:italic; text-align: center;font-size:10px;height: 40px;">出席停止<br>忌引き等</th>
+													<th style="border: 1px solid black; font-weight:italic; text-align: center;font-size:10px;height: 40px;">出席しなければ<br>ならない日<br>数</th>
+													<th style="border: 1px solid black; font-weight:italic; text-align: center;height: 40px;">欠席<br>日数</th>
+													<th style="border: 1px solid black; font-weight:italic; text-align: center;height: 40px;">出席<br>日数</th>
+													<th style="border: 1px solid black; font-weight:italic; text-align: center;height: 40px;">遅刻</th>
+													<th style="border: 1px solid black; font-weight:italic; text-align: center;height: 40px;">早退</th>
 												</tr>
 											</thead>
 											<tbody style="border: 1px solid black;">';
@@ -1617,26 +1626,27 @@ class ExamPdfController1 extends Controller
 						$at_tot5 += $att['totpres'];
 						$at_tot6 += $att['totlate'];
 						$at_tot7 += $att['totexc'];
+
 						$output .= '<tr>
-												<td style="height: 22px;">' . $attarray[intval($att['month'])] . '</td>
-												<td style="height: 22px;">' . $att['no_schooldays'] . '</td>
-												<td style="height: 22px;">' . $att['suspension'] . '</td>
-												<td style="height: 22px;">' . $att['totalcoming'] . '</td>
-												<td style="height: 22px;">' . $att['totabs'] . '</td>
-												<td style="height: 22px;">' . $att['totpres'] . '</td>
-												<td style="height: 22px;">' . $att['totlate'] . '</td>
-												<td style="height: 22px;">' . $att['totexc'] . '</td>
+												<td style="height: 30px;">' . $attarray[intval($att['month'])] . '</td>
+												<td style="height: 30px;">' . $att['no_schooldays'] . '</td>
+												<td style="height: 30px;">' . $att['suspension'] . '</td>
+												<td style="height: 30px;">' . $att['totalcoming'] . '</td>
+												<td style="height: 30px;">' . $att['totabs'] . '</td>
+												<td style="height: 30px;">' . $att['totpres'] . '</td>
+												<td style="height: 30px;">' . $att['totlate'] . '</td>
+												<td style="height: 30px;">' . $att['totexc'] . '</td>
 											</tr>';
 					}
 					$output .= '<tr style="border-top: 2px solid black;">
-											<td style="height: 25px;"> 合計</td>
-											<td style="height: 25px;">' . $at_tot1 . '</td>
-											<td style="height: 25px;">' . $at_tot2 . '</td>
-											<td style="height: 25px;">' . $at_tot3 . '</td>
-											<td style="height: 25px;">' . $at_tot4 . '</td>
-											<td style="height: 25px;">' . $at_tot5 . '</td>
-											<td style="height: 25px;">' . $at_tot6 . '</td>
-											<td style="height: 25px;">' . $at_tot7 . '</td>
+											<td style="height: 35px;"> 合計</td>
+											<td style="height: 35px;">' . $at_tot1 . '</td>
+											<td style="height: 35px;">' . $at_tot2 . '</td>
+											<td style="height: 35px;">' . $at_tot3 . '</td>
+											<td style="height: 35px;">' . $at_tot4 . '</td>
+											<td style="height: 35px;">' . $at_tot5 . '</td>
+											<td style="height: 35px;">' . $at_tot6 . '</td>
+											<td style="height: 35px;">' . $at_tot7 . '</td>
 										</tr>';
 					$output .= '</tbody>
 										</table>
@@ -1747,7 +1757,7 @@ class ExamPdfController1 extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:146px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+													<td colspan="5" style="height:170px;text-align:left;vertical-align: top;word-wrap: break-word;">';
 					$comment = explode("\n", $mark1);
 					foreach ($comment as $cmt) {
 						$output .= $cmt . '<br>';
@@ -1805,7 +1815,7 @@ class ExamPdfController1 extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 1px solid black;">
-													<td colspan="5" style="height:146px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+													<td colspan="5" style="height:170px;text-align:left;vertical-align: top;word-wrap: break-word;">';
 					$comment = explode("\n", $mark2);
 					foreach ($comment as $cmt) {
 						$output .= $cmt . '<br>';
@@ -1861,7 +1871,7 @@ class ExamPdfController1 extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:146px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+													<td colspan="5" style="height:170px;text-align:left;vertical-align: top;word-wrap: break-word;">';
 					$comment = explode("\n", $mark4);
 					foreach ($comment as $cmt) {
 						$output .= $cmt . '<br>';
@@ -1917,7 +1927,7 @@ class ExamPdfController1 extends Controller
 											</thead>
 											<tbody>
 												<tr style="border-top: 2px solid black;">
-													<td colspan="5" style="height:146px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+													<td colspan="5" style="height:170px;text-align:left;vertical-align: top;word-wrap: break-word;">';
 					$comment = explode("\n", $mark5);
 					foreach ($comment as $cmt) {
 						$output .= $cmt . '<br>';
@@ -1929,7 +1939,7 @@ class ExamPdfController1 extends Controller
 						
 										<div style="display: flex; flex-wrap: wrap;">
 											<div style="width: 100%; box-sizing: border-box;">
-												<p style="text-align: right; margin-top:0px;marign-bottom:25px;font-size:14px;">※1，2学期の内容は、三者懇談でお伝えさせていただきます。</p>
+												<p style="text-align: right; margin-top:4px;marign-bottom:25px;font-size:14px;">※1，2学期の内容は、三者懇談でお伝えさせていただきます。</p>
 											</div>
 										</div>
 						
@@ -1941,8 +1951,8 @@ class ExamPdfController1 extends Controller
 													</thead>
 													<tbody>
 														<tr>
-															<td style="text-align: left; height: 45px; border: 1px solid black;">
-																校│<br>長│' . $getteacherdata['data']['principal'] . '
+															<td style="text-align: left; height: 45px; border: 1px solid black;font-size:15px;">
+																校│長│' . $getteacherdata['data']['principal'] . '
 															</td>
 														</tr>
 													</tbody>
@@ -1956,8 +1966,8 @@ class ExamPdfController1 extends Controller
 													</thead>
 													<tbody>
 														<tr>
-															<td style="text-align: left; height: 45px; border: 1px solid black;">
-																担│<br>任│' . $getteacherdata['data']['teacher'] . '
+															<td style="text-align: left; height: 45px; border: 1px solid black;font-size:15px;">
+																担│任│' . $getteacherdata['data']['teacher'] . '
 															</td>
 														</tr>
 													</tbody>
@@ -1997,7 +2007,7 @@ class ExamPdfController1 extends Controller
 				foreach ($getstudents['data'] as $stu) {
 					$sno++;
 					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
-					$output = '<!DOCTYPE html>
+					$output .= '<!DOCTYPE html>
 						<html lang="en">
 						
 						<head>
@@ -2010,14 +2020,14 @@ class ExamPdfController1 extends Controller
 							<style>
 								';
 					$output .= '@font-face {
-						 font-family: Open Sans ipag;
+						 font-family: Times New Roman  ipag;
 								font-style: normal;
 								font-weight: 300;
 								src: url("' . $fonturl . '");
 								}
 						
 								body {
-									font-family: "ipag", "Open Sans", !important;
+									font-family: "ipag", "Times New Roman ", !important;
 								}
 						
 								table {
@@ -2035,6 +2045,7 @@ class ExamPdfController1 extends Controller
 									line-height: 20px;
 									letter-spacing: 0.0133em;
 									word-wrap: break-word;
+									font-size: 18px;
 								}
 						
 								.column1 {
@@ -2074,32 +2085,32 @@ class ExamPdfController1 extends Controller
 								<div class="row">
 									<div class="column1" style="width:10%;">
 										<div style="margin-top:20px;">
-											<p style="margin: 0;font-size:20px;">' . $stuclass .  '年生</p>
+											<p style="margin-left:20px;font-size:20px;">' . $stuclass .  '年生</p>
 										</div>
 						
 									</div>
 									<div class="column1" style="width:10%;">
 						
 										<div style="margin-top:20px;">
-											<p style="margin: 0;font-size:20px;"> 1学期</p>
+											<p style="margin-left:20px;font-size:20px;"> 1学期</p>
 										</div>
 						
 									</div>
 									<div class="column1" style="width:5%;">
 										<div style="margin-top:20px;">
-											<p style="margin: 0;font-size:20px;">通知表</p>
+											<p style="margin-left:20px;font-size:20px;">通知表</p>
 										</div>
 									</div>
-									<div class="column1" style="width:19%;">
+									<div class="column1" style="margin-left:37px;width:15%;">
 										<table>
 											<thead>
 											</thead>
 											<tbody>
 												<tr>
-													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;"> ' . $section['data']['name'] . '</td>
-													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;"> 組</td>
-													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;"> ' . $attendance_no . '</td>
-													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;"> 番</td>
+													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;width:7%;"> ' . $section['data']['name'] . '</td>
+													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;width:7%; 組</td>
+													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;width:7%;"> ' . $attendance_no . '</td>
+													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;width:7%;"> 番</td>
 												</tr>
 											</tbody>
 										</table>
@@ -2120,7 +2131,7 @@ class ExamPdfController1 extends Controller
 									</div>
 								</div>
 						
-								<div class="row">
+								<div class="row" style="margin-top:-25px;">
 									<div class="column2" style="width:50%;">
 										<table style="border-collapse: collapse; margin-bottom: 0px; border: 2px solid black;">
 											<thead class="colspanHead">
@@ -2198,7 +2209,7 @@ class ExamPdfController1 extends Controller
 										</table>
 						
 										<!-- Second table and additional content... -->
-										<table class="table table-bordered table-responsive" style="border: 2px solid black;margin-top:45px;height:25%;">
+										<table class="table table-bordered table-responsive" style="border: 2px solid black;margin-top:48px;height:25%;">
 											<thead class="colspanHead">
 												<tr>
 													<th style="border: 1px solid black; font-weight:italic; text-align: center;">出欠の<br>記録</th>
@@ -2571,8 +2582,8 @@ class ExamPdfController1 extends Controller
 													</thead>
 													<tbody>
 														<tr>
-															<td style="text-align: left; height: 45px; border: 1px solid black;">
-																校│<br>長│' . $getteacherdata['data']['principal'] . '
+															<td style="text-align: left; height: 45px; border: 1px solid black;font-size:15px;">
+																校│長│' . $getteacherdata['data']['principal'] . '
 															</td>
 														</tr>
 													</tbody>
@@ -2586,8 +2597,8 @@ class ExamPdfController1 extends Controller
 													</thead>
 													<tbody>
 														<tr>
-															<td style="text-align: left; height: 45px; border: 1px solid black;">
-																担│<br>任│ ' . $getteacherdata['data']['teacher'] . '
+															<td style="text-align: left; height: 45px; border: 1px solid black;font-size:15px;">
+																担│任│ ' . $getteacherdata['data']['teacher'] . '
 															</td>
 														</tr>
 													</tbody>
@@ -2631,7 +2642,7 @@ class ExamPdfController1 extends Controller
 			foreach ($getstudents['data'] as $stu) {
 				$sno++;
 				$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
-				$output = '<!DOCTYPE html>
+				$output .= '<!DOCTYPE html>
 					<html lang="en">
 					
 					<head>
@@ -2644,14 +2655,14 @@ class ExamPdfController1 extends Controller
 					<style>
 					';
 				$output .= '@font-face {
-					font-family: Open Sans ipag;
+					font-family: Times New Roman ipag;
 					font-style: normal;
 					font-weight: 300;
 					src: url("' . $fonturl . '");
 					}
 					
 					body {
-					font-family: "ipag", "Open Sans", !important;
+					font-family: "ipag", "Times New Roman", !important;
 					}
 					
 					table {
@@ -2668,7 +2679,7 @@ class ExamPdfController1 extends Controller
 					line-height: 18px;
 					letter-spacing: 0.0133em;
 					word-wrap: break-word;
-					font-size:16px;
+					font-size:18px;
 					}
 					
 					.column1 {
@@ -2757,7 +2768,7 @@ class ExamPdfController1 extends Controller
 					</div>
 					</div>
 					
-					<div class="row">
+					<div class="row" style="margin-top:-25px;line-height:50%;">
 					<div class="column2" style="width:55%;">
 					<table style="border-collapse: collapse; margin-bottom: 5px; border: 2px solid black;">
 					<thead class="colspanHead">
@@ -2862,17 +2873,17 @@ class ExamPdfController1 extends Controller
 					
 					
 					<!-- Second table and additional content... -->
-					<table class="table table-bordered table-responsive" style="border: 2px solid black;height:25%;margin-top:23px;width:100%">
+					<table class="table table-bordered table-responsive" style="border: 2px solid black;height:25%;margin-top:25px;width:100%">
 					<thead class="colspanHead">
 					<tr>
-					<th style="border: 1px solid black; font-weight:italic; text-align: center;">出欠の<br>記録</th>
-					<th style="border: 1px solid black; font-weight:italic; text-align: center;">授業<br>日数</th>
-					<th style="border: 1px solid black; font-weight:italic; text-align: center;font-size:12px; ">出席停<br>止<br>忌引き等</th>
-					<th style="border: 1px solid black; font-weight:italic; text-align: center;font-size:12px; ">出席しなけれ<br>ばならない日<br>数</th>
-					<th style="border: 1px solid black; font-weight:italic; text-align: center;">欠席<br>日数</th>
-					<th style="border: 1px solid black; font-weight:italic; text-align: center;">出席<br>日数</th>
-					<th style="border: 1px solid black; font-weight:italic; text-align: center;">遅刻</th>
-					<th style="border: 1px solid black; font-weight:italic; text-align: center;">早退</th>
+					<th style="border: 1px solid black; font-weight:italic; text-align: center;height:30px;">出欠の<br>記録</th>
+					<th style="border: 1px solid black; font-weight:italic; text-align: center;height:30px;">授業<br>日数</th>
+					<th style="border: 1px solid black; font-weight:italic; text-align: center;font-size:12px;height:30px; ">出席停<br>止<br>忌引き等</th>
+					<th style="border: 1px solid black; font-weight:italic; text-align: center;font-size:12px;height:30px; ">出席しなけれ<br>ばならない日<br>数</th>
+					<th style="border: 1px solid black; font-weight:italic; text-align: center;height:30px;">欠席<br>日数</th>
+					<th style="border: 1px solid black; font-weight:italic; text-align: center;height:30px;">出席<br>日数</th>
+					<th style="border: 1px solid black; font-weight:italic; text-align: center;height:30px;">遅刻</th>
+					<th style="border: 1px solid black; font-weight:italic; text-align: center;height:30px;">早退</th>
 					</tr>
 					</thead>
 					<tbody style="border: 1px solid black;">';
@@ -2908,25 +2919,25 @@ class ExamPdfController1 extends Controller
 					$at_tot6 += $att['totlate'];
 					$at_tot7 += $att['totexc'];
 					$output .= '<tr>
-						<td>' . $attarray[intval($att['month'])] . '</td>
-						<td>' . $att['no_schooldays'] . '</td>
-						<td>' . $att['suspension'] . '</td>
-						<td>' . $att['totalcoming'] . '</td>
-						<td>' . $att['totabs'] . '</td>
-						<td>' . $att['totpres'] . '</td>
-						<td>' . $att['totlate'] . '</td>
-						<td>' . $att['totexc'] . '</td>
+						<td style="height: 27px;">' . $attarray[intval($att['month'])] . '</td>
+						<td style="height: 27px;">' . $att['no_schooldays'] . '</td>
+						<td style="height: 27px;">' . $att['suspension'] . '</td>
+						<td style="height: 27px;">' . $att['totalcoming'] . '</td>
+						<td style="height: 27px;">' . $att['totabs'] . '</td>
+						<td style="height: 27px;">' . $att['totpres'] . '</td>
+						<td style="height: 27px;">' . $att['totlate'] . '</td>
+						<td style="height: 27px;">' . $att['totexc'] . '</td>
 					</tr>';
 				}
 				$output .= '<tr style="border-top: 2px solid black;">
-					<td> 合計</td>
-					<td>' . $at_tot1 . '</td>
-					<td>' . $at_tot2 . '</td>
-					<td>' . $at_tot3 . '</td>
-					<td>' . $at_tot4 . '</td>
-					<td>' . $at_tot5 . '</td>
-					<td>' . $at_tot6 . '</td>
-					<td>' . $at_tot7 . '</td>
+					<td style="height: 40px;"> 合計</td>
+					<td style="height: 40px;">' . $at_tot1 . '</td>
+					<td style="height: 40px;">' . $at_tot2 . '</td>
+					<td style="height: 40px;">' . $at_tot3 . '</td>
+					<td style="height: 40px;">' . $at_tot4 . '</td>
+					<td style="height: 40px;">' . $at_tot5 . '</td>
+					<td style="height: 40px;">' . $at_tot6 . '</td>
+					<td style="height: 40px;">' . $at_tot7 . '</td>
 				</tr>';
 
 
@@ -3042,7 +3053,7 @@ class ExamPdfController1 extends Controller
 					</thead>
 					<tbody>
 					<tr style="border-top: 2px solid black;">
-					<td colspan="5" style="height:180px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+					<td colspan="5" style="height:210px;text-align:left;vertical-align: top;word-wrap: break-word;">';
 				$comment = explode("\n", $mark1);
 				foreach ($comment as $cmt) {
 					$output .= $cmt . '<br>';
@@ -3098,7 +3109,7 @@ class ExamPdfController1 extends Controller
 					</thead>
 					<tbody>
 					<tr style="border-top: 1px solid black;">
-					<td colspan="5" style="height:180px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+					<td colspan="5" style="height:210px;text-align:left;vertical-align: top;word-wrap: break-word;">';
 				$comment = explode("\n", $mark2);
 				foreach ($comment as $cmt) {
 					$output .= $cmt . '<br>';
@@ -3152,7 +3163,7 @@ class ExamPdfController1 extends Controller
 					</thead>
 					<tbody>
 					<tr style="border-top: 2px solid black;">
-					<td colspan="5" style="height:180px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+					<td colspan="5" style="height:210px;text-align:left;vertical-align: top;word-wrap: break-word;">';
 				$comment = explode("\n", $mark3);
 				foreach ($comment as $cmt) {
 					$output .= $cmt . '<br>';
@@ -3207,7 +3218,7 @@ class ExamPdfController1 extends Controller
 					</thead>
 					<tbody>
 					<tr style="border-top: 2px solid black;">
-					<td colspan="5" style="height:180px;text-align:left;vertical-align: top;word-wrap: break-word;">';
+					<td colspan="5" style="height:210px;text-align:left;vertical-align: top;word-wrap: break-word;">';
 				$comment = explode("\n", $mark4);
 				foreach ($comment as $cmt) {
 					$output .= $cmt . '<br>';
@@ -3218,48 +3229,42 @@ class ExamPdfController1 extends Controller
 					</table>';
 
 				$output .= '<div style="display: flex; flex-wrap: wrap;">
-				<div style="width: 100%; box-sizing: border-box;">
-					<p style="text-align: right; margin-top:0px;marign-bottom:20px;font-size:12px;">※1,2学期の内容は、三者懇談でお伝えさせていただきます。                                </p>
-				</div>
-			</div>
-			
-			
-			<div class="row" style="margin-top:82px;">
-									<div style="width: 50%;float: left;">
-										<table style="border-collapse: collapse; margin-top: 22px;  border: 2px solid black;">
-											<thead style="text-align: center;">
-												<!-- Your content here -->
-											</thead>
-											<tbody>
-												<tr>
-													<td style="text-align: left; height: 45px; border: 1px solid black;">
-														校│<br>長│' . $getteacherdata['data']['principal'] . '
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-									<div style="width: 1%;"></div>
-									<div style="width: 48%; float: right;">
-										<table style="border-collapse: collapse; margin-top: 22px; border: 2px solid black;">
-											<thead style="text-align: center;">
-												<!-- Your content here -->
-											</thead>
-											<tbody>
-												<tr>
-													<td style="text-align: left; height: 45px; border: 1px solid black;">
-														担│<br>任│ ' . $getteacherdata['data']['teacher'] . '
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								
-			</div>
-			</div>
-			</div>
-			</body>
+						<div style="width: 100%; box-sizing: border-box;">
+							<p style="text-align: right; margin-top:px;marign-bottom:22px;font-size:12px;">※1,2学期の内容は、三者懇談でお伝えさせていただきます。                                </p>
+						</div>
+					</div>
+					
+
+                <div style="width:100%;margin-top:40px;">
+                    <table style="margin-top: 12px; width: 100%;border: 2px solid black;">
+                        <thead>
+                            <!-- Your content here -->
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="1" style="text-align: left; height: 40px; width:5%;">
+                                    校<br>長
+                                </td>
+                                <td colspan="1" style="text-align: left; height: 40px; border-top: 2px solid black;">
+                                    ' . $getteacherdata['data']['principal'] . '
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="1" style="text-align: left; height: 40px; width:5%;">
+                                    担<br>任
+                                </td>
+                                <td colspan="1" style="text-align: left; height: 40px; border-top: 1px solid black;">
+                                    ' . $getteacherdata['data']['teacher'] . '
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+										
+					</div>
+					</div>
+					</div>
+					</body>
 					
 					</html>';
 				$pdf = \App::make('dompdf.wrapper');
@@ -3327,7 +3332,7 @@ class ExamPdfController1 extends Controller
 	{
 
 		ini_set('max_execution_time', 600);
-    	ini_set('memory_limit', '1024M');
+		ini_set('memory_limit', '1024M');
 		$data = [
 			'branch_id' => session()->get('branch_id'),
 			'exam_id' => $request->exam_id,
@@ -3694,7 +3699,7 @@ class ExamPdfController1 extends Controller
 	public function downprimaryform1($id)
 	{
 		ini_set('max_execution_time', 600);
-    	ini_set('memory_limit', '1024M');
+		ini_set('memory_limit', '1024M');
 		$footer_text = session()->get('footer_text');
 		$sdata = [
 			'id' => $id,
@@ -4063,7 +4068,7 @@ class ExamPdfController1 extends Controller
 	public function downsecondaryform1($id)
 	{
 		ini_set('max_execution_time', 600);
-    	ini_set('memory_limit', '1024M');
+		ini_set('memory_limit', '1024M');
 		$student_id = $id;
 		$sdata = [
 			'id' => $id,
