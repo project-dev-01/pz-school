@@ -9367,10 +9367,10 @@ class AdminController extends Controller
 
         // Validate the request    
         // Set type based on the last date of withdrawal
-        // $type = "Admission";
-        // if ($request->last_date_of_withdrawal) {
-        //     $type = "Re-Admission";
-        // }
+        $type = "Admission";
+        if ($request->last_date_of_withdrawal) {
+            $type = "Re-Admission";
+        }
 
         // $type = $request->filled('last_date_of_withdrawal') ? 'Re-Admission' : 'Admission';
 
@@ -9538,6 +9538,9 @@ class AdminController extends Controller
             'trail_start_date' => $trail_start_date,
             'trail_end_date' => $trail_end_date,
             'official_date' => $official_date,
+
+            'type' => $type,
+            'last_date_of_withdrawal' => $request->last_date_of_withdrawal,
 
             'passport' => $request->passport,
             'nric' => $request->nric,

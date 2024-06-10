@@ -1239,6 +1239,47 @@
                                                         </div>
                                                     </div>
                                             </div>
+
+                                            
+                                                <div class="col-md-2 mt-3">
+                                                    <div class="form-group">
+                                                        <div class="radio radio-success form-check-inline">
+                                                            <input type="radio" class="re_admission" id="" disabled  name="re_admission" value="yes" {{ isset($student['type']) ? $student['type'] == "Re-Admission" ? 'checked' : '' : '' }}>
+                                                            <label for="yes"> {{ __('messages.re-admission') }} </label>
+                                                        </div>
+                                                        <div class="radio radio-success form-check-inline">
+                                                            <input type="radio" class="re_admission" id="" disabled name="re_admission" value="no" {{ isset($student['type']) ? $student['type'] == "Admission" ? 'checked' : '' : '' }}>
+                                                            <label for="no"> {{ __('messages.admission') }} </label>
+                                                        </div>
+                                                        <!-- <div class="radio radio-success form-check-inline">
+                                                            <input type="radio" class="verify_emails" id="" name="verify_emails" value="guardian">
+                                                            <label for="guardian"> Guardian </label>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                                @php
+
+                                                $last_date = "none";
+                                                if($student['type']=="Re-Admission"){
+
+                                                $last_date = "";
+                                                }
+                                                @endphp
+                                                <div class="col-md-4" id="last_date" style="display:{{$last_date}}">
+                                                    <div class="form-group">
+                                                        <label for="last_date_of_withdrawal">{{ __('messages.last_date_of_withdrawal') }}</label>
+                                                        <div class="input-group input-group-merge">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">
+                                                                    <span class="far fa-calendar-alt"></span>
+                                                                </div>
+                                                            </div>
+                                                            <input type="text" class="form-control" disabled id="last_date_of_withdrawal" value="{{ isset($student['last_date_of_withdrawal']) ? $student['last_date_of_withdrawal'] : ''}}" name="last_date_of_withdrawal" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                        </div>
+                                                     
+                                                        <label for="last_date_of_withdrawal" class="error"></label>
+                                                    </div>
+                                                </div>
                                             
                                     </div>
                                     <div class="row">
