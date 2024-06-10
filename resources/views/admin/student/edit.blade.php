@@ -1163,7 +1163,7 @@
                                     </div>
 
                                     <div class="row">
-                                            <div class="col-md-4" id="enrollment_show" >
+                                            {{-- <div class="col-md-4" id="enrollment_show" >
                                                 <div class="form-group">
                                                     <label for="enrollment">{{ __('messages.enrollment') }}</label>
                                                     <select id="enrollment" name="enrollment" class="form-control">
@@ -1172,7 +1172,7 @@
                                                         <option {{ isset($student['enrollment']) ? $student['enrollment'] == "Official Enrollment" ? 'selected' : '' : '' }} value="Official Enrollment">{{ __('messages.official_enrollment') }}</option>
                                                     </select>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             @php
 
                                             $trail_date = "none";
@@ -1180,7 +1180,7 @@
                                             $trail_date = "block";
                                             }
                                             @endphp
-                                            <div class="col-md-4" id="trailstartdate_show" style="display:{{$trail_date}}">
+                                            <div class="col-md-4" id="trailstartdate_show">
                                                 <div class="form-group">
                                                     <label for="text">{{ __('messages.trail_start_date') }}</label>
                                                     <div class="input-group input-group-merge">
@@ -1193,7 +1193,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4" id="trailenddate_show" style="display:{{$trail_date}}">
+                                            <div class="col-md-4" id="trailenddate_show" >
                                                 <div class="form-group">
                                                     <label for="text">{{ __('messages.trail_end_date') }}</label>
                                                     <div class="input-group input-group-merge">
@@ -1212,7 +1212,7 @@
                                             $official_date = "block";
                                             }
                                             @endphp
-                                            <div class="col-md-4" id="official_date_show" style="display:{{$official_date}}">
+                                            <div class="col-md-4" id="official_date_show" >
                                                 <div class="form-group">
                                                     <label for="text">{{ __('messages.official_date') }}</label>
                                                     <div class="input-group input-group-merge">
