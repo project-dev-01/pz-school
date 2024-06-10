@@ -59,7 +59,7 @@ class GuestController extends Controller
                 } else if ($status == "Send Back") {
                     $result = "warning";
                 } else if ($status == "Applied") {
-                    $result = "info";
+                    $result = "success";
                 } else if ($status == "Reject") {
                     $result = "danger";
                 }    else {
@@ -76,7 +76,7 @@ class GuestController extends Controller
                 } else if ($status == "Send Back") {
                     $result = "warning";
                 } else if ($status == "Applied") {
-                    $result = "info";
+                    $result = "success";
                 } else if ($status == "Reject") {
                     $result = "danger";
                 }  else {
