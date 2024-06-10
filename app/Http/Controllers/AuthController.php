@@ -1264,6 +1264,7 @@ class AuthController extends Controller
     // set session common
     public function sessionCommon($req, $userDetails, $roleID)
     {
+        // dd($userDetails);
         // return $req;
         // dd($userDetails);
         $req->session()->put('user_id', $userDetails['data']['user']['id']);
@@ -1272,7 +1273,6 @@ class AuthController extends Controller
         $req->session()->put('role_id', $roleID);
         $req->session()->put('picture', $userDetails['data']['user']['picture']);
         $req->session()->put('token', $userDetails['data']['token']);
-        $req->session()->put('name', $userDetails['data']['user']['name']);
         $req->session()->put('first_name', isset($userDetails['data']['user']['firstname']) ? $userDetails['data']['user']['firstname'] : "");
         $req->session()->put('last_name', isset($userDetails['data']['user']['lastname']) ? $userDetails['data']['user']['lastname'] : "");
         $req->session()->put('email', $userDetails['data']['user']['email']);
@@ -1324,8 +1324,10 @@ class AuthController extends Controller
                 }
             }
         }
-        $req->session()->put('name_sequence', $first_last_reverse);
-        $user_name = $userDetails['data']['user']['name'];
+        // $req->session()->put('name_sequence', $first_last_reverse);
+        // $req->session()->put('name', $userDetails['data']['user']['name']);
+        $req->session()->put('name', $first_last_reverse);
+        $user_name = $first_last_reverse;
         return $user_name;
     }
     public function lastlogout(Request $request)

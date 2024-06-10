@@ -1212,7 +1212,7 @@
                                             $official_date = "block";
                                             }
                                             @endphp
-                                            <div class="col-md-4" id="official_date_show" >
+                                            <div class="col-md-4" id="official_date_show">
                                                 <div class="form-group">
                                                     <label for="text">{{ __('messages.official_date') }}</label>
                                                     <div class="input-group input-group-merge">
@@ -1487,7 +1487,7 @@
                                                 <div class="form-group">
                                                     <label for="email">{{ __('messages.email') }}<span class="text-danger">*</span></label>
                                                    
-                                                        <input type="text" class="form-control" id="guardian_email"  name="guardian_email" placeholder="xxxxx@gmail.com" >
+                                                        <input type="text" class="form-control" id="guardian_email" readonly  name="guardian_email" placeholder="xxxxx@gmail.com" >
                                                     
                                                 </div>
                                             </div>
