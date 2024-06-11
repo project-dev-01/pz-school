@@ -1049,8 +1049,8 @@ class ExamPdfController1 extends Controller
 						$fmark = ($mark == "Excellent") ? '○' : '';
 
 						$output .= '<tr style="height:60px;">
-										<td colspan="4" style="text-align:left;vertical-align: top;width:100px;height:30px;">' . $papers['papers'] . '</td>
-										<td colspan="1">' . $fmark . '</td>
+										<td colspan="4" style="text-align:left;width:92%;vertical-align: top;width:100px;height:30px;">' . $papers['papers'] . '</td>
+										<td colspan="1" style="width:8%;">' . $fmark . '</td>
 									</tr>';
 					}
 
@@ -1696,8 +1696,8 @@ class ExamPdfController1 extends Controller
 						}
 						$fmark = ($mark == "Excellent") ? '○' : '';
 						$output .= '<tr style="height:60px;">
-											<td colspan="4" style="text-align:left;width:100px;">' . $papers['papers'] . '</td>
-											<td colspan="1">' . $fmark . '
+											<td colspan="4" style="text-align:left;width:92%;">' . $papers['papers'] . '</td>
+											<td colspan="1" style="width:8%;">' . $fmark . '
 											</td>
 											</tr>';
 					}
@@ -2321,8 +2321,8 @@ class ExamPdfController1 extends Controller
 						}
 						$fmark = ($mark == "Excellent") ? '○' : '';
 						$output .= '<tr style="height:40px;">
-											<td colspan="4" style="height:40px;text-align:left;width:100px;">' . $papers['papers'] . '</td>
-											<td colspan="1">' . $fmark . '
+											<td colspan="4" style="height:40px;text-align:left;width:92%;">' . $papers['papers'] . '</td>
+											<td colspan="1" style="width:8%;">' . $fmark . '
 											</td>
 											</tr>';
 					}
@@ -2979,8 +2979,8 @@ class ExamPdfController1 extends Controller
 					}
 					$fmark = ($mark == "Excellent") ? '○' : '';
 					$output .= '<tr style="height:60px;">
-					<td colspan="4" style="text-align:left;width:100px;">' . $papers['papers'] . '</td>
-					<td colspan="1">' . $fmark . '
+					<td colspan="4" style="text-align:left;width:92%;">' . $papers['papers'] . '</td>
+					<td colspan="1" style="width:8%;">' . $fmark . '
 					</td>
 					</tr>';
 				}
