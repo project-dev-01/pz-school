@@ -74,6 +74,9 @@ class ExamPdfController1 extends Controller
 		}
 		$pdfFiles = [];
 		foreach ($getstudents['data'] as $stu) {
+			if($sno == 10){
+				break;
+			}
 			$sno++;
 			$n1 = ($request->department_id == '1') ? 'P' : 'S';
 			$n2 = $grade['data']['name_numeric'];
@@ -514,7 +517,7 @@ class ExamPdfController1 extends Controller
 			// Set custom paper size
 			// $customPaper = [0, 0, 792.00, 1224.00];
 			if ($request->department_id == 1) {
-				$customPaper = array(0, 0, 700.00, 950.00);
+				$customPaper = array(0, 0, 700.00, 920.00);
 			} else if ($request->department_id == 2) {
 				$customPaper = array(0, 0, 700.00, 1000.00);
 			} else {
@@ -716,6 +719,9 @@ class ExamPdfController1 extends Controller
 				];
 				$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 				foreach ($getstudents['data'] as $stu) {
+					if($sno == 10){
+						break;
+					}
 					$sno++;
 					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
 					$output .= '<!DOCTYPE html>
@@ -1049,7 +1055,7 @@ class ExamPdfController1 extends Controller
 						$fmark = ($mark == "Excellent") ? '○' : '';
 
 						$output .= '<tr style="height:60px;">
-										<td colspan="4" style="text-align:left;width:92%;vertical-align: top;width:100px;height:30px;">' . $papers['papers'] . '</td>
+										<td colspan="4" style="text-align:left;vertical-align: top;width:92%;height:30px;">' . $papers['papers'] . '</td>
 										<td colspan="1" style="width:8%;">' . $fmark . '</td>
 									</tr>';
 					}
@@ -1313,6 +1319,9 @@ class ExamPdfController1 extends Controller
 				];
 				$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 				foreach ($getstudents['data'] as $stu) {
+					if($sno == 10){
+						break;
+					}
 					$sno++;
 					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
 					$output .= '<!DOCTYPE html>
@@ -1936,7 +1945,7 @@ class ExamPdfController1 extends Controller
 											</div>
 										</div>
 						
-										<div style="width:100%;margin-top:24px;">
+										<div style="width:100%;margin-top:17px;">
                     <table style="margin-top: 12px; width: 100%;">
                         <thead>
                             <!-- Your content here -->
@@ -1992,6 +2001,9 @@ class ExamPdfController1 extends Controller
 				];
 				$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 				foreach ($getstudents['data'] as $stu) {
+					if($sno == 10){
+						break;
+					}
 					$sno++;
 					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
 					$output .= '<!DOCTYPE html>
@@ -2095,7 +2107,7 @@ class ExamPdfController1 extends Controller
 											<tbody>
 												<tr>
 													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;width:7%;"> ' . $section['data']['name'] . '</td>
-													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;width:7%; 組</td>
+													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;width:7%;"> 組</td>
 													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;width:7%;"> ' . $attendance_no . '</td>
 													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;width:7%;"> 番</td>
 												</tr>
@@ -2621,6 +2633,9 @@ class ExamPdfController1 extends Controller
 
 
 			foreach ($getstudents['data'] as $stu) {
+				if($sno == 10){
+					break;
+				}
 				$sno++;
 				$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
 				$output .= '<!DOCTYPE html>

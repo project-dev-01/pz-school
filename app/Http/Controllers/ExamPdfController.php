@@ -10,6 +10,9 @@ use DateInterval;
 use DatePeriod;
 use DateTimeZone;
 use PDF;
+use Dompdf\Exception;
+
+use Illuminate\Support\Facades\Log;
 
 class ExamPdfController extends Controller
 {
@@ -130,6 +133,10 @@ class ExamPdfController extends Controller
 
 
 		foreach ($getstudents['data'] as $stu) {
+			if($sno == 10){
+				break;
+			}
+			// Log::info("student details" . \json_encode($stu));
 			$sno++;
 			$n1 = ($request->department_id == '1') ? 'P' : 'S';
 			$n2 = $grade['data']['name_numeric'];
@@ -507,11 +514,15 @@ class ExamPdfController extends Controller
 								<div style="page-break-after: always;"></div>';
 		}
 		$output .= '</body></html>';
+		// Log::info("output data".\json_encode($output));
 		//             $output .= '</main>
 		//      </body>
 		//  </html>';
+		// Make sure to import the necessary classes
 		$pdf = \App::make('dompdf.wrapper');
-		// set size
+		// Log::info("PDF Wrapper created");
+
+		// Set custom paper size based on department_id
 		if ($request->department_id == 1) {
 			$customPaper = array(0, 0, 700.00, 920.00);
 		} else if ($request->department_id == 2) {
@@ -519,21 +530,51 @@ class ExamPdfController extends Controller
 		} else {
 			$customPaper = array(0, 0, 700.00, 1000.00);
 		}
-		$pdf->set_paper($customPaper);
-		$pdf->loadHTML($output);
-		$pdfContent = $pdf->output();
-		// Set default headers
-		$headers = [
-			'Content-Type' => 'application/pdf',
-			'Content-Length' => strlen($pdfContent)
-		];
-		// filename
-		$now = now();
-		$timestamp = strtotime($now);
 
-		$fileName = __('messages.english_communication') . '-' .  $gradename . '-' . $classname . '-' . $timestamp . ".pdf";
-		$headers['Content-Disposition'] = 'attachment; filename="' . rawurlencode($fileName)  . '"';
-		return response($pdfContent)->withHeaders($headers);
+		try {
+			// Set paper size
+			$pdf->set_paper($customPaper);
+			// Log::info("Custom paper size set", ['customPaper' => $customPaper]);
+
+			// Load HTML content
+			$pdf->loadHTML($output);
+			// Log::info("HTML content loaded into PDF");
+
+			// Generate PDF
+			$pdfContent = $pdf->output();
+			// Log::info("PDF generated successfully");
+
+			
+
+			// Generate filename
+			$now = now();
+			$timestamp = strtotime($now);
+			$fileName = __('messages.english_communication') . '-' .  $gradename . '-' . $classname . '-' . $timestamp . ".pdf";
+			// $headers['Content-Disposition'] = 'attachment; filename="' . rawurlencode($fileName) . '"';
+			// Set headers for PDF response
+			$headers = [
+				'Content-Type' => 'application/pdf',
+				'Content-Length' => strlen($pdfContent),
+				'Content-Disposition' => 'attachment; filename="' . rawurlencode($fileName) . '"',
+			];
+			// Log::info("PDF generated successfully");
+			// Return response with headers
+			 // Return response with headers
+			return response($pdfContent, 200, $headers);
+			// return response($pdfContent)->withHeaders($headers);
+		} catch (Exception $e) {
+			// Log the exception details
+			Log::error("Error generating PDF", [
+				'message' => $e->getMessage(),
+				'trace' => $e->getTraceAsString()
+			]);
+
+			// Optionally, return an error response
+			return response()->json([
+				'error' => 'An error occurred while generating the PDF.',
+				'message' => $e->getMessage()
+			], 500);
+		}
 		//return $pdf->download($fileName);
 		// return $pdf->stream();
 
@@ -672,6 +713,9 @@ class ExamPdfController extends Controller
 				];
 				$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 				foreach ($getstudents['data'] as $stu) {
+					if($sno == 10){
+						break;
+					}
 					$sno++;
 					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
 					$output .= '<!DOCTYPE html>
@@ -1254,6 +1298,9 @@ class ExamPdfController extends Controller
 				];
 				$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 				foreach ($getstudents['data'] as $stu) {
+					if($sno == 10){
+						break;
+					}
 					$sno++;
 					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
 					$output .= '<!DOCTYPE html>
@@ -1918,6 +1965,9 @@ class ExamPdfController extends Controller
 				];
 				$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 				foreach ($getstudents['data'] as $stu) {
+					if($sno == 10){
+						break;
+					}
 					$sno++;
 					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
 					$output .= '<!DOCTYPE html>
@@ -2531,6 +2581,9 @@ class ExamPdfController extends Controller
 
 
 			foreach ($getstudents['data'] as $stu) {
+				if($sno == 10){
+					break;
+				}
 				$sno++;
 				$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
 				$output .= '<!DOCTYPE html>
