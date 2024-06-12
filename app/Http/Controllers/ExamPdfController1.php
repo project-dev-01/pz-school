@@ -20,10 +20,10 @@ class ExamPdfController1 extends Controller
 		ini_set('max_execution_time', 600);
 		ini_set('memory_limit', '1024M');
 		if ($request->department_id == 1) {
-			$pdf_logo = config('constants.image_url') . '/common-asset/images/primary_logo.png';
+			$pdf_logo = config('constants.image_url') . '/common-asset/images/jskl_pdf_ec_logo.png';
 		}
 		if ($request->department_id == 2) {
-			$pdf_logo = config('constants.image_url') . '/common-asset/images/secondary_logo.png';
+			$pdf_logo = config('constants.image_url') . '/common-asset/images/jskl_pdf_ec_logo.png';
 		}
 		$data = [
 			'branch_id' => session()->get('branch_id'),
@@ -4392,5 +4392,28 @@ class ExamPdfController1 extends Controller
 		$fileName = __('messages.download_form1') . $name . ".pdf";
 		return $pdf->download($fileName);
 		// return $pdf->stream();  
+	}
+	public function adjustFontSize($text)
+	{
+		$baseFontSize = 18;
+		$minFontSize = 8;
+		$threshold = 100;
+		$length = strlen($text);
+		$fontSize = $baseFontSize;
+
+		// Assume a base number of characters that fit within the threshold height at the base font size
+		$charsThatFit = 50; // This is an estimate, adjust as necessary
+
+		// Reduce font size until text length fits within the threshold height
+		while ($length > $charsThatFit && $fontSize > $minFontSize) {
+			$fontSize--;
+			$charsThatFit = 50 * ($baseFontSize / $fontSize); // Adjust the fitting factor
+		}
+		// return htmlspecialchars($text);
+
+		return [
+			'fontSize' => $fontSize,
+			'content' => htmlspecialchars($text)
+		];
 	}
 }

@@ -18,10 +18,10 @@ class ExamPdfController extends Controller
 		ini_set('max_execution_time', 600);
 		ini_set('memory_limit', '1024M');
 		if ($request->department_id == 1) {
-			$pdf_logo = config('constants.image_url') . '/common-asset/images/primary_logo.png';
+			$pdf_logo = config('constants.image_url') . '/common-asset/images/jskl_pdf_ec_logo.png';
 		}
 		if ($request->department_id == 2) {
-			$pdf_logo = config('constants.image_url') . '/common-asset/images/secondary_logo.png';
+			$pdf_logo = config('constants.image_url') . '/common-asset/images/jskl_pdf_ec_logo.png';
 		}
 		$data = [
 			'branch_id' => session()->get('branch_id'),
@@ -1877,7 +1877,7 @@ class ExamPdfController extends Controller
 											</div>
 										</div>
 						
-										<div style="width:100%;margin-top:24px;">
+										<div style="width:100%;margin-top:17px;">
                     <table style="margin-top: 12px; width: 100%;">
                         <thead>
                             <!-- Your content here -->
@@ -2021,7 +2021,7 @@ class ExamPdfController extends Controller
 											<tbody>
 												<tr>
 													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;width:7%;"> ' . $section['data']['name'] . '</td>
-													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;width:7%; 組</td>
+													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;width:7%;"> 組</td>
 													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;width:7%;"> ' . $attendance_no . '</td>
 													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;width:7%;"> 番</td>
 												</tr>
@@ -3163,7 +3163,7 @@ class ExamPdfController extends Controller
 		// Create a ZIP file
 		$pdf = \App::make('dompdf.wrapper');
 		// set size
-		
+
 		$pdf->set_paper($customPaper);
 		$pdf->loadHTML($output);
 		$pdfContent = $pdf->output();

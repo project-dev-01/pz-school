@@ -1662,7 +1662,7 @@ class ExamindividualPdfController extends Controller
 					}
 					$fmark = ($mark == "Excellent") ? '○' : '';
 					$output .= '<tr style="height:60px;">
-											<td colspan="4" style="text-align:left;vertical-align: top;width:92%;height:30px;">' . $papers['papers'] . '</td>
+											<td colspan="4" style="text-align:left;width:92%;">' . $papers['papers'] . '</td>
 										<td colspan="1" style="width:8%;">' . $fmark . '</td>
 											</tr>';
 				}
@@ -1901,7 +1901,7 @@ class ExamindividualPdfController extends Controller
 											</div>
 										</div>
 						
-				<div style="width:100%;margin-top:24px;">
+				<div style="width:100%;margin-top:17px;">
                     <table style="margin-top: 12px; width: 100%;">
                         <thead>
                             <!-- Your content here -->
@@ -2062,7 +2062,7 @@ class ExamindividualPdfController extends Controller
 											<tbody>
 												<tr>
 													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;width:7%;"> ' . $section['data']['name'] . '</td>
-													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;width:7%; 組</td>
+													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;width:7%;"> 組</td>
 													<td style="vertical-align: middle;border-right:hidden;font-size:20px; height: 60px;width:7%;"> ' . $attendance_no . '</td>
 													<td style="text-align: right;font-size:20px; vertical-align: bottom; height: 60px;width:7%;"> 番</td>
 												</tr>
@@ -2288,7 +2288,7 @@ class ExamindividualPdfController extends Controller
 					}
 					$fmark = ($mark == "Excellent") ? '○' : '';
 					$output .= '<tr style="height:40px;">
-											<td colspan="4" style="text-align:left;vertical-align: top;width:92%;height:30px;">' . $papers['papers'] . '</td>
+											<td colspan="4" style="height:40px;text-align:left;width:92%;">' . $papers['papers'] . '</td>
 										<td colspan="1" style="width:8%;">' . $fmark . '</td>
 											</tr>';
 				}
@@ -2949,8 +2949,9 @@ class ExamindividualPdfController extends Controller
 				}
 				$fmark = ($mark == "Excellent") ? '○' : '';
 				$output .= '<tr style="height:60px;">
-					<td colspan="4" style="text-align:left;vertical-align: top;width:92%;height:30px;">' . $papers['papers'] . '</td>
-										<td colspan="1" style="width:8%;">' . $fmark . '</td>
+					<td colspan="4" style="text-align:left;width:92%;">' . $papers['papers'] . '</td>
+					<td colspan="1" style="width:8%;">' . $fmark . '
+					</td>
 					</tr>';
 			}
 
@@ -3227,7 +3228,6 @@ class ExamindividualPdfController extends Controller
 				'Content-Type' => 'application/pdf',
 				'Content-Length' => strlen($pdfContent)
 			];
-			return $pdf->stream();
 			// filename
 			$now = now();
 			$name = strtotime($now);
