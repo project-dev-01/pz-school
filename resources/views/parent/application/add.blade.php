@@ -1323,11 +1323,8 @@
     toastr.options.preventDuplicates = true;
 </script>
 <script src="{{ asset('js/validation/validation.js') }}"></script>
-
-
 <script src="{{ asset('libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
 <script src="{{ asset('libs/autonumeric/autoNumeric-min.js') }}"></script>
-
 <!-- Init js-->
 <script src="{{ asset('js/pages/form-masks.init.js') }}"></script>
 <script src="{{ asset('libs/jquery-mask-plugin/jquery.mask.min.js') }}"></script>

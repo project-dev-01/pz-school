@@ -397,19 +397,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="guardian_last_name labelres">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_guardian_info" id="guardian_last_name" value="{{ isset($guardian['last_name']) ? $guardian['last_name'] : ''}}" name="guardian_last_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_last_name" value="{{ isset($guardian['last_name']) ? $guardian['last_name'] : ''}}" name="guardian_last_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="guardian_middle_name labelres">{{ __('messages.middle_name') }}</label>
-                                        <input type="text" class="form-control copy_guardian_info" id="guardian_middle_name" value="{{ isset($guardian['middle_name']) ? $guardian['middle_name'] : ''}}" name="guardian_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_middle_name" value="{{ isset($guardian['middle_name']) ? $guardian['middle_name'] : ''}}" name="guardian_middle_name" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="guardian_first_name labelres">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_guardian_info" id="guardian_first_name" value="{{ isset($guardian['first_name']) ? $guardian['first_name'] : ''}}" name="guardian_first_name" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_first_name" value="{{ isset($guardian['first_name']) ? $guardian['first_name'] : ''}}" name="guardian_first_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -417,19 +417,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="guardian_last_name_furigana">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_guardian_info" id="guardian_last_name_furigana" value="{{ isset($guardian['last_name_furigana']) ? $guardian['last_name_furigana'] : ''}}" name="guardian_last_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_last_name_furigana" value="{{ isset($guardian['last_name_furigana']) ? $guardian['last_name_furigana'] : ''}}" name="guardian_last_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="guardian_middle_name_furigana labelres">{{ __('messages.middle_name_furigana') }}</label>
-                                        <input type="text" class="form-control copy_guardian_info" id="guardian_middle_name_furigana" value="{{ isset($guardian['middle_name_furigana']) ? $guardian['middle_name_furigana'] : ''}}" name="guardian_middle_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_middle_name_furigana" value="{{ isset($guardian['middle_name_furigana']) ? $guardian['middle_name_furigana'] : ''}}" name="guardian_middle_name_furigana"  aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="guardian_first_name_furigana labelres">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_guardian_info" id="guardian_first_name_furigana" value="{{ isset($guardian['first_name_furigana']) ? $guardian['first_name_furigana'] : ''}}" name="guardian_first_name_furigana" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_first_name_furigana" value="{{ isset($guardian['first_name_furigana']) ? $guardian['first_name_furigana'] : ''}}" name="guardian_first_name_furigana" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>
@@ -437,19 +437,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="guardian_last_name_english labelres">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_guardian_info" id="guardian_last_name_english" value="{{ isset($guardian['last_name_english']) ? $guardian['last_name_english'] : ''}}" name="guardian_last_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_last_name_english" value="{{ isset($guardian['last_name_english']) ? $guardian['last_name_english'] : ''}}" name="guardian_last_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="guardian_middle_name_english labelres">{{ __('messages.middle_name_roma') }}</label>
-                                        <input type="text" class="form-control copy_guardian_info" id="guardian_middle_name_english" value="{{ isset($guardian['middle_name_english']) ? $guardian['middle_name_english'] : ''}}" name="guardian_middle_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_middle_name_english" value="{{ isset($guardian['middle_name_english']) ? $guardian['middle_name_english'] : ''}}" name="guardian_middle_name_english"  aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="guardian_first_name_english labelres">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control copy_guardian_info" id="guardian_first_name_english" value="{{ isset($guardian['first_name_english']) ? $guardian['first_name_english'] : ''}}" name="guardian_first_name_english" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                        <input type="text" class="form-control copy_guardian_info" id="guardian_first_name_english" value="{{ isset($guardian['first_name_english']) ? $guardian['first_name_english'] : ''}}" name="guardian_first_name_english" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                     </div>
                                 </div>
                             </div>

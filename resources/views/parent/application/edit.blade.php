@@ -380,7 +380,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="last_name">{{ __('messages.last_name') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="last_name" {{$readonly_phase_1}} value="{{ isset($application['last_name']) ? $application['last_name'] : ''}}" name="last_name" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="last_name" {{$readonly_phase_1}} value="{{ isset($application['last_name']) ? $application['last_name'] : ''}}" name="last_name" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -392,7 +392,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="first_name">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="first_name" {{$readonly_phase_1}} value="{{ isset($application['first_name']) ? $application['first_name'] : ''}}" name="first_name" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="first_name" {{$readonly_phase_1}} value="{{ isset($application['first_name']) ? $application['first_name'] : ''}}" name="first_name" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -401,19 +401,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="last_name">{{ __('messages.last_name_furigana') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="last_name_furigana" {{$readonly_phase_1}} value="{{ isset($application['last_name_furigana']) ? $application['last_name_furigana'] : ''}}" name="last_name_furigana" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="last_name_furigana" {{$readonly_phase_1}} value="{{ isset($application['last_name_furigana']) ? $application['last_name_furigana'] : ''}}" name="last_name_furigana" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="middle_name">{{ __('messages.middle_name_furigana') }}</label>
-                                                    <input type="text" class="form-control" id="middle_name_furigana" {{$readonly_phase_1}} value="{{ isset($application['middle_name_furigana']) ? $application['middle_name_furigana'] : ''}}" name="middle_name_furigana" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="middle_name_furigana" {{$readonly_phase_1}} value="{{ isset($application['middle_name_furigana']) ? $application['middle_name_furigana'] : ''}}" name="middle_name_furigana" maxlength="50"  aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="first_name">{{ __('messages.first_name_furigana') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="first_name_furigana" {{$readonly_phase_1}} value="{{ isset($application['first_name_furigana']) ? $application['first_name_furigana'] : ''}}" name="first_name_furigana" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="first_name_furigana" {{$readonly_phase_1}} value="{{ isset($application['first_name_furigana']) ? $application['first_name_furigana'] : ''}}" name="first_name_furigana" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -423,19 +423,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="last_name">{{ __('messages.last_name_roma') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="last_name_english" {{$readonly_phase_1}} value="{{ isset($application['last_name_english']) ? $application['last_name_english'] : ''}}" name="last_name_english" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="last_name_english" {{$readonly_phase_1}} value="{{ isset($application['last_name_english']) ? $application['last_name_english'] : ''}}" name="last_name_english" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="middle_name">{{ __('messages.middle_name_roma') }}</label>
-                                                    <input type="text" class="form-control" id="middle_name_english" {{$readonly_phase_1}} value="{{ isset($application['middle_name_english']) ? $application['middle_name_english'] : ''}}" name="middle_name_english" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="middle_name_english" {{$readonly_phase_1}} value="{{ isset($application['middle_name_english']) ? $application['middle_name_english'] : ''}}" name="middle_name_english" maxlength="50" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="first_name">{{ __('messages.first_name_roma') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="first_name_english" {{$readonly_phase_1}} value="{{ isset($application['first_name_english']) ? $application['first_name_english'] : ''}}" name="first_name_english" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="first_name_english" {{$readonly_phase_1}} value="{{ isset($application['first_name_english']) ? $application['first_name_english'] : ''}}" name="first_name_english" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                         </div>
@@ -445,13 +445,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="first_name">{{ __('messages.first_name_common') }}<span class="text-danger"></span></label>
-                                                    <input type="text" class="form-control" id="first_name_common" {{$readonly_phase_1}} value="{{ isset($application['first_name_common']) ? $application['first_name_common'] : ''}}" name="first_name_common" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="first_name_common" {{$readonly_phase_1}} value="{{ isset($application['first_name_common']) ? $application['first_name_common'] : ''}}" name="first_name_common" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="last_name">{{ __('messages.last_name_common') }}</label>
-                                                    <input type="text" class="form-control" id="last_name_common" {{$readonly_phase_1}} value="{{ isset($application['last_name_common']) ? $application['last_name_common'] : ''}}" name="last_name_common" maxlength="50" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                    <input type="text" class="form-control" id="last_name_common" {{$readonly_phase_1}} value="{{ isset($application['last_name_common']) ? $application['last_name_common'] : ''}}" name="last_name_common" maxlength="50" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
                                                 </div>
                                             </div>
                                             @endif
@@ -692,7 +692,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_middle_name">{{ __('messages.middle_name') }}</label>
-                                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name" {{$readonly_phase_1}} value="{{ isset($application['mother_middle_name']) ? $application['mother_middle_name'] : ''}}" name="mother_middle_name" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info mother_form" id="mother_middle_name" {{$readonly_phase_1}} value="{{ isset($application['mother_middle_name']) ? $application['mother_middle_name'] : ''}}" name="mother_middle_name"  aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">

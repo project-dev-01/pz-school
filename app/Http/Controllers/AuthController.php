@@ -1327,6 +1327,7 @@ class AuthController extends Controller
         // $req->session()->put('name_sequence', $first_last_reverse);
         // $req->session()->put('name', $userDetails['data']['user']['name']);
         $req->session()->put('name', $first_last_reverse);
+
         $user_name = $first_last_reverse;
         return $user_name;
     }

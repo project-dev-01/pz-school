@@ -385,7 +385,7 @@
                                         <div class="form-group mb-3">
                                             <label for="lname">{{ __('messages.last_name') }} <span class="text-danger">*</span></label>
 
-                                            <input type="text" name="lname" class="form-control" id="lname" value="{{ isset($student['last_name']) ? $student['last_name'] : ''}}" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" name="lname" class="form-control" id="lname" value="{{ isset($student['last_name']) ? $student['last_name'] : ''}}" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
 
                                         </div>
                                     </div>
@@ -393,7 +393,7 @@
                                         <div class="form-group">
                                             <label for="mname">{{ __('messages.middle_name') }} </label>
 
-                                            <input type="text" name="mname" class="form-control alloptions" maxlength="50" id="mname" value="{{ isset($student['middle_name']) ? $student['middle_name'] : ''}}" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" name="mname" class="form-control alloptions" maxlength="50" id="mname" value="{{ isset($student['middle_name']) ? $student['middle_name'] : ''}}"  aria-describedby="inputGroupPrepend">
 
                                         </div>
                                     </div>
@@ -401,7 +401,7 @@
                                         <div class="form-group">
                                             <label for="fname">{{ __('messages.first_name') }}<span class="text-danger">*</span></label>
 
-                                            <input type="text" name="fname" class="form-control" value="{{ isset($student['first_name']) ? $student['first_name'] : ''}}" id="fname" placeholder="{{ __('messages.yamamoto') }}" aria-describedby="inputGroupPrepend">
+                                            <input type="text" name="fname" class="form-control" value="{{ isset($student['first_name']) ? $student['first_name'] : ''}}" id="fname" placeholder="{{ __('messages.yukio') }}" aria-describedby="inputGroupPrepend">
 
                                         </div>
                                     </div>
