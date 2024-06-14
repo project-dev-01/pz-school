@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
+use App\Helpers\CommonHelper;
 use Illuminate\Support\Facades\File;
 use ZipArchive;
 use DateTime;
@@ -11,20 +12,22 @@ use DateInterval;
 use DatePeriod;
 use DateTimeZone;
 use PDF;
+use Dompdf\Exception;
+
+use Illuminate\Support\Facades\Log;
 
 class ExamPdfController1 extends Controller
 {
-
+	protected CommonHelper $commonHelper;
+	public function __construct(CommonHelper $commonHelper)
+	{
+		$this->commonHelper = $commonHelper;
+	}
 	public function downbyecreport(Request $request)
 	{
 		ini_set('max_execution_time', 600);
 		ini_set('memory_limit', '1024M');
-		if ($request->department_id == 1) {
-			$pdf_logo = config('constants.image_url') . '/common-asset/images/jskl_pdf_ec_logo.png';
-		}
-		if ($request->department_id == 2) {
-			$pdf_logo = config('constants.image_url') . '/common-asset/images/jskl_pdf_ec_logo.png';
-		}
+		$pdf_logo = config('constants.image_url') . '/common-asset/images/jskl_pdf_ec_logo.png';
 		$data = [
 			'branch_id' => session()->get('branch_id'),
 			'exam_id' => $request->exam_id,
@@ -42,11 +45,14 @@ class ExamPdfController1 extends Controller
 		if (empty($getstudents['data'])) {
 			return redirect()->route('admin.exam_results.byreport')->with('errors', "No Student Data Found");
 		}
-		$footer_text = session()->get('footer_text');
 		$sno = 0;
-
 		$grade = Helper::PostMethod(config('constants.api.class_details'), $data);
 		$section = Helper::PostMethod(config('constants.api.section_details'), $data);
+		$sub_data = [
+			'subject_name' => "英語コミュニケーション"
+		];
+		$subject_details = Helper::PostMethod(config('constants.api.get_subject_details'), $sub_data);
+		$subjectID = $subject_details['data']['subject_id'] ?? '0';
 		$gradename = $grade['data']['name'];
 		$classname = $section['data']['name'];
 		$acdata = [
@@ -58,125 +64,151 @@ class ExamPdfController1 extends Controller
 			'id' => $request->exam_id
 
 		];
-		$bdata = [
-			'id' => session()->get('branch_id'),
-		];
-		$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 		$term = Helper::PostMethod(config('constants.api.exam_details'), $termdata);
 		$acyear = Helper::PostMethod(config('constants.api.academic_year_details'), $acdata);
-		$acy = $acyear['data']['name'];
-		$term_name = isset($term['data']['term_name']) ? $term['data']['term_name'] : '';
 		$storagePath = storage_path('app/public/pdfs');
-
 		// Ensure the storage directory exists
 		if (!File::exists($storagePath)) {
 			File::makeDirectory($storagePath, 0755, true);
 		}
 		$pdfFiles = [];
+		$fonturl = storage_path('fonts/ipag.ttf');
+		$n1 = ($request->department_id == '1') ? 'P' : 'S';
+		$n2 = $grade['data']['name_numeric'] ?? '';
+		$n3 = $section['data']['name'] ?? '';
+		if ($request->department_id == 1) {
+			// Subject Name => "English Communication"
+
+			//Listening
+			$l1 = "L-1 Understands and follows instructions in class activities";
+			$l2 = "L-2 Understands simple transactions in conversations and activities";
+			$l3 = "L-3 Understands and recognises main points in simple speech";
+			//Reading
+			$r1 = "R-1 Reads simple words and follows instructions on posters and worksheets";
+			$r2 = "R-2 Reads simple sentences in the text book";
+			//Speaking
+			$s1 = "S-1 Tries to have a conversation form using simple phrases and sentences";
+			$s2 = "S-2 Asks and answers simple questions on familiar topics";
+			$s3 = "S-3 Uses clear and loud speech to communicate";
+			$s4 = "S-4 Uses learned phrases and sentences to give ideas and opinions";
+			//Writing
+			$w1 = "W-1 Writes simple, short words";
+			$w2 = "W-2 Fills in simple forms and worksheets with proper words and phrases";
+			//Attitude
+			$a1 = "A-1 Cooperates and pays attention in class";
+			$a2 = "A-2 Participates actively in class activities, games, and discussions";
+			$a3 = "A-3 Contributes positively in group work";
+			$heading = array('Listening', 'Reading', 'Speaking', 'Writing', 'Attitude');
+			$papers[0] = array($l1, $l2, $l3);
+			$papers[1] = array($r1, $r2);
+			$papers[2] = array($s1, $s2, $s3, $s4);
+			$papers[3] = array($w1, $w2);
+			$papers[4] = array($a1, $a2, $a3);
+		}
+		if ($request->department_id == 2) {
+			// Subject Name => EC or English Communication
+			//Listening
+			$l1 = "L-1 Understands and follows instructions in class activities";
+			$l2 = "L-2 Understands transactions in conversations and activities";
+			$l3 = "L-3 Understands and recognises main points in speech";
+			//Reading
+			$r1 = "R-1 Reads high frequency words";
+			$r2 = "R-2 Reads sentences in the text book";
+			//Speaking
+			$s1 = "S-1 Tries to have a conversation form using phrases and sentences";
+			$s2 = "S-2 Asks and answers questions on familiar topics";
+			$s3 = "S-3 Uses clear and loud speech to communicate";
+			$s4 = "S-4 Uses learned phrases and sentences to give ideas and opinions";
+			$s5 = "S-5 Speaks with fluency, proper pronunciation and intonation";
+			//Writing
+			$w1 = "W-1 Writes simple, short words";
+			$w2 = "W-2 Fills in simple forms and worksheets with proper words and phrases";
+			$w3 = "W-3 Expresses opinions and ideas using learned words and sentences";
+			//Attitude
+			$a1 = "A-1 Cooperates and pays attention in class";
+			$a2 = "A-2 Brings books and files, submit homework and classwork on time";
+			$a3 = "A-3 Participates actively in class activities, games, and discussions";
+			$a4 = "A-4 Contributes positively in group work";
+			$heading = array('Listening', 'Reading', 'Speaking', 'Writing', 'Attitude');
+			$papers[0] = array($l1, $l2, $l3);
+			$papers[1] = array($r1, $r2);
+			$papers[2] = array($s1, $s2, $s3, $s4, $s5);
+			$papers[3] = array($w1, $w2, $w3);
+			$papers[4] = array($a1, $a2, $a3, $a4);
+		}
+		$teachername = '';
+		$teachercmd = '';
+		
 		foreach ($getstudents['data'] as $stu) {
-			if($sno == 10){
-				break;
+			$output = '<!DOCTYPE html>
+			<html lang="en">
+			<head>
+			<meta charset="UTF-8">
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>EC_term-report_primary</title>
+			<style>
+			@font-face {
+			font-family: ipag;
+			font-style: normal;
+			font-weight: normal;
+			src: url("' . $fonturl . '");
+			} 
+			body
+			{ 
+				font-family: "ipag", "Times New Roman", !important;
 			}
+			tr,
+			td {
+			font-family: "Times New Roman";
+			word-wrap: break-word;
+			font-style: normal;
+			font-size: 16px;
+			letter-spacing: 0.0133em;
+			}
+			
+			h6 {
+			font-family: "Times New Roman";
+			font-style: normal;
+			font-size: 14px;
+			letter-spacing: 0.0133em;
+			}
+			
+			h1 {
+			font-family: "Times New Roman";
+			font-style: normal;
+			line-height: 60px;
+			letter-spacing: 0.0133em;
+			}
+			
+			h4 {
+			font-family: "Times New Roman";
+			font-style: normal;
+			font-size: 24px;
+			letter-spacing: 0.0133em;
+			}
+			
+			h5 {
+			font-family: "Times New Roman";
+			font-style: normal;
+			font-size: 15px;
+			letter-spacing: 0.0133em;
+			}
+			h3 { font-family: "Times New Roman";
+			}
+			</style>
+			</head>
+			
+			<body>';
 			$sno++;
-			$n1 = ($request->department_id == '1') ? 'P' : 'S';
-			$n2 = $grade['data']['name_numeric'];
-			$n3 = $section['data']['name'];
 			$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
 			$number = $n1 . $n2 . $n3 . sprintf("%02d", $attendance_no);
-			$fonturl = storage_path('fonts/ipag.ttf');
-			$papername1 = "EC-Class";
-			$pdata = [
-				'branch_id' => session()->get('branch_id'),
-				'exam_id' => $request->exam_id,
-				'department_id' => $request->department_id,
-				'class_id' => $request->class_id,
-				'section_id' => $request->section_id,
-				'semester_id' => $request->semester_id,
-				'session_id' => $request->session_id,
-				'academic_session_id' => $request->academic_year,
-				'student_id' => $stu['student_id'],
-				'paper_name' => $papername1
-
-			]; // dd($pdata);
-			$paper = Helper::PostMethod(config('constants.api.getec_marks'), $pdata);
-			$ec_classname = $paper['data']['freetext'] ?? '';
-			$papername2 = "Level";
-			$pdata = [
-				'branch_id' => session()->get('branch_id'),
-				'exam_id' => $request->exam_id,
-				'department_id' => $request->department_id,
-				'class_id' => $request->class_id,
-				'section_id' => $request->section_id,
-				'semester_id' => $request->semester_id,
-				'session_id' => $request->session_id,
-				'academic_session_id' => $request->academic_year,
-				'student_id' => $stu['student_id'],
-				'paper_name' => $papername2
-
-			]; // dd($pdata);
-			$paper = Helper::PostMethod(config('constants.api.getec_marks'), $pdata);
-			$levelname = $paper['data']['freetext']  ?? '';
-			$output = '<!DOCTYPE html>
-				<html lang="en">
-				<head>
-				<meta charset="UTF-8">
-				<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-				<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				<title>EC_term-report_primary</title>
-				<style>
-				@font-face {
-				font-family: ipag;
-				font-style: normal;
-				font-weight: normal;
-				src: url("' . $fonturl . '");
-				} 
-				body
-				{ 
-					font-family: "ipag", "Times New Roman", !important;
-				}
-				tr,
-				td {
-				font-family: "Times New Roman";
-				word-wrap: break-word;
-				font-style: normal;
-				font-size: 16px;
-				letter-spacing: 0.0133em;
-				}
-				
-				h6 {
-				font-family: "Times New Roman";
-				font-style: normal;
-				font-size: 14px;
-				letter-spacing: 0.0133em;
-				}
-				
-				h1 {
-				font-family: "Times New Roman";
-				font-style: normal;
-				line-height: 60px;
-				letter-spacing: 0.0133em;
-				}
-				
-				h4 {
-				font-family: "Times New Roman";
-				font-style: normal;
-				font-size: 24px;
-				letter-spacing: 0.0133em;
-				}
-				
-				h5 {
-				font-family: "Times New Roman";
-				font-style: normal;
-				font-size: 15px;
-				letter-spacing: 0.0133em;
-				}
-				h3 { font-family: "Times New Roman";
-				}
-				</style>
-				</head>
-				
-				<body>';
-
+			// Fetch EC-Class paper marks
+			$ec_classname = $this->commonHelper->fetchPaperMarks($request, $stu, "EC-Class", $subjectID);
+			$ec_classname = ['data']['freetext'] ?? '';
+			// Fetch Level paper marks
+			$levelname = $this->commonHelper->fetchPaperMarks($request, $stu, "Level", $subjectID);
+			$levelname = ['data']['freetext'] ?? '';
 			$output .= '<div class="content" >
 			<table class="main" width="100%" style="border-collapse: collapse;">
 			<tr>
@@ -196,13 +228,13 @@ class ExamPdfController1 extends Controller
 			<tr>
 			<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; width:30%; text-align: center;">
 			
-			<h4 style="margin: 0;margin-top:-30;">' . $acy . ' </h4>
+			<h4 style="margin: 0;margin-top:-30;">' . ($acyear['data']['name'] ?? '') . ' </h4>
 			</td>       
 			<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; width:30%; text-align: left;">
 			<h4 style="margin: 0;margin-top:-30;">English Communication</h4>
 			</td>       
 			<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; width:30%; text-align: left;">
-			<h4 style="margin-top:-20px;">' . $term_name . ' Report</h4>
+			<h4 style="margin-top:-20px;">' . ($term['data']['term_name'] ?? '') . ' Report</h4>
 			</td>
 			</tr> 
 			<tr>
@@ -233,35 +265,6 @@ class ExamPdfController1 extends Controller
 			<table style="border-collapse: collapse; width: 100%;">
 			<tbody>';
 			if ($request->department_id == 1) {
-				// Subject Name => "English Communication"
-
-				//Listening
-				$l1 = "L-1 Understands and follows instructions in class activities";
-				$l2 = "L-2 Understands simple transactions in conversations and activities";
-				$l3 = "L-3 Understands and recognises main points in simple speech";
-				//Reading
-				$r1 = "R-1 Reads simple words and follows instructions on posters and worksheets";
-				$r2 = "R-2 Reads simple sentences in the text book";
-				//Speaking
-				$s1 = "S-1 Tries to have a conversation form using simple phrases and sentences";
-				$s2 = "S-2 Asks and answers simple questions on familiar topics";
-				$s3 = "S-3 Uses clear and loud speech to communicate";
-				$s4 = "S-4 Uses learned phrases and sentences to give ideas and opinions";
-				//Writing
-				$w1 = "W-1 Writes simple, short words";
-				$w2 = "W-2 Fills in simple forms and worksheets with proper words and phrases";
-				//Attitude
-				$a1 = "A-1 Cooperates and pays attention in class";
-				$a2 = "A-2 Participates actively in class activities, games, and discussions";
-				$a3 = "A-3 Contributes positively in group work";
-				$heading = array('Listening', 'Reading', 'Speaking', 'Writing', 'Attitude');
-				$papers[0] = array($l1, $l2, $l3);
-				$papers[1] = array($r1, $r2);
-				$papers[2] = array($s1, $s2, $s3, $s4);
-				$papers[3] = array($w1, $w2);
-				$papers[4] = array($a1, $a2, $a3);
-				$teachername = '';
-				$teachercmd = '';
 				$i = 0;
 				foreach ($heading as $heads) {
 					$output .= '
@@ -270,42 +273,11 @@ class ExamPdfController1 extends Controller
 							style="text-align:center; border: 2px solid black;background-color:#40403a57;font-size:20px;">
 							' . $heads . '</td>
 							</tr>';
-
 					$paperslist = $papers[$i];
-					//dd($Getpaper);
 					$i++;
 					foreach ($paperslist as $papername) {
-						$pdata = [
-							'branch_id' => session()->get('branch_id'),
-							'exam_id' => $request->exam_id,
-							'department_id' => $request->department_id,
-							'class_id' => $request->class_id,
-							'section_id' => $request->section_id,
-							'semester_id' => $request->semester_id,
-							'session_id' => $request->session_id,
-							'academic_session_id' => $request->academic_year,
-							'student_id' => $stu['student_id'],
-
-							'paper_name' => $papername
-
-						];
-
-						$paper = Helper::PostMethod(config('constants.api.getec_marks'), $pdata);
-						//dd($getspsubject1);//dd($pdata);
-						$mark = "";
-						if (!empty($paper['data'])) {
-
-							if ($paper['data']['score_type'] == 'Points') {
-								$mark = $paper['data']['grade_name'];
-							} elseif ($paper['data']['score_type'] == 'Freetext') {
-								$mark = $paper['data']['freetext'];
-							} elseif ($paper['data']['score_type'] == 'Grade') {
-								$mark = $paper['data']['grade'];
-							} else {
-								$mark = $paper['data']['score'];
-							}
-						}
-
+						$paper = $this->commonHelper->fetchPaperMarks($request, $stu, $papername, $subjectID);
+						$mark = $this->commonHelper->getMark($paper);
 						$output .= '<tr>
 								<td style="border: 2px solid black; text-align: left;font-weight: normal;height:25px;font-size:16px;">' . $papername . '
 								</td>
@@ -316,38 +288,6 @@ class ExamPdfController1 extends Controller
 				$output .= ' </tbody>';
 			}
 			if ($request->department_id == 2) {
-				// Subject Name => EC or English Communication
-
-				//Listening
-				$l1 = "L-1 Understands and follows instructions in class activities";
-				$l2 = "L-2 Understands transactions in conversations and activities";
-				$l3 = "L-3 Understands and recognises main points in speech";
-				//Reading
-				$r1 = "R-1 Reads high frequency words";
-				$r2 = "R-2 Reads sentences in the text book";
-				//Speaking
-				$s1 = "S-1 Tries to have a conversation form using phrases and sentences";
-				$s2 = "S-2 Asks and answers questions on familiar topics";
-				$s3 = "S-3 Uses clear and loud speech to communicate";
-				$s4 = "S-4 Uses learned phrases and sentences to give ideas and opinions";
-				$s5 = "S-5 Speaks with fluency, proper pronunciation and intonation";
-				//Writing
-				$w1 = "W-1 Writes simple, short words";
-				$w2 = "W-2 Fills in simple forms and worksheets with proper words and phrases";
-				$w3 = "W-3 Expresses opinions and ideas using learned words and sentences";
-				//Attitude
-				$a1 = "A-1 Cooperates and pays attention in class";
-				$a2 = "A-2 Brings books and files, submit homework and classwork on time";
-				$a3 = "A-3 Participates actively in class activities, games, and discussions";
-				$a4 = "A-4 Contributes positively in group work";
-				$heading = array('Listening', 'Reading', 'Speaking', 'Writing', 'Attitude');
-				$papers[0] = array($l1, $l2, $l3);
-				$papers[1] = array($r1, $r2);
-				$papers[2] = array($s1, $s2, $s3, $s4, $s5);
-				$papers[3] = array($w1, $w2, $w3);
-				$papers[4] = array($a1, $a2, $a3, $a4);
-				$teachername = '';
-				$teachercmd = '';
 				$i = 0;
 				foreach ($heading as $heads) {
 					$output .= '
@@ -361,36 +301,8 @@ class ExamPdfController1 extends Controller
 					//dd($Getpaper);
 					$i++;
 					foreach ($paperslist as $papername) {
-						$pdata = [
-							'branch_id' => session()->get('branch_id'),
-							'exam_id' => $request->exam_id,
-							'department_id' => $request->department_id,
-							'class_id' => $request->class_id,
-							'section_id' => $request->section_id,
-							'semester_id' => $request->semester_id,
-							'session_id' => $request->session_id,
-							'academic_session_id' => $request->academic_year,
-							'student_id' => $stu['student_id'],
-
-							'paper_name' => $papername
-
-						];
-
-						$paper = Helper::PostMethod(config('constants.api.getec_marks'), $pdata);
-						//dd($getspsubject1);//dd($pdata);
-						$mark = "";
-						if (!empty($paper['data'])) {
-
-							if ($paper['data']['score_type'] == 'Points') {
-								$mark = $paper['data']['grade_name'];
-							} elseif ($paper['data']['score_type'] == 'Freetext') {
-								$mark = $paper['data']['freetext'];
-							} elseif ($paper['data']['score_type'] == 'Grade') {
-								$mark = $paper['data']['grade'];
-							} else {
-								$mark = $paper['data']['score'];
-							}
-						}
+						$paper = $this->commonHelper->fetchPaperMarks($request, $stu, $papername, $subjectID);
+						$mark = $this->commonHelper->getMark($paper);
 
 						$output .= '<tr>
 								<td style="border: 2px solid black; text-align: left;font-weight: normal;height:25px;font-size:16px;">' . $papername . '
@@ -420,52 +332,12 @@ class ExamPdfController1 extends Controller
 					
 					</td>
 					</tr>';
-			$papername = "Teacher`s Comments";
-			$pdata = [
-				'branch_id' => session()->get('branch_id'),
-				'exam_id' => $request->exam_id,
-				'department_id' => $request->department_id,
-				'class_id' => $request->class_id,
-				'section_id' => $request->section_id,
-				'semester_id' => $request->semester_id,
-				'session_id' => $request->session_id,
-				'academic_session_id' => $request->academic_year,
-				'student_id' => $stu['student_id'],
-				'paper_name' => $papername
+			$paper = $this->commonHelper->fetchPaperMarks($request, $stu, 'Teacher`s Comments', $subjectID);
 
-			];
-			$paper = Helper::PostMethod(config('constants.api.getec_marks'), $pdata);
 			//dd($getspsubject1);//dd($pdata);
-			$teachercmd = "";
-			if (!empty($paper['data'])) {
+			$teachercmd = $this->commonHelper->getMark($paper);
 
-				if ($paper['data']['score_type'] == 'Points') {
-					$teachercmd = $paper['data']['grade_name'];
-				} elseif ($paper['data']['score_type'] == 'Freetext') {
-					$teachercmd = $paper['data']['freetext'];
-				} elseif ($paper['data']['score_type'] == 'Grade') {
-					$teachercmd = $paper['data']['grade'];
-				} else {
-					$teachercmd = $paper['data']['score'];
-				}
-			}
-			$papername = "Teacher Name";
-			$pdata = [
-				'branch_id' => session()->get('branch_id'),
-				'exam_id' => $request->exam_id,
-				'department_id' => $request->department_id,
-				'class_id' => $request->class_id,
-				'section_id' => $request->section_id,
-				'semester_id' => $request->semester_id,
-				'session_id' => $request->session_id,
-				'academic_session_id' => $request->academic_year,
-				'student_id' => $stu['student_id'],
-				'paper_name' => $papername
-
-			];
-			// dd($pdata);
-
-			$paper = Helper::PostMethod(config('constants.api.getec_marks'), $pdata);
+			$paper = $this->commonHelper->fetchPaperMarks($request, $stu, 'Teacher Name', $subjectID);
 			$teachername = $paper['data']['freetext'] ?? '';
 			$output .= '<tr>
 					<td class="content-wrap aligncenter" colspan="3" style="margin: 0; padding-left: 20px;padding-right: 20px;padding-top:-10px; text-align: center;">
@@ -511,7 +383,7 @@ class ExamPdfController1 extends Controller
 								<div style="page-break-after: always;"></div>';
 
 			$output .= '</body></html>';
-			
+
 			$pdf = \App::make('dompdf.wrapper');
 
 			// Set custom paper size
@@ -708,7 +580,7 @@ class ExamPdfController1 extends Controller
 		}
 
 		$pdfFiles = [];
-		$output = '';
+		// $output = '';
 		if ($request->department_id == 1) // Primary 
 		{
 			if ($stuclass == 1 || $stuclass == 2) {
@@ -719,12 +591,10 @@ class ExamPdfController1 extends Controller
 				];
 				$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 				foreach ($getstudents['data'] as $stu) {
-					if($sno == 10){
-						break;
-					}
+
 					$sno++;
 					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
-					$output .= '<!DOCTYPE html>
+					$output = '<!DOCTYPE html>
 						<html lang="en">
 						
 						<head>
@@ -1319,12 +1189,10 @@ class ExamPdfController1 extends Controller
 				];
 				$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 				foreach ($getstudents['data'] as $stu) {
-					if($sno == 10){
-						break;
-					}
+
 					$sno++;
 					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
-					$output .= '<!DOCTYPE html>
+					$output = '<!DOCTYPE html>
 						<html lang="en">
 						
 						<head>
@@ -2001,12 +1869,10 @@ class ExamPdfController1 extends Controller
 				];
 				$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 				foreach ($getstudents['data'] as $stu) {
-					if($sno == 10){
-						break;
-					}
+
 					$sno++;
 					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
-					$output .= '<!DOCTYPE html>
+					$output = '<!DOCTYPE html>
 						<html lang="en">
 						
 						<head>
@@ -2633,12 +2499,12 @@ class ExamPdfController1 extends Controller
 
 
 			foreach ($getstudents['data'] as $stu) {
-				if($sno == 10){
+				if ($sno == 10) {
 					break;
 				}
 				$sno++;
 				$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
-				$output .= '<!DOCTYPE html>
+				$output = '<!DOCTYPE html>
 					<html lang="en">
 					
 					<head>

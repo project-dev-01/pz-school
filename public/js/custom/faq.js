@@ -1,18 +1,48 @@
 $(function () {
-    
+    function openJSKL() {
+        // Get a token from the endpoint
+        $.ajax({
+            url: "https://jskl.jessesoo4148.workers.dev/token",
+            headers: {
+                Authorization: "Basic anNrbC1icmlkZ2UtYXNpYTpmYzk0ZTA2ZTg2ZGVjNTJmMDI1OWI1Mzc="
+            },
+            method: "GET"
+        }).done(function(token) {
+            // Use the token to fetch content
+            $.ajax({
+                url: "https://jskl.jessesoo4148.workers.dev/proxy",
+                data: {
+                    token: token,
+                    proxyUrl: "https://jskl.r-cms.jp/download/"
+                },
+                method: "GET"
+            }).done(function(html) {
+                // Open a new window
+                var newWindow = window.open();
+                newWindow.document.open();
+                newWindow.document.write(html);
+                newWindow.document.close();
+            });
+        });
+    }
+
+    // Bind the click event to the link
+    $('#new-question-link').click(function() {
+        openJSKL();
+    });
     // rules validation
     $("#sendFaqMail").validate({
         rules: {
-            subject:"required",
+            subject: "required",
         }
     });
 
     $('#sendFaqMail').on('submit', function (e) {
         e.preventDefault();
-        
+
         var Check = $("#sendFaqMail").valid();
         if (Check === true) {
-            
+
             $('#faq-mail').modal('hide');
             $("#overlay").fadeIn(300);
             var email = $("#email").val();
@@ -29,7 +59,7 @@ $(function () {
             formData.append('remarks', remarks);
             formData.append('subject', subject);
             formData.append('school_name', schoolName);
-            
+
             var form = this;
             $.ajax({
                 url: faqEmail,

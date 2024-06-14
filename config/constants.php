@@ -3,7 +3,7 @@ $url = "http://localhost/paxsuzen-api-dev/public/api";
 // $url = "https://api.suzen.school/api";
 $schoolurl = "http://localhost/school-management-system/public"; // end line don't use "/"
 return [
-    'branch_id'=>'5',
+    'branch_id'=>'6',
     'school_name'=>'クアラルンプール日本人学校',
     'school_image'=>'logo_jskl.jpeg',
     'image_url' => "http://localhost/paxsuzen-api-dev/public",
@@ -1117,6 +1117,7 @@ return [
 
         
         'getec_marks' => $url.'/exam_result/getec_marks',
+        'get_subject_details' => $url.'/exam_result/get_subject_details',
         'getec_teacher' => $url.'/exam_result/getec_teacher',        
         'getsubjectpapermarks' => $url.'/exam_result/getsubjectpapermark',
         'stuexam_ppmarklist' => $url.'/exam_result/stuexam_ppmarklist',        
@@ -1131,6 +1132,7 @@ return [
         'get_student_medical_record_admin' => $url.'/get_student_medical_record_admin',
         'get_allergies_name_list' => $url.'/get_allergies_name_list',
         'student_medical_report_pdf' => $url.'/student_medical_report_pdf',
+        'stuexam_ppmarkchartlist' => $url.'/exam_result/stuexam_ppmarkchartlist',
         
       ]
 

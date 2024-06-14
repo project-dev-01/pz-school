@@ -83,6 +83,28 @@
                 </div>
                 <!--/col-md-5-->
             </div>
+            <div class="row pt-3">
+                <div class="col-lg-5 offset-lg-1">
+                    <!-- Question/Answer -->
+                    <div>
+                        <div class="faq-question-q-box">Q.</div>
+                        <h4 class="faq-question" data-wow-delay=".1s">Add a new question at Parent Portal FAQ page</h4>
+                        <p class="faq-answer mb-4">
+                            <span class="text-left" style="display: inline-block; color: red;margin-top:10px;">
+                                <a href="javascript:void(0);" style="color: red;" id="new-question-link">New question Click here</a>
+                                <br>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <!--/col-md-5 -->
+
+                <div class="col-lg-5">
+
+
+                </div>
+                <!--/col-md-5-->
+            </div>
             <!-- end row -->
         </div>
     </div>
