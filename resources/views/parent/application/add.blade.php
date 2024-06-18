@@ -732,7 +732,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="mother_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control copy_parent_info mother_form number_validation" id="mother_phone_number" value="{{ isset($guardian['mother_phone_number']) ? $guardian['mother_phone_number'] : ''}}" name="mother_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info mother_form number_validation" id="mother_phone_number"  name="mother_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
                                             <label for="mother_phone_number" class="error"></label>
                                         </div>
                                     </div>
@@ -861,7 +861,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="father_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control copy_parent_info father_form number_validation" id="father_phone_number" value="{{ isset($guardian['father_phone_number']) ? $guardian['father_phone_number'] : ''}}" name="father_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                            <input type="text" class="form-control copy_parent_info father_form number_validation" id="father_phone_number"  name="father_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
                                             <label for="father_phone_number" class="error"></label>
                                         </div>
                                     </div>
@@ -1331,6 +1331,7 @@
 <!-- Init js-->
 <script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
 <script src="{{ asset('country/js/countrySelect.js') }}"></script>
+
 <script>
     $(".country").countrySelect({
         defaultCountry: "jp",

@@ -1336,9 +1336,11 @@ class AuthController extends Controller
         try {
             $session_id = session()->get('user_id');
             $role_id = session()->get('role_id');
+            $branch_id = session()->get('branch_id');
             $data = [
                 'userID' => $session_id,
-                'role_id' => $role_id
+                'role_id' => $role_id,
+                'branch_id' => $branch_id
             ];
             if ($session_id !== null) {
                 $response = Helper::PostMethod(config('constants.api.lastlogout'), $data);
@@ -1351,7 +1353,6 @@ class AuthController extends Controller
                 return response()->json(['error' => 'Token expired or invalid 403.'], 403);
             }
         } catch (\Exception $e) {
-
             // CSRF token mismatch occurred, handle the error
             return response()->json(['error' => $e->getMessage()], 500);
         }
