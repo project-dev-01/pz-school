@@ -43,7 +43,7 @@ return [
     "address_2" => "住所２",
     "academic_details" => "学籍情報",
     "academic_year" => "入学希望年度",
-    "register_number" => "登録番号",
+    "register_number" => "学籍番号",
     "roll_number" => "学籍番号",
     "admission_date" => "入学日",
     "grade" => "学年",
