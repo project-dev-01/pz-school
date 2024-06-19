@@ -1836,6 +1836,7 @@ return [
   "download_form1" => "Download - Form 1",
   "download_form2a" => "Download - Form 2(A)",
   "download_form2b" => "Download - Form 2(B)",
+  "download_form2ab" => "Download - Form 2(AB)",
 
   "download_form1title" => "Elementary School Guidance Schedule",
   "download_form1title2" => "From 1 (Records of Student Registration)",

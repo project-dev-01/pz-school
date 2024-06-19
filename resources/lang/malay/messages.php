@@ -1833,6 +1833,7 @@ return [
     "download_form1" => "Download - Form 1",
     "download_form2a" => "Download - Form 2(A)",
     "download_form2b" => "Download - Form 2(B)",
+    "download_form2ab" => "Download - Form 2(AB)",
 
     "download_form1title" => "Jadual Bimbingan Sekolah Rendah",
     "download_form1title2" => "Daripada 1 (Rekod Pendaftaran Pelajar)",

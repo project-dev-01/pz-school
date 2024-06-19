@@ -359,6 +359,7 @@
                             </div>
 
                             <div class="col-md-12" id="secondary_personal">
+                                @include('admin.exam_results.chartstudent_table')
                                 <div class="clearfix mt-4">
                                     <form id="form3" method="post" action="{{ route('admin.exam_results.downbypersoanalreport') }}">
                                         @csrf

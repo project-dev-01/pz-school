@@ -392,7 +392,8 @@ class ExamindividualPdfController extends Controller
 		// filename
 		$now = now();
 		$name = strtotime($now);
-		$fileName = __('messages.english_communication') . $stu['eng_name'] . $name . ".pdf";
+		//$fileName = __('messages.english_communication') . $stu['eng_name'] . $name . ".pdf";
+		$fileName = __('messages.english_communication') . "_" . $number . "_" . $stu['eng_name'] . "_" . $name . ".pdf";
 		return $this->commonHelper->generatePdf($customPaper, $output, $fileName);
 		//return $pdf->download($fileName);
 		// return $pdf->stream();
@@ -2482,7 +2483,7 @@ class ExamindividualPdfController extends Controller
 					</tr>
 				
 					<tr style="height:60px;">
-						<td colspan="2">ロール番号 : ' . $stu['attendance_no'] . '</td>
+						<td colspan="2"> ' . $stu['attendance_no'] . '</td>
 						<td colspan="3">名前 :' . $stu['name'] . '</td>
 					</tr>
 					<tr> 

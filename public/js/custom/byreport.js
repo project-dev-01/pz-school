@@ -339,7 +339,7 @@ $(function () {
         } else if (reportType == 'report_card') {
             var studentTableID = '#student-table';
         } else if (reportType == 'personal_test_result') {
-            var studentTableID = '#student-table';
+            var studentTableID = '#chartstudent-table';
         } else {
             // def
             var studentTableID = '#student-table';

@@ -394,7 +394,9 @@ class ExamPdfController extends Controller
 		// Generate filename
 		$now = now();
 		$timestamp = strtotime($now);
-		$fileName = __('messages.english_communication') . '-' .  ($grade['data']['name'] ?? '') . '-' . ($section['data']['name'] ?? '') . '-' . $timestamp . ".pdf";
+		$department = ($request->department_id == 1) ? 'Primary' : 'Secondary';
+		$fileName = __('messages.english_communication') . "_" . $department . "_" . $gradename . "_" . $classname . "_" . $timestamp . ".pdf";
+		//$fileName = __('messages.english_communication') . '-' .  ($grade['data']['name'] ?? '') . '-' . ($section['data']['name'] ?? '') . '-' . $timestamp . ".pdf";
 		return $this->commonHelper->generatePdf($customPaper, $output, $fileName);
 	}
 	public function downbyreportcard(Request $request)

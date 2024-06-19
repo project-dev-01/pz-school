@@ -412,15 +412,13 @@
 						@endif
 					</div> <!-- end col -->
                     <div class="col-xl-3 col-3">
-						
-						<a href="{{url('admin/yoroku/downloadform2a/'.$student['id'])}}" class="btn btn-warning">{{ __('messages.download_form2a') }}</a> 
-						
+						@if($student['department_id']==1)
+						<a href="{{url('admin/yoroku/downloadpriYorokuform2ab/'.$student['id'])}}" class="btn btn-warning">{{ __('messages.download_form2ab') }}</a> 
+						@elseif($student['department_id']==2)
+						<a href="{{url('admin/yoroku/downloadsecYorokuform2ab/'.$student['id'])}}" class="btn btn-warning">{{ __('messages.download_form2ab') }}</a> 
+						@endif
 					</div> <!-- end col -->
-                    <div class="col-xl-3 col-3">
-						
-						<a href="{{url('admin/yoroku/downloadform2b/'.$student['id'])}}" class="btn btn-warning">{{ __('messages.download_form2b') }}</a> 
-						
-					</div> <!-- end col -->
+                   
 				</div><!-- end row -->
 			</div> <!-- end card-->
 		</div> <!-- end col-->
