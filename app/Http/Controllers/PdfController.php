@@ -4142,6 +4142,10 @@ class PdfController extends Controller
         $allergies_details = isset($response['data']['allergies']) ? $response['data']['allergies'] : [];
         $allergies_name = isset($allergies_name_list['data']) ? $allergies_name_list['data'] : [];
         $studentmedical = isset($response['data']['student']) ? $response['data']['student'] : [];
+        $studentEnrollData = isset($response['data']['enroll_data']) ? $response['data']['enroll_data'] : [];
+        $studentCurrentHealthData = isset($response['data']['current_health_condition']) ? $response['data']['current_health_condition'] : [];
+        
+       
         $fonturl = storage_path('fonts/ipag.ttf');
         $response = "<!DOCTYPE html>";
         $response .= "<html><head>";
@@ -4149,759 +4153,950 @@ class PdfController extends Controller
         $response .= '<style>';
         // $test .='* { font-family: DejaVu Sans, sans-serif; }';
         $response .= '@font-face {
-            font-family: ipag;
+            font-family: Times New Roman ipag;
             font-style: normal;
-            font-weight: normal;
+            font-weight: 300;
             src: url("' . $fonturl . '");
-        } 
-        body{ font-family: ipag !important;}
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            font-size: 13px;
-        }
-
-        td,
-        th {
+          }
+      
+          body {
+            font-family: "ipag", "Times New Roman", !important;
+          }
+          td,
+          th {
             border: 1px solid black;
             text-align: left;
-            font-size: 13px;
-
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        .column {
+            letter-spacing: 0.0133em;
+            word-wrap: break-word;
+            font-size: 16px;
+            font-family: "ipag";
+          }
+      
+          .column1 {
             float: left;
-            width: 50%;
+            width: 30%;
             padding: 10px;
-        }
-
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-        .line {
-            height: 10px;
-            right: 10px;
-            margin: auto;
-            left: -5px;
-            width: 100%;
-            border-top: 1px solid #000;
-            -webkit-transform: rotate(14deg);
-            -ms-transform: rotate(14deg);
-            transform: rotate(14deg);
-        }
-
-        .diagonal {
-            width: 150px;
-            height: 40px;
-        }
-
-        .diagonal span.lb {
-            bottom: 2px;
-            left: 2px;
-        }
-
-        .diagonal span.rt {
-            top: 2px;
-            right: 2px;
-        }
-
-        .diagonalCross2 {
-            background: linear-gradient(to top right, #fff calc(50% - 1px), black, #fff calc(50% + 1px))
-        }
-
-        .rtxt {
-            transform: rotate(90deg);
-            transform-origin: center;
-            position: relative;
-        }
-
-        .rtd {
-            white-space: nowrap;
-            vertical-align: bottom;
+            height: 80px;
+          }
+      
+          .vertical-text {
+            writing-mode: vertical-rl;
+            text-align: center;
             width: 0px;
-        }';
+            line-height: 1;
+            padding: 0;
+            margin: 0;
+          }';
         $response .= '</style>';
         $response .= "</head>";
         $response .= "<body>";
-        $response .= '<div class="content" style="box-sizing: border-box; max-width: 800px; display: block; margin: 0 auto; padding: 20px;border-radius: 7px; margin-top: 20px;background-color: #fff; border: 1px solid black;">
-        <table class="main" width="100%">
-            <div class="row">
-                <div class="col-md-6">
-                </div>
-                <div class="col-md-6">
-                    <h5 style="float:right;">The JAPANESE SCHOOL of KUALA LUMPUR</h5>
-                </div>
-            </div>
+        $response .= ' <div class="content">
+        <table class="main" width="100%" style="border-collapse: collapse;">
+          <div class="row">
             <!-- 1 -->
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 style="text-align:center;">MY MEDICAL RECORD</h3>
-                </div>
+            <div>
+              <p style="float:right;">'.  __('messages.japanese_school_kuala_lumpur') .'</p>
             </div>
-            <table style="margin-bottom: 15px;">
-                <thead>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td rowspan="2">
-                            <p>Grade</p>
-                            <p style="text-align:center;">20</p>
-                            <p style="text-align:right;">Class</p>
-                        </td>
-                        <td>Grade</td>
-                        <td>P 1 20</td>
-                        <td>P 2 20</td>
-                        <td>P 3 20</td>
-                        <td>P 4 20</td>
-                        <td>P 5 20</td>
-                        <td>P 6 20</td>
-                        <td>S 1 20</td>
-                        <td>S 2 20</td>
-                        <td>S 3 20</td>
-                    </tr>
-                    <tr>
-                        <td>Class</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td colspan="8"></td>
-                        <td colspan="3">
-                            <p style="text-align:left;">Gender</p>
-                            <p style="text-align:center;">Male . Female</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="8">
-                            <p style="text-align:left;">Student Name:'. $studentmedical['name'] .'</p>
-                            <p style="text-align:center;">__________________ &nbsp; &nbsp; __________________</p>
-                            <p style="text-align:center;">Firstname &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Familyname</p>
-                        </td>
-                        <td colspan="3" style="text-align:left;">
-                            <p>Blood Type:</p>
-                            <p style="text-align:center;">A . B . O . AB</p>
-                            <p style="text-align:center;">Rh (+ -)</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="8">
-                            <p style="text-align:left;">Date of Birth:</p>
-                            <p style="text-align:center;">Date: &nbsp;&nbsp; Month : &nbsp;&nbsp; Year :&nbsp;&nbsp;</p>
-                        </td>
-                        <td colspan="3">
-                            <p style="text-align:left;">Normal Temparature: </p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <!-- 2 --->
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 style="text-align:left;">1</h3>
-                </div>
-            </div>
-            <table style="margin-bottom: 15px;">
-                <thead>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td rowspan="3" style="width: 100px;">
-                            <p>Emergency Contact</p>
-                        </td>
-                        <td colspan="2" style="width: 132px;">
-                            <p>Name</p>
-                        </td>
-                        <td style="width: 50px;"></td>
-                        <td colspan="2">
-                            <p>Contact Number</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 50px;">1</td>
-                        <td></td>
-                        <td></td>
-                        <td colspan="2"></td>
-                    </tr>
-                    <tr>
-                        <td style="width: 50px;">2</td>
-                        <td></td>
-                        <td></td>
-                        <td colspan="2"></td>
-                    <tr>
-                        <td>
-                            <p>Address</p>
-                        </td>
-                        <td colspan="5">
-                            <div class="column">
-                                <p>Condominium Address :</p>
-                            </div>
-                            <div class="column">
-                                <p>District :</p>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p>Home Doctor</p>
-                        </td>
-                        <td colspan="5">
-                            <div class="column">
-                                <p>Hospital</p>
-                            </div>
-                            <div class="column">
-                                <p>Doctors Name</p>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p>Insurance</p>
-                        </td>
-                        <td colspan="5">
-                            <div class="form-group">
-                                <p>
-                                    <input type="radio" name="yes_no" checked style="margin: 10px;">Yes</input>
-                                    <input type="radio" name="yes_no" style="margin: 10px;">No</input>
-                                    <label style="margin-left: 30px;">Company name :</label>
-                                </p>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <!-- 3--->
-            <div class="row">
-                <div class="col-md-12">
-                    <h4 style="text-align:left;">2 Place "O", if any of the condition are present.</h4>
-                </div>
-            </div>
-            <table style="margin-bottom: 15px;">
-                <tbody>
-                    <tr style="height: 30px;">
-                        <td rowspan="2">About allergies</td>
-                        <td rowspan="2 style=" width: 40px;">Age of onset</td>
-                        <td colspan="3"></td>
-                    </tr>
-                    <tr style="height: 30px;">
-                        <td rowspan="1">Undern Treatment</td>
-                        <td rowspan="1">Follow up</td>
-                        <td rowspan="1">(age)
-                            Treated ( )
-                        </td>
-                    </tr>
-                    <tr>
-                    </tr>';
-                    foreach($allergies_name as $index => $allergies){
-                    $response .= '<tr style="height: 30px;">
-                        <td>' .$allergies['name']. '</td>
-                       <td>' .$allergies_details[$allergies['id']]['age_onset']. '</td>
-                       <td>' .$allergies_details[$allergies['id']]['under_treatment']. '</td>
-                       <td>' .$allergies_details[$allergies['id']]['follow_up']. '</td>
-                       <td>' .$allergies_details[$allergies['id']]['age_treat']. '</td>
-                    </tr>';
-                  
-                    }
-                   $response .= '<tr>
-                        <td colspan="5">Please write about the allergen if any</td>
-                    </tr>
-                    <tr>
-                        <td colspan="5">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <span style="margin-right:10px;">*</span>
-                                    <label>Anaphylactic Shock :</label>
-                                    <input type="radio" name="yes_no" checked style="margin: 10px;">Yes</input>
-                                    <input type="radio" name="yes_no" style="margin: 10px;">No</input>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <span style="margin-right:10px;">*</span>
-                                    <label>Epinephrine autoinjector :</label>
-                                    <input type="radio" name="yes_no" checked style="margin: 10px;">Yes</input>
-                                    <input type="radio" name="yes_no" style="margin: 10px;">No</input>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <span style="margin-right:10px;">*</span>
-                                    <label>Other Medicines :</label>
-                                    <input type="radio" name="yes_no" checked style="margin: 10px;">Yes</input>
-                                    <input type="radio" name="yes_no" style="margin: 10px;">No</input>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-    </div><!--Col-12-->
-    </table>
-    </div>
-
-    <div class="content" style="box-sizing: border-box; max-width: 800px; display: block; margin: 0 auto; padding: 20px;border-radius: 7px; margin-top: 20px;background-color: #fff;border: 1px solid black;">
-        <table class="main" width="100%">
-            <!-- 1 -->
-            <div class="row">
-                <div class="col-md-12">
-                    <h4 style="text-align:left;margin-top: 0px;">3 Medical History(Age)&nbsp;&nbsp; Name:</h4>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <table style="margin-bottom: 15px;">
-                    <thead>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Heart problem ( )</td>
-                            <td>Epilepsy ( )</td>
-                            <td>Measles ( )</td>
-                        </tr>
-                        <tr>
-                            <td>Kawasaki disease ( )</td>
-                            <td>Febrile convulsions ( )</td>
-                            <td>Chicken pox ( )</td>
-                        </tr>
-                        <tr>
-                            <td>Scoliosis ( )</td>
-                            <td>Tuberculosis ( )</td>
-                            <td>Mumps ( )</td>
-                        </tr>
-                        <tr>
-                            <td>Kidney problems ( )</td>
-                            <td rowspan="2">Others
-                                <br>( )
-                            </td>
-                            <td>Rubella<br>(German measles) ( )</td>
-                        </tr>
-                        <tr>
-                            <td>Diabetes ( )</td>
-                            <td>Dengue Fever ( )</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" style="text-align:left;">Operated Disease ( )
-                                Injury ( )
-                                Illness ( )
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <!-- 2 --->
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4 style="text-align:left;margin-top: 0px;">4 Immunization Histroy</h4>
-                    </div>
-                </div>
-                <table style="margin-bottom: 15px;">
-                    <thead>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Type</td>
-                            <td style="width: 125px;">times</td>
-                            <td>Type</td>
-                            <td style="width: 125px;">times</td>
-                        </tr>
-                        <tr>
-                            <td>Japanese encephalitis</td>
-                            <td style="width: 125px;"></td>
-                            <td>Streptpcpccus pneumoniae</td>
-                            <td style="width: 125px;"></td>
-                        </tr>
-                        <tr>
-                            <td>3 Triple antigen</td>
-                            <td style="width: 125px;"></td>
-                            <td>(Hib)</td>
-                            <td style="width: 125px;"></td>
-                        </tr>
-                        <tr>
-                            <td>4 Quadruple antigen</td>
-                            <td style="width: 125px;"></td>
-                            <td>Covid 19</td>
-                            <td style="width: 125px;"></td>
-                        </tr>
-                        <tr>
-                            <td>BCG</td>
-                            <td style="width: 125px;"></td>
-                            <td>Rabies vaccine</td>
-                            <td style="width: 125px;"></td>
-                        </tr>
-                        <tr>
-                            <td>Rubella (MR)</td>
-                            <td style="width: 125px;"></td>
-                            <td>Tetanus</td>
-                            <td style="width: 125px;"></td>
-                        </tr>
-                        <tr>
-                            <td>Chicken pox</td>
-                            <td style="width: 125px;"></td>
-                            <td rowspan="2" style="vertical-align:text-top;">Advised by doctors against vaccination.</td>
-                            <td rowspan="2" style="width: 125px;"></td>
-                        </tr>
-                        <tr>
-                            <td>Mumos</td>
-                            <td style="width: 125px;"></td>
-
-                        </tr>
-
-                    </tbody>
-                </table>
-                <!-- 3--->
-                <div class="row">
-                    <div class="column" style="padding:0px;">
-                        <h4 style="text-align:left;margin-top: 0px;">5 Current Health Condition</h4>
-                    </div>
-                    <div class="column" style="padding:0px;">
-                        <h4 style="text-align:right;margin-top: 0px;">Grade()</h4>
-                    </div>
-                </div>
-                <table style="margin-bottom: 15px;">
-                    <thead>
-                    </thead>
-                    <tbody>
-                        <tr style="text-align:center;">
-                            <td></td>
-                            <td colspan="10" style="width:45px;">Place "O", if any of the conditions are present.</td>
-                            <td style="text-align:center;">P <br>1</td>
-                            <td style="text-align:center;">P <br>2</td>
-                            <td style="text-align:center;">P <br>3</td>
-                            <td style="text-align:center;">P <br>4</td>
-                            <td style="text-align:center;">P <br>5</td>
-                            <td style="text-align:center;">P <br>6</td>
-                            <td style="text-align:center;">S <br>1</td>
-                            <td style="text-align:center;">S <br>2</td>
-                            <td style="text-align:center;">S <br>3</td>
-
-                        </tr>
-
-                        <tr>
-                            <td rowspan="9" class="">
-                                <div class="rtxt">Internal Medicine</div>
-                            </td>
-                            <td colspan="10" style="width:45px;">Develops a fever asily.</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" style="width:45px;">Frequent headaches.</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" style="width:45px;">Dyspepsia & stomachache and cliarrhea easily.</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" style="width:45px;">Constipates easily.</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" style="width:45px;">Vomits easily.</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" style="width:45px;">Faints easily.</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" style="width:45px;">Dizziness easily.</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" style="width:45px;">Nettle rash easily.</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" style="width:45px;">Prone to car sickness.</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td rowspan="5" class="rtd">
-                                <div class="rtxt">ENT</div>
-                            </td>
-                            <td colspan="10" style="width:45px;">Has poor hearing.</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" style="width:45px;">Has had otitis media before.</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" style="width:45px;">Bleeds from the nose easily.</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" style="width:45px;">nasal congestion and sevene running nose easily. </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" style="width:45px;">Throat is swollen easily.</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td rowspan="4" class="rtd">
-                                <div class="rtxt">Eye</div>
-                            </td>
-                            <td colspan="10" style="width:45px;">Squinted eyes to view from a distance</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" style="width:45px;">eye irritation & redness easily.</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" style="width:45px;">Use glasses or lenses</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" style="width:45px;">Wrong Colour</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td rowspan="4" class="rtd">
-                                <div class="rtxt">Dent</div>
-                            </td>
-                            <td colspan="10" style="width:45px;">Has a sensistive tooth or toothache</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" style="width:45px;">Bleed from gum</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" style="width:45px;">Pain or sound in jaw joint</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10" style="width:45px;">Has been Orthodontics</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td colspan="20">Any medicine to take daily?<br>(No/Yes) (Name of medicine:)</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4 style="text-align:left;">6 Any Other medical concerns which require the attention of the medical practitioner</h4>
-                    </div>
-                </div>
-                <table class="table table-bordered" style="margin-bottom: 15px;">
-                    <thead>
-                    </thead>
-                    <tbody>
-                        <tr style="vertical-align: text-top;">
-                            <td style="width:156px;height:60px;"><b>Date:</b></td>
-                            <td colspan="20"><b>Remarks:</b></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </table>
+          </div>
+    
+        </table>
+        <!-- 2 -->
+        <div class="row" style="margin-top:30px;">
+          <div>
+            <p style="text-align:center;font-size:25px;">'. __('messages.my_medical_record')  .'</p>
+          </div>
         </div>
+        <!-- 3 -->
+        <table class="table table-bordered" style="margin-bottom: 30px;"  width="100%" style="border-collapse: collapse;">
+          <thead>
+          </thead>
+          <tbody>';
+        
+          if (empty($studentEnrollData)) {
+            // If no data, display a row with "N/A"
+            $response .= '<tr>
+                    <td rowspan="2">'. __('messages.grade') .'/'. __('messages.class') .'</td>
+                    <td>'. __('messages.grade') .'</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>'. __('messages.class') .'</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                </tr>';
+        } else {
+             // Display the header row only once
+                $response .= '<tr>
+                <td rowspan="2">'. __('messages.grade') .'/'. __('messages.class') .'</td>
+                <td>'. __('messages.grade') .'</td>';
+
+            foreach ($studentEnrollData as $stu) {
+                $n1 = ($stu['department_id'] == '1') ? 'P' : 'S';
+                $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $stu['class_id']]);
+                $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                $attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
+                $number = $n1 . $n2 . sprintf("%02d", $attendance_no);
+
+                $response .= '<td>'.$number.'</td>';
+            }
+
+            // Fill the remaining cells with "N/A" if the number of students is less than 9
+            for ($i = count($studentEnrollData); $i < 9; $i++) {
+                $response .= '<td>N/A</td>';
+            }
+
+            $response .= '</tr>
+                <tr>
+                    <td>'. __('messages.class') .'</td>';
+
+            foreach ($studentEnrollData as $stu) {
+                $sectionDetails = Helper::PostMethod(config('constants.api.section_details'), ['section_id' => $stu['section_id']]);
+                $n3 = isset($sectionDetails['data']['name']) ? $sectionDetails['data']['name'] : 'N/A';
+                $response .= '<td>'.$n3.'</td>';
+            }
+
+            // Fill the remaining cells with "N/A" if the number of students is less than 9
+            for ($i = count($studentEnrollData); $i < 9; $i++) {
+                $response .= '<td>N/A</td>';
+            }
+
+            $response .= '</tr>';
+            
+        }
+        $response .=  '<tr style="height: 60px;">
+              <td colspan="8"></td>
+              <td colspan="3">
+                <p style="text-align:left;">'. __('messages.gender')  .'</p>
+                <p style="text-align:center;">Male . Female</p>
+              </td>
+            </tr>
+            <tr style="height: 60px;">
+              <td colspan="8">
+                <p style="text-align:left;">&nbsp;&nbsp;'. __('messages.student_name')  .':</p>
+                <span style="text-align:center;">&nbsp;&nbsp;&nbsp;&nbsp;'. $studentmedical['first_name'] .' &nbsp;&nbsp; '. $studentmedical['last_name'] .'</span>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Firstname &nbsp;&nbsp; Familyname</p>
+              </td>
+              <td colspan="3" style="text-align:left;">
+                <p>'. __('messages.blood_type')  .':</p>
+                <p style="text-align:center;">A . B . O . AB</p>
+                <p style="text-align:center;">Rh (+ -)</p>
+              </td>
+            </tr>
+            <tr style="height: 60px;">
+              <td colspan="8">
+                <p style="text-align:left;">'. __('messages.date_of_birth') .':</p>
+                <p style="text-align:center;">Date: &nbsp;&nbsp; Month : &nbsp;&nbsp; Year :&nbsp;&nbsp;</p>
+              </td>
+              <td colspan="3">
+                <p style="text-align:left;">'. __('messages.normal_temperature') .': '.$studentmedical['normal_temperature'].'</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- 4 --->
+        <div class="row">
+          <div>
+            <p style="text-align:left;">1.'. __('messages.basic_details').'</p>
+          </div>
+        </div>
+        <table class="table table-bordered" style="margin-bottom: 35px;"  width="100%" style="border-collapse: collapse;">
+          <thead>
+          </thead>
+          <tbody>
+            <tr style="height: 40px;">
+              <td rowspan="3" style="width: 100px;">
+                <p>'. __('messages.emergency_contact') .'</p>
+              </td>
+              <td colspan="2" style="width: 132px;">
+                <p>'. __('messages.name') .'</p>
+              </td>
+              <td style="width: 50px;"></td>
+              <td colspan="2">
+                <p>'. __('messages.contact_number') .'</p>
+              </td>
+            </tr>
+            <tr style="height: 40px;">
+              <td style="width: 50px;">1</td>
+              <td></td>
+              <td></td>
+              <td colspan="2"></td>
+            </tr>
+            <tr style="height: 40px;">
+              <td style="width: 50px;">2</td>
+              <td></td>
+              <td></td>
+              <td colspan="2"></td>
+            <tr style="height: 40px;">
+              <td>
+                <p>'. __('messages.address') .'</p>
+              </td>
+              <td colspan="5"><p style="text-align:left;margin-top:30px;">'. __('messages.condominium_address') .':'.$studentmedical['address_condominium'].'</p>
+			  <p style="text-align:center;margin-top:-50px;">'. __('messages.district') .':'.$studentmedical['address_district'].'</p></td>
+            </tr>
+            <tr style="height: 40px;">
+              <td>
+                <p>'. __('messages.home_doctor') .'</p>
+              </td>
+              <td colspan="5"><p style="text-align:left;">'. __('messages.hospital_name') .':'.$studentmedical['hospital_name'].'</p>
+			  <p style="text-align:center;margin-top:-40px;">'. __('messages.doctor_name') .':'.$studentmedical['doctor_name'].'</p></td>
+            </tr>
+            <tr style="height: 40px;">
+              <td>
+                <p>'. __('messages.insurance') .'</p>
+              </td>
+              <td colspan="5"><p style="text-align:left;">'.$studentmedical['insurance_yes_no'].'</p>
+			  <p style="text-align:center;margin-top:-40px;">'. __('messages.company_name') .':'.$studentmedical['company_name'].'</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- 3--->
+        <div class="row">
+          <div>
+            <p style="text-align:left;">2 '. __('messages.place_o_condition') .'</p>
+          </div>
+        </div>
+        <table class="table table-bordered" style="margin-bottom: 35px;"  width="100%" style="border-collapse: collapse;">
+          <thead>
+          </thead>
+          <tbody>
+            <tr style="height: 30px;">
+              <td colspan="3" rowspan="2">'.__('messages.about_allergies').'</td>
+              <td colspan="2" rowspan="2" style="width: 50px;">'.__('messages.age_of_onset').'</td>
+              <td colspan="3"></td>
+            </tr>
+    
+            <tr style="height: 30px;">
+              <td>'.__('messages.under_treatment').'</td>
+              <td>'.__('messages.follow_up').'</td>
+              <td>'.__('messages.age_treated').'
+              </td>
+            </tr>
+            <tr style="height: 30px;">
+    
+            </tr>';
+            foreach($allergies_name as $index => $allergies){
+                $response .= '<tr style="height: 30px;">
+                    <td colspan="3">' .$allergies['name']. '</td>
+                   <td colspan="2">' .$allergies_details[$allergies['id']]['age_onset']. '</td>
+                   <td colspan="1">' .$allergies_details[$allergies['id']]['under_treatment']. '</td>
+                   <td colspan="1">' .$allergies_details[$allergies['id']]['follow_up']. '</td>
+                   <td colspan="1">' .$allergies_details[$allergies['id']]['age_treat']. '</td>
+                </tr>';
+              
+                }
+            $response .= ' <tr style="height: 70px;">
+              <td colspan="8">'.__('messages.please_write_about').'<br>'.$studentmedical['allergen_if_any'].'</td>
+            </tr>
+            <tr style="height: 70px;">
+              <td colspan="8">
+                <ul>
+                  <li>'.__('messages.anaphylactic_shock').' : '.$studentmedical['anaphylactic_shock'].'</li>
+                  <li>'.__('messages.epinephrine_autoinjector').' : '.$studentmedical['epinephrine_autoinjector'].'</li>
+                  <li>'.__('messages.other_medicines').' : '.$studentmedical['other_medicines'].'</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    
+      </div>
+      </table>
+      </div>
+    
+      <div class="content">
+        <table class="main"  width="100%" style="border-collapse: collapse;">
+          <div class="row">
+            <div class="col-12">
+              <h4>3 '.__('messages.medical_history_age').' &nbsp;&nbsp; '.__('messages.name').':</h4>
+            </div>
+          </div>
+          <div class="col-12">
+            <table class="table-bordered"  width="100%" style="border-collapse: collapse;">
+              <thead></thead>
+              <tbody>
+                <tr>
+                  <td>'.__('messages.heart_problem') .'('.$studentmedical['heart_problem'].' )</td>
+                  <td>'.__('messages.epilepsy').' ('.$studentmedical['epilepsy'].' )</td>
+                  <td>'.__('messages.measles').'  ( '.$studentmedical['measles'].')</td>
+                </tr>
+                <tr>
+                  <td>'. __('messages.kawasaki_disease').' ('.$studentmedical['kawasaki_disease'].' )</td>
+                  <td>'.__('messages.febrile_convulsions').' ('.$studentmedical['febrile_convulsions'].' )</td>
+                  <td>'.__('messages.chicken_pox') .' ('.$studentmedical['chicken_pox'].')</td>
+                </tr>
+                <tr>
+                  <td>'.__('messages.scoliosis').' ('.$studentmedical['scoliosis'].' )</td>
+                  <td>'.__('messages.tuberculosis').' ( '.$studentmedical['tuberculosis'].')</td>
+                  <td>'.__('messages.mumps').' ('.$studentmedical['mumps'].' )</td>
+                </tr>
+                <tr>
+                  <td>'.__('messages.kidney_problems').' ('.$studentmedical['kidny_problems'].' )</td>
+                  <td rowspan="2">'.__('messages.others').' <br>('.$studentmedical['others'].' )</td>
+                  <td>'.__('messages.rubella').' ('.$studentmedical['rubella'].' )</td>
+                </tr>
+                <tr>
+                  <td>'.__('messages.diabetes').'  ( '.$studentmedical['diabetes'].')</td>
+                  <td>'.__('messages.dengue_fever').' ( '.$studentmedical['dengue_fever'].')</td>
+                </tr>
+                <tr>
+                  <td colspan="3">
+                    <p>'.__('messages.operated_disease').' ('.$studentmedical['operated_disease'].' )</p>
+                    <p>'.__('messages.injury').' ( '.$studentmedical['injury'].')</p>
+                    <p style="text-align:right;">'.__('messages.illness').' ('.$studentmedical['illness'].' )</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <h4>4.'.__('messages.immunization_history').'</h4>
+            </div>
+          </div>
+          <div class="col-12">
+            <table class="table-bordered"  width="100%" style="border-collapse: collapse;">
+              <thead></thead>
+              <tbody>
+                <tr>
+                  <td>'.__('messages.type').'</td>
+                  <td style="width: 125px;">times</td>
+                  <td>'.__('messages.type').'</td>
+                  <td style="width: 125px;">times</td>
+                </tr>
+                <tr>
+                  <td>'.__('messages.japanese_encephalitis').'</td>
+                  <td>'.$studentmedical['japanese_encephalitis'].'</td>
+                  <td>'.__('messages.streptococcus_pneumoniae').'</td>
+                  <td>'.$studentmedical['streptococcus_pneumoniae'].'</td>
+                </tr>
+                <tr>
+                  <td>3 '.__('messages.triple_antigen').'</td>
+                  <td>'.$studentmedical['triple_antigen'].'</td>
+                  <td>('.__('messages.hib').')</td>
+                  <td>'.$studentmedical['hib'].'</td>
+                </tr>
+                <tr>
+                  <td>4 '.__('messages.quadruple_antigen').'</td>
+                  <td>'.$studentmedical['quadruple_antigen'].'</td>
+                  <td>'.__('messages.covid').'</td>
+                  <td>'.$studentmedical['covid_19'].'</td>
+                </tr>
+                <tr>
+                  <td>'.__('messages.bcg').'</td>
+                  <td>'.$studentmedical['bcg'].'</td>
+                  <td>'.__('messages.rabies_vaccine').'</td>
+                  <td>'.$studentmedical['rabies_vaccine'].'</td>
+                </tr>
+                <tr>
+                  <td>'.__('messages.measles/rubella').'</td>
+                  <td>'.$studentmedical['measles_rubella'].'</td>
+                  <td>'.__('messages.tetanus').'</td>
+                  <td>'.$studentmedical['tetanus'].'</td>
+                </tr>
+                <tr>
+                  <td>'.__('messages.chicken_pox').'</td>
+                  <td>'.$studentmedical['chicken_pox_imm'].'</td>
+                  <td rowspan="2">'.__('messages.advised_doctors_vaccination').'</td>
+                  <td rowspan="2">'.$studentmedical['doctors_advised'].'</td>
+                </tr>
+                <tr>
+                  <td>'.__('messages.mumps').'</td>
+                  <td>'.$studentmedical['mumps_imm'].'</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div class="column">
+              <h4 style="text-align:left;">5 '.__('messages.current_health_condition').'</h4>
+            </div>
+            <div class="column">
+              <h4 style="text-align:right;margin-top:-40px;">'.__('messages.grade').'()</h4>
+            </div>
+          </div>
+          <div>';
+          $staticData = [
+            ['department' => 'P', 'grade' => 1],
+            ['department' => 'P', 'grade' => 2],
+            ['department' => 'P', 'grade' => 3],
+            ['department' => 'P', 'grade' => 4],
+            ['department' => 'P', 'grade' => 5],
+            ['department' => 'P', 'grade' => 6],
+            ['department' => 'S', 'grade' => 1],
+            ['department' => 'S', 'grade' => 2],
+            ['department' => 'S', 'grade' => 3],
+        ];
+        $response .= ' <table class="table table-bordered"  width="100%" style="border-collapse: collapse;">
+              <thead>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding:0px !important"></td>
+                  <td>Place "O", if any of the conditions are present.</td>';
+                  foreach ($staticData as $data) {
+                    $response .= '<td style="text-align:center;">' . $data['department'] . '<br>' . $data['grade'] . '</td>';
+                }
+                $response .= '  </tr>
+                <tr>
+                  <td rowspan="9" class="vertical-text">
+                    I<br>n<br>t<br>e<br>r<br>n<br>a<br>l<br><br>M<br>e<br>d<br>i<br>c<br>i<br>n<br>e</td>
+                  <td>Develops a fever easily.</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['develops_fever_easily'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+    
+                <tr>
+                  <td>Frequent headaches.</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['frequent_headaches'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td>Dyspepsia & stomachache and cliarrhea easily.</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['dyspepsia_stomachache_cliarrhea'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td>Constipates easily.</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['constipates'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td>Vomits easily.</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['vomits'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td>Faints easily.</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['faints'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td>Dizziness easily.</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['dizziness'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td>Nettle rash easily.</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['nettle_rash'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                </tr>
+                <tr>
+                  <td>Prone to car sickness.</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['prone_to_car_sickness'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td rowspan="5" style="writing-mode: vertical-rl;text-align: center;width:0px;">E<br>N<br>T</td>
+                  <td>Has poor hearing.</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['has_poor_hearing'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td>Has had otitis media before.</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['has_had_otitis_media_before'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td>Bleeds from the nose easily.</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['bleeds_from_the_nose'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td>nasal congestion and sevene running nose easily.</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['nasal_congestion'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td>Throat is swollen easily.</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['throat_is_swollen'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td rowspan="4" style="writing-mode: vertical-rl;text-align: center;width:0px;">E<br>y<br>e</td>
+                  <td>Squinted eyes to view from a distance.</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['squinted_eyes'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td>Eye irritation & redness easily.</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['eye_irritation_redness'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td>Use glasses or lensess</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['glasses_lenses'])) {
+                                $response .='<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td>Wrong Colour</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['wrong_colour'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td rowspan="4" style="writing-mode: vertical-rl;text-align: center;width:0px;">D<br>e<br>n<br>t</td>
+                  <td>Has a sensistive tooth or toothache</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['tooth_toothache'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td>Bleed from gum</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['bleed_gum'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td>Pain or sound in jaw joint</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['pain_sound_jaw_joint'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr>
+                  <td>Has been Orthodontics</td>';
+                  foreach ($studentCurrentHealthData as $healthData) {
+                    $n1 = ($healthData['department_id'] == '1') ? 'P' : 'S';
+                    $gradeDetails = Helper::PostMethod(config('constants.api.class_details'), ['class_id' => $healthData['class_id']]);
+                    $n2 = isset($gradeDetails['data']['name_numeric']) ? $gradeDetails['data']['name_numeric'] : 'N/A';
+                    foreach ($staticData as $data) {
+                        // Check if department and grade match with the current health data
+                        if ($data['department'] == $n1 && $data['grade'] == $n2) {
+                            // Check if develops_fever_easily data is present
+                            if (!empty($healthData['orthodontics'])) {
+                                $response .= '<td>○</td>'; // Place "O" if develops_fever_easily data is present
+                            } else {
+                                $response .= '<td></td>'; // Otherwise leave it empty
+                            }
+                        } else {
+                            $response .= '<td></td>'; // Otherwise leave it empty
+                        }
+                    }
+                
+                    // Repeat the same process for other health conditions
+                }
+                $response .= '</tr>
+                <tr style="height: 40px;">
+                  <td colspan="11">'.__('messages.any_medicine_take_daily').'<br>'.__('messages.no_yes_Name_medicine').'</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="row">
+              <div class="col-md-12">
+                <h4 style="text-align:left;">6 '.__('messages.any_medical_practitioner').'</h4>
+              </div>
+            </div>
+            <table class="table table-bordered" style="margin-bottom: 15px;"  width="100%" style="border-collapse: collapse;">
+              <thead>
+              </thead>
+              <tbody>
+                <tr style="height: 80px;vertical-align: text-top;">
+                  <td style="width:156px;height: 80px;">'.__('messages.date').': '.$studentmedical['date'].'</td>
+                  <td style="height: 80px;" colspan="20">'.__('messages.remarks').':'.$studentmedical['remarks'].'</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </table>
+      </div>
+      </table>
+      </div>
     </body>
-
-
-    </body>
-
+    
     </html>';
     $pdf = \App::make('dompdf.wrapper');
     // set size
-    $customPaper = array(0, 0, 1920.00, 810.00);
+    $customPaper = [0, 0, 792.00, 1224.00];
     $pdf->set_paper($customPaper);
     // $paper_size = array(0, 0, 360, 360);
     // $pdf->set_paper($paper_size);

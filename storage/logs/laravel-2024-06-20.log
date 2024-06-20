@@ -1,0 +1,2380 @@
+[2024-06-20 21:15:55] local.ERROR: HTTP request failed to http://localhost/paxsuze-api/public/api/all_logout {"url":"http://localhost/paxsuze-api/public/api/all_logout","body":{"session_id":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","branch_id":5,"name_status":""},"error":"<!DOCTYPE html>
+
+<html lang=\"en\">
+
+
+
+<head>
+
+    <meta charset=\"utf-8\" />
+
+    <title>500</title>
+
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+
+    <meta name=\"description\" content=\"To learn as much as I can, attain good grades and advance my education further. I believe that self-motivation and a strict routine has helped me achieve my goals so far, and I will use the same method in the future.\">
+
+    <meta name=\"keywords\" content=\"Paxsuzen School, education, future leaders, curriculum\">
+
+    <meta content=\"Paxsuzen\" name=\"author\" />
+
+    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+
+    <!-- CSRF Token -->
+
+    <meta name=\"csrf-token\" content=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" />
+
+    <!-- App favicon -->
+
+    <link rel=\"shortcut icon\" href=\"http://localhost/paxsuze-api/public/common-asset/images/favicon.ico\">
+
+    <!-- App css -->
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"bs-default-stylesheet\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/app.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"app-default-stylesheet\" />
+
+    <!-- icons -->
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/icons.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/admin_login.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/opensans-font.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom/errorpage.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+</head>
+
+
+
+<body class=\"loading auth-fluid-pages pb-0\">
+
+
+
+    <div class=\"auth-fluid\">
+
+        <!--Auth fluid left content -->
+
+        <div class=\"col-md-6\" style=\"background: #F4F7FC;\">
+
+            <div class=\"align-items-center d-flex h-100\">
+
+                <div class=\"card-body\">
+
+\t\t\t\t<div class=\"auth-brand text-center text-lg-left\">
+
+                            <div class=\"auth-logo\">
+
+                                <div class=\"auth-logo\">
+
+                                    <a href=\"\" class=\"logo logo-dark\">
+
+                                        <span class=\"logo-lg\">
+
+                                            <img src=\"http://localhost/paxsuze-api/public/common-asset/images/Suzen-app-logo.png\" alt=\"\" height=\"60px\">
+
+                                        </span>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <div class=\"responsive\">
+
+                        <h1 class=\"eoppps\">Internal Server<br> Error</h1>
+
+                        <p class=\"etext\">We currently having an internal problem with our<br> server. This might take a while.</p>
+
+                                                <a href=\"javascript:void(0);\" onclick=\"event.preventDefault(); document.getElementById('logout-form').submit();\">
+
+                            <span>Go to Home</span>
+
+                        </a>
+
+                                                <form id=\"logout-form\" action=\"http://localhost/paxsuzen_school/public/admin/logout\" method=\"POST\" class=\"d-none\">
+
+                            <input type=\"hidden\" name=\"_token\" value=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" autocomplete=\"off\">                        </form>
+
+                                                                    </div>
+
+                </div> <!-- end .card-body -->
+
+            </div> <!-- end .align-items-center.d-flex.h-100-->
+
+        </div>
+
+        <!-- end auth-fluid-form-box-->
+
+
+
+        <!-- Auth fluid right content -->
+
+        <div class=\"col-md-6\">
+
+                <img src=\"http://localhost/paxsuzen_school/public/images/error500.jpg\" class=\"bg-image-content\">
+
+        </div>
+
+        <!-- end Auth fluid right content -->
+
+    </div>
+
+    <!-- end auth-fluid-->
+
+
+
+    <!-- Vendor js -->
+
+    <script src=\"http://localhost/paxsuzen_school/public/js/vendor.min.js\"></script>
+
+    <script type=\"text/javascript\">
+
+        $.ajaxSetup({
+
+            headers: {
+
+                'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')
+
+            }
+
+        });
+
+    </script>
+
+
+
+    <!-- App js -->
+
+    <script src=\"http://localhost/paxsuzen_school/public/js/app.min.js\"></script>
+
+    <script>window.UserHelpPublicProjectID=\"Y7YyGqyq2\"</script>
+
+        <script src=\"https://run.userhelp.co\" async></script>
+
+
+
+</body>
+
+
+
+</html>"} 
+[2024-06-20 21:15:55] local.ERROR: HTTP request failed to http://localhost/paxsuze-api/public/api/lastlogout {"url":"http://localhost/paxsuze-api/public/api/lastlogout","body":{"userID":4066,"role_id":"2","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","branch_id":5,"name_status":""},"error":"<!DOCTYPE html>
+
+<html lang=\"en\">
+
+
+
+<head>
+
+    <meta charset=\"utf-8\" />
+
+    <title>500</title>
+
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+
+    <meta name=\"description\" content=\"To learn as much as I can, attain good grades and advance my education further. I believe that self-motivation and a strict routine has helped me achieve my goals so far, and I will use the same method in the future.\">
+
+    <meta name=\"keywords\" content=\"Paxsuzen School, education, future leaders, curriculum\">
+
+    <meta content=\"Paxsuzen\" name=\"author\" />
+
+    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+
+    <!-- CSRF Token -->
+
+    <meta name=\"csrf-token\" content=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" />
+
+    <!-- App favicon -->
+
+    <link rel=\"shortcut icon\" href=\"http://localhost/paxsuze-api/public/common-asset/images/favicon.ico\">
+
+    <!-- App css -->
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"bs-default-stylesheet\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/app.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"app-default-stylesheet\" />
+
+    <!-- icons -->
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/icons.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/admin_login.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/opensans-font.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom/errorpage.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+</head>
+
+
+
+<body class=\"loading auth-fluid-pages pb-0\">
+
+
+
+    <div class=\"auth-fluid\">
+
+        <!--Auth fluid left content -->
+
+        <div class=\"col-md-6\" style=\"background: #F4F7FC;\">
+
+            <div class=\"align-items-center d-flex h-100\">
+
+                <div class=\"card-body\">
+
+\t\t\t\t<div class=\"auth-brand text-center text-lg-left\">
+
+                            <div class=\"auth-logo\">
+
+                                <div class=\"auth-logo\">
+
+                                    <a href=\"\" class=\"logo logo-dark\">
+
+                                        <span class=\"logo-lg\">
+
+                                            <img src=\"http://localhost/paxsuze-api/public/common-asset/images/Suzen-app-logo.png\" alt=\"\" height=\"60px\">
+
+                                        </span>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <div class=\"responsive\">
+
+                        <h1 class=\"eoppps\">Internal Server<br> Error</h1>
+
+                        <p class=\"etext\">We currently having an internal problem with our<br> server. This might take a while.</p>
+
+                                                <a href=\"javascript:void(0);\" onclick=\"event.preventDefault(); document.getElementById('logout-form').submit();\">
+
+                            <span>Go to Home</span>
+
+                        </a>
+
+                                                <form id=\"logout-form\" action=\"http://localhost/paxsuzen_school/public/admin/logout\" method=\"POST\" class=\"d-none\">
+
+                            <input type=\"hidden\" name=\"_token\" value=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" autocomplete=\"off\">                        </form>
+
+                                                                    </div>
+
+                </div> <!-- end .card-body -->
+
+            </div> <!-- end .align-items-center.d-flex.h-100-->
+
+        </div>
+
+        <!-- end auth-fluid-form-box-->
+
+
+
+        <!-- Auth fluid right content -->
+
+        <div class=\"col-md-6\">
+
+                <img src=\"http://localhost/paxsuzen_school/public/images/error500.jpg\" class=\"bg-image-content\">
+
+        </div>
+
+        <!-- end Auth fluid right content -->
+
+    </div>
+
+    <!-- end auth-fluid-->
+
+
+
+    <!-- Vendor js -->
+
+    <script src=\"http://localhost/paxsuzen_school/public/js/vendor.min.js\"></script>
+
+    <script type=\"text/javascript\">
+
+        $.ajaxSetup({
+
+            headers: {
+
+                'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')
+
+            }
+
+        });
+
+    </script>
+
+
+
+    <!-- App js -->
+
+    <script src=\"http://localhost/paxsuzen_school/public/js/app.min.js\"></script>
+
+    <script>window.UserHelpPublicProjectID=\"Y7YyGqyq2\"</script>
+
+        <script src=\"https://run.userhelp.co\" async></script>
+
+
+
+</body>
+
+
+
+</html>"} 
+[2024-06-20 21:15:59] local.ERROR: HTTP request failed to http://localhost/paxsuze-api/public/api/lastlogout {"url":"http://localhost/paxsuze-api/public/api/lastlogout","body":{"userID":4066,"role_id":"2","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","branch_id":5,"name_status":""},"error":"<!DOCTYPE html>
+
+<html lang=\"en\">
+
+
+
+<head>
+
+    <meta charset=\"utf-8\" />
+
+    <title>500</title>
+
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+
+    <meta name=\"description\" content=\"To learn as much as I can, attain good grades and advance my education further. I believe that self-motivation and a strict routine has helped me achieve my goals so far, and I will use the same method in the future.\">
+
+    <meta name=\"keywords\" content=\"Paxsuzen School, education, future leaders, curriculum\">
+
+    <meta content=\"Paxsuzen\" name=\"author\" />
+
+    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+
+    <!-- CSRF Token -->
+
+    <meta name=\"csrf-token\" content=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" />
+
+    <!-- App favicon -->
+
+    <link rel=\"shortcut icon\" href=\"http://localhost/paxsuze-api/public/common-asset/images/favicon.ico\">
+
+    <!-- App css -->
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"bs-default-stylesheet\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/app.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"app-default-stylesheet\" />
+
+    <!-- icons -->
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/icons.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/admin_login.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/opensans-font.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom/errorpage.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+</head>
+
+
+
+<body class=\"loading auth-fluid-pages pb-0\">
+
+
+
+    <div class=\"auth-fluid\">
+
+        <!--Auth fluid left content -->
+
+        <div class=\"col-md-6\" style=\"background: #F4F7FC;\">
+
+            <div class=\"align-items-center d-flex h-100\">
+
+                <div class=\"card-body\">
+
+\t\t\t\t<div class=\"auth-brand text-center text-lg-left\">
+
+                            <div class=\"auth-logo\">
+
+                                <div class=\"auth-logo\">
+
+                                    <a href=\"\" class=\"logo logo-dark\">
+
+                                        <span class=\"logo-lg\">
+
+                                            <img src=\"http://localhost/paxsuze-api/public/common-asset/images/Suzen-app-logo.png\" alt=\"\" height=\"60px\">
+
+                                        </span>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <div class=\"responsive\">
+
+                        <h1 class=\"eoppps\">Internal Server<br> Error</h1>
+
+                        <p class=\"etext\">We currently having an internal problem with our<br> server. This might take a while.</p>
+
+                                                <a href=\"javascript:void(0);\" onclick=\"event.preventDefault(); document.getElementById('logout-form').submit();\">
+
+                            <span>Go to Home</span>
+
+                        </a>
+
+                                                <form id=\"logout-form\" action=\"http://localhost/paxsuzen_school/public/admin/logout\" method=\"POST\" class=\"d-none\">
+
+                            <input type=\"hidden\" name=\"_token\" value=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" autocomplete=\"off\">                        </form>
+
+                                                                    </div>
+
+                </div> <!-- end .card-body -->
+
+            </div> <!-- end .align-items-center.d-flex.h-100-->
+
+        </div>
+
+        <!-- end auth-fluid-form-box-->
+
+
+
+        <!-- Auth fluid right content -->
+
+        <div class=\"col-md-6\">
+
+                <img src=\"http://localhost/paxsuzen_school/public/images/error500.jpg\" class=\"bg-image-content\">
+
+        </div>
+
+        <!-- end Auth fluid right content -->
+
+    </div>
+
+    <!-- end auth-fluid-->
+
+
+
+    <!-- Vendor js -->
+
+    <script src=\"http://localhost/paxsuzen_school/public/js/vendor.min.js\"></script>
+
+    <script type=\"text/javascript\">
+
+        $.ajaxSetup({
+
+            headers: {
+
+                'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')
+
+            }
+
+        });
+
+    </script>
+
+
+
+    <!-- App js -->
+
+    <script src=\"http://localhost/paxsuzen_school/public/js/app.min.js\"></script>
+
+    <script>window.UserHelpPublicProjectID=\"Y7YyGqyq2\"</script>
+
+        <script src=\"https://run.userhelp.co\" async></script>
+
+
+
+</body>
+
+
+
+</html>"} 
+[2024-06-20 21:16:00] local.ERROR: HTTP request failed to http://localhost/paxsuze-api/public/api/all_logout {"url":"http://localhost/paxsuze-api/public/api/all_logout","body":{"session_id":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","branch_id":5,"name_status":""},"error":"<!DOCTYPE html>
+
+<html lang=\"en\">
+
+
+
+<head>
+
+    <meta charset=\"utf-8\" />
+
+    <title>500</title>
+
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+
+    <meta name=\"description\" content=\"To learn as much as I can, attain good grades and advance my education further. I believe that self-motivation and a strict routine has helped me achieve my goals so far, and I will use the same method in the future.\">
+
+    <meta name=\"keywords\" content=\"Paxsuzen School, education, future leaders, curriculum\">
+
+    <meta content=\"Paxsuzen\" name=\"author\" />
+
+    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+
+    <!-- CSRF Token -->
+
+    <meta name=\"csrf-token\" content=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" />
+
+    <!-- App favicon -->
+
+    <link rel=\"shortcut icon\" href=\"http://localhost/paxsuze-api/public/common-asset/images/favicon.ico\">
+
+    <!-- App css -->
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"bs-default-stylesheet\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/app.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"app-default-stylesheet\" />
+
+    <!-- icons -->
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/icons.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/admin_login.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/opensans-font.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom/errorpage.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+</head>
+
+
+
+<body class=\"loading auth-fluid-pages pb-0\">
+
+
+
+    <div class=\"auth-fluid\">
+
+        <!--Auth fluid left content -->
+
+        <div class=\"col-md-6\" style=\"background: #F4F7FC;\">
+
+            <div class=\"align-items-center d-flex h-100\">
+
+                <div class=\"card-body\">
+
+\t\t\t\t<div class=\"auth-brand text-center text-lg-left\">
+
+                            <div class=\"auth-logo\">
+
+                                <div class=\"auth-logo\">
+
+                                    <a href=\"\" class=\"logo logo-dark\">
+
+                                        <span class=\"logo-lg\">
+
+                                            <img src=\"http://localhost/paxsuze-api/public/common-asset/images/Suzen-app-logo.png\" alt=\"\" height=\"60px\">
+
+                                        </span>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <div class=\"responsive\">
+
+                        <h1 class=\"eoppps\">Internal Server<br> Error</h1>
+
+                        <p class=\"etext\">We currently having an internal problem with our<br> server. This might take a while.</p>
+
+                                                <a href=\"javascript:void(0);\" onclick=\"event.preventDefault(); document.getElementById('logout-form').submit();\">
+
+                            <span>Go to Home</span>
+
+                        </a>
+
+                                                <form id=\"logout-form\" action=\"http://localhost/paxsuzen_school/public/admin/logout\" method=\"POST\" class=\"d-none\">
+
+                            <input type=\"hidden\" name=\"_token\" value=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" autocomplete=\"off\">                        </form>
+
+                                                                    </div>
+
+                </div> <!-- end .card-body -->
+
+            </div> <!-- end .align-items-center.d-flex.h-100-->
+
+        </div>
+
+        <!-- end auth-fluid-form-box-->
+
+
+
+        <!-- Auth fluid right content -->
+
+        <div class=\"col-md-6\">
+
+                <img src=\"http://localhost/paxsuzen_school/public/images/error500.jpg\" class=\"bg-image-content\">
+
+        </div>
+
+        <!-- end Auth fluid right content -->
+
+    </div>
+
+    <!-- end auth-fluid-->
+
+
+
+    <!-- Vendor js -->
+
+    <script src=\"http://localhost/paxsuzen_school/public/js/vendor.min.js\"></script>
+
+    <script type=\"text/javascript\">
+
+        $.ajaxSetup({
+
+            headers: {
+
+                'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')
+
+            }
+
+        });
+
+    </script>
+
+
+
+    <!-- App js -->
+
+    <script src=\"http://localhost/paxsuzen_school/public/js/app.min.js\"></script>
+
+    <script>window.UserHelpPublicProjectID=\"Y7YyGqyq2\"</script>
+
+        <script src=\"https://run.userhelp.co\" async></script>
+
+
+
+</body>
+
+
+
+</html>"} 
+[2024-06-20 21:16:52] local.ERROR: HTTP request failed to http://localhost/paxsuze-api/public/api/lastlogout {"url":"http://localhost/paxsuze-api/public/api/lastlogout","body":{"userID":4066,"role_id":"2","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","branch_id":5,"name_status":""},"error":"<!DOCTYPE html>
+
+<html lang=\"en\">
+
+
+
+<head>
+
+    <meta charset=\"utf-8\" />
+
+    <title>500</title>
+
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+
+    <meta name=\"description\" content=\"To learn as much as I can, attain good grades and advance my education further. I believe that self-motivation and a strict routine has helped me achieve my goals so far, and I will use the same method in the future.\">
+
+    <meta name=\"keywords\" content=\"Paxsuzen School, education, future leaders, curriculum\">
+
+    <meta content=\"Paxsuzen\" name=\"author\" />
+
+    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+
+    <!-- CSRF Token -->
+
+    <meta name=\"csrf-token\" content=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" />
+
+    <!-- App favicon -->
+
+    <link rel=\"shortcut icon\" href=\"http://localhost/paxsuze-api/public/common-asset/images/favicon.ico\">
+
+    <!-- App css -->
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"bs-default-stylesheet\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/app.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"app-default-stylesheet\" />
+
+    <!-- icons -->
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/icons.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/admin_login.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/opensans-font.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom/errorpage.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+</head>
+
+
+
+<body class=\"loading auth-fluid-pages pb-0\">
+
+
+
+    <div class=\"auth-fluid\">
+
+        <!--Auth fluid left content -->
+
+        <div class=\"col-md-6\" style=\"background: #F4F7FC;\">
+
+            <div class=\"align-items-center d-flex h-100\">
+
+                <div class=\"card-body\">
+
+\t\t\t\t<div class=\"auth-brand text-center text-lg-left\">
+
+                            <div class=\"auth-logo\">
+
+                                <div class=\"auth-logo\">
+
+                                    <a href=\"\" class=\"logo logo-dark\">
+
+                                        <span class=\"logo-lg\">
+
+                                            <img src=\"http://localhost/paxsuze-api/public/common-asset/images/Suzen-app-logo.png\" alt=\"\" height=\"60px\">
+
+                                        </span>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <div class=\"responsive\">
+
+                        <h1 class=\"eoppps\">Internal Server<br> Error</h1>
+
+                        <p class=\"etext\">We currently having an internal problem with our<br> server. This might take a while.</p>
+
+                                                <a href=\"javascript:void(0);\" onclick=\"event.preventDefault(); document.getElementById('logout-form').submit();\">
+
+                            <span>Go to Home</span>
+
+                        </a>
+
+                                                <form id=\"logout-form\" action=\"http://localhost/paxsuzen_school/public/admin/logout\" method=\"POST\" class=\"d-none\">
+
+                            <input type=\"hidden\" name=\"_token\" value=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" autocomplete=\"off\">                        </form>
+
+                                                                    </div>
+
+                </div> <!-- end .card-body -->
+
+            </div> <!-- end .align-items-center.d-flex.h-100-->
+
+        </div>
+
+        <!-- end auth-fluid-form-box-->
+
+
+
+        <!-- Auth fluid right content -->
+
+        <div class=\"col-md-6\">
+
+                <img src=\"http://localhost/paxsuzen_school/public/images/error500.jpg\" class=\"bg-image-content\">
+
+        </div>
+
+        <!-- end Auth fluid right content -->
+
+    </div>
+
+    <!-- end auth-fluid-->
+
+
+
+    <!-- Vendor js -->
+
+    <script src=\"http://localhost/paxsuzen_school/public/js/vendor.min.js\"></script>
+
+    <script type=\"text/javascript\">
+
+        $.ajaxSetup({
+
+            headers: {
+
+                'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')
+
+            }
+
+        });
+
+    </script>
+
+
+
+    <!-- App js -->
+
+    <script src=\"http://localhost/paxsuzen_school/public/js/app.min.js\"></script>
+
+    <script>window.UserHelpPublicProjectID=\"Y7YyGqyq2\"</script>
+
+        <script src=\"https://run.userhelp.co\" async></script>
+
+
+
+</body>
+
+
+
+</html>"} 
+[2024-06-20 21:16:52] local.ERROR: HTTP request failed to http://localhost/paxsuze-api/public/api/all_logout {"url":"http://localhost/paxsuze-api/public/api/all_logout","body":{"session_id":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","branch_id":5,"name_status":""},"error":"<!DOCTYPE html>
+
+<html lang=\"en\">
+
+
+
+<head>
+
+    <meta charset=\"utf-8\" />
+
+    <title>500</title>
+
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+
+    <meta name=\"description\" content=\"To learn as much as I can, attain good grades and advance my education further. I believe that self-motivation and a strict routine has helped me achieve my goals so far, and I will use the same method in the future.\">
+
+    <meta name=\"keywords\" content=\"Paxsuzen School, education, future leaders, curriculum\">
+
+    <meta content=\"Paxsuzen\" name=\"author\" />
+
+    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+
+    <!-- CSRF Token -->
+
+    <meta name=\"csrf-token\" content=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" />
+
+    <!-- App favicon -->
+
+    <link rel=\"shortcut icon\" href=\"http://localhost/paxsuze-api/public/common-asset/images/favicon.ico\">
+
+    <!-- App css -->
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"bs-default-stylesheet\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/app.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"app-default-stylesheet\" />
+
+    <!-- icons -->
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/icons.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/admin_login.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/opensans-font.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom/errorpage.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+</head>
+
+
+
+<body class=\"loading auth-fluid-pages pb-0\">
+
+
+
+    <div class=\"auth-fluid\">
+
+        <!--Auth fluid left content -->
+
+        <div class=\"col-md-6\" style=\"background: #F4F7FC;\">
+
+            <div class=\"align-items-center d-flex h-100\">
+
+                <div class=\"card-body\">
+
+\t\t\t\t<div class=\"auth-brand text-center text-lg-left\">
+
+                            <div class=\"auth-logo\">
+
+                                <div class=\"auth-logo\">
+
+                                    <a href=\"\" class=\"logo logo-dark\">
+
+                                        <span class=\"logo-lg\">
+
+                                            <img src=\"http://localhost/paxsuze-api/public/common-asset/images/Suzen-app-logo.png\" alt=\"\" height=\"60px\">
+
+                                        </span>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <div class=\"responsive\">
+
+                        <h1 class=\"eoppps\">Internal Server<br> Error</h1>
+
+                        <p class=\"etext\">We currently having an internal problem with our<br> server. This might take a while.</p>
+
+                                                <a href=\"javascript:void(0);\" onclick=\"event.preventDefault(); document.getElementById('logout-form').submit();\">
+
+                            <span>Go to Home</span>
+
+                        </a>
+
+                                                <form id=\"logout-form\" action=\"http://localhost/paxsuzen_school/public/admin/logout\" method=\"POST\" class=\"d-none\">
+
+                            <input type=\"hidden\" name=\"_token\" value=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" autocomplete=\"off\">                        </form>
+
+                                                                    </div>
+
+                </div> <!-- end .card-body -->
+
+            </div> <!-- end .align-items-center.d-flex.h-100-->
+
+        </div>
+
+        <!-- end auth-fluid-form-box-->
+
+
+
+        <!-- Auth fluid right content -->
+
+        <div class=\"col-md-6\">
+
+                <img src=\"http://localhost/paxsuzen_school/public/images/error500.jpg\" class=\"bg-image-content\">
+
+        </div>
+
+        <!-- end Auth fluid right content -->
+
+    </div>
+
+    <!-- end auth-fluid-->
+
+
+
+    <!-- Vendor js -->
+
+    <script src=\"http://localhost/paxsuzen_school/public/js/vendor.min.js\"></script>
+
+    <script type=\"text/javascript\">
+
+        $.ajaxSetup({
+
+            headers: {
+
+                'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')
+
+            }
+
+        });
+
+    </script>
+
+
+
+    <!-- App js -->
+
+    <script src=\"http://localhost/paxsuzen_school/public/js/app.min.js\"></script>
+
+    <script>window.UserHelpPublicProjectID=\"Y7YyGqyq2\"</script>
+
+        <script src=\"https://run.userhelp.co\" async></script>
+
+
+
+</body>
+
+
+
+</html>"} 
+[2024-06-20 21:16:54] local.ERROR: HTTP request failed to http://localhost/paxsuze-api/public/api/lastlogout {"url":"http://localhost/paxsuze-api/public/api/lastlogout","body":{"userID":4066,"role_id":"2","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","branch_id":5,"name_status":""},"error":"<!DOCTYPE html>
+
+<html lang=\"en\">
+
+
+
+<head>
+
+    <meta charset=\"utf-8\" />
+
+    <title>500</title>
+
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+
+    <meta name=\"description\" content=\"To learn as much as I can, attain good grades and advance my education further. I believe that self-motivation and a strict routine has helped me achieve my goals so far, and I will use the same method in the future.\">
+
+    <meta name=\"keywords\" content=\"Paxsuzen School, education, future leaders, curriculum\">
+
+    <meta content=\"Paxsuzen\" name=\"author\" />
+
+    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+
+    <!-- CSRF Token -->
+
+    <meta name=\"csrf-token\" content=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" />
+
+    <!-- App favicon -->
+
+    <link rel=\"shortcut icon\" href=\"http://localhost/paxsuze-api/public/common-asset/images/favicon.ico\">
+
+    <!-- App css -->
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"bs-default-stylesheet\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/app.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"app-default-stylesheet\" />
+
+    <!-- icons -->
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/icons.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/admin_login.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/opensans-font.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom/errorpage.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+</head>
+
+
+
+<body class=\"loading auth-fluid-pages pb-0\">
+
+
+
+    <div class=\"auth-fluid\">
+
+        <!--Auth fluid left content -->
+
+        <div class=\"col-md-6\" style=\"background: #F4F7FC;\">
+
+            <div class=\"align-items-center d-flex h-100\">
+
+                <div class=\"card-body\">
+
+\t\t\t\t<div class=\"auth-brand text-center text-lg-left\">
+
+                            <div class=\"auth-logo\">
+
+                                <div class=\"auth-logo\">
+
+                                    <a href=\"\" class=\"logo logo-dark\">
+
+                                        <span class=\"logo-lg\">
+
+                                            <img src=\"http://localhost/paxsuze-api/public/common-asset/images/Suzen-app-logo.png\" alt=\"\" height=\"60px\">
+
+                                        </span>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <div class=\"responsive\">
+
+                        <h1 class=\"eoppps\">Internal Server<br> Error</h1>
+
+                        <p class=\"etext\">We currently having an internal problem with our<br> server. This might take a while.</p>
+
+                                                <a href=\"javascript:void(0);\" onclick=\"event.preventDefault(); document.getElementById('logout-form').submit();\">
+
+                            <span>Go to Home</span>
+
+                        </a>
+
+                                                <form id=\"logout-form\" action=\"http://localhost/paxsuzen_school/public/admin/logout\" method=\"POST\" class=\"d-none\">
+
+                            <input type=\"hidden\" name=\"_token\" value=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" autocomplete=\"off\">                        </form>
+
+                                                                    </div>
+
+                </div> <!-- end .card-body -->
+
+            </div> <!-- end .align-items-center.d-flex.h-100-->
+
+        </div>
+
+        <!-- end auth-fluid-form-box-->
+
+
+
+        <!-- Auth fluid right content -->
+
+        <div class=\"col-md-6\">
+
+                <img src=\"http://localhost/paxsuzen_school/public/images/error500.jpg\" class=\"bg-image-content\">
+
+        </div>
+
+        <!-- end Auth fluid right content -->
+
+    </div>
+
+    <!-- end auth-fluid-->
+
+
+
+    <!-- Vendor js -->
+
+    <script src=\"http://localhost/paxsuzen_school/public/js/vendor.min.js\"></script>
+
+    <script type=\"text/javascript\">
+
+        $.ajaxSetup({
+
+            headers: {
+
+                'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')
+
+            }
+
+        });
+
+    </script>
+
+
+
+    <!-- App js -->
+
+    <script src=\"http://localhost/paxsuzen_school/public/js/app.min.js\"></script>
+
+    <script>window.UserHelpPublicProjectID=\"Y7YyGqyq2\"</script>
+
+        <script src=\"https://run.userhelp.co\" async></script>
+
+
+
+</body>
+
+
+
+</html>"} 
+[2024-06-20 21:16:54] local.ERROR: HTTP request failed to http://localhost/paxsuze-api/public/api/all_logout {"url":"http://localhost/paxsuze-api/public/api/all_logout","body":{"session_id":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","branch_id":5,"name_status":""},"error":"<!DOCTYPE html>
+
+<html lang=\"en\">
+
+
+
+<head>
+
+    <meta charset=\"utf-8\" />
+
+    <title>500</title>
+
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+
+    <meta name=\"description\" content=\"To learn as much as I can, attain good grades and advance my education further. I believe that self-motivation and a strict routine has helped me achieve my goals so far, and I will use the same method in the future.\">
+
+    <meta name=\"keywords\" content=\"Paxsuzen School, education, future leaders, curriculum\">
+
+    <meta content=\"Paxsuzen\" name=\"author\" />
+
+    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+
+    <!-- CSRF Token -->
+
+    <meta name=\"csrf-token\" content=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" />
+
+    <!-- App favicon -->
+
+    <link rel=\"shortcut icon\" href=\"http://localhost/paxsuze-api/public/common-asset/images/favicon.ico\">
+
+    <!-- App css -->
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"bs-default-stylesheet\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/app.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"app-default-stylesheet\" />
+
+    <!-- icons -->
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/icons.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/admin_login.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/opensans-font.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom/errorpage.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+</head>
+
+
+
+<body class=\"loading auth-fluid-pages pb-0\">
+
+
+
+    <div class=\"auth-fluid\">
+
+        <!--Auth fluid left content -->
+
+        <div class=\"col-md-6\" style=\"background: #F4F7FC;\">
+
+            <div class=\"align-items-center d-flex h-100\">
+
+                <div class=\"card-body\">
+
+\t\t\t\t<div class=\"auth-brand text-center text-lg-left\">
+
+                            <div class=\"auth-logo\">
+
+                                <div class=\"auth-logo\">
+
+                                    <a href=\"\" class=\"logo logo-dark\">
+
+                                        <span class=\"logo-lg\">
+
+                                            <img src=\"http://localhost/paxsuze-api/public/common-asset/images/Suzen-app-logo.png\" alt=\"\" height=\"60px\">
+
+                                        </span>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <div class=\"responsive\">
+
+                        <h1 class=\"eoppps\">Internal Server<br> Error</h1>
+
+                        <p class=\"etext\">We currently having an internal problem with our<br> server. This might take a while.</p>
+
+                                                <a href=\"javascript:void(0);\" onclick=\"event.preventDefault(); document.getElementById('logout-form').submit();\">
+
+                            <span>Go to Home</span>
+
+                        </a>
+
+                                                <form id=\"logout-form\" action=\"http://localhost/paxsuzen_school/public/admin/logout\" method=\"POST\" class=\"d-none\">
+
+                            <input type=\"hidden\" name=\"_token\" value=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" autocomplete=\"off\">                        </form>
+
+                                                                    </div>
+
+                </div> <!-- end .card-body -->
+
+            </div> <!-- end .align-items-center.d-flex.h-100-->
+
+        </div>
+
+        <!-- end auth-fluid-form-box-->
+
+
+
+        <!-- Auth fluid right content -->
+
+        <div class=\"col-md-6\">
+
+                <img src=\"http://localhost/paxsuzen_school/public/images/error500.jpg\" class=\"bg-image-content\">
+
+        </div>
+
+        <!-- end Auth fluid right content -->
+
+    </div>
+
+    <!-- end auth-fluid-->
+
+
+
+    <!-- Vendor js -->
+
+    <script src=\"http://localhost/paxsuzen_school/public/js/vendor.min.js\"></script>
+
+    <script type=\"text/javascript\">
+
+        $.ajaxSetup({
+
+            headers: {
+
+                'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')
+
+            }
+
+        });
+
+    </script>
+
+
+
+    <!-- App js -->
+
+    <script src=\"http://localhost/paxsuzen_school/public/js/app.min.js\"></script>
+
+    <script>window.UserHelpPublicProjectID=\"Y7YyGqyq2\"</script>
+
+        <script src=\"https://run.userhelp.co\" async></script>
+
+
+
+</body>
+
+
+
+</html>"} 
+[2024-06-20 21:17:56] local.ERROR: HTTP request failed to http://localhost/paxsuze-api/public/api/lastlogout {"url":"http://localhost/paxsuze-api/public/api/lastlogout","body":{"userID":4066,"role_id":"2","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","branch_id":5,"name_status":""},"error":"<!DOCTYPE html>
+
+<html lang=\"en\">
+
+
+
+<head>
+
+    <meta charset=\"utf-8\" />
+
+    <title>500</title>
+
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+
+    <meta name=\"description\" content=\"To learn as much as I can, attain good grades and advance my education further. I believe that self-motivation and a strict routine has helped me achieve my goals so far, and I will use the same method in the future.\">
+
+    <meta name=\"keywords\" content=\"Paxsuzen School, education, future leaders, curriculum\">
+
+    <meta content=\"Paxsuzen\" name=\"author\" />
+
+    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+
+    <!-- CSRF Token -->
+
+    <meta name=\"csrf-token\" content=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" />
+
+    <!-- App favicon -->
+
+    <link rel=\"shortcut icon\" href=\"http://localhost/paxsuze-api/public/common-asset/images/favicon.ico\">
+
+    <!-- App css -->
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"bs-default-stylesheet\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/app.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"app-default-stylesheet\" />
+
+    <!-- icons -->
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/icons.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/admin_login.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/opensans-font.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/paxsuzen_school/public/css/custom/errorpage.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+</head>
+
+
+
+<body class=\"loading auth-fluid-pages pb-0\">
+
+
+
+    <div class=\"auth-fluid\">
+
+        <!--Auth fluid left content -->
+
+        <div class=\"col-md-6\" style=\"background: #F4F7FC;\">
+
+            <div class=\"align-items-center d-flex h-100\">
+
+                <div class=\"card-body\">
+
+\t\t\t\t<div class=\"auth-brand text-center text-lg-left\">
+
+                            <div class=\"auth-logo\">
+
+                                <div class=\"auth-logo\">
+
+                                    <a href=\"\" class=\"logo logo-dark\">
+
+                                        <span class=\"logo-lg\">
+
+                                            <img src=\"http://localhost/paxsuze-api/public/common-asset/images/Suzen-app-logo.png\" alt=\"\" height=\"60px\">
+
+                                        </span>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <div class=\"responsive\">
+
+                        <h1 class=\"eoppps\">Internal Server<br> Error</h1>
+
+                        <p class=\"etext\">We currently having an internal problem with our<br> server. This might take a while.</p>
+
+                                                <a href=\"javascript:void(0);\" onclick=\"event.preventDefault(); document.getElementById('logout-form').submit();\">
+
+                            <span>Go to Home</span>
+
+                        </a>
+
+                                                <form id=\"logout-form\" action=\"http://localhost/paxsuzen_school/public/admin/logout\" method=\"POST\" class=\"d-none\">
+
+                            <input type=\"hidden\" name=\"_token\" value=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" autocomplete=\"off\">                        </form>
+
+                                                                    </div>
+
+                </div> <!-- end .card-body -->
+
+            </div> <!-- end .align-items-center.d-flex.h-100-->
+
+        </div>
+
+        <!-- end auth-fluid-form-box-->
+
+
+
+        <!-- Auth fluid right content -->
+
+        <div class=\"col-md-6\">
+
+                <img src=\"http://localhost/paxsuzen_school/public/images/error500.jpg\" class=\"bg-image-content\">
+
+        </div>
+
+        <!-- end Auth fluid right content -->
+
+    </div>
+
+    <!-- end auth-fluid-->
+
+
+
+    <!-- Vendor js -->
+
+    <script src=\"http://localhost/paxsuzen_school/public/js/vendor.min.js\"></script>
+
+    <script type=\"text/javascript\">
+
+        $.ajaxSetup({
+
+            headers: {
+
+                'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')
+
+            }
+
+        });
+
+    </script>
+
+
+
+    <!-- App js -->
+
+    <script src=\"http://localhost/paxsuzen_school/public/js/app.min.js\"></script>
+
+    <script>window.UserHelpPublicProjectID=\"Y7YyGqyq2\"</script>
+
+        <script src=\"https://run.userhelp.co\" async></script>
+
+
+
+</body>
+
+
+
+</html>"} 
+[2024-06-20 21:22:41] local.ERROR: HTTP request failed to http://localhost/paxsuzen-api-dev/public/api/all_logout {"url":"http://localhost/paxsuzen-api-dev/public/api/all_logout","body":{"session_id":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","branch_id":5,"name_status":""},"error":"<!DOCTYPE html>
+
+<html lang=\"en\">
+
+
+
+<head>
+
+\t<meta charset=\"utf-8\" />
+
+\t<title>404</title>
+
+\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+
+\t<meta name=\"description\" content=\"To learn as much as I can, attain good grades and advance my education further. I believe that self-motivation and a strict routine has helped me achieve my goals so far, and I will use the same method in the future.\">
+
+\t<meta name=\"keywords\" content=\"Paxsuzen School, education, future leaders, curriculum\">
+
+\t<meta content=\"Paxsuzen\" name=\"author\" />
+
+\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+
+\t<!-- CSRF Token -->
+
+\t<meta name=\"csrf-token\" content=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" />
+
+\t<!-- App favicon -->
+
+\t<link rel=\"shortcut icon\" href=\"http://localhost/paxsuzen-api-dev/public/common-asset/images/favicon.ico\">
+
+\t<!-- App css -->
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"bs-default-stylesheet\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/app.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"app-default-stylesheet\" />
+
+\t<!-- icons -->
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/icons.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/admin_login.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/opensans-font.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/custom/errorpage.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+</head>
+
+
+
+<body class=\"loading auth-fluid-pages pb-0\">
+
+
+
+\t<div class=\"auth-fluid\">
+
+\t\t<!--Auth fluid left content -->
+
+\t\t<div class=\"col-md-6\" style=\"background: #F4F7FC;\">
+
+\t\t\t<div class=\"align-items-center d-flex h-100\">
+
+\t\t\t\t
+
+\t\t\t\t<div class=\"card-body\">
+
+\t\t\t\t<div class=\"auth-brand text-center text-lg-left\">
+
+                            <div class=\"auth-logo\">
+
+                                <div class=\"auth-logo\">
+
+                                    <a href=\"\" class=\"logo logo-dark\">
+
+                                        <span class=\"logo-lg\">
+
+                                            <img src=\"http://localhost/paxsuzen-api-dev/public/common-asset/images/Suzen-app-logo.png\" alt=\"\" height=\"60px\">
+
+                                        </span>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+\t\t\t\t\t<div class=\"responsive\">
+
+\t\t\t\t\t\t<h1 class=\"eoppps\">Page Not Found</h1>
+
+\t\t\t\t\t\t<p class=\"etext\">We can’t seems to find the page that you are <br>looking for. This page might be already removed.</p>
+
+\t\t\t\t\t\t<a href=\"javascript:void(0)\" id=\"retryButton\" class=\"link_404\">Retry</a>
+
+\t\t\t\t\t\t<br>
+
+\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"javascript:void(0);\" onclick=\"event.preventDefault(); document.getElementById('logout-form').submit();\">
+
+\t\t\t\t\t\t\t<span>Go to Home</span>
+
+\t\t\t\t\t\t</a>
+
+\t\t\t\t\t\t\t\t\t\t\t\t<form id=\"logout-form\" action=\"http://localhost/paxsuzen_school/public/admin/logout\" method=\"POST\" class=\"d-none\">
+
+\t\t\t\t\t\t\t<input type=\"hidden\" name=\"_token\" value=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" autocomplete=\"off\">\t\t\t\t\t\t</form>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t</div> <!-- end .card-body -->
+
+\t\t\t</div> <!-- end .align-items-center.d-flex.h-100-->
+
+\t\t</div>
+
+\t\t<!-- end auth-fluid-form-box-->
+
+
+
+\t\t<!-- Auth fluid right content -->
+
+\t\t<div class=\"col-md-6\">
+
+\t\t\t\t<img src=\"http://localhost/paxsuzen_school/public/images/error404.jpg\" class=\"bg-image-content\">
+
+\t\t</div>
+
+\t\t<!-- end Auth fluid right content -->
+
+\t</div>
+
+\t<!-- end auth-fluid-->
+
+
+
+\t<!-- Vendor js -->
+
+\t<script src=\"http://localhost/paxsuzen_school/public/js/vendor.min.js\"></script>
+
+\t<script type=\"text/javascript\">
+
+\t\t$.ajaxSetup({
+
+\t\t\theaders: {
+
+\t\t\t\t'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')
+
+\t\t\t}
+
+\t\t});
+
+\t</script>
+
+
+
+\t<!-- App js -->
+
+\t<script src=\"http://localhost/paxsuzen_school/public/js/app.min.js\"></script>
+
+\t<script>
+
+\t\tdocument.getElementById('retryButton').addEventListener('click', function() {
+
+\t\t\tlocation.reload(); // Reload the page when the button is clicked
+
+\t\t});
+
+\t</script>
+
+\t<script>window.UserHelpPublicProjectID=\"Y7YyGqyq2\"</script>
+
+        <script src=\"https://run.userhelp.co\" async></script>
+
+</body>
+
+
+
+</html>"} 
+[2024-06-20 21:23:40] local.ERROR: HTTP request failed to http://localhost/paxsuzen-api-dev/public/api/lastlogout {"url":"http://localhost/paxsuzen-api-dev/public/api/lastlogout","body":{"userID":4066,"role_id":"2","branch_id":5,"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","name_status":""},"error":"<!DOCTYPE html>
+
+<html lang=\"en\">
+
+
+
+<head>
+
+\t<meta charset=\"utf-8\" />
+
+\t<title>404</title>
+
+\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+
+\t<meta name=\"description\" content=\"To learn as much as I can, attain good grades and advance my education further. I believe that self-motivation and a strict routine has helped me achieve my goals so far, and I will use the same method in the future.\">
+
+\t<meta name=\"keywords\" content=\"Paxsuzen School, education, future leaders, curriculum\">
+
+\t<meta content=\"Paxsuzen\" name=\"author\" />
+
+\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+
+\t<!-- CSRF Token -->
+
+\t<meta name=\"csrf-token\" content=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" />
+
+\t<!-- App favicon -->
+
+\t<link rel=\"shortcut icon\" href=\"http://localhost/paxsuzen-api-dev/public/common-asset/images/favicon.ico\">
+
+\t<!-- App css -->
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"bs-default-stylesheet\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/app.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"app-default-stylesheet\" />
+
+\t<!-- icons -->
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/icons.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/admin_login.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/opensans-font.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/custom/errorpage.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+</head>
+
+
+
+<body class=\"loading auth-fluid-pages pb-0\">
+
+
+
+\t<div class=\"auth-fluid\">
+
+\t\t<!--Auth fluid left content -->
+
+\t\t<div class=\"col-md-6\" style=\"background: #F4F7FC;\">
+
+\t\t\t<div class=\"align-items-center d-flex h-100\">
+
+\t\t\t\t
+
+\t\t\t\t<div class=\"card-body\">
+
+\t\t\t\t<div class=\"auth-brand text-center text-lg-left\">
+
+                            <div class=\"auth-logo\">
+
+                                <div class=\"auth-logo\">
+
+                                    <a href=\"\" class=\"logo logo-dark\">
+
+                                        <span class=\"logo-lg\">
+
+                                            <img src=\"http://localhost/paxsuzen-api-dev/public/common-asset/images/Suzen-app-logo.png\" alt=\"\" height=\"60px\">
+
+                                        </span>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+\t\t\t\t\t<div class=\"responsive\">
+
+\t\t\t\t\t\t<h1 class=\"eoppps\">Page Not Found</h1>
+
+\t\t\t\t\t\t<p class=\"etext\">We can’t seems to find the page that you are <br>looking for. This page might be already removed.</p>
+
+\t\t\t\t\t\t<a href=\"javascript:void(0)\" id=\"retryButton\" class=\"link_404\">Retry</a>
+
+\t\t\t\t\t\t<br>
+
+\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"javascript:void(0);\" onclick=\"event.preventDefault(); document.getElementById('logout-form').submit();\">
+
+\t\t\t\t\t\t\t<span>Go to Home</span>
+
+\t\t\t\t\t\t</a>
+
+\t\t\t\t\t\t\t\t\t\t\t\t<form id=\"logout-form\" action=\"http://localhost/paxsuzen_school/public/admin/logout\" method=\"POST\" class=\"d-none\">
+
+\t\t\t\t\t\t\t<input type=\"hidden\" name=\"_token\" value=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" autocomplete=\"off\">\t\t\t\t\t\t</form>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t</div> <!-- end .card-body -->
+
+\t\t\t</div> <!-- end .align-items-center.d-flex.h-100-->
+
+\t\t</div>
+
+\t\t<!-- end auth-fluid-form-box-->
+
+
+
+\t\t<!-- Auth fluid right content -->
+
+\t\t<div class=\"col-md-6\">
+
+\t\t\t\t<img src=\"http://localhost/paxsuzen_school/public/images/error404.jpg\" class=\"bg-image-content\">
+
+\t\t</div>
+
+\t\t<!-- end Auth fluid right content -->
+
+\t</div>
+
+\t<!-- end auth-fluid-->
+
+
+
+\t<!-- Vendor js -->
+
+\t<script src=\"http://localhost/paxsuzen_school/public/js/vendor.min.js\"></script>
+
+\t<script type=\"text/javascript\">
+
+\t\t$.ajaxSetup({
+
+\t\t\theaders: {
+
+\t\t\t\t'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')
+
+\t\t\t}
+
+\t\t});
+
+\t</script>
+
+
+
+\t<!-- App js -->
+
+\t<script src=\"http://localhost/paxsuzen_school/public/js/app.min.js\"></script>
+
+\t<script>
+
+\t\tdocument.getElementById('retryButton').addEventListener('click', function() {
+
+\t\t\tlocation.reload(); // Reload the page when the button is clicked
+
+\t\t});
+
+\t</script>
+
+\t<script>window.UserHelpPublicProjectID=\"Y7YyGqyq2\"</script>
+
+        <script src=\"https://run.userhelp.co\" async></script>
+
+</body>
+
+
+
+</html>"} 
+[2024-06-20 21:24:11] local.ERROR: HTTP request failed to http://localhost/paxsuzen-api-dev/public/api/all_logout {"url":"http://localhost/paxsuzen-api-dev/public/api/all_logout","body":{"session_id":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","branch_id":5,"name_status":""},"error":"<!DOCTYPE html>
+
+<html lang=\"en\">
+
+
+
+<head>
+
+\t<meta charset=\"utf-8\" />
+
+\t<title>404</title>
+
+\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+
+\t<meta name=\"description\" content=\"To learn as much as I can, attain good grades and advance my education further. I believe that self-motivation and a strict routine has helped me achieve my goals so far, and I will use the same method in the future.\">
+
+\t<meta name=\"keywords\" content=\"Paxsuzen School, education, future leaders, curriculum\">
+
+\t<meta content=\"Paxsuzen\" name=\"author\" />
+
+\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+
+\t<!-- CSRF Token -->
+
+\t<meta name=\"csrf-token\" content=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" />
+
+\t<!-- App favicon -->
+
+\t<link rel=\"shortcut icon\" href=\"http://localhost/paxsuzen-api-dev/public/common-asset/images/favicon.ico\">
+
+\t<!-- App css -->
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"bs-default-stylesheet\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/app.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"app-default-stylesheet\" />
+
+\t<!-- icons -->
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/icons.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/admin_login.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/opensans-font.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/custom/errorpage.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+</head>
+
+
+
+<body class=\"loading auth-fluid-pages pb-0\">
+
+
+
+\t<div class=\"auth-fluid\">
+
+\t\t<!--Auth fluid left content -->
+
+\t\t<div class=\"col-md-6\" style=\"background: #F4F7FC;\">
+
+\t\t\t<div class=\"align-items-center d-flex h-100\">
+
+\t\t\t\t
+
+\t\t\t\t<div class=\"card-body\">
+
+\t\t\t\t<div class=\"auth-brand text-center text-lg-left\">
+
+                            <div class=\"auth-logo\">
+
+                                <div class=\"auth-logo\">
+
+                                    <a href=\"\" class=\"logo logo-dark\">
+
+                                        <span class=\"logo-lg\">
+
+                                            <img src=\"http://localhost/paxsuzen-api-dev/public/common-asset/images/Suzen-app-logo.png\" alt=\"\" height=\"60px\">
+
+                                        </span>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+\t\t\t\t\t<div class=\"responsive\">
+
+\t\t\t\t\t\t<h1 class=\"eoppps\">Page Not Found</h1>
+
+\t\t\t\t\t\t<p class=\"etext\">We can’t seems to find the page that you are <br>looking for. This page might be already removed.</p>
+
+\t\t\t\t\t\t<a href=\"javascript:void(0)\" id=\"retryButton\" class=\"link_404\">Retry</a>
+
+\t\t\t\t\t\t<br>
+
+\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"javascript:void(0);\" onclick=\"event.preventDefault(); document.getElementById('logout-form').submit();\">
+
+\t\t\t\t\t\t\t<span>Go to Home</span>
+
+\t\t\t\t\t\t</a>
+
+\t\t\t\t\t\t\t\t\t\t\t\t<form id=\"logout-form\" action=\"http://localhost/paxsuzen_school/public/admin/logout\" method=\"POST\" class=\"d-none\">
+
+\t\t\t\t\t\t\t<input type=\"hidden\" name=\"_token\" value=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" autocomplete=\"off\">\t\t\t\t\t\t</form>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t</div> <!-- end .card-body -->
+
+\t\t\t</div> <!-- end .align-items-center.d-flex.h-100-->
+
+\t\t</div>
+
+\t\t<!-- end auth-fluid-form-box-->
+
+
+
+\t\t<!-- Auth fluid right content -->
+
+\t\t<div class=\"col-md-6\">
+
+\t\t\t\t<img src=\"http://localhost/paxsuzen_school/public/images/error404.jpg\" class=\"bg-image-content\">
+
+\t\t</div>
+
+\t\t<!-- end Auth fluid right content -->
+
+\t</div>
+
+\t<!-- end auth-fluid-->
+
+
+
+\t<!-- Vendor js -->
+
+\t<script src=\"http://localhost/paxsuzen_school/public/js/vendor.min.js\"></script>
+
+\t<script type=\"text/javascript\">
+
+\t\t$.ajaxSetup({
+
+\t\t\theaders: {
+
+\t\t\t\t'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')
+
+\t\t\t}
+
+\t\t});
+
+\t</script>
+
+
+
+\t<!-- App js -->
+
+\t<script src=\"http://localhost/paxsuzen_school/public/js/app.min.js\"></script>
+
+\t<script>
+
+\t\tdocument.getElementById('retryButton').addEventListener('click', function() {
+
+\t\t\tlocation.reload(); // Reload the page when the button is clicked
+
+\t\t});
+
+\t</script>
+
+\t<script>window.UserHelpPublicProjectID=\"Y7YyGqyq2\"</script>
+
+        <script src=\"https://run.userhelp.co\" async></script>
+
+</body>
+
+
+
+</html>"} 
+[2024-06-20 21:25:51] local.ERROR: HTTP request failed to http://localhost/paxsuzen-api-dev/public/api/lastlogout {"url":"http://localhost/paxsuzen-api-dev/public/api/lastlogout","body":{"userID":4066,"role_id":"2","branch_id":5,"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","name_status":""},"error":"<!DOCTYPE html>
+
+<html lang=\"en\">
+
+
+
+<head>
+
+\t<meta charset=\"utf-8\" />
+
+\t<title>404</title>
+
+\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+
+\t<meta name=\"description\" content=\"To learn as much as I can, attain good grades and advance my education further. I believe that self-motivation and a strict routine has helped me achieve my goals so far, and I will use the same method in the future.\">
+
+\t<meta name=\"keywords\" content=\"Paxsuzen School, education, future leaders, curriculum\">
+
+\t<meta content=\"Paxsuzen\" name=\"author\" />
+
+\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+
+\t<!-- CSRF Token -->
+
+\t<meta name=\"csrf-token\" content=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" />
+
+\t<!-- App favicon -->
+
+\t<link rel=\"shortcut icon\" href=\"http://localhost/paxsuzen-api-dev/public/common-asset/images/favicon.ico\">
+
+\t<!-- App css -->
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"bs-default-stylesheet\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/app.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"app-default-stylesheet\" />
+
+\t<!-- icons -->
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/icons.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/admin_login.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/opensans-font.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/custom/errorpage.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+</head>
+
+
+
+<body class=\"loading auth-fluid-pages pb-0\">
+
+
+
+\t<div class=\"auth-fluid\">
+
+\t\t<!--Auth fluid left content -->
+
+\t\t<div class=\"col-md-6\" style=\"background: #F4F7FC;\">
+
+\t\t\t<div class=\"align-items-center d-flex h-100\">
+
+\t\t\t\t
+
+\t\t\t\t<div class=\"card-body\">
+
+\t\t\t\t<div class=\"auth-brand text-center text-lg-left\">
+
+                            <div class=\"auth-logo\">
+
+                                <div class=\"auth-logo\">
+
+                                    <a href=\"\" class=\"logo logo-dark\">
+
+                                        <span class=\"logo-lg\">
+
+                                            <img src=\"http://localhost/paxsuzen-api-dev/public/common-asset/images/Suzen-app-logo.png\" alt=\"\" height=\"60px\">
+
+                                        </span>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+\t\t\t\t\t<div class=\"responsive\">
+
+\t\t\t\t\t\t<h1 class=\"eoppps\">Page Not Found</h1>
+
+\t\t\t\t\t\t<p class=\"etext\">We can’t seems to find the page that you are <br>looking for. This page might be already removed.</p>
+
+\t\t\t\t\t\t<a href=\"javascript:void(0)\" id=\"retryButton\" class=\"link_404\">Retry</a>
+
+\t\t\t\t\t\t<br>
+
+\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"javascript:void(0);\" onclick=\"event.preventDefault(); document.getElementById('logout-form').submit();\">
+
+\t\t\t\t\t\t\t<span>Go to Home</span>
+
+\t\t\t\t\t\t</a>
+
+\t\t\t\t\t\t\t\t\t\t\t\t<form id=\"logout-form\" action=\"http://localhost/paxsuzen_school/public/admin/logout\" method=\"POST\" class=\"d-none\">
+
+\t\t\t\t\t\t\t<input type=\"hidden\" name=\"_token\" value=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" autocomplete=\"off\">\t\t\t\t\t\t</form>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t</div> <!-- end .card-body -->
+
+\t\t\t</div> <!-- end .align-items-center.d-flex.h-100-->
+
+\t\t</div>
+
+\t\t<!-- end auth-fluid-form-box-->
+
+
+
+\t\t<!-- Auth fluid right content -->
+
+\t\t<div class=\"col-md-6\">
+
+\t\t\t\t<img src=\"http://localhost/paxsuzen_school/public/images/error404.jpg\" class=\"bg-image-content\">
+
+\t\t</div>
+
+\t\t<!-- end Auth fluid right content -->
+
+\t</div>
+
+\t<!-- end auth-fluid-->
+
+
+
+\t<!-- Vendor js -->
+
+\t<script src=\"http://localhost/paxsuzen_school/public/js/vendor.min.js\"></script>
+
+\t<script type=\"text/javascript\">
+
+\t\t$.ajaxSetup({
+
+\t\t\theaders: {
+
+\t\t\t\t'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')
+
+\t\t\t}
+
+\t\t});
+
+\t</script>
+
+
+
+\t<!-- App js -->
+
+\t<script src=\"http://localhost/paxsuzen_school/public/js/app.min.js\"></script>
+
+\t<script>
+
+\t\tdocument.getElementById('retryButton').addEventListener('click', function() {
+
+\t\t\tlocation.reload(); // Reload the page when the button is clicked
+
+\t\t});
+
+\t</script>
+
+\t<script>window.UserHelpPublicProjectID=\"Y7YyGqyq2\"</script>
+
+        <script src=\"https://run.userhelp.co\" async></script>
+
+</body>
+
+
+
+</html>"} 
+[2024-06-20 21:25:51] local.ERROR: HTTP request failed to http://localhost/paxsuzen-api-dev/public/api/all_logout {"url":"http://localhost/paxsuzen-api-dev/public/api/all_logout","body":{"session_id":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmExM2I0ZjczYmU2Nzg0ZTEzN2UxODY1ZjU1ZGNiYTFjMzlkYTQ4YmI5M2EzYzdjNmQxNTVmYzM4MzkzNTgyMjRhN2I0YTcxMGY0Y2ZhNmIiLCJpYXQiOjE3MTg4ODUxMDEuODgwMzcyLCJuYmYiOjE3MTg4ODUxMDEuODgwMzk3LCJleHAiOjE3NTA0MjExMDEuNjc3NzM2LCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.hOGjQ4tkAeUjqq2MB4G-bDKTYO2JxCun1TxaQedb_pq1mvbRUE2erElEEdApng3AWqEkSGEt3Uxae3tB4UDhPWlpl4YMLv-xGcljrsLT9M58f5t7Ek4s3LaADDBCRbLCNsSU-W24dH4G9BM16Jq7F4Pu5yGX9LWaxOBc5NNEqoJWMbF5fDs-8IxD1z6dizwPTBG2lMWWWW5QEgP9FKZ3lpfP-dAUmOK_kBNKnMjqQmCfFX6XOSKGGUj1O7Jjwf-QB4wYsT-ZAV5NSK5HT-x15gTfUaxgbCZO-wVKuKBHI806rAbRkU5Kmf1nuNpF0jkdCm4554oqSLNE6jUB_59xFMtG_6meWyvg37_bY0XwZqmOFw3ceuujFkCiLbZYcneBAd5ghk4My3ItzIHxqu0fEAI_sKbu8exrzfevKG2kqTQWzRD_DYYUB-CuOLKhCQBhZ8Yssg7bOeHFPtECZhDpStr5By6RRuR6zszbBEX58ENob0uX_6Dd0zpRHEK75GmDg39masaj2Oydl2VcvukKiYPbF4g6Eq6MyFTF_xpT7tHt7q-zdx0BhedwFQ9gY0vM52Me-hDfSAfrCJI1sOPIf6j7WWe5h5RAYF3mvay7RZPBFX3CMg2r9WFCpfxD5m2R-Rw8RStMGjMhcPCvt6ERl6Dsg16HNH53_66X4OMOizs","branch_id":5,"name_status":""},"error":"<!DOCTYPE html>
+
+<html lang=\"en\">
+
+
+
+<head>
+
+\t<meta charset=\"utf-8\" />
+
+\t<title>404</title>
+
+\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+
+\t<meta name=\"description\" content=\"To learn as much as I can, attain good grades and advance my education further. I believe that self-motivation and a strict routine has helped me achieve my goals so far, and I will use the same method in the future.\">
+
+\t<meta name=\"keywords\" content=\"Paxsuzen School, education, future leaders, curriculum\">
+
+\t<meta content=\"Paxsuzen\" name=\"author\" />
+
+\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+
+\t<!-- CSRF Token -->
+
+\t<meta name=\"csrf-token\" content=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" />
+
+\t<!-- App favicon -->
+
+\t<link rel=\"shortcut icon\" href=\"http://localhost/paxsuzen-api-dev/public/common-asset/images/favicon.ico\">
+
+\t<!-- App css -->
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"bs-default-stylesheet\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/app.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"app-default-stylesheet\" />
+
+\t<!-- icons -->
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/icons.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/admin_login.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/custom-minified/opensans-font.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+\t<link href=\"http://localhost/paxsuzen_school/public/css/custom/errorpage.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+</head>
+
+
+
+<body class=\"loading auth-fluid-pages pb-0\">
+
+
+
+\t<div class=\"auth-fluid\">
+
+\t\t<!--Auth fluid left content -->
+
+\t\t<div class=\"col-md-6\" style=\"background: #F4F7FC;\">
+
+\t\t\t<div class=\"align-items-center d-flex h-100\">
+
+\t\t\t\t
+
+\t\t\t\t<div class=\"card-body\">
+
+\t\t\t\t<div class=\"auth-brand text-center text-lg-left\">
+
+                            <div class=\"auth-logo\">
+
+                                <div class=\"auth-logo\">
+
+                                    <a href=\"\" class=\"logo logo-dark\">
+
+                                        <span class=\"logo-lg\">
+
+                                            <img src=\"http://localhost/paxsuzen-api-dev/public/common-asset/images/Suzen-app-logo.png\" alt=\"\" height=\"60px\">
+
+                                        </span>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+\t\t\t\t\t<div class=\"responsive\">
+
+\t\t\t\t\t\t<h1 class=\"eoppps\">Page Not Found</h1>
+
+\t\t\t\t\t\t<p class=\"etext\">We can’t seems to find the page that you are <br>looking for. This page might be already removed.</p>
+
+\t\t\t\t\t\t<a href=\"javascript:void(0)\" id=\"retryButton\" class=\"link_404\">Retry</a>
+
+\t\t\t\t\t\t<br>
+
+\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"javascript:void(0);\" onclick=\"event.preventDefault(); document.getElementById('logout-form').submit();\">
+
+\t\t\t\t\t\t\t<span>Go to Home</span>
+
+\t\t\t\t\t\t</a>
+
+\t\t\t\t\t\t\t\t\t\t\t\t<form id=\"logout-form\" action=\"http://localhost/paxsuzen_school/public/admin/logout\" method=\"POST\" class=\"d-none\">
+
+\t\t\t\t\t\t\t<input type=\"hidden\" name=\"_token\" value=\"UyCiFj7S6Sgva7LxbNIy2T41tibNk6Ws9DQk8JIr\" autocomplete=\"off\">\t\t\t\t\t\t</form>
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t</div> <!-- end .card-body -->
+
+\t\t\t</div> <!-- end .align-items-center.d-flex.h-100-->
+
+\t\t</div>
+
+\t\t<!-- end auth-fluid-form-box-->
+
+
+
+\t\t<!-- Auth fluid right content -->
+
+\t\t<div class=\"col-md-6\">
+
+\t\t\t\t<img src=\"http://localhost/paxsuzen_school/public/images/error404.jpg\" class=\"bg-image-content\">
+
+\t\t</div>
+
+\t\t<!-- end Auth fluid right content -->
+
+\t</div>
+
+\t<!-- end auth-fluid-->
+
+
+
+\t<!-- Vendor js -->
+
+\t<script src=\"http://localhost/paxsuzen_school/public/js/vendor.min.js\"></script>
+
+\t<script type=\"text/javascript\">
+
+\t\t$.ajaxSetup({
+
+\t\t\theaders: {
+
+\t\t\t\t'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')
+
+\t\t\t}
+
+\t\t});
+
+\t</script>
+
+
+
+\t<!-- App js -->
+
+\t<script src=\"http://localhost/paxsuzen_school/public/js/app.min.js\"></script>
+
+\t<script>
+
+\t\tdocument.getElementById('retryButton').addEventListener('click', function() {
+
+\t\t\tlocation.reload(); // Reload the page when the button is clicked
+
+\t\t});
+
+\t</script>
+
+\t<script>window.UserHelpPublicProjectID=\"Y7YyGqyq2\"</script>
+
+        <script src=\"https://run.userhelp.co\" async></script>
+
+</body>
+
+
+
+</html>"} 
