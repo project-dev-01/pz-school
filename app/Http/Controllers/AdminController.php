@@ -9221,7 +9221,7 @@ class AdminController extends Controller
                 } else if ($status == "Send Back") {
                     $result = "warning";
                 } else if ($status == "Applied") {
-                    $result = "success";
+                    $result = "primary";
                 } else if ($status == "Reject") {
                     $result = "danger";
                 } else {
@@ -9238,7 +9238,7 @@ class AdminController extends Controller
                 } else if ($status == "Send Back") {
                     $result = "warning";
                 } else if ($status == "Applied") {
-                    $result = "info";
+                    $result = "primary";
                 } else if ($status == "Reject") {
                     $result = "danger";
                 } else {
@@ -11082,7 +11082,7 @@ class AdminController extends Controller
                 } else if ($row['termination_status'] == "Pending") {
                     $color = "warning";
                 } else if ($row['termination_status'] == "Applied") {
-                    $color = "success";
+                    $color = "primary"; 
                 } else if ($row['termination_status'] == "Send Back") {
                     $color = "warning";
                 }

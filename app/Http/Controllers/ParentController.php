@@ -1838,7 +1838,7 @@ class ParentController extends Controller
                 } else if ($status == "Send Back") {
                     $result = "warning";
                 } else if ($status == "Applied") {
-                    $result = "success";
+                    $result = "primary"; // dark blue color
                 } else if ($status == "Reject") {
                     $result = "danger";
                 } else {
@@ -1855,7 +1855,7 @@ class ParentController extends Controller
                 } else if ($status == "Send Back") {
                     $result = "warning";
                 } else if ($status == "Applied") {
-                    $result = "success";
+                    $result = "primary"; // dark blue color
                 } else if ($status == "Reject") {
                     $result = "danger";
                 } else {
@@ -2500,7 +2500,7 @@ class ParentController extends Controller
                 } else if ($row['termination_status'] == "Pending") {
                     $color = "warning";
                 } else if ($row['termination_status'] == "Applied") {
-                    $color = "info";
+                    $color = "primary"; // dark blue color
                 } else if ($row['termination_status'] == "Send Back") {
                     $color = "warning";
                 }
