@@ -2322,4 +2322,8 @@ return [
       "accepted" => "申請受理",
       "trail_start_date" => "体験入学開始日",
       "login_details_will_send_to_your_mailbox" => "ログイン情報はご登録したメールアドレスに送られますので、そちらのメールにてご参照ください。",
+      "application_status" => "Application Status",
+      "application_phase_1_status" => "Phase 1 => ",
+      "application_phase_2_status" => "Phase 2 => ",
+
 ];

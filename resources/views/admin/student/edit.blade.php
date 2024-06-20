@@ -1163,7 +1163,7 @@
                                     </div>
 
                                     <div class="row">
-                                            {{-- <div class="col-md-4" id="enrollment_show" >
+                                            <div class="col-md-4" id="enrollment_show" >
                                                 <div class="form-group">
                                                     <label for="enrollment">{{ __('messages.enrollment') }}</label>
                                                     <select id="enrollment" name="enrollment" class="form-control">
@@ -1172,7 +1172,7 @@
                                                         <option {{ isset($student['enrollment']) ? $student['enrollment'] == "Official Enrollment" ? 'selected' : '' : '' }} value="Official Enrollment">{{ __('messages.official_enrollment') }}</option>
                                                     </select>
                                                 </div>
-                                            </div> --}}
+                                            </div>
                                             @php
 
                                             $trail_date = "none";
@@ -1189,7 +1189,7 @@
                                                                 <span class="far fa-calendar-alt"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control" id="trail_start_date" value="{{ isset($student['trail_start_date']) ? $student['trail_start_date'] : date('Y-m-d')}}" name="trail_start_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control" id="trail_start_date" value="{{ isset($student['trail_start_date']) ? $student['trail_start_date'] : ''}}" name="trail_start_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1202,7 +1202,7 @@
                                                                 <span class="far fa-calendar-alt"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control" id="trail_end_date" value="{{ isset($student['trail_end_date']) ? $student['trail_end_date'] : date('Y-m-d')}}" name="trail_end_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control" id="trail_end_date" value="{{ isset($student['trail_end_date']) ? $student['trail_end_date'] : ''}}" name="trail_end_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1221,7 +1221,7 @@
                                                                 <span class="far fa-calendar-alt"></span>
                                                             </div>
                                                         </div>
-                                                        <input type="text" class="form-control" id="official_date" value="{{ isset($student['official_date']) ? $student['official_date'] : date('Y-m-d')}}" name="official_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control" id="official_date" value="{{ isset($student['official_date']) ? $student['official_date'] : ''}}" name="official_date" placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                     </div>
                                                 </div>
                                             </div>

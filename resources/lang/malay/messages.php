@@ -2246,4 +2246,7 @@ return [
       "accepted" => "Accepted",
       "trail_start_date" => "Trail Start Date",
       "login_details_will_send_to_your_mailbox" => "Login details will send to your mailbox. Please follow the instruction to login.",
+      "application_status" => "Application Status",
+      "application_phase_1_status" => "Phase 1 => ",
+      "application_phase_2_status" => "Phase 2 => ",
 ];

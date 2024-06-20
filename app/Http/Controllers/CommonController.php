@@ -298,7 +298,7 @@ class CommonController extends Controller
                             $notificationlist .= '<a href="' . route('parent.application.index') . '" class="dropdown-item mark-as-read" data-id="' . $notification['id'] . '">
                             <p class="notify-details">' . __('messages.application_status') . '</p>
                             <p class="text-muted mb-0 user-msg">
-                            <small>' . $student_name . ' ' . __('messages.application_phase_1_status'. $notification['data']['phase_1_status']) . ', ' .  __('messages.application_phase_2_status'. $notification['data']['phase_2_status']) . '</small>
+                            <small>' . $student_name . ' ' . __('messages.application_phase_1_status') .  $notification['data']['phase_1_status'].', ' .  __('messages.application_phase_2_status') . $notification['data']['phase_2_status']. '</small>
                             </p>
                             </a>';
                         }
