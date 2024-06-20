@@ -7434,7 +7434,8 @@ a.text-blue:hover, a.text-blue:focus {
 .badge-soft-warning {
   color: #fcc015;
   background-color: rgba(252, 192, 21, 0.18);
-  box-shadow: none; }
+  box-shadow: none; 
+}
   .badge-soft-warning[href]:hover, .badge-soft-warning[href]:focus {
     color: #fcc015;
     text-decoration: none;
@@ -7443,11 +7444,24 @@ a.text-blue:hover, a.text-blue:focus {
 .badge-soft-danger {
   color: #f86262;
   background-color: rgba(248, 98, 98, 0.18);
-  box-shadow: none; }
+  box-shadow: none;
+ }
+
   .badge-soft-danger[href]:hover, .badge-soft-danger[href]:focus {
     color: #f86262;
     text-decoration: none;
-    background-color: rgba(248, 98, 98, 0.4); }
+    background-color: rgba(248, 98, 98, 0.4);
+   }
+   .badge-soft-primary {
+    color: #0d6efd;
+    background-color: rgba(241, 85, 108, .18);
+    box-shadow: none;
+  }
+  .badge-soft-primary[href]:hover, .badge-soft-primary[href]:focus {
+    color: #0d6efd;
+    text-decoration: none;
+    background-color: rgba(248, 98, 98, 0.4);
+   }
 
 .badge-soft-light {
   color: #424e5a;
