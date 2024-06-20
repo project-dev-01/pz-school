@@ -140,6 +140,11 @@ class ExamPdfController1 extends Controller
 		$teachercmd = '';
 		
 		foreach ($getstudents['data'] as $stu) {
+			$n1 = ($request->department_id == '1') ? 'P' : 'S';
+					$n2 = $grade['data']['name_numeric'];
+					$n3 = $section['data']['name'];
+					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
+					$number = $n1 . $n2 . $n3 . sprintf("%02d", $attendance_no);
 			$output = '<!DOCTYPE html>
 			<html lang="en">
 			<head>
@@ -400,7 +405,11 @@ class ExamPdfController1 extends Controller
 			$pdf->loadHTML($output);
 			// return $pdf->stream();
 			// Filename setup
-			$fileName = __('messages.english_communication') . "-" . $stu['eng_name'] . ".pdf";
+			
+			$now = now();
+				$name = strtotime($now);
+				$fileName = __('messages.english_communication') . "_" . $number . "_" . $stu['eng_name'] . "_" . $name . ".pdf";
+				
 			$pdfFilePath = $storagePath . '/' . $fileName;
 
 			// Save the PDF to the specified folder
@@ -591,9 +600,13 @@ class ExamPdfController1 extends Controller
 				];
 				$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 				foreach ($getstudents['data'] as $stu) {
-
-					$sno++;
+					$n1 = ($request->department_id == '1') ? 'P' : 'S';
+					$n2 = $grade['data']['name_numeric'];
+					$n3 = $section['data']['name'];
 					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
+					$number = $n1 . $n2 . $n3 . sprintf("%02d", $attendance_no);
+					$sno++;
+					
 					$output = '<!DOCTYPE html>
 						<html lang="en">
 						
@@ -1172,7 +1185,10 @@ class ExamPdfController1 extends Controller
 					$pdf->loadHTML($output);
 					// return $pdf->stream();
 					// Filename setup
-					$fileName = __('messages.report_card') . "-" . $stu['name'] . ".pdf";
+					$now = now();
+				$name = strtotime($now);
+				$fileName = __('messages.report_card') . "_" . $number . "_" . $stu['name'] . "_" . $name . ".pdf";
+				
 					$pdfFilePath = $storagePath . '/' . $fileName;
 
 					// Save the PDF to the specified folder
@@ -1189,9 +1205,13 @@ class ExamPdfController1 extends Controller
 				];
 				$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 				foreach ($getstudents['data'] as $stu) {
-
-					$sno++;
+					$n1 = ($request->department_id == '1') ? 'P' : 'S';
+					$n2 = $grade['data']['name_numeric'];
+					$n3 = $section['data']['name'];
 					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
+					$number = $n1 . $n2 . $n3 . sprintf("%02d", $attendance_no);
+					$sno++;
+					
 					$output = '<!DOCTYPE html>
 						<html lang="en">
 						
@@ -1852,7 +1872,10 @@ class ExamPdfController1 extends Controller
 					$pdf->loadHTML($output);
 					// return $pdf->stream();
 					// Filename setup
-					$fileName = __('messages.report_card') . "-" . $stu['name'] . ".pdf";
+					$now = now();
+				$name = strtotime($now);
+				$fileName = __('messages.report_card') . "_" . $number . "_" . $stu['name'] . "_" . $name . ".pdf";
+				
 					$pdfFilePath = $storagePath . '/' . $fileName;
 
 					// Save the PDF to the specified folder
@@ -1869,9 +1892,13 @@ class ExamPdfController1 extends Controller
 				];
 				$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
 				foreach ($getstudents['data'] as $stu) {
-
-					$sno++;
+					$n1 = ($request->department_id == '1') ? 'P' : 'S';
+					$n2 = $grade['data']['name_numeric'];
+					$n3 = $section['data']['name'];
 					$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
+					$number = $n1 . $n2 . $n3 . sprintf("%02d", $attendance_no);
+					$sno++;
+					
 					$output = '<!DOCTYPE html>
 						<html lang="en">
 						
@@ -2478,7 +2505,10 @@ class ExamPdfController1 extends Controller
 					$pdf->loadHTML($output);
 					// return $pdf->stream();
 					// Filename setup
-					$fileName = __('messages.report_card') . "-" . $stu['name'] . ".pdf";
+					$now = now();
+				$name = strtotime($now);
+				$fileName = __('messages.report_card') . "_" . $number . "_" . $stu['name'] . "_" . $name . ".pdf";
+				
 					$pdfFilePath = $storagePath . '/' . $fileName;
 
 					// Save the PDF to the specified folder
@@ -2499,11 +2529,15 @@ class ExamPdfController1 extends Controller
 
 
 			foreach ($getstudents['data'] as $stu) {
+				$n1 = ($request->department_id == '1') ? 'P' : 'S';
+		$n2 = $grade['data']['name_numeric'];
+		$n3 = $section['data']['name'];
+		$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
+		$number = $n1 . $n2 . $n3 . sprintf("%02d", $attendance_no);
 				if ($sno == 10) {
 					break;
 				}
 				$sno++;
-				$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
 				$output = '<!DOCTYPE html>
 					<html lang="en">
 					
@@ -3137,7 +3171,9 @@ class ExamPdfController1 extends Controller
 				$pdf->loadHTML($output);
 
 				// Filename setup
-				$fileName = __('messages.report_card') . "-" . $stu['name'] . ".pdf";
+				$now = now();
+				$name = strtotime($now);
+				$fileName = __('messages.report_card') . "_" . $number . "_" . $stu['name'] . "_" . $name . ".pdf";
 				$pdfFilePath = $storagePath . '/' . $fileName;
 
 				// Save the PDF to the specified folder
@@ -3155,7 +3191,7 @@ class ExamPdfController1 extends Controller
 		];
 		$departmentinfo = Helper::PostMethod(config('constants.api.department_details'), $depdata);
 
-		$zipFileName = __('messages.report_card') . "-" . $departmentinfo['data']['name'] . "-" . $gradename . "-" . $classname . "-" . $timestamp . ".zip";
+		$zipFileName = __('messages.report_card') . "_" . $departmentinfo['data']['name'] . "_" . $gradename . "_" . $classname . "_" . $timestamp . ".zip";
 		$zipFilePath = $storagePath . '/' . $zipFileName;
 
 		$zip = new ZipArchive();
@@ -3235,6 +3271,7 @@ class ExamPdfController1 extends Controller
 
 		$pdfFiles = [];
 		foreach ($getstudents['data'] as $stu) {
+			
 			$sno++;
 			$output = "<!DOCTYPE html>";
 			$output .= "<html><head>";
@@ -3524,7 +3561,7 @@ class ExamPdfController1 extends Controller
 			$pdf->loadHTML($output);
 
 			// Filename setup
-			$fileName = __('messages.personal_test_res') . "-" . $stu['name'] . ".pdf";
+			$fileName = __('messages.personal_test_res') . "_" . $stu['name'] . ".pdf";
 			$pdfFilePath = $storagePath . '/' . $fileName;
 
 			// Save the PDF to the specified folder

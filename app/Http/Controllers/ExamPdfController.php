@@ -395,7 +395,7 @@ class ExamPdfController extends Controller
 		$now = now();
 		$timestamp = strtotime($now);
 		$department = ($request->department_id == 1) ? 'Primary' : 'Secondary';
-		$fileName = __('messages.english_communication') . "_" . $department . "_" . $gradename . "_" . $classname . "_" . $timestamp . ".pdf";
+		$fileName = __('messages.english_communication') . "_" . $department . "_" . $grade['data']['name'] . "_" . $section['data']['name'] . "_" . $timestamp . ".pdf";
 		//$fileName = __('messages.english_communication') . '-' .  ($grade['data']['name'] ?? '') . '-' . ($section['data']['name'] ?? '') . '-' . $timestamp . ".pdf";
 		return $this->commonHelper->generatePdf($customPaper, $output, $fileName);
 	}
@@ -2338,7 +2338,7 @@ class ExamPdfController extends Controller
 		];
 		$departmentinfo = Helper::PostMethod(config('constants.api.department_details'), $depdata);
 		//dd($departmentinfo);
-		$fileName = __('messages.report_card') . "-" . $departmentinfo['data']['name'] . "-" . $gradename . "-" . $classname . "-" . $name . ".pdf";
+		$fileName = __('messages.report_card') . "_" . $departmentinfo['data']['name'] . "_" . $gradename . "_" . $classname . "_" . $name . ".pdf";
 		return $this->commonHelper->generatePdf($customPaper, $output, $fileName);
 		//return $pdf->download($fileName);
 	}
