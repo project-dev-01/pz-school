@@ -11077,6 +11077,8 @@ class AdminController extends Controller
                 $color = "";
                 if ($row['termination_status'] == "Approved") {
                     $color = "success";
+                } else if ($row['termination_status'] == "Accepted") {
+                    $color = "success";
                 } else if ($row['termination_status'] == "Rejected") {
                     $color = "danger";
                 } else if ($row['termination_status'] == "Pending") {

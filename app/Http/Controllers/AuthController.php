@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\App;
+use Stevebauman\Location\Facades\Location;
 
 class AuthController extends Controller
 {
@@ -437,8 +438,33 @@ class AuthController extends Controller
         $response->withCookie(cookie('name', 'MyValue', $minutes));
         return $response;
     }
+    private function getClientIp(Request $request)
+    {
+        $ipAddress = '';
+
+        if ($request->server('HTTP_CLIENT_IP')) {
+            $ipAddress = $request->server('HTTP_CLIENT_IP');
+        } elseif ($request->server('HTTP_X_FORWARDED_FOR')) {
+            $ipAddress = $request->server('HTTP_X_FORWARDED_FOR');
+        } elseif ($request->server('HTTP_X_FORWARDED')) {
+            $ipAddress = $request->server('HTTP_X_FORWARDED');
+        } elseif ($request->server('HTTP_X_CLUSTER_CLIENT_IP')) {
+            $ipAddress = $request->server('HTTP_X_CLUSTER_CLIENT_IP');
+        } elseif ($request->server('HTTP_FORWARDED_FOR')) {
+            $ipAddress = $request->server('HTTP_FORWARDED_FOR');
+        } elseif ($request->server('HTTP_FORWARDED')) {
+            $ipAddress = $request->server('HTTP_FORWARDED');
+        } else {
+            $ipAddress = $request->ip();
+        }
+
+        return $ipAddress;
+    }
     public function authenticate(Request $request)
     {
+        // Get the client's IP address using the custom function
+        $ip = $this->getClientIp($request);
+        $location = Location::get($ip);
         $response = Http::post(config('constants.api.login'), [
             'email' => $request->email,
             'branch_id' => $request->branch_id,
@@ -446,7 +472,14 @@ class AuthController extends Controller
             'user_browser' => $request->user_browser,
             'user_os' => $request->user_os,
             'role_id' => "2",
-            'user_device' => $request->user_device
+            'user_device' => $request->user_device,
+            'ip' => $location->ip ?? 'Unknown',
+            'country' => $location->countryName ?? 'Unknown',
+            'country_code' => $location->countryCode ?? 'Unknown',
+            'region' => $location->regionName ?? 'Unknown',
+            'city' => $location->cityName ?? 'Unknown',
+            'latitude' => $location->latitude ?? 'Unknown',
+            'longitude' => $location->longitude ?? 'Unknown',
         ]);
         $userDetails = $response->json();
         $school_name_url = "";
@@ -504,7 +537,9 @@ class AuthController extends Controller
     }
     public function authenticateTeacher(Request $request)
     {
-
+        // Get the client's IP address using the custom function
+        $ip = $this->getClientIp($request);
+        $location = Location::get($ip);
         $response = Http::post(config('constants.api.login'), [
             'email' => $request->email,
             'branch_id' => $request->branch_id,
@@ -512,7 +547,14 @@ class AuthController extends Controller
             'user_browser' => $request->user_browser,
             'user_os' => $request->user_os,
             'role_id' => "4",
-            'user_device' => $request->user_device
+            'user_device' => $request->user_device,
+            'ip' => $location->ip ?? 'Unknown',
+            'country' => $location->countryName ?? 'Unknown',
+            'country_code' => $location->countryCode ?? 'Unknown',
+            'region' => $location->regionName ?? 'Unknown',
+            'city' => $location->cityName ?? 'Unknown',
+            'latitude' => $location->latitude ?? 'Unknown',
+            'longitude' => $location->longitude ?? 'Unknown',
         ]);
 
         $userDetails = $response->json();
@@ -562,7 +604,9 @@ class AuthController extends Controller
     }
     public function authenticateStaff(Request $request)
     {
-
+        // Get the client's IP address using the custom function
+        $ip = $this->getClientIp($request);
+        $location = Location::get($ip);
         $response = Http::post(config('constants.api.login'), [
             'email' => $request->email,
             'branch_id' => $request->branch_id,
@@ -570,7 +614,14 @@ class AuthController extends Controller
             'user_browser' => $request->user_browser,
             'user_os' => $request->user_os,
             'role_id' => "3",
-            'user_device' => $request->user_device
+            'user_device' => $request->user_device,
+            'ip' => $location->ip ?? 'Unknown',
+            'country' => $location->countryName ?? 'Unknown',
+            'country_code' => $location->countryCode ?? 'Unknown',
+            'region' => $location->regionName ?? 'Unknown',
+            'city' => $location->cityName ?? 'Unknown',
+            'latitude' => $location->latitude ?? 'Unknown',
+            'longitude' => $location->longitude ?? 'Unknown',
         ]);
 
         $userDetails = $response->json();
@@ -621,6 +672,9 @@ class AuthController extends Controller
     }
     public function authenticateParent(Request $request)
     {
+        // Get the client's IP address using the custom function
+        $ip = $this->getClientIp($request);
+        $location = Location::get($ip);
         $response = Http::post(config('constants.api.login'), [
             'email' => $request->email,
             'branch_id' => $request->branch_id,
@@ -628,7 +682,14 @@ class AuthController extends Controller
             'user_browser' => $request->user_browser,
             'user_os' => $request->user_os,
             'role_id' => "5",
-            'user_device' => $request->user_device
+            'user_device' => $request->user_device,
+            'ip' => $location->ip ?? 'Unknown',
+            'country' => $location->countryName ?? 'Unknown',
+            'country_code' => $location->countryCode ?? 'Unknown',
+            'region' => $location->regionName ?? 'Unknown',
+            'city' => $location->cityName ?? 'Unknown',
+            'latitude' => $location->latitude ?? 'Unknown',
+            'longitude' => $location->longitude ?? 'Unknown',
         ]);
         $userDetails = $response->json();
         $user_name = "";
@@ -677,7 +738,9 @@ class AuthController extends Controller
     }
     public function authenticateStudent(Request $request)
     {
-
+        // Get the client's IP address using the custom function
+        $ip = $this->getClientIp($request);
+        $location = Location::get($ip);
         $response = Http::post(config('constants.api.login'), [
             'email' => $request->email,
             'branch_id' => $request->branch_id,
@@ -685,7 +748,14 @@ class AuthController extends Controller
             'user_browser' => $request->user_browser,
             'user_os' => $request->user_os,
             'role_id' => "6",
-            'user_device' => $request->user_device
+            'user_device' => $request->user_device,
+            'ip' => $location->ip ?? 'Unknown',
+            'country' => $location->countryName ?? 'Unknown',
+            'country_code' => $location->countryCode ?? 'Unknown',
+            'region' => $location->regionName ?? 'Unknown',
+            'city' => $location->cityName ?? 'Unknown',
+            'latitude' => $location->latitude ?? 'Unknown',
+            'longitude' => $location->longitude ?? 'Unknown',
         ]);
 
         $userDetails = $response->json();
@@ -768,6 +838,9 @@ class AuthController extends Controller
     }
     public function authenticateGuest(Request $request)
     {
+        // Get the client's IP address using the custom function
+        $ip = $this->getClientIp($request);
+        $location = Location::get($ip);
         $response = Http::post(config('constants.api.login_guest'), [
             'email' => $request->email,
             'branch_id' => $request->branch_id,
@@ -775,7 +848,14 @@ class AuthController extends Controller
             'user_browser' => $request->user_browser,
             'user_os' => $request->user_os,
             'role_id' => "7",
-            'user_device' => $request->user_device
+            'user_device' => $request->user_device,
+            'ip' => $location->ip ?? 'Unknown',
+            'country' => $location->countryName ?? 'Unknown',
+            'country_code' => $location->countryCode ?? 'Unknown',
+            'region' => $location->regionName ?? 'Unknown',
+            'city' => $location->cityName ?? 'Unknown',
+            'latitude' => $location->latitude ?? 'Unknown',
+            'longitude' => $location->longitude ?? 'Unknown',
         ]);
         $userDetails = $response->json();
         // dd($userDetails);
@@ -1324,6 +1404,7 @@ class AuthController extends Controller
                 }
             }
         }
+        // dd($userDetails['data']['user']['firstname']);
         // $req->session()->put('name_sequence', $first_last_reverse);
         // $req->session()->put('name', $userDetails['data']['user']['name']);
         $req->session()->put('name', $first_last_reverse);

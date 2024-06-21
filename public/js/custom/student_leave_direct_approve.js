@@ -114,8 +114,8 @@ $(function () {
     }
     $('#leave_file').change(function () {
         var file = $('#leave_file')[0].files[0];
-        if (file.size > 2097152) {
-            $('#file_name').text("File greater than 2Mb");
+        if (file.size > 10485760) { // 10MB = 10 * 1024 * 1024 bytes
+            $('#file_name').text("File greater than 10Mb");
             $("#file_name").addClass("error");
             $('#leave_file').val('');
         } else {
@@ -123,6 +123,7 @@ $(function () {
             $('#file_name').text(file.name);
         }
     });
+    
 
     // studentAllReasons
     $(document).on('click', '#studentAllReasons', function () {

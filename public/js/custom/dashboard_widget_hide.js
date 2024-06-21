@@ -83,9 +83,9 @@ $(function () {
         row.remove();
         updateOrderValues();
         // Check if all widgets are deleted and show message
-        if ($('.widget').length === 0) {
-            toastr.error('Please add a widget.');
-        }
+        // if ($('.widget').length === 0) {
+        //     toastr.error('Please add a widget.');
+        // }
     }
     function updateOrderValues() {
         $('.widget').each(function (index) {
@@ -149,16 +149,16 @@ $(function () {
         var isValid = true;  // To track if all widgetValues are valid
         var form = this;
         var button = $('.addWidget'); // Get the button
-        if (button.length === 0) {
-            toastr.error('Please add a widget.');
-            isValid = false;
-        } else {
+        // if (button.length === 0) {
+        //     toastr.error('Please add a widget.');
+        //     isValid = false;
+        // } else {
             var buttonText = button.text(); // Get the button text
             if (buttonText.includes(messages.add_widget)) {
                 toastr.error('Please fill in all widget values.');
                 isValid = false;
             }
-        }
+        // }
     
         if (isValid) {
             $.ajax({
