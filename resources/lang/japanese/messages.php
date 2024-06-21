@@ -1920,7 +1920,7 @@ return [
     "add_hideunhide" => "ウィジェット追加",
     "dashboard_details" => "ダッシュボードの詳細",
     "add_attendance_report" => "出欠レポート",
-    "pattern" => "パターン",
+    "pattern" => "集計単位",
     "wick" => "芯",
     "nursing_teacher" => "養護教諭",
     "homeroom_teacher" => "担任の先生",
