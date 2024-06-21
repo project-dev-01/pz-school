@@ -20,7 +20,7 @@
                         if ($absent_attendance_report && $absent_attendance_report['code'] == '200') {
                         $data = $absent_attendance_report['data'];
                         $type = isset($data['type'])?$data['type']:'';
-                        $absent_count = isset($data['absent_details'][0]['absentCount'])?$data['absent_details'][0]['absentCount']:'N/A';
+                        $absent_count = isset($data['absent_details'][0]['no_of_days_attendance'])?$data['absent_details'][0]['no_of_days_attendance']:'N/A';
                         }
                         @endphp
                     </h4>
