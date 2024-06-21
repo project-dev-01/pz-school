@@ -181,10 +181,10 @@
                                             <th>#</th>
                                             <th> {{ __('messages.register_number') }}</th>
                                             <th> {{ __('messages.name') }}</th>
-                                            <th> {{ __('messages.name_english') }}</th>
-                                            <th> {{ __('messages.name_common') }}</th>
+                                            <!-- <th> {{ __('messages.name_english') }}</th>
+                                            <th> {{ __('messages.name_common') }}</th> -->
                                             <th> {{ __('messages.type') }}</th>
-                                            <th> {{ __('messages.gender') }}</th>
+                                            <!-- <th> {{ __('messages.gender') }}</th> -->
                                             <th> {{ __('messages.email') }}</th>
                                             <th> {{ __('messages.academic_year') }}</th>
                                             <th> {{ __('messages.grade') }}</th>
