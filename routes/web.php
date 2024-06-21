@@ -680,7 +680,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('exam/adhocuploadmark', [AdminController::class, 'AdhocExamuploadmark'])->name('admin.exam.adhocuploadmark');
 
         //Graduates Yoroku primary /Secondary Report
-
+        Route::get('yoroku/downloadprimary/{id}', [YorokuPdfController::class, 'downloadprimary'])->name('admin.yoroku.downloadprimary');
+        Route::get('yoroku/downloadsecondary/{id}', [YorokuPdfController::class, 'downloadsecondary'])->name('admin.yoroku.downloadsecondary');
+        Route::post('individual/downloadyorokuprimary', [YorokuPdfController::class, 'downloadyorokuprimary'])->name('admin.individual.downloadyorokuprimary');
+        Route::post('individual/downloadyorokusecondary', [YorokuPdfController::class, 'downloadyorokusecondary'])->name('admin.individual.downloadyorokusecondary');
+       
         Route::get('primary/downloadform1/{id}', [ExamPdfController1::class, 'downprimaryform1'])->name('admin.primary.downloadform1');
         Route::get('yoroku/downloadpriYorokuform2ab/{id}', [YorokuPdfController::class, 'downloadpriYorokuform2ab'])->name('admin.yoroku.downloadpriYorokuform2ab');
         Route::get('yoroku/downloadsecYorokuform2ab/{id}', [YorokuPdfController::class, 'downloadsecYorokuform2ab'])->name('admin.yoroku.downloadsecYorokuform2ab');

@@ -181,7 +181,8 @@
                                         <option value="report_card">{{ __('messages.report_card') }}</option>
                                         <option value="personal_test_result">{{ __('messages.personal_test_res') }}</option>
                                         <option value="english_communication">{{ __('messages.english_communication') }}</option>
-                                    </select>
+                                        <option value="yoroku_report">{{ __('messages.yoroku_report') }}</option>
+                                        </select>
                                 </div>
                             </div>
                         </div>
@@ -340,6 +341,70 @@
         </div> <!-- end col -->
 
     </div>
+    <div class="row" style="display: none;" id="byyoroku_body">
+        <div class="col-xl-12">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <h4 class="navv">
+                            {{ __('messages.yoroku_report') }}
+                            <h4>
+                    </li>
+                </ul><br>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @include('admin.exam_results.yorokustudent_table')
+
+                            <!-- <div id="btnAppend">
+                            </div> -->
+                            <!--<div class="col-md-12">
+                                <div class="clearfix mt-4">
+                                    <form id="form2" method="post" action="{{ route('admin.exam_results.downbyreportcard') }}">
+                                        @csrf
+
+                                        <input type="hidden" name="department_id" class="downDepartmentID">
+                                        <input type="hidden" name="exam_id" class="downExamID">
+                                        <input type="hidden" name="class_id" class="downClassID">
+                                        <input type="hidden" name="semester_id" class="downSemesterID">
+                                        <input type="hidden" name="session_id" class="downSessionID">
+                                        <input type="hidden" name="section_id" class="downSectionID">
+                                        <input type="hidden" name="academic_year" class="downAcademicYear">
+                                        <input type="hidden" name="report_type" class="downReport_type">
+
+                                        <div class="clearfix float-right" style="margin-bottom:5px; margin-left: 10px;">
+                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light" style="white-space: nowrap;">{{ __('messages.download_zip_file') }}</button>
+                                        </div>
+                                    </form>
+                                    <form id="allPdfForm2" method="post" action="{{ route('admin.exam_results.downbyreportcardfile') }}">
+                                        @csrf
+                                        <input type="hidden" name="department_id" class="downDepartmentID">
+                                        <input type="hidden" name="exam_id" class="downExamID">
+                                        <input type="hidden" name="class_id" class="downClassID">
+                                        <input type="hidden" name="semester_id" class="downSemesterID">
+                                        <input type="hidden" name="session_id" class="downSessionID">
+                                        <input type="hidden" name="section_id" class="downSectionID">
+                                        <input type="hidden" name="academic_year" class="downAcademicYear">
+                                        <input type="hidden" name="report_type" class="downReport_type">
+                                        <div class="clearfix float-right" style="margin-bottom:5px; margin-left: 10px;">
+                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light" style="white-space: nowrap;">{{ __('messages.download_all_pdf') }}</button>
+                                            <!--<button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>-->
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>-->
+
+                        </div>
+                        <!-- end row-->
+
+                    </div> <!-- end card-body -->
+
+                </div> <!-- end card-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+
+    </div>
     <div class="row" style="display: none;" id="bypersonal_body">
         <div class="col-xl-12">
             <div class="card">
@@ -413,6 +478,9 @@
     var downbyecreport = "{{ route('admin.individual.downbyecreport') }}";
     var downbyreportcard = "{{ route('admin.individual.downbyreportcard') }}";
     var downbypersoanalreport = "{{ route('admin.individual.downbypersoanalreport') }}";
+    
+    var downbyprimaryyoroku = "{{ route('admin.individual.downloadyorokuprimary') }}";
+    var downbysecondaryyoroku = "{{ route('admin.individual.downloadyorokusecondary') }}";
 
     var examsByclassandsection = "{{ config('constants.api.exam_by_classSection') }}";
     var getbySubject = "{{ config('constants.api.tot_grade_calcu_bySubject') }}";

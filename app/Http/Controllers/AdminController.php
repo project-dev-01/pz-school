@@ -11896,16 +11896,17 @@ class AdminController extends Controller
             "stu_status" => $request->stu_status,
             "academic_session_id" => session()->get('academic_session_id')
         ];
+        $routepath=($request->department_id==1)?'admin.yoroku.downloadprimary':'admin.yoroku.downloadsecondary';
         //dd($data);
         $response = Helper::PostMethod(config('constants.api.getgraduatestudentlist'), $data);
         $data = isset($response['data']) ? $response['data'] : [];
-        return DataTables::of($data)
+        return DataTables::of($data,$routepath)
 
             ->addIndexColumn()
-            ->addColumn('actions', function ($row) {
-                $edit = route('admin.graduates.details', $row['id']);
+            ->addColumn('actions', function ($row) use ($routepath) {
+                $edit = route($routepath, $row['id']);
                 return '<div class="button-list">
-                                 <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" id="editStudentBtn"><i class="fe-eye"></i></a>
+                                 <a href="' . $edit . '" class="btn btn-blue waves-effect waves-light" id="editStudentBtn"><i class="fe-download"></i></a>
                                  
                          </div>';
             })

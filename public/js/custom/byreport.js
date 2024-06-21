@@ -160,14 +160,26 @@ $(function () {
             $("#byec_body").show("slow");
             $("#byreport_body").hide("slow");
             $("#bypersonal_body").hide("slow");
+            
+            $("#byyoroku_body").hide("slow");
         } else if (reportType == 'report_card') {
             $("#byec_body").hide("slow");
             $("#byreport_body").show("slow");
             $("#bypersonal_body").hide("slow");
-        } else {
+            
+            $("#byyoroku_body").hide("slow");
+        } 
+        else if (reportType == 'yoroku_report') {
             $("#byec_body").hide("slow");
             $("#byreport_body").hide("slow");
-            $("#bypersonal_body").show("slow");
+            $("#bypersonal_body").hide("slow");
+            $("#byyoroku_body").show("slow");
+        }
+        else {
+            $("#byec_body").hide("slow");
+            $("#byreport_body").hide("slow");
+            $("#bypersonal_body").show("slow"); 
+            $("#byyoroku_body").hide("slow");
             if (departmentId == '2') {
                 $("#secondary_personal").show("slow");
                 $("#primary_personal").hide("slow");
@@ -340,7 +352,11 @@ $(function () {
             var studentTableID = '#student-table';
         } else if (reportType == 'personal_test_result') {
             var studentTableID = '#chartstudent-table';
-        } else {
+        }
+        else if (reportType == 'yoroku_report') {
+            var studentTableID = '#yorokustudent-table';
+        }
+         else {
             // def
             var studentTableID = '#student-table';
         }
@@ -488,6 +504,12 @@ $(function () {
             }
             if (report_type == 'personal_test_result') {
                 $('#individual_pdf').attr('action', downbypersoanalreport);
+            }
+            if (report_type == 'yoroku_report' && department_id==1) {
+                $('#individual_pdf').attr('action', downbyprimaryyoroku);
+            }
+            if (report_type == 'yoroku_report' && department_id==2) {
+                $('#individual_pdf').attr('action', downbysecondaryyoroku);
             }
             // $('#individual_pdf').submit();
             showLoading();

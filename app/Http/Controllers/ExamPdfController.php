@@ -708,24 +708,40 @@ class ExamPdfController extends Controller
 					$at_tot6 = 0;
 					$at_tot7 = 0;
 					foreach ($getattendance['data'] as $att) {
-						$at_tot1 += $att['no_schooldays'];
-						$at_tot2 += $att['suspension'];
-						$at_tot3 += $att['totalcoming'];
-						$at_tot4 += $att['totabs'];
-						$at_tot5 += $att['totpres'];
-						$at_tot6 += $att['totlate'];
-						$at_tot7 += $att['totexc'];
-
-						$output .= '<tr>
+						if($att['no_schooldays']==0)
+						{
+							$output .= '<tr>
 							<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
-							<td style="height: 32px;">' . $att['no_schooldays'] . '</td>
-							<td style="height: 32px;">' . $att['suspension'] . '</td>
-							<td style="height: 32px;">' . $att['totalcoming'] . '</td>
-							<td style="height: 32px;">' . $att['totabs'] . '</td>
-							<td style="height: 32px;">' . $att['totpres'] . '</td>
-							<td style="height: 32px;">' . $att['totlate'] . '</td>
-							<td style="height: 32px;">' . $att['totexc'] . '</td>
-						</tr>';
+							<td style="height: 32px;"> </td>
+							<td style="height: 32px;"> </td>
+							<td style="height: 32px;"> </td>
+							<td style="height: 32px;"> </td>
+							<td style="height: 32px;"> </td>
+							<td style="height: 32px;"> </td>
+							<td style="height: 32px;"> </td>
+							</tr>';
+						}
+						else
+						{
+							$at_tot1 += $att['no_schooldays'];
+							$at_tot2 += $att['suspension'];
+							$at_tot3 += $att['totalcoming'];
+							$at_tot4 += $att['totabs'];
+							$at_tot5 += $att['totpres'];
+							$at_tot6 += $att['totlate'];
+							$at_tot7 += $att['totexc'];
+
+							$output .= '<tr>
+								<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
+								<td style="height: 32px;">' . $att['no_schooldays'] . '</td>
+								<td style="height: 32px;">' . $att['suspension'] . '</td>
+								<td style="height: 32px;">' . $att['totalcoming'] . '</td>
+								<td style="height: 32px;">' . $att['totabs'] . '</td>
+								<td style="height: 32px;">' . $att['totpres'] . '</td>
+								<td style="height: 32px;">' . $att['totlate'] . '</td>
+								<td style="height: 32px;">' . $att['totexc'] . '</td>
+							</tr>';
+						}
 					}
 
 					$output .= '<tr style="border-top: 2px solid black;">
@@ -1140,24 +1156,40 @@ class ExamPdfController extends Controller
 					$at_tot6 = 0;
 					$at_tot7 = 0;
 					foreach ($getattendance['data'] as $att) {
-						$at_tot1 += $att['no_schooldays'];
-						$at_tot2 += $att['suspension'];
-						$at_tot3 += $att['totalcoming'];
-						$at_tot4 += $att['totabs'];
-						$at_tot5 += $att['totpres'];
-						$at_tot6 += $att['totlate'];
-						$at_tot7 += $att['totexc'];
+						if($att['no_schooldays']==0)
+						{
+							$output .= '<tr>
+							<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
+							<td style="height: 32px;"> </td>
+							<td style="height: 32px;"> </td>
+							<td style="height: 32px;"> </td>
+							<td style="height: 32px;"> </td>
+							<td style="height: 32px;"> </td>
+							<td style="height: 32px;"> </td>
+							<td style="height: 32px;"> </td>
+							</tr>';
+						}
+						else
+						{
+							$at_tot1 += $att['no_schooldays'];
+							$at_tot2 += $att['suspension'];
+							$at_tot3 += $att['totalcoming'];
+							$at_tot4 += $att['totabs'];
+							$at_tot5 += $att['totpres'];
+							$at_tot6 += $att['totlate'];
+							$at_tot7 += $att['totexc'];
 
-						$output .= '<tr>
-												<td style="height: 30px;">' . $attarray[intval($att['month'])] . '</td>
-												<td style="height: 30px;">' . $att['no_schooldays'] . '</td>
-												<td style="height: 30px;">' . $att['suspension'] . '</td>
-												<td style="height: 30px;">' . $att['totalcoming'] . '</td>
-												<td style="height: 30px;">' . $att['totabs'] . '</td>
-												<td style="height: 30px;">' . $att['totpres'] . '</td>
-												<td style="height: 30px;">' . $att['totlate'] . '</td>
-												<td style="height: 30px;">' . $att['totexc'] . '</td>
-											</tr>';
+							$output .= '<tr>
+								<td style="height: 30px;">' . $attarray[intval($att['month'])] . '</td>
+								<td style="height: 30px;">' . $att['no_schooldays'] . '</td>
+								<td style="height: 30px;">' . $att['suspension'] . '</td>
+								<td style="height: 30px;">' . $att['totalcoming'] . '</td>
+								<td style="height: 30px;">' . $att['totabs'] . '</td>
+								<td style="height: 30px;">' . $att['totpres'] . '</td>
+								<td style="height: 30px;">' . $att['totlate'] . '</td>
+								<td style="height: 30px;">' . $att['totexc'] . '</td>
+							</tr>';
+						}
 					}
 					$output .= '<tr style="border-top: 2px solid black;">
 											<td style="height: 35px;"> 合計</td>
@@ -1578,23 +1610,39 @@ class ExamPdfController extends Controller
 					$at_tot6 = 0;
 					$at_tot7 = 0;
 					foreach ($getattendance['data'] as $att) {
-						$at_tot1 += $att['no_schooldays'];
-						$at_tot2 += $att['suspension'];
-						$at_tot3 += $att['totalcoming'];
-						$at_tot4 += $att['totabs'];
-						$at_tot5 += $att['totpres'];
-						$at_tot6 += $att['totlate'];
-						$at_tot7 += $att['totexc'];
-						$output .= '<tr>
-												<td style="height: 28px;">' . $attarray[intval($att['month'])] . '</td>
-												<td style="height: 28px;">' . $att['no_schooldays'] . '</td>
-												<td style="height: 28px;">' . $att['suspension'] . '</td>
-												<td style="height: 28px;">' . $att['totalcoming'] . '</td>
-												<td style="height: 28px;">' . $att['totabs'] . '</td>
-												<td style="height: 28px;">' . $att['totpres'] . '</td>
-												<td style="height: 28px;">' . $att['totlate'] . '</td>
-												<td style="height: 28px;">' . $att['totexc'] . '</td>
-											</tr>';
+						if($att['no_schooldays']==0)
+						{
+							$output .= '<tr>
+							<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
+							<td style="height: 32px;"> </td>
+							<td style="height: 32px;"> </td>
+							<td style="height: 32px;"> </td>
+							<td style="height: 32px;"> </td>
+							<td style="height: 32px;"> </td>
+							<td style="height: 32px;"> </td>
+							<td style="height: 32px;"> </td>
+							</tr>';
+						}
+						else
+						{
+							$at_tot1 += $att['no_schooldays'];
+							$at_tot2 += $att['suspension'];
+							$at_tot3 += $att['totalcoming'];
+							$at_tot4 += $att['totabs'];
+							$at_tot5 += $att['totpres'];
+							$at_tot6 += $att['totlate'];
+							$at_tot7 += $att['totexc'];
+							$output .= '<tr>
+								<td style="height: 28px;">' . $attarray[intval($att['month'])] . '</td>
+								<td style="height: 28px;">' . $att['no_schooldays'] . '</td>
+								<td style="height: 28px;">' . $att['suspension'] . '</td>
+								<td style="height: 28px;">' . $att['totalcoming'] . '</td>
+								<td style="height: 28px;">' . $att['totabs'] . '</td>
+								<td style="height: 28px;">' . $att['totpres'] . '</td>
+								<td style="height: 28px;">' . $att['totlate'] . '</td>
+								<td style="height: 28px;">' . $att['totexc'] . '</td>
+							</tr>';
+						}
 					}
 					$output .= '<tr style="border-top: 2px solid black;">
 											<td style="height: 35px;"> 合計</td>
@@ -2056,23 +2104,39 @@ class ExamPdfController extends Controller
 				$at_tot6 = 0;
 				$at_tot7 = 0;
 				foreach ($getattendance['data'] as $att) {
-					$at_tot1 += $att['no_schooldays'];
-					$at_tot2 += $att['suspension'];
-					$at_tot3 += $att['totalcoming'];
-					$at_tot4 += $att['totabs'];
-					$at_tot5 += $att['totpres'];
-					$at_tot6 += $att['totlate'];
-					$at_tot7 += $att['totexc'];
-					$output .= '<tr>
-						<td style="height: 27px;">' . $attarray[intval($att['month'])] . '</td>
-						<td style="height: 27px;">' . $att['no_schooldays'] . '</td>
-						<td style="height: 27px;">' . $att['suspension'] . '</td>
-						<td style="height: 27px;">' . $att['totalcoming'] . '</td>
-						<td style="height: 27px;">' . $att['totabs'] . '</td>
-						<td style="height: 27px;">' . $att['totpres'] . '</td>
-						<td style="height: 27px;">' . $att['totlate'] . '</td>
-						<td style="height: 27px;">' . $att['totexc'] . '</td>
-					</tr>';
+					if($att['no_schooldays']==0)
+					{
+						$output .= '<tr>
+						<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						</tr>';
+					}
+					else
+					{
+						$at_tot1 += $att['no_schooldays'];
+						$at_tot2 += $att['suspension'];
+						$at_tot3 += $att['totalcoming'];
+						$at_tot4 += $att['totabs'];
+						$at_tot5 += $att['totpres'];
+						$at_tot6 += $att['totlate'];
+						$at_tot7 += $att['totexc'];
+						$output .= '<tr>
+							<td style="height: 27px;">' . $attarray[intval($att['month'])] . '</td>
+							<td style="height: 27px;">' . $att['no_schooldays'] . '</td>
+							<td style="height: 27px;">' . $att['suspension'] . '</td>
+							<td style="height: 27px;">' . $att['totalcoming'] . '</td>
+							<td style="height: 27px;">' . $att['totabs'] . '</td>
+							<td style="height: 27px;">' . $att['totpres'] . '</td>
+							<td style="height: 27px;">' . $att['totlate'] . '</td>
+							<td style="height: 27px;">' . $att['totexc'] . '</td>
+						</tr>';
+					}
 				}
 				$output .= '<tr style="border-top: 2px solid black;">
 					<td style="height: 40px;"> 合計</td>
@@ -4100,15 +4164,30 @@ class ExamPdfController extends Controller
 					$totabs += $att['totabs'];
 				}
 			}
-			$output .= ' <tr>
-            <td colspan="1" style="width: 0px;">' . $sec['class_numeric'] . '</td>
-            <td colspan="1" style="width: 0px;">' . $totaldays . '</td>
-            <td colspan="1" style="width: 0px;">' . $suspension . '</td>
-            <td colspan="1" style="width: 0px;">' . $totalcomimg . '</td>
-            <td colspan="1" style="width: 0px;">' . $totabs . '</td>
-            <td colspan="1" style="width: 0px;">' . $totpres . '</td>
-            <td colspan="12" style="width: 0px;;">' . $remark . '</td>            
-            </tr>';
+			if($totaldays==0)
+			{
+				$output .= '<tr>
+				<td colspan="1" style="width: 0px;">' . $sec['class_numeric'] . '</td>
+				<td colspan="1" style="width: 0px;"> </td>
+				<td colspan="1" style="width: 0px;"> </td>
+				<td colspan="1" style="width: 0px;"> </td>
+				<td colspan="1" style="width: 0px;"> </td>
+				<td colspan="1" style="width: 0px;"> </td>
+				<td colspan="12" style="width: 0px;"> </td>            
+				</tr>';
+			}
+			else
+			{
+				$output .= ' <tr>
+				<td colspan="1" style="width: 0px;">' . $sec['class_numeric'] . '</td>
+				<td colspan="1" style="width: 0px;">' . $totaldays . '</td>
+				<td colspan="1" style="width: 0px;">' . $suspension . '</td>
+				<td colspan="1" style="width: 0px;">' . $totalcomimg . '</td>
+				<td colspan="1" style="width: 0px;">' . $totabs . '</td>
+				<td colspan="1" style="width: 0px;">' . $totpres . '</td>
+				<td colspan="12" style="width: 0px;">' . $remark . '</td>            
+				</tr>';
+			}
 		}
 		$output .= '</tbody>
 			</table>

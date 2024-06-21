@@ -721,14 +721,31 @@ class ExamindividualPdfController extends Controller
 				$at_tot6 = 0;
 				$at_tot7 = 0;
 				foreach ($getattendance['data'] as $att) {
-					$at_tot1 += $att['no_schooldays'];
-					$at_tot2 += $att['suspension'];
-					$at_tot3 += $att['totalcoming'];
-					$at_tot4 += $att['totabs'];
-					$at_tot5 += $att['totpres'];
-					$at_tot6 += $att['totlate'];
-					$at_tot7 += $att['totexc'];
-					$output .= '<tr>
+					if($att['no_schooldays']==0)
+					{
+						$output .= '<tr>
+						<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						</tr>';
+					}
+					else
+					{
+
+					
+						$at_tot1 += $att['no_schooldays'];
+						$at_tot2 += $att['suspension'];
+						$at_tot3 += $att['totalcoming'];
+						$at_tot4 += $att['totabs'];
+						$at_tot5 += $att['totpres'];
+						$at_tot6 += $att['totlate'];
+						$at_tot7 += $att['totexc'];
+						$output .= '<tr>
 							<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
 							<td style="height: 32px;">' . $att['no_schooldays'] . '</td>
 							<td style="height: 32px;">' . $att['suspension'] . '</td>
@@ -738,6 +755,7 @@ class ExamindividualPdfController extends Controller
 							<td style="height: 32px;">' . $att['totlate'] . '</td>
 							<td style="height: 32px;">' . $att['totexc'] . '</td>
 						</tr>';
+					}
 				}
 				$output .= '<tr style="border-top: 2px solid black;">
 						<td style="height: 34px;"> 合計</td>
@@ -1157,6 +1175,21 @@ class ExamindividualPdfController extends Controller
 				$at_tot6 = 0;
 				$at_tot7 = 0;
 				foreach ($getattendance['data'] as $att) {
+					if($att['no_schooldays']==0)
+					{
+						$output .= '<tr>
+						<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						</tr>';
+					}
+					else
+					{
 					$at_tot1 += $att['no_schooldays'];
 					$at_tot2 += $att['suspension'];
 					$at_tot3 += $att['totalcoming'];
@@ -1165,15 +1198,16 @@ class ExamindividualPdfController extends Controller
 					$at_tot6 += $att['totlate'];
 					$at_tot7 += $att['totexc'];
 					$output .= '<tr>
-												<td style="height: 30px;">' . $attarray[intval($att['month'])] . '</td>
-												<td style="height: 30px;">' . $att['no_schooldays'] . '</td>
-												<td style="height: 30px;">' . $att['suspension'] . '</td>
-												<td style="height: 30px;">' . $att['totalcoming'] . '</td>
-												<td style="height: 30px;">' . $att['totabs'] . '</td>
-												<td style="height: 30px;">' . $att['totpres'] . '</td>
-												<td style="height: 30px;">' . $att['totlate'] . '</td>
-												<td style="height: 30px;">' . $att['totexc'] . '</td>
-											</tr>';
+							<td style="height: 30px;">' . $attarray[intval($att['month'])] . '</td>
+							<td style="height: 30px;">' . $att['no_schooldays'] . '</td>
+							<td style="height: 30px;">' . $att['suspension'] . '</td>
+							<td style="height: 30px;">' . $att['totalcoming'] . '</td>
+							<td style="height: 30px;">' . $att['totabs'] . '</td>
+							<td style="height: 30px;">' . $att['totpres'] . '</td>
+							<td style="height: 30px;">' . $att['totlate'] . '</td>
+							<td style="height: 30px;">' . $att['totexc'] . '</td>
+						</tr>';
+					}
 				}
 				$output .= '<tr style="border-top: 2px solid black;">
 											<td style="height: 35px;"> 合計</td>
@@ -1573,6 +1607,21 @@ class ExamindividualPdfController extends Controller
 				$at_tot6 = 0;
 				$at_tot7 = 0;
 				foreach ($getattendance['data'] as $att) {
+					if($att['no_schooldays']==0)
+					{
+						$output .= '<tr>
+						<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						<td style="height: 32px;"> </td>
+						</tr>';
+					}
+					else
+					{
 					$at_tot1 += $att['no_schooldays'];
 					$at_tot2 += $att['suspension'];
 					$at_tot3 += $att['totalcoming'];
@@ -1581,15 +1630,16 @@ class ExamindividualPdfController extends Controller
 					$at_tot6 += $att['totlate'];
 					$at_tot7 += $att['totexc'];
 					$output .= '<tr>
-												<td style="height: 28px;">' . $attarray[intval($att['month'])] . '</td>
-												<td style="height: 28px;">' . $att['no_schooldays'] . '</td>
-												<td style="height: 28px;">' . $att['suspension'] . '</td>
-												<td style="height: 28px;">' . $att['totalcoming'] . '</td>
-												<td style="height: 28px;">' . $att['totabs'] . '</td>
-												<td style="height: 28px;">' . $att['totpres'] . '</td>
-												<td style="height: 28px;">' . $att['totlate'] . '</td>
-												<td style="height: 28px;">' . $att['totexc'] . '</td>
-											</tr>';
+							<td style="height: 28px;">' . $attarray[intval($att['month'])] . '</td>
+							<td style="height: 28px;">' . $att['no_schooldays'] . '</td>
+							<td style="height: 28px;">' . $att['suspension'] . '</td>
+							<td style="height: 28px;">' . $att['totalcoming'] . '</td>
+							<td style="height: 28px;">' . $att['totabs'] . '</td>
+							<td style="height: 28px;">' . $att['totpres'] . '</td>
+							<td style="height: 28px;">' . $att['totlate'] . '</td>
+							<td style="height: 28px;">' . $att['totexc'] . '</td>
+						</tr>';
+					}
 				}
 				$output .= '<tr style="border-top: 2px solid black;">
 											<td style="height: 35px;"> 合計</td>
@@ -2048,6 +2098,21 @@ class ExamindividualPdfController extends Controller
 			$at_tot6 = 0;
 			$at_tot7 = 0;
 			foreach ($getattendance['data'] as $att) {
+				if($att['no_schooldays']==0)
+				{
+					$output .= '<tr>
+					<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
+					<td style="height: 32px;"> </td>
+					<td style="height: 32px;"> </td>
+					<td style="height: 32px;"> </td>
+					<td style="height: 32px;"> </td>
+					<td style="height: 32px;"> </td>
+					<td style="height: 32px;"> </td>
+					<td style="height: 32px;"> </td>
+					</tr>';
+				}
+				else
+				{
 				$at_tot1 += $att['no_schooldays'];
 				$at_tot2 += $att['suspension'];
 				$at_tot3 += $att['totalcoming'];
@@ -2065,6 +2130,7 @@ class ExamindividualPdfController extends Controller
 						<td style="height: 27px;">' . $att['totlate'] . '</td>
 						<td style="height: 27px;">' . $att['totexc'] . '</td>
 					</tr>';
+				}
 			}
 			$output .= '<tr style="border-top: 2px solid black;">
 					<td style="height: 40px;"> 合計</td>
@@ -2330,10 +2396,9 @@ class ExamindividualPdfController extends Controller
 		$output .= '</body></html>';
 		return $this->commonHelper->generatePdf($customPaper, $output, $fileName);
 	}
-	public function downbypersoanaloldreport(Request $request)
+	
+	public function downbypersoanalreport(Request $request)
 	{
-
-
 		$data = [
 			'branch_id' => session()->get('branch_id'),
 			'exam_id' => $request->exam_id,
@@ -2353,8 +2418,8 @@ class ExamindividualPdfController extends Controller
 		$english = "英語";
 		$music = "音楽";
 		$art = "美術";
-		$sport = "保体";
-		$engineer = "技家";
+		$sport = "保健体育";
+		$engineer = "家庭"; // Home Econ
 
 		$getstudents = Helper::PostMethod(config('constants.api.exam_individualstudentslist'), $data);
 
@@ -2366,81 +2431,10 @@ class ExamindividualPdfController extends Controller
 		$getnonmainsubjects = array($music, $art, $sport, $engineer);
 		$footer_text = session()->get('footer_text');
 		$personal_score = "個人得点"; //   individual score
-
-		$fonturl = storage_path('fonts/ipag.ttf');
-		$sno = 1;
-
-
 		$getteacherdata = Helper::PostMethod(config('constants.api.classteacher_principal'), $data);
-		$output = "<!DOCTYPE html>";
-		$output .= "<html><head>";
-		$output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
-		$output .= '<style>';
-		// $test .='* { font-family: DejaVu Sans, sans-serif; }';
-		$output .= '@font-face {
-					font-family: ipag;
-					font-style: normal;
-					font-weight: normal;
-					src: url("' . $fonturl . '");
-				} 
-				body {
-					font-family: "ipag", "Open Sans", !important;
-					}
-				
-				table {
-					border-collapse: collapse;
-					width: 100%;
-					line-height: 20px;
-					letter-spacing: 0.0133em;
-					}
-					
-					td,
-					th {
-					border: 1px solid black;
-					text-align: center;
-					line-height: 20px;
-					letter-spacing: 0.0133em;
-					word-wrap: break-word;
-					}
-				
-				.line {
-				height: 10px;
-				right: 10px;
-				margin: auto;
-				left: -5px;
-				width: 100%;
-				border-top: 1px solid #000;
-				-webkit-transform: rotate(14deg);
-				-ms-transform: rotate(14deg);
-				transform: rotate(14deg);
-				}
-				
-				.diagonal {
-				width: 150px;
-				height: 40px;
-				}
-				
-				.diagonal span.lb {
-				bottom: 2px;
-				left: 2px;
-				}
-				.table th, .table td {
-					border: none; /* Removes borders from table headers and cells */
-					padding: 8px; /* Adds padding for better readability */
-					text-align: left; /* Aligns text to the left */
-				}
-				
-				.diagonal span.rt {
-				top: 2px;
-				right: 2px;
-				}
-				.diagonalCross2 {
-				background: linear-gradient(to top right, #fff calc(50% - 1px), black , #fff calc(50% + 1px) )
-				}';
-		$output .= '</style>';
-		$output .= "</head>";
-		$output .= '<body>';
-		$sno = 0;
+
+
+		$sno = 1;
 
 		$grade = Helper::PostMethod(config('constants.api.class_details'), $data);
 		$section = Helper::PostMethod(config('constants.api.section_details'), $data);
@@ -2464,62 +2458,16 @@ class ExamindividualPdfController extends Controller
 			'id' => session()->get('branch_id'),
 		];
 		$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
-		//dd($acyear['data']['name']);
-		$acy = $acyear['data']['name'];
+			//dd($acyear['data']['name']);
+			$acy = $acyear['data']['name'];
 
-		$output .= '<table class="table" width="100%" border=0>			
-					
-					<tr>
-						<td >
-							<p>' . $grade['data']['name'] . ' </p>
-						</td>
-						<td>
-							<p>' . $request->semester_id . ' 学期</p>
-						</td>
-						<td>
-							<p><p>' . $term['data']['name'] . '</p> </p>
-						</td>
-						<td>クラス : ' . $section['data']['name'] . '</td>
-						<td>番 : ' . $sno . '</td>
-					</tr>
-				
-					<tr style="height:60px;">
-						<td colspan="2"> ' . $stu['attendance_no'] . '</td>
-						<td colspan="3">名前 :' . $stu['name'] . '</td>
-					</tr>
-					<tr> 
-						<td colspan="5" >
-						<table  width="100%" border=1>
-						<thead>                
-							<tr>
-								<td style=" border: 1px solid #959595;"></td>';
-		$main = 0;
-		$opt = 0;
-
-		foreach ($getmainsubjects as $mainsubject) {
-			$main++;
-			$output .= ' <td style=" border: 1px solid #959595;">' . $mainsubject . '</td>';
-		}
-		foreach ($getnonmainsubjects as $optsubject) {
-			$opt++;
-			$output .= ' <td style=" border: 1px solid #959595;">' . $optsubject . '</td>';
-		}
-
-		$output .= ' <td style=" border: 1px solid #959595;">5教科合計</td>
-								<td style=" border: 1px solid #959595;">9教科合計</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td style=" border: 1px solid #959595;">個人得点</td>';
-		$i = 0;
-		$totalmain = 0;
-		$totalopt = 0;
+		$craft = [];
+		$m1=0;$m2=0;$m3=0;$m4=0;$m5=0;$m6=0;$m7=0;$m8=0;$m9=0;$m10=0;
+		$nm1=0;$nm2=0;$nm3=0;$nm4=0;$nm5=0;$nm6=0;$nm7=0;$nm8=0;$nm9=0;$nm10=0;
+		
 		foreach ($getmainsubjects as $subject) {
-			$i++;
 			$studata = [
-				'branch_id' => session()->get('branch_id'),
-				'student_id' => $stu['student_id'],
+				'branch_id' => session()->get('branch_id'),				
 				'exam_id' => $request->exam_id,
 				'class_id' => $request->class_id,
 				'section_id' => $request->section_id,
@@ -2528,884 +2476,606 @@ class ExamindividualPdfController extends Controller
 				'subject' => $subject,
 				'paper' => $personal_score,
 				'academic_session_id' => $request->academic_year
-
 			];
-			$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppmarklist'), $studata);
+			$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppmarkchartlist'), $studata);
+			
+			$craft[$subject] = $getmarks['data'];
+			$m1+=$getmarks['data']['91-100'];
+			$m2+=$getmarks['data']['81-90'];
+			$m3+=$getmarks['data']['70-80'];
+			$m4+=$getmarks['data']['61-70'];
+			$m5+=$getmarks['data']['51-60'];
+			$m6+=$getmarks['data']['40-50'];
+			$m7+=$getmarks['data']['31-40'];
+			$m8+=$getmarks['data']['21-30'];
+			$m9+=$getmarks['data']['11-20'];
+			$m10+=$getmarks['data']['0-10'];			
+			
+			$nm1+=$getmarks['data']['91-100'];
+			$nm2+=$getmarks['data']['81-90'];
+			$nm3+=$getmarks['data']['70-80'];
+			$nm4+=$getmarks['data']['61-70'];
+			$nm5+=$getmarks['data']['51-60'];
+			$nm6+=$getmarks['data']['40-50'];
+			$nm7+=$getmarks['data']['31-40'];
+			$nm8+=$getmarks['data']['21-30'];
+			$nm9+=$getmarks['data']['11-20'];
+			$nm10+=$getmarks['data']['0-10'];	
 
-			$mark = (isset($getmarks['data']['score']) && $getmarks['data']['score'] != null) ? $getmarks['data']['score'] : '';
-
-			$output .= '<td colspan="1" style=" border: 1px solid #959595;">' . $mark . '</td>';
-			$mark = ($mark != '') ? $mark : 0;
-			$totalmain += $mark;
 		}
-		foreach ($getnonmainsubjects as $subject) {
-			$i++;
-			$studata = [
-				'branch_id' => session()->get('branch_id'),
-				'student_id' => $stu['student_id'],
-				'exam_id' => $request->exam_id,
-				'class_id' => $request->class_id,
-				'section_id' => $request->section_id,
-				'semester_id' => $request->semester_id,
-				'session_id' => $request->session_id,
-				'subject' => $subject,
-				'paper' => $personal_score,
-				'academic_session_id' => $request->academic_year
-
-			];
-			$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppmarklist'), $studata);
-
-
-			$mark = (isset($getmarks['data']['score']) && $getmarks['data']['score'] != null) ? $getmarks['data']['score'] : '';
-
-
-			$output .= '<td colspan="1" style=" border: 1px solid #959595;">' . $mark . '</td>';
-			$mark = ($mark != '') ? $mark : 0;
-			$totalopt += $mark;
-		}
-		$totall = $totalmain + $totalopt;
-		$output .= '<td style=" border: 1px solid #959595;">' . $totalmain . '</td>
-										<td style=" border: 1px solid #959595;">' . $totall . '</td>';
-
-		$output .= '</tr>
-							<tr>
-								<td style=" border: 1px solid #959595;">学年平均</td>';
-		$ma = 0;
-		$totalavgmain = 0;
-		$totalavgopt = 0;
-		foreach ($getmainsubjects as $subject) {
-			$ma++;
-			$studata = [
-				'branch_id' => session()->get('branch_id'),
-				'student_id' => $stu['student_id'],
-				'exam_id' => $request->exam_id,
-				'class_id' => $request->class_id,
-				'section_id' => $request->section_id,
-				'semester_id' => $request->semester_id,
-				'session_id' => $request->session_id,
-				'subject' => $subject,
-				'paper' => $personal_score,
-				'academic_session_id' => $request->academic_year
-
-			];
-			$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppavgmarklist'), $studata);
-
-			$mark = (isset($getmarks['data']['avg']) && $getmarks['data']['avg'] != null) ? $getmarks['data']['avg'] : '';
-
-			$output .= '<td colspan="1" style=" border: 1px solid #959595;">' . $mark . '</td>';
-			$mark = ($mark != '') ? $mark : 0;
-			$totalavgmain += $mark;
-		}
-		$op = 0;
-		foreach ($getnonmainsubjects as $subject) {
-			$op++;
-			$studata = [
-				'branch_id' => session()->get('branch_id'),
-				'student_id' => $stu['student_id'],
-				'exam_id' => $request->exam_id,
-				'class_id' => $request->class_id,
-				'section_id' => $request->section_id,
-				'semester_id' => $request->semester_id,
-				'session_id' => $request->session_id,
-				'subject' => $subject,
-				'paper' => $personal_score,
-				'academic_session_id' => $request->academic_year
-
-			];
-			$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppavgmarklist'), $studata);
-			$mark = (isset($getmarks['data']['avg']) && $getmarks['data']['avg'] != null) ? $getmarks['data']['avg'] : '';
-
-			$output .= '<td colspan="1" style=" border: 1px solid #959595;">' . $mark . '</td>';
-			$mark = ($mark != '') ? $mark : 0;
-
-			$totalavgopt += $mark;
-		}
-
-
-		$avgtotal1 = $totalavgmain / $ma;
-		$avgtotal2 = ($totalavgmain + $totalavgopt) / ($ma + $op);
-		$output .= '  <td style=" border: 1px solid #959595;">' . round($avgtotal1, 2) . '</td>
-								<td style=" border: 1px solid #959595;">' . round($avgtotal2, 2) . '</td>
-							</tr>
-						</tbody>
-					</table>
-					<br>
-					<p style="text-align:left">学習の振り返り</p>
-					<table  width="100%">
-						<thead>
-							<tr style="height:60px;">
-								<td style=" border: 1px solid #959595;">できたこと・よかったこと </td>
-								<td style=" border: 1px solid #959595;">できなかったこと・反省，今後の学習に向けて</td>
-								<td style=" border: 1px solid #959595;">保護者の方のコメント</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td style=" border: 1px solid #959595;height:200px;"></td>
-								<td style=" border: 1px solid #959595;height:200px;"></td>
-								<td style=" border: 1px solid #959595;height:200px;"></td>
-							</tr>
-						</tbody>
-					</table>
-						</td>
-					</tr>
-					
-					
-				</table>
-				
-				</body>
-				</html';
-		$pdf = \App::make('dompdf.wrapper');
-		// set size
-		$customPaper = array(0, 0, 792.00, 1224.00);
-		$pdf->set_paper($customPaper);
-		$pdf->loadHTML($output);
-		$pdfContent = $pdf->output();
-		// Set default headers
-		$headers = [
-			'Content-Type' => 'application/pdf',
-			'Content-Length' => strlen($pdfContent)
+		$marks_distribution5s = [
+			'451-500' => ($m1/5),
+			'401-450' =>  ($m2/5),
+			'351-400' =>  ($m3/5),
+			'301-350' =>  ($m4/5),
+			'251-300' =>  ($m5/5),
+			'201-250' =>  ($m6/5),
+			'151-200' =>  ($m7/5),
+			'101-150' =>  ($m8/5),
+			'51-100' =>  ($m9/5),
+			'0-50' =>  ($m10/5),
 		];
+		$craft['5教科合計'] = $marks_distribution5s;
+		foreach ($getnonmainsubjects as $subject) {
+			$studata = [
+				'branch_id' => session()->get('branch_id'),				
+				'exam_id' => $request->exam_id,
+				'class_id' => $request->class_id,
+				'section_id' => $request->section_id,
+				'semester_id' => $request->semester_id,
+				'session_id' => $request->session_id,
+				'subject' => $subject,
+				'paper' => $personal_score,
+				'academic_session_id' => $request->academic_year
+			];
+			$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppmarkchartlist'), $studata);
+			//dd($getmarks);
+			$craft[$subject] = $getmarks['data'];
+			$nm1+=$getmarks['data']['91-100'];
+			$nm2+=$getmarks['data']['81-90'];
+			$nm3+=$getmarks['data']['70-80'];
+			$nm4+=$getmarks['data']['61-70'];
+			$nm5+=$getmarks['data']['51-60'];
+			$nm6+=$getmarks['data']['40-50'];
+			$nm7+=$getmarks['data']['31-40'];
+			$nm8+=$getmarks['data']['21-30'];
+			$nm9+=$getmarks['data']['11-20'];
+			$nm10+=$getmarks['data']['0-10'];	
+		}
+		
+		
+		$marks_distribution9s = [
+			'811-900' => ($nm1/9),
+			'721-810' =>  ($nm2/9),
+			'6311-720' =>  ($nm3/9),
+			'541-630' =>  ($nm4/9),
+			'451-540' =>  ($nm5/9),
+			'361-450' =>  ($nm6/9),
+			'271-360' =>  ($nm7/9),
+			'181-270' =>  ($nm8/9),
+			'91-180' =>  ($nm9/9),
+			'0-90' =>  ($nm10/9),
+		];
+		
+		$craft['9教科合計'] = $marks_distribution9s;
+		$firstSubject = reset($craft);
+			$labels = array_keys($firstSubject);
+			
+			$labels2 = array('451-500','401-450','351-400','301-350','251-300','201-250','151-200','101-150','51-100','0-50');
+			//dd($labels2);
+			
+			$labels3 = array('811-900','721-810','6311-720','541-630','451-540','361-450','271-360','181-270','91-180','0-90');
+			
+			$ch=0;
+			$chartpath=[];
+			foreach ($craft as $subject => $distribution) {
+				$ch++;
+				// Extract data from the distribution array
+				$data = array_values($distribution);
+				$xTitle = $request->input('xTitle', 'Number of incidents');
+				$yTitle = $request->input('yTitle', 'Names');
+				
+
+				try {
+					if($ch==6)
+					{
+						$chartImagePath = $this->generateBarChartSingle($labels2, $data, $xTitle, $yTitle, $subject);
+						array_push($chartpath,$chartImagePath);
+					}
+					elseif($ch==11)
+					{
+						$chartImagePath = $this->generateBarChartSingle($labels3, $data, $xTitle, $yTitle, $subject);
+						array_push($chartpath,$chartImagePath);
+					}
+					else
+					{
+						$chartImagePath = $this->generateBarChartSingle($labels, $data, $xTitle, $yTitle, $subject);
+						array_push($chartpath,$chartImagePath);
+					}
+					
+
+				} catch (Exception $e) {
+					// Handle the error appropriately
+					}
+			}
+
+	$fonturl = storage_path('fonts/ipag.ttf');
+	$output = "<!DOCTYPE html>";
+	$output .= "
+	<html>
+	<head>
+		";
+		$output .= '
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		';
+		$output .= '
+		<style>';
+			// $test .='* { font-family: DejaVu Sans, sans-serif; }';
+			$output .= '@font-face {
+			font-family: ipag;
+			font-style: normal;
+			font-weight: normal;
+			src: url("' . $fonturl . '");
+			}
+			body 
+			{
+			font-family: "ipag", "Times New Roman", !important;
+			}
+			p {
+			color: black;
+			font-size: 15px;
+			margin: 0pt;
+			}
+			.s1 {
+			color: black;
+			font-size: 15px;
+			}
+			.s2 {
+			color: black;
+			font-size: 15px;
+			}
+			.s3 {
+			color: black;
+			font-size: 15px;
+			}
+			.s4 {
+			color: black;
+			font-size: 15px;
+			}
+			.s5 {
+			color: #0D0D0D;
+			font-size: 15px;
+			}
+			.s6 {
+			color: black;
+			font-size: 15px;
+			}
+			.s7 {
+			color: #0D0D0D;
+			font-size: 15px;
+			}
+			table,
+			tbody {
+			vertical-align: top;
+			overflow: visible;
+			}
+			.td {
+			border-top-style: solid;
+			border-top-width: 1pt;
+			border-left-style: solid;
+			border-left-width: 1pt;
+			border-bottom-style: solid;
+			border-bottom-width: 1pt;
+			border-right-style: solid;
+			border-right-width: 1pt
+			}
+		</style>
+	</head>
+	<body>
+		<div class="content"
+			style="box-sizing: border-box; max-width: 800px; display: block; margin: 0 auto; padding: 20px;border-radius: 7px; margin-top: 20px;">
+			<div class="row">
+				<p
+				style="padding-top: 2pt;padding-left: 23pt;text-indent: 0pt;text-align: left;font-size:20px;margin-top:30px;font-weight: bold; ">
+				' . $grade['data']['name_numeric'] . ' 学年 &nbsp;&nbsp;&nbsp;' . $request->semester_id . ' 学期
+				&nbsp;&nbsp;&nbsp;' . $term['data']['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;個人結果表
+				</p>
+			</div>
+			<p class="s1" style="padding-top: 1pt;padding-left: 180pt;text-indent: 0pt;text-align: left;">
+				&nbsp;&nbsp;&nbsp;&nbsp;  '. $acy.' 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ' . $section['data']['name'] . ' 組&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ' . $stu['attendance_no'] . ' 番&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</p>
+			<table style="border-collapse:collapse;" cellspacing="0">
+				<tr style="height:15pt">
+				<td class="td" style="width:75pt;">
+					<p style="text-indent: 0pt;text-align: left;"><br /></p>
+				</td>
+				<td class="td" style="width:35pt;">
+					<p class="s3" style="padding-top: 1pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">国語</p>
+				</td>
+				<td class="td" style="width:35pt;">
+					<p class="s3" style="padding-top: 1pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">社会</p>
+				</td>
+				<td class="td" style="width:35pt;">
+					<p class="s3" style="padding-top: 1pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">数学</p>
+				</td>
+				<td class="td" style="width:35pt;">
+					<p class="s3" style="padding-top: 1pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">理科</p>
+				</td>
+				<td class="td" style="width:35pt;">
+					<p class="s3" style="padding-top: 1pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">英語</p>
+				</td>
+				<td class="td" style="width:35pt;">
+					<p class="s3" style="padding-top: 1pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">音楽</p>
+				</td>
+				<td class="td" style="width:35pt;">
+					<p class="s3" style="padding-top: 1pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">美術</p>
+				</td>
+				<td class="td" style="width:35pt;">
+					<p class="s3" style="padding-top: 1pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">保体</p>
+				</td>
+				<td class="td" style="width:35pt;">
+					<p class="s3" style="padding-top: 1pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">技家</p>
+				</td>
+				<td class="td" style="width:75pt;">
+					<p class="s3" style="padding-top: 1pt;padding-left: 14pt;text-indent: 0pt;text-align: left;">5教科合計
+					</p>
+				</td>
+				<td class="td" style="width:75pt;">
+					<p class="s3" style="padding-top: 1pt;padding-left: 14pt;text-indent: 0pt;text-align: left;">9教科合計
+					</p>
+				</td>
+				</tr>
+				<tr style="height:25pt">
+				<td class="td" style="width:67pt;">
+					<p class="s3" style="padding-top: 6pt;padding-left: 1pt;text-indent: 0pt;text-align: center;">個人得点
+					</p>
+				</td>';
+			$i = 0;
+			$totalmain = 0;
+			$totalopt = 0;
+			foreach ($getmainsubjects as $subject) {
+				$i++;
+				$studata = [
+					'branch_id' => session()->get('branch_id'),
+					'student_id' => $stu['student_id'],
+					'exam_id' => $request->exam_id,
+					'class_id' => $request->class_id,
+					'section_id' => $request->section_id,
+					'semester_id' => $request->semester_id,
+					'session_id' => $request->session_id,
+					'subject' => $subject,
+					'paper' => $personal_score,
+					'academic_session_id' => $request->academic_year
+
+				];
+				$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppmarklist'), $studata);
+
+				$mark = (isset($getmarks['data']['score']) && $getmarks['data']['score'] != null) ? $getmarks['data']['score'] : '';
+
+				$output .= ' <td class="td" style="width:34pt;">
+					<p style="text-indent: 0pt;text-align: left;">' . $mark . '</p>
+				</td>';
+				$mark = ($mark != '') ? $mark : 0;
+				$totalmain += $mark;
+			}
+			foreach ($getnonmainsubjects as $subject) {
+				$i++;
+				$studata = [
+					'branch_id' => session()->get('branch_id'),
+					'student_id' => $stu['student_id'],
+					'exam_id' => $request->exam_id,
+					'class_id' => $request->class_id,
+					'section_id' => $request->section_id,
+					'semester_id' => $request->semester_id,
+					'session_id' => $request->session_id,
+					'subject' => $subject,
+					'paper' => $personal_score,
+					'academic_session_id' => $request->academic_year
+
+				];
+				$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppmarklist'), $studata);
+
+
+				$mark = (isset($getmarks['data']['score']) && $getmarks['data']['score'] != null) ? $getmarks['data']['score'] : '';
+
+
+				$output .= ' <td class="td" style="width:34pt;">
+					<p style="text-indent: 0pt;text-align: left;">' . $mark . '</p>
+				</td>';
+				$mark = ($mark != '') ? $mark : 0;
+				$totalopt += $mark;
+			}
+			$totall = $totalmain + $totalopt;
+
+				$output .= '<td class="td" style="width:67pt;">
+					<p style="text-indent: 0pt;text-align: left;">' . $totalmain . '</p>
+				</td>
+				<td class="td" style="width:67pt;">
+					<p style="text-indent: 0pt;text-align: left;">' . $totall . '</p>
+				</td>
+				</tr>
+				<tr style="height:15pt">
+				<td class="td" style="width:67pt;">
+					<p class="s3" style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;">学年平均
+					</p>
+				</td>';
+			$ma = 0;
+			$totalavgmain = 0;
+			$totalavgopt = 0;
+			foreach ($getmainsubjects as $subject) {
+				$ma++;
+				$studata = [
+					'branch_id' => session()->get('branch_id'),
+					'student_id' => $stu['student_id'],
+					'exam_id' => $request->exam_id,
+					'class_id' => $request->class_id,
+					'section_id' => $request->section_id,
+					'semester_id' => $request->semester_id,
+					'session_id' => $request->session_id,
+					'subject' => $subject,
+					'paper' => $personal_score,
+					'academic_session_id' => $request->academic_year
+
+				];
+				$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppavgmarklist'), $studata);
+
+				$mark = (isset($getmarks['data']['avg']) && $getmarks['data']['avg'] != null) ? $getmarks['data']['avg'] : '';
+
+				
+				$output .= ' <td class="td" style="width:34pt;">
+					<p style="text-indent: 0pt;text-align: left;">' . round($mark, 2) . '</p>
+				</td>';
+				$mark = ($mark != '') ? $mark : 0;
+				$totalavgmain += $mark;
+			}
+			$op = 0;
+			foreach ($getnonmainsubjects as $subject) {
+				$op++;
+				$studata = [
+					'branch_id' => session()->get('branch_id'),
+					'student_id' => $stu['student_id'],
+					'exam_id' => $request->exam_id,
+					'class_id' => $request->class_id,
+					'section_id' => $request->section_id,
+					'semester_id' => $request->semester_id,
+					'session_id' => $request->session_id,
+					'subject' => $subject,
+					'paper' => $personal_score,
+					'academic_session_id' => $request->academic_year
+
+				];
+				$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppavgmarklist'), $studata);
+				$mark = (isset($getmarks['data']['avg']) && $getmarks['data']['avg'] != null) ? $getmarks['data']['avg'] : '';
+				$output .= ' <td class="td" style="width:34pt;">
+				<p style="text-indent: 0pt;text-align: left;">' . round($mark, 2) . '</p>
+			</td>';
+				
+				$mark = ($mark != '') ? $mark : 0;
+
+				$totalavgopt += $mark;
+			}
+
+
+			$avgtotal1 = $totalavgmain / $ma;
+			$avgtotal2 = ($totalavgmain + $totalavgopt) / ($ma + $op);
+			$output .= '<td class="td" style="width:70pt;">
+					<p style="text-indent: 0pt;text-align: left;">' . round($avgtotal1, 2) . '</p>
+				</td>
+				<td class="td" style="width:70pt;">
+					<p style="text-indent: 0pt;text-align: left;">' . round($avgtotal2, 2) . '</p>
+				</td>
+				</tr>
+			</table>
+			<p style="padding-top: 6pt;text-indent: 0pt;text-align: left;"><br /></p>
+			<p class="s4" style="padding-bottom: 1pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">学習の振り返り</p>
+			<table style="border-collapse:collapse;" cellspacing="0">
+				<tr style="height:140px">
+				<td class="td" style="width:178pt;height:200px;">
+					<p class="s3"
+						style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: left;font-size:12px;">
+						できたこと・よかったこと
+					</p>
+				</td>
+				<td class="td" style="width:205pt;height:200px;">
+					<p class="s3"
+						style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: left;font-size:12px;">
+						できなかったこと・反省，今後の学習に向けて
+					</p>
+				</td>
+				<td class="td" style="width:178pt;height:200px;">
+					<p class="s3"
+						style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: left;font-size:12px;">
+						保護者の方のコメント
+					</p>
+				</td>
+				</tr>
+			</table>
+			<p style="padding-top: 1pt;text-indent: 0pt;text-align: left;"><br /></p>
+			<div style="display: inline-block; vertical-align: top;">
+				<!-- Table 1 -->
+				<table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; margin-right: 1px; vertical-align: middle;margin-top:20px;">
+				<tr>
+					<td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
+						<p class="s3"
+							style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
+							国語
+							
+						</p>
+						<img src="' . $chartpath[0] . '" alt="craft" width="225px" height="150px">
+					</td>
+				</tr>
+				</table>
+				<!-- Table 2 -->
+				<table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; margin-right: 1px; vertical-align: middle;margin-top:20px;">
+				<tr>
+					<td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
+						<p class="s3"
+							style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
+							社会
+							
+						</p>
+						<img src="' . $chartpath[1] . '" alt="craft" width="225px" height="150px">
+					</td>
+				</tr>
+				</table>
+				<!-- Table 3 -->
+				<table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; vertical-align: middle;margin-top:20px;">
+				<tr>
+					<td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
+						<p class="s3"
+							style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
+						数学
+						</p>
+						<img src="' . $chartpath[2] . '" alt="craft" width="225px" height="150px">
+					</td>
+				</tr>
+				</table>
+			</div>
+			<div style="display: inline-block; vertical-align: top;">
+				<!-- Table 1 -->
+				<table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; margin-right: 1px; vertical-align: middle;margin-top:5px;">
+				<tr>
+					<td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
+						<p class="s3"
+							style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
+						理科
+						</p>
+						<img src="' . $chartpath[3] . '" alt="craft" width="225px" height="150px">
+					</td>
+				</tr>
+				</table>
+				<!-- Table 2 -->
+				<table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; margin-right: 1px; vertical-align: middle;margin-top:5px;">
+				<tr>
+					<td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
+						<p class="s3"
+							style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
+							英語
+						</p>
+						<img src="' . $chartpath[4] . '" alt="craft" width="225px" height="150px">
+					</td>
+				</tr>
+				</table>
+				<!-- Table 3 -->
+				<table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; vertical-align: middle;margin-top:5px;">
+				<tr>
+					<td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
+						<p class="s3"
+							style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
+							5教科合計
+						</p>
+						<img src="' . $chartpath[5] . '" alt="craft" width="225px" height="150px">
+					</td>
+				</tr>
+				</table>
+			</div>
+			<div style="display: inline-block; vertical-align: top;">
+				<!-- Table 1 -->
+				<table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; margin-right: 1px; vertical-align: middle;margin-top:5px;">
+				<tr>
+					<td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
+						<p class="s3"
+							style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
+							音楽
+						</p>
+						<img src="' . $chartpath[6] . '" alt="craft" width="225px" height="150px">
+					</td>
+				</tr>
+				</table>
+				<!-- Table 2 -->
+				<table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; margin-right: 1px; vertical-align: middle;margin-top:5px;">
+				<tr>
+					<td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
+						<p class="s3"
+							style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
+							美術
+						</p>
+						<img src="' . $chartpath[7] . '" alt="craft" width="225px" height="150px">
+					</td>
+				</tr>
+				</table>
+				<!-- Table 3 -->
+				<table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; vertical-align: middle;margin-top:5px;">
+				<tr>
+					<td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
+						<p class="s3"
+							style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
+							保体
+						</p>
+						<img src="' . $chartpath[8] . '" alt="craft" width="225px" height="150px">
+					</td>
+				</tr>
+				</table>
+			</div>
+			<div style="display: inline-block; vertical-align: top;">
+				<!-- Table 1 -->
+				<table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; margin-right: 1px; vertical-align: middle;margin-top:5px;">
+				<tr>
+					<td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
+						<p class="s3"
+							style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
+							技家
+						</p>
+						<img src="' . $chartpath[9] . '" alt="craft" width="225px" height="150px">
+					</td>
+				</tr>
+				</table>
+				<!-- Table 2 -->
+				<table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; margin-right: 160px; vertical-align: middle;margin-top:5px;">
+				<tr>
+					<td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
+						<p class="s3"
+							style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
+							9教科合計
+						</p>
+						<img src="' . $chartpath[10] . '" alt="craft" width="225px" height="150px">
+					</td>
+				</tr>
+				</table>
+				<!-- Table 3 -->
+				<table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 60pt; height: 60pt; display: inline-table; margin-right: 1px; vertical-align: middle;margin-top:140px;">
+				<tr>
+					<td >
+						<p class="s3"
+							style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: left;font-size:12px;margin-top:-20px;">
+							できたこと
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td style="width: 60pt; height: 60pt; text-align: center; vertical-align: middle;">
+						<p class="s3"
+							style="padding-top: 1pt;padding-left: 1pt;border-bottom: 1px solid black;text-indent: 0pt;text-align: center;font-size:12px;margin-top:-40px;">
+							できたこと
+						</p>
+						' . $getteacherdata['data']['teacher'] . '
+					</td>
+				</tr>
+				</table>
+			</div>
+			<p style="text-indent: 0pt;text-align: left;"><br /></p>
+			<p style="padding-left: 441pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+		</div>
+	</body>
+	</html>
+	';
+
 		// filename
+		$customPaper = array(0, 0, 792.00, 1330.00);
 		$now = now();
 		$name = strtotime($now);
 		$fileName = __('messages.personal_test_res') . "_" . $number . "_" . $stu['name'] . "_" . $name . ".pdf";
+
 		// Set the appropriate HTTP headers
-		$headers['Content-Disposition'] = 'attachment; filename="' . rawurlencode($fileName)  . '"';
-		return response($pdfContent)->withHeaders($headers);
+		return $this->commonHelper->generatePdf($customPaper, $output, $fileName);
 		//return $pdf->download($fileName);
 		// return $pdf->stream();
-	}
-	public function downbypersoanalreport(Request $request)
-{
-	$data = [
-		'branch_id' => session()->get('branch_id'),
-		'exam_id' => $request->exam_id,
-		'department_id' => $request->department_id,
-		'class_id' => $request->class_id,
-		'section_id' => $request->section_id,
-		'semester_id' => $request->semester_id,
-		'session_id' => $request->session_id,
-		'academic_session_id' => $request->academic_year,
-
-		'student_id' => $request->student_id,
-	];
-	$language = "国語";
-	$socity = "社会";
-	$math = "数学";
-	$science = "理科";
-	$english = "英語";
-	$music = "音楽";
-	$art = "美術";
-	$sport = "保健体育";
-	$engineer = "家庭"; // Home Econ
-
-	$getstudents = Helper::PostMethod(config('constants.api.exam_individualstudentslist'), $data);
-
-	if (empty($getstudents['data'])) {
-		return redirect()->route('admin.exam_results.byreport')->with('errors', "No Student Data Found");
-	}
-	$stu = $getstudents['data'];
-	$getmainsubjects = array($language, $socity, $math, $science, $english);
-	$getnonmainsubjects = array($music, $art, $sport, $engineer);
-	$footer_text = session()->get('footer_text');
-	$personal_score = "個人得点"; //   individual score
-	$getteacherdata = Helper::PostMethod(config('constants.api.classteacher_principal'), $data);
-
-
-	$sno = 1;
-
-	$grade = Helper::PostMethod(config('constants.api.class_details'), $data);
-	$section = Helper::PostMethod(config('constants.api.section_details'), $data);
-	$n1 = ($request->department_id == '1') ? 'P' : 'S';
-	$n2 = $grade['data']['name_numeric'];
-	$n3 = $section['data']['name'];
-	$attendance_no = isset($stu['attendance_no']) ? $stu['attendance_no'] : "00";
-	$number = $n1 . $n2 . $n3 . sprintf("%02d", $attendance_no);
-	$acdata = [
-		'branch_id' => session()->get('branch_id'),
-		'id' => $request->academic_year
-	];
-	$termdata = [
-		'branch_id' => session()->get('branch_id'),
-		'id' => $request->exam_id
-
-	];
-	$term = Helper::PostMethod(config('constants.api.exam_details'), $termdata);
-	$acyear = Helper::PostMethod(config('constants.api.academic_year_details'), $acdata);
-	$bdata = [
-		'id' => session()->get('branch_id'),
-	];
-	$getbranch = Helper::PostMethod(config('constants.api.branch_details'), $bdata);
-		//dd($acyear['data']['name']);
-		$acy = $acyear['data']['name'];
-
-	$craft = [];
-	$m1=0;$m2=0;$m3=0;$m4=0;$m5=0;$m6=0;$m7=0;$m8=0;$m9=0;$m10=0;
-	$nm1=0;$nm2=0;$nm3=0;$nm4=0;$nm5=0;$nm6=0;$nm7=0;$nm8=0;$nm9=0;$nm10=0;
-	
-	foreach ($getmainsubjects as $subject) {
-		$studata = [
-			'branch_id' => session()->get('branch_id'),				
-			'exam_id' => $request->exam_id,
-			'class_id' => $request->class_id,
-			'section_id' => $request->section_id,
-			'semester_id' => $request->semester_id,
-			'session_id' => $request->session_id,
-			'subject' => $subject,
-			'paper' => $personal_score,
-			'academic_session_id' => $request->academic_year
-		];
-		$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppmarkchartlist'), $studata);
-		
-		$craft[$subject] = $getmarks['data'];
-		$m1+=$getmarks['data']['91-100'];
-		$m2+=$getmarks['data']['81-90'];
-		$m3+=$getmarks['data']['70-80'];
-		$m4+=$getmarks['data']['61-70'];
-		$m5+=$getmarks['data']['51-60'];
-		$m6+=$getmarks['data']['40-50'];
-		$m7+=$getmarks['data']['31-40'];
-		$m8+=$getmarks['data']['21-30'];
-		$m9+=$getmarks['data']['11-20'];
-		$m10+=$getmarks['data']['0-10'];			
-		
-		$nm1+=$getmarks['data']['91-100'];
-		$nm2+=$getmarks['data']['81-90'];
-		$nm3+=$getmarks['data']['70-80'];
-		$nm4+=$getmarks['data']['61-70'];
-		$nm5+=$getmarks['data']['51-60'];
-		$nm6+=$getmarks['data']['40-50'];
-		$nm7+=$getmarks['data']['31-40'];
-		$nm8+=$getmarks['data']['21-30'];
-		$nm9+=$getmarks['data']['11-20'];
-		$nm10+=$getmarks['data']['0-10'];	
-
-	}
-	$marks_distribution5s = [
-		'451-500' => ($m1/5),
-		'401-450' =>  ($m2/5),
-		'351-400' =>  ($m3/5),
-		'301-350' =>  ($m4/5),
-		'251-300' =>  ($m5/5),
-		'201-250' =>  ($m6/5),
-		'151-200' =>  ($m7/5),
-		'101-150' =>  ($m8/5),
-		'51-100' =>  ($m9/5),
-		'0-50' =>  ($m10/5),
-	];
-	$craft['5教科合計'] = $marks_distribution5s;
-	foreach ($getnonmainsubjects as $subject) {
-		$studata = [
-			'branch_id' => session()->get('branch_id'),				
-			'exam_id' => $request->exam_id,
-			'class_id' => $request->class_id,
-			'section_id' => $request->section_id,
-			'semester_id' => $request->semester_id,
-			'session_id' => $request->session_id,
-			'subject' => $subject,
-			'paper' => $personal_score,
-			'academic_session_id' => $request->academic_year
-		];
-		$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppmarkchartlist'), $studata);
-		//dd($getmarks);
-		$craft[$subject] = $getmarks['data'];
-		$nm1+=$getmarks['data']['91-100'];
-		$nm2+=$getmarks['data']['81-90'];
-		$nm3+=$getmarks['data']['70-80'];
-		$nm4+=$getmarks['data']['61-70'];
-		$nm5+=$getmarks['data']['51-60'];
-		$nm6+=$getmarks['data']['40-50'];
-		$nm7+=$getmarks['data']['31-40'];
-		$nm8+=$getmarks['data']['21-30'];
-		$nm9+=$getmarks['data']['11-20'];
-		$nm10+=$getmarks['data']['0-10'];	
-	}
-	
-	
-	$marks_distribution9s = [
-		'811-900' => ($nm1/9),
-		'721-810' =>  ($nm2/9),
-		'6311-720' =>  ($nm3/9),
-		'541-630' =>  ($nm4/9),
-		'451-540' =>  ($nm5/9),
-		'361-450' =>  ($nm6/9),
-		'271-360' =>  ($nm7/9),
-		'181-270' =>  ($nm8/9),
-		'91-180' =>  ($nm9/9),
-		'0-90' =>  ($nm10/9),
-	];
-	
-	$craft['9教科合計'] = $marks_distribution9s;
-	$firstSubject = reset($craft);
-		$labels = array_keys($firstSubject);
-		
-		$labels2 = array('451-500','401-450','351-400','301-350','251-300','201-250','151-200','101-150','51-100','0-50');
-		//dd($labels2);
-		
-		$labels3 = array('811-900','721-810','6311-720','541-630','451-540','361-450','271-360','181-270','91-180','0-90');
-		
-		$ch=0;
-		$chartpath=[];
-		foreach ($craft as $subject => $distribution) {
-			$ch++;
-			// Extract data from the distribution array
-			$data = array_values($distribution);
-			$xTitle = $request->input('xTitle', 'Number of incidents');
-			$yTitle = $request->input('yTitle', 'Names');
-			
-
-			try {
-				if($ch==6)
-				{
-					$chartImagePath = $this->generateBarChartSingle($labels2, $data, $xTitle, $yTitle, $subject);
-					array_push($chartpath,$chartImagePath);
-				}
-				elseif($ch==11)
-				{
-					$chartImagePath = $this->generateBarChartSingle($labels3, $data, $xTitle, $yTitle, $subject);
-					array_push($chartpath,$chartImagePath);
-				}
-				else
-				{
-					$chartImagePath = $this->generateBarChartSingle($labels, $data, $xTitle, $yTitle, $subject);
-					array_push($chartpath,$chartImagePath);
-				}
-				
-
-			} catch (Exception $e) {
-				// Handle the error appropriately
-				}
-		}
-
-$fonturl = storage_path('fonts/ipag.ttf');
-$output = "<!DOCTYPE html>";
-$output .= "
-<html>
-   <head>
-      ";
-      $output .= '
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-      ';
-      $output .= '
-      <style>';
-         // $test .='* { font-family: DejaVu Sans, sans-serif; }';
-         $output .= '@font-face {
-         font-family: ipag;
-         font-style: normal;
-         font-weight: normal;
-         src: url("' . $fonturl . '");
-         }
-         body 
-         {
-         font-family: "ipag", "Times New Roman", !important;
-         }
-         p {
-         color: black;
-         font-size: 15px;
-         margin: 0pt;
-         }
-         .s1 {
-         color: black;
-         font-size: 15px;
-         }
-         .s2 {
-         color: black;
-         font-size: 15px;
-         }
-         .s3 {
-         color: black;
-         font-size: 15px;
-         }
-         .s4 {
-         color: black;
-         font-size: 15px;
-         }
-         .s5 {
-         color: #0D0D0D;
-         font-size: 15px;
-         }
-         .s6 {
-         color: black;
-         font-size: 15px;
-         }
-         .s7 {
-         color: #0D0D0D;
-         font-size: 15px;
-         }
-         table,
-         tbody {
-         vertical-align: top;
-         overflow: visible;
-         }
-         .td {
-         border-top-style: solid;
-         border-top-width: 1pt;
-         border-left-style: solid;
-         border-left-width: 1pt;
-         border-bottom-style: solid;
-         border-bottom-width: 1pt;
-         border-right-style: solid;
-         border-right-width: 1pt
-         }
-      </style>
-   </head>
-   <body>
-      <div class="content"
-         style="box-sizing: border-box; max-width: 800px; display: block; margin: 0 auto; padding: 20px;border-radius: 7px; margin-top: 20px;">
-         <div class="row">
-            <p
-               style="padding-top: 2pt;padding-left: 23pt;text-indent: 0pt;text-align: left;font-size:20px;margin-top:30px;font-weight: bold; ">
-               ' . $grade['data']['name_numeric'] . ' 学年 &nbsp;&nbsp;&nbsp;' . $request->semester_id . ' 学期
-               &nbsp;&nbsp;&nbsp;' . $term['data']['name'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;個人結果表
-            </p>
-         </div>
-         <p class="s1" style="padding-top: 1pt;padding-left: 180pt;text-indent: 0pt;text-align: left;">
-            &nbsp;&nbsp;&nbsp;&nbsp;  '. $acy.' 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ' . $section['data']['name'] . ' 組&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ' . $stu['attendance_no'] . ' 番&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         </p>
-         <table style="border-collapse:collapse;" cellspacing="0">
-            <tr style="height:15pt">
-               <td class="td" style="width:75pt;">
-                  <p style="text-indent: 0pt;text-align: left;"><br /></p>
-               </td>
-               <td class="td" style="width:35pt;">
-                  <p class="s3" style="padding-top: 1pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">国語</p>
-               </td>
-               <td class="td" style="width:35pt;">
-                  <p class="s3" style="padding-top: 1pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">社会</p>
-               </td>
-               <td class="td" style="width:35pt;">
-                  <p class="s3" style="padding-top: 1pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">数学</p>
-               </td>
-               <td class="td" style="width:35pt;">
-                  <p class="s3" style="padding-top: 1pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">理科</p>
-               </td>
-               <td class="td" style="width:35pt;">
-                  <p class="s3" style="padding-top: 1pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">英語</p>
-               </td>
-               <td class="td" style="width:35pt;">
-                  <p class="s3" style="padding-top: 1pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">音楽</p>
-               </td>
-               <td class="td" style="width:35pt;">
-                  <p class="s3" style="padding-top: 1pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">美術</p>
-               </td>
-               <td class="td" style="width:35pt;">
-                  <p class="s3" style="padding-top: 1pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">保体</p>
-               </td>
-               <td class="td" style="width:35pt;">
-                  <p class="s3" style="padding-top: 1pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">技家</p>
-               </td>
-               <td class="td" style="width:75pt;">
-                  <p class="s3" style="padding-top: 1pt;padding-left: 14pt;text-indent: 0pt;text-align: left;">5教科合計
-                  </p>
-               </td>
-               <td class="td" style="width:75pt;">
-                  <p class="s3" style="padding-top: 1pt;padding-left: 14pt;text-indent: 0pt;text-align: left;">9教科合計
-                  </p>
-               </td>
-            </tr>
-            <tr style="height:25pt">
-               <td class="td" style="width:67pt;">
-                  <p class="s3" style="padding-top: 6pt;padding-left: 1pt;text-indent: 0pt;text-align: center;">個人得点
-                  </p>
-               </td>';
-		$i = 0;
-		$totalmain = 0;
-		$totalopt = 0;
-		foreach ($getmainsubjects as $subject) {
-			$i++;
-			$studata = [
-				'branch_id' => session()->get('branch_id'),
-				'student_id' => $stu['student_id'],
-				'exam_id' => $request->exam_id,
-				'class_id' => $request->class_id,
-				'section_id' => $request->section_id,
-				'semester_id' => $request->semester_id,
-				'session_id' => $request->session_id,
-				'subject' => $subject,
-				'paper' => $personal_score,
-				'academic_session_id' => $request->academic_year
-
-			];
-			$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppmarklist'), $studata);
-
-			$mark = (isset($getmarks['data']['score']) && $getmarks['data']['score'] != null) ? $getmarks['data']['score'] : '';
-
-			$output .= ' <td class="td" style="width:34pt;">
-                  <p style="text-indent: 0pt;text-align: left;">' . $mark . '</p>
-               </td>';
-			$mark = ($mark != '') ? $mark : 0;
-			$totalmain += $mark;
-		}
-		foreach ($getnonmainsubjects as $subject) {
-			$i++;
-			$studata = [
-				'branch_id' => session()->get('branch_id'),
-				'student_id' => $stu['student_id'],
-				'exam_id' => $request->exam_id,
-				'class_id' => $request->class_id,
-				'section_id' => $request->section_id,
-				'semester_id' => $request->semester_id,
-				'session_id' => $request->session_id,
-				'subject' => $subject,
-				'paper' => $personal_score,
-				'academic_session_id' => $request->academic_year
-
-			];
-			$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppmarklist'), $studata);
-
-
-			$mark = (isset($getmarks['data']['score']) && $getmarks['data']['score'] != null) ? $getmarks['data']['score'] : '';
-
-
-			$output .= ' <td class="td" style="width:34pt;">
-                  <p style="text-indent: 0pt;text-align: left;">' . $mark . '</p>
-               </td>';
-			$mark = ($mark != '') ? $mark : 0;
-			$totalopt += $mark;
-		}
-		$totall = $totalmain + $totalopt;
-
-               $output .= '<td class="td" style="width:67pt;">
-                  <p style="text-indent: 0pt;text-align: left;">' . $totalmain . '</p>
-               </td>
-               <td class="td" style="width:67pt;">
-                  <p style="text-indent: 0pt;text-align: left;">' . $totall . '</p>
-               </td>
-            </tr>
-            <tr style="height:15pt">
-               <td class="td" style="width:67pt;">
-                  <p class="s3" style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;">学年平均
-                  </p>
-               </td>';
-		$ma = 0;
-		$totalavgmain = 0;
-		$totalavgopt = 0;
-		foreach ($getmainsubjects as $subject) {
-			$ma++;
-			$studata = [
-				'branch_id' => session()->get('branch_id'),
-				'student_id' => $stu['student_id'],
-				'exam_id' => $request->exam_id,
-				'class_id' => $request->class_id,
-				'section_id' => $request->section_id,
-				'semester_id' => $request->semester_id,
-				'session_id' => $request->session_id,
-				'subject' => $subject,
-				'paper' => $personal_score,
-				'academic_session_id' => $request->academic_year
-
-			];
-			$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppavgmarklist'), $studata);
-
-			$mark = (isset($getmarks['data']['avg']) && $getmarks['data']['avg'] != null) ? $getmarks['data']['avg'] : '';
-
-			
-			$output .= ' <td class="td" style="width:34pt;">
-                  <p style="text-indent: 0pt;text-align: left;">' . round($mark, 2) . '</p>
-               </td>';
-			$mark = ($mark != '') ? $mark : 0;
-			$totalavgmain += $mark;
-		}
-		$op = 0;
-		foreach ($getnonmainsubjects as $subject) {
-			$op++;
-			$studata = [
-				'branch_id' => session()->get('branch_id'),
-				'student_id' => $stu['student_id'],
-				'exam_id' => $request->exam_id,
-				'class_id' => $request->class_id,
-				'section_id' => $request->section_id,
-				'semester_id' => $request->semester_id,
-				'session_id' => $request->session_id,
-				'subject' => $subject,
-				'paper' => $personal_score,
-				'academic_session_id' => $request->academic_year
-
-			];
-			$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppavgmarklist'), $studata);
-			$mark = (isset($getmarks['data']['avg']) && $getmarks['data']['avg'] != null) ? $getmarks['data']['avg'] : '';
-			$output .= ' <td class="td" style="width:34pt;">
-			<p style="text-indent: 0pt;text-align: left;">' . round($mark, 2) . '</p>
-		 </td>';
-			
-			$mark = ($mark != '') ? $mark : 0;
-
-			$totalavgopt += $mark;
-		}
-
-
-		$avgtotal1 = $totalavgmain / $ma;
-		$avgtotal2 = ($totalavgmain + $totalavgopt) / ($ma + $op);
-		$output .= '<td class="td" style="width:70pt;">
-                  <p style="text-indent: 0pt;text-align: left;">' . round($avgtotal1, 2) . '</p>
-               </td>
-               <td class="td" style="width:70pt;">
-                  <p style="text-indent: 0pt;text-align: left;">' . round($avgtotal2, 2) . '</p>
-               </td>
-            </tr>
-         </table>
-         <p style="padding-top: 6pt;text-indent: 0pt;text-align: left;"><br /></p>
-         <p class="s4" style="padding-bottom: 1pt;padding-left: 7pt;text-indent: 0pt;text-align: left;">学習の振り返り</p>
-         <table style="border-collapse:collapse;" cellspacing="0">
-            <tr style="height:140px">
-               <td class="td" style="width:178pt;height:200px;">
-                  <p class="s3"
-                     style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: left;font-size:12px;">
-                     できたこと・よかったこと
-                  </p>
-               </td>
-               <td class="td" style="width:205pt;height:200px;">
-                  <p class="s3"
-                     style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: left;font-size:12px;">
-                     できなかったこと・反省，今後の学習に向けて
-                  </p>
-               </td>
-               <td class="td" style="width:178pt;height:200px;">
-                  <p class="s3"
-                     style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: left;font-size:12px;">
-                     保護者の方のコメント
-                  </p>
-               </td>
-            </tr>
-         </table>
-         <p style="padding-top: 1pt;text-indent: 0pt;text-align: left;"><br /></p>
-         <div style="display: inline-block; vertical-align: top;">
-            <!-- Table 1 -->
-            <table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; margin-right: 1px; vertical-align: middle;margin-top:20px;">
-               <tr>
-                  <td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
-                     <p class="s3"
-                        style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
-                        国語
-						
-                     </p>
-					 <img src="' . $chartpath[0] . '" alt="craft" width="225px" height="150px">
-                  </td>
-               </tr>
-            </table>
-            <!-- Table 2 -->
-            <table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; margin-right: 1px; vertical-align: middle;margin-top:20px;">
-               <tr>
-                  <td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
-                     <p class="s3"
-                        style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
-                        社会
-						
-                     </p>
-					 <img src="' . $chartpath[1] . '" alt="craft" width="225px" height="150px">
-                  </td>
-               </tr>
-            </table>
-            <!-- Table 3 -->
-            <table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; vertical-align: middle;margin-top:20px;">
-               <tr>
-                  <td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
-                     <p class="s3"
-                        style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
-                       数学
-                     </p>
-					 <img src="' . $chartpath[2] . '" alt="craft" width="225px" height="150px">
-                  </td>
-               </tr>
-            </table>
-         </div>
-         <div style="display: inline-block; vertical-align: top;">
-            <!-- Table 1 -->
-            <table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; margin-right: 1px; vertical-align: middle;margin-top:5px;">
-               <tr>
-                  <td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
-                     <p class="s3"
-                        style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
-                       理科
-                     </p>
-					 <img src="' . $chartpath[3] . '" alt="craft" width="225px" height="150px">
-                  </td>
-               </tr>
-            </table>
-            <!-- Table 2 -->
-            <table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; margin-right: 1px; vertical-align: middle;margin-top:5px;">
-               <tr>
-                  <td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
-                     <p class="s3"
-                        style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
-                        英語
-                     </p>
-					 <img src="' . $chartpath[4] . '" alt="craft" width="225px" height="150px">
-                  </td>
-               </tr>
-            </table>
-            <!-- Table 3 -->
-            <table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; vertical-align: middle;margin-top:5px;">
-               <tr>
-                  <td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
-                     <p class="s3"
-                        style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
-                        5教科合計
-                     </p>
-					 <img src="' . $chartpath[5] . '" alt="craft" width="225px" height="150px">
-                  </td>
-               </tr>
-            </table>
-         </div>
-         <div style="display: inline-block; vertical-align: top;">
-            <!-- Table 1 -->
-            <table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; margin-right: 1px; vertical-align: middle;margin-top:5px;">
-               <tr>
-                  <td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
-                     <p class="s3"
-                        style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
-                        音楽
-                     </p>
-					 <img src="' . $chartpath[6] . '" alt="craft" width="225px" height="150px">
-                  </td>
-               </tr>
-            </table>
-            <!-- Table 2 -->
-            <table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; margin-right: 1px; vertical-align: middle;margin-top:5px;">
-               <tr>
-                  <td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
-                     <p class="s3"
-                        style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
-                        美術
-                     </p>
-					 <img src="' . $chartpath[7] . '" alt="craft" width="225px" height="150px">
-                  </td>
-               </tr>
-            </table>
-            <!-- Table 3 -->
-            <table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; vertical-align: middle;margin-top:5px;">
-               <tr>
-                  <td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
-                     <p class="s3"
-                        style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
-                        保体
-                     </p>
-					 <img src="' . $chartpath[8] . '" alt="craft" width="225px" height="150px">
-                  </td>
-               </tr>
-            </table>
-         </div>
-         <div style="display: inline-block; vertical-align: top;">
-            <!-- Table 1 -->
-            <table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; margin-right: 1px; vertical-align: middle;margin-top:5px;">
-               <tr>
-                  <td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
-                     <p class="s3"
-                        style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
-                        技家
-                     </p>
-					 <img src="' . $chartpath[9] . '" alt="craft" width="225px" height="150px">
-                  </td>
-               </tr>
-            </table>
-            <!-- Table 2 -->
-            <table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 178pt; height: 160pt; display: inline-table; margin-right: 160px; vertical-align: middle;margin-top:5px;">
-               <tr>
-                  <td style="width: 183pt; height: 160pt; text-align: center; vertical-align: middle;">
-                     <p class="s3"
-                        style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: center;font-size:12px;">
-                        9教科合計
-                     </p>
-					 <img src="' . $chartpath[10] . '" alt="craft" width="225px" height="150px">
-                  </td>
-               </tr>
-            </table>
-            <!-- Table 3 -->
-            <table style="border-collapse: collapse; border: 1px solid black; font-size: 12px; width: 60pt; height: 60pt; display: inline-table; margin-right: 1px; vertical-align: middle;margin-top:140px;">
-               <tr>
-                  <td >
-                     <p class="s3"
-                        style="padding-top: 1pt;padding-left: 1pt;text-indent: 0pt;text-align: left;font-size:12px;margin-top:-20px;">
-                        できたこと
-                     </p>
-                  </td>
-               </tr>
-               <tr>
-                  <td style="width: 60pt; height: 60pt; text-align: center; vertical-align: middle;">
-                     <p class="s3"
-                        style="padding-top: 1pt;padding-left: 1pt;border-bottom: 1px solid black;text-indent: 0pt;text-align: center;font-size:12px;margin-top:-40px;">
-                        できたこと
-                     </p>
-					 ' . $getteacherdata['data']['teacher'] . '
-                  </td>
-               </tr>
-            </table>
-         </div>
-         <p style="text-indent: 0pt;text-align: left;"><br /></p>
-         <p style="padding-left: 441pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
-      </div>
-   </body>
-</html>
-';
-
-// filename
-$customPaper = array(0, 0, 792.00, 1330.00);
-$now = now();
-$name = strtotime($now);
-$fileName = __('messages.personal_test_res') . "_" . $number . "_" . $stu['name'] . "_" . $name . ".pdf";
-
-// Set the appropriate HTTP headers
-return $this->commonHelper->generatePdf($customPaper, $output, $fileName);
-//return $pdf->download($fileName);
-// return $pdf->stream();
-$directory = public_path('barchart');
-if(file_exists($directory)) {
-    // Attempt to delete files in the directory
-    File::deleteDirectory($directory);
-} 
-}
-public function generateBarChart($labels, $data, $xTitle = 'Number of incidents', $yTitle = 'Names', $subject = 'default_subject')
-	{
-		require_once public_path('jpgraph-4.4.2/src/jpgraph.php');
-		require_once public_path('jpgraph-4.4.2/src/jpgraph_bar.php');
-
-		// Define the directory and ensure it exists
 		$directory = public_path('barchart');
-		if (!is_dir($directory)) {
-			if (!mkdir($directory, 0777, true)) {
-				throw new Exception("Failed to create directory: $directory");
-			}
-		}
-
-		// Ensure the directory is writable
-		if (!is_writable($directory)) {
-			throw new Exception("Directory $directory is not writable");
-		}
-
-		// Create a unique file name using the subject and current timestamp
-		$timestamp = time();
-		$fileName = $subject . '_' . $timestamp . '.png';
-		$filePath = $directory . '/' . $fileName;
-
-		// Create the graph
-		$graph = new \Graph(600, 400, 'auto');
-		$graph->SetScale('textlin');
-
-		// Setup margin and titles
-		$graph->SetMargin(50, 20, 30, 30);
-		$graph->title->Set('Number of incidents');
-		// $graph->xaxis->title->Set($xTitle);
-		// $graph->yaxis->title->Set($yTitle);
-
-		// Setup X-axis labels with multi-line support if needed
-		$graph->xaxis->SetTickLabels($labels);
-		$graph->xaxis->SetLabelMargin(10);
-
-		// Create the bar plot (horizontal)
-		$bplot = new \BarPlot($data);
-		$bplot->SetFillColor('darkgray');
-
-		// Add the bar plot to the graph
-		$graph->Add($bplot);
-
-		// Display the graph
-		$graph->Stroke($filePath);
-
-		return $filePath;
+		if(file_exists($directory)) {
+			// Attempt to delete files in the directory
+			File::deleteDirectory($directory);
+		} 
 	}
-
-
 	public function generateBarChartSingle($labels, $data, $xTitle = 'Number of students', $yTitle = 'Mark range', $subject)
 	{
 		require_once public_path('jpgraph-4.4.2/src/jpgraph.php');
@@ -3463,61 +3133,5 @@ public function generateBarChart($labels, $data, $xTitle = 'Number of incidents'
 
 		return $filePath;
 	}
-	public function generateBarChartSingle1($labels, $data, $xTitle = 'Number of students', $yTitle = 'Mark range', $subject)
-	{
-		require_once public_path('jpgraph-4.4.2/src/jpgraph.php');
-		require_once public_path('jpgraph-4.4.2/src/jpgraph_bar.php');
-
-		// Define the directory and ensure it exists
-		$directory = public_path('barchart');
-		// if (!is_dir($directory)) {
-		// 	if (!mkdir($directory, 0777, true)) {
-		// 		throw new Exception("Failed to create directory: $directory");
-		// 	}
-		// }
-
-		// // Ensure the directory is writable
-		// if (!is_writable($directory)) {
-		// 	throw new Exception("Directory $directory is not writable");
-		// }
-
-		// Create a unique file name using the subject and current timestamp
-		$timestamp = time();
-		$fileName = $subject . '_' . $timestamp . '.png';
-		$filePath = $directory . '/' . $fileName;
-
-		// Create the graph
-		$graph = new \Graph(600, 400, 'auto');
-		$graph->SetScale('textlin');
-		$graph->Set90AndMargin(150, 30, 50, 50); // Rotate the graph to make horizontal bars
-
-		// Setup margin and titles
-		// $graph->title->Set('Distribution of Student Marks');
-		// $graph->xaxis->title->Set($xTitle);
-		// $graph->yaxis->title->Set($yTitle);
-
-		// Setup X-axis labels with the mark ranges (since the graph is rotated)
-		$graph->xaxis->SetTickLabels($labels);
-		$graph->xaxis->SetLabelMargin(10);
-
-		// Create the bar plot (horizontal)
-		$bplot = new \BarPlot($data);
-
-		// Add the bar plot to the graph
-		$graph->Add($bplot);
-		$bplot->SetFillColor('darkgray');
-		// $bplot->value->SetValuePos();
-		$bplot->value->SetFormat('%d');
-		$bplot->value->SetColor("black");
-		$bplot->value->SetAlign('left', 'center');
-		$bplot->value->SetFont(FF_FONT1, FS_BOLD);
-		$bplot->value->SetMargin(10);
-		$bplot->value->Show();
-
-		// $graph->title->Set($subject);
-		// Display the graph
-		$graph->Stroke($filePath);
-
-		return $filePath;
-	}
+	
 }
