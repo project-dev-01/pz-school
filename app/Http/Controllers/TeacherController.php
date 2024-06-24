@@ -1084,10 +1084,12 @@ class TeacherController extends Controller
     }
     public function homework()
     {
-        $data = [
-            'teacher_id' => session()->get('ref_user_id')
+        $staff_data = [
+            'teacher_id' => session()->get('ref_user_id'),
+            'academic_session_id' => session()->get('academic_session_id')
         ];
-        $class = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+       // dd($data);
+       $class = Helper::PostMethod(config('constants.api.class_teacher_classes'), $staff_data);
         $session = Helper::GetMethod(config('constants.api.session'));
         $semester = Helper::GetMethod(config('constants.api.semester'));
         return view(
@@ -2175,16 +2177,18 @@ class TeacherController extends Controller
     }
     public function promotionBulkStudentList(Request $request)
     {
-        $data = [
-            'teacher_id' => session()->get('ref_user_id')
+        $staff_data = [
+            'teacher_id' => session()->get('ref_user_id'),
+            'academic_session_id' => session()->get('academic_session_id')
         ];
-        $response = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+       // dd($data);
+       $getclass = Helper::PostMethod(config('constants.api.class_teacher_classes'), $staff_data);
         $department = Helper::GetMethod(config('constants.api.department_list'));
         return view(
             'teacher.promotion.studentList',
             [
                 'department' => isset($department['data']) ? $department['data'] : [],
-                'teacher_class' => isset($response['data']) ? $response['data'] : [],
+                'teacher_class' => isset($getclass['data']) ? $getclass['data'] : [],
             ]
         );
     }
@@ -2344,11 +2348,12 @@ class TeacherController extends Controller
     public function studentInterviewNotesIndex()
     {
 
-        $data = [
-            'teacher_id' => session()->get('ref_user_id')
+        $staff_data = [
+            'teacher_id' => session()->get('ref_user_id'),
+            'academic_session_id' => session()->get('academic_session_id')
         ];
        // dd($data);
-        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+       $getclass = Helper::PostMethod(config('constants.api.class_teacher_classes'), $staff_data);
         return view(
             'teacher.student_interview_notes.index',
             [
@@ -2359,10 +2364,11 @@ class TeacherController extends Controller
     }
     public function createStudentInterviewNotes()
     {
-        $data = [
-            'teacher_id' => session()->get('ref_user_id')
+        $staff_data = [
+            'teacher_id' => session()->get('ref_user_id'),
+            'academic_session_id' => session()->get('academic_session_id')
         ];
-        $getclass = Helper::PostMethod(config('constants.api.teacher_class'), $data);
+        $getclass = Helper::PostMethod(config('constants.api.class_teacher_classes'), $staff_data);
         return view(
             'teacher.student_interview_notes.add',
             [
