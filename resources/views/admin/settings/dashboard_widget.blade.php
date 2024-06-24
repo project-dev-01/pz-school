@@ -183,7 +183,11 @@
                                                                     <input type="hidden" name="unhide_data[{{ $r['order_no'] }}][section_id]" id="sectionID{{ $r['order_no'] }}" value="{{ $r['section_id'] }}">
                                                                     <input type="hidden" name="unhide_data[{{ $r['order_no'] }}][pattern]" id="patternName{{ $r['order_no'] }}" value="{{ $r['pattern'] }}">
                                                                     @if($r['widget_value'] =="AttendanceReport")
-                                                                    <button type="button" data-widget="{{ $r['order_no'] }}" id="WidgetLabelName{{ $r['order_no'] }}" class="form-control name_list addWidget widget-button" style="height: 45px;border-radius: 10px;border: 1px solid #18161652;background-color: transparent;font-weight: bold;font-family: Open Sans;font-size: 13px;">{{ $r['widget_name'] }}</button>
+                                                                    @php
+                                                                    preg_match_all('/\((.*?)\)/', $r['widget_name'], $matches);
+                                                                    $result = implode(', ', $matches[1]);
+                                                                    @endphp
+                                                                    <button type="button" ata-widget="{{ $r['order_no'] }}" id="WidgetLabelName{{ $r['order_no'] }}" class="form-control name_list addWidget widget-button" style="height: 45px;border-radius: 10px;border: 1px solid #18161652;background-color: transparent;font-weight: bold;font-family: Open Sans;font-size: 13px;">{{ __('messages.AttendanceReport') }} ( {{ $result }} )</button>
                                                                     @else
                                                                     <button type="button" data-widget="{{ $r['order_no'] }}" id="WidgetLabelName{{ $r['order_no'] }}" class="form-control name_list addWidget widget-button" style="height: 45px;border-radius: 10px;border: 1px solid #18161652;background-color: transparent;font-weight: bold;font-family: Open Sans;font-size: 13px;">{{ __('messages.'.$r['widget_value']) }}</button>
                                                                     @endif
