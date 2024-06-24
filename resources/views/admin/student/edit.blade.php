@@ -1166,7 +1166,7 @@
                                             <div class="col-md-4" id="enrollment_show" >
                                                 <div class="form-group">
                                                     <label for="enrollment">{{ __('messages.enrollment') }}</label>
-                                                    <select id="enrollment" name="enrollment" class="form-control">
+                                                    <select id="enrollmenttt" name="enrollment" class="form-control">
                                                         <option value="">{{ __('messages.select_enrollment') }}</option>
                                                         <option {{ isset($student['enrollment']) ? $student['enrollment'] == "Trail Enrollment" ? 'selected' : '' : '' }} value="Trail Enrollment">{{ __('messages.trail_enrollment') }}</option>
                                                         <option {{ isset($student['enrollment']) ? $student['enrollment'] == "Official Enrollment" ? 'selected' : '' : '' }} value="Official Enrollment">{{ __('messages.official_enrollment') }}</option>

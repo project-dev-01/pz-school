@@ -304,6 +304,7 @@
     var mobile_no_lang = "{{ __('messages.mobile_no') }}";
     var race_lang = "{{ __('messages.race') }}";
     var religion_lang = "{{ __('messages.religion') }}";
+    var relation_lang = "{{ __('messages.relation') }}";
     var blood_group_lang = "{{ __('messages.blood_group') }}";
     var nric_lang = "{{ __('messages.nric') }}";
     var passport_lang = "{{ __('messages.passport_number') }}";

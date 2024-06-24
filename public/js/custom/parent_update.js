@@ -7,9 +7,16 @@ $(function () {
         $("#parent_update_view_body").empty();
         $.post(parentUpdateView, { id: id,type: type,token: token,branch_id: branchID }, function (res) {
             var row = "";
+            console.log(res);
             if (res.code == 200) {
-                $.each(res.data.data, function (key, val) {
+                $.each(res.data, function (key, val) {
+                     // Skip the 'status' and 'remark' keys
+                    if (key === 'status' || key === 'remark') {
+                        return true; // continue to next iteration
+                    }
                     var field = key+"_lang";
+                    console.log(field);
+                    console.log(window[field]);
                     var status = "";
                     var color = "";
                     if(val.status=="accept"){
@@ -37,7 +44,7 @@ $(function () {
                     
                     });
                 
-                $("#remarks").val(res.data.remarks);
+                $("#remarks").val(res.data.remark);
                 $("#parent_update_view_body").append(row);
             }
         });
