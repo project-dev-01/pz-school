@@ -2411,6 +2411,7 @@ class ExamindividualPdfController extends Controller
 
 			'student_id' => $request->student_id,
 		];
+		
 		$language = "国語";
 		$socity = "社会";
 		$math = "数学";
@@ -2420,21 +2421,22 @@ class ExamindividualPdfController extends Controller
 		$art = "美術";
 		$sport = "保健体育";
 		$engineer = "家庭"; // Home Econ
-
+		
 		$getstudents = Helper::PostMethod(config('constants.api.exam_individualstudentslist'), $data);
-
+		
 		if (empty($getstudents['data'])) {
 			return redirect()->route('admin.exam_results.byreport')->with('errors', "No Student Data Found");
 		}
 		$stu = $getstudents['data'];
+		
 		$getmainsubjects = array($language, $socity, $math, $science, $english);
 		$getnonmainsubjects = array($music, $art, $sport, $engineer);
+		$total9subjects = array($language, $socity, $math, $science, $english,$music, $art, $sport, $engineer);
 		$footer_text = session()->get('footer_text');
 		$personal_score = "個人得点"; //   individual score
+		
 		$getteacherdata = Helper::PostMethod(config('constants.api.classteacher_principal'), $data);
 
-
-		$sno = 1;
 
 		$grade = Helper::PostMethod(config('constants.api.class_details'), $data);
 		$section = Helper::PostMethod(config('constants.api.section_details'), $data);
@@ -2462,8 +2464,6 @@ class ExamindividualPdfController extends Controller
 			$acy = $acyear['data']['name'];
 
 		$craft = [];
-		$m1=0;$m2=0;$m3=0;$m4=0;$m5=0;$m6=0;$m7=0;$m8=0;$m9=0;$m10=0;
-		$nm1=0;$nm2=0;$nm3=0;$nm4=0;$nm5=0;$nm6=0;$nm7=0;$nm8=0;$nm9=0;$nm10=0;
 		
 		foreach ($getmainsubjects as $subject) {
 			$studata = [
@@ -2480,42 +2480,28 @@ class ExamindividualPdfController extends Controller
 			$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppmarkchartlist'), $studata);
 			
 			$craft[$subject] = $getmarks['data'];
-			$m1+=$getmarks['data']['91-100'];
-			$m2+=$getmarks['data']['81-90'];
-			$m3+=$getmarks['data']['70-80'];
-			$m4+=$getmarks['data']['61-70'];
-			$m5+=$getmarks['data']['51-60'];
-			$m6+=$getmarks['data']['40-50'];
-			$m7+=$getmarks['data']['31-40'];
-			$m8+=$getmarks['data']['21-30'];
-			$m9+=$getmarks['data']['11-20'];
-			$m10+=$getmarks['data']['0-10'];			
 			
-			$nm1+=$getmarks['data']['91-100'];
-			$nm2+=$getmarks['data']['81-90'];
-			$nm3+=$getmarks['data']['70-80'];
-			$nm4+=$getmarks['data']['61-70'];
-			$nm5+=$getmarks['data']['51-60'];
-			$nm6+=$getmarks['data']['40-50'];
-			$nm7+=$getmarks['data']['31-40'];
-			$nm8+=$getmarks['data']['21-30'];
-			$nm9+=$getmarks['data']['11-20'];
-			$nm10+=$getmarks['data']['0-10'];	
 
 		}
-		$marks_distribution5s = [
-			'451-500' => ($m1/5),
-			'401-450' =>  ($m2/5),
-			'351-400' =>  ($m3/5),
-			'301-350' =>  ($m4/5),
-			'251-300' =>  ($m5/5),
-			'201-250' =>  ($m6/5),
-			'151-200' =>  ($m7/5),
-			'101-150' =>  ($m8/5),
-			'51-100' =>  ($m9/5),
-			'0-50' =>  ($m10/5),
+		
+		
+		
+		$studata = [
+			'branch_id' => session()->get('branch_id'),				
+			'exam_id' => $request->exam_id,
+			'department_id' => $request->department_id,
+			'class_id' => $request->class_id,
+			'section_id' => $request->section_id,
+			'semester_id' => $request->semester_id,
+			'session_id' => $request->session_id,
+			'subject' => $total9subjects,
+			'paper' => $personal_score,
+			'academic_session_id' => $request->academic_year
 		];
-		$craft['5教科合計'] = $marks_distribution5s;
+		$gettotalmarks = Helper::PostMethod(config('constants.api.stuexam_pptotmarkchartlist'), $studata);
+		
+		$craft['5教科合計'] = $gettotalmarks['data']['marks_distribution5s'];
+
 		foreach ($getnonmainsubjects as $subject) {
 			$studata = [
 				'branch_id' => session()->get('branch_id'),				
@@ -2531,33 +2517,10 @@ class ExamindividualPdfController extends Controller
 			$getmarks = Helper::PostMethod(config('constants.api.stuexam_ppmarkchartlist'), $studata);
 			//dd($getmarks);
 			$craft[$subject] = $getmarks['data'];
-			$nm1+=$getmarks['data']['91-100'];
-			$nm2+=$getmarks['data']['81-90'];
-			$nm3+=$getmarks['data']['70-80'];
-			$nm4+=$getmarks['data']['61-70'];
-			$nm5+=$getmarks['data']['51-60'];
-			$nm6+=$getmarks['data']['40-50'];
-			$nm7+=$getmarks['data']['31-40'];
-			$nm8+=$getmarks['data']['21-30'];
-			$nm9+=$getmarks['data']['11-20'];
-			$nm10+=$getmarks['data']['0-10'];	
+				
 		}
+		$craft['9教科合計'] = $gettotalmarks['data']['marks_distribution9s'];
 		
-		
-		$marks_distribution9s = [
-			'811-900' => ($nm1/9),
-			'721-810' =>  ($nm2/9),
-			'6311-720' =>  ($nm3/9),
-			'541-630' =>  ($nm4/9),
-			'451-540' =>  ($nm5/9),
-			'361-450' =>  ($nm6/9),
-			'271-360' =>  ($nm7/9),
-			'181-270' =>  ($nm8/9),
-			'91-180' =>  ($nm9/9),
-			'0-90' =>  ($nm10/9),
-		];
-		
-		$craft['9教科合計'] = $marks_distribution9s;
 		$firstSubject = reset($craft);
 			$labels = array_keys($firstSubject);
 			

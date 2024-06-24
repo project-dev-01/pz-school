@@ -1133,6 +1133,7 @@ return [
         'get_allergies_name_list' => $url.'/get_allergies_name_list',
         'student_medical_report_pdf' => $url.'/student_medical_report_pdf',
         'stuexam_ppmarkchartlist' => $url.'/exam_result/stuexam_ppmarkchartlist',
+        'stuexam_pptotmarkchartlist' => $url.'/exam_result/stuexam_pptotmarkchartlist',
         
       ]
 
