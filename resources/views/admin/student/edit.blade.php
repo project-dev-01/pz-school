@@ -1230,12 +1230,12 @@
                                                 <div class="form-group">
                                                         <label for="date_of_termination">{{ __('messages.date_of_termination') }}</label>
                                                         <div class="input-group input-group-merge">
-                                                            <input type="text" class="form-control" id="date_of_termination" name="date_of_termination" value="{{ isset($student['date_of_termination']) ? $student['date_of_termination'] : date('Y-m-d') }}"   placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                             <div class="input-group-prepend">
-                                                                <!-- <div class="input-group-text">
+                                                                <div class="input-group-text">
                                                                     <span class="far fa-calendar-alt"></span>
-                                                                </div> -->
+                                                                </div>
                                                             </div>
+                                                            <input type="text" class="form-control" id="date_of_termination" name="date_of_termination" value="{{ isset($student['date_of_termination']) ? $student['date_of_termination'] : '' }}"   placeholder="{{ __('messages.yyyy_mm_dd') }}" aria-describedby="inputGroupPrepend">
                                                         </div>
                                                     </div>
                                             </div>
