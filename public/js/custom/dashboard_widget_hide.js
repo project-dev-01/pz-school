@@ -204,8 +204,8 @@ $(function () {
             var pattern_name = $("#pattern option:selected").text();
             var visibility = 0; // default zero
             var addAttText = AttendanceReportLabel;
-            // var combinetext = att_widget_name;
-            var combinetext = "";
+            var combinetext = att_widget_name;
+            // var combinetext = "";
             var combinetextValues = "";
             if (department_name && (department_id != "")) {
                 combinetext += "," + department_name;
