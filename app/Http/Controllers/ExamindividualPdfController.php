@@ -394,7 +394,7 @@ class ExamindividualPdfController extends Controller
 		$now = now();
 		$name = strtotime($now);
 		//$fileName = __('messages.english_communication') . $stu['eng_name'] . $name . ".pdf";
-		$fileName = __('messages.english_communication') . "_" . $number . "_" . $stu['eng_name'] . "_" . $name . ".pdf";
+		$fileName = __('messages.english_communication') . "_" . $number . "_" . str_replace(":","",$stu['eng_name']) . "_" . $name . ".pdf";
 		return $this->commonHelper->generatePdf($customPaper, $output, $fileName);
 		//return $pdf->download($fileName);
 		// return $pdf->stream();
@@ -985,7 +985,7 @@ class ExamindividualPdfController extends Controller
 				$customPaper = array(0, 0, 792.00, 1224.00);
 				$now = now();
 				$name = strtotime($now);
-				$fileName = __('messages.report_card') . "_" . $number . "_" . $stu['name'] . "_" . $name . ".pdf";
+				$fileName = __('messages.report_card') . "_" . $number . "_" . str_replace(":","",$stu['name']) . "_" . $name . ".pdf";
 			}
 			if ($stuclass == 3 || $stuclass == 4) {
 				// here i put subjects and paper details
@@ -1179,14 +1179,14 @@ class ExamindividualPdfController extends Controller
 					if($att['no_schooldays']==0)
 					{
 						$output .= '<tr>
-						<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
+						<td style="height: 30px;">' . $attarray[intval($att['month'])] . '</td>
+						<td style="height: 30px;"> </td>
+						<td style="height: 30px;"> </td>
+						<td style="height: 30px;"> </td>
+						<td style="height: 30px;"> </td>
+						<td style="height: 30px;"> </td>
+						<td style="height: 30px;"> </td>
+						<td style="height: 30px;"> </td>
 						</tr>';
 					}
 					else
@@ -1460,7 +1460,7 @@ class ExamindividualPdfController extends Controller
 				$customPaper = array(0, 0, 792.00, 1300.00);
 				$now = now();
 				$name = strtotime($now);
-				$fileName = __('messages.report_card') . "_" . $number . "_" . $stu['name'] . "_" . $name . ".pdf";
+				$fileName = __('messages.report_card') . "_" . $number . "_" . str_replace(":","",$stu['name']) . "_" . $name . ".pdf";
 			}
 			if ($stuclass == 5 || $stuclass == 6) {
 				$sno = 1;
@@ -1611,14 +1611,14 @@ class ExamindividualPdfController extends Controller
 					if($att['no_schooldays']==0)
 					{
 						$output .= '<tr>
-						<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
+						<td style="height: 28px;">' . $attarray[intval($att['month'])] . '</td>
+						<td style="height: 28px;"> </td>
+						<td style="height: 28px;"> </td>
+						<td style="height: 28px;"> </td>
+						<td style="height: 28px;"> </td>
+						<td style="height: 28px;"> </td>
+						<td style="height: 28px;"> </td>
+						<td style="height: 28px;"> </td>
 						</tr>';
 					}
 					else
@@ -1901,7 +1901,7 @@ class ExamindividualPdfController extends Controller
 				// filename
 				$now = now();
 				$name = strtotime($now);
-				$fileName = __('messages.report_card') . "_" . $number . "_" . $stu['name'] . "_" . $name . ".pdf";
+				$fileName = __('messages.report_card') . "_" . $number . "_" . str_replace(":","",$stu['name']) . "_" . $name . ".pdf";
 				// return $pdf->stream();
 			}
 		} elseif ($request->department_id == 2) // Secondary 
@@ -2102,14 +2102,14 @@ class ExamindividualPdfController extends Controller
 				if($att['no_schooldays']==0)
 				{
 					$output .= '<tr>
-					<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
-					<td style="height: 32px;"> </td>
-					<td style="height: 32px;"> </td>
-					<td style="height: 32px;"> </td>
-					<td style="height: 32px;"> </td>
-					<td style="height: 32px;"> </td>
-					<td style="height: 32px;"> </td>
-					<td style="height: 32px;"> </td>
+					<td style="height: 27px;">' . $attarray[intval($att['month'])] . '</td>
+					<td style="height: 27px;"> </td>
+					<td style="height: 27px;"> </td>
+					<td style="height: 27px;"> </td>
+					<td style="height: 27px;"> </td>
+					<td style="height: 27px;"> </td>
+					<td style="height: 27px;"> </td>
+					<td style="height: 27px;"> </td>
 					</tr>';
 				}
 				else
@@ -2392,7 +2392,7 @@ class ExamindividualPdfController extends Controller
 			// filename
 			$now = now();
 			$name = strtotime($now);
-			$fileName = __('messages.report_card') . "_" . $number . "_" . $stu['name'] . "_" . $name . ".pdf";
+			$fileName = __('messages.report_card') . "_" . $number . "_" . str_replace(":","",$stu['name']) . "_" . $name . ".pdf";
 		}
 		$output .= '</body></html>';
 		return $this->commonHelper->generatePdf($customPaper, $output, $fileName);
@@ -3028,7 +3028,7 @@ class ExamindividualPdfController extends Controller
 		$customPaper = array(0, 0, 792.00, 1330.00);
 		$now = now();
 		$name = strtotime($now);
-		$fileName = __('messages.personal_test_res') . "_" . $number . "_" . $stu['name'] . "_" . $name . ".pdf";
+		$fileName = __('messages.personal_test_res') . "_" . $number . "_" . str_replace(":","",$stu['name']) . "_" . $name . ".pdf";
 
 		// Set the appropriate HTTP headers
 		return $this->commonHelper->generatePdf($customPaper, $output, $fileName);

@@ -408,7 +408,8 @@ class ExamPdfController1 extends Controller
 			
 			$now = now();
 				$name = strtotime($now);
-				$fileName = __('messages.english_communication') . "_" . $number . "_" . $stu['eng_name'] . "_" . $name . ".pdf";
+				
+				$fileName = __('messages.english_communication') . "_" . $number . "_" . str_replace(":","",$stu['eng_name']) . "_" . $name . ".pdf";
 				
 			$pdfFilePath = $storagePath . '/' . $fileName;
 
@@ -1203,7 +1204,7 @@ class ExamPdfController1 extends Controller
 					// Filename setup
 					$now = now();
 				$name = strtotime($now);
-				$fileName = __('messages.report_card') . "_" . $number . "_" . $stu['name'] . "_" . $name . ".pdf";
+				$fileName = __('messages.report_card') . "_" . $number . "_" . str_replace(":","",$stu['name']) . "_" . $name . ".pdf";
 				
 					$pdfFilePath = $storagePath . '/' . $fileName;
 
@@ -1528,14 +1529,14 @@ class ExamPdfController1 extends Controller
 						if($att['no_schooldays']==0)
 						{
 							$output .= '<tr>
-							<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
+							<td style="height: 30px;">' . $attarray[intval($att['month'])] . '</td>
+							<td style="height: 30px;"> </td>
+							<td style="height: 30px;"> </td>
+							<td style="height: 30px;"> </td>
+							<td style="height: 30px;"> </td>
+							<td style="height: 30px;"> </td>
+							<td style="height: 30px;"> </td>
+							<td style="height: 30px;"> </td>
 							</tr>';
 						}
 						else
@@ -1906,7 +1907,7 @@ class ExamPdfController1 extends Controller
 					// Filename setup
 					$now = now();
 				$name = strtotime($now);
-				$fileName = __('messages.report_card') . "_" . $number . "_" . $stu['name'] . "_" . $name . ".pdf";
+				$fileName = __('messages.report_card') . "_" . $number . "_" . str_replace(":","",$stu['name']) . "_" . $name . ".pdf";
 				
 					$pdfFilePath = $storagePath . '/' . $fileName;
 
@@ -2174,14 +2175,14 @@ class ExamPdfController1 extends Controller
 						if($att['no_schooldays']==0)
 						{
 							$output .= '<tr>
-							<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
+							<td style="height: 28px;">' . $attarray[intval($att['month'])] . '</td>
+							<td style="height: 28px;"> </td>
+							<td style="height: 28px;"> </td>
+							<td style="height: 28px;"> </td>
+							<td style="height: 28px;"> </td>
+							<td style="height: 28px;"> </td>
+							<td style="height: 28px;"> </td>
+							<td style="height: 28px;"> </td>
 							</tr>';
 						}
 						else
@@ -2555,7 +2556,7 @@ class ExamPdfController1 extends Controller
 					// Filename setup
 					$now = now();
 				$name = strtotime($now);
-				$fileName = __('messages.report_card') . "_" . $number . "_" . $stu['name'] . "_" . $name . ".pdf";
+				$fileName = __('messages.report_card') . "_" . $number . "_" . str_replace(":","",$stu['name']) . "_" . $name . ".pdf";
 				
 					$pdfFilePath = $storagePath . '/' . $fileName;
 
@@ -2858,14 +2859,14 @@ class ExamPdfController1 extends Controller
 					if($att['no_schooldays']==0)
 					{
 						$output .= '<tr>
-						<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
+						<td style="height: 27px;">' . $attarray[intval($att['month'])] . '</td>
+						<td style="height: 27px;"> </td>
+						<td style="height: 27px;"> </td>
+						<td style="height: 27px;"> </td>
+						<td style="height: 27px;"> </td>
+						<td style="height: 27px;"> </td>
+						<td style="height: 27px;"> </td>
+						<td style="height: 27px;"> </td>
 						</tr>';
 					}
 					else
@@ -3237,7 +3238,7 @@ class ExamPdfController1 extends Controller
 				// Filename setup
 				$now = now();
 				$name = strtotime($now);
-				$fileName = __('messages.report_card') . "_" . $number . "_" . $stu['name'] . "_" . $name . ".pdf";
+				$fileName = __('messages.report_card') . "_" . $number . "_" . str_replace(":","",$stu['name']) . "_" . $name . ".pdf";
 				$pdfFilePath = $storagePath . '/' . $fileName;
 
 				// Save the PDF to the specified folder
@@ -3304,8 +3305,8 @@ class ExamPdfController1 extends Controller
 			'semester_id' => $request->semester_id,
 			'session_id' => $request->session_id,
 			'academic_session_id' => $request->academic_year,
+			
 
-			'student_id' => $request->student_id,
 		];
 		
 		$language = "国語";
@@ -3318,7 +3319,7 @@ class ExamPdfController1 extends Controller
 		$sport = "保健体育";
 		$engineer = "家庭"; // Home Econ
 		
-		$getstudents = Helper::PostMethod(config('constants.api.exam_individualstudentslist'), $data);
+		$getstudents = Helper::PostMethod(config('constants.api.exam_studentslist'), $data);
 		
 		if (empty($getstudents['data'])) {
 			return redirect()->route('admin.exam_results.byreport')->with('errors', "No Student Data Found");
@@ -3336,7 +3337,8 @@ class ExamPdfController1 extends Controller
 
 		$grade = Helper::PostMethod(config('constants.api.class_details'), $data);
 		$section = Helper::PostMethod(config('constants.api.section_details'), $data);
-		
+		$gradename = $grade['data']['name'];
+		$classname = $section['data']['name'];
 		$acdata = [
 			'branch_id' => session()->get('branch_id'),
 			'id' => $request->academic_year
@@ -3935,9 +3937,12 @@ class ExamPdfController1 extends Controller
 			$customPaper = [0, 0, 792.00, 1224.00];
 			$pdf->set_paper($customPaper);
 			$pdf->loadHTML($output);
-
+			$now = now();
+			$name = strtotime($now);
 			// Filename setup
-			$fileName = __('messages.personal_test_res') . "_" . $stu['name'] . ".pdf";
+			
+			$fileName = __('messages.personal_test_res') . "_" . $number . "_" . str_replace(":","",$stu['name']) . "_" . $name . ".pdf";
+				
 			$pdfFilePath = $storagePath . '/' . $fileName;
 
 			// Save the PDF to the specified folder
@@ -3959,6 +3964,7 @@ class ExamPdfController1 extends Controller
 		$zipFilePath = $storagePath . '/' . $zipFileName;
 
 		$zip = new ZipArchive();
+		
 		if ($zip->open($zipFilePath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
 			foreach ($pdfFiles as $pdfFile) {
 				$zip->addFile($pdfFile, basename($pdfFile));
@@ -3968,7 +3974,25 @@ class ExamPdfController1 extends Controller
 
 		// Download the ZIP file
 		if (File::exists($zipFilePath)) {
-			return response()->download($zipFilePath)->deleteFileAfterSend(true);
+			// Read the ZIP file content
+			$zipContent = File::get($zipFilePath);
+
+			// Set the appropriate HTTP headers
+			$headers = [
+				'Content-Type' => 'application/zip',
+				'Content-Disposition' => 'attachment; filename=' . rawurlencode($zipFileName),
+				'Content-Length' => strlen($zipContent),
+			];
+
+			// Return the response with headers and delete the file after sending
+			$response = response($zipContent)->withHeaders($headers);
+
+			// Delete the file after sending the response
+			File::delete($zipFilePath);
+
+			// Return the response
+			return $response;
+			//return response()->download($zipFilePath)->deleteFileAfterSend(true);
 		}
 	}
 	public function downprimaryform1($id)
@@ -4709,5 +4733,62 @@ class ExamPdfController1 extends Controller
 			'fontSize' => $fontSize,
 			'content' => htmlspecialchars($text)
 		];
+	}
+	public function generateBarChartSingle($labels, $data, $xTitle = 'Number of students', $yTitle = 'Mark range', $subject)
+	{
+		require_once public_path('jpgraph-4.4.2/src/jpgraph.php');
+		require_once public_path('jpgraph-4.4.2/src/jpgraph_bar.php');
+
+		// Define the directory and ensure it exists
+		$directory = public_path('barchart');
+		// if (!is_dir($directory)) {
+		// 	if (!mkdir($directory, 0777, true)) {
+		// 		throw new Exception("Failed to create directory: $directory");
+		// 	}
+		// }
+
+		// // Ensure the directory is writable
+		// if (!is_writable($directory)) {
+		// 	throw new Exception("Directory $directory is not writable");
+		// }
+
+		// Create a unique file name using the subject and current timestamp
+		$timestamp = time();
+		$fileName = $subject . '_' . $timestamp . '.png';
+		$filePath = $directory . '/' . $fileName;
+
+		// Create the graph
+		$graph = new \Graph(600, 400, 'auto');
+		$graph->SetScale('textlin');
+		$graph->Set90AndMargin(150, 30, 50, 50); // Rotate the graph to make horizontal bars
+
+		// Setup margin and titles
+		// $graph->title->Set('Distribution of Student Marks');
+		// $graph->xaxis->title->Set($xTitle);
+		// $graph->yaxis->title->Set($yTitle);
+
+		// Setup X-axis labels with the mark ranges (since the graph is rotated)
+		$graph->xaxis->SetTickLabels($labels);
+		$graph->xaxis->SetLabelMargin(10);
+
+		// Create the bar plot (horizontal)
+		$bplot = new \BarPlot($data);
+
+		// Add the bar plot to the graph
+		$graph->Add($bplot);
+		$bplot->SetFillColor('darkgray');
+		// $bplot->value->SetValuePos();
+		$bplot->value->SetFormat('%d');
+		$bplot->value->SetColor("black");
+		$bplot->value->SetAlign('left', 'center');
+		$bplot->value->SetFont(FF_FONT1, FS_BOLD);
+		$bplot->value->SetMargin(10);
+		$bplot->value->Show();
+
+		// $graph->title->Set($subject);
+		// Display the graph
+		$graph->Stroke($filePath);
+
+		return $filePath;
 	}
 }

@@ -732,14 +732,14 @@ class ExamPdfController extends Controller
 							$at_tot7 += $att['totexc'];
 
 							$output .= '<tr>
-								<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
-								<td style="height: 32px;">' . $att['no_schooldays'] . '</td>
-								<td style="height: 32px;">' . $att['suspension'] . '</td>
-								<td style="height: 32px;">' . $att['totalcoming'] . '</td>
-								<td style="height: 32px;">' . $att['totabs'] . '</td>
-								<td style="height: 32px;">' . $att['totpres'] . '</td>
-								<td style="height: 32px;">' . $att['totlate'] . '</td>
-								<td style="height: 32px;">' . $att['totexc'] . '</td>
+								<td style="height: 34px;">' . $attarray[intval($att['month'])] . '</td>
+								<td style="height: 34px;">' . $att['no_schooldays'] . '</td>
+								<td style="height: 34px;">' . $att['suspension'] . '</td>
+								<td style="height: 34px;">' . $att['totalcoming'] . '</td>
+								<td style="height: 34px;">' . $att['totabs'] . '</td>
+								<td style="height: 34px;">' . $att['totpres'] . '</td>
+								<td style="height: 34px;">' . $att['totlate'] . '</td>
+								<td style="height: 34px;">' . $att['totexc'] . '</td>
 							</tr>';
 						}
 					}
@@ -1159,14 +1159,14 @@ class ExamPdfController extends Controller
 						if($att['no_schooldays']==0)
 						{
 							$output .= '<tr>
-							<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
+							<td style="height: 30px;">' . $attarray[intval($att['month'])] . '</td>
+							<td style="height: 30px;"> </td>
+							<td style="height: 30px;"> </td>
+							<td style="height: 30px;"> </td>
+							<td style="height: 30px;"> </td>
+							<td style="height: 30px;"> </td>
+							<td style="height: 30px;"> </td>
+							<td style="height: 30px;"> </td>
 							</tr>';
 						}
 						else
@@ -1613,14 +1613,14 @@ class ExamPdfController extends Controller
 						if($att['no_schooldays']==0)
 						{
 							$output .= '<tr>
-							<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
-							<td style="height: 32px;"> </td>
+							<td style="height: 28px;">' . $attarray[intval($att['month'])] . '</td>
+							<td style="height: 28px;"> </td>
+							<td style="height: 28px;"> </td>
+							<td style="height: 28px;"> </td>
+							<td style="height: 28px;"> </td>
+							<td style="height: 28px;"> </td>
+							<td style="height: 28px;"> </td>
+							<td style="height: 28px;"> </td>
 							</tr>';
 						}
 						else
@@ -2107,14 +2107,14 @@ class ExamPdfController extends Controller
 					if($att['no_schooldays']==0)
 					{
 						$output .= '<tr>
-						<td style="height: 32px;">' . $attarray[intval($att['month'])] . '</td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
-						<td style="height: 32px;"> </td>
+						<td style="height: 27px;">' . $attarray[intval($att['month'])] . '</td>
+						<td style="height: 27px;"> </td>
+						<td style="height: 27px;"> </td>
+						<td style="height: 27px;"> </td>
+						<td style="height: 27px;"> </td>
+						<td style="height: 27px;"> </td>
+						<td style="height: 27px;"> </td>
+						<td style="height: 27px;"> </td>
 						</tr>';
 					}
 					else
@@ -2422,8 +2422,8 @@ class ExamPdfController extends Controller
 			'semester_id' => $request->semester_id,
 			'session_id' => $request->session_id,
 			'academic_session_id' => $request->academic_year,
+			
 
-			'student_id' => $request->student_id,
 		];
 		
 		$language = "国語";
@@ -2436,7 +2436,7 @@ class ExamPdfController extends Controller
 		$sport = "保健体育";
 		$engineer = "家庭"; // Home Econ
 		
-		$getstudents = Helper::PostMethod(config('constants.api.exam_individualstudentslist'), $data);
+		$getstudents = Helper::PostMethod(config('constants.api.exam_studentslist'), $data);
 		
 		if (empty($getstudents['data'])) {
 			return redirect()->route('admin.exam_results.byreport')->with('errors', "No Student Data Found");
@@ -4978,115 +4978,7 @@ class ExamPdfController extends Controller
 	}
 
 
-	public function generateBarChart($labels, $data, $xTitle = 'Number of incidents', $yTitle = 'Names', $subject = 'default_subject')
-	{
-		require_once public_path('jpgraph-4.4.2/src/jpgraph.php');
-		require_once public_path('jpgraph-4.4.2/src/jpgraph_bar.php');
-
-		// Define the directory and ensure it exists
-		$directory = public_path('barchart');
-		if (!is_dir($directory)) {
-			if (!mkdir($directory, 0777, true)) {
-				throw new Exception("Failed to create directory: $directory");
-			}
-		}
-
-		// Ensure the directory is writable
-		if (!is_writable($directory)) {
-			throw new Exception("Directory $directory is not writable");
-		}
-
-		// Create a unique file name using the subject and current timestamp
-		$timestamp = time();
-		$fileName = $subject . '_' . $timestamp . '.png';
-		$filePath = $directory . '/' . $fileName;
-
-		// Create the graph
-		$graph = new \Graph(600, 400, 'auto');
-		$graph->SetScale('textlin');
-
-		// Setup margin and titles
-		$graph->SetMargin(50, 20, 30, 30);
-		$graph->title->Set('Number of incidents');
-		// $graph->xaxis->title->Set($xTitle);
-		// $graph->yaxis->title->Set($yTitle);
-
-		// Setup X-axis labels with multi-line support if needed
-		$graph->xaxis->SetTickLabels($labels);
-		$graph->xaxis->SetLabelMargin(10);
-
-		// Create the bar plot (horizontal)
-		$bplot = new \BarPlot($data);
-		$bplot->SetFillColor('darkgray');
-
-		// Add the bar plot to the graph
-		$graph->Add($bplot);
-
-		// Display the graph
-		$graph->Stroke($filePath);
-
-		return $filePath;
-	}
-
-
 	public function generateBarChartSingle($labels, $data, $xTitle = 'Number of students', $yTitle = 'Mark range', $subject)
-	{
-		require_once public_path('jpgraph-4.4.2/src/jpgraph.php');
-		require_once public_path('jpgraph-4.4.2/src/jpgraph_bar.php');
-
-		// Define the directory and ensure it exists
-		$directory = public_path('barchart');
-		// if (!is_dir($directory)) {
-		// 	if (!mkdir($directory, 0777, true)) {
-		// 		throw new Exception("Failed to create directory: $directory");
-		// 	}
-		// }
-
-		// // Ensure the directory is writable
-		// if (!is_writable($directory)) {
-		// 	throw new Exception("Directory $directory is not writable");
-		// }
-
-		// Create a unique file name using the subject and current timestamp
-		$timestamp = time();
-		$fileName = $subject . '_' . $timestamp . '.png';
-		$filePath = $directory . '/' . $fileName;
-
-		// Create the graph
-		$graph = new \Graph(600, 400, 'auto');
-		$graph->SetScale('textlin');
-		$graph->Set90AndMargin(150, 30, 50, 50); // Rotate the graph to make horizontal bars
-
-		// Setup margin and titles
-		// $graph->title->Set('Distribution of Student Marks');
-		// $graph->xaxis->title->Set($xTitle);
-		// $graph->yaxis->title->Set($yTitle);
-
-		// Setup X-axis labels with the mark ranges (since the graph is rotated)
-		$graph->xaxis->SetTickLabels($labels);
-		$graph->xaxis->SetLabelMargin(10);
-
-		// Create the bar plot (horizontal)
-		$bplot = new \BarPlot($data);
-
-		// Add the bar plot to the graph
-		$graph->Add($bplot);
-		$bplot->SetFillColor('darkgray');
-		// $bplot->value->SetValuePos();
-		$bplot->value->SetFormat('%d');
-		$bplot->value->SetColor("black");
-		$bplot->value->SetAlign('left', 'center');
-		$bplot->value->SetFont(FF_FONT1, FS_BOLD);
-		$bplot->value->SetMargin(10);
-		$bplot->value->Show();
-
-		// $graph->title->Set($subject);
-		// Display the graph
-		$graph->Stroke($filePath);
-
-		return $filePath;
-	}
-	public function generateBarChartSingle1($labels, $data, $xTitle = 'Number of students', $yTitle = 'Mark range', $subject)
 	{
 		require_once public_path('jpgraph-4.4.2/src/jpgraph.php');
 		require_once public_path('jpgraph-4.4.2/src/jpgraph_bar.php');

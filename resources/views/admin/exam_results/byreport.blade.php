@@ -437,7 +437,22 @@
                                         <input type="hidden" name="academic_year" class="downAcademicYear">
                                         <input type="hidden" name="report_type" class="downReport_type">
                                         <div class="clearfix float-right" style="margin-bottom:5px; margin-left: 10px;">
+                                            <button type="submit" class="btn btn-primary-bl waves-effect waves-light" style="white-space: nowrap;">{{ __('messages.download_zip_file') }}</button>
+                                        </div>
+                                    </form>
+                                    <form id="allPdfForm3" method="post" action="{{ route('admin.exam_results.downbypersoanalreportfile') }}">
+                                        @csrf
+                                        <input type="hidden" name="department_id" class="downDepartmentID">
+                                        <input type="hidden" name="exam_id" class="downExamID">
+                                        <input type="hidden" name="class_id" class="downClassID">
+                                        <input type="hidden" name="semester_id" class="downSemesterID">
+                                        <input type="hidden" name="session_id" class="downSessionID">
+                                        <input type="hidden" name="section_id" class="downSectionID">
+                                        <input type="hidden" name="academic_year" class="downAcademicYear">
+                                        <input type="hidden" name="report_type" class="downReport_type">
+                                        <div class="clearfix float-right" style="margin-bottom:5px; margin-left: 10px;">
                                             <button type="submit" class="btn btn-primary-bl waves-effect waves-light" style="white-space: nowrap;">{{ __('messages.download_all_pdf') }}</button>
+                                            <!--<button type="button" class="btn btn-primary-bl waves-effect waves-light exportToExcel">{{ __('messages.download') }}</button>-->
                                         </div>
                                     </form>
                                 </div>
