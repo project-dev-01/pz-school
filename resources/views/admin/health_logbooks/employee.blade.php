@@ -322,7 +322,7 @@
     var editHealthLogBooksListPartC ="{{ route('admin.health_logbooks_partc.edit') }}";
     var updateHealthLogBooksListPartC ="{{ route('admin.health_logbooks_partc.update') }}";
     var getStudentList = "{{ config('constants.api.get_student_details_buletin_board') }}";
-    var getTeacherAbsentExcuse = "{{ config('constants.api.get_teacher_absent_excuse') }}";
+    
     
     var admin_employee_attentance_storage = localStorage.getItem('admin_employee_attentance_details');
 </script>
@@ -347,12 +347,7 @@
 <script src="{{ asset('libs/raphael/raphael.min.js') }}"></script>
 
 <script>
-    var homeworkView = "{{ route('admin.homework.view') }}";
-    var homeworkList = "{{ route('admin.evaluation_report') }}";
     var sectionByClass = "{{ route('admin.section_by_class') }}";
-    var subjectByClass = "{{ route('admin.subject_by_class') }}";
-    var evaluationReportList = "{{ route('admin.evaluation_report.list') }}";
-    var homeworkTableList = "{{ route('admin.homework.details') }}";
     var getGradeByDepartmentUrl = "{{ config('constants.api.grade_list_by_departmentId') }}";
 
     // Get PDF Footer Text

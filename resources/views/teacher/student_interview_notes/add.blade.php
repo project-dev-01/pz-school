@@ -64,7 +64,7 @@
                                     <select id="changeClassNameAdd" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
                                         @forelse ($classes as $class)
-                                        <option value="{{ $class['class_id'] }}">{{ $class['class_name'] }}</option>
+                                        <option value="{{ $class['id'] }}">{{ $class['name'] }}</option>
                                         @empty
                                         @endforelse
                                     </select>

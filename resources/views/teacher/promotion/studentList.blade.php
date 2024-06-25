@@ -108,7 +108,7 @@
 										<select id="downloadListClassID" class="form-control" name="download_class_id">
 											<option value="">{{ __('messages.select_grade') }}</option>
 											@forelse($teacher_class as $cla)
-											<option value="{{$cla['class_id']}}">{{$cla['class_name']}}</option>
+											<option value="{{$cla['id']}}">{{$cla['name']}}</option>
 											@empty
 											@endforelse
 										</select>

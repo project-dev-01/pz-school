@@ -145,7 +145,7 @@ width: 14.3em;
                                     <select id="class_id" class="form-control" name="class_id">
                                         <option value="">{{ __('messages.select_grade') }}</option>
                                         @forelse($class as $cla)
-                                        <option value="{{$cla['class_id']}}">{{$cla['class_name']}}</option>
+                                        <option value="{{$cla['id']}}">{{$cla['name']}}</option>
                                         @empty
                                         @endforelse
                                     </select>
