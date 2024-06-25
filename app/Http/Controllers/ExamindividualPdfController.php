@@ -69,11 +69,12 @@ class ExamindividualPdfController extends Controller
 		$term = Helper::PostMethod(config('constants.api.exam_details'), $termdata);
 		$acyear = Helper::PostMethod(config('constants.api.academic_year_details'), $acdata);
 		// Fetch EC-Class paper marks
-		$ec_classname = $this->commonHelper->fetchPaperMarks($request, $stu, "EC-Class", $subjectID);
-		$ec_classname = ['data']['freetext'] ?? '';
+		
+		$paper1 = $this->commonHelper->fetchPaperMarks($request, $stu, "EC-Class", $subjectID);
+		$ec_classname = $paper1['data']['freetext'] ?? '';
 		// Fetch Level paper marks
-		$levelname = $this->commonHelper->fetchPaperMarks($request, $stu, "Level", $subjectID);
-		$levelname = ['data']['freetext'] ?? '';
+		$paper2 = $this->commonHelper->fetchPaperMarks($request, $stu, "Level", $subjectID);
+		$levelname = $paper2['data']['freetext'] ?? '';
 
 		$term = Helper::PostMethod(config('constants.api.exam_details'), $termdata);
 		$n1 = ($request->department_id == '1') ? 'P' : 'S';
