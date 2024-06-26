@@ -106,7 +106,7 @@ class ExamindividualPdfController extends Controller
 				font-family: "Times New Roman";
 				word-wrap: break-word;
 				font-style: normal;
-				font-size: 16px;
+				font-size: 18px;
 				letter-spacing: 0.0133em;
 				}
 				
@@ -134,10 +134,11 @@ class ExamindividualPdfController extends Controller
 				h5 {
 				font-family: "Times New Roman";
 				font-style: normal;
-				font-size: 15px;
+				font-size: 20px;
 				letter-spacing: 0.0133em;
 				}
 				h3 { font-family: "Times New Roman";
+				font-size: 20px;
 				}
 				</style>
 				</head>
@@ -178,11 +179,11 @@ class ExamindividualPdfController extends Controller
 					<h4 style="margin: 0;">' . $number . '</h4>
 					</td>       
 					<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; text-align: left;">
-					<h5 style="margin: 0;margin-top:-30px;">EC-Class</h5>
+					<h5 style="margin: 0;margin-top:-42px;">EC-Class</h5>
 					<h4 style="margin: 0;">' . $ec_classname . '</h4>
 					</td>       
 					<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; text-align: left;">
-					<h5 style="margin: 0;margin-top:-30px;">Level</h5>
+					<h5 style="margin: 0;margin-top:-42px;">Level</h5>
 					<h4 style="margin: 0;">' . $levelname . '</h4>
 					</td>
 					</tr> 
@@ -192,7 +193,7 @@ class ExamindividualPdfController extends Controller
 					<h3 style="margin: 0;">Student Name</h3>
 					</td>       
 					<td colspan="2" class="content-wrap aligncenter" style="margin: 0;padding-left: 10px;padding-top:20px; padding-bottom:-10px;text-align: left;">
-					<h3 style="margin: 0;">' . strtoupper($stu['eng_name']) . '</h3>
+					<h3 style="margin: 0;font-size: 22px;">' . strtoupper($stu['eng_name']) . '</h3>
 					</td>
 					</tr> 
 					<tr>
@@ -235,7 +236,7 @@ class ExamindividualPdfController extends Controller
 				$output .= '
 							<tr>
 							<td colspan="2"
-							style="text-align:center; border: 2px solid black;background-color:#40403a57;font-size:20px;">
+							style="text-align:center; border: 2px solid black;background-color:#40403a57;font-size:20px;font-weight:bold; color:black;">
 							' . $heads . '</td>
 							</tr>';
 
@@ -246,9 +247,9 @@ class ExamindividualPdfController extends Controller
 					$paper = $this->commonHelper->fetchPaperMarks($request, $stu, $papername, $subjectID);
 					$mark = $this->commonHelper->getMark($paper);
 					$output .= '<tr>
-								<td style="border: 2px solid black; text-align: left;font-weight: normal;height:25px;font-size:16px;">' . $papername . '
+								<td style="border: 2px solid black; text-align: left;font-weight: normal;height:25px;font-size:18px;">' . $papername . '
 								</td>
-								<td style="border: 2px solid black; text-align: center;font-weight: normal;height:25px;font-size:16px;">' . $mark . '</td>
+								<td style="border: 2px solid black; text-align: center;font-weight: normal;height:25px;font-size:18px;">' . $mark . '</td>
 								</tr>';
 				}
 			}
@@ -290,7 +291,7 @@ class ExamindividualPdfController extends Controller
 				$output .= '
 							<tr>
 							<td colspan="2"
-							style="text-align:center; border: 2px solid black;background-color:#40403a57;font-size:20px;">
+							style="text-align:center; border: 2px solid black;background-color:#40403a57;font-size:20px;font-size:20px;font-weight:bold; color:black;">
 							' . $heads . '</td>
 							</tr>';
 
@@ -302,9 +303,9 @@ class ExamindividualPdfController extends Controller
 					$mark = $this->commonHelper->getMark($paper);
 
 					$output .= '<tr>
-								<td style="border: 2px solid black; text-align: left;font-weight: normal;height:25px;font-size:16px;">' . $papername . '
+								<td style="border: 2px solid black; text-align: left;font-weight: normal;height:25px;font-size:18px;">' . $papername . '
 								</td>
-								<td style="border: 2px solid black; text-align: center;font-weight: normal;height:25px;font-size:16px;">' . $mark . '</td>
+								<td style="border: 2px solid black; text-align: center;font-weight: normal;height:25px;font-size:18px;width:20%;">' . $mark . '</td>
 								</tr>';
 				}
 			}
@@ -324,7 +325,7 @@ class ExamindividualPdfController extends Controller
 					<td class="content-wrap aligncenter"  colspan="2" style="margin: 0; padding-right: 20px; text-align: center;">
 					
 					<div style="text-align: right;">
-					<h6 style="margin: 0;font-weight: normal;font-size:16px;">Results: Improving, Satisfactory, Excellent</h6>
+					<h6 style="margin: 0;font-weight: normal;font-size:20px;">Results: Improving, Satisfactory, Excellent</h6>
 					</div>
 					
 					</td>
@@ -346,12 +347,12 @@ class ExamindividualPdfController extends Controller
 					<tbody>
 					<tr>
 					<td colspan="2"
-					style="text-align: center; border: 2px solid black; background-color: #40403a57; color: black;font-size:18px;">
+					style="text-align: center; border: 2px solid black; background-color: #40403a57; color: black;font-size:20px;font-weight:bold; color:black;">
 					Teacher`s Comments</td>
 					</tr>
 					<tr>
 					<td colspan="2"
-					style="text-align: left; border: 2px solid black; height: 100px; color: black; padding: 10px;
+					style="text-align: left; border: 2px solid black; height: 100px; color: black; padding: 10px;font-size:20px;
 					word-wrap: break-word;">
 					';
 		$comment = explode("\n", $teachercmd);
@@ -369,11 +370,11 @@ class ExamindividualPdfController extends Controller
 					<tr>
 					<td class="content-wrap aligncenter"  style="margin: 0; padding: 10px; text-align: center;">
 					</td>
-					<td class="content-wrap aligncenter"  style="margin: 0; padding: 10px; text-align: center;font-size:16px;">
+					<td class="content-wrap aligncenter"  style="margin: 0; padding: 10px; text-align: center;font-size:18px;">
 					<h5 style="margin: 0;">English Teacher`s Name</h5>
 					</td>
 					<td class="content-wrap aligncenter"  style="margin: 0; padding: 10px; text-align: center;">
-					<h5 style="margin: 0;font-weight: normal;font-size:16px;">' . $teachername . '</h5>
+					<h5 style="margin: 0;font-weight: normal;font-size:18px;">' . $teachername . '</h5>
 					
 					</td>
 					</tr>
