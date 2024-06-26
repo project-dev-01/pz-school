@@ -655,13 +655,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('exam_results/byreport', [AdminController::class, 'byreport'])->name('admin.exam_results.byreport');
         Route::post('exam_results/downbyecreport', [ExamPdfController1::class, 'downbyecreport'])->name('admin.exam_results.downbyecreport');
         Route::post('exam_results/downbyreportcard', [ExamPdfController1::class, 'downbyreportcard'])->name('admin.exam_results.downbyreportcard');
-        Route::post('exam_results/downbypersoanalreport', [ExamPdfController::class, 'downbypersoanalreport'])->name('admin.exam_results.downbypersoanalreport');
+        Route::post('exam_results/downbypersoanalreport', [ExamPdfController1::class, 'downbypersoanalreport'])->name('admin.exam_results.downbypersoanalreport');
         Route::get('exam_results/byreportindividual', [AdminController::class, 'byreportindividual'])->name('admin.exam_results.byreportindividual');
         Route::post('individual/downbyecreport', [ExamindividualPdfController::class, 'downbyecreport'])->name('admin.individual.downbyecreport');
         Route::post('individual/downbyreportcard', [ExamindividualPdfController::class, 'downbyreportcard'])->name('admin.individual.downbyreportcard');
         Route::post('individual/downbypersoanalreport', [ExamindividualPdfController::class, 'downbypersoanalreport'])->name('admin.individual.downbypersoanalreport');
         Route::post('exam_results/downbyecreportfile', [ExamPdfController::class, 'downbyecreport'])->name('admin.exam_results.downbyecreportfile');
         Route::post('exam_results/downbyreportcardfile', [ExamPdfController::class, 'downbyreportcard'])->name('admin.exam_results.downbyreportcardfile');
+        Route::post('exam_results/downbypersoanalreportfile', [ExamPdfController::class, 'downbypersoanalreport'])->name('admin.exam_results.downbypersoanalreportfile');
 
         Route::get('individual/downbypersoanalpdfreport', [ExamindividualPdfController::class, 'downbypersoanalpdfreport'])->name('admin.individual.downbypersoanalpdfreport');
        

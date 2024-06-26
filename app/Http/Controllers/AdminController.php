@@ -11129,7 +11129,7 @@ class AdminController extends Controller
         // dd($request);
         $termination_notification = "No";
         $date_of_termination = null;
-        if ($request->termination_status == "Approved") {
+        if ($request->termination_status != "Applied") {
             $date_of_termination = $request->date_of_termination;
             $termination_notification = "Yes";
         }
@@ -11150,7 +11150,7 @@ class AdminController extends Controller
             'role_id' => session()->get('role_id'),
 
         ];
-        // dd($request);
+        // dd($data);
         $response = Helper::PostMethod(config('constants.api.termination_update_admin'), $data);
         return $response;
     }
