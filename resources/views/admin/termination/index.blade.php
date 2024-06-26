@@ -211,14 +211,13 @@
 <script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
 <script src="{{ asset('datatable/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('datatable/js/dataTables.bootstrap4.min.js') }}"></script>
-
+<!-- <script src="{{ asset('js/custom/select2.min.js')}}"></script> -->
 <script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('toastr/toastr.min.js') }}"></script>
 <script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
 <script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
-
     var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
 
@@ -235,28 +234,43 @@
 </script>
 <!-- button js added -->
 <script>
-    
-    function initializeIntlTelInput(inputSelector) {
-        var input = document.querySelector(inputSelector);
-        intlTelInput(input, {
-            allowExtensions: true,
-            autoFormat: false,
-            autoHideDialCode: false,
-            autoPlaceholder: false,
-            defaultCountry: "auto",
-            ipinfoToken: "yolo",
-            nationalMode: false,
-            numberType: "MOBILE",
-            initialCountry: "my",
-            //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-            preferredCountries: ['my', 'jp'],
-            preventInvalidNumbers: true,
-            // utilsScript: "js/utils.js"
-        });
+  function initializeIntlTelInput(inputSelector) {
+    var input = document.querySelector(inputSelector);
+    var iti = intlTelInput(input, {
+        allowExtensions: true,
+        autoFormat: false,
+        autoHideDialCode: false,
+        autoPlaceholder: false,
+        initialCountry: "auto",
+        ipinfoToken: "yolo",
+        nationalMode: false,
+        numberType: "MOBILE",
+        preventInvalidNumbers: true,
+        // utilsScript: "js/utils.js" // Uncomment if you have the utils script
+    });
+
+    // Trigger click on flag container to show the dropdown
+    var flagContainer = input.parentNode.querySelector('.iti__flag-container');
+    if (flagContainer) {
+        flagContainer.click();
     }
 
-initializeIntlTelInput("#transfer_destination_tel");
-initializeIntlTelInput("#parent_phone_number_after_transfer");
+    // Add event listener to open flag dropdown on input field focus
+    input.addEventListener('focus', function() {
+        if (flagContainer) {
+            flagContainer.click();
+        }
+    });
+
+    return iti;
+}
+
+$(document).ready(function() {
+    initializeIntlTelInput("#transfer_destination_tel");
+    initializeIntlTelInput("#parent_phone_number_after_transfer");
+});
+
+
 </script>
 <script src="{{ asset('buttons-datatables/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('buttons-datatables/jszip.min.js') }}"></script>

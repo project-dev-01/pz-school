@@ -342,9 +342,9 @@
     // $("#to_ldate").val(at);
 
     var parent_leaveapply_storage = localStorage.getItem('parent_leaveapply_details');
-    var holidayEventList = "{{ config('constants.api.holidays_list_event') }}";
+    var holidayEventList = "{{ config('constants.api.holidays_list_event') }}"
 
-
+    var holidayNormalEventList = "{{ config('constants.api.holidays_normal_list_event') }}"
 
 
     var deleteTitle = "{{ __('messages.are_you_sure') }}";
