@@ -760,7 +760,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mother_phone_number">{{ __('messages.phone_number') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control copy_parent_info mother_form number_validation" {{$readonly_phase_1}} id="mother_phone_number" value="{{ isset($application['mother_phone_number']) ? $application['mother_phone_number'] : ''}}" name="" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
+                                                        <input type="text" class="form-control copy_parent_info mother_form number_validation" {{$readonly_phase_1}} id="mother_phone_number" value="{{ isset($application['mother_phone_number']) ? $application['mother_phone_number'] : ''}}" name="mother_phone_number" placeholder="(XXX)-(XXX)-(XXXX)" aria-describedby="inputGroupPrepend">
                                                         <label for="mother_phone_number" class="error"></label>
                                                     </div>
                                                 </div>
