@@ -11139,6 +11139,7 @@ class AdminController extends Controller
         }
         $data = [
             'id' => $request->id,
+            'url' => url('/'),
             'school_fees_payment_status' => $request->school_fees_payment_status,
             'termination_status' => $request->termination_status,
             'termination_status_old' => $request->termination_status_old,
