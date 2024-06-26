@@ -41,9 +41,11 @@ class CheckPublishNotifications extends Command
         try {
             $secretKey = config('constants.cron_secret_key');
             $branchId = config('constants.branch_id');
+            $parent_url = config('constants.api.parent_login');
             $payload = [
                 'branch_id' => $branchId,
-                'secret_key' => $secretKey // Include the secret key in the payload
+                'secret_key' => $secretKey, // Include the secret key in the payload
+                'parent_url'=> $parent_url
             ];
             $url = config('constants.api.bulletin_board_cronJob');
             $response = Http::post($url, $payload);

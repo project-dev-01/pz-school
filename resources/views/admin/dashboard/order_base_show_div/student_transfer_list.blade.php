@@ -1,3 +1,10 @@
+<style>
+    .badge-soft-primary {
+     width: 97px !important;
+    height: 24px !important;
+    border-radius: 5px !important;
+}
+</style>
 <div class="row">
     <div class="col-xl-12 col-md-12">
         <div class="card">

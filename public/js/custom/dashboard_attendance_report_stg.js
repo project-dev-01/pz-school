@@ -376,11 +376,16 @@ $(function () {
                             status = "warning";
                         } else if (row.termination_status == "Send Back") {
                             status = "info";
-                        } else {
+                        } else if (row.termination_status == "Applied") {
+                            status = "primary";
+                        }else {
                             status = "";
                         }
-                        var att_status = '<div class="button-list"><span class="badge badge-soft-' + status + ' p-1">' + row.termination_status + '</span></div>';
-                        return att_status;
+                        var att_status = "";
+                        if (status) {
+                         att_status = '<div class="button-list"><span class="badge badge-soft-' + status + ' p-1">' + row.termination_status + '</span></div>';
+                        }
+                         return att_status;
 
                     }
                 },
@@ -395,8 +400,11 @@ $(function () {
                         if (row.school_fees_payment_status == "Unpaid") {
                             sstatus = "danger";
                         }
-                        var att_sstatus = '<div class="button-list"><span class="badge badge-soft-' + sstatus + ' p-1">' + row.school_fees_payment_status + '</span></div>';
-                        return att_sstatus;
+                        var att_sstatus = "";
+                        if (sstatus) {
+                         att_sstatus = '<div class="button-list"><span class="badge badge-soft-' + sstatus + ' p-1">' + row.school_fees_payment_status + '</span></div>';
+                        }
+                         return att_sstatus;
 
                     }
                 }
@@ -575,12 +583,17 @@ $(function () {
                             status = "warning";
                         } else if (row.termination_status == "Send Back") {
                             status = "info";
+                        } else if (row.termination_status == "Applied") {
+                            status = "primary";
                         } else {
                             status = "";
                         }
-                        var att_status = '<div class="button-list"><span class="badge badge-soft-' + status + ' p-1">' + row.termination_status + '</span></div>';
+                
+                        var att_status = "";
+                        if (status) {
+                            att_status = '<div class="button-list"><span class="badge badge-soft-' + status + ' p-1">' + row.termination_status + '</span></div>';
+                        }
                         return att_status;
-
                     }
                 },
                 {
@@ -594,8 +607,11 @@ $(function () {
                         if (row.school_fees_payment_status == "Unpaid") {
                             sstatus = "danger";
                         }
-                        var att_sstatus = '<div class="button-list"><span class="badge badge-soft-' + sstatus + ' p-1">' + row.school_fees_payment_status + '</span></div>';
-                        return att_sstatus;
+                        var att_sstatus = "";
+                        if (sstatus) {
+                         att_sstatus = '<div class="button-list"><span class="badge badge-soft-' + sstatus + ' p-1">' + row.school_fees_payment_status + '</span></div>';
+                        }
+                         return att_sstatus;
 
                     }
                 }
