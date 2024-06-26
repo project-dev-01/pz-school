@@ -582,27 +582,27 @@ class ExamindividualPdfController extends Controller
 				$output .= '<div class="content">
 						<div class="row">
 						<div class="column">
-						<p style="margin: 0;font-size:20px;">クアラルンプール日本人学校　小学部</p>
+						<p style="margin: 0;font-size:20px;margin-left:5px;">クアラルンプール日本人学校　小学部</p>
 						</div>
 						</div>
 						
 						<div class="row">
 						<div class="column1" style="width:10%;">
 						<div style="margin-top:20px;">
-						<p style="margin-left:20px;font-size:20px;">' . $stuclass .  '年生</p>
+						<p style="margin-left:20px;font-size:20px;margin-top:-5px;">' . $stuclass .  '年生</p>
 						</div>
 						
 						</div>
 						<div class="column1" style="width:10%;">
 						
 						<div style="margin-top:20px;">
-						<p style="margin-left:20px;font-size:20px;"> 1学期</p>
+						<p style="margin-left:20px;font-size:20px;margin-top:-5px;"> 1学期</p>
 						</div>
 						
 						</div>
 						<div class="column1" style="width:5%;">
 						<div style="margin-top:20px;">
-						<p style="margin-left:20px;font-size:20px;">通知表</p>
+						<p style="margin-left:20px;font-size:20px;margin-top:-5px;">通知表</p>
 						</div>
 						</div>
 						<div class="column1" style="margin-left:37px;width:15%;">
@@ -627,8 +627,9 @@ class ExamindividualPdfController extends Controller
 						</thead>
 						<tbody>
 						<tr>
-						<td style="vertical-align: top; text-align: left; border-right:hidden;height: 60px;">氏<br>名</td>
+						<td style="vertical-align: top; text-align: left; border-right:hidden;height: 60px;">氏名</td>
 						<td style="vertical-align: inherit;text-align:center; height: 60px;">' . $stu['name'] . '</td>
+						<td style="vertical-align: top; text-align: left; border-left:hidden;height: 60px;"></td>
 						</tr>
 						</tbody>
 						</table>
@@ -640,7 +641,8 @@ class ExamindividualPdfController extends Controller
 						<table style="border-collapse: collapse; margin-bottom: 15px; border: 2px solid black;">
 						<thead class="colspanHead">
 						<tr>
-						<td colspan="2" style="border: 2px solid black; border-right:hidden; height: 30px;">学 習 の 記 録</td>
+						<td style="border: 2px solid black; border-right:hidden; height: 30px;"></td>
+						<td colspan="1" style="border: 2px solid black; border-right:hidden; height: 30px;margin-left:10px;">学 習 の 記 録</td>
 						<td colspan="3" style="border: 2px solid black; height: 30px;">
 						<ul style="list-style-type: none; padding: 0; margin: 0; text-align:left;">
 						<li style="margin-left: 10px;font-size:14px;">(A　よくできる)</li>
@@ -686,7 +688,7 @@ class ExamindividualPdfController extends Controller
 
 							$mark = (isset($mark['grade']) && $mark['grade'] != null) ? $mark['grade'] : '';
 
-							$output .= '<td style="width:2%;  height: 37px;font-size:14px;">' . $mark . '</td>';
+							$output .= '<td style="width:2%;  height: 37px;font-size:18px;">' . $mark . '</td>';
 						}
 						$output .= ' </tr>';
 						//dd($subject);
@@ -965,7 +967,7 @@ class ExamindividualPdfController extends Controller
                                 <td colspan="1" style="text-align: left; height: 40px; width:5%;border: 2px solid black;">
                                     校<br>長
                                 </td>
-                                <td colspan="1" style="text-align: left; height: 40px; border: 2px solid black;">
+                                <td colspan="1" style="text-align: center; height: 40px; border: 2px solid black;">
                                    ' . $getteacherdata['data']['principal'] . '
                                 </td>
                             </tr>
@@ -973,7 +975,7 @@ class ExamindividualPdfController extends Controller
                                 <td colspan="1" style="text-align: left; height: 40px; width:5%;border: 2px solid black;">
                                    担<br>任
                                 </td>
-                                <td colspan="1" style="text-align: left; height: 40px; border: 2px solid black;">
+                                <td colspan="1" style="text-align: center; height: 40px; border: 2px solid black;">
                                     ' . $getteacherdata['data']['teacher'] . '
                                 </td>
                             </tr>
@@ -998,27 +1000,27 @@ class ExamindividualPdfController extends Controller
 				$output .= '<div class="content">
 								<div class="row">
 									<div class="column">
-										<p style="margin: 0;font-size: 20px;">クアラルンプール日本人学校　小学部</p>
+										<p style="margin: 0;font-size: 20px;margin-left:7px;">クアラルンプール日本人学校　小学部</p>
 									</div>
 								</div>
 						
 								<div class="row">
 									<div class="column1" style="width:10%;">
 										<div style="margin-top:20px;">
-											<p style="margin-left:20px;font-size:20px;">' . $stuclass .  '年生</p>
+											<p style="margin-left:20px;font-size:20px;margin-top:-7px;">' . $stuclass .  '年生</p>
 										</div>
 						
 									</div>
 									<div class="column1" style="width:10%;">
 						
 										<div style="margin-top:20px;">
-											<p style="margin-left:20px;font-size:20px;"> 1学期</p>
+											<p style="margin-left:20px;font-size:20px;margin-top:-7px;"> 1学期</p>
 										</div>
 						
 									</div>
 									<div class="column1" style="width:5%;">
 										<div style="margin-top:20px;">
-											<p style="margin-left:20px;font-size:20px;">通知表</p>
+											<p style="margin-left:20px;font-size:20px;margin-top:-7px;">通知表</p>
 										</div>
 									</div>
 									<div class="column1" style="margin-left:37px;width:15%;">
@@ -1043,8 +1045,9 @@ class ExamindividualPdfController extends Controller
 											</thead>
 											<tbody>
 												<tr>
-													<td style="vertical-align: top; text-align: left; border-right:hidden;height: 60px;">氏<br>名</td>
+													<td style="vertical-align: top; text-align: left; border-right:hidden;height: 60px;">氏名</td>
 													<td style="vertical-align: inherit;text-align:center; height: 60px;font-size:20px;">' . $stu['name'] . '</td>
+												    <td style="vertical-align: top; text-align: left; border-left:hidden;height: 60px;"></td>
 												</tr>
 											</tbody>
 										</table>
@@ -1056,7 +1059,8 @@ class ExamindividualPdfController extends Controller
 										<table style="border-collapse: collapse; margin-bottom: 15px; border: 2px solid black;">
 											<thead class="colspanHead">
 												<tr>
-													<td colspan="2" style="border: 2px solid black; border-right:hidden;">学 習 の 記 録</td>
+												    <td style="border: 2px solid black; border-right:hidden; height: 30px;"></td>
+													<td colspan="1" style="border: 2px solid black; border-right:hidden;height: 30px;margin-left:10px;">学 習 の 記 録</td>
 													<td colspan="3" style="border: 2px solid black;">
 														<ul style="list-style-type: none; padding: 0; margin: 0; text-align:left;">
 															<li style="margin-left: 10px;font-size:14px;">(A　よくできる)</li>
@@ -1097,7 +1101,7 @@ class ExamindividualPdfController extends Controller
 
 							$mark = (isset($mark['grade']) && $mark['grade'] != null) ? $mark['grade'] : '';
 
-							$output .= '<td style="width:2%;  height: 25px;font-size:14px;">' . $mark . '</td>';
+							$output .= '<td style="width:2%;  height: 25px;font-size:18px;">' . $mark . '</td>';
 						}
 						$output .= ' </tr>';
 						//dd($subject);
@@ -1436,7 +1440,7 @@ class ExamindividualPdfController extends Controller
                                 <td colspan="1" style="text-align: left; height: 40px; width:5%;border: 2px solid black;">
                                     校<br>長
                                 </td>
-                                <td colspan="1" style="text-align: left; height: 40px; border: 2px solid black;">
+                                <td colspan="1" style="text-align: center; height: 40px; border: 2px solid black;">
                                    ' . $getteacherdata['data']['principal'] . '
                                 </td>
                             </tr>
@@ -1444,7 +1448,7 @@ class ExamindividualPdfController extends Controller
                                 <td colspan="1" style="text-align: left; height: 40px; width:5%;border: 2px solid black;">
                                     担<br>任
                                 </td>
-                                <td colspan="1" style="text-align: left; height: 40px; border: 2px solid black;">
+                                <td colspan="1" style="text-align: center; height: 40px; border: 2px solid black;">
                                     ' . $getteacherdata['data']['teacher'] . '
                                 </td>
                             </tr>
@@ -1472,27 +1476,27 @@ class ExamindividualPdfController extends Controller
 				$output .= '<div class="content">
 								<div class="row">
 									<div class="column">
-										<p style="margin: 0;font-size:20px;">クアラルンプール日本人学校　小学部</p>
+										<p style="margin: 0;font-size:20px;margin-left:7px;">クアラルンプール日本人学校　小学部</p>
 									</div>
 								</div>
 						
 								<div class="row">
 									<div class="column1" style="width:10%;">
 										<div style="margin-top:20px;">
-											<p style="margin-left:20px;font-size:20px;">' . $stuclass .  '年生</p>
+											<p style="margin-left:20px;font-size:20px;margin-top:-7px;">' . $stuclass .  '年生</p>
 										</div>
 						
 									</div>
 									<div class="column1" style="width:10%;">
 						
 										<div style="margin-top:20px;">
-											<p style="margin-left:20px;font-size:20px;"> 1学期</p>
+											<p style="margin-left:20px;font-size:20px;margin-top:-7px;"> 1学期</p>
 										</div>
 						
 									</div>
 									<div class="column1" style="width:5%;">
 										<div style="margin-top:20px;">
-											<p style="margin-left:20px;font-size:20px;">通知表</p>
+											<p style="margin-left:20px;font-size:20px;margin-top:-7px;">通知表</p>
 										</div>
 									</div>
 									<div class="column1" style="margin-left:37px;width:15%;">
@@ -1517,8 +1521,9 @@ class ExamindividualPdfController extends Controller
 											</thead>
 											<tbody>
 												<tr>
-													<td style="margin: 0px;vertical-align: top;text-align: left; border-right:hidden;height: 60px;">氏<br>名</td>
+													<td style="margin: 0px;vertical-align: top;text-align: left; border-right:hidden;height: 60px;">氏名</td>
 													<td style="vertical-align: inherit;font-size:20px;text-align:center; height: 60px;">' . $stu['name'] . '</td>
+													<td style="vertical-align: top; text-align: left; border-left:hidden;height: 60px;"></td>
 												</tr>
 											</tbody>
 										</table>
@@ -1530,7 +1535,8 @@ class ExamindividualPdfController extends Controller
 										<table style="border-collapse: collapse; margin-bottom: 0px; border: 2px solid black;">
 											<thead class="colspanHead">
 												<tr>
-													<td colspan="2" style="border: 2px solid black; border-right:hidden; height: 35px;font-size:16px;">学 習 の 記 録</td>
+												    <td style="border: 2px solid black; border-right:hidden;"></td>
+													<td colspan="1" style="border: 2px solid black; border-right:hidden; height: 35px;font-size:16px;">学 習 の 記 録</td>
 													<td colspan="3" style="border: 2px solid black; height: 35px;">
 														<ul style="list-style-type: none; padding: 0; margin: 0; text-align:left;">
 															<li style="margin-left: 10px;font-size:14px;">(A　よくできる)</li>
@@ -1572,7 +1578,7 @@ class ExamindividualPdfController extends Controller
 
 							$mark = (isset($mark['grade']) && $mark['grade'] != null) ? $mark['grade'] : '';
 
-							$output .= '<td style="width:2%;  height: 30px;font-size:14px;">' . $mark . '</td>';
+							$output .= '<td style="width:2%;  height: 30px;font-size:18px;">' . $mark . '</td>';
 						}
 						$output .= ' </tr>';
 						//dd($subject);
@@ -1879,7 +1885,7 @@ class ExamindividualPdfController extends Controller
                                 <td colspan="1" style="text-align: left; height: 40px; width:5%;border: 2px solid black;">
                                     校<br>長
                                 </td>
-                                <td colspan="1" style="text-align: left; height: 40px; border: 2px solid black;">
+                                <td colspan="1" style="text-align: center; height: 40px; border: 2px solid black;">
                                    ' . $getteacherdata['data']['principal'] . '
                                 </td>
                             </tr>
@@ -1887,7 +1893,7 @@ class ExamindividualPdfController extends Controller
                                 <td colspan="1" style="text-align: left; height: 40px; width:5%;border: 2px solid black;">
                                     担<br>任
                                 </td>
-                                <td colspan="1" style="text-align: left; height: 40px; border: 2px solid black;">
+                                <td colspan="1" style="text-align: center; height: 40px; border: 2px solid black;">
                                     ' . $getteacherdata['data']['teacher'] . '
                                 </td>
                             </tr>
@@ -1933,27 +1939,27 @@ class ExamindividualPdfController extends Controller
 			$output .= '<div class="content">
 					<div class="row">
 					<div class="column">
-					<p style="margin: 0;font-size:20px;">クアラルンプール日本人学校　中学部</p>
+					<p style="margin: 0;font-size:20px;margin-left:5px;">クアラルンプール日本人学校　中学部</p>
 					</div>
 					</div>
 					
 					<div class="row">
 					<div class="column1" style="width:10%;">
 					<div style="margin-top:20px;">
-					<p style="margin: 0;font-size:20px;">' . $stuclass .  '年生</p>
+					<p style="margin: 0;font-size:20px;margin-top:-5px;">' . $stuclass .  '年生</p>
 					</div>
 					
 					</div>
 					<div class="column1" style="width:10%;">
 					
 					<div style="margin-top:20px;">
-					<p style="margin: 0;font-size:20px;"> 1学期</p>
+					<p style="margin: 0;font-size:20px;margin-top:-5px;"> 1学期</p>
 					</div>
 					
 					</div>
 					<div class="column1" style="width:5%;">
 					<div style="margin-top:20px;">
-					<p style="margin: 0;font-size:20px;">通知表</p>
+					<p style="margin: 0;font-size:20px;margin-top:-5px;">通知表</p>
 					</div>
 					</div>
 				
@@ -1980,6 +1986,7 @@ class ExamindividualPdfController extends Controller
 					</thead>
 					<tbody>
 					<tr>
+					
 					<td style="vertical-align: top; text-align: left; border-right:hidden;height: 60px;">氏名</td>
 					<td style="vertical-align: inherit;text-align:center; height: 60px;">' . $stu['name'] . '</td>
 					</tr>
@@ -2047,7 +2054,7 @@ class ExamindividualPdfController extends Controller
 
 								$mark = (isset($mark['grade']) && $mark['grade'] != null) ? $mark['grade'] : '';
 
-								$output .= '<td style="width:2%;  height: 30px;font-size:14px;">' . $mark . '</td>';
+								$output .= '<td style="width:2%;  height: 30px;font-size:18px;">' . $mark . '</td>';
 								if ($i == 1) {
 
 									if ($getmarks["data"][3]["marks"][$k] != null) {
@@ -2369,7 +2376,7 @@ class ExamindividualPdfController extends Controller
                                 <td colspan="1" style="text-align: left; height: 40px; width:5%;border: 2px solid black;">
                                     校<br>長
                                 </td>
-                                <td colspan="1" style="text-align: left; height: 40px; border: 2px solid black;">
+                                <td colspan="1" style="text-align: center; height: 40px; border: 2px solid black;">
                                     ' . $getteacherdata['data']['principal'] . '
                                 </td>
                             </tr>
@@ -2377,7 +2384,7 @@ class ExamindividualPdfController extends Controller
                                 <td colspan="1" style="text-align: left; height: 40px; width:5%;border: 2px solid black;">
                                     担<br>任
                                 </td>
-                                <td colspan="1" style="text-align: left; height: 40px; border: 2px solid black;">
+                                <td colspan="1" style="text-align: center; height: 40px; border: 2px solid black;">
                                     ' . $getteacherdata['data']['teacher'] . '
                                 </td>
                             </tr>
