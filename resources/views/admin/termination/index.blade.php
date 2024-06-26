@@ -1,6 +1,7 @@
 @extends('layouts.admin-layout')
 @section('title',' ' . __('messages.termination') . '')
 @section('component_css')
+<link href="{{ asset('libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
@@ -16,6 +17,7 @@
 <link rel="stylesheet" href="{{ asset('mobile-country/css/intlTelInput.css') }}">
 <link href="{{ asset('css/custom/pagehead_breadcrumb.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/custom/collapse.css') }}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{{ asset('country/css/countrySelect.css') }}">
 @endsection
 @section('content')
 <style>
@@ -91,18 +93,18 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-            <ul class="nav nav-tabs" style="display: inline-block;">
+                <ul class="nav nav-tabs" style="display: inline-block;">
                     <li class="nav-item d-flex justify-content-between align-items-center">
-                    <h4 class="nav-link">{{ __('messages.select_ground') }}
+                        <h4 class="nav-link">{{ __('messages.select_ground') }}
                             <h4>
                                 <!-- Up and Down Arrows -->
                                 <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
                                     <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
                          background: white; color: blue;width: 25px;padding:-1px"></i></b>
                                 </button>
-                            </li>
-                        </ul>             
-              
+                    </li>
+                </ul>
+
                 <div class="card-body collapse show">
                     <form id="applicationFilter" autocomplete="off">
                         <div class="row">
@@ -153,20 +155,20 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-            <ul class="nav nav-tabs" style="display: inline-block;">
+                <ul class="nav nav-tabs" style="display: inline-block;">
                     <li class="nav-item d-flex justify-content-between align-items-center">
-                                <!-- Button placed on the left side -->
-                                <h4 class="navv">
-                                {{ __('messages.termination_list') }}
-                                </h4>
-                                <!-- Up and Down Arrows -->
-                                <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
-                                    <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
+                        <!-- Button placed on the left side -->
+                        <h4 class="navv">
+                            {{ __('messages.termination_list') }}
+                        </h4>
+                        <!-- Up and Down Arrows -->
+                        <button class="btn btn-link collapse-button" type="button" id="collapseButton1" aria-expanded="true" aria-controls="toDoList">
+                            <b><i class="mdi mdi-chevron-up rounded-circle" style="font-size: 14px; border: 1px solid white; 
                          background: white; color: blue;width: 25px;padding:-1px"></i></b>
-                                </button>
-                            </li>
-                        </ul>
-             
+                        </button>
+                    </li>
+                </ul>
+
                 <div class="card-body collapse show">
                     <div class="row">
                         <div class="col-sm-12">
@@ -207,17 +209,21 @@
 
 @endsection
 @section('scripts')
+<script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
+
 <!-- plugin js -->
 <script src="{{ asset('libs/moment/min/moment.min.js') }}"></script>
 <script src="{{ asset('datatable/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('datatable/js/dataTables.bootstrap4.min.js') }}"></script>
-<!-- <script src="{{ asset('js/custom/select2.min.js')}}"></script> -->
+
 <script src="{{ asset('sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('toastr/toastr.min.js') }}"></script>
 <script src="{{ asset('date-picker/jquery-ui.js') }}"></script>
 <script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
+<script src="{{ asset('country/js/countrySelect.js') }}"></script>
 <script>
     toastr.options.preventDuplicates = true;
+
     var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
 
@@ -234,43 +240,41 @@
 </script>
 <!-- button js added -->
 <script>
-  function initializeIntlTelInput(inputSelector) {
-    var input = document.querySelector(inputSelector);
-    var iti = intlTelInput(input, {
-        allowExtensions: true,
-        autoFormat: false,
-        autoHideDialCode: false,
-        autoPlaceholder: false,
-        initialCountry: "auto",
-        ipinfoToken: "yolo",
-        nationalMode: false,
-        numberType: "MOBILE",
-        preventInvalidNumbers: true,
-        // utilsScript: "js/utils.js" // Uncomment if you have the utils script
-    });
+    function initializeIntlTelInput(inputSelector) {
+        var input = document.querySelector(inputSelector);
+        var iti = intlTelInput(input, {
+            allowExtensions: true,
+            autoFormat: false,
+            autoHideDialCode: false,
+            autoPlaceholder: false,
+            initialCountry: "auto",
+            ipinfoToken: "yolo",
+            nationalMode: false,
+            numberType: "MOBILE",
+            preventInvalidNumbers: true,
+            // utilsScript: "js/utils.js" // Uncomment if you have the utils script
+        });
 
-    // Trigger click on flag container to show the dropdown
-    var flagContainer = input.parentNode.querySelector('.iti__flag-container');
-    if (flagContainer) {
-        flagContainer.click();
-    }
-
-    // Add event listener to open flag dropdown on input field focus
-    input.addEventListener('focus', function() {
+        // Trigger click on flag container to show the dropdown
+        var flagContainer = input.parentNode.querySelector('.iti__flag-container');
         if (flagContainer) {
             flagContainer.click();
         }
+
+        // Add event listener to open flag dropdown on input field focus
+        input.addEventListener('focus', function() {
+            if (flagContainer) {
+                flagContainer.click();
+            }
+        });
+
+        return iti;
+    }
+
+    $(document).ready(function() {
+        initializeIntlTelInput("#transfer_destination_tel");
+        initializeIntlTelInput("#parent_phone_number_after_transfer");
     });
-
-    return iti;
-}
-
-$(document).ready(function() {
-    initializeIntlTelInput("#transfer_destination_tel");
-    initializeIntlTelInput("#parent_phone_number_after_transfer");
-});
-
-
 </script>
 <script src="{{ asset('buttons-datatables/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('buttons-datatables/jszip.min.js') }}"></script>

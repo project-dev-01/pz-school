@@ -433,7 +433,7 @@ var email_lang = "{{ __('messages.email') }}";
         //     getNotifications();
         // }, 2000);
 
-        /*var sTimeOut = setInterval(function() {
+        var sTimeOut = setInterval(function() {
             $.ajax({
                 type: 'GET',
                 url: allLogout,
@@ -474,7 +474,7 @@ var email_lang = "{{ __('messages.email') }}";
                     // window.location.href =loginurl;
                 }
             });
-        }, 10000);*/
+        }, 10000);
         if (get_roll_id == '4' || get_roll_id == '5') {
             var sTimeOutq = setInterval(function() {
 
