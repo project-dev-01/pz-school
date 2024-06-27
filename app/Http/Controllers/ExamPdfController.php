@@ -237,11 +237,11 @@ class ExamPdfController extends Controller
 			<h4 style="margin: 0;">' . $number . '</h4>
 			</td>       
 			<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; text-align: left;">
-					<h5 style="margin: 0;margin-top:-42px;">EC-Class</h5>
+					<h5 style="margin: 0;margin-top:-30px;">EC-Class</h5>
 			<h4 style="margin: 0;">' . $ec_classname . '</h4>
 			</td>       
 			<td class="content-wrap aligncenter" style="margin: 0; padding: 10px; text-align: left;">
-					<h5 style="margin: 0;margin-top:-42px;">Level</h5>
+					<h5 style="margin: 0;margin-top:-30px;">Level</h5>
 			<h4 style="margin: 0;">' . $levelname . '</h4>
 			</td>
 			</tr> 
@@ -337,7 +337,7 @@ class ExamPdfController extends Controller
 					<td class="content-wrap aligncenter" colspan="3" style="margin: 0; padding-left: 20px;padding-right: 20px;padding-top:-10px; text-align: center;">
 					
 					<!-- Teacher`s Comments -->
-					<table style="margin-top: 40px; border-collapse: collapse; width: 100%;">
+					<table style="margin-top: 30px; border-collapse: collapse; width: 100%;">
 					<tbody>
 					<tr>
 					<td colspan="2"
@@ -616,7 +616,7 @@ class ExamPdfController extends Controller
 						<tbody>
 						<tr>
 						<td style="vertical-align: top; text-align: left; border-right:hidden;height: 60px;">氏名</td>
-						<td style="vertical-align: inherit;text-align:center; height: 60px;">' . $stu['name'] . '</td>
+						<td style="vertical-align: inherit;text-align:center; height: 60px;width:50%;">' . $stu['name'] . '</td>
 						<td style="vertical-align: top; text-align: left; border-left:hidden;height: 60px;"></td>
 						</tr>
 						</tbody>
@@ -1029,7 +1029,7 @@ class ExamPdfController extends Controller
 											<tbody>
 												<tr>
 													<td style="vertical-align: top; text-align: left; border-right:hidden;height: 60px;">氏名</td>
-													<td style="vertical-align: inherit;text-align:center; height: 60px;font-size:20px;">' . $stu['name'] . '</td>
+													<td style="vertical-align: inherit;text-align:center; height: 60px;font-size:20px;width:50%;">' . $stu['name'] . '</td>
 												    <td style="vertical-align: top; text-align: left; border-left:hidden;height: 60px;"></td>
 												</tr>
 											</tbody>
@@ -1525,7 +1525,7 @@ class ExamPdfController extends Controller
 											<tbody>
 												<tr>
 													<td style="margin: 0px;vertical-align: top;text-align: left; border-right:hidden;height: 60px;">氏名</td>
-													<td style="vertical-align: inherit;font-size:20px;text-align:center; height: 60px;">' . $stu['name'] . '</td>
+													<td style="vertical-align: inherit;font-size:20px;text-align:center; height: 60px;width:50%;">' . $stu['name'] . '</td>
 													<td style="vertical-align: top; text-align: left; border-left:hidden;height: 60px;"></td>
 												</tr>
 											</tbody>
