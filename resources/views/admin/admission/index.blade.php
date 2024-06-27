@@ -357,7 +357,7 @@
                             <div class="col-md-12">
                                 <div class="col-lg-3">
                                     <div class="mt-3">
-                                        <input type="file" class="dropify-im" name="photo" id="photo" data-max-file-size="2M" data-plugins="dropify" data-default-file="{{ config('constants.image_url').'/common-asset/images/700x500.png' }}" />
+                                        <input type="file" class="dropify-im" name="photo" id="photo" data-max-file-size="10M" data-plugins="dropify" data-default-file="{{ config('constants.image_url').'/common-asset/images/700x500.png' }}" />
                                         <p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
                                     </div>
                                 </div>

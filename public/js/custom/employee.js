@@ -97,8 +97,8 @@ $(function () {
     $('#passport_photo').change(function () {
         // var i = $(this).prev('label').clone();
         var file = $('#passport_photo')[0].files[0];
-        if (file.size > 2097152) {
-            $('#passport_photo_name').text("File greater than 2Mb");
+        if (file.size > 10485760) { // 10MB = 10 * 1024 * 1024 bytes
+            $('#passport_photo_name').text("File greater than 10Mb");
             $("#passport_photo_name").addClass("error");
             $('#passport_photo').val('');
         } else {
@@ -110,8 +110,8 @@ $(function () {
     $('#visa_photo').change(function () {
         // var i = $(this).prev('label').clone();
         var file = $('#visa_photo')[0].files[0];
-        if (file.size > 2097152) {
-            $('#visa_photo_name').text("File greater than 2Mb");
+        if (file.size > 10485760) { // 10MB = 10 * 1024 * 1024 bytes
+            $('#visa_photo_name').text("File greater than 10Mb");
             $("#visa_photo_name").addClass("error");
             $('#visa_photo').val('');
         } else {

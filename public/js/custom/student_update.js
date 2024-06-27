@@ -58,8 +58,8 @@ $(function () {
     $('#passport_photo').change(function() {
         // var i = $(this).prev('label').clone();
         var file = $('#passport_photo')[0].files[0];
-        if(file.size > 2097152) {
-            $('#passport_photo_name').text("File greater than 2Mb");
+        if(file.size > 10485760) { // 10MB = 10 * 1024 * 1024 bytes
+            $('#passport_photo_name').text("File greater than 4Mb");
             $("#passport_photo_name").addClass("error");
             $('#passport_photo').val('');
         } else {
@@ -71,8 +71,8 @@ $(function () {
     $('#visa_photo').change(function() {
         // var i = $(this).prev('label').clone();
         var file = $('#visa_photo')[0].files[0];
-        if(file.size > 2097152) {
-            $('#visa_photo_name').text("File greater than 2Mb");
+        if(file.size > 10485760) { // 10MB = 10 * 1024 * 1024 bytes
+            $('#visa_photo_name').text("File greater than 4Mb");
             $("#visa_photo_name").addClass("error");
             $('#visa_photo').val('');
         } else {
@@ -83,8 +83,8 @@ $(function () {
     $('#nric_photo').change(function() {
         // var i = $(this).prev('label').clone();
         var file = $('#nric_photo')[0].files[0];
-        if(file.size > 2097152) {
-            $('#nric_photo_name').text("File greater than 2Mb");
+        if(file.size > 10485760) { // 10MB = 10 * 1024 * 1024 bytes
+            $('#nric_photo_name').text("File greater than 4Mb");
             $("#nric_photo_name").addClass("error");
             $('#nric_photo').val('');
         } else {
@@ -95,8 +95,8 @@ $(function () {
     $('#japanese_association_membership_image_principal').change(function() {
         // var i = $(this).prev('label').clone();
         var file = $('#japanese_association_membership_image_principal')[0].files[0];
-        if(file.size > 2097152) {
-            $('#japanese_association_membership_image_principal_name').text("File greater than 2Mb");
+        if(file.size > 10485760) { // 10MB = 10 * 1024 * 1024 bytes
+            $('#japanese_association_membership_image_principal_name').text("File greater than 4Mb");
             $("#japanese_association_membership_image_principal_name").addClass("error");
             $('#japanese_association_membership_image_principal').val('');
         } else {

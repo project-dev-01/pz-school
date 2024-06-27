@@ -47,8 +47,8 @@ $(function () {
     $('#photo').change(function() {
         // var i = $(this).prev('label').clone();
         var file = $('#photo')[0].files[0];
-        if(file.size > 2097152) {
-            $('#photo_name').text("File greater than 2Mb");
+        if(file.size > 10485760) { // 10MB = 10 * 1024 * 1024 bytes
+            $('#photo_name').text("File greater than 10Mb");
             $("#photo_name").addClass("error");
             $('#photo').val('');
         } else {
@@ -59,8 +59,8 @@ $(function () {
     $('#edit_photo').change(function() {
         // var i = $(this).prev('label').clone();
         var file = $('#edit_photo')[0].files[0];
-        if(file.size > 2097152) {
-            $('#edit_photo_name').text("File greater than 2Mb");
+        if(file.size > 10485760) { // 10MB = 10 * 1024 * 1024 bytes
+            $('#edit_photo_name').text("File greater than 10Mb");
             $("#edit_photo_name").addClass("error");
             $('#edit_photo').val('');
         } else {

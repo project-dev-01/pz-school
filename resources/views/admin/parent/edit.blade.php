@@ -486,7 +486,7 @@
 											<div class="col-lg-3">
 												<div class="mt-3">
 													<input type="hidden" name="old_photo" id="oldPhoto" value="{{ isset($parent['photo']) ? $parent['photo'] : ''}}" />
-													<input type="file" name="photo" id="photo" class="dropify-im" data-max-file-size="2M" data-plugins="dropify" data-default-file="{{ isset($parent['photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['photo'] ? config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['photo'] : config('constants.image_url').'/common-asset/images/users/default.jpg' }}" />
+													<input type="file" name="photo" id="photo" class="dropify-im" data-max-file-size="10M" data-plugins="dropify" data-default-file="{{ isset($parent['photo']) && config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['photo'] ? config('constants.image_url').'/'.config('constants.branch_id').'/users/images/'.$parent['photo'] : config('constants.image_url').'/common-asset/images/users/default.jpg' }}" />
 													<p class="text-muted text-center mt-2 mb-0">{{ __('messages.photo') }}</p>
 													</div>
 												</div>

@@ -15,8 +15,8 @@ $(function () {
         // var i = $(this).prev('label').clone();
         var file = $('#homework_file')[0].files[0];
         // var size = $('#homework_file')[0].files[0].size;
-        if (file.size > 2097152) {
-            $('#file_name').text("File greater than 2Mb");
+        if (file.size > 10485760) { // 10MB = 10 * 1024 * 1024 bytes
+            $('#file_name').text("File greater than 10Mb");
             $("#file_name").addClass("error");
             $('#homework_file').val('');
         } else {
@@ -29,8 +29,8 @@ $(function () {
     //     // var i = $(this).prev('label').clone();
     //     var file = $(this)[0].files[0];
     //     // var size = $('#homework_file')[0].files[0].size;
-    //     if(file.size > 2097152) {
-    //         $(this).parent().text("File greater than 2Mb");
+    //     if(file.size > 10485760) { // 10MB = 10 * 1024 * 1024 bytes
+    //         $(this).parent().text("File greater than 10Mb");
     //         $(this).parent().addClass("error");
     //         $('#homework_file').val('');
     //     } else {
@@ -68,8 +68,8 @@ $(function () {
     $(document).on('change', '.homework_file', function () {
         console.log(12343333)
         var file = $(this)[0].files[0];
-        if (file.size > 2097152) {
-            toastr.error("File greater than 2Mb");
+        if (file.size > 10485760) { // 10MB = 10 * 1024 * 1024 bytes
+            toastr.error("File greater than 10Mb");
             $(this).val('');
         }
     });
