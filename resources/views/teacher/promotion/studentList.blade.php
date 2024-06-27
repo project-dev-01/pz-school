@@ -198,25 +198,14 @@
 					<form id="promoteStudentListForm" method="post" action="" autocomplete="off">
 						<div class="card-body collapse show">
 							<div class="row">
-								<!-- <div class="col-md-3">
-									<div class="form-group">
-										<label for="promote_list_department_id">{{ __('messages.department') }}<span class="text-danger">*</span></label>
-										<select id="promote_list_department_id" name="promote_list_department_id" class="form-control">
-										   <option value="All">{{ __('messages.all') }}</option>
-												@forelse($department as $r)
-												<option value="{{$r['id']}}">{{$r['name']}}</option>
-												@empty
-												@endforelse
-										</select>
-									</div>
-								</div> -->
+								
 								<div class="col-md-3">
 									<div class="form-group">
 										<label for="promoteListClassID">{{ __('messages.grade') }}<span class="text-danger">*</span></label>
 										<select id="promoteListClassID" class="form-control" name="promote_list_class_id">
 											<option value="All">{{ __('messages.all') }}</option>
 											@forelse($teacher_class as $cla)
-											<option value="{{$cla['class_id']}}">{{$cla['class_name']}}</option>
+											<option value="{{$cla['id']}}">{{$cla['name']}}</option>
 											@empty
 											@endforelse
 										</select>
