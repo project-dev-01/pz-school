@@ -13,6 +13,9 @@
 <link rel="stylesheet" href="{{ asset('sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
 <link href="{{ asset('css/custom/buttonresponsive.css') }}" rel="stylesheet" type="text/css" />
+<style>
+    svg {height:16px;width:15px;}
+    </style>
 @endsection
 @section('content')
 <!-- Start Content-->

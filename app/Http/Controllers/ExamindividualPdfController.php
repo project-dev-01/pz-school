@@ -3042,11 +3042,8 @@ class ExamindividualPdfController extends Controller
 		return $this->commonHelper->generatePdf($customPaper, $output, $fileName);
 		//return $pdf->download($fileName);
 		// return $pdf->stream();
-		$directory = public_path('barchart');
-		if(file_exists($directory)) {
-			// Attempt to delete files in the directory
-			File::deleteDirectory($directory);
-		} 
+		$directory = public_path('barchart');		
+		File::delete($directory);
 	}
 	public function generateBarChartSingle($labels, $data, $xTitle = 'Number of students', $yTitle = 'Mark range', $subject)
 	{
@@ -3055,6 +3052,10 @@ class ExamindividualPdfController extends Controller
 
 		// Define the directory and ensure it exists
 		$directory = public_path('barchart');
+		
+		if (!File::exists($directory)) {
+			File::makeDirectory($directory, 0755, true);
+		}
 		// if (!is_dir($directory)) {
 		// 	if (!mkdir($directory, 0777, true)) {
 		// 		throw new Exception("Failed to create directory: $directory");

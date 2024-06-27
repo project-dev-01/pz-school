@@ -3996,7 +3996,8 @@ class ExamPdfController1 extends Controller
 
 			// Delete the file after sending the response
 			File::delete($zipFilePath);
-
+			$directory = public_path('barchart');		
+			File::delete($directory);
 			// Return the response
 			return $response;
 			//return response()->download($zipFilePath)->deleteFileAfterSend(true);
@@ -4748,6 +4749,9 @@ class ExamPdfController1 extends Controller
 
 		// Define the directory and ensure it exists
 		$directory = public_path('barchart');
+		if (!File::exists($directory)) {
+			File::makeDirectory($directory, 0755, true);
+		}
 		// if (!is_dir($directory)) {
 		// 	if (!mkdir($directory, 0777, true)) {
 		// 		throw new Exception("Failed to create directory: $directory");

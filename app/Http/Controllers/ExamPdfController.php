@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use App\Helpers\CommonHelper;
-
+use Illuminate\Support\Facades\File;
 use DateTime;
 use DateInterval;
 use DatePeriod;
@@ -3070,10 +3070,8 @@ class ExamPdfController extends Controller
 		$headers['Content-Disposition'] = 'attachment; filename="' . rawurlencode($fileName)  . '"';
 		return response($pdfContent)->withHeaders($headers);
 
-		$directory = public_path('barchart');
-		if (is_dir($directory)) {
-			rmdir($directory);
-		} 
+		$directory = public_path('barchart');		
+		File::delete($directory);
 	}
 	public function downprimaryform1($id)
 	{
@@ -4993,6 +4991,10 @@ class ExamPdfController extends Controller
 
 		// Define the directory and ensure it exists
 		$directory = public_path('barchart');
+		
+		if (!File::exists($directory)) {
+			File::makeDirectory($directory, 0755, true);
+		}
 		// if (!is_dir($directory)) {
 		// 	if (!mkdir($directory, 0777, true)) {
 		// 		throw new Exception("Failed to create directory: $directory");
