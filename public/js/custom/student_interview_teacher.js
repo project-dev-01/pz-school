@@ -241,7 +241,7 @@ console.log(formData);
                     render: function (data, type, row) {
                         // Add edit and delete buttons
                         return '<div class="button-list">' +
-                        '<a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light" data-id="' + row.id + '"  id="editCommentCBtn"><i class="fe-eye"></i></a>' +
+                        '<a href="javascript:void(0)" class="btn btn-blue btn-sm waves-effect waves-light" data-id="' + row.student_interviewId + '"  id="editCommentCBtn"><i class="fe-eye"></i></a>' +
                         '<a href="javascript:void(0)" class="btn btn-green btn-sm waves-effect waves-light" data-id="' + row.student_interviewId + '" data-type="' + row.type + '" id="addCommentBtn"><i class="fe-plus"></i></a>' +
                         '</div>';
 
