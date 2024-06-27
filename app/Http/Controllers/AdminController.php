@@ -5836,6 +5836,8 @@ class AdminController extends Controller
 
     public function updateParentInfo(Request $request)
     {
+        // Add the first URL variable to the request
+        $request->merge(['url' => url('/')]);
         // dd($request);
         $response = Helper::PostMethod(config('constants.api.parent_update_info_update'), $request);
         // dd($response);
