@@ -451,7 +451,10 @@ class ExamPdfController1 extends Controller
 			$response = response($zipContent)->withHeaders($headers);
 
 			// Delete the file after sending the response
-			File::delete($zipFilePath);
+			//File::delete($zipFilePath);
+			if (File::exists($storagePath)) {
+				File::deleteDirectory($storagePath,true);
+			}
 
 			// Return the response
 			return $response;
@@ -3288,7 +3291,10 @@ class ExamPdfController1 extends Controller
 			$response = response($zipContent)->withHeaders($headers);
 
 			// Delete the file after sending the response
-			File::delete($zipFilePath);
+			//File::delete($zipFilePath);
+			if (File::exists($storagePath)) {
+				File::deleteDirectory($storagePath,true);
+			}
 
 			// Return the response
 			return $response;
@@ -3992,12 +3998,16 @@ class ExamPdfController1 extends Controller
 			];
 
 			// Return the response with headers and delete the file after sending
-			$response = response($zipContent)->withHeaders($headers);
-
-			// Delete the file after sending the response
-			File::delete($zipFilePath);
-			$directory = public_path('barchart');		
-			File::delete($directory);
+			$response = response($zipContent)->withHeaders($headers);			
+			
+			$storagePath1 = storage_path('app/public/barchart');	
+			if (File::exists($storagePath1)) {
+				File::deleteDirectory($storagePath1,true);
+			}
+			if (File::exists($storagePath)) {
+				File::deleteDirectory($storagePath,true);
+			}
+			
 			// Return the response
 			return $response;
 			//return response()->download($zipFilePath)->deleteFileAfterSend(true);
@@ -4748,9 +4758,11 @@ class ExamPdfController1 extends Controller
 		require_once public_path('jpgraph-4.4.2/src/jpgraph_bar.php');
 
 		// Define the directory and ensure it exists
-		$directory = public_path('barchart');
-		if (!File::exists($directory)) {
-			File::makeDirectory($directory, 0755, true);
+		$storagePath = storage_path('app/public/barchart');
+
+		// Ensure the storage directory exists
+		if (!File::exists($storagePath)) {
+			File::makeDirectory($storagePath, 0755, true);
 		}
 		// if (!is_dir($directory)) {
 		// 	if (!mkdir($directory, 0777, true)) {
@@ -4766,7 +4778,7 @@ class ExamPdfController1 extends Controller
 		// Create a unique file name using the subject and current timestamp
 		$timestamp = time();
 		$fileName = $subject . '_' . $timestamp . '.png';
-		$filePath = $directory . '/' . $fileName;
+		$filePath = $storagePath . '/' . $fileName;
 
 		// Create the graph
 		$graph = new \Graph(600, 400, 'auto');

@@ -656,21 +656,48 @@ $(function () {
                     var markbtn = (item['oldmark']['grade'] != '' && item['oldmark']['grade'] != item['F']) ? 'danger' : 'success';
                     var markmsg = (item['oldmark']['grade'] != '') ? 'Previous Data : ' + item['oldmark']['grade'] : 'New Data';
                     if (item['oldmark']['point_grade'] == '') {
-                        // misdata++;
-                        var markmsg = 'Wrong Data';
-                        var markbtn = 'danger';
+                         misdata++;
+                        var markmsg = 'Wrong Points Data. Enter standard Points value like Improving,Satisfactory,Excellent';
+                        var markbtn = 'warning';
                     }
 
                 }
                 else if (item['E'] == 'Freetext') {
-                    var markbtn = (item['oldmark']['freetext'] != '' && item['oldmark']['freetext'] != item['F']) ? 'danger' : 'success';
-                    var markmsg = (item['oldmark']['freetext'] != '') ? 'Previous Data : ' + item['oldmark']['freetext'] : 'New Data';
-
+                    if(item['F'].length>max_freetext)
+                    {   
+                        misdata++;
+                        var markbtn =  'warning';
+                        var markmsg =  "Your Text limit exceeded(Maximum "+ max_freetext +" characters allowed). The string contains " + item['F'].length + " characters.";
+                    
+                    }
+                    else
+                    {
+                        var markbtn = (item['oldmark']['freetext'] != '' && item['oldmark']['freetext'] != item['F']) ? 'danger' : 'success';
+                        var markmsg = (item['oldmark']['freetext'] != '') ? 'Previous Data : ' + item['oldmark']['freetext'] : 'New Data';
+                    }
                 }
-                else {
-                    var markbtn = (item['oldmark']['score'] != '' && item['oldmark']['score'] != item['F']) ? 'danger' : 'success';
-                    var markmsg = (item['oldmark']['score'] != '') ? 'Previous Data : ' + item['oldmark']['score'] : 'New Data';
+                else 
+                {
+                    var threeDigitNumericPattern = /^\d{1,3}$/;
 
+                    if (!threeDigitNumericPattern.test(item['F'])) 
+                    {
+                        misdata++;
+                        var markbtn =  'warning';
+                        var markmsg =  "Mark is invalid. Please enter a numeric value up to 3 digits.";
+                    
+                    }
+                    else if(parseInt(item['F'])>parseInt(max_scoremark))
+                    {
+                        misdata++;
+                        var markbtn =  'warning';
+                        var markmsg =  "Mark is invalid. Maximum mark is "+max_scoremark;
+                    }
+                    else
+                    { 
+                        var markbtn = (item['oldmark']['score'] != '' && item['oldmark']['score'] != item['F']) ? 'danger' : 'success';
+                        var markmsg = (item['oldmark']['score'] != '') ? 'Previous Data : ' + item['oldmark']['score'] : 'New Data';
+                    }
                 }
                 var statusToLower = (item['G'] != '') ? item['G'].toLowerCase() : '';
                 var mark = (statusToLower == 'a') ? '0' : ((item['G'] != '') ? item['F'] : '');
@@ -687,9 +714,11 @@ $(function () {
 
         if (misdata == 0) {
             $('#save_modelbtn').show();
+            $('#submit_alert').html('');
         }
         else {
             $('#save_modelbtn').hide();
+            $('#submit_alert').html('<h4 class="text-warning"> Wrong Input data in this csv file. Please Update Correct mark data.</h4>');
         }
 
     }

@@ -1,0 +1,642 @@
+[2024-06-28 19:51:48] local.ERROR: HTTP request failed to http://localhost/paxsuzen-api-dev/public/api/get_today_schedules_teacher {"url":"http://localhost/paxsuzen-api-dev/public/api/get_today_schedules_teacher","body":{"login_id":4066,"teacher_id":5,"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiY2RjNzNkNzk3ZGE3Njc3MWEyYjI5ZGM4YzUxZDJlZjg2NDJlNDk4YzUzMTMzYWFiNWU3MWFjMDNhMGU4M2U0OGY3YjZlNjIwYWY1MTc3ZDciLCJpYXQiOjE3MTk1NjgwODcuODU1NjI3LCJuYmYiOjE3MTk1NjgwODcuODU1NjM5LCJleHAiOjE3NTExMDQwODcuNzYyMDcyLCJzdWIiOiI0MDY2Iiwic2NvcGVzIjpbXX0.bq3MdO3vWx1HOvOq6GlTbcl6Fd7VZOon_xgUkqrxWMrqZq74qW4QVDnj2RaeW61dM55sUbcGcUG2kauxVVrL9d9cFrNF86MnTLQLjqolHGQh7A_n5_d03FoiTJpXRXYcbrQRKw0fWGwAgX8WNLH0JigN6tnVHOwjlUCSyFHz7BYGHn2u36gWPR-jRQQl3QO-9hGBrGdx4XrW6d8Ro_sdtD_j7q1KfjJSdQkcT8C2ndopVoPmPgE9mfffE0Mwugw_22PtelefL4d5P2NVUCwOb9X4FDyQS0HInUrwxXqF8wZeUt-A9fZa4_pVEYBsb94GZOqz4n32EuYlmyaApyRYFs-9kMJy2iqG7gpo8Kbtsvig0DIIHm-_YcxW8lP22wvbKZeK7C5Kp8dgzmYWINXRifPpMANjUWYeoFbgd4RB5UsdYWY5NqMexyHH9wO_oowXIAza-3P9NIQq79FJn98p0YN7SCD7eOCTaUGJO_NToXxwu33CVFN9VKX6eh37jnOI15UqgxbQm1pJB5vZn8OCA5zPyo1nXuwJhrYyATTbV9DYysvoakFUjjDg1dfZjY17oz8PmU405na3UA0jITD4oOpkNYzIPy5mfLpsQBMRNPNQt6ajqmZa3OmHOw7Dtoovi7hyJhWwxhlkWZNNul0qH0cD4uHi2swvcy0sm6Tg1PU","branch_id":5,"name_status":""},"error":"<!DOCTYPE html>
+
+<html lang=\"en\">
+
+
+
+<head>
+
+    <meta charset=\"utf-8\" />
+
+    <title>500</title>
+
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+
+    <meta name=\"description\" content=\"To learn as much as I can, attain good grades and advance my education further. I believe that self-motivation and a strict routine has helped me achieve my goals so far, and I will use the same method in the future.\">
+
+    <meta name=\"keywords\" content=\"Paxsuzen School, education, future leaders, curriculum\">
+
+    <meta content=\"Paxsuzen\" name=\"author\" />
+
+    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+
+    <!-- CSRF Token -->
+
+    <meta name=\"csrf-token\" content=\"tgEHCdkjjgIrf4907gzzjIIH2NuAS1DtcQLgJuZY\" />
+
+    <!-- App favicon -->
+
+    <link rel=\"shortcut icon\" href=\"http://localhost/paxsuzen-api-dev/public/common-asset/images/favicon.ico\">
+
+    <!-- App css -->
+
+    <link href=\"http://localhost/school-management-system/public/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"bs-default-stylesheet\" />
+
+    <link href=\"http://localhost/school-management-system/public/css/app.min.css\" rel=\"stylesheet\" type=\"text/css\" id=\"app-default-stylesheet\" />
+
+    <!-- icons -->
+
+    <link href=\"http://localhost/school-management-system/public/css/icons.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/school-management-system/public/css/custom-minified/admin_login.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/school-management-system/public/css/custom-minified/opensans-font.min.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+    <link href=\"http://localhost/school-management-system/public/css/custom/errorpage.css\" rel=\"stylesheet\" type=\"text/css\" />
+
+</head>
+
+
+
+<body class=\"loading auth-fluid-pages pb-0\">
+
+
+
+    <div class=\"auth-fluid\">
+
+        <!--Auth fluid left content -->
+
+        <div class=\"col-md-6\" style=\"background: #F4F7FC;\">
+
+            <div class=\"align-items-center d-flex h-100\">
+
+                <div class=\"card-body\">
+
+\t\t\t\t<div class=\"auth-brand text-center text-lg-left\">
+
+                            <div class=\"auth-logo\">
+
+                                <div class=\"auth-logo\">
+
+                                    <a href=\"\" class=\"logo logo-dark\">
+
+                                        <span class=\"logo-lg\">
+
+                                            <img src=\"http://localhost/paxsuzen-api-dev/public/common-asset/images/Suzen-app-logo.png\" alt=\"\" height=\"60px\">
+
+                                        </span>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <div class=\"responsive\">
+
+                        <h1 class=\"eoppps\">Internal Server<br> Error</h1>
+
+                        <p class=\"etext\">We currently having an internal problem with our<br> server. This might take a while.</p>
+
+                                                <a href=\"javascript:void(0);\" onclick=\"event.preventDefault(); document.getElementById('logout-form').submit();\">
+
+                            <span>Go to Home</span>
+
+                        </a>
+
+                                                <form id=\"logout-form\" action=\"http://localhost/school-management-system/public/admin/logout\" method=\"POST\" class=\"d-none\">
+
+                            <input type=\"hidden\" name=\"_token\" value=\"tgEHCdkjjgIrf4907gzzjIIH2NuAS1DtcQLgJuZY\" autocomplete=\"off\">                        </form>
+
+                                                                    </div>
+
+                </div> <!-- end .card-body -->
+
+            </div> <!-- end .align-items-center.d-flex.h-100-->
+
+        </div>
+
+        <!-- end auth-fluid-form-box-->
+
+
+
+        <!-- Auth fluid right content -->
+
+        <div class=\"col-md-6\">
+
+                <img src=\"http://localhost/school-management-system/public/images/error500.jpg\" class=\"bg-image-content\">
+
+        </div>
+
+        <!-- end Auth fluid right content -->
+
+    </div>
+
+    <!-- end auth-fluid-->
+
+
+
+    <!-- Vendor js -->
+
+    <script src=\"http://localhost/school-management-system/public/js/vendor.min.js\"></script>
+
+    <script type=\"text/javascript\">
+
+        $.ajaxSetup({
+
+            headers: {
+
+                'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')
+
+            }
+
+        });
+
+    </script>
+
+
+
+    <!-- App js -->
+
+    <script src=\"http://localhost/school-management-system/public/js/app.min.js\"></script>
+
+    <script>window.UserHelpPublicProjectID=\"Y7YyGqyq2\"</script>
+
+        <script src=\"https://run.userhelp.co\" async></script>
+
+
+
+</body>
+
+
+
+</html>"} 
+[2024-06-28 19:55:15] local.ERROR: HTTP request failed to  {"url":"","body":{"login_id":null,"teacher_id":null,"token":null,"branch_id":null,"name_status":null},"error":"cURL error 3: URL rejected: Malformed input to a URL function (see https://curl.haxx.se/libcurl/c/libcurl-errors.html)"} 
+[2024-06-28 19:55:55] local.ERROR: The file "C:\xampp\htdocs\school-management-system\database\maxmind/GeoLite2-City.mmdb" does not exist or is not readable.  
+[2024-06-28 19:55:55] local.ERROR: The file "C:\xampp\htdocs\school-management-system\database\maxmind/GeoLite2-City.mmdb" does not exist or is not readable. {"exception":"[object] (InvalidArgumentException(code: 0): The file \"C:\\xampp\\htdocs\\school-management-system\\database\\maxmind/GeoLite2-City.mmdb\" does not exist or is not readable. at C:\\xampp\\htdocs\\school-management-system\\vendor\\maxmind-db\\reader\\src\\MaxMind\\Db\\Reader.php:85)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\school-management-system\\vendor\\geoip2\\geoip2\\src\\Database\\Reader.php(76): MaxMind\\Db\\Reader->__construct('C:\\\\xampp\\\\htdocs...')
+#1 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(163): GeoIp2\\Database\\Reader->__construct('C:\\\\xampp\\\\htdocs...')
+#2 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(141): Stevebauman\\Location\\Drivers\\MaxMind->newReader('C:\\\\xampp\\\\htdocs...')
+#3 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(108): Stevebauman\\Location\\Drivers\\MaxMind->fetchLocation('::1')
+#4 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php(741): Stevebauman\\Location\\Drivers\\MaxMind->Stevebauman\\Location\\Drivers\\{closure}()
+#5 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(107): rescue(Object(Closure), false)
+#6 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(33): Stevebauman\\Location\\Drivers\\MaxMind->process(Object(Stevebauman\\Location\\LocationRequest))
+#7 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#8 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#9 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#10 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#11 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\LocationManager.php(72): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#12 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php(355): Stevebauman\\Location\\LocationManager->get('::1')
+#13 C:\\xampp\\htdocs\\school-management-system\\app\\Http\\Controllers\\AuthController.php(467): Illuminate\\Support\\Facades\\Facade::__callStatic('get', Array)
+#14 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php(54): App\\Http\\Controllers\\AuthController->authenticate(Object(Illuminate\\Http\\Request))
+#15 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction('authenticate', Array)
+#16 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(259): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\AuthController), 'authenticate')
+#17 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(205): Illuminate\\Routing\\Route->runController()
+#18 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(806): Illuminate\\Routing\\Route->run()
+#19 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(144): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#20 C:\\xampp\\htdocs\\school-management-system\\app\\Http\\Middleware\\LanguageManager.php(31): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): App\\Http\\Middleware\\LanguageManager->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#24 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#25 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\AuthenticateSession.php(41): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Session\\Middleware\\AuthenticateSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Middleware\\ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#29 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#30 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#31 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#32 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#37 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(805): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#39 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(784): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#40 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(748): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#41 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(737): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#42 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#43 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(144): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#44 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#49 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#56 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#57 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#58 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#59 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#60 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#61 C:\\xampp\\htdocs\\school-management-system\\public\\index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#62 {main}
+"} 
+[2024-06-28 19:57:14] local.ERROR: HTTP request failed to  {"url":"","body":{"login_id":null,"teacher_id":null,"token":null,"branch_id":null,"name_status":null},"error":"cURL error 3: URL rejected: Malformed input to a URL function (see https://curl.haxx.se/libcurl/c/libcurl-errors.html)"} 
+[2024-06-28 19:57:21] local.ERROR: The file "C:\xampp\htdocs\school-management-system\database\maxmind/GeoLite2-City.mmdb" does not exist or is not readable.  
+[2024-06-28 19:57:21] local.ERROR: The file "C:\xampp\htdocs\school-management-system\database\maxmind/GeoLite2-City.mmdb" does not exist or is not readable. {"exception":"[object] (InvalidArgumentException(code: 0): The file \"C:\\xampp\\htdocs\\school-management-system\\database\\maxmind/GeoLite2-City.mmdb\" does not exist or is not readable. at C:\\xampp\\htdocs\\school-management-system\\vendor\\maxmind-db\\reader\\src\\MaxMind\\Db\\Reader.php:85)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\school-management-system\\vendor\\geoip2\\geoip2\\src\\Database\\Reader.php(76): MaxMind\\Db\\Reader->__construct('C:\\\\xampp\\\\htdocs...')
+#1 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(163): GeoIp2\\Database\\Reader->__construct('C:\\\\xampp\\\\htdocs...')
+#2 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(141): Stevebauman\\Location\\Drivers\\MaxMind->newReader('C:\\\\xampp\\\\htdocs...')
+#3 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(108): Stevebauman\\Location\\Drivers\\MaxMind->fetchLocation('::1')
+#4 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php(741): Stevebauman\\Location\\Drivers\\MaxMind->Stevebauman\\Location\\Drivers\\{closure}()
+#5 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(107): rescue(Object(Closure), false)
+#6 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(33): Stevebauman\\Location\\Drivers\\MaxMind->process(Object(Stevebauman\\Location\\LocationRequest))
+#7 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#8 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#9 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#10 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#11 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\LocationManager.php(72): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#12 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php(355): Stevebauman\\Location\\LocationManager->get('::1')
+#13 C:\\xampp\\htdocs\\school-management-system\\app\\Http\\Controllers\\AuthController.php(467): Illuminate\\Support\\Facades\\Facade::__callStatic('get', Array)
+#14 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php(54): App\\Http\\Controllers\\AuthController->authenticate(Object(Illuminate\\Http\\Request))
+#15 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction('authenticate', Array)
+#16 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(259): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\AuthController), 'authenticate')
+#17 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(205): Illuminate\\Routing\\Route->runController()
+#18 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(806): Illuminate\\Routing\\Route->run()
+#19 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(144): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#20 C:\\xampp\\htdocs\\school-management-system\\app\\Http\\Middleware\\LanguageManager.php(31): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): App\\Http\\Middleware\\LanguageManager->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#24 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#25 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\AuthenticateSession.php(41): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Session\\Middleware\\AuthenticateSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Middleware\\ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#29 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#30 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#31 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#32 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#37 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(805): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#39 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(784): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#40 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(748): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#41 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(737): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#42 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#43 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(144): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#44 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#49 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#56 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#57 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#58 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#59 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#60 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#61 C:\\xampp\\htdocs\\school-management-system\\public\\index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#62 {main}
+"} 
+[2024-06-28 19:58:14] production.ERROR: No application encryption key has been specified.  
+[2024-06-28 19:58:14] production.ERROR: No application encryption key has been specified. {"exception":"[object] (Illuminate\\Encryption\\MissingAppKeyException(code: 0): No application encryption key has been specified. at C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php:79)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php(307): Illuminate\\Encryption\\EncryptionServiceProvider->Illuminate\\Encryption\\{closure}('')
+#1 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php(77): tap('', Object(Closure))
+#2 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php(60): Illuminate\\Encryption\\EncryptionServiceProvider->key(Array)
+#3 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php(32): Illuminate\\Encryption\\EncryptionServiceProvider->parseKey(Array)
+#4 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(908): Illuminate\\Encryption\\EncryptionServiceProvider->Illuminate\\Encryption\\{closure}(Object(Illuminate\\Foundation\\Application), Array)
+#5 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(795): Illuminate\\Container\\Container->build(Object(Closure))
+#6 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(961): Illuminate\\Container\\Container->resolve('encrypter', Array, true)
+#7 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(731): Illuminate\\Foundation\\Application->resolve('encrypter', Array)
+#8 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(946): Illuminate\\Container\\Container->make('encrypter', Array)
+#9 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(1066): Illuminate\\Foundation\\Application->make('encrypter')
+#10 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(982): Illuminate\\Container\\Container->resolveClass(Object(ReflectionParameter))
+#11 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(943): Illuminate\\Container\\Container->resolveDependencies(Array)
+#12 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(795): Illuminate\\Container\\Container->build('App\\\\Http\\\\Middle...')
+#13 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(961): Illuminate\\Container\\Container->resolve('App\\\\Http\\\\Middle...', Array, true)
+#14 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(731): Illuminate\\Foundation\\Application->resolve('App\\\\Http\\\\Middle...', Array)
+#15 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(946): Illuminate\\Container\\Container->make('App\\\\Http\\\\Middle...', Array)
+#16 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(172): Illuminate\\Foundation\\Application->make('App\\\\Http\\\\Middle...')
+#17 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#18 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(805): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#19 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(784): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#20 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(748): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#21 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(737): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#22 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#23 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(144): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#24 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#25 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#27 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#28 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#30 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#31 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#32 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#33 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#34 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#35 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#36 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#37 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#38 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#39 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#40 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#41 C:\\xampp\\htdocs\\school-management-system\\public\\index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#42 {main}
+"} 
+[2024-06-28 19:58:14] production.ERROR: No application encryption key has been specified.  
+[2024-06-28 19:58:14] production.ERROR: No application encryption key has been specified. {"exception":"[object] (Illuminate\\Encryption\\MissingAppKeyException(code: 0): No application encryption key has been specified. at C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php:79)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php(307): Illuminate\\Encryption\\EncryptionServiceProvider->Illuminate\\Encryption\\{closure}('')
+#1 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php(77): tap('', Object(Closure))
+#2 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php(60): Illuminate\\Encryption\\EncryptionServiceProvider->key(Array)
+#3 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Encryption\\EncryptionServiceProvider.php(32): Illuminate\\Encryption\\EncryptionServiceProvider->parseKey(Array)
+#4 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(908): Illuminate\\Encryption\\EncryptionServiceProvider->Illuminate\\Encryption\\{closure}(Object(Illuminate\\Foundation\\Application), Array)
+#5 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(795): Illuminate\\Container\\Container->build(Object(Closure))
+#6 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(961): Illuminate\\Container\\Container->resolve('encrypter', Array, true)
+#7 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(731): Illuminate\\Foundation\\Application->resolve('encrypter', Array)
+#8 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(946): Illuminate\\Container\\Container->make('encrypter', Array)
+#9 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(1066): Illuminate\\Foundation\\Application->make('encrypter')
+#10 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(982): Illuminate\\Container\\Container->resolveClass(Object(ReflectionParameter))
+#11 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(943): Illuminate\\Container\\Container->resolveDependencies(Array)
+#12 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(795): Illuminate\\Container\\Container->build('App\\\\Http\\\\Middle...')
+#13 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(961): Illuminate\\Container\\Container->resolve('App\\\\Http\\\\Middle...', Array, true)
+#14 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(731): Illuminate\\Foundation\\Application->resolve('App\\\\Http\\\\Middle...', Array)
+#15 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(946): Illuminate\\Container\\Container->make('App\\\\Http\\\\Middle...', Array)
+#16 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(255): Illuminate\\Foundation\\Application->make('App\\\\Http\\\\Middle...')
+#17 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(213): Illuminate\\Foundation\\Http\\Kernel->terminateMiddleware(Object(Illuminate\\Http\\Request), Object(Illuminate\\Http\\JsonResponse))
+#18 C:\\xampp\\htdocs\\school-management-system\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->terminate(Object(Illuminate\\Http\\Request), Object(Illuminate\\Http\\JsonResponse))
+#19 {main}
+"} 
+[2024-06-28 20:00:30] local.ERROR: The file "C:\xampp\htdocs\school-management-system\database\maxmind/GeoLite2-City.mmdb" does not exist or is not readable.  
+[2024-06-28 20:00:30] local.ERROR: The file "C:\xampp\htdocs\school-management-system\database\maxmind/GeoLite2-City.mmdb" does not exist or is not readable. {"exception":"[object] (InvalidArgumentException(code: 0): The file \"C:\\xampp\\htdocs\\school-management-system\\database\\maxmind/GeoLite2-City.mmdb\" does not exist or is not readable. at C:\\xampp\\htdocs\\school-management-system\\vendor\\maxmind-db\\reader\\src\\MaxMind\\Db\\Reader.php:85)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\school-management-system\\vendor\\geoip2\\geoip2\\src\\Database\\Reader.php(76): MaxMind\\Db\\Reader->__construct('C:\\\\xampp\\\\htdocs...')
+#1 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(163): GeoIp2\\Database\\Reader->__construct('C:\\\\xampp\\\\htdocs...')
+#2 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(141): Stevebauman\\Location\\Drivers\\MaxMind->newReader('C:\\\\xampp\\\\htdocs...')
+#3 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(108): Stevebauman\\Location\\Drivers\\MaxMind->fetchLocation('::1')
+#4 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php(741): Stevebauman\\Location\\Drivers\\MaxMind->Stevebauman\\Location\\Drivers\\{closure}()
+#5 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(107): rescue(Object(Closure), false)
+#6 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(33): Stevebauman\\Location\\Drivers\\MaxMind->process(Object(Stevebauman\\Location\\LocationRequest))
+#7 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#8 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#9 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#10 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#11 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\LocationManager.php(72): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#12 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php(355): Stevebauman\\Location\\LocationManager->get('::1')
+#13 C:\\xampp\\htdocs\\school-management-system\\app\\Http\\Controllers\\AuthController.php(467): Illuminate\\Support\\Facades\\Facade::__callStatic('get', Array)
+#14 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php(54): App\\Http\\Controllers\\AuthController->authenticate(Object(Illuminate\\Http\\Request))
+#15 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction('authenticate', Array)
+#16 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(259): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\AuthController), 'authenticate')
+#17 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(205): Illuminate\\Routing\\Route->runController()
+#18 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(806): Illuminate\\Routing\\Route->run()
+#19 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(144): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#20 C:\\xampp\\htdocs\\school-management-system\\app\\Http\\Middleware\\LanguageManager.php(31): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): App\\Http\\Middleware\\LanguageManager->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#24 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#25 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\AuthenticateSession.php(41): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Session\\Middleware\\AuthenticateSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Middleware\\ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#29 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#30 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#31 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#32 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#37 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(805): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#39 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(784): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#40 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(748): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#41 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(737): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#42 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#43 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(144): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#44 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#49 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#56 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#57 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#58 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#59 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#60 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#61 C:\\xampp\\htdocs\\school-management-system\\public\\index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#62 {main}
+"} 
+[2024-06-28 20:00:58] local.ERROR: The file "C:\xampp\htdocs\school-management-system\database\maxmind/GeoLite2-City.mmdb" does not exist or is not readable.  
+[2024-06-28 20:00:58] local.ERROR: The file "C:\xampp\htdocs\school-management-system\database\maxmind/GeoLite2-City.mmdb" does not exist or is not readable. {"exception":"[object] (InvalidArgumentException(code: 0): The file \"C:\\xampp\\htdocs\\school-management-system\\database\\maxmind/GeoLite2-City.mmdb\" does not exist or is not readable. at C:\\xampp\\htdocs\\school-management-system\\vendor\\maxmind-db\\reader\\src\\MaxMind\\Db\\Reader.php:85)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\school-management-system\\vendor\\geoip2\\geoip2\\src\\Database\\Reader.php(76): MaxMind\\Db\\Reader->__construct('C:\\\\xampp\\\\htdocs...')
+#1 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(163): GeoIp2\\Database\\Reader->__construct('C:\\\\xampp\\\\htdocs...')
+#2 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(141): Stevebauman\\Location\\Drivers\\MaxMind->newReader('C:\\\\xampp\\\\htdocs...')
+#3 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(108): Stevebauman\\Location\\Drivers\\MaxMind->fetchLocation('::1')
+#4 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php(741): Stevebauman\\Location\\Drivers\\MaxMind->Stevebauman\\Location\\Drivers\\{closure}()
+#5 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(107): rescue(Object(Closure), false)
+#6 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(33): Stevebauman\\Location\\Drivers\\MaxMind->process(Object(Stevebauman\\Location\\LocationRequest))
+#7 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#8 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#9 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#10 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#11 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\LocationManager.php(72): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#12 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php(355): Stevebauman\\Location\\LocationManager->get('::1')
+#13 C:\\xampp\\htdocs\\school-management-system\\app\\Http\\Controllers\\AuthController.php(467): Illuminate\\Support\\Facades\\Facade::__callStatic('get', Array)
+#14 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php(54): App\\Http\\Controllers\\AuthController->authenticate(Object(Illuminate\\Http\\Request))
+#15 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction('authenticate', Array)
+#16 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(259): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\AuthController), 'authenticate')
+#17 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(205): Illuminate\\Routing\\Route->runController()
+#18 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(806): Illuminate\\Routing\\Route->run()
+#19 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(144): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#20 C:\\xampp\\htdocs\\school-management-system\\app\\Http\\Middleware\\LanguageManager.php(31): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): App\\Http\\Middleware\\LanguageManager->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#24 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#25 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\AuthenticateSession.php(41): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Session\\Middleware\\AuthenticateSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Middleware\\ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#29 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#30 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#31 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#32 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#37 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(805): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#39 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(784): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#40 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(748): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#41 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(737): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#42 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#43 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(144): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#44 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#49 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#56 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#57 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#58 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#59 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#60 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#61 C:\\xampp\\htdocs\\school-management-system\\public\\index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#62 {main}
+"} 
+[2024-06-28 20:01:18] local.ERROR: HTTP request failed to  {"url":"","body":{"login_id":null,"teacher_id":null,"token":null,"branch_id":null,"name_status":null},"error":"cURL error 3: URL rejected: Malformed input to a URL function (see https://curl.haxx.se/libcurl/c/libcurl-errors.html)"} 
+[2024-06-28 20:03:28] local.ERROR: The file "C:\xampp\htdocs\school-management-system\database\maxmind/GeoLite2-City.mmdb" does not exist or is not readable.  
+[2024-06-28 20:03:28] local.ERROR: The file "C:\xampp\htdocs\school-management-system\database\maxmind/GeoLite2-City.mmdb" does not exist or is not readable. {"exception":"[object] (InvalidArgumentException(code: 0): The file \"C:\\xampp\\htdocs\\school-management-system\\database\\maxmind/GeoLite2-City.mmdb\" does not exist or is not readable. at C:\\xampp\\htdocs\\school-management-system\\vendor\\maxmind-db\\reader\\src\\MaxMind\\Db\\Reader.php:85)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\school-management-system\\vendor\\geoip2\\geoip2\\src\\Database\\Reader.php(76): MaxMind\\Db\\Reader->__construct('C:\\\\xampp\\\\htdocs...')
+#1 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(163): GeoIp2\\Database\\Reader->__construct('C:\\\\xampp\\\\htdocs...')
+#2 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(141): Stevebauman\\Location\\Drivers\\MaxMind->newReader('C:\\\\xampp\\\\htdocs...')
+#3 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(108): Stevebauman\\Location\\Drivers\\MaxMind->fetchLocation('::1')
+#4 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php(741): Stevebauman\\Location\\Drivers\\MaxMind->Stevebauman\\Location\\Drivers\\{closure}()
+#5 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(107): rescue(Object(Closure), false)
+#6 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(33): Stevebauman\\Location\\Drivers\\MaxMind->process(Object(Stevebauman\\Location\\LocationRequest))
+#7 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#8 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#9 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#10 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#11 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\LocationManager.php(72): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#12 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php(355): Stevebauman\\Location\\LocationManager->get('::1')
+#13 C:\\xampp\\htdocs\\school-management-system\\app\\Http\\Controllers\\AuthController.php(467): Illuminate\\Support\\Facades\\Facade::__callStatic('get', Array)
+#14 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php(54): App\\Http\\Controllers\\AuthController->authenticate(Object(Illuminate\\Http\\Request))
+#15 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction('authenticate', Array)
+#16 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(259): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\AuthController), 'authenticate')
+#17 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(205): Illuminate\\Routing\\Route->runController()
+#18 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(806): Illuminate\\Routing\\Route->run()
+#19 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(144): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#20 C:\\xampp\\htdocs\\school-management-system\\app\\Http\\Middleware\\LanguageManager.php(31): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): App\\Http\\Middleware\\LanguageManager->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#24 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#25 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\AuthenticateSession.php(41): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Session\\Middleware\\AuthenticateSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Middleware\\ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#29 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#30 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#31 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#32 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#37 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(805): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#39 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(784): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#40 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(748): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#41 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(737): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#42 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#43 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(144): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#44 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#49 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#56 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#57 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#58 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#59 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#60 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#61 C:\\xampp\\htdocs\\school-management-system\\public\\index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#62 {main}
+"} 
+[2024-06-28 20:04:29] local.ERROR: HTTP request failed to  {"url":"","body":{"login_id":null,"teacher_id":null,"token":null,"branch_id":null,"name_status":null},"error":"cURL error 3: URL rejected: Malformed input to a URL function (see https://curl.haxx.se/libcurl/c/libcurl-errors.html)"} 
+[2024-06-28 20:06:12] local.ERROR: The file "C:\xampp\htdocs\school-management-system\database\maxmind/GeoLite2-City.mmdb" does not exist or is not readable.  
+[2024-06-28 20:06:12] local.ERROR: The file "C:\xampp\htdocs\school-management-system\database\maxmind/GeoLite2-City.mmdb" does not exist or is not readable. {"exception":"[object] (InvalidArgumentException(code: 0): The file \"C:\\xampp\\htdocs\\school-management-system\\database\\maxmind/GeoLite2-City.mmdb\" does not exist or is not readable. at C:\\xampp\\htdocs\\school-management-system\\vendor\\maxmind-db\\reader\\src\\MaxMind\\Db\\Reader.php:85)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\school-management-system\\vendor\\geoip2\\geoip2\\src\\Database\\Reader.php(76): MaxMind\\Db\\Reader->__construct('C:\\\\xampp\\\\htdocs...')
+#1 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(163): GeoIp2\\Database\\Reader->__construct('C:\\\\xampp\\\\htdocs...')
+#2 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(141): Stevebauman\\Location\\Drivers\\MaxMind->newReader('C:\\\\xampp\\\\htdocs...')
+#3 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(108): Stevebauman\\Location\\Drivers\\MaxMind->fetchLocation('::1')
+#4 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php(741): Stevebauman\\Location\\Drivers\\MaxMind->Stevebauman\\Location\\Drivers\\{closure}()
+#5 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\MaxMind.php(107): rescue(Object(Closure), false)
+#6 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(33): Stevebauman\\Location\\Drivers\\MaxMind->process(Object(Stevebauman\\Location\\LocationRequest))
+#7 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#8 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#9 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#10 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\Drivers\\Driver.php(51): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#11 C:\\xampp\\htdocs\\school-management-system\\vendor\\stevebauman\\location\\src\\LocationManager.php(72): Stevebauman\\Location\\Drivers\\Driver->get(Object(Stevebauman\\Location\\LocationRequest))
+#12 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php(355): Stevebauman\\Location\\LocationManager->get('::1')
+#13 C:\\xampp\\htdocs\\school-management-system\\app\\Http\\Controllers\\AuthController.php(467): Illuminate\\Support\\Facades\\Facade::__callStatic('get', Array)
+#14 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php(54): App\\Http\\Controllers\\AuthController->authenticate(Object(Illuminate\\Http\\Request))
+#15 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction('authenticate', Array)
+#16 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(259): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\AuthController), 'authenticate')
+#17 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(205): Illuminate\\Routing\\Route->runController()
+#18 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(806): Illuminate\\Routing\\Route->run()
+#19 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(144): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#20 C:\\xampp\\htdocs\\school-management-system\\app\\Http\\Middleware\\LanguageManager.php(31): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): App\\Http\\Middleware\\LanguageManager->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#24 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#25 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\AuthenticateSession.php(41): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Session\\Middleware\\AuthenticateSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Middleware\\ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#29 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#30 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#31 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#32 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#37 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(805): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#39 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(784): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#40 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(748): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#41 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(737): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#42 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#43 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(144): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#44 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#49 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#56 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#57 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(183): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#58 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#59 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#60 C:\\xampp\\htdocs\\school-management-system\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#61 C:\\xampp\\htdocs\\school-management-system\\public\\index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#62 {main}
+"} 
