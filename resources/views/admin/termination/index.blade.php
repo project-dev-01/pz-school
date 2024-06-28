@@ -239,43 +239,37 @@
     var footer_txt = "{{ session()->get('footer_text') }}";
 </script>
 <!-- button js added -->
+<link rel="stylesheet" href="{{ asset('mobile-country/css/intlTelInput.css') }}">
+<script src="{{ asset('mobile-country/js/intlTelInput.js') }}"></script>
 <script>
+    var itiTransferDestinationTel;
+    var itiParentPhoneNumberAfterTransfer;
+
     function initializeIntlTelInput(inputSelector) {
         var input = document.querySelector(inputSelector);
-        var iti = intlTelInput(input, {
+        return intlTelInput(input, {
             allowExtensions: true,
             autoFormat: false,
             autoHideDialCode: false,
             autoPlaceholder: false,
             initialCountry: "auto",
-            ipinfoToken: "yolo",
+            geoIpLookup: function(callback) {
+                $.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "us";
+                    callback(countryCode);
+                });
+            },
             nationalMode: false,
-            numberType: "MOBILE",
-            preventInvalidNumbers: true,
-            // utilsScript: "js/utils.js" // Uncomment if you have the utils script
+            utilsScript: "{{ asset('mobile-country/js/utils.js') }}"
         });
-
-        // Trigger click on flag container to show the dropdown
-        var flagContainer = input.parentNode.querySelector('.iti__flag-container');
-        if (flagContainer) {
-            flagContainer.click();
-        }
-
-        // Add event listener to open flag dropdown on input field focus
-        input.addEventListener('focus', function() {
-            if (flagContainer) {
-                flagContainer.click();
-            }
-        });
-
-        return iti;
     }
 
     $(document).ready(function() {
-        initializeIntlTelInput("#transfer_destination_tel");
-        initializeIntlTelInput("#parent_phone_number_after_transfer");
+        itiTransferDestinationTel = initializeIntlTelInput("#transfer_destination_tel");
+        itiParentPhoneNumberAfterTransfer = initializeIntlTelInput("#parent_phone_number_after_transfer");
     });
 </script>
+
 <script src="{{ asset('buttons-datatables/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('buttons-datatables/jszip.min.js') }}"></script>
 <script src="{{ asset('buttons-datatables/pdfmake.min.js') }}"></script>
