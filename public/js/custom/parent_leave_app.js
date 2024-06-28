@@ -1,89 +1,52 @@
 $(function () {
-    var dates = [];
+    // var dates = [];
+    var enabledDates = [];
+    var disabledDates = [];
     getHolidays();
-    getNormalHolidays();
     function getHolidays() {
-        $.get(holidayEventList, { token: token, branch_id: branchID }, function (res) {
+        $.get(holidayEventList, { token: token, branch_id: branchID ,class_id :studClassID}, function (res) {
+            // console.log(studClassID);
             if (res.code == 200) {
+                // console.log(res);
                 $.each(res.data, function (key, val) {
-                    // Push each date between start_date and end_date into dates array
-                    var currentDate = new Date(val.start_date);
+                   
+                    var startDate = new Date(val.start_date);
                     var endDate = new Date(val.end_date);
-                    while (currentDate <= endDate) {
-                        dates.push($.datepicker.formatDate('yy-mm-dd', currentDate));
-                        currentDate.setDate(currentDate.getDate() + 1);
+
+                    while (startDate <= endDate) {
+                        var dateString = $.datepicker.formatDate('yy-mm-dd', startDate);
+
+                        if (val.holiday == '0') {
+                            disabledDates.push(dateString); // Disable holiday dates
+                        } else if (val.holiday == '1') {
+                            enabledDates.push(dateString); // Enable working days
+                        }
+
+                        startDate.setDate(startDate.getDate() + 1);
                     }
                 });
             }
         }, 'json');
     }
 
-    var getNormal = []; // Define dates in the global scope
-
-    function getNormalHolidays() {
-        $.get(holidayNormalEventList, { token: token, branch_id: branchID }, function (res) {
-            if (res.code == 200) {
-                $.each(res.data, function (key, val) {
-                    getNormal.push({ start_date: new Date(val.start_date), end_date: new Date(val.end_date) });
-                });
-    
-                // Initialize datepicker after fetching holidays
-                $("#frm_ldate").datepicker({
-                    beforeShowDay: function(date) {
-                        return disableOrEnableDates(date);
-                    }
-                });
-            }
-        }, 'json');
-    }
-    
-    function disableOrEnableDates(date) {
+    function DisableDates(date) {
+        var dateString = $.datepicker.formatDate('yy-mm-dd', date);
         var day = date.getDay();
-        var isEnabled = false;
-        // console.log(day);
-        // Check if the date is in the 'getNormal' array
-        $.each(getNormal, function (key, val) {
-            var startDate = val.start_date;
-            var endDate = val.end_date;
-                console.log(startDate);
-                console.log(endDate);
-                // Check if the date is within the holiday range
-            if (date >= startDate && date <= endDate) {
-                var startDay = startDate.getDay();
-                var endDay = endDate.getDay();
-                  console.log(startDay);
-                  console.log(endDay);
-                // Enable dates if both start date and end date are weekends
-                if ((startDay === 6 || startDay === 0) && (endDay === 6 || endDay === 0)) {
-                    isEnabled = true;
-                    return false; // Exit $.each loop
-                }
-    
-                // Enable dates if either start date or end date is a weekend
-                if (startDay === 6 || startDay === 0 || endDay === 6 || endDay === 0) {
-                    isEnabled = true;
-                    return false; // Exit $.each loop
-                }
+
+        if (disabledDates.includes(dateString)) {
+            return [false, "", "Holiday"]; // Disable holiday dates
+        } else if (enabledDates.includes(dateString)) {
+            return [true, "", "Working Day"]; // Enable working days
+        } else {
+            if (day == 0 || day == 6) {
+                return [false, "", "Weekend"]; // Disable weekends
+            } else {
+                return [true, "", "Weekday"]; // Enable weekdays
             }
-        });
-    
-        // Enable all other dates by default if they are weekdays
-        if (!isEnabled && (day !== 0 && day !== 6)) {
-            isEnabled = true;
         }
-    
-        return [isEnabled, ""];
     }
-    
-    $(document).ready(function () {
-        console.log("Fetching normal holidays...");
-        getNormalHolidays(); // Fetch holidays and initialize datepicker
-    });
-    
 
     
-    
-       
     $("#frm_ldate").datepicker({
         dateFormat: 'dd-mm-yy',
         changeMonth: true,
@@ -91,7 +54,7 @@ $(function () {
         autoclose: true,
         yearRange: "-100:+50", // last hundred years
         minDate: 0,
-        beforeShowDay: disableOrEnableDates,
+        beforeShowDay: DisableDates,
     });
     $("#to_ldate").datepicker({
         dateFormat: 'dd-mm-yy',
@@ -100,7 +63,7 @@ $(function () {
         autoclose: true,
         yearRange: "-100:+50", // last hundred years
         minDate: 0,
-        beforeShowDay: disableOrEnableDates,
+        beforeShowDay: DisableDates,
     });
     $("#to_ldate").on('change', function () {
         let frm_ldate = $("#frm_ldate").val();

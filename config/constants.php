@@ -119,8 +119,6 @@ return [
         'event_type_update' => $url.'/event_type/update',
         'event_type_delete' => $url.'/event_type/delete',
         'holidays_list_event' => $url.'/event_type/holidays_list_event',
-        'holidays_normal_list_event' =>  $url.'/event_type/holidays_normal_list_event',
-
         // event url
         'event_add' => $url.'/event/add',
         'event_list' => $url.'/event/list',
