@@ -48,8 +48,8 @@ $(function () {
                 $('#schedule_date_of_termination').val(data.data.schedule_date_of_termination);
                 $('#reason_for_transfer').val(data.data.reason_for_transfer);
                 $('#transfer_destination_school_name').val(data.data.transfer_destination_school_name);
-                $('#transfer_destination_tel').val(data.data.transfer_destination_tel);
-                $('#parent_phone_number_after_transfer').val(data.data.parent_phone_number_after_transfer);
+                // $('#transfer_destination_tel').val(data.data.transfer_destination_tel);
+                // $('#parent_phone_number_after_transfer').val(data.data.parent_phone_number_after_transfer);
 
                 // var parent_phone_number_after_transfer = data.parent_phone_number_after_transfer;
                 // var  parent_phone_number_after_transfer_flag= getCountryCodeByNationality(parent_phone_number_after_transfer);
@@ -60,7 +60,18 @@ $(function () {
                 $('#school_fees_payment_status').val(data.data.school_fees_payment_status);
                 $('#termination_status').val(data.data.termination_status);
                 $('#termination_status_old').val(data.data.termination_status);
-                console.log('123', data.data.delete_google_address)
+                // Set phone numbers with country code
+                if (itiTransferDestinationTel) {
+                    itiTransferDestinationTel.setNumber(data.data.transfer_destination_tel);
+                } else {
+                    $('#transfer_destination_tel').val(data.data.transfer_destination_tel);
+                }
+                if (itiParentPhoneNumberAfterTransfer) {
+                    itiParentPhoneNumberAfterTransfer.setNumber(data.data.parent_phone_number_after_transfer);
+                } else {
+                    $('#parent_phone_number_after_transfer').val(data.data.parent_phone_number_after_transfer);
+                }
+
                 if (data.data.delete_google_address == "Yes") {
                     $('#delete_google_address').prop('checked', true)
                 }
@@ -245,19 +256,19 @@ $(function () {
                             d.academic_grade = $('#academic_grade').val()
                     },
                     success: function (data) {
-                        console.log(data.data.length);
+                        // console.log(data.data.length);
                         if (data && data.data.length > 0) {
                             console.log('ok');
                             $('#application-table_wrapper .buttons-csv').removeClass('disabled');
                             $('#application-table_wrapper .buttons-pdf').removeClass('disabled');  // Enable all buttons if at least one record exists
                         } else {
-                            console.log(data);
+                            // console.log(data);
                             $('#application-table_wrapper .buttons-csv').addClass('disabled');
                             $('#application-table_wrapper .buttons-pdf').addClass('disabled');
                         }
                     },
                     error: function () {
-                        console.log('error');
+                        // console.log('error');
                         // Handle error if necessary
                     }
                 });
