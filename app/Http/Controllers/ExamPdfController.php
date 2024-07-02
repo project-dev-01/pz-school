@@ -3068,10 +3068,17 @@ class ExamPdfController extends Controller
 		$name = strtotime($now);
 		$fileName = __('messages.personal_test_res') . $name . ".pdf";
 		$headers['Content-Disposition'] = 'attachment; filename="' . rawurlencode($fileName)  . '"';
-		return response($pdfContent)->withHeaders($headers);
-
-		$directory = public_path('barchart');		
-		File::delete($directory);
+		$response = response($pdfContent)->withHeaders($headers);
+		
+			
+		$storagePath = storage_path('app/public/barchart');	
+		if (File::exists($storagePath)) {
+			File::deleteDirectory($storagePath,true);
+		}
+		
+		// Return the response
+		return $response;	
+		
 	}
 	public function downprimaryform1($id)
 	{
@@ -4990,10 +4997,11 @@ class ExamPdfController extends Controller
 		require_once public_path('jpgraph-4.4.2/src/jpgraph_bar.php');
 
 		// Define the directory and ensure it exists
-		$directory = public_path('barchart');
-		
-		if (!File::exists($directory)) {
-			File::makeDirectory($directory, 0755, true);
+		$storagePath = storage_path('app/public/barchart');
+
+		// Ensure the storage directory exists
+		if (!File::exists($storagePath)) {
+			File::makeDirectory($storagePath, 0755, true);
 		}
 		// if (!is_dir($directory)) {
 		// 	if (!mkdir($directory, 0777, true)) {
@@ -5009,7 +5017,7 @@ class ExamPdfController extends Controller
 		// Create a unique file name using the subject and current timestamp
 		$timestamp = time();
 		$fileName = $subject . '_' . $timestamp . '.png';
-		$filePath = $directory . '/' . $fileName;
+		$filePath = $storagePath . '/' . $fileName;
 
 		// Create the graph
 		$graph = new \Graph(600, 400, 'auto');

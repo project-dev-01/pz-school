@@ -9,6 +9,8 @@ return [
     'image_url' => "http://localhost/paxsuzen-api-dev/public",
     'cron_secret_key'=> 'S6rSMVixPeupH51AO5mVFjkQJ88bnjOO',
     'domainname'=> $schoolurl,
+    'max_freetext'=>'300', // set Free text character in Exam Bulk Upload Validation
+    'max_scoremark'=>'100', // set Maximum Mark in Exam Bulk Upload Validation
     'api' => [
         // school login url        
         'homepage'=> $schoolurl.'/home',

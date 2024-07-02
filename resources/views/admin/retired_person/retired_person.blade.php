@@ -103,7 +103,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="table-responsive">
-                                <table class="table w-100 nowrap " id="emp-table">
+                                <table class="table dt-responsive nowrap w-100" id="emp-table">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -189,14 +189,7 @@
     var studentImg = "{{ config('constants.image_url').'/'.config('constants.branch_id').'/users/images/' }}";
     var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
     
-    var sectionByClass = "{{ route('admin.section_by_class') }}";
-    var studentDelete = "{{ route('admin.student.delete') }}";
-    var employeeList = "{{ route('admin.retired_person.list') }}";
-    // lang change name start
-    var deleteTitle = "{{ __('messages.are_you_sure') }}";
-    var deleteHtml = "{{ __('messages.delete_this_student') }}";
-    var deletecancelButtonText = "{{ __('messages.cancel') }}";
-    var deleteconfirmButtonText = "{{ __('messages.yes_delete') }}";
+    var retireEmployeeList = "{{ route('admin.retired_person.list') }}";
     // lang change name end// Get PDF Footer Text
 
     // Get PDF Footer Text

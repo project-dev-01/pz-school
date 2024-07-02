@@ -190,6 +190,7 @@
 									</tbody>									
 								</table>
 								<center>
+									<div id="submit_alert"></div>
 									<input type="button" name="upload" id="save_modelbtn" class="btn btn-success" data-toggle="modal" data-target="#markModal" value="{{ __('messages.upload') }}">  </center> 
 								
 							</div>
@@ -266,6 +267,8 @@
 					// default image test
 					var defaultImg = "{{ config('constants.image_url').'/common-asset/images/users/default.jpg' }}";
 					var downloadFileName = "{{ __('messages.exam_paper_result') }}";
+					var max_freetext="{{config('constants.max_freetext')}}";
+					var max_scoremark="{{config('constants.max_scoremark')}}";
 					// localStorage variables
 					var exam_import_result_storage = localStorage.getItem('admin_exam_bulk_import');
 					var marktext="{{ __('messages.alertexamupload_mark') }}";

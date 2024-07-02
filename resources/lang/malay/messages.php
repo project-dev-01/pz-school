@@ -2332,4 +2332,5 @@ return [
       "home_doctor" => "Home Doctor",
       "medical_history_age" => "Medical History (Age)",
       "times" => "times",
+      "yoroku_report" => "Laporan Yoroku",
 ];

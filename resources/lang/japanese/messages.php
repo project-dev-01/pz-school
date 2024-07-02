@@ -2407,5 +2407,6 @@ return [
       "home_doctor" => "ホームドクター",
       "medical_history_age" => "病歴（年齢)",
       "times" => "回",
+      "yoroku_report" => "与六レポート",
 
 ];
