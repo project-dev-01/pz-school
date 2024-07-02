@@ -378,6 +378,8 @@ $(function () {
                             status = "info";
                         } else if (row.termination_status == "Applied") {
                             status = "primary";
+                        } else if (row.termination_status == "Accepted") {
+                            status = "secondary";
                         }else {
                             status = "";
                         }
@@ -585,7 +587,9 @@ $(function () {
                             status = "info";
                         } else if (row.termination_status == "Applied") {
                             status = "primary";
-                        } else {
+                        } else if (row.termination_status == "Accepted") {
+                            status = "secondary";
+                        }else {
                             status = "";
                         }
                 
