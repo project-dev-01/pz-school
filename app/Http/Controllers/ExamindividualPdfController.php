@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use App\Helpers\CommonHelper;
 use Illuminate\Support\Facades\File;
-use ZipArchive;
 use DateTime;
 use DateInterval;
 use DatePeriod;
@@ -3037,24 +3036,32 @@ class ExamindividualPdfController extends Controller
 		$now = now();
 		$name = strtotime($now);
 		$fileName = __('messages.personal_test_res') . "_" . $number . "_" . str_replace(":","",$stu['name']) . "_" . $name . ".pdf";
-
+			
+		
+		
 		// Set the appropriate HTTP headers
-		return $this->commonHelper->generatePdf($customPaper, $output, $fileName);
+		$outputpdf= $this->commonHelper->generatePdf($customPaper, $output, $fileName);
+		$storagePath = storage_path('app/public/barchart');	
+		if (File::exists($storagePath)) {
+			File::deleteDirectory($storagePath,true);
+		}
+		return $outputpdf;
 		//return $pdf->download($fileName);
 		// return $pdf->stream();
-		$directory = public_path('barchart');		
-		File::delete($directory);
+		
+		
 	}
 	public function generateBarChartSingle($labels, $data, $xTitle = 'Number of students', $yTitle = 'Mark range', $subject)
 	{
 		require_once public_path('jpgraph-4.4.2/src/jpgraph.php');
 		require_once public_path('jpgraph-4.4.2/src/jpgraph_bar.php');
 
-		// Define the directory and ensure it exists
-		$directory = public_path('barchart');
 		
-		if (!File::exists($directory)) {
-			File::makeDirectory($directory, 0755, true);
+		$storagePath = storage_path('app/public/barchart');
+
+		// Ensure the storage directory exists
+		if (!File::exists($storagePath)) {
+			File::makeDirectory($storagePath, 0755, true);
 		}
 		// if (!is_dir($directory)) {
 		// 	if (!mkdir($directory, 0777, true)) {
@@ -3070,7 +3077,7 @@ class ExamindividualPdfController extends Controller
 		// Create a unique file name using the subject and current timestamp
 		$timestamp = time();
 		$fileName = $subject . '_' . $timestamp . '.png';
-		$filePath = $directory . '/' . $fileName;
+		$filePath = $storagePath . '/' . $fileName;
 
 		// Create the graph
 		$graph = new \Graph(600, 400, 'auto');

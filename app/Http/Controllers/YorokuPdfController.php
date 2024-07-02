@@ -1203,7 +1203,7 @@ class YorokuPdfController extends Controller
 		$now = now();
 		$name = strtotime($now);
 		
-		$fileName = __('messages.yoroku') . "_Primary_" . $student['first_name'] . "_" . $name . ".pdf";
+		$fileName = __('messages.yoroku_report') . "_Primary_" . $student['first_name'] . "_" . $name . ".pdf";
 
 		return $pdf->download($fileName);
 		// return $pdf->stream();        
@@ -2438,7 +2438,7 @@ $output .= '<!DOCTYPE html>
 		// filename
 		$now = now();
 		$name = strtotime($now);
-		$fileName = __('messages.yoroku') . "_Secondary_" . $student['first_name'] . "_" . $name . ".pdf";
+		$fileName = __('messages.yoroku_report') . "_Secondary_" . $student['first_name'] . "_" . $name . ".pdf";
 		return $pdf->download($fileName);
 		// return $pdf->stream();
 
