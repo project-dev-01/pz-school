@@ -335,6 +335,8 @@
     var leave_status_txt = "{{ __('messages.leave_status') }}";
     var footer_txt = "{{ session()->get('footer_text') }}";
     var getReasonsByLeaveType = "{{ config('constants.api.get_reasons_by_leave_type') }}";
+    var holidayEventList = "{{ config('constants.api.holidays_list_event') }}";
+
     var leaveTypeWiseGetAllReason = "{{ config('constants.api.leave_type_wise_get_all_reason') }}";
     // Get PDF Header & Footer Text End
     var at = "{{date('d-m-Y')}}";
